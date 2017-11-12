@@ -15,8 +15,8 @@ namespace Thingy.ViewModels
             _db = db;
             Pending = new ObservableCollection<ToDoItem>();
             Completed = new ObservableCollection<ToDoItem>();
-            Pending.AddRange(db.GetUncompletedTasks());
-            Completed.AddRange(db.GetCompletedTasks());
+            Pending.AddRange(_db.GetRelevantItems());
+            Completed.AddRange(_db.GetCompleteded());
         }
 
         public ObservableCollection<ToDoItem> Pending { get; private set; }

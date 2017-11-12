@@ -67,6 +67,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Infrastructure\IModuleLoader.cs" />
+    <Compile Include="Infrastructure\ModuleLoader.cs" />
+    <Compile Include="ModalDialog.xaml.cs">
+      <DependentUpon>ModalDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\AbstractModule.cs" />
+    <Compile Include="Modules\ToDoList.cs" />
     <Compile Include="ViewModels\ToDoListViewModel.cs" />
     <Compile Include="Views\ToDoList.xaml.cs">
       <DependentUpon>ToDoList.xaml</DependentUpon>
@@ -83,6 +90,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ModalDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ToDoList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -33,14 +33,15 @@ namespace Thingy.Db
             GC.SuppressFinalize(this);
         }
 
-        public IEnumerable<ToDoItem> GetCompletedTasks()
+        public IEnumerable<ToDoItem> GetCompleteded()
         {
-            return ToDoCollection.Find(q => q.IsCompleted == true);
+            return ToDoCollection.Find(x => x.IsCompleted == true);
         }
 
-        public IEnumerable<ToDoItem> GetUncompletedTasks()
+        public IEnumerable<ToDoItem> GetRelevantItems()
         {
-            return ToDoCollection.Find(q => q.IsCompleted == false);
+            return ToDoCollection.Find(x => x.IsCompleted == false);
         }
+
     }
 }

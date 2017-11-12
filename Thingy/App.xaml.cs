@@ -1,27 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AppLib.Common.IOC;
+using AppLib.WPF.MVVM;
 using System.Windows;
-using AppLib.Common;
-using AppLib.Common.IOC;
+using System.Windows.Controls;
 using Thingy.Db;
+using Thingy.Infrastructure;
 
 namespace Thingy
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : Application, IApplication
     {
         public static IContainer IoCContainer { get; private set; }
+
+        public static IApplication Instance
+        {
+            get { return App.Current as IApplication; }
+        }
+
+        public void Close()
+        {
+            App.Current.Shutdown();
+        }
+
+        public bool? ShowDialog(UserControl control, ViewModel model = null)
+        {
+            ModalDialog modalDialog = new ModalDialog();
+            if (model != null)
+                control.DataContext = model;
+            modalDialog.DailogContent = control;
+            return modalDialog.ShowDialog();
+        }
 
         protected override void OnStartup(StartupEventArgs e)
         {
             IoCContainer = new Container();
-            IoCContainer.Register<IDataBase, DataBase>(Container.Singleton);
+            IoCContainer.RegisterSingleton<IDataBase, DataBase>();
+            IoCContainer.RegisterSingleton<IModuleLoader, ModuleLoader>();
             base.OnStartup(e);
         }
     }

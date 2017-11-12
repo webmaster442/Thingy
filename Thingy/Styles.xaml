@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Thingy">
+    <Style TargetType="Button">
+        <Setter Property="MinWidth" Value="80"/>
+        <Setter Property="MinHeight" Value="27"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Padding" Value="3"/>
+    </Style>
+</ResourceDictionary>

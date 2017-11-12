@@ -9,7 +9,7 @@ namespace Thingy.Db
 {
     public interface IDataBase
     {
-        IEnumerable<ToDoItem> GetCompletedTasks();
-        IEnumerable<ToDoItem> GetUncompletedTasks();
+        IEnumerable<ToDoItem> GetRelevantItems();
+        IEnumerable<ToDoItem> GetCompleteded();
     }
 }
