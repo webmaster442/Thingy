@@ -36,7 +36,10 @@ namespace Thingy
         protected override void OnStartup(StartupEventArgs e)
         {
             IoCContainer = new Container();
-            IoCContainer.RegisterSingleton<IDataBase, DataBase>();
+            IoCContainer.RegisterSingleton<IDataBase>(() =>
+            {
+                return new DataBase("test.db");
+            });
             IoCContainer.RegisterSingleton<IModuleLoader, ModuleLoader>();
             base.OnStartup(e);
         }
