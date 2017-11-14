@@ -17,11 +17,11 @@ namespace Thingy.ViewModels
         public StartPageViewModel(IModuleLoader moduleLoader)
         {
             _moduleLoader = moduleLoader;
-            Modules = new ObservableCollection<AbstractModule>();
+            Modules = new ObservableCollection<IModule>();
             Modules.AddRange(_moduleLoader);
         }
 
-        public ObservableCollection<AbstractModule> Modules
+        public ObservableCollection<IModule> Modules
         {
             get;
             private set;

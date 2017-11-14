@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Thingy.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
@@ -14,9 +14,15 @@
         <TextBlock 
             Grid.Row="0"
             Text="New Module ..."/>
-        <ItemsPresenter
-            Grid.Row="1">
-            
-        </ItemsPresenter>
+        <ItemsControl
+            Grid.Row="1"
+            ItemsSource="{Binding Modules}"
+            ItemTemplate="{StaticResource StartPageTemplate}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
     </Grid>
 </UserControl>

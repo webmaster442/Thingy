@@ -73,10 +73,11 @@
     <Compile Include="IApplication.cs" />
     <Compile Include="Infrastructure\IModuleLoader.cs" />
     <Compile Include="Infrastructure\ModuleLoader.cs" />
+    <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="ModalDialog.xaml.cs">
       <DependentUpon>ModalDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\AbstractModule.cs" />
+    <Compile Include="Modules\IModule.cs" />
     <Compile Include="Modules\ToDoList.cs" />
     <Compile Include="ViewModels\StartPageViewModel.cs" />
     <Compile Include="ViewModels\ToDoListViewModel.cs" />
@@ -87,6 +88,10 @@
       <DependentUpon>ToDoList.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\Tile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates\StartPageTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,6 +164,12 @@
       <Project>{2D7E8D87-74AC-402A-8E11-BDACC7B3839B}</Project>
       <Name>Thingy.Db</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-checklist.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-gift.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

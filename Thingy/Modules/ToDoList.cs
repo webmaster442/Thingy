@@ -1,26 +1,29 @@
-﻿using AppLib.Common.IOC;
-using System;
+﻿using System;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Thingy.Db;
 
 namespace Thingy.Modules
 {
-    public sealed class ToDoList : AbstractModule
+    public class ToDoList : IModule
     {
-        public override string Name
+        public string ModuleName
         {
             get { return "To Do List"; }
         }
 
-        public override Uri IconPath
+        public ImageSource Icon
         {
-            get { return null; }
+            get { return new BitmapImage(new Uri("pack://application:,,,/Thingy;component/Icons/icons8-checklist.png")); }
         }
 
-        public override UserControl RunModule()
+        public UserControl RunModule()
         {
-            var toDoList = new Views.ToDoList();
-            toDoList.DataContext = new ViewModels.ToDoListViewModel(App.IoCContainer.ResolveSingleton<IDataBase>());
+            var toDoList = new Views.ToDoList
+            {
+                DataContext = new ViewModels.ToDoListViewModel(App.IoCContainer.ResolveSingleton<IDataBase>())
+            };
             return toDoList;
         }
     }

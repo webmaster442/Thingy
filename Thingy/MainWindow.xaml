@@ -1,29 +1,38 @@
-﻿<dragablz:DragablzWindow
+﻿<applib:ModernWindow
     x:Class="Thingy.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:applib="http://github.com/webmaster442/AppLib/WPF"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
     xmlns:local="clr-namespace:Thingy"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="MainWindow"
-    Width="525"
-    Height="350"
+    Title="Thingy"
+    Width="800"
+    Height="480"
+    Icon="Icons/icons8-gift.png"
     mc:Ignorable="d">
+    <applib:ModernWindow.DataContext>
+        <local:MainWindowViewModel />
+    </applib:ModernWindow.DataContext>
     <dragablz:TabablzControl
         Margin="3"
+        HeaderMemberPath="Header"
         ItemContainerStyle="{StaticResource TrapezoidDragableTabItemStyle}"
+        ItemsSource="{Binding Items}"
+        NewItemFactory="{Binding ItemFactory}"
         ShowDefaultAddButton="True"
         ShowDefaultCloseButton="True">
         <dragablz:TabablzControl.HeaderPrefixContent>
-            <TextBlock>Before</TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <applib:ImageAwesome
+                    Width="20"
+                    Height="20"
+                    Icon="fa_arrow_circle_right" />
+            </StackPanel>
         </dragablz:TabablzControl.HeaderPrefixContent>
         <dragablz:TabablzControl.InterTabController>
             <dragablz:InterTabController />
         </dragablz:TabablzControl.InterTabController>
-        <TabItem
-            Header="Thingy Start"
-            IsSelected="True">
-        </TabItem>
     </dragablz:TabablzControl>
-</dragablz:DragablzWindow>
+</applib:ModernWindow>

@@ -1,4 +1,5 @@
-﻿using Dragablz;
+﻿using AppLib.WPF.Controls;
+using Dragablz;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace Thingy
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : DragablzWindow
+    public partial class MainWindow : ModernWindow
     {
         public MainWindow()
         {

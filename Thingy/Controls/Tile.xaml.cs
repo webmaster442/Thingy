@@ -26,6 +26,18 @@ namespace Thingy.Controls
         public static readonly DependencyProperty TileImageProperty =
             DependencyProperty.Register("TileImage", typeof(ImageSource), typeof(Tile));
 
+        public string TileText
+        {
+            get { return (string)GetValue(TileTextProperty); }
+            set { SetValue(TileTextProperty, value); }
+        }
+
+        public ImageSource TileImage
+        {
+            get { return (ImageSource)GetValue(TileImageProperty); }
+            set { SetValue(TileImageProperty, value); }
+        }
+
         public Tile()
         {
             InitializeComponent();

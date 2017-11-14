@@ -10,24 +10,25 @@ namespace Thingy.Infrastructure
 {
     public class ModuleLoader : IModuleLoader
     {
-        private HashSet<AbstractModule> modules;
+        private List<IModule> modules;
 
         public ModuleLoader()
         {
-            modules = new HashSet<AbstractModule>();
-            var assembly = Assembly.GetAssembly(typeof(AbstractModule));
+            modules = new List<IModule>();
 
-            var modulelist = from module in assembly.GetTypes()
-                          where module.IsAssignableFrom(typeof(AbstractModule))
-                          select (AbstractModule)Activator.CreateInstance(module);
+            var imodule = typeof(IModule);
+
+            var modulelist = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(assembly => assembly.GetTypes())
+                .Where(type => imodule.IsAssignableFrom(type) && type.IsInterface == false);
 
             foreach (var module in modulelist)
             {
-                modules.Add(module);
+                modules.Add((IModule)Activator.CreateInstance(module));
             }
         }
 
-        public IEnumerator<AbstractModule> GetEnumerator()
+        public IEnumerator<IModule> GetEnumerator()
         {
             return modules.GetEnumerator();
         }
@@ -40,7 +41,7 @@ namespace Thingy.Infrastructure
         public UserControl GetModuleByName(string name)
         {
             var run = (from module in modules
-                       where module.Name == name
+                       where module.ModuleName == name
                        select module).FirstOrDefault();
 
             if (run == null)
