@@ -5,8 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Thingy.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="100"
     x:Name="Control"
+    d:DesignHeight="100"
     d:DesignWidth="100"
     mc:Ignorable="d">
     <UserControl.Resources>
@@ -113,34 +113,41 @@
                 Storyboard="{StaticResource MouseOut}" />
         </EventTrigger>
     </UserControl.Triggers>
-    <Grid 
-        Background="{Binding ElementName=Control, Path=Background}">
-        <Image
-            x:Name="image"
-            Margin="10"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            RenderTransformOrigin="0.5,0.5"
-            Stretch="Fill"
-            Source="{Binding ElementName=Control, Path=TileImage}"
-            StretchDirection="DownOnly">
-            <Image.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform
-                        ScaleX="0.75"
-                        ScaleY="0.75" />
-                    <SkewTransform />
-                    <RotateTransform />
-                    <TranslateTransform />
-                </TransformGroup>
-            </Image.RenderTransform>
-        </Image>
-        <TextBlock
-            x:Name="textBlock"
-            Margin="5"
-            VerticalAlignment="Bottom"
-            Foreground="White"
-            Text="{Binding ElementName=Control, Path=TileText}"
-            TextWrapping="Wrap" />
-    </Grid>
+    <Button 
+        Command="{Binding ElementName=Control, Path=ClickCommand}"
+        Background="{Binding ElementName=Control, Path=Background}"
+        Margin="0"
+        Padding="0">
+        <Grid
+            Width="{Binding ElementName=Control, Path=ActualWidth}"
+            Height="{Binding ElementName=Control, Path=ActualHeight}">
+            <Image
+                x:Name="image"
+                Margin="10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                RenderTransformOrigin="0.5,0.5"
+                Source="{Binding ElementName=Control, Path=TileImage}"
+                Stretch="Fill"
+                StretchDirection="DownOnly">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform
+                            ScaleX="0.75"
+                            ScaleY="0.75" />
+                        <SkewTransform />
+                        <RotateTransform />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <TextBlock
+                x:Name="textBlock"
+                Margin="5"
+                VerticalAlignment="Bottom"
+                Foreground="White"
+                Text="{Binding ElementName=Control, Path=TileText}"
+                TextWrapping="Wrap" />
+        </Grid>
+    </Button>
 </UserControl>

@@ -26,6 +26,9 @@ namespace Thingy.Controls
         public static readonly DependencyProperty TileImageProperty =
             DependencyProperty.Register("TileImage", typeof(ImageSource), typeof(Tile));
 
+        public static readonly DependencyProperty ClickCommandProperty =
+            DependencyProperty.Register("ClickCommand", typeof(ICommand), typeof(Tile), new PropertyMetadata(null));
+
         public string TileText
         {
             get { return (string)GetValue(TileTextProperty); }
@@ -36,6 +39,12 @@ namespace Thingy.Controls
         {
             get { return (ImageSource)GetValue(TileImageProperty); }
             set { SetValue(TileImageProperty, value); }
+        }
+
+        public ICommand ClickCommand
+        {
+            get { return (ICommand)GetValue(ClickCommandProperty); }
+            set { SetValue(ClickCommandProperty, value); }
         }
 
         public Tile()
