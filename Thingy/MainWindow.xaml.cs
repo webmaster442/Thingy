@@ -1,19 +1,6 @@
 ﻿using AppLib.WPF.Controls;
 using Dragablz;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Thingy
 {
@@ -25,6 +12,18 @@ namespace Thingy
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        public void SetCurrentTabContent(string title, UserControl control)
+        {
+            var selected = TabControl.SelectedItem as Dragablz.HeaderedItemViewModel;
+            selected.Header = title;
+            selected.Content = control;
+        }
+
+        private void ModernWindow_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            TabablzControl.AddItemCommand.Execute(this, TabControl);
         }
     }
 }

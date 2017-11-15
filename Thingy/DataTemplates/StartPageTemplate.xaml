@@ -12,7 +12,8 @@
             Background="Orange"
             TileImage="{Binding Icon}"
             TileText="{Binding ModuleName}"
-            ClickCommand="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.TileClickCommand}">
+            ClickCommand="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.TileClickCommand}"
+            ClickCommandParameter="{Binding ModuleName}">
         </controls:Tile>
     </DataTemplate>
 

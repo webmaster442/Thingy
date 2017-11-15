@@ -4,8 +4,9 @@ using Thingy.Modules;
 
 namespace Thingy.Infrastructure
 {
-    public interface IModuleLoader: IEnumerable<IModule>
+    public interface IModuleLoader
     {
         UserControl GetModuleByName(string name);
+        IEnumerable<IModule> Modules { get; }
     }
 }

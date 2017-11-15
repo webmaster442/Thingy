@@ -115,6 +115,7 @@
     </UserControl.Triggers>
     <Button 
         Command="{Binding ElementName=Control, Path=ClickCommand}"
+        CommandParameter="{Binding ElementName=Control, Path=ClickCommandParameter}"
         Background="{Binding ElementName=Control, Path=Background}"
         Margin="0"
         Padding="0">

@@ -6,6 +6,7 @@ namespace Thingy
     public interface IApplication
     {
         bool? ShowDialog(UserControl control, ViewModel model = null);
+        void SetCurrentTabContent(string Title, UserControl control);
         void Close();
     }
 }

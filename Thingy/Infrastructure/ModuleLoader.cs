@@ -10,11 +10,11 @@ namespace Thingy.Infrastructure
 {
     public class ModuleLoader : IModuleLoader
     {
-        private List<IModule> modules;
+        private List<IModule> _modules;
 
         public ModuleLoader()
         {
-            modules = new List<IModule>();
+            _modules = new List<IModule>();
 
             var imodule = typeof(IModule);
 
@@ -24,23 +24,18 @@ namespace Thingy.Infrastructure
 
             foreach (var module in modulelist)
             {
-                modules.Add((IModule)Activator.CreateInstance(module));
+                _modules.Add((IModule)Activator.CreateInstance(module));
             }
         }
 
-        public IEnumerator<IModule> GetEnumerator()
+        public IEnumerable<IModule> Modules
         {
-            return modules.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return modules.GetEnumerator();
+            get { return _modules; }
         }
 
         public UserControl GetModuleByName(string name)
         {
-            var run = (from module in modules
+            var run = (from module in _modules
                        where module.ModuleName == name
                        select module).FirstOrDefault();
 

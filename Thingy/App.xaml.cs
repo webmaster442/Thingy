@@ -24,6 +24,11 @@ namespace Thingy
             App.Current.Shutdown();
         }
 
+        public void SetCurrentTabContent(string Title, UserControl control)
+        {
+            (App.Current.MainWindow as MainWindow).SetCurrentTabContent(Title, control);
+        }
+
         public bool? ShowDialog(UserControl control, ViewModel model = null)
         {
             ModalDialog modalDialog = new ModalDialog();

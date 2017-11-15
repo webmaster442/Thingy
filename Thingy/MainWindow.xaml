@@ -11,15 +11,16 @@
     Width="800"
     Height="480"
     Icon="Icons/icons8-gift.png"
+    Loaded="ModernWindow_Loaded"
     mc:Ignorable="d">
     <applib:ModernWindow.DataContext>
         <local:MainWindowViewModel />
     </applib:ModernWindow.DataContext>
     <dragablz:TabablzControl
+        x:Name="TabControl"
         Margin="3"
         HeaderMemberPath="Header"
         ItemContainerStyle="{StaticResource TrapezoidDragableTabItemStyle}"
-        ItemsSource="{Binding Items}"
         NewItemFactory="{Binding ItemFactory}"
         ShowDefaultAddButton="True"
         ShowDefaultCloseButton="True">

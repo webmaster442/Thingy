@@ -10,12 +10,8 @@ namespace Thingy
 {
     public class MainWindowViewModel: ViewModel
     {
-        public ObservableCollection<HeaderedItemViewModel> Items;
-
         public MainWindowViewModel()
         {
-            Items = new ObservableCollection<HeaderedItemViewModel>();
-            Items.Add(ItemFactory.Invoke());
         }
 
         public Func<HeaderedItemViewModel> ItemFactory
@@ -25,7 +21,7 @@ namespace Thingy
                 return () =>
                 {
                     var start = new StartPage();
-                    start.DataContext = new StartPageViewModel(App.IoCContainer.ResolveSingleton<IModuleLoader>());
+                    start.DataContext = new StartPageViewModel(App.Instance, App.IoCContainer.ResolveSingleton<IModuleLoader>());
 
                     return new HeaderedItemViewModel
                     {

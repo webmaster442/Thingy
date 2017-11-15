@@ -10,12 +10,13 @@ namespace Thingy.Db
     {
         private LiteDatabase _db;
         private Stream _filestream;
-        private LiteCollection<ToDoItem> ToDoCollection;
+        private LiteCollection<ToDoItem> _ToDoCollection;
 
         public DataBase(string file)
         {
             _filestream = File.Open(file, System.IO.FileMode.OpenOrCreate);
             _db = new LiteDatabase(_filestream);
+            _ToDoCollection = _db.GetCollection<ToDoItem>(nameof(_ToDoCollection));
         }
 
         public void Dispose()
@@ -35,12 +36,12 @@ namespace Thingy.Db
 
         public IEnumerable<ToDoItem> GetCompleteded()
         {
-            return ToDoCollection.Find(x => x.IsCompleted == true);
+            return _ToDoCollection.Find(x => x.IsCompleted == true);
         }
 
         public IEnumerable<ToDoItem> GetRelevantItems()
         {
-            return ToDoCollection.Find(x => x.IsCompleted == false);
+            return _ToDoCollection.Find(x => x.IsCompleted == false);
         }
 
     }

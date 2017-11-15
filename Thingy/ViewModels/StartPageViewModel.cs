@@ -9,26 +9,31 @@ using System.Threading.Tasks;
 using System.Windows;
 using Thingy.Infrastructure;
 using Thingy.Modules;
+using Thingy.Views;
 
 namespace Thingy.ViewModels
 {
     public class StartPageViewModel: ViewModel
     {
         private IModuleLoader _moduleLoader;
+        private IApplication _application;
 
-        public DelegateCommand TileClickCommand { get; private set; }
+        public DelegateCommand<string> TileClickCommand { get; private set; }
 
-        public StartPageViewModel(IModuleLoader moduleLoader)
+        public StartPageViewModel(IApplication application, IModuleLoader moduleLoader)
         {
             _moduleLoader = moduleLoader;
+            _application = application;
             Modules = new ObservableCollection<IModule>();
-            Modules.AddRange(_moduleLoader);
-            TileClickCommand = DelegateCommand.ToCommand(TileClick);
+            Modules.AddRange(_moduleLoader.Modules);
+            TileClickCommand = DelegateCommand<string>.ToCommand(TileClick);
         }
 
-        private void TileClick()
+        private void TileClick(string obj)
         {
-            MessageBox.Show("Blah");
+            var control = _moduleLoader.GetModuleByName(obj);
+            _application.SetCurrentTabContent(obj, control);
+
         }
 
         public ObservableCollection<IModule> Modules
