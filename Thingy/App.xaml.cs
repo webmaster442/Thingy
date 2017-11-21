@@ -29,12 +29,14 @@ namespace Thingy
             (App.Current.MainWindow as MainWindow).SetCurrentTabContent(Title, control);
         }
 
-        public bool? ShowDialog(UserControl control, ViewModel model = null)
+        public bool? ShowDialog(UserControl control, string Title, ViewModel model = null)
         {
             ModalDialog modalDialog = new ModalDialog();
             if (model != null)
                 control.DataContext = model;
             modalDialog.DailogContent = control;
+            modalDialog.Title = Title;
+            modalDialog.Owner = App.Current.MainWindow;
             return modalDialog.ShowDialog();
         }
 

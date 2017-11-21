@@ -22,7 +22,7 @@ namespace Thingy.Modules
         {
             var toDoList = new Views.ToDoList
             {
-                DataContext = new ViewModels.ToDoListViewModel(App.IoCContainer.ResolveSingleton<IDataBase>())
+                DataContext = new ViewModels.ToDoListViewModel(App.Instance, App.IoCContainer.ResolveSingleton<IDataBase>())
             };
             return toDoList;
         }

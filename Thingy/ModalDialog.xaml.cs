@@ -9,7 +9,7 @@ namespace Thingy
     {
 
         public static readonly DependencyProperty DialogContentProperty =
-            DependencyProperty.Register("DialogContent", typeof(object), typeof(ModalDialog));
+            DependencyProperty.Register("DailogContent", typeof(object), typeof(ModalDialog));
 
         public object DailogContent
         {
