@@ -1,6 +1,7 @@
 ﻿using AppLib.Common.Extensions;
 using AppLib.WPF.MVVM;
 using System.Collections.ObjectModel;
+using Thingy.Controls;
 using Thingy.Db;
 using Thingy.Db.Entity;
 using Thingy.Views;
@@ -12,9 +13,9 @@ namespace Thingy.ViewModels
         private IDataBase _db;
         private IApplication _application;
 
-        public ObservableCollection<ToDoItem> Pending { get; private set; }
+        public TrulyObservableCollection<ToDoItem> Pending { get;  set; }
 
-        public ObservableCollection<ToDoItem> Completed { get; private set; }
+        public TrulyObservableCollection<ToDoItem> Completed { get;  set; }
 
         public DelegateCommand AddNewItemCommand { get; private set; }
 
@@ -25,12 +26,19 @@ namespace Thingy.ViewModels
         {
             _application = app;
             _db = db;
-            Pending = new ObservableCollection<ToDoItem>();
-            Completed = new ObservableCollection<ToDoItem>();
+            Pending = new TrulyObservableCollection<ToDoItem>();
+            Pending.ItemChanged += Pending_ItemChanged;
+            Completed = new TrulyObservableCollection<ToDoItem>();
             Pending.AddRange(_db.GetUncompletedTasks());
             Completed.AddRange(_db.GetCompletededTasks());
             AddNewItemCommand = DelegateCommand.ToCommand(AddNewItem);
             DeleteItemCommand = DelegateCommand<int>.ToCommand(DeleteItem, CanDelete);
+        }
+
+        private void Pending_ItemChanged(object sender, ItemChangedEventArgs<ToDoItem> e)
+        {
+            var item = e.ChangedItem;
+            _db.UpdateToDoItem(item);
         }
 
         private void DeleteItem(int obj)

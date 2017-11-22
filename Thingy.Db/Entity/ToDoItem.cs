@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Thingy.Db.Entity
 {
-    public class ToDoItem: BindableBase, IEquatable<ToDoItem>
+    public class ToDoItem : BindableBase, IEquatable<ToDoItem>
     {
         private string _content;
         private bool _iscompleted;
@@ -25,10 +25,9 @@ namespace Thingy.Db.Entity
             get { return _iscompleted; }
             set
             {
-                if (SetValue(ref _iscompleted, value))
-                {
+                SetValue(ref _iscompleted, value);
+                if (CompletedDate == null && IsCompleted)
                     CompletedDate = DateTime.Now;
-                }
             }
         }
 

@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBase.cs" />
+    <Compile Include="Entity\FolderLink.cs" />
     <Compile Include="Entity\ToDoItem.cs" />
     <Compile Include="IDataBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

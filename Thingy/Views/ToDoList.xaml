@@ -16,11 +16,13 @@
             <TabItem Header="Tasks">
                 <ListBox
                     x:Name="Pending"
-                    ItemsSource="{Binding Pending}" />
+                    ItemTemplate="{StaticResource ToDoItem}"
+                    ItemsSource="{Binding Pending, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </TabItem>
             <TabItem Header="Completed">
-                <ListBox
+                <ListBox 
                     x:Name="Completed"
+                    ItemTemplate="{StaticResource ToDoItem}"
                     ItemsSource="{Binding Completed}" />
             </TabItem>
         </TabControl>

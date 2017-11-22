@@ -13,5 +13,6 @@ namespace Thingy.Db
         IEnumerable<ToDoItem> GetCompletededTasks();
         void SaveToDoItem(ToDoItem itemtoSave);
         void DeleteToDoItem(ToDoItem toDelete);
+        void UpdateToDoItem(ToDoItem item);
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Thingy.Db.Entity;
+using System.Linq;
 
 namespace Thingy.Db
 {
@@ -36,7 +37,9 @@ namespace Thingy.Db
 
         public IEnumerable<ToDoItem> GetCompletededTasks()
         {
-            return _ToDoCollection.Find(x => x.IsCompleted == true);
+            return _ToDoCollection.Find(x => x.IsCompleted == true)
+                .OrderBy(x => x.DueDate);
+
         }
 
         public IEnumerable<ToDoItem> GetUncompletedTasks()
@@ -51,7 +54,20 @@ namespace Thingy.Db
 
         public void DeleteToDoItem(ToDoItem toDelete)
         {
-            _ToDoCollection.Delete(item => item == toDelete);
+            _ToDoCollection.Delete(item => item.Content == toDelete.Content);
+        }
+
+        public void UpdateToDoItem(ToDoItem toUpdate)
+        {
+            var u = (_ToDoCollection.Find(item => item.Content == toUpdate.Content)).FirstOrDefault();
+            if (u != null)
+            {
+                u.CompletedDate = toUpdate.CompletedDate;
+                u.Content = toUpdate.Content;
+                u.DueDate = toUpdate.DueDate;
+                u.IsCompleted = toUpdate.IsCompleted;
+                _ToDoCollection.Update(u);
+            }
         }
     }
 }
