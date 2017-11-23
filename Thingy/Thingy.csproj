@@ -78,12 +78,18 @@
     <Compile Include="ModalDialog.xaml.cs">
       <DependentUpon>ModalDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Drive.cs" />
     <Compile Include="Modules\IModule.cs" />
-    <Compile Include="Modules\ToDoList.cs" />
+    <Compile Include="Modules\PlacesModule.cs" />
+    <Compile Include="Modules\ToDoListModule.cs" />
+    <Compile Include="ViewModels\PlacesViewModel.cs" />
     <Compile Include="ViewModels\StartPageViewModel.cs" />
     <Compile Include="ViewModels\ToDoListViewModel.cs" />
     <Compile Include="Views\NewToDoItem.xaml.cs">
       <DependentUpon>NewToDoItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Places.xaml.cs">
+      <DependentUpon>Places.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
@@ -124,6 +130,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NewToDoItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Places.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -182,6 +192,22 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\icons8-gift.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-cd.png" />
+    <Resource Include="Icons\icons8-dropbox.png" />
+    <Resource Include="Icons\icons8-google-drive.png" />
+    <Resource Include="Icons\icons8-hdd.png" />
+    <Resource Include="Icons\icons8-memory-slot.png" />
+    <Resource Include="Icons\icons8-network-drive.png" />
+    <Resource Include="Icons\icons8-onedrive.png" />
+    <Resource Include="Icons\icons8-usb-connector.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-folder-tree.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-folder.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

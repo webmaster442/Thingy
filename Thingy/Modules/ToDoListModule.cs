@@ -6,7 +6,7 @@ using Thingy.Db;
 
 namespace Thingy.Modules
 {
-    public class ToDoList : IModule
+    public class ToDoListModule : IModule
     {
         public string ModuleName
         {

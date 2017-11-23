@@ -1,47 +1,100 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:wpfext="http://github.com/webmaster442/AppLib/WPF"
-                    xmlns:local="clr-namespace:Thingy.DataTemplates">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Thingy.DataTemplates"
+    xmlns:applib="http://github.com/webmaster442/AppLib/WPF"
+    xmlns:wpfext="http://github.com/webmaster442/AppLib/WPF">
     <DataTemplate x:Key="ToDoItem">
         <CheckBox
-                Grid.Column="0"
-                IsEnabled="{Binding IsCompleted, Converter={wpfext:NegateConverter}}"
-                IsChecked="{Binding IsCompleted}">
+            Grid.Column="0"
+            IsChecked="{Binding IsCompleted}"
+            IsEnabled="{Binding IsCompleted, Converter={wpfext:NegateConverter}}">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <TextBlock
                     Grid.Row="0"
                     Grid.ColumnSpan="4"
                     FontSize="16"
-                    TextWrapping="Wrap"
-                    Text="{Binding Content}"/>
+                    Text="{Binding Content}"
+                    TextWrapping="Wrap" />
                 <TextBlock
                     Grid.Row="1"
                     Grid.Column="0"
-                    Text="Due: "/>
+                    Text="Due: " />
                 <TextBlock
                     Grid.Row="1"
                     Grid.Column="1"
-                    Text="{Binding DueDate}"/>
+                    Text="{Binding DueDate}" />
                 <TextBlock
                     Grid.Row="1"
                     Grid.Column="2"
-                    Text="Completed: "/>
+                    Text="Completed: " />
                 <TextBlock
                     Grid.Row="1"
                     Grid.Column="3"
-                    Text="{Binding CompletedDate}"/>
+                    Text="{Binding CompletedDate}" />
             </Grid>
         </CheckBox>
     </DataTemplate>
-    
+
+    <DataTemplate x:Key="Drive">
+        <Button Style="{StaticResource Flat}">
+            <Grid
+                Width="150"
+                Height="64">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Image
+                    Grid.RowSpan="2"
+                    Grid.Column="0"
+                    Width="48"
+                    Height="48"
+                    Source="{Binding Icon}" />
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="3,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    Text="{Binding LabelText}"
+                    TextWrapping="Wrap" />
+                <ProgressBar
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Height="20"
+                    Margin="3"
+                    VerticalAlignment="Top"
+                    Maximum="{Binding DiskSize}"
+                    Minimum="0"
+                    Value="{Binding UsedSpace}" />
+            </Grid>
+        </Button>
+    </DataTemplate>
+
+    <DataTemplate x:Key="FolderLink">
+        <applib:ImageButton
+            Image="pack://application:,,,/Thingy;component/Icons/icons8-folder.png"
+            ImageWidth="48"
+            ImageHeight="48"
+            Width="150"
+            CommandParameter="{Binding Path}"
+            Content="{Binding Name}"
+            Style="{StaticResource Flat}" />
+    </DataTemplate>
+
 </ResourceDictionary>

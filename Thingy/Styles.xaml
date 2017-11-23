@@ -11,13 +11,11 @@
     </Style>
 
     <Style TargetType="TextBlock">
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="1"/>
+        <Setter Property="Margin" Value="1" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
-    
-    <Style
-        x:Key="Title"
-        TargetType="Label">
+
+    <Style x:Key="Title" TargetType="Label">
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
@@ -25,13 +23,28 @@
                         Margin="3,0,0,3"
                         BorderBrush="Black"
                         BorderThickness="0,0,0,1">
-                        <TextBlock 
+                        <TextBlock
                             FontSize="16"
                             Text="{Binding}" />
                     </Border>
                 </DataTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style x:Key="Flat">
+        <Setter Property="Control.Background" Value="{x:Null}" />
+        <Setter Property="Control.BorderBrush" Value="{x:Null}" />
+        <Style.Triggers>
+            <Trigger Property="Control.IsMouseOver" Value="True">
+                <Setter Property="Control.Background" Value="{x:Null}" />
+                <Setter Property="Control.BorderBrush" Value="{x:Null}" />
+                <Setter Property="Control.FontWeight" Value="Bold" />
+            </Trigger>
+            <Trigger Property="Control.IsFocused" Value="True">
+                <Setter Property="Control.FontWeight" Value="Bold" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
 </ResourceDictionary>
