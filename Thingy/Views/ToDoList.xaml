@@ -36,6 +36,9 @@
                 Command="{Binding DeleteItemCommand}"
                 CommandParameter="{Binding ElementName=Pending, Path=SelectedIndex}"
                 Content="Delete Selected" />
+            <Button
+                Command="{Binding DeleteCompletedItemsCommand}"
+                Content="Delete Completed"/>
         </StackPanel>
     </Grid>
 </UserControl>

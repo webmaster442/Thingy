@@ -55,6 +55,8 @@ namespace Thingy.Controls
 
         public void AddRange(IEnumerable<T> dataToAdd)
         {
+            if (!dataToAdd.Any()) return;
+
             this.CheckReentrancy();
 
             //int startingIndex = this.Count;
@@ -69,6 +71,12 @@ namespace Thingy.Controls
             this.OnPropertyChanged(new PropertyChangedEventArgs("Count"));
             this.OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
             this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, dataToAdd.ToList()));
+        }
+
+        public void UpdateCollection(IEnumerable<T> newItems)
+        {
+            this.Clear();
+            this.AddRange(newItems);
         }
 
         private void ItemPropertyChanged(object sender, PropertyChangedEventArgs e)

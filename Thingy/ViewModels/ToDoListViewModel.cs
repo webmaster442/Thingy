@@ -1,6 +1,4 @@
-﻿using AppLib.Common.Extensions;
-using AppLib.WPF.MVVM;
-using System.Collections.ObjectModel;
+﻿using AppLib.WPF.MVVM;
 using Thingy.Controls;
 using Thingy.Db;
 using Thingy.Db.Entity;
@@ -21,6 +19,8 @@ namespace Thingy.ViewModels
 
         public DelegateCommand<int> DeleteItemCommand { get; private set; }
 
+        public DelegateCommand DeleteCompletedItemsCommand { get; private set; }
+
 
         public ToDoListViewModel(IApplication app, IDataBase db)
         {
@@ -33,12 +33,15 @@ namespace Thingy.ViewModels
             Completed.AddRange(_db.GetCompletededTasks());
             AddNewItemCommand = DelegateCommand.ToCommand(AddNewItem);
             DeleteItemCommand = DelegateCommand<int>.ToCommand(DeleteItem, CanDelete);
+            DeleteCompletedItemsCommand = DelegateCommand.ToCommand(DeleteCompletedItems);
         }
 
         private void Pending_ItemChanged(object sender, ItemChangedEventArgs<ToDoItem> e)
         {
             var item = e.ChangedItem;
             _db.UpdateToDoItem(item);
+            Pending.UpdateCollection(_db.GetUncompletedTasks());
+            Completed.UpdateCollection(_db.GetCompletededTasks());
         }
 
         private void DeleteItem(int obj)
@@ -64,7 +67,13 @@ namespace Thingy.ViewModels
                 _db.SaveToDoItem(item);
                 
             }
+        }
 
+        private void DeleteCompletedItems()
+        {
+            _db.DeleteCompletedToDoItems();
+            Pending.UpdateCollection(_db.GetUncompletedTasks());
+            Completed.UpdateCollection(_db.GetCompletededTasks());
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using Thingy.Db.Entity;
 using System.Linq;
+using System.Windows;
 
 namespace Thingy.Db
 {
@@ -67,6 +68,15 @@ namespace Thingy.Db
                 u.DueDate = toUpdate.DueDate;
                 u.IsCompleted = toUpdate.IsCompleted;
                 _ToDoCollection.Update(u);
+            }
+        }
+
+        public void DeleteCompletedToDoItems()
+        {
+            var q = MessageBox.Show("Delete Completed Items?\nOperation can't be undone.", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (q == MessageBoxResult.Yes)
+            {
+                _ToDoCollection.Delete(item => item.IsCompleted == true);
             }
         }
     }

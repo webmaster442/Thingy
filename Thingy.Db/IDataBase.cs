@@ -14,5 +14,6 @@ namespace Thingy.Db
         void SaveToDoItem(ToDoItem itemtoSave);
         void DeleteToDoItem(ToDoItem toDelete);
         void UpdateToDoItem(ToDoItem item);
+        void DeleteCompletedToDoItems();
     }
 }

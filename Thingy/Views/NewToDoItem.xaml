@@ -20,7 +20,9 @@
             Grid.Row="1"
             Margin="5,2">
             <TextBlock Text="Task Description:" />
-            <TextBox Text="{Binding Content}" />
+            <TextBox
+                MinHeight="36"
+                Text="{Binding Content}" />
             <TextBlock Text="Due Date:" />
             <DatePicker SelectedDate="{Binding DueDate}" />
         </StackPanel>
