@@ -13,12 +13,14 @@ namespace Thingy.Db
         private LiteDatabase _db;
         private Stream _filestream;
         private LiteCollection<ToDoItem> _ToDoCollection;
+        private LiteCollection<FolderLink> _Folders;
 
         public DataBase(string file)
         {
             _filestream = File.Open(file, System.IO.FileMode.OpenOrCreate);
             _db = new LiteDatabase(_filestream);
             _ToDoCollection = _db.GetCollection<ToDoItem>(nameof(_ToDoCollection));
+            _Folders = _db.GetCollection<FolderLink>(nameof(_Folders));
         }
 
         public void Dispose()
@@ -36,6 +38,7 @@ namespace Thingy.Db
             GC.SuppressFinalize(this);
         }
 
+        #region Task management
         public IEnumerable<ToDoItem> GetCompletededTasks()
         {
             return _ToDoCollection.Find(x => x.IsCompleted == true)
@@ -79,5 +82,23 @@ namespace Thingy.Db
                 _ToDoCollection.Delete(item => item.IsCompleted == true);
             }
         }
+        #endregion
+
+        #region Favorite Folders
+        public IEnumerable<FolderLink> GetFavoriteFolders()
+        {
+            return _Folders.FindAll();
+        }
+
+        public void SaveFavoriteFolder(FolderLink favorite)
+        {
+            _Folders.Insert(favorite);
+        }
+
+        public void DeleteFavoriteFolder(FolderLink favorite)
+        {
+            _Folders.Delete(folder => folder == favorite);
+        }
+        #endregion
     }
 }

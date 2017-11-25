@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Thingy.Db;
 
 namespace Thingy.Modules
 {
@@ -21,7 +22,7 @@ namespace Thingy.Modules
         {
             return new Views.Places
             {
-                DataContext = new ViewModels.PlacesViewModel()
+                DataContext = new ViewModels.PlacesViewModel(App.Instance, App.IoCContainer.ResolveSingleton<IDataBase>())
             };
         }
     }

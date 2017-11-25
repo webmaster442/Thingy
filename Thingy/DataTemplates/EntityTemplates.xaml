@@ -1,14 +1,12 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:Thingy.DataTemplates"
-    xmlns:applib="http://github.com/webmaster442/AppLib/WPF"
-    xmlns:wpfext="http://github.com/webmaster442/AppLib/WPF">
+    xmlns:applib="http://github.com/webmaster442/AppLib/WPF">
     <DataTemplate x:Key="ToDoItem">
         <CheckBox
             Grid.Column="0"
             IsChecked="{Binding IsCompleted}"
-            IsEnabled="{Binding IsCompleted, Converter={wpfext:NegateConverter}}">
+            IsEnabled="{Binding IsCompleted, Converter={applib:NegateConverter}}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -47,7 +45,10 @@
     </DataTemplate>
 
     <DataTemplate x:Key="Drive">
-        <Button Style="{StaticResource Flat}">
+        <Button
+            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.OpenLocationCommand}"
+            CommandParameter="{Binding Path}"
+            Style="{StaticResource Flat}">
             <Grid
                 Width="150"
                 Height="64">
@@ -88,24 +89,25 @@
 
     <DataTemplate x:Key="FolderLink">
         <applib:ImageButton
-            Image="pack://application:,,,/Thingy.Images;component/Icons/icons8-folder.png"
-            ImageWidth="48"
-            ImageHeight="48"
             Width="150"
+            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.OpenLocationCommand}"
             CommandParameter="{Binding Path}"
             Content="{Binding Name}"
+            Image="pack://application:,,,/Thingy.Images;component/Icons/icons8-folder.png"
+            ImageHeight="48"
+            ImageWidth="48"
             Style="{StaticResource Flat}" />
     </DataTemplate>
 
     <DataTemplate x:Key="SystemFolderLink">
         <applib:ImageButton
-            ToolTip="{Binding Path}"
-            Image="{Binding Icon}"
-            ImageWidth="48"
-            ImageHeight="48"
             Width="150"
+            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.OpenLocationCommand}"
             CommandParameter="{Binding Path}"
             Content="{Binding Name}"
+            Image="{Binding Icon}"
+            ImageHeight="48"
+            ImageWidth="48"
             Style="{StaticResource Flat}" />
     </DataTemplate>
 

@@ -39,7 +39,32 @@
                 </StackPanel>
             </ScrollViewer>
         </TabItem>
-        <TabItem Header="User favoirites" />
+        <TabItem Header="User favoirites">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <ScrollViewer Grid.Row="0">
+                    <ItemsControl
+                        ItemTemplate="{StaticResource FolderLink}"
+                        ItemsSource="{Binding Folders}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ScrollViewer>
+                <StackPanel 
+                    Orientation="Horizontal"
+                    Grid.Row="1">
+                    <Button
+                        Content="Add new..."
+                        Command="{Binding NewFolderLinkCommand}"/>
+                </StackPanel>
+            </Grid>
+        </TabItem>
     </TabControl>
 
 </UserControl>

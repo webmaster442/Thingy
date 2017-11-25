@@ -12,12 +12,15 @@ namespace Thingy.Implementation.Models
         private string _LabelText;
         private long _UsedSpace;
         private long _DiskSize;
+        private string _path;
         private ImageSource _Icon;
 
         public Drive() { }
 
         public Drive(DriveInfo driveInfo)
         {
+            Path = driveInfo.Name;
+
             switch (driveInfo.DriveType)
             {
                 case DriveType.CDRom:
@@ -51,37 +54,34 @@ namespace Thingy.Implementation.Models
             }
         }
 
+        public string Path
+        {
+            get { return _path; }
+            set { SetValue(ref _path, value); }
+        }
+
         public string LabelText
         {
             get { return _LabelText; }
-            set
-            {
-                SetValue(ref _LabelText, value);
-            }
+            set { SetValue(ref _LabelText, value); }
         }
+
         public long UsedSpace
         {
             get { return _UsedSpace; }
-            set
-            {
-                SetValue(ref _UsedSpace, value);
-            }
+            set { SetValue(ref _UsedSpace, value); }
         }
+
         public long DiskSize
         {
             get { return _DiskSize; }
-            set
-            {
-                SetValue(ref _DiskSize, value);
-            }
+            set { SetValue(ref _DiskSize, value); }
         }
+
         public ImageSource Icon
         {
             get { return _Icon; }
-            set
-            {
-                SetValue(ref _Icon, value);
-            }
+            set { SetValue(ref _Icon, value); }
         }
 
         public override bool Equals(object obj)
@@ -95,6 +95,7 @@ namespace Thingy.Implementation.Models
                    _LabelText == other._LabelText &&
                    _UsedSpace == other._UsedSpace &&
                    _DiskSize == other._DiskSize &&
+                   _path == other._path &&
                    EqualityComparer<ImageSource>.Default.Equals(Icon, other.Icon);
         }
 
@@ -104,6 +105,7 @@ namespace Thingy.Implementation.Models
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_LabelText);
             hashCode = hashCode * -1521134295 + _UsedSpace.GetHashCode();
             hashCode = hashCode * -1521134295 + _DiskSize.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_path);
             hashCode = hashCode * -1521134295 + EqualityComparer<ImageSource>.Default.GetHashCode(Icon);
             return hashCode;
         }

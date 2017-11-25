@@ -15,5 +15,9 @@ namespace Thingy.Db
         void DeleteToDoItem(ToDoItem toDelete);
         void UpdateToDoItem(ToDoItem item);
         void DeleteCompletedToDoItems();
+        //---------------------------------------------
+        IEnumerable<FolderLink> GetFavoriteFolders();
+        void SaveFavoriteFolder(FolderLink favorite);
+        void DeleteFavoriteFolder(FolderLink favorite);
     }
 }

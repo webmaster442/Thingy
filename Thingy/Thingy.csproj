@@ -84,6 +84,9 @@
     <Compile Include="ViewModels\PlacesViewModel.cs" />
     <Compile Include="ViewModels\StartPageViewModel.cs" />
     <Compile Include="ViewModels\ToDoListViewModel.cs" />
+    <Compile Include="Views\NewFolderLink.xaml.cs">
+      <DependentUpon>NewFolderLink.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NewToDoItem.xaml.cs">
       <DependentUpon>NewToDoItem.xaml</DependentUpon>
     </Compile>
@@ -125,6 +128,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewFolderLink.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
