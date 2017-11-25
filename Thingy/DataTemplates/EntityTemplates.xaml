@@ -88,7 +88,19 @@
 
     <DataTemplate x:Key="FolderLink">
         <applib:ImageButton
-            Image="pack://application:,,,/Thingy;component/Icons/icons8-folder.png"
+            Image="pack://application:,,,/Thingy.Images;component/Icons/icons8-folder.png"
+            ImageWidth="48"
+            ImageHeight="48"
+            Width="150"
+            CommandParameter="{Binding Path}"
+            Content="{Binding Name}"
+            Style="{StaticResource Flat}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="SystemFolderLink">
+        <applib:ImageButton
+            ToolTip="{Binding Path}"
+            Image="{Binding Icon}"
             ImageWidth="48"
             ImageHeight="48"
             Width="150"

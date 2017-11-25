@@ -8,34 +8,38 @@
     d:DesignHeight="300"
     d:DesignWidth="300"
     mc:Ignorable="d">
-    <ScrollViewer>
-        <StackPanel>
-            <Expander
-                Header="Drives"
-                IsExpanded="True">
-                <ItemsControl
-                    ItemTemplate="{StaticResource Drive}"
-                    ItemsSource="{Binding Drives}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-            </Expander>
-            <Expander
-                Header="System Places"
-                IsExpanded="True">
-                <ItemsControl
-                    ItemTemplate="{StaticResource FolderLink}"
-                    ItemsSource="{Binding SystemPlaces}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-            </Expander>
-        </StackPanel>
-    </ScrollViewer>
+    <TabControl>
+        <TabItem Header="System">
+            <ScrollViewer>
+                <StackPanel>
+                    <Label
+                        Content="Drives"
+                        Style="{StaticResource Title}" />
+                    <ItemsControl
+                        ItemTemplate="{StaticResource Drive}"
+                        ItemsSource="{Binding Drives}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                    <Label
+                        Content="Folders"
+                        Style="{StaticResource Title}" />
+                    <ItemsControl
+                        ItemTemplate="{StaticResource SystemFolderLink}"
+                        ItemsSource="{Binding SystemPlaces}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="User favoirites" />
+    </TabControl>
+
 </UserControl>

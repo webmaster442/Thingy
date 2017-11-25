@@ -5,7 +5,7 @@ using System.IO;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Thingy.Models
+namespace Thingy.Implementation.Models
 {
     public class Drive : BindableBase, IEquatable<Drive>
     {
@@ -21,19 +21,19 @@ namespace Thingy.Models
             switch (driveInfo.DriveType)
             {
                 case DriveType.CDRom:
-                    Icon = new BitmapImage(new Uri("pack://application:,,,/Thingy;component/Icons/icons8-cd.png"));
+                    Icon = new BitmapImage(new Uri("pack://application:,,,/Thingy.Images;component/Icons/icons8-cd.png"));
                     break;
                 case DriveType.Fixed:
-                    Icon = new BitmapImage(new Uri("pack://application:,,,/Thingy;component/Icons/icons8-hdd.png"));
+                    Icon = new BitmapImage(new Uri("pack://application:,,,/Thingy.Images;component/Icons/icons8-hdd.png"));
                     break;
                 case DriveType.Network:
-                    Icon = new BitmapImage(new Uri("pack://application:,,,/Thingy;component/Icons/icons8-network-drive.png"));
+                    Icon = new BitmapImage(new Uri("pack://application:,,,/Thingy.Images;component/Icons/icons8-network-drive.png"));
                     break;
                 case DriveType.Ram:
-                    Icon = new BitmapImage(new Uri("pack://application:,,,/Thingy;component/Icons/icons8-memory-slot.png"));
+                    Icon = new BitmapImage(new Uri("pack://application:,,,/Thingy.Images;component/Icons/icons8-memory-slot.png"));
                     break;
                 case DriveType.Removable:
-                    Icon = new BitmapImage(new Uri("pack://application:,,,/Thingy;component/Icons/icons8-usb-connector.png"));
+                    Icon = new BitmapImage(new Uri("pack://application:,,,/Thingy.Images;component/Icons/icons8-usb-connector.png"));
                     break;
             }
 

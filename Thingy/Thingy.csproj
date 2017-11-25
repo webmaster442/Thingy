@@ -78,7 +78,6 @@
     <Compile Include="ModalDialog.xaml.cs">
       <DependentUpon>ModalDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Drive.cs" />
     <Compile Include="Modules\IModule.cs" />
     <Compile Include="Modules\PlacesModule.cs" />
     <Compile Include="Modules\ToDoListModule.cs" />
@@ -186,28 +185,14 @@
       <Project>{2D7E8D87-74AC-402A-8E11-BDACC7B3839B}</Project>
       <Name>Thingy.Db</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Icons\icons8-checklist.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Icons\icons8-gift.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Icons\icons8-cd.png" />
-    <Resource Include="Icons\icons8-dropbox.png" />
-    <Resource Include="Icons\icons8-google-drive.png" />
-    <Resource Include="Icons\icons8-hdd.png" />
-    <Resource Include="Icons\icons8-memory-slot.png" />
-    <Resource Include="Icons\icons8-network-drive.png" />
-    <Resource Include="Icons\icons8-onedrive.png" />
-    <Resource Include="Icons\icons8-usb-connector.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Icons\icons8-folder-tree.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Icons\icons8-folder.png" />
+    <ProjectReference Include="..\Thingy.Images\Thingy.Images.csproj">
+      <Project>{63a3ee73-078f-4dec-8578-5af6f158d383}</Project>
+      <Name>Thingy.Images</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Thingy.Implementation\Thingy.Implementation.csproj">
+      <Project>{5B8ED112-5CC6-4783-98BD-D6C5583D6A58}</Project>
+      <Name>Thingy.Implementation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

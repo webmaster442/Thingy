@@ -14,7 +14,7 @@ namespace Thingy.Modules
 
         public ImageSource Icon
         {
-            get { return new BitmapImage(new Uri("pack://application:,,,/Thingy;component/Icons/icons8-folder-tree.png")); }
+            get { return new BitmapImage(new Uri("pack://application:,,,/Thingy.Images;component/Icons/icons8-folder-tree.png")); }
         }
 
         public UserControl RunModule()
