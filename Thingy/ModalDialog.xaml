@@ -7,9 +7,9 @@
     x:Name="Dialog"
     MinWidth="400"
     MinHeight="320"
-    ShowInTaskbar="True" 
-    SizeToContent="WidthAndHeight"
     ResizeMode="CanMinimize"
+    ShowInTaskbar="True"
+    SizeToContent="WidthAndHeight"
     WindowStartupLocation="CenterOwner"
     mc:Ignorable="d">
     <Grid>
@@ -20,9 +20,24 @@
         <ContentControl
             x:Name="Content"
             Grid.Row="0"
-            Content="{Binding ElementName=Dialog, Path=DailogContent}"
+            HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
-            HorizontalAlignment="Stretch"/>
+            Content="{Binding ElementName=Dialog, Path=DailogContent}" />
+        <StackPanel
+            x:Name="ErrorLabel"
+            Visibility="Hidden"
+            Grid.Row="1"
+            Margin="10,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
+            <Image
+                Width="30"
+                Source="pack://application:,,,/Thingy.Images;component/Icons/icons8-high-priority.png" />
+            <TextBlock
+                Foreground="Red"
+                Text="There are Errors" />
+        </StackPanel>
         <StackPanel
             Grid.Row="1"
             HorizontalAlignment="Right"
@@ -30,12 +45,12 @@
             Orientation="Horizontal">
             <Button
                 x:Name="Ok"
-                Content="OK"
-                Click="Ok_Click" />
+                Click="Ok_Click"
+                Content="OK" />
             <Button
                 x:Name="Cancel"
-                Content="Cancel"
-                Click="Cancel_Click" />
+                Click="Cancel_Click"
+                Content="Cancel" />
         </StackPanel>
     </Grid>
 </Window>

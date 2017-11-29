@@ -90,5 +90,8 @@
     <Resource Include="Icons\icons8-user-folder.png" />
     <Resource Include="Icons\icons8-wired-network.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-high-priority.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

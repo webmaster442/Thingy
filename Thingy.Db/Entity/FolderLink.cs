@@ -2,15 +2,23 @@
 using LiteDB;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Thingy.Db.Entity
 {
-    public class FolderLink: BindableBase, IEquatable<FolderLink>
+    public class FolderLink: ValidatableBase, IEquatable<FolderLink>
     {
         private string _name;
         private string _path;
 
+        public FolderLink()
+        {
+            ValidateOnPropertyChange = true;
+            Validate();
+        }
+
         [BsonId]
+        [Required]
         public string Name
         {
             get { return _name; }
@@ -18,6 +26,7 @@ namespace Thingy.Db.Entity
         }
 
         [BsonField]
+        [Required]
         public string Path
         {
             get { return _path; }
