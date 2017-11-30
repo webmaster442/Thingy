@@ -96,5 +96,9 @@
   <ItemGroup>
     <Resource Include="Icons\icons8-clear-symbol.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-console.png" />
+    <Resource Include="Icons\icons8-git.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
