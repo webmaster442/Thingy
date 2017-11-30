@@ -1,4 +1,4 @@
-﻿using AppLib.WPF.MVVM;
+﻿using AppLib.MVVM;
 using System.Windows.Controls;
 
 namespace Thingy

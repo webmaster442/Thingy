@@ -1,4 +1,4 @@
-﻿using AppLib.WPF.MVVM;
+﻿using AppLib.MVVM;
 using LiteDB;
 using System;
 using System.Collections.Generic;
@@ -27,10 +27,22 @@ namespace Thingy.Db.Entity
 
         [BsonField]
         [Required]
+        [CustomValidation(typeof(FolderLink), "PathValidate")]
         public string Path
         {
             get { return _path; }
             set { SetValue(ref _path, value); }
+        }
+
+        public static ValidationResult PathValidate(object obj, ValidationContext context)
+        {
+            var folderLink = (FolderLink)context.ObjectInstance;
+            if (!System.IO.Directory.Exists(folderLink.Path))
+            {
+                return new ValidationResult(string.Format("Path doesn't exist: {0}", folderLink.Path),
+                                            new string[] { nameof(folderLink.Path) });
+            }
+            return ValidationResult.Success;
         }
 
         public override bool Equals(object obj)

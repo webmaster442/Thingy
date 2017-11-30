@@ -1,5 +1,5 @@
 ﻿using AppLib.Common.Extensions;
-using AppLib.WPF.MVVM;
+using AppLib.MVVM;
 using System.Collections.ObjectModel;
 using Thingy.Db;
 using Thingy.Db.Entity;

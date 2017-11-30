@@ -22,11 +22,14 @@
             Grid.Row="1"
             Margin="5,2">
             <TextBlock Text="Link name:" />
-            <TextBox Text="{Binding Name}" />
+            <TextBox
+                Style="{StaticResource Validatable}"
+                Text="{Binding Name}" />
             <TextBlock Text="Link Location:" />
             <applib:FileSelector
+                Style="{StaticResource Validatable}"
                 Filter="folder"
-                SelectedFile="{Binding Path}"/>
+                SelectedFile="{Binding Path, Mode=TwoWay}"/>
         </StackPanel>
     </Grid>
 </UserControl>

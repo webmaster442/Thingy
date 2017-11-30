@@ -1,5 +1,5 @@
 ﻿using AppLib.Common.IOC;
-using AppLib.WPF.MVVM;
+using AppLib.MVVM;
 using System.Windows;
 using System.Windows.Controls;
 using Thingy.Db;

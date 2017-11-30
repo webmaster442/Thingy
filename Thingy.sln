@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy", "Thingy\Thingy.csproj", "{B02377D2-EBB9-407A-851C-E7E9E2B4914D}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.Implementation", "Thingy.Implementation\Thingy.Implementation.csproj", "{5B8ED112-5CC6-4783-98BD-D6C5583D6A58}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.Images", "Thingy.Images\Thingy.Images.csproj", "{63A3EE73-078F-4DEC-8578-5AF6F158D383}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppLib.MVVM", "applib\AppLib.MVVM\AppLib.MVVM.csproj", "{848616A9-3D2F-42B1-B474-BE506E8019E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{63A3EE73-078F-4DEC-8578-5AF6F158D383}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63A3EE73-078F-4DEC-8578-5AF6F158D383}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63A3EE73-078F-4DEC-8578-5AF6F158D383}.Release|Any CPU.Build.0 = Release|Any CPU
+		{848616A9-3D2F-42B1-B474-BE506E8019E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{848616A9-3D2F-42B1-B474-BE506E8019E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{848616A9-3D2F-42B1-B474-BE506E8019E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{848616A9-3D2F-42B1-B474-BE506E8019E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

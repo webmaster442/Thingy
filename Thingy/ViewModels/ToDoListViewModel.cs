@@ -1,4 +1,4 @@
-﻿using AppLib.WPF.MVVM;
+﻿using AppLib.MVVM;
 using Thingy.Controls;
 using Thingy.Db;
 using Thingy.Db.Entity;

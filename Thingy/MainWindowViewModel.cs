@@ -1,4 +1,4 @@
-﻿using AppLib.WPF.MVVM;
+﻿using AppLib.MVVM;
 using Dragablz;
 using System;
 using System.Collections.ObjectModel;

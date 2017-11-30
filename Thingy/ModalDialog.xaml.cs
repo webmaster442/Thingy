@@ -36,7 +36,6 @@ namespace Thingy
                     if (ValidatableContent != null)
                         ValidatableContent.ErrorsChanged -= ErrorHandler;
                     Ok.IsEnabled = true;
-                    ErrorLabel.Visibility = Visibility.Collapsed;
                 }
             }
         }
@@ -53,27 +52,7 @@ namespace Thingy
 
         private void ErrorHandler(object sender, DataErrorsChangedEventArgs e)
         {
-            ErrorLabel.ToolTip = BuildErrorString(ValidatableContent.GetErrors(""));
-            if (ValidatableContent.HasErrors)
-            {
-                Ok.IsEnabled = false;
-                ErrorLabel.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                Ok.IsEnabled = true;
-                ErrorLabel.Visibility = Visibility.Collapsed;
-            }
-        }
-
-        private object BuildErrorString(IEnumerable enumerable)
-        {
-            StringBuilder sb = new StringBuilder();
-            foreach (string error in enumerable)
-            {
-                sb.AppendLine(error);
-            }
-            return sb.ToString();
+            Ok.IsEnabled = !ValidatableContent.HasErrors;
         }
 
         public ModalDialog()

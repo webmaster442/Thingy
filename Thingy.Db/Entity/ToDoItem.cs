@@ -1,4 +1,4 @@
-﻿using AppLib.WPF.MVVM;
+﻿using AppLib.MVVM;
 using LiteDB;
 using System;
 using System.Collections.Generic;

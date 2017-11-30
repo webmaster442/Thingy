@@ -2,6 +2,41 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <ControlTemplate x:Key="validationErrorTemplate">
+        <DockPanel>
+            <StackPanel
+                DockPanel.Dock="Bottom"
+                Orientation="Horizontal"
+                Margin="2,0">
+                <Grid
+                    Width="12"
+                    Height="12">
+                    <Ellipse
+                        Width="12"
+                        Height="12"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Fill="Red" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="8"
+                        FontWeight="Heavy"
+                        Foreground="White"
+                        TextAlignment="Center"
+                        Text="X"
+                        ToolTip="{Binding ElementName=ErrorAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
+                </Grid>
+                <TextBlock
+                    Margin="2,0,0,0"
+                    FontWeight="Bold"
+                    Foreground="Red"
+                    Text="{Binding ElementName=ErrorAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" />
+            </StackPanel>
+            <AdornedElementPlaceholder x:Name="ErrorAdorner" />
+        </DockPanel>
+    </ControlTemplate>
+
     <Style TargetType="Button">
         <Setter Property="Margin" Value="5" />
         <Setter Property="MinHeight" Value="27" />
@@ -14,6 +49,17 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
+    <Style x:Key="Validatable">
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource validationErrorTemplate}"/>
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="true">
+                <Setter Property="Control.ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}"/>
+                <Setter Property="Control.BorderBrush" Value="Red"/>
+                <Setter Property="Control.Margin" Value="0,0,0,28"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
     <Style
         x:Key="Title"
         TargetType="Label">

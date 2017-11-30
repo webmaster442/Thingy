@@ -57,6 +57,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\applib\AppLib.MVVM\AppLib.MVVM.csproj">
+      <Project>{848616A9-3D2F-42B1-B474-BE506E8019E4}</Project>
+      <Name>AppLib.MVVM</Name>
+    </ProjectReference>
     <ProjectReference Include="..\applib\AppLib.WPF\AppLib.WPF.csproj">
       <Project>{faf19388-a6c0-46f9-a588-a46db392ace4}</Project>
       <Name>AppLib.WPF</Name>

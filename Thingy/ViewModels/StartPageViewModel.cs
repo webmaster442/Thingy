@@ -1,5 +1,5 @@
 ﻿using AppLib.Common.Extensions;
-using AppLib.WPF.MVVM;
+using AppLib.MVVM;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
