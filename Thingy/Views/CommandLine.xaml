@@ -1,0 +1,53 @@
+﻿<UserControl
+    x:Class="Thingy.Views.CommandLine"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Thingy.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="http://schemas.microsoft.com/expression/2010/interactivity"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    mc:Ignorable="d">
+    <interactivity:Interaction.Triggers>
+        <interactivity:EventTrigger EventName="Loaded">
+            <interactivity:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </interactivity:EventTrigger>
+    </interactivity:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ToolBarPanel
+            Grid.Row="0"
+            Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+            Orientation="Horizontal" />
+        <TextBox
+            x:Name="Console"
+            Grid.Row="1"
+            Padding="10"
+            AcceptsReturn="True"
+            FontFamily="Consolas"
+            TextWrapping="Wrap"
+            VerticalScrollBarVisibility="Visible">
+            <TextBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem
+                        Command="{Binding CopyCommand}"
+                        Header="Copy" />
+                    <MenuItem
+                        Command="{Binding PasteCommand}"
+                        Header="Paste" />
+                    <Separator />
+                    <MenuItem
+                        Command="{Binding ClearCommand}"
+                        Header="Clear Output" />
+                    <MenuItem
+                        Command="{Binding RestartCommand}"
+                        Header="Restart CMD.exe" />
+                </ContextMenu>
+            </TextBox.ContextMenu>
+        </TextBox>
+    </Grid>
+</UserControl>

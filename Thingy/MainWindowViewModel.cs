@@ -20,8 +20,10 @@ namespace Thingy
             {
                 return () =>
                 {
-                    var start = new StartPage();
-                    start.DataContext = new StartPageViewModel(App.Instance, App.IoCContainer.ResolveSingleton<IModuleLoader>());
+                    var start = new StartPage
+                    {
+                        DataContext = new StartPageViewModel(App.Instance, App.IoCContainer.ResolveSingleton<IModuleLoader>())
+                    };
 
                     return new HeaderedItemViewModel
                     {

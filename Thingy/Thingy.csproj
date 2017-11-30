@@ -78,12 +78,18 @@
     <Compile Include="ModalDialog.xaml.cs">
       <DependentUpon>ModalDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\CommandLineModule.cs" />
     <Compile Include="Modules\IModule.cs" />
     <Compile Include="Modules\PlacesModule.cs" />
     <Compile Include="Modules\ToDoListModule.cs" />
+    <Compile Include="ViewModels\CommandLineViewModel.cs" />
     <Compile Include="ViewModels\PlacesViewModel.cs" />
     <Compile Include="ViewModels\StartPageViewModel.cs" />
     <Compile Include="ViewModels\ToDoListViewModel.cs" />
+    <Compile Include="Views\CommandLine.xaml.cs">
+      <DependentUpon>CommandLine.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ICommandLineView.cs" />
     <Compile Include="Views\NewFolderLink.xaml.cs">
       <DependentUpon>NewFolderLink.xaml</DependentUpon>
     </Compile>
@@ -128,6 +134,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CommandLine.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

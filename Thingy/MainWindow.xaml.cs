@@ -1,6 +1,8 @@
 ﻿using AppLib.WPF.Controls;
 using Dragablz;
 using System.Windows.Controls;
+using System;
+using AppLib.MVVM;
 
 namespace Thingy
 {
@@ -12,6 +14,14 @@ namespace Thingy
         public MainWindow()
         {
             InitializeComponent();
+            TabControl.ClosingItemCallback = TabClosing;
+        }
+
+        private void TabClosing(ItemActionCallbackArgs<TabablzControl> args)
+        {
+            var content = args.DragablzItem?.DataContext as HeaderedItemViewModel;
+            var closable = content?.Content as ICloseableView;
+            closable.Close();
         }
 
         public void SetCurrentTabContent(string title, UserControl control)
