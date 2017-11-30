@@ -21,7 +21,7 @@ namespace Thingy
         {
             var content = args.DragablzItem?.DataContext as HeaderedItemViewModel;
             var closable = content?.Content as ICloseableView;
-            closable.Close();
+            closable?.Close();
         }
 
         public void SetCurrentTabContent(string title, UserControl control)
