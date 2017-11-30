@@ -217,7 +217,12 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>del *.pdb
-del *.xml</PostBuildEvent>
+    <PostBuildEvent>if "$(ConfigurationName)" EQU "Debug" goto exit
+
+:delete
+del *.pdb
+del *.xml
+
+:exit</PostBuildEvent>
   </PropertyGroup>
 </Project>
