@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Thingy.Db.Entity;
 
 namespace Thingy.Db
@@ -18,6 +14,6 @@ namespace Thingy.Db
         //---------------------------------------------
         IEnumerable<FolderLink> GetFavoriteFolders();
         void SaveFavoriteFolder(FolderLink favorite);
-        void DeleteFavoriteFolder(FolderLink favorite);
+        void DeleteFavoriteFolder(string foldername);
     }
 }

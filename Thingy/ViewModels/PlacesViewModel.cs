@@ -1,6 +1,7 @@
 ﻿using AppLib.Common.Extensions;
 using AppLib.MVVM;
 using System.Collections.ObjectModel;
+using System.Windows;
 using Thingy.Db;
 using Thingy.Db.Entity;
 using Thingy.Implementation;
@@ -21,6 +22,7 @@ namespace Thingy.ViewModels
 
         public DelegateCommand NewFolderLinkCommand { get; private set; }
         public DelegateCommand<string> OpenLocationCommand { get; private set; }
+        public DelegateCommand<string> DeleteSelectedLinkCommand { get; private set; }
 
         public PlacesViewModel(IApplication app, IDataBase db)
         {
@@ -31,6 +33,7 @@ namespace Thingy.ViewModels
             Folders = new ObservableCollection<FolderLink>(_db.GetFavoriteFolders());
             NewFolderLinkCommand = DelegateCommand.ToCommand(NewFolderLink);
             OpenLocationCommand = DelegateCommand<string>.ToCommand(OpenLocation);
+            DeleteSelectedLinkCommand = DelegateCommand<string>.ToCommand(DeleteSelectedLink);
         }
 
         private void OpenLocation(string obj)
@@ -51,6 +54,16 @@ namespace Thingy.ViewModels
             if (_app.ShowDialog(dialog, "New Folder Link") == true)
             {
                 _db.SaveFavoriteFolder(item);
+                Folders.UpdateWith(_db.GetFavoriteFolders());
+            }
+        }
+
+        private void DeleteSelectedLink(string obj)
+        {
+            var q = MessageBox.Show("Delete link?", "Link delete", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (q == MessageBoxResult.Yes)
+            {
+                _db.DeleteFavoriteFolder(obj);
                 Folders.UpdateWith(_db.GetFavoriteFolders());
             }
         }

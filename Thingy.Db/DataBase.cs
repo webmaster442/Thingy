@@ -95,9 +95,9 @@ namespace Thingy.Db
             _Folders.Insert(favorite);
         }
 
-        public void DeleteFavoriteFolder(FolderLink favorite)
+        public void DeleteFavoriteFolder(string foldername)
         {
-            _Folders.Delete(folder => folder == favorite);
+            _Folders.Delete(folder => folder.Name == foldername);
         }
         #endregion
     }

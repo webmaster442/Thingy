@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CloudDrivesLocator.cs" />
     <Compile Include="Models\Drive.cs" />
     <Compile Include="Models\SystemFolderLink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -88,15 +88,36 @@
     </DataTemplate>
 
     <DataTemplate x:Key="FolderLink">
-        <applib:ImageButton
-            Width="150"
-            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.OpenLocationCommand}"
-            CommandParameter="{Binding Path}"
-            Content="{Binding Name}"
-            Image="pack://application:,,,/Thingy.Images;component/Icons/icons8-folder.png"
-            ImageHeight="48"
-            ImageWidth="48"
-            Style="{StaticResource Flat}" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <applib:ImageButton
+                Grid.Column="0"
+                Width="150"
+                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.OpenLocationCommand}"
+                CommandParameter="{Binding Path}"
+                Content="{Binding Name}"
+                Image="pack://application:,,,/Thingy.Images;component/Icons/icons8-folder.png"
+                ImageHeight="48"
+                ImageWidth="48"
+                Style="{StaticResource Flat}" />
+            <Button
+                VerticalAlignment="Top"
+                Height="20"
+                Grid.Column="1"
+                Margin="2,0"
+                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.DeleteSelectedLinkCommand}"
+                CommandParameter="{Binding Name}"
+                Style="{StaticResource Flat}"
+                ToolTip="Delete">
+                <Image
+                    Width="16"
+                    Height="16"
+                    Source="pack://application:,,,/Thingy.Images;component/Icons/icons8-clear-symbol.png" />
+            </Button>
+        </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="SystemFolderLink">

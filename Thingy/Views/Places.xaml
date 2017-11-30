@@ -9,6 +9,32 @@
     d:DesignWidth="300"
     mc:Ignorable="d">
     <TabControl>
+        <TabItem Header="User favoirites">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <ScrollViewer Grid.Row="0">
+                    <ItemsControl
+                        ItemTemplate="{StaticResource FolderLink}"
+                        ItemsSource="{Binding Folders}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ScrollViewer>
+                <StackPanel
+                    Grid.Row="1"
+                    Orientation="Horizontal">
+                    <Button
+                        Command="{Binding NewFolderLinkCommand}"
+                        Content="Add new..." />
+                </StackPanel>
+            </Grid>
+        </TabItem>
         <TabItem Header="System">
             <ScrollViewer>
                 <StackPanel>
@@ -38,32 +64,6 @@
                     </ItemsControl>
                 </StackPanel>
             </ScrollViewer>
-        </TabItem>
-        <TabItem Header="User favoirites">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <ScrollViewer Grid.Row="0">
-                    <ItemsControl
-                        ItemTemplate="{StaticResource FolderLink}"
-                        ItemsSource="{Binding Folders}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </ScrollViewer>
-                <StackPanel 
-                    Orientation="Horizontal"
-                    Grid.Row="1">
-                    <Button
-                        Content="Add new..."
-                        Command="{Binding NewFolderLinkCommand}"/>
-                </StackPanel>
-            </Grid>
         </TabItem>
     </TabControl>
 

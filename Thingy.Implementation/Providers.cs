@@ -76,6 +76,24 @@ namespace Thingy.Implementation
                 Path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads"),
                 Icon = new BitmapImage(new Uri("pack://application:,,,/Thingy.Images;component/Icons/icons8-downloads-folder.png"))
             };
+            if (!string.IsNullOrEmpty(CloudDriveLocation.DropBox))
+            {
+                yield return new SystemFolderLink
+                {
+                    Name = "Dropbox",
+                    Path = CloudDriveLocation.DropBox,
+                    Icon = new BitmapImage(new Uri("pack://application:,,,/Thingy.Images;component/Icons/icons8-dropbox.png"))
+                };
+            }
+            if (!string.IsNullOrEmpty(CloudDriveLocation.OneDrive))
+            {
+                yield return new SystemFolderLink
+                {
+                    Name = "OneDrive",
+                    Path = CloudDriveLocation.OneDrive,
+                    Icon = new BitmapImage(new Uri("pack://application:,,,/Thingy.Images;component/Icons/icons8-onedrive.png"))
+                };
+            }
         }
     }
 }
