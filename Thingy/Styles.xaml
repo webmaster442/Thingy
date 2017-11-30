@@ -37,7 +37,7 @@
         </DockPanel>
     </ControlTemplate>
 
-    <Style TargetType="Button">
+    <Style TargetType="Button" x:Key="BigButton">
         <Setter Property="Margin" Value="5" />
         <Setter Property="MinHeight" Value="27" />
         <Setter Property="MinWidth" Value="80" />

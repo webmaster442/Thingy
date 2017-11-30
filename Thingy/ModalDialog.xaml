@@ -25,12 +25,12 @@
             Content="{Binding ElementName=Dialog, Path=DailogContent}" />
         <StackPanel
             x:Name="ErrorLabel"
-            Visibility="Hidden"
             Grid.Row="1"
             Margin="10,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            Orientation="Horizontal">
+            Orientation="Horizontal"
+            Visibility="Hidden">
             <Image
                 Width="30"
                 Source="pack://application:,,,/Thingy.Images;component/Icons/icons8-high-priority.png" />
@@ -46,11 +46,13 @@
             <Button
                 x:Name="Ok"
                 Click="Ok_Click"
-                Content="OK" />
+                Content="OK"
+                Style="{StaticResource BigButton}" />
             <Button
                 x:Name="Cancel"
                 Click="Cancel_Click"
-                Content="Cancel" />
+                Content="Cancel"
+                Style="{StaticResource BigButton}" />
         </StackPanel>
     </Grid>
 </Window>
