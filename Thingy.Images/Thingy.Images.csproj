@@ -103,5 +103,17 @@
   <ItemGroup>
     <Resource Include="Icons\icons8-powershell.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-battery-level.png" />
+    <Resource Include="Icons\icons8-charged-battery.png" />
+    <Resource Include="Icons\icons8-charging-battery.png" />
+    <Resource Include="Icons\icons8-full-battery.png" />
+    <Resource Include="Icons\icons8-low-battery.png" />
+    <Resource Include="Icons\icons8-monitor.png" />
+    <Resource Include="Icons\icons8-processor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-audio.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -12,69 +12,103 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="150" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="150" />
-            <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <TextBlock
-            Grid.Column="0"
-            Margin="5,0"
-            Text="CPU: " />
-        <ProgressBar
-            x:Name="CPUProgress"
-            Grid.Column="1"
-            Margin="2"
-            Maximum="100"
-            Minimum="0" />
-        <TextBlock
-            x:Name="CPUText"
-            Grid.Column="1"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Text="100%" />
-        <TextBlock
+        <StackPanel Orientation="Horizontal">
+            <Image Source="pack://application:,,,/Thingy.Images;component/Icons/icons8-processor.png" />
+            <TextBlock
+                Margin="5,0"
+                Text="CPU: " />
+            <Grid>
+                <ProgressBar
+                    x:Name="CPUProgress"
+                    Width="150"
+                    Margin="2"
+                    Maximum="100"
+                    Minimum="0" />
+                <TextBlock
+                    x:Name="CPUText"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Text="100%" />
+            </Grid>
+            <Image Source="pack://application:,,,/Thingy.Images;component/Icons/icons8-memory-slot.png" />
+            <TextBlock
+                Grid.Column="2"
+                Margin="5,0"
+                Text="Ram: " />
+            <Grid>
+                <ProgressBar
+                    x:Name="RAMProgress"
+                    Grid.Column="3"
+                    Width="150"
+                    Margin="2"
+                    Maximum="100"
+                    Minimum="0" />
+                <TextBlock
+                    x:Name="RAMText"
+                    Grid.Column="3"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Text="100%" />
+            </Grid>
+            <TextBlock
+                x:Name="RAMAmount"
+                Grid.Column="4"
+                Margin="2,0"
+                Text="14,2GB" />
+        </StackPanel>
+        <StackPanel
             Grid.Column="2"
-            Margin="5,0"
-            Text="Ram: " />
-        <ProgressBar
-            x:Name="RAMProgress"
-            Grid.Column="3"
-            Margin="2"
-            Maximum="100"
-            Minimum="0" />
-        <TextBlock
-            x:Name="RAMText"
-            Grid.Column="3"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Text="100%" />
-        <TextBlock
-            x:Name="RAMAmount"
-            Grid.Column="4"
-            Margin="2,0"
-            Text="14,2GB" />
-        <Menu Grid.Column="6">
-            <MenuItem Header="Monitor">
-                <MenuItem
-                    Click="MenuItem_Click"
-                    Header="1st Screen only"
-                    Tag="/internal" />
-                <MenuItem
-                    Click="MenuItem_Click"
-                    Header="Duplicate"
-                    Tag="/clone" />
-                <MenuItem
-                    Click="MenuItem_Click"
-                    Header="Extend"
-                    Tag="/extend" />
-                <MenuItem
-                    Click="MenuItem_Click"
-                    Header="2nd Screen only"
-                    Tag="/external" />
-            </MenuItem>
-        </Menu>
+            Orientation="Horizontal">
+            <Image Source="pack://application:,,,/Thingy.Images;component/Icons/icons8-audio.png" />
+            <ToggleButton
+                x:Name="BtnMute"
+                Margin="5,0"
+                Checked="BtnMute_Checked"
+                Unchecked="BtnMute_Checked">
+                <ToggleButton.Style>
+                    <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource Flat}">
+                        <Setter Property="Content" Value="Mute" />
+                        <Style.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Content" Value="UnMute" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ToggleButton.Style>
+            </ToggleButton>
+            <Slider
+                Minimum="0"
+                Maximum="100"
+                x:Name="VolumeSlider"
+                ValueChanged="Slider_ValueChanged"
+                Width="150"/>
+            <Image
+                Margin="10,0,5,0"
+                Source="pack://application:,,,/Thingy.Images;component/Icons/icons8-monitor.png" />
+            <Menu>
+                <MenuItem Header="Monitor">
+                    <MenuItem
+                        Click="ScreenClick"
+                        Header="1st Screen only"
+                        Tag="/internal" />
+                    <MenuItem
+                        Click="ScreenClick"
+                        Header="Duplicate"
+                        Tag="/clone" />
+                    <MenuItem
+                        Click="ScreenClick"
+                        Header="Extend"
+                        Tag="/extend" />
+                    <MenuItem
+                        Click="ScreenClick"
+                        Header="2nd Screen only"
+                        Tag="/external" />
+                </MenuItem>
+            </Menu>
+        </StackPanel>
     </Grid>
 </UserControl>
