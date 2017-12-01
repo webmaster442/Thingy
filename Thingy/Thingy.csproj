@@ -85,6 +85,9 @@
     <Compile Include="Modules\PlacesModule.cs" />
     <Compile Include="Modules\PowerShellModule.cs" />
     <Compile Include="Modules\ToDoListModule.cs" />
+    <Compile Include="Statusbar.xaml.cs">
+      <DependentUpon>Statusbar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\CommandLineViewModel.cs" />
     <Compile Include="ViewModels\PlacesViewModel.cs" />
     <Compile Include="ViewModels\StartPageViewModel.cs" />
@@ -133,6 +136,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ModalDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Statusbar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
