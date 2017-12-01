@@ -17,9 +17,10 @@ namespace Thingy.ViewModels
         public DelegateCommand CopyCommand { get; private set; }
         public DelegateCommand PasteCommand { get; private set; }
 
-        public CommandLineViewModel(ICommandLineView view) : base(view)
+        public CommandLineViewModel(ICommandLineView view, string shell = "cmd.exe") : base(view)
         {
             controller = new TerminalController(view);
+            controller.SetShell(shell);
             LoadedCommand = DelegateCommand.ToCommand(Loaded);
             ClosingCommand = DelegateCommand.ToCommand(Closing);
 

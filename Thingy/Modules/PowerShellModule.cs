@@ -5,22 +5,22 @@ using System.Windows.Media.Imaging;
 
 namespace Thingy.Modules
 {
-    public class CommandLineModule : ModuleBase
+    class PowerShellModule : ModuleBase
     {
         public override string ModuleName
         {
-            get { return "Windows Command Line"; }
+            get { return "Powershell"; }
         }
 
         public override ImageSource Icon
         {
-            get { return new BitmapImage(new Uri("pack://application:,,,/Thingy.Images;component/Icons/icons8-console.png")); }
+            get { return new BitmapImage(new Uri("pack://application:,,,/Thingy.Images;component/Icons/icons8-powershell.png")); }
         }
 
         public override UserControl RunModule()
         {
             var view = new Views.CommandLine();
-            view.DataContext = new ViewModels.CommandLineViewModel(view);
+            view.DataContext = new ViewModels.CommandLineViewModel(view, "powershell.exe");
             return view;
         }
     }

@@ -36,7 +36,7 @@ namespace Thingy.Infrastructure
 
         public IEnumerable<IModule> Modules
         {
-            get { return _modules; }
+            get { return _modules.OrderBy(module => module.ModuleName); }
         }
 
         public UserControl GetModuleByName(string name)
