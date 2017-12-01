@@ -51,6 +51,7 @@
     <Compile Include="CmdHost\TabHandler.cs" />
     <Compile Include="CmdHost\TerminalContentMgr.cs" />
     <Compile Include="CmdHost\TerminalController.cs" />
+    <Compile Include="TileColorProvider.cs" />
     <Compile Include="Models\Drive.cs" />
     <Compile Include="Models\SystemFolderLink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -6,19 +6,19 @@ using Thingy.Db;
 
 namespace Thingy.Modules
 {
-    public class PlacesModule : IModule
+    public class PlacesModule : ModuleBase
     {
-        public string ModuleName
+        public override string ModuleName
         {
             get { return "Places"; }
         }
 
-        public ImageSource Icon
+        public override ImageSource Icon
         {
             get { return new BitmapImage(new Uri("pack://application:,,,/Thingy.Images;component/Icons/icons8-folder-tree.png")); }
         }
 
-        public UserControl RunModule()
+        public override UserControl RunModule()
         {
             return new Views.Places
             {

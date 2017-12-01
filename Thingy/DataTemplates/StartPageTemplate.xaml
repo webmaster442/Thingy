@@ -9,7 +9,7 @@
             Width="120"
             Height="120"
             Margin="3"
-            Background="Orange"
+            Background="{Binding ColorBrush}"
             TileImage="{Binding Icon}"
             TileText="{Binding ModuleName}"
             ClickCommand="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.TileClickCommand}"

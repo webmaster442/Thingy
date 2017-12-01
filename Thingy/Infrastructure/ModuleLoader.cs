@@ -20,11 +20,17 @@ namespace Thingy.Infrastructure
 
             var modulelist = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(assembly => assembly.GetTypes())
-                .Where(type => imodule.IsAssignableFrom(type) && type.IsInterface == false);
+                .Where(type => imodule.IsAssignableFrom(type) &&
+                       type.IsInterface == false && 
+                       type.IsAbstract == false);
 
             foreach (var module in modulelist)
             {
-                _modules.Add((IModule)Activator.CreateInstance(module));
+                var instance = (IModule)Activator.CreateInstance(module);
+                if (instance.CanLoad)
+                {
+                    _modules.Add(instance);
+                }
             }
         }
 

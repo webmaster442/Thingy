@@ -9,5 +9,8 @@ namespace Thingy.Modules
         string ModuleName { get; }
         ImageSource Icon { get; }
         UserControl RunModule();
+        Color TileColor { get; }
+        SolidColorBrush ColorBrush { get; }
+        bool CanLoad { get; }
     }
 }

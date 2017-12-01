@@ -80,6 +80,7 @@
     </Compile>
     <Compile Include="Modules\CommandLineModule.cs" />
     <Compile Include="Modules\IModule.cs" />
+    <Compile Include="Modules\ModuleBase.cs" />
     <Compile Include="Modules\PlacesModule.cs" />
     <Compile Include="Modules\ToDoListModule.cs" />
     <Compile Include="ViewModels\CommandLineViewModel.cs" />

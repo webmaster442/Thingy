@@ -6,19 +6,19 @@ using Thingy.Db;
 
 namespace Thingy.Modules
 {
-    public class ToDoListModule : IModule
+    public class ToDoListModule : ModuleBase
     {
-        public string ModuleName
+        public override string ModuleName
         {
             get { return "To Do List"; }
         }
 
-        public ImageSource Icon
+        public override ImageSource Icon
         {
             get { return new BitmapImage(new Uri("pack://application:,,,/Thingy.Images;component/Icons/icons8-checklist.png")); }
         }
 
-        public UserControl RunModule()
+        public override UserControl RunModule()
         {
             var toDoList = new Views.ToDoList
             {
