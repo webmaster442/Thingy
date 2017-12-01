@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:Thingy"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Height="22"
+    d:DesignWidth="870"
     Background="White"
     mc:Ignorable="d">
     <Grid>
@@ -14,6 +15,8 @@
             <ColumnDefinition Width="150" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <TextBlock
@@ -53,5 +56,25 @@
             Grid.Column="4"
             Margin="2,0"
             Text="14,2GB" />
+        <Menu Grid.Column="6">
+            <MenuItem Header="Monitor">
+                <MenuItem
+                    Click="MenuItem_Click"
+                    Header="1st Screen only"
+                    Tag="/internal" />
+                <MenuItem
+                    Click="MenuItem_Click"
+                    Header="Duplicate"
+                    Tag="/clone" />
+                <MenuItem
+                    Click="MenuItem_Click"
+                    Header="Extend"
+                    Tag="/extend" />
+                <MenuItem
+                    Click="MenuItem_Click"
+                    Header="2nd Screen only"
+                    Tag="/external" />
+            </MenuItem>
+        </Menu>
     </Grid>
 </UserControl>

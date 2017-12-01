@@ -48,5 +48,16 @@ namespace Thingy
             RAMText.Text = string.Format("{0:0.00}%", ram);
             RAMAmount.Text = string.Format("{0} MB", PerformanceInfo.GetPhysicalAvailableMemoryInMiB());
         }
+
+        private void MenuItem_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (sender is MenuItem caller)
+            {
+                Process p = new Process();
+                p.StartInfo.FileName = "DisplaySwitch.exe";
+                p.StartInfo.Arguments = caller.Tag.ToString();
+                p.Start();
+            }
+        }
     }
 }
