@@ -52,6 +52,7 @@
     <Compile Include="CmdHost\TerminalContentMgr.cs" />
     <Compile Include="CmdHost\TerminalController.cs" />
     <Compile Include="PerformanceInfo.cs" />
+    <Compile Include="SystemVolumeControl.cs" />
     <Compile Include="TileColorProvider.cs" />
     <Compile Include="Models\Drive.cs" />
     <Compile Include="Models\SystemFolderLink.cs" />
