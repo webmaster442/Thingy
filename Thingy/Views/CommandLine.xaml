@@ -23,15 +23,18 @@
             Grid.Row="0"
             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
             Orientation="Horizontal">
-            <TextBlock Text="Font size:" />
+            <TextBlock
+                Margin="3"
+                Text="Font size:" />
             <applib:EditableSlider
+                Margin="3"
                 x:Name="FontSizeSelector"
                 DisplayFormat="0"
                 Height="20"
-                Maximum="16"
+                Maximum="22"
                 Minimum="8"
-                Value="12"
-                DefaultValue="12"/>
+                Value="14"
+                DefaultValue="14"/>
         </StackPanel>
         <TextBox
             FontSize="{Binding ElementName=FontSizeSelector, Path=Value}"
@@ -39,9 +42,9 @@
             Grid.Row="1"
             Padding="5"
             AcceptsReturn="True"
-            Background="Black"
+            Background="#7f8c8d"
             FontFamily="Consolas"
-            Foreground="Green"
+            Foreground="Black"
             TextWrapping="Wrap"
             VerticalScrollBarVisibility="Visible">
             <TextBox.ContextMenu>

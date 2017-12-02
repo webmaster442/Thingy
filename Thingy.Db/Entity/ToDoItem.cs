@@ -2,17 +2,25 @@
 using LiteDB;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Thingy.Db.Entity
 {
-    public class ToDoItem : BindableBase, IEquatable<ToDoItem>
+    public class ToDoItem : ValidatableBase, IEquatable<ToDoItem>
     {
         private string _content;
         private bool _iscompleted;
         private DateTime? _completeddate;
         private DateTime? _duedate;
 
+        public ToDoItem()
+        {
+            ValidateOnPropertyChange = true;
+            Validate();
+        }
+
         [BsonId]
+        [Required]
         public string Content
         {
             get { return _content; }

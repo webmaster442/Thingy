@@ -20,7 +20,7 @@
                     ItemsSource="{Binding Pending, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </TabItem>
             <TabItem Header="Completed">
-                <ListBox 
+                <ListBox
                     x:Name="Completed"
                     ItemTemplate="{StaticResource ToDoItem}"
                     ItemsSource="{Binding Completed}" />
@@ -31,14 +31,17 @@
             Orientation="Horizontal">
             <Button
                 Command="{Binding AddNewItemCommand}"
-                Content="Add new ..." />
+                Content="Add new ..."
+                Style="{StaticResource BigButton}" />
             <Button
                 Command="{Binding DeleteItemCommand}"
                 CommandParameter="{Binding ElementName=Pending, Path=SelectedIndex}"
-                Content="Delete Selected" />
+                Content="Delete Selected"
+                Style="{StaticResource BigButton}" />
             <Button
                 Command="{Binding DeleteCompletedItemsCommand}"
-                Content="Delete Completed"/>
+                Content="Delete Completed"
+                Style="{StaticResource BigButton}" />
         </StackPanel>
     </Grid>
 </UserControl>

@@ -22,6 +22,7 @@
             <TextBlock Text="Task Description:" />
             <TextBox
                 MinHeight="36"
+                Style="{StaticResource Validatable}"
                 Text="{Binding Content}" />
             <TextBlock Text="Due Date:" />
             <DatePicker SelectedDate="{Binding DueDate}" />

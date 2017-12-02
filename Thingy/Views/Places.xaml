@@ -31,7 +31,8 @@
                     Orientation="Horizontal">
                     <Button
                         Command="{Binding NewFolderLinkCommand}"
-                        Content="Add new..." />
+                        Content="Add new..."
+                        Style="{StaticResource BigButton}"/>
                 </StackPanel>
             </Grid>
         </TabItem>
