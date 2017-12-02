@@ -2,7 +2,6 @@
 using CmdHost;
 using System.Windows;
 using Thingy.Views;
-using System;
 
 namespace Thingy.ViewModels
 {

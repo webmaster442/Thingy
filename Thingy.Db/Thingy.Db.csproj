@@ -48,9 +48,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBase.cs" />
+    <Compile Include="DataBaseFileStorage.cs" />
     <Compile Include="Entity\FolderLink.cs" />
     <Compile Include="Entity\ToDoItem.cs" />
+    <Compile Include="Entity\VirualFolder.cs" />
     <Compile Include="IDataBase.cs" />
+    <Compile Include="IDataBaseFileStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
