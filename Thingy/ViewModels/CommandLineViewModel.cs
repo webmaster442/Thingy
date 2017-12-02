@@ -2,6 +2,7 @@
 using CmdHost;
 using System.Windows;
 using Thingy.Views;
+using System;
 
 namespace Thingy.ViewModels
 {
@@ -16,6 +17,7 @@ namespace Thingy.ViewModels
         public DelegateCommand RestartCommand { get; private set; }
         public DelegateCommand CopyCommand { get; private set; }
         public DelegateCommand PasteCommand { get; private set; }
+        public DelegateCommand SetFolderCommand { get; private set; }
 
         public CommandLineViewModel(ICommandLineView view, string shell = "cmd.exe") : base(view)
         {
@@ -23,11 +25,25 @@ namespace Thingy.ViewModels
             controller.SetShell(shell);
             LoadedCommand = DelegateCommand.ToCommand(Loaded);
             ClosingCommand = DelegateCommand.ToCommand(Closing);
+            SetFolderCommand = DelegateCommand.ToCommand(SetFolder);
 
             ClearCommand = DelegateCommand.ToCommand(Clear);
             RestartCommand = DelegateCommand.ToCommand(Restart);
             CopyCommand = DelegateCommand.ToCommand(Copy);
             PasteCommand = DelegateCommand.ToCommand(Paste);
+        }
+
+        private void SetFolder()
+        {
+            if (View != null)
+            {
+                var fb = new System.Windows.Forms.FolderBrowserDialog();
+                if (fb.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    Clipboard.SetText($"pushd \"{fb.SelectedPath}\"");
+                    View?.GetTextBox()?.Paste();
+                }
+            }
         }
 
         private void Closing()

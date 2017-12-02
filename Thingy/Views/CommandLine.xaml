@@ -7,7 +7,7 @@
     xmlns:interactivity="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="300"
-    d:DesignWidth="300"
+    d:DesignWidth="800"
     mc:Ignorable="d">
     <interactivity:Interaction.Triggers>
         <interactivity:EventTrigger EventName="Loaded">
@@ -23,6 +23,13 @@
             Grid.Row="0"
             Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
             Orientation="Horizontal">
+            <applib:ImageButton
+                Margin="3"
+                Image="pack://application:,,,/Thingy.Images;component/Icons/icons8-folder-tree.png"
+                Command="{Binding SetFolderCommand}"
+                ImageHeight="24"
+                ImageWidth="24"
+                Content="Set folder"/>
             <TextBlock
                 Margin="3"
                 Text="Font size:" />
