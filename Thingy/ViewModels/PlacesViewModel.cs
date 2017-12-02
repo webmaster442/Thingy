@@ -1,6 +1,8 @@
 ﻿using AppLib.Common.Extensions;
 using AppLib.MVVM;
+using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using Thingy.Db;
 using Thingy.Db.Entity;
@@ -15,6 +17,7 @@ namespace Thingy.ViewModels
 
         private IDataBase _db;
         private IApplication _app;
+        private string _filter;
 
         public ObservableCollection<SystemFolderLink> SystemPlaces { get; private set; }
         public ObservableCollection<Drive> Drives { get; private set; }
@@ -30,10 +33,34 @@ namespace Thingy.ViewModels
             _db = db;
             SystemPlaces = new ObservableCollection<SystemFolderLink>(Providers.ProvideSystemPlaces());
             Drives = new ObservableCollection<Drive>(Providers.ProvideDriveData());
-            Folders = new ObservableCollection<FolderLink>(_db.GetFavoriteFolders());
+            Folders = new ObservableCollection<FolderLink>();
             NewFolderLinkCommand = DelegateCommand.ToCommand(NewFolderLink);
             OpenLocationCommand = DelegateCommand<string>.ToCommand(OpenLocation);
             DeleteSelectedLinkCommand = DelegateCommand<string>.ToCommand(DeleteSelectedLink);
+        }
+
+        public string Filter
+        {
+            get { return _filter; }
+            set
+            {
+                SetValue(ref _filter, value);
+                ApplyFiltering();
+            }
+        }
+
+        private void ApplyFiltering()
+        {
+            if (string.IsNullOrEmpty(_filter))
+                Folders.UpdateWith(_db.GetFavoriteFolders());
+            else
+            {
+                var match = from frolder in _db.GetFavoriteFolders()
+                            where 
+                            frolder.Name.Contains(_filter, StringComparison.InvariantCultureIgnoreCase)
+                            select frolder;
+                Folders.UpdateWith(match);
+            }
         }
 
         private void OpenLocation(string obj)
@@ -54,7 +81,7 @@ namespace Thingy.ViewModels
             if (_app.ShowDialog(dialog, "New Folder Link") == true)
             {
                 _db.SaveFavoriteFolder(item);
-                Folders.UpdateWith(_db.GetFavoriteFolders());
+                ApplyFiltering();
             }
         }
 
@@ -64,7 +91,7 @@ namespace Thingy.ViewModels
             if (q == MessageBoxResult.Yes)
             {
                 _db.DeleteFavoriteFolder(obj);
-                Folders.UpdateWith(_db.GetFavoriteFolders());
+                ApplyFiltering();
             }
         }
     }
