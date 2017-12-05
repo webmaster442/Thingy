@@ -3,6 +3,7 @@ using AppLib.MVVM;
 using System.Collections.ObjectModel;
 using Thingy.Db;
 using Thingy.Db.Entity;
+using System;
 
 namespace Thingy.ViewModels
 {
@@ -10,8 +11,8 @@ namespace Thingy.ViewModels
     {
         private IDataBase _db;
         private IApplication _app;
-        private readonly ObservableCollection<VirualFolder> _folders;
 
+        public ObservableCollection<VirualFolder> Folders { get; private set; }
         public ObservableCollection<string> CurrentFolder { get; private set; }
 
         public DelegateCommand NewFolderCommand { get; private set; }
@@ -25,15 +26,15 @@ namespace Thingy.ViewModels
         {
             _app = app;
             _db = db;
-            _folders = new ObservableCollection<VirualFolder>();
+            Folders = new ObservableCollection<VirualFolder>();
             CurrentFolder = new ObservableCollection<string>();
-            _folders.UpdateWith(_db.GetVirtualFolders());
+            Folders.UpdateWith(_db.GetVirtualFolders());
             NewFolderCommand = DelegateCommand.ToCommand(NewFolder);
             DeleteFolderCommand = DelegateCommand<string>.ToCommand(DeleteFolder, CanDeleteFolder);
             AddFilesCommand = DelegateCommand.ToCommand(AddFiles);
             DeleteFilesCommand = DelegateCommand<string[]>.ToCommand(DeleteFiles, CanDeleteFiles);
-            CopyContentsCommand = DelegateCommand.ToCommand(CopyContents);
-            CreateZipCommand = DelegateCommand.ToCommand(CreateZip);
+            CopyContentsCommand = DelegateCommand.ToCommand(CopyContents, CanCopyAndZip);
+            CreateZipCommand = DelegateCommand.ToCommand(CreateZip, CanCopyAndZip);
         }
 
         private void NewFolder()
@@ -42,7 +43,7 @@ namespace Thingy.ViewModels
             if (_app.ShowDialog(new Views.NewVirtualFolder(), "New Virtual Folder", modell) == true)
             {
                 _db.SaveVirtualFolder(modell);
-                _folders.UpdateWith(_db.GetVirtualFolders());
+                Folders.UpdateWith(_db.GetVirtualFolders());
             }
         }
 
@@ -77,7 +78,12 @@ namespace Thingy.ViewModels
 
         private bool CanDeleteFiles(string[] obj)
         {
-            return (obj.Length > 0);
+            return (obj != null && obj.Length > 0);
+        }
+
+        private bool CanCopyAndZip()
+        {
+            return CurrentFolder.Count > 0;
         }
 
         private void CopyContents()

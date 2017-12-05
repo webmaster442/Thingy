@@ -19,10 +19,13 @@
         </Grid.RowDefinitions>
         <ListBox
             x:Name="FolderList"
+            ItemTemplate="{StaticResource VirtualFolder}"
+            ItemsSource="{Binding Folders}"
             Grid.Row="0"
             Grid.Column="0" />
         <ListBox
             x:Name="FilesList"
+            ItemsSource="{Binding CurrentFolder}"
             Grid.Row="0"
             Grid.Column="1" />
         <StackPanel
