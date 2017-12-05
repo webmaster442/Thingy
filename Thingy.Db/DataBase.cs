@@ -14,7 +14,7 @@ namespace Thingy.Db
         private Stream _filestream;
         private LiteCollection<ToDoItem> _ToDoCollection;
         private LiteCollection<FolderLink> _FolderLinkCollection;
-        private LiteCollection<VirualFolder> _VirtualFolderCollection;
+        private LiteCollection<VirtualFolder> _VirtualFolderCollection;
 
         public DataBase(string file)
         {
@@ -23,7 +23,7 @@ namespace Thingy.Db
             Files = new DataBaseFileStorage(_db);
             _ToDoCollection = _db.GetCollection<ToDoItem>(nameof(_ToDoCollection));
             _FolderLinkCollection = _db.GetCollection<FolderLink>(nameof(_FolderLinkCollection));
-            _VirtualFolderCollection = _db.GetCollection<VirualFolder>(nameof(_VirtualFolderCollection));
+            _VirtualFolderCollection = _db.GetCollection<VirtualFolder>(nameof(_VirtualFolderCollection));
         }
 
         public IDataBaseFileStorage Files
@@ -111,12 +111,12 @@ namespace Thingy.Db
         #endregion
 
         #region Virtual Folders
-        public IEnumerable<VirualFolder> GetVirtualFolders()
+        public IEnumerable<VirtualFolder> GetVirtualFolders()
         {
             return _VirtualFolderCollection.FindAll();
         }
 
-        public void SaveVirtualFolder(VirualFolder folder)
+        public void SaveVirtualFolder(VirtualFolder folder)
         {
             var existing = _VirtualFolderCollection.Find(f => f.Name == folder.Name).FirstOrDefault();
             if (existing != null)

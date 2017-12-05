@@ -3,59 +3,86 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:interactivity="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:local="clr-namespace:Thingy.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="300"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    <UserControl.Triggers>
+        <EventTrigger
+            RoutedEvent="Control.MouseDoubleClick"
+            SourceName="FolderList" />
+    </UserControl.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <ListBox
             x:Name="FolderList"
-            ItemTemplate="{StaticResource VirtualFolder}"
-            ItemsSource="{Binding Folders}"
             Grid.Row="0"
-            Grid.Column="0" />
+            Grid.RowSpan="2"
+            Grid.Column="0"
+            ItemTemplate="{StaticResource VirtualFolder}"
+            ItemsSource="{Binding Folders}">
+            <interactivity:Interaction.Triggers>
+                <interactivity:EventTrigger EventName="MouseDoubleClick">
+                    <interactivity:InvokeCommandAction
+                        Command="{Binding LoadFolderCommand}"
+                        CommandParameter="{Binding ElementName=FolderList, Path=SelectedItem}" />
+                </interactivity:EventTrigger>
+            </interactivity:Interaction.Triggers>
+        </ListBox>
+        <Label
+            Grid.Row="0"
+            Grid.Column="1"
+            Content="{Binding SelectedFolder}"
+            Style="{StaticResource Title}" />
         <ListBox
             x:Name="FilesList"
-            ItemsSource="{Binding CurrentFolder}"
-            Grid.Row="0"
-            Grid.Column="1" />
+            Grid.Row="1"
+            Grid.Column="1"
+            ItemsSource="{Binding CurrentFolder}" />
         <StackPanel
             x:Name="FileManagement"
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.ColumnSpan="2"
             Orientation="Horizontal">
             <Button
-                Content="New Folder"
+                x:Name="button"
                 Command="{Binding NewFolderCommand}"
+                Content="New Folder"
                 Style="{StaticResource BigButton}" />
             <Button
-                Content="Delete folder"
+                x:Name="button1"
                 Command="{Binding DeleteFolderCommand}"
+                Content="Delete folder"
                 Style="{StaticResource BigButton}" />
             <Button
-                Content="Add Files"
+                x:Name="button2"
                 Command="{Binding AddFilesCommand}"
+                Content="Add Files"
                 Style="{StaticResource BigButton}" />
             <Button
-                Content="Delete files"
+                x:Name="button3"
                 Command="{Binding DeleteFilesCommand}"
+                Content="Delete files"
                 Style="{StaticResource BigButton}" />
             <Button
-                Content="Copy folder contents"
+                x:Name="button4"
                 Command="{Binding CopyContentsCommand}"
+                Content="Copy folder contents"
                 Style="{StaticResource BigButton}" />
             <Button
-                Content="Create ZIP"
+                x:Name="button5"
                 Command="{Binding CreateZipCommand}"
+                Content="Create ZIP"
                 Style="{StaticResource BigButton}" />
         </StackPanel>
     </Grid>

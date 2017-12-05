@@ -18,8 +18,8 @@ namespace Thingy.Db
         void SaveFavoriteFolder(FolderLink favorite);
         void DeleteFavoriteFolder(string foldername);
         //---------------------------------------------
-        IEnumerable<VirualFolder> GetVirtualFolders();
-        void SaveVirtualFolder(VirualFolder folder);
+        IEnumerable<VirtualFolder> GetVirtualFolders();
+        void SaveVirtualFolder(VirtualFolder folder);
         void DeleteVirtualFolder(string folderName);
     }
 }

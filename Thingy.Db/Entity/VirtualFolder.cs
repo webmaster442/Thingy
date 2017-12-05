@@ -6,13 +6,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Thingy.Db.Entity
 {
-    public class VirualFolder: ValidatableBase, IEquatable<VirualFolder>
+    public class VirtualFolder: ValidatableBase, IEquatable<VirtualFolder>
     {
         private string _FolderName;
         private List<string> _files;
 
-        public VirualFolder()
+        public VirtualFolder()
         {
+            Files = new List<string>();
             ValidateOnPropertyChange = true;
         }
 
@@ -33,10 +34,10 @@ namespace Thingy.Db.Entity
 
         public override bool Equals(object obj)
         {
-            return Equals(obj as VirualFolder);
+            return Equals(obj as VirtualFolder);
         }
 
-        public bool Equals(VirualFolder other)
+        public bool Equals(VirtualFolder other)
         {
             return other != null &&
                    _FolderName == other._FolderName &&
@@ -51,12 +52,12 @@ namespace Thingy.Db.Entity
             return hashCode;
         }
 
-        public static bool operator ==(VirualFolder folder1, VirualFolder folder2)
+        public static bool operator ==(VirtualFolder folder1, VirtualFolder folder2)
         {
-            return EqualityComparer<VirualFolder>.Default.Equals(folder1, folder2);
+            return EqualityComparer<VirtualFolder>.Default.Equals(folder1, folder2);
         }
 
-        public static bool operator !=(VirualFolder folder1, VirualFolder folder2)
+        public static bool operator !=(VirtualFolder folder1, VirtualFolder folder2)
         {
             return !(folder1 == folder2);
         }
