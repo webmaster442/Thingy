@@ -86,6 +86,7 @@
     <Compile Include="Modules\PlacesModule.cs" />
     <Compile Include="Modules\PowerShellModule.cs" />
     <Compile Include="Modules\ToDoListModule.cs" />
+    <Compile Include="Modules\VirtualFoldersModule.cs" />
     <Compile Include="Statusbar.xaml.cs">
       <DependentUpon>Statusbar.xaml</DependentUpon>
     </Compile>
@@ -93,6 +94,7 @@
     <Compile Include="ViewModels\PlacesViewModel.cs" />
     <Compile Include="ViewModels\StartPageViewModel.cs" />
     <Compile Include="ViewModels\ToDoListViewModel.cs" />
+    <Compile Include="ViewModels\VirtualFoldersViewModel.cs" />
     <Compile Include="Views\CommandLine.xaml.cs">
       <DependentUpon>CommandLine.xaml</DependentUpon>
     </Compile>
@@ -103,6 +105,9 @@
     <Compile Include="Views\NewToDoItem.xaml.cs">
       <DependentUpon>NewToDoItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NewVirtualFolder.xaml.cs">
+      <DependentUpon>NewVirtualFolder.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Places.xaml.cs">
       <DependentUpon>Places.xaml</DependentUpon>
     </Compile>
@@ -111,6 +116,9 @@
     </Compile>
     <Compile Include="Views\ToDoList.xaml.cs">
       <DependentUpon>ToDoList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VirtualFolders.xaml.cs">
+      <DependentUpon>VirtualFolders.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\Tile.xaml">
       <SubType>Designer</SubType>
@@ -160,6 +168,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\NewVirtualFolder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Places.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -169,6 +181,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ToDoList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VirtualFolders.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

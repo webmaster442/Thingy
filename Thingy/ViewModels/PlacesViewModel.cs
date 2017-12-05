@@ -77,8 +77,7 @@ namespace Thingy.ViewModels
         {
             var dialog = new NewFolderLink();
             var item = new FolderLink();
-            dialog.DataContext = item;
-            if (_app.ShowDialog(dialog, "New Folder Link") == true)
+            if (_app.ShowDialog(dialog, "New Folder Link", item) == true)
             {
                 _db.SaveFavoriteFolder(item);
                 ApplyFiltering();

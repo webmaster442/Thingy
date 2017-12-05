@@ -1,5 +1,5 @@
 ﻿using AppLib.Common.IOC;
-using AppLib.MVVM;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using Thingy.Db;
@@ -12,7 +12,7 @@ namespace Thingy
     /// </summary>
     public partial class App : Application, IApplication
     {
-        public static IContainer IoCContainer { get; private set; }
+        public static AppLib.Common.IOC.IContainer IoCContainer { get; private set; }
 
         public static IApplication Instance
         {
@@ -29,7 +29,7 @@ namespace Thingy
             (App.Current.MainWindow as MainWindow).SetCurrentTabContent(Title, control);
         }
 
-        public bool? ShowDialog(UserControl control, string Title, ViewModel model = null)
+        public bool? ShowDialog(UserControl control, string Title, INotifyPropertyChanged model = null)
         {
             ModalDialog modalDialog = new ModalDialog();
             if (model != null)
@@ -42,7 +42,7 @@ namespace Thingy
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            IoCContainer = new Container();
+            IoCContainer = new AppLib.Common.IOC.Container();
             IoCContainer.RegisterSingleton<IDataBase>(() =>
             {
                 return new DataBase("test.db");

@@ -60,8 +60,7 @@ namespace Thingy.ViewModels
         {
             var dialog = new NewToDoItem();
             var item = new ToDoItem();
-            dialog.DataContext = item;
-            if (_application.ShowDialog(dialog, "New To Do Item") == true)
+            if (_application.ShowDialog(dialog, "New To Do Item", item) == true)
             {
                 Pending.Add(item);
                 _db.SaveToDoItem(item);

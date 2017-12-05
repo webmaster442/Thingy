@@ -20,6 +20,6 @@ namespace Thingy.Db
         //---------------------------------------------
         IEnumerable<VirualFolder> GetVirtualFolders();
         void SaveVirtualFolder(VirualFolder folder);
-        void DeleteVirtualFolder(VirualFolder folder);
+        void DeleteVirtualFolder(string folderName);
     }
 }

@@ -131,9 +131,9 @@ namespace Thingy.Db
             }
         }
 
-        public void DeleteVirtualFolder(VirualFolder folder)
+        public void DeleteVirtualFolder(string folderName)
         {
-            _VirtualFolderCollection.Delete(f => f.Name == folder.Name);
+            _VirtualFolderCollection.Delete(f => f.Name == folderName);
         }
         #endregion
     }
