@@ -1,5 +1,4 @@
 ﻿using LiteDB;
-using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -42,12 +41,25 @@ namespace Thingy.Db
 
         public Stream GetIcon(string key)
         {
-            throw new NotImplementedException();
+            var id = FilenameToHashId(FolderIcons, key);
+            if (_dbreference.FileStorage.Exists(id))
+            {
+                return _dbreference.FileStorage.OpenRead(id);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public void SaveIcon(string key, Stream data)
         {
-            throw new NotImplementedException();
+            var id = FilenameToHashId(FolderIcons, key);
+            if (_dbreference.FileStorage.Exists(id))
+            {
+                _dbreference.FileStorage.Delete(id);
+            }
+            _dbreference.FileStorage.Upload(id, id, data);
         }
     }
 }

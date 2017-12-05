@@ -19,8 +19,15 @@ namespace Thingy.Db
         {
             _filestream = File.Open(file, System.IO.FileMode.OpenOrCreate);
             _db = new LiteDatabase(_filestream);
+            Files = new DataBaseFileStorage(_db);
             _ToDoCollection = _db.GetCollection<ToDoItem>(nameof(_ToDoCollection));
             _Folders = _db.GetCollection<FolderLink>(nameof(_Folders));
+        }
+
+        public IDataBaseFileStorage Files
+        {
+            get;
+            private set;
         }
 
         public void Dispose()

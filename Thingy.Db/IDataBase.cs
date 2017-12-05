@@ -5,6 +5,7 @@ namespace Thingy.Db
 {
     public interface IDataBase
     {
+        IDataBaseFileStorage Files { get; }
         IEnumerable<ToDoItem> GetUncompletedTasks();
         IEnumerable<ToDoItem> GetCompletededTasks();
         void SaveToDoItem(ToDoItem itemtoSave);
