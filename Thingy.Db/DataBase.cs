@@ -13,7 +13,8 @@ namespace Thingy.Db
         private LiteDatabase _db;
         private Stream _filestream;
         private LiteCollection<ToDoItem> _ToDoCollection;
-        private LiteCollection<FolderLink> _Folders;
+        private LiteCollection<FolderLink> _FolderLinkCollection;
+        private LiteCollection<VirualFolder> _VirtualFolderCollection;
 
         public DataBase(string file)
         {
@@ -21,7 +22,8 @@ namespace Thingy.Db
             _db = new LiteDatabase(_filestream);
             Files = new DataBaseFileStorage(_db);
             _ToDoCollection = _db.GetCollection<ToDoItem>(nameof(_ToDoCollection));
-            _Folders = _db.GetCollection<FolderLink>(nameof(_Folders));
+            _FolderLinkCollection = _db.GetCollection<FolderLink>(nameof(_FolderLinkCollection));
+            _VirtualFolderCollection = _db.GetCollection<VirualFolder>(nameof(_VirtualFolderCollection));
         }
 
         public IDataBaseFileStorage Files
@@ -94,17 +96,44 @@ namespace Thingy.Db
         #region Favorite Folders
         public IEnumerable<FolderLink> GetFavoriteFolders()
         {
-            return _Folders.FindAll();
+            return _FolderLinkCollection.FindAll();
         }
 
         public void SaveFavoriteFolder(FolderLink favorite)
         {
-            _Folders.Insert(favorite);
+            _FolderLinkCollection.Insert(favorite);
         }
 
         public void DeleteFavoriteFolder(string foldername)
         {
-            _Folders.Delete(folder => folder.Name == foldername);
+            _FolderLinkCollection.Delete(folder => folder.Name == foldername);
+        }
+        #endregion
+
+        #region Virtual Folders
+        public IEnumerable<VirualFolder> GetVirtualFolders()
+        {
+            return _VirtualFolderCollection.FindAll();
+        }
+
+        public void SaveVirtualFolder(VirualFolder folder)
+        {
+            var existing = _VirtualFolderCollection.Find(f => f.Name == folder.Name).FirstOrDefault();
+            if (existing != null)
+            {
+                existing.Files.Clear();
+                existing.Files.AddRange(folder.Files);
+                _VirtualFolderCollection.Update(existing);
+            }
+            else
+            {
+                _VirtualFolderCollection.Insert(folder);
+            }
+        }
+
+        public void DeleteVirtualFolder(VirualFolder folder)
+        {
+            _VirtualFolderCollection.Delete(f => f.Name == folder.Name);
         }
         #endregion
     }
