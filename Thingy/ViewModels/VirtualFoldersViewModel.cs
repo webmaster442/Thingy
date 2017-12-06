@@ -1,5 +1,7 @@
 ﻿using AppLib.Common.Extensions;
 using AppLib.MVVM;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
@@ -8,7 +10,7 @@ using Thingy.Db.Entity;
 
 namespace Thingy.ViewModels
 {
-    public class VirtualFoldersViewModel: ViewModel
+    public class VirtualFoldersViewModel : ViewModel
     {
         private IDataBase _db;
         private IApplication _app;
@@ -20,9 +22,11 @@ namespace Thingy.ViewModels
 
         public DelegateCommand<VirtualFolder> LoadFolderCommand { get; private set; }
         public DelegateCommand NewFolderCommand { get; private set; }
-        public DelegateCommand<string> DeleteFolderCommand { get; private set; }
+        public DelegateCommand<VirtualFolder> DeleteFolderCommand { get; private set; }
+        public DelegateCommand ClearFolderCommand { get; private set; }
         public DelegateCommand AddFilesCommand { get; private set; }
-        public DelegateCommand<string[]> DeleteFilesCommand { get; private set; }
+        public DelegateCommand<IList> DeleteFilesCommand { get; private set; }
+        public DelegateCommand SaveFolderCommand { get; private set; }
         public DelegateCommand CopyContentsCommand { get; private set; }
         public DelegateCommand CreateZipCommand { get; private set; }
 
@@ -36,12 +40,14 @@ namespace Thingy.ViewModels
             Folders.UpdateWith(_db.GetVirtualFolders());
 
             NewFolderCommand = DelegateCommand.ToCommand(NewFolder);
-            DeleteFolderCommand = DelegateCommand<string>.ToCommand(DeleteFolder, CanDeleteFolder);
-            AddFilesCommand = DelegateCommand.ToCommand(AddFiles);
-            DeleteFilesCommand = DelegateCommand<string[]>.ToCommand(DeleteFiles, CanDeleteFiles);
+            DeleteFolderCommand = DelegateCommand<VirtualFolder>.ToCommand(DeleteFolder, CanDeleteFolder);
+            ClearFolderCommand = DelegateCommand.ToCommand(ClearFolder, IsFolderOpened);
+            AddFilesCommand = DelegateCommand.ToCommand(AddFiles, IsFolderOpened);
+            DeleteFilesCommand = DelegateCommand<IList>.ToCommand(DeleteFiles, CanDeleteFiles);
             CopyContentsCommand = DelegateCommand.ToCommand(CopyContents, CanCopyAndZip);
             CreateZipCommand = DelegateCommand.ToCommand(CreateZip, CanCopyAndZip);
             LoadFolderCommand = DelegateCommand<VirtualFolder>.ToCommand(LoadFolder);
+            SaveFolderCommand = DelegateCommand.ToCommand(SaveFolder, CanSaveFolder);
         }
 
         public string SelectedFolder
@@ -91,43 +97,75 @@ namespace Thingy.ViewModels
             }
         }
 
-        private bool CanDeleteFolder(string obj)
+        private bool IsFolderOpened()
         {
-            return !string.IsNullOrEmpty(obj);
+            return !string.IsNullOrEmpty(_selectedfolder);
         }
 
-        private void DeleteFolder(string obj)
+        private void ClearFolder()
         {
-            _db.DeleteVirtualFolder(obj);
+            CurrentFolder.Clear();
+        }
+
+
+        private bool CanDeleteFolder(VirtualFolder obj)
+        {
+            return obj != null;
+        }
+
+        private void DeleteFolder(VirtualFolder obj)
+        {
+            _db.DeleteVirtualFolder(obj.Name);
         }
 
         private void AddFiles()
         {
-            var openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            openFileDialog.Filter = "All files|*.*";
-            openFileDialog.Multiselect = true;
+            var openFileDialog = new System.Windows.Forms.OpenFileDialog
+            {
+                Filter = "All files|*.*",
+                Multiselect = true
+            };
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 CurrentFolder.AddRange(openFileDialog.FileNames);
             }
         }
 
-        private void DeleteFiles(string[] obj)
+        private void DeleteFiles(IList obj)
         {
-            foreach (var item in obj)
+            List<string> files = new List<string>(obj.Count);
+            files.AddRange(obj.Cast<string>());
+
+            foreach (var file in files)
             {
-                CurrentFolder.Remove(item);
+                CurrentFolder.Remove(file);
             }
         }
 
-        private bool CanDeleteFiles(string[] obj)
+        private bool CanDeleteFiles(IList obj)
         {
-            return (obj != null && obj.Length > 0);
+            return (obj != null && obj.Count > 0);
         }
 
         private bool CanCopyAndZip()
         {
             return CurrentFolder.Count > 0;
+        }
+
+        private bool CanSaveFolder()
+        {
+            return _changed && IsFolderOpened();
+        }
+
+        private void SaveFolder()
+        {
+            VirtualFolder current = new VirtualFolder
+            {
+                Name = _selectedfolder,
+                Files = new List<string>(CurrentFolder)
+            };
+            _db.SaveVirtualFolder(current);
+            _changed = false;
         }
 
         private void CopyContents()

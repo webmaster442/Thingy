@@ -48,6 +48,7 @@
             x:Name="FilesList"
             Grid.Row="1"
             Grid.Column="1"
+            SelectionMode="Multiple"
             ItemsSource="{Binding CurrentFolder}" />
         <StackPanel
             x:Name="FileManagement"
@@ -55,32 +56,32 @@
             Grid.ColumnSpan="2"
             Orientation="Horizontal">
             <Button
-                x:Name="button"
                 Command="{Binding NewFolderCommand}"
                 Content="New Folder"
                 Style="{StaticResource BigButton}" />
             <Button
-                x:Name="button1"
                 Command="{Binding DeleteFolderCommand}"
+                CommandParameter="{Binding ElementName=FolderList, Path=SelectedItem}"
                 Content="Delete folder"
                 Style="{StaticResource BigButton}" />
             <Button
-                x:Name="button2"
                 Command="{Binding AddFilesCommand}"
                 Content="Add Files"
                 Style="{StaticResource BigButton}" />
             <Button
-                x:Name="button3"
                 Command="{Binding DeleteFilesCommand}"
+                CommandParameter="{Binding ElementName=FilesList, Path=SelectedItems}"
                 Content="Delete files"
                 Style="{StaticResource BigButton}" />
             <Button
-                x:Name="button4"
+                Command="{Binding ClearFolderCommand}"
+                Content="Clear folder"
+                Style="{StaticResource BigButton}" />
+            <Button
                 Command="{Binding CopyContentsCommand}"
                 Content="Copy folder contents"
                 Style="{StaticResource BigButton}" />
             <Button
-                x:Name="button5"
                 Command="{Binding CreateZipCommand}"
                 Content="Create ZIP"
                 Style="{StaticResource BigButton}" />
