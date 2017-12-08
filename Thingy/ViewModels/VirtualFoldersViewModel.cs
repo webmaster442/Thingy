@@ -44,8 +44,8 @@ namespace Thingy.ViewModels
             ClearFolderCommand = DelegateCommand.ToCommand(ClearFolder, IsFolderOpened);
             AddFilesCommand = DelegateCommand.ToCommand(AddFiles, IsFolderOpened);
             DeleteFilesCommand = DelegateCommand<IList>.ToCommand(DeleteFiles, CanDeleteFiles);
-            CopyContentsCommand = DelegateCommand.ToCommand(CopyContents, CanCopyAndZip);
-            CreateZipCommand = DelegateCommand.ToCommand(CreateZip, CanCopyAndZip);
+            CopyContentsCommand = DelegateCommand.ToCommand(CopyContents, CanCopyOrZip);
+            CreateZipCommand = DelegateCommand.ToCommand(CreateZip, CanCopyOrZip);
             LoadFolderCommand = DelegateCommand<VirtualFolder>.ToCommand(LoadFolder);
             SaveFolderCommand = DelegateCommand.ToCommand(SaveFolder, CanSaveFolder);
         }
@@ -95,6 +95,17 @@ namespace Thingy.ViewModels
                 _db.SaveVirtualFolder(modell);
                 Folders.UpdateWith(_db.GetVirtualFolders());
             }
+        }
+
+        private bool CanSaveFolder()
+        {
+            return _changed && IsFolderOpened();
+        }
+
+        private void SaveFolder()
+        {
+            UpdateVirtualFolder();
+            _changed = false;
         }
 
         private bool IsFolderOpened()
@@ -147,25 +158,9 @@ namespace Thingy.ViewModels
             return (obj != null && obj.Count > 0);
         }
 
-        private bool CanCopyAndZip()
+        private bool CanCopyOrZip()
         {
             return CurrentFolder.Count > 0;
-        }
-
-        private bool CanSaveFolder()
-        {
-            return _changed && IsFolderOpened();
-        }
-
-        private void SaveFolder()
-        {
-            VirtualFolder current = new VirtualFolder
-            {
-                Name = _selectedfolder,
-                Files = new List<string>(CurrentFolder)
-            };
-            _db.SaveVirtualFolder(current);
-            _changed = false;
         }
 
         private void CopyContents()

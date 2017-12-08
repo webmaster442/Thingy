@@ -39,17 +39,25 @@
                 </interactivity:EventTrigger>
             </interactivity:Interaction.Triggers>
         </ListBox>
-        <Label
+        <StackPanel
             Grid.Row="0"
             Grid.Column="1"
-            Content="{Binding SelectedFolder}"
-            Style="{StaticResource Title}" />
+            Orientation="Horizontal">
+            <Label
+                Content="{Binding SelectedFolder}"
+                Style="{StaticResource Title}"
+                Margin="10,0"/>
+            <Button
+                Content="Save Folder"
+                Command="{Binding SaveFolderCommand}"
+                Style="{StaticResource BigButton}"/>
+        </StackPanel>
         <ListBox
             x:Name="FilesList"
             Grid.Row="1"
             Grid.Column="1"
-            SelectionMode="Multiple"
-            ItemsSource="{Binding CurrentFolder}" />
+            ItemsSource="{Binding CurrentFolder}"
+            SelectionMode="Multiple" />
         <StackPanel
             x:Name="FileManagement"
             Grid.Row="2"

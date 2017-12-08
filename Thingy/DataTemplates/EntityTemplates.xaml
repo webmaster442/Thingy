@@ -149,4 +149,14 @@
         </Grid>
     </DataTemplate>
 
+    <DataTemplate x:Key="VirtualFolderContent">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+    </DataTemplate>
+
 </ResourceDictionary>
