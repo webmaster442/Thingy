@@ -172,6 +172,9 @@ namespace Thingy.ViewModels
             };
             if (folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                var dialog = new Views.CopyorZipDialog();
+                dialog.Show();
+                dialog.StartCopy(CurrentFolder, folderBrowserDialog.SelectedPath);
 
             }
         }
