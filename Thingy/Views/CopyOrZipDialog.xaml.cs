@@ -64,13 +64,19 @@ namespace Thingy.Views
                             {
                                 bufferFill = source.Read(buffer, 0, buffer.Length);
                                 ct.ThrowIfCancellationRequested();
+                                totaldone += bufferFill;
                                 target.Write(buffer, 0, bufferFill);
                                 ReportProgress(progress, totaldone, totalsize);
+                                await Task.Delay(100);
                             }
                             while (bufferFill > 0);
                         }
                     }
                 }
+            }
+            catch (OperationCanceledException)
+            {
+                return true;
             }
             catch (Exception)
             {
