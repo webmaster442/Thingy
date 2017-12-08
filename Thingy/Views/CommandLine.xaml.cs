@@ -28,7 +28,7 @@ namespace Thingy.Views
 
         public void Close()
         {
-            (DataContext as CommandLineViewModel)?.ClosingCommand?.Execute(null);
+            (DataContext as CommandLineViewModel)?.ClosingCommand?.Execute();
         }
 
         public TextBox GetTextBox()

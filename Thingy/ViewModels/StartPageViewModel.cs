@@ -26,7 +26,7 @@ namespace Thingy.ViewModels
             _application = application;
             Modules = new ObservableCollection<IModule>();
             Modules.AddRange(_moduleLoader.Modules);
-            TileClickCommand = DelegateCommand<string>.ToCommand(TileClick);
+            TileClickCommand = Command.ToCommand<string>(TileClick);
         }
 
         private void TileClick(string obj)

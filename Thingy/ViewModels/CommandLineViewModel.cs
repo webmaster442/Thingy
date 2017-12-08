@@ -22,14 +22,14 @@ namespace Thingy.ViewModels
         {
             controller = new TerminalController(view);
             controller.SetShell(shell);
-            LoadedCommand = DelegateCommand.ToCommand(Loaded);
-            ClosingCommand = DelegateCommand.ToCommand(Closing);
-            SetFolderCommand = DelegateCommand.ToCommand(SetFolder);
+            LoadedCommand = Command.ToCommand(Loaded);
+            ClosingCommand = Command.ToCommand(Closing);
+            SetFolderCommand = Command.ToCommand(SetFolder);
 
-            ClearCommand = DelegateCommand.ToCommand(Clear);
-            RestartCommand = DelegateCommand.ToCommand(Restart);
-            CopyCommand = DelegateCommand.ToCommand(Copy);
-            PasteCommand = DelegateCommand.ToCommand(Paste);
+            ClearCommand = Command.ToCommand(Clear);
+            RestartCommand = Command.ToCommand(Restart);
+            CopyCommand = Command.ToCommand(Copy);
+            PasteCommand = Command.ToCommand(Paste);
         }
 
         private void SetFolder()
