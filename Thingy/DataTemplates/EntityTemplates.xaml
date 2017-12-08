@@ -152,10 +152,22 @@
     <DataTemplate x:Key="VirtualFolderContent">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
+            <Image
+                Grid.Column="0"
+                Width="48"
+                Height="48"
+                Source="{Binding Converter={applib:FileIconConverter}}" />
+            <TextBlock
+                Grid.Column="1"
+                Text="{Binding Converter={applib:FileInfoConverter}, ConverterParameter=name}" />
+            <TextBlock
+                Grid.Column="2"
+                Text="{Binding Converter={applib:FileInfoConverter}, ConverterParameter=size}" />
+
         </Grid>
     </DataTemplate>
 

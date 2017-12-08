@@ -44,18 +44,20 @@
             Grid.Column="1"
             Orientation="Horizontal">
             <Label
+                Margin="10,0"
                 Content="{Binding SelectedFolder}"
-                Style="{StaticResource Title}"
-                Margin="10,0"/>
+                Style="{StaticResource Title}" />
             <Button
-                Content="Save Folder"
                 Command="{Binding SaveFolderCommand}"
-                Style="{StaticResource BigButton}"/>
+                Content="Save Folder"
+                Style="{StaticResource BigButton}" />
         </StackPanel>
         <ListBox
             x:Name="FilesList"
             Grid.Row="1"
             Grid.Column="1"
+            HorizontalContentAlignment="Stretch"
+            ItemTemplate="{StaticResource VirtualFolderContent}"
             ItemsSource="{Binding CurrentFolder}"
             SelectionMode="Multiple" />
         <StackPanel
