@@ -13,9 +13,14 @@ namespace Thingy.Views
             InitializeComponent();
         }
 
+        public CommandLineViewModel ViewModel
+        {
+            get { return DataContext as CommandLineViewModel; }
+        }
+
         public void Close()
         {
-            (DataContext as CommandLineViewModel)?.ClosingCommand?.Execute(null);
+            ViewModel?.ClosingCommand?.Execute(null);
         }
 
         public TextBox GetTextBox()

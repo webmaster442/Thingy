@@ -23,6 +23,8 @@ namespace Thingy.ViewModels
         public DelegateCommand<VirtualFolder> LoadFolderCommand { get; private set; }
         public DelegateCommand NewFolderCommand { get; private set; }
         public DelegateCommand<VirtualFolder> DeleteFolderCommand { get; private set; }
+        public DelegateCommand<string[]> FilesDroppedCommand { get; private set; }
+
         public DelegateCommand ClearFolderCommand { get; private set; }
         public DelegateCommand AddFilesCommand { get; private set; }
         public DelegateCommand<IList> DeleteFilesCommand { get; private set; }
@@ -48,6 +50,15 @@ namespace Thingy.ViewModels
             CreateZipCommand = Command.ToCommand(CreateZip, CanCopyOrZip);
             LoadFolderCommand = Command.ToCommand<VirtualFolder>(LoadFolder);
             SaveFolderCommand = Command.ToCommand(SaveFolder, CanSaveFolder);
+            FilesDroppedCommand = Command.ToCommand<string[]>(FilesDropped);
+        }
+
+        private void FilesDropped(string[] obj)
+        {
+            if (IsFolderOpened())
+            {
+                CurrentFolder.AddRange(obj);
+            }
         }
 
         public string SelectedFolder
@@ -185,7 +196,9 @@ namespace Thingy.ViewModels
             saveFileDialog.Filter = "Zip files|*.zip";
             if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-
+                var dialog = new Views.CopyorZipDialog();
+                dialog.Show();
+                dialog.StartZip(CurrentFolder, saveFileDialog.FileName);
             }
         }
     }

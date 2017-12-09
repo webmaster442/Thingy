@@ -9,11 +9,6 @@
     d:DesignHeight="300"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <UserControl.Triggers>
-        <EventTrigger
-            RoutedEvent="Control.MouseDoubleClick"
-            SourceName="FolderList" />
-    </UserControl.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
@@ -57,6 +52,9 @@
             Grid.Row="1"
             Grid.Column="1"
             HorizontalContentAlignment="Stretch"
+            AllowDrop="True"
+            DragEnter="FilesList_DragEnter"
+            Drop="FilesList_Drop"
             ItemTemplate="{StaticResource VirtualFolderContent}"
             ItemsSource="{Binding CurrentFolder}"
             SelectionMode="Multiple" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -34,9 +35,9 @@ namespace Thingy.Views
             }
         }
 
-        private async Task<bool> CopyTask(IList<string> files, 
-                                          string destination, 
-                                          IProgress<double> progress, 
+        private async Task<bool> CopyTask(IList<string> files,
+                                          string destination,
+                                          IProgress<double> progress,
                                           CancellationToken ct)
         {
             long totalsize = 0;
@@ -67,9 +68,68 @@ namespace Thingy.Views
                                 totaldone += bufferFill;
                                 target.Write(buffer, 0, bufferFill);
                                 ReportProgress(progress, totaldone, totalsize);
-                                await Task.Delay(100);
+                                //await Task.Delay(100);
                             }
                             while (bufferFill > 0);
+                        }
+                    }
+                }
+            }
+            catch (OperationCanceledException)
+            {
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private async Task<bool> ZipTask(IList<string> files,
+                                  string destination,
+                                  IProgress<double> progress,
+                                  CancellationToken ct)
+        {
+            long totalsize = 0;
+            long totaldone = 0;
+            byte[] buffer = new byte[4096 * 2];
+            int bufferFill;
+            List<string> destinations = new List<string>(files.Count);
+
+            foreach (var file in files)
+            {
+                FileInfo fi = new FileInfo(file);
+                totalsize += fi.Length;
+                destinations.Add(fi.Name);
+            }
+
+            try
+            {
+                using (var target = File.Create(destination))
+                {
+                    using (var zip = new ZipArchive(target, ZipArchiveMode.Create, true))
+                    {
+                        for (int i = 0; i < files.Count; i++)
+                        {
+                            using (var source = File.OpenRead(files[i]))
+                            {
+                                var entry = zip.CreateEntry(destinations[i]);
+                                using (var packed = entry.Open())
+                                {
+                                    do
+                                    {
+                                        bufferFill = source.Read(buffer, 0, buffer.Length);
+                                        ct.ThrowIfCancellationRequested();
+                                        totaldone += bufferFill;
+                                        packed.Write(buffer, 0, bufferFill);
+                                        ReportProgress(progress, totaldone, totalsize);
+                                        //await Task.Delay(100);
+                                    }
+                                    while (bufferFill > 0);
+                                }
+                            }
                         }
                     }
                 }
@@ -113,11 +173,40 @@ namespace Thingy.Views
                 _cancellationTokenSource = new CancellationTokenSource();
                 _taskrunning = true;
                 bool result = await CopyTask(files, destination, _progress, _cancellationTokenSource.Token);
+                _taskrunning = false;
                 if (!result)
                 {
                     MessageBox.Show("Error on copy", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+                else
+                {
+                    Close();
+                }
+            }
+            catch (Exception)
+            {
                 _taskrunning = false;
+            }
+        }
+
+        public async void StartZip(IList<string> files, string destination)
+        {
+            try
+            {
+                Title = "Packing";
+                DialogText.Text = "Packing in progress...";
+                _cancellationTokenSource = new CancellationTokenSource();
+                _taskrunning = true;
+                bool result = await ZipTask(files, destination, _progress, _cancellationTokenSource.Token);
+                _taskrunning = false;
+                if (!result)
+                {
+                    MessageBox.Show("Error on packing", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    Close();
+                }
             }
             catch (Exception)
             {

@@ -19,7 +19,7 @@ namespace Thingy.ViewModels
         public DelegateCommand SetFolderCommand { get; private set; }
 
         public CommandLineViewModel(ICommandLineView view, string shell = "cmd.exe") : base(view)
-        {
+            {
             controller = new TerminalController(view);
             controller.SetShell(shell);
             LoadedCommand = Command.ToCommand(Loaded);
