@@ -77,6 +77,7 @@
     <Compile Include="IApplication.cs" />
     <Compile Include="Infrastructure\IModuleLoader.cs" />
     <Compile Include="Infrastructure\ModuleLoader.cs" />
+    <Compile Include="ViewModels\ProgramsViewModel.cs" />
     <Compile Include="Views\CopyOrZipDialog.xaml.cs">
       <DependentUpon>CopyOrZipDialog.xaml</DependentUpon>
     </Compile>
@@ -106,6 +107,9 @@
     <Compile Include="Views\NewFolderLink.xaml.cs">
       <DependentUpon>NewFolderLink.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NewProgram.xaml.cs">
+      <DependentUpon>NewProgram.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NewToDoItem.xaml.cs">
       <DependentUpon>NewToDoItem.xaml</DependentUpon>
     </Compile>
@@ -114,6 +118,9 @@
     </Compile>
     <Compile Include="Views\Places.xaml.cs">
       <DependentUpon>Places.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Programs.xaml.cs">
+      <DependentUpon>Programs.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
@@ -172,6 +179,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\NewProgram.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\NewToDoItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -181,6 +192,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Places.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Programs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
