@@ -104,16 +104,16 @@
       <DependentUpon>CommandLine.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ICommandLineView.cs" />
-    <Compile Include="Views\NewFolderLink.xaml.cs">
+    <Compile Include="Views\Dialogs\NewFolderLink.xaml.cs">
       <DependentUpon>NewFolderLink.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\NewProgram.xaml.cs">
+    <Compile Include="Views\Dialogs\NewProgram.xaml.cs">
       <DependentUpon>NewProgram.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\NewToDoItem.xaml.cs">
+    <Compile Include="Views\Dialogs\NewToDoItem.xaml.cs">
       <DependentUpon>NewToDoItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\NewVirtualFolder.xaml.cs">
+    <Compile Include="Views\Dialogs\NewVirtualFolder.xaml.cs">
       <DependentUpon>NewVirtualFolder.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Places.xaml.cs">
@@ -175,19 +175,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\NewFolderLink.xaml">
+    <Page Include="Views\Dialogs\NewFolderLink.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\NewProgram.xaml">
+    <Page Include="Views\Dialogs\NewProgram.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\NewToDoItem.xaml">
+    <Page Include="Views\Dialogs\NewToDoItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\NewVirtualFolder.xaml">
+    <Page Include="Views\Dialogs\NewVirtualFolder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

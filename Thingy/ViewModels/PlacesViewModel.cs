@@ -8,7 +8,6 @@ using Thingy.Db;
 using Thingy.Db.Entity;
 using Thingy.Implementation;
 using Thingy.Implementation.Models;
-using Thingy.Views;
 
 namespace Thingy.ViewModels
 {
@@ -75,7 +74,7 @@ namespace Thingy.ViewModels
 
         private void NewFolderLink()
         {
-            var dialog = new NewFolderLink();
+            var dialog = new Views.Dialogs.NewFolderLink();
             var item = new FolderLink();
             if (_app.ShowDialog(dialog, "New Folder Link", item) == true)
             {

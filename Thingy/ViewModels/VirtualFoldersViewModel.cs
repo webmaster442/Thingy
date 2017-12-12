@@ -101,7 +101,7 @@ namespace Thingy.ViewModels
         private void NewFolder()
         {
             var modell = new VirtualFolder();
-            if (_app.ShowDialog(new Views.NewVirtualFolder(), "New Virtual Folder", modell) == true)
+            if (_app.ShowDialog(new Views.Dialogs.NewVirtualFolder(), "New Virtual Folder", modell) == true)
             {
                 _db.VirtualFolders.SaveVirtualFolder(modell);
                 Folders.UpdateWith(_db.VirtualFolders.GetVirtualFolders());

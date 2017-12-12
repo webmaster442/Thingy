@@ -2,7 +2,6 @@
 using Thingy.Controls;
 using Thingy.Db;
 using Thingy.Db.Entity;
-using Thingy.Views;
 
 namespace Thingy.ViewModels
 {
@@ -58,7 +57,7 @@ namespace Thingy.ViewModels
 
         private void AddNewItem()
         {
-            var dialog = new NewToDoItem();
+            var dialog = new Views.Dialogs.NewToDoItem();
             var item = new ToDoItem();
             if (_application.ShowDialog(dialog, "New To Do Item", item) == true)
             {
