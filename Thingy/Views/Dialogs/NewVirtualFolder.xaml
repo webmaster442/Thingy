@@ -16,7 +16,9 @@
             Grid.Row="0"
             Content="New Virtual folder"
             Style="{StaticResource Title}" />
-        <StackPanel Grid.Row="1">
+        <StackPanel
+            Grid.Row="1"
+            Margin="5,2">
             <TextBlock Text="Folder name:" />
             <TextBox
                 Style="{StaticResource Validatable}"

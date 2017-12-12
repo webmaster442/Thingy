@@ -1,27 +1,34 @@
 ﻿using AppLib.MVVM;
+using LiteDB;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Thingy.Db.Entity
 {
-    public class LauncherProgram: BindableBase, IEquatable<LauncherProgram>
+    public class LauncherProgram: ValidatableBase, IEquatable<LauncherProgram>
     {
         private string _name;
         private string _path;
         private string _params;
 
+        [BsonId]
+        [Required]
         public string Name
         {
             get { return _name; }
             set { SetValue(ref _name, value); }
         }
 
+        [BsonField]
+        [Required]
         public string Path
         {
             get { return _path; }
             set { SetValue(ref _path, value); }
         }
 
+        [BsonField]
         public string Params
         {
             get { return _params; }

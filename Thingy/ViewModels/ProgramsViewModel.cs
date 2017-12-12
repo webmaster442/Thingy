@@ -13,16 +13,19 @@ namespace Thingy.ViewModels
     public class ProgramsViewModel: ViewModel
     {
         private IDataBase _db;
+        private IApplication _application;
 
         public DelegateCommand AddCommand { get; private set; }
         public DelegateCommand<LauncherProgram> EditCommand { get; private set; }
         public DelegateCommand<LauncherProgram> DeleteCommand { get; private set; }
+        public DelegateCommand RunCommand { get; private set; }
 
         public ObservableCollection<LauncherProgram> Programs { get; private set; }
 
-        public ProgramsViewModel(IDataBase db)
+        public ProgramsViewModel(IApplication app, IDataBase db)
         {
             _db = db;
+            _application = app;
             Programs = new ObservableCollection<LauncherProgram>();
             AddCommand = Command.ToCommand(Add);
             EditCommand = Command.ToCommand<LauncherProgram>(Edit, CanEditOrDelete);
@@ -41,12 +44,22 @@ namespace Thingy.ViewModels
 
         private void Edit(LauncherProgram obj)
         {
-            throw new NotImplementedException();
+            var dialog = new Views.Dialogs.NewProgram();
+            if (_application.ShowDialog(dialog, "New Program", obj) == true)
+            {
+                _db.Programs.SaveLauncherProgram(obj);
+            }
+
         }
 
         private void Add()
         {
-            throw new NotImplementedException();
+            var dialog = new Views.Dialogs.NewProgram();
+            var model = new LauncherProgram();
+            if (_application.ShowDialog(dialog, "New Program", model) == true)
+            {
+                _db.Programs.SaveLauncherProgram(model);
+            }
         }
     }
 }
