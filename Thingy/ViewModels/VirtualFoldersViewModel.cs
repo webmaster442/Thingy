@@ -39,7 +39,7 @@ namespace Thingy.ViewModels
             Folders = new ObservableCollection<VirtualFolder>();
             CurrentFolder = new ObservableCollection<string>();
             CurrentFolder.CollectionChanged += CurrentFolder_CollectionChanged;
-            Folders.UpdateWith(_db.GetVirtualFolders());
+            Folders.UpdateWith(_db.VirtualFolders.GetVirtualFolders());
 
             NewFolderCommand = Command.ToCommand(NewFolder);
             DeleteFolderCommand = Command.ToCommand<VirtualFolder>(DeleteFolder, CanDeleteFolder);
@@ -94,7 +94,7 @@ namespace Thingy.ViewModels
             {
                 loadedfolder.Files.Clear();
                 loadedfolder.Files.AddRange(CurrentFolder);
-                _db.SaveVirtualFolder(loadedfolder);
+                _db.VirtualFolders.SaveVirtualFolder(loadedfolder);
             }
         }
 
@@ -103,8 +103,8 @@ namespace Thingy.ViewModels
             var modell = new VirtualFolder();
             if (_app.ShowDialog(new Views.NewVirtualFolder(), "New Virtual Folder", modell) == true)
             {
-                _db.SaveVirtualFolder(modell);
-                Folders.UpdateWith(_db.GetVirtualFolders());
+                _db.VirtualFolders.SaveVirtualFolder(modell);
+                Folders.UpdateWith(_db.VirtualFolders.GetVirtualFolders());
             }
         }
 
@@ -137,7 +137,7 @@ namespace Thingy.ViewModels
 
         private void DeleteFolder(VirtualFolder obj)
         {
-            _db.DeleteVirtualFolder(obj.Name);
+            _db.VirtualFolders.DeleteVirtualFolder(obj.Name);
         }
 
         private void AddFiles()

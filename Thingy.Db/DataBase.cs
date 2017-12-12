@@ -8,13 +8,19 @@ using System.Windows;
 
 namespace Thingy.Db
 {
-    public sealed class DataBase : IDataBase, IDisposable
+    public sealed class DataBase : IDataBase, 
+                                   IVirtualFolders,
+                                   ITodo,
+                                   IFavoriteFolders,
+                                   IPrograms, 
+                                   IDisposable
     {
         private LiteDatabase _db;
         private Stream _filestream;
         private LiteCollection<ToDoItem> _ToDoCollection;
         private LiteCollection<FolderLink> _FolderLinkCollection;
         private LiteCollection<VirtualFolder> _VirtualFolderCollection;
+        private LiteCollection<LauncherProgram> _Programs;
 
         public DataBase(string file)
         {
@@ -24,6 +30,7 @@ namespace Thingy.Db
             _ToDoCollection = _db.GetCollection<ToDoItem>(nameof(_ToDoCollection));
             _FolderLinkCollection = _db.GetCollection<FolderLink>(nameof(_FolderLinkCollection));
             _VirtualFolderCollection = _db.GetCollection<VirtualFolder>(nameof(_VirtualFolderCollection));
+            _Programs = _db.GetCollection<LauncherProgram>(nameof(_Programs));
         }
 
         public IDataBaseFileStorage Files
@@ -31,6 +38,18 @@ namespace Thingy.Db
             get;
             private set;
         }
+
+        #region IDatabase Implementation
+
+        public ITodo Todo => this;
+
+        public IFavoriteFolders FavoriteFolders => this;
+
+        public IVirtualFolders VirtualFolders => this;
+
+        public IPrograms Programs => this;
+
+        #endregion
 
         public void Dispose()
         {
@@ -134,6 +153,23 @@ namespace Thingy.Db
         public void DeleteVirtualFolder(string folderName)
         {
             _VirtualFolderCollection.Delete(f => f.Name == folderName);
+        }
+        #endregion
+
+        #region Program launcher
+        public IEnumerable<LauncherProgram> GetPrograms()
+        {
+            return _Programs.FindAll();
+        }
+
+        public void SaveLauncherProgram(LauncherProgram program)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteLauncherProgram(string name)
+        {
+            _Programs.Delete(p => p.Name == name);
         }
         #endregion
     }

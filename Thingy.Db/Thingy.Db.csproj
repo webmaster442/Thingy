@@ -54,10 +54,15 @@
     <Compile Include="Entity\ToDoItem.cs" />
     <Compile Include="Entity\VirtualFolder.cs" />
     <Compile Include="IDataBase.cs" />
-    <Compile Include="IDataBaseFileStorage.cs" />
+    <Compile Include="Interfaces\IDataBaseFileStorage.cs" />
+    <Compile Include="Interfaces\IFavoriteFolders.cs" />
+    <Compile Include="Interfaces\IPrograms.cs" />
+    <Compile Include="Interfaces\ITodo.cs" />
+    <Compile Include="Interfaces\IVirtualFolders.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Database Diagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -70,5 +75,6 @@
       <Name>AppLib.WPF</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Thingy.Db.DataBase">
+    <Position X="8.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IGCAgIAAASQAICAAACCAAAIAACAACAAAAgAAAAEgiqU=</HashCode>
+      <FileName>DataBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Thingy.Db.DataBaseFileStorage">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAQAAAACEAIAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataBaseFileStorage.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Thingy.Db.Entity.FolderLink" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAiAAIEgAAAAAQAAAAAAIAAAAAAAAAAAiA=</HashCode>
+      <FileName>Entity\FolderLink.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Thingy.Db.Entity.LauncherProgram" BaseTypeListCollapsed="true">
+    <Position X="4" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAIAAAACAAIAgAAAAAQAAAAAAIAAAAAAAAIAAiA=</HashCode>
+      <FileName>Entity\LauncherProgram.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Thingy.Db.Entity.ToDoItem" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACgAAACABgIAgAAAAAAAAAJAAAAAAAAAAAiA=</HashCode>
+      <FileName>Entity\ToDoItem.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Thingy.Db.Entity.VirtualFolder" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAQAAAAAAIAIAAAAAAAAEqA=</HashCode>
+      <FileName>Entity\VirtualFolder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Thingy.Db.IDataBase">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAQAAAAAAAAAAAAAAACAAAAAAAAAAAAAgAIA=</HashCode>
+      <FileName>IDataBase.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Thingy.Db.IDataBaseFileStorage">
+    <Position X="12.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAACAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IDataBaseFileStorage.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Thingy.Db.IFavoriteFolders">
+    <Position X="10.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAgAAAAAAACA=</HashCode>
+      <FileName>Interfaces\IFavoriteFolders.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Thingy.Db.IPrograms">
+    <Position X="10.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Interfaces\IPrograms.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Thingy.Db.ITodo">
+    <Position X="10.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAIAAAAQAAAAAAAAAAAIAAAAACAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Interfaces\ITodo.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Thingy.Db.IVirtualFolders">
+    <Position X="10.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQ=</HashCode>
+      <FileName>Interfaces\IVirtualFolders.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

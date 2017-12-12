@@ -52,10 +52,10 @@ namespace Thingy.ViewModels
         private void ApplyFiltering()
         {
             if (string.IsNullOrEmpty(_filter))
-                Folders.UpdateWith(_db.GetFavoriteFolders());
+                Folders.UpdateWith(_db.FavoriteFolders.GetFavoriteFolders());
             else
             {
-                var match = from frolder in _db.GetFavoriteFolders()
+                var match = from frolder in _db.FavoriteFolders.GetFavoriteFolders()
                             where 
                             frolder.Name.Contains(_filter, StringComparison.InvariantCultureIgnoreCase)
                             select frolder;
@@ -79,7 +79,7 @@ namespace Thingy.ViewModels
             var item = new FolderLink();
             if (_app.ShowDialog(dialog, "New Folder Link", item) == true)
             {
-                _db.SaveFavoriteFolder(item);
+                _db.FavoriteFolders.SaveFavoriteFolder(item);
                 ApplyFiltering();
             }
         }
@@ -89,7 +89,7 @@ namespace Thingy.ViewModels
             var q = MessageBox.Show("Delete link?", "Link delete", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (q == MessageBoxResult.Yes)
             {
-                _db.DeleteFavoriteFolder(obj);
+                _db.FavoriteFolders.DeleteFavoriteFolder(obj);
                 ApplyFiltering();
             }
         }
