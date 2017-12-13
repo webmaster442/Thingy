@@ -12,7 +12,6 @@
     Height="480"
     Icon="pack://application:,,,/Thingy.Images;component/Icons/icons8-gift.png"
     Loaded="ModernWindow_Loaded"
-    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <applib:ModernWindow.DataContext>
         <local:MainWindowViewModel />

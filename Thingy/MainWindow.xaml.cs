@@ -3,6 +3,7 @@ using Dragablz;
 using System.Windows.Controls;
 using System;
 using AppLib.MVVM;
+using Thingy.Infrastructure;
 
 namespace Thingy
 {
@@ -11,6 +12,7 @@ namespace Thingy
     /// </summary>
     public partial class MainWindow : ModernWindow
     {
+
         public MainWindow()
         {
             InitializeComponent();
