@@ -26,17 +26,11 @@ namespace Thingy.Db
         {
             _filestream = File.Open(file, System.IO.FileMode.OpenOrCreate);
             _db = new LiteDatabase(_filestream);
-            Files = new DataBaseFileStorage(_db);
             _ToDoCollection = _db.GetCollection<ToDoItem>(nameof(_ToDoCollection));
             _FolderLinkCollection = _db.GetCollection<FolderLink>(nameof(_FolderLinkCollection));
             _VirtualFolderCollection = _db.GetCollection<VirtualFolder>(nameof(_VirtualFolderCollection));
             _Programs = _db.GetCollection<LauncherProgram>(nameof(_Programs));
-        }
-
-        public IDataBaseFileStorage Files
-        {
-            get;
-            private set;
+            _Programs.EnsureIndex(p => p.Path);
         }
 
         #region IDatabase Implementation
@@ -164,12 +158,23 @@ namespace Thingy.Db
 
         public void SaveLauncherProgram(LauncherProgram program)
         {
-            throw new NotImplementedException();
+
+                _Programs.Insert(program);
         }
 
         public void DeleteLauncherProgram(string name)
         {
             _Programs.Delete(p => p.Name == name);
+        }
+
+        public void UpdateLauncherProgramByName(string oldname, LauncherProgram newdata)
+        {
+            var existing = _Programs.Find(f => f.Name == oldname).FirstOrDefault();
+            if (existing != null)
+            {
+                _Programs.Delete(p => p == existing);
+                _Programs.Insert(newdata);
+            }
         }
         #endregion
     }

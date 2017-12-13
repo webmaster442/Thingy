@@ -115,5 +115,14 @@
   <ItemGroup>
     <Resource Include="Icons\icons8-audio.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-favorite-folder-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-linking-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-edit-row-96.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

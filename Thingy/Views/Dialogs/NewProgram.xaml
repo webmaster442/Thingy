@@ -25,15 +25,17 @@
             <applib:FileSelector
                 Filter="Programs|*.exe"
                 SelectedFile="{Binding Path, Mode=TwoWay}"
-                Style="{StaticResource Validatable}" />
+                Style="{StaticResource Validatable}"/>
             <TextBlock
                 Text="Program Name:" />
             <TextBox
-                Text="{Binding Name}" />
+                Text="{Binding Name}"
+                Style="{StaticResource Validatable}"/>
             <TextBlock 
                 Text="Optional arguments:" />
             <TextBox 
-                Text="{Binding Params}" />
+                Text="{Binding Params}"
+                Style="{StaticResource Validatable}"/>
         </StackPanel>
     </Grid>
 </UserControl>

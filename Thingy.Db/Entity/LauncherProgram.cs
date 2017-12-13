@@ -12,6 +12,12 @@ namespace Thingy.Db.Entity
         private string _path;
         private string _params;
 
+        public LauncherProgram()
+        {
+            ValidateOnPropertyChange = true;
+            Validate();
+        }
+
         [BsonId]
         [Required]
         public string Name
@@ -25,7 +31,16 @@ namespace Thingy.Db.Entity
         public string Path
         {
             get { return _path; }
-            set { SetValue(ref _path, value); }
+            set
+            {
+                if (SetValue(ref _path, value))
+                {
+                    if (string.IsNullOrEmpty(_name))
+                    {
+                        Name = System.IO.Path.GetFileNameWithoutExtension(value);
+                    }
+                }
+            }
         }
 
         [BsonField]

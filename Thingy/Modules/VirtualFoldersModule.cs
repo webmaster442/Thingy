@@ -1,5 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Thingy.Db;
 
 namespace Thingy.Modules
@@ -13,7 +15,7 @@ namespace Thingy.Modules
 
         public override ImageSource Icon
         {
-            get { return null; }
+            get { return new BitmapImage(new Uri("pack://application:,,,/Thingy.Images;component/Icons/icons8-favorite-folder-96.png")); }
         }
 
         public override UserControl RunModule()

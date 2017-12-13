@@ -48,13 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBase.cs" />
-    <Compile Include="DataBaseFileStorage.cs" />
     <Compile Include="Entity\FolderLink.cs" />
     <Compile Include="Entity\LauncherProgram.cs" />
     <Compile Include="Entity\ToDoItem.cs" />
     <Compile Include="Entity\VirtualFolder.cs" />
     <Compile Include="IDataBase.cs" />
-    <Compile Include="Interfaces\IDataBaseFileStorage.cs" />
     <Compile Include="Interfaces\IFavoriteFolders.cs" />
     <Compile Include="Interfaces\IPrograms.cs" />
     <Compile Include="Interfaces\ITodo.cs" />

@@ -75,8 +75,10 @@
     </Compile>
     <Compile Include="Controls\TrulyObservableCollection.cs" />
     <Compile Include="IApplication.cs" />
+    <Compile Include="Infrastructure\DBFileIconConverter.cs" />
     <Compile Include="Infrastructure\IModuleLoader.cs" />
     <Compile Include="Infrastructure\ModuleLoader.cs" />
+    <Compile Include="Modules\ProgramsModule.cs" />
     <Compile Include="ViewModels\ProgramsViewModel.cs" />
     <Compile Include="Views\CopyOrZipDialog.xaml.cs">
       <DependentUpon>CopyOrZipDialog.xaml</DependentUpon>

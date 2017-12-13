@@ -97,6 +97,7 @@
     <Compile Include="CoreAudio\PropVariant.cs" />
     <Compile Include="CoreAudio\SessionCollection.cs" />
     <Compile Include="CoreAudio\SimpleAudioVolume.cs" />
+    <Compile Include="ExeIconExtractor.cs" />
     <Compile Include="PerformanceInfo.cs" />
     <Compile Include="TileColorProvider.cs" />
     <Compile Include="Models\Drive.cs" />
