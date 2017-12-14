@@ -31,6 +31,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Calculators", "Calculators"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.CurrencyConvert", "Thingy.CurrencyConvert\Thingy.CurrencyConvert.csproj", "{94105275-CD32-4CF2-8D61-13D35E4FC2C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.IronPython", "Thingy.IronPython\Thingy.IronPython.csproj", "{D66505D8-EFDD-4D39-A8E2-02723B94B4B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{94105275-CD32-4CF2-8D61-13D35E4FC2C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94105275-CD32-4CF2-8D61-13D35E4FC2C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94105275-CD32-4CF2-8D61-13D35E4FC2C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D66505D8-EFDD-4D39-A8E2-02723B94B4B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D66505D8-EFDD-4D39-A8E2-02723B94B4B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D66505D8-EFDD-4D39-A8E2-02723B94B4B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D66505D8-EFDD-4D39-A8E2-02723B94B4B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +84,7 @@ Global
 		{FAF19388-A6C0-46F9-A588-A46DB392ACE4} = {2F25642E-765F-4F1C-9C71-F329B53FCDF6}
 		{848616A9-3D2F-42B1-B474-BE506E8019E4} = {2F25642E-765F-4F1C-9C71-F329B53FCDF6}
 		{94105275-CD32-4CF2-8D61-13D35E4FC2C0} = {9C3872E5-90F3-4F2A-9C9F-DE46FE4B45B7}
+		{D66505D8-EFDD-4D39-A8E2-02723B94B4B6} = {9C3872E5-90F3-4F2A-9C9F-DE46FE4B45B7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DD6722DD-E90E-429E-83DB-F90CCB4A136E}
