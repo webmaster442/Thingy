@@ -78,6 +78,7 @@
     <Compile Include="Infrastructure\DBFileIconConverter.cs" />
     <Compile Include="Infrastructure\IModuleLoader.cs" />
     <Compile Include="Infrastructure\ModuleLoader.cs" />
+    <Compile Include="Modules\CurrencyConverterModule.cs" />
     <Compile Include="Modules\ProgramsModule.cs" />
     <Compile Include="ViewModels\ProgramsViewModel.cs" />
     <Compile Include="Views\CopyOrZipDialog.xaml.cs">
@@ -260,6 +261,10 @@
     <ProjectReference Include="..\applib\AppLib.WPF\AppLib.WPF.csproj">
       <Project>{faf19388-a6c0-46f9-a588-a46db392ace4}</Project>
       <Name>AppLib.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Thingy.CurrencyConvert\Thingy.CurrencyConvert.csproj">
+      <Project>{94105275-cd32-4cf2-8d61-13d35e4fc2c0}</Project>
+      <Name>Thingy.CurrencyConvert</Name>
     </ProjectReference>
     <ProjectReference Include="..\Thingy.Db\Thingy.Db.csproj">
       <Project>{2D7E8D87-74AC-402A-8E11-BDACC7B3839B}</Project>

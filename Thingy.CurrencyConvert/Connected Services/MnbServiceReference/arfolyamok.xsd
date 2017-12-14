@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://www.mnb.hu/webservices/" elementFormDefault="qualified" targetNamespace="http://www.mnb.hu/webservices/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="GetCurrenciesRequestBody">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="GetCurrenciesRequestBody" nillable="true" type="tns:GetCurrenciesRequestBody" />
+  <xs:element name="GetCurrencies" nillable="true" type="tns:GetCurrenciesRequestBody" />
+  <xs:complexType name="GetCurrenciesResponseBody">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GetCurrenciesResult" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetCurrenciesResponseBody" nillable="true" type="tns:GetCurrenciesResponseBody" />
+  <xs:element name="GetCurrenciesResponse" nillable="true" type="tns:GetCurrenciesResponseBody" />
+  <xs:complexType name="GetCurrencyUnitsRequestBody">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="currencyNames" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetCurrencyUnitsRequestBody" nillable="true" type="tns:GetCurrencyUnitsRequestBody" />
+  <xs:element name="GetCurrencyUnits" nillable="true" type="tns:GetCurrencyUnitsRequestBody" />
+  <xs:complexType name="GetCurrencyUnitsResponseBody">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GetCurrencyUnitsResult" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetCurrencyUnitsResponseBody" nillable="true" type="tns:GetCurrencyUnitsResponseBody" />
+  <xs:element name="GetCurrencyUnitsResponse" nillable="true" type="tns:GetCurrencyUnitsResponseBody" />
+  <xs:complexType name="GetCurrentExchangeRatesRequestBody">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="GetCurrentExchangeRatesRequestBody" nillable="true" type="tns:GetCurrentExchangeRatesRequestBody" />
+  <xs:element name="GetCurrentExchangeRates" nillable="true" type="tns:GetCurrentExchangeRatesRequestBody" />
+  <xs:complexType name="GetCurrentExchangeRatesResponseBody">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GetCurrentExchangeRatesResult" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetCurrentExchangeRatesResponseBody" nillable="true" type="tns:GetCurrentExchangeRatesResponseBody" />
+  <xs:element name="GetCurrentExchangeRatesResponse" nillable="true" type="tns:GetCurrentExchangeRatesResponseBody" />
+  <xs:complexType name="GetDateIntervalRequestBody">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="GetDateIntervalRequestBody" nillable="true" type="tns:GetDateIntervalRequestBody" />
+  <xs:element name="GetDateInterval" nillable="true" type="tns:GetDateIntervalRequestBody" />
+  <xs:complexType name="GetDateIntervalResponseBody">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GetDateIntervalResult" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetDateIntervalResponseBody" nillable="true" type="tns:GetDateIntervalResponseBody" />
+  <xs:element name="GetDateIntervalResponse" nillable="true" type="tns:GetDateIntervalResponseBody" />
+  <xs:complexType name="GetExchangeRatesRequestBody">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="startDate" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="endDate" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="currencyNames" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetExchangeRatesRequestBody" nillable="true" type="tns:GetExchangeRatesRequestBody" />
+  <xs:element name="GetExchangeRates" nillable="true" type="tns:GetExchangeRatesRequestBody" />
+  <xs:complexType name="GetExchangeRatesResponseBody">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GetExchangeRatesResult" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetExchangeRatesResponseBody" nillable="true" type="tns:GetExchangeRatesResponseBody" />
+  <xs:element name="GetExchangeRatesResponse" nillable="true" type="tns:GetExchangeRatesResponseBody" />
+  <xs:complexType name="GetInfoRequestBody">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="GetInfoRequestBody" nillable="true" type="tns:GetInfoRequestBody" />
+  <xs:element name="GetInfo" nillable="true" type="tns:GetInfoRequestBody" />
+  <xs:complexType name="GetInfoResponseBody">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GetInfoResult" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetInfoResponseBody" nillable="true" type="tns:GetInfoResponseBody" />
+  <xs:element name="GetInfoResponse" nillable="true" type="tns:GetInfoResponseBody" />
+</xs:schema>

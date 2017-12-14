@@ -124,5 +124,8 @@
   <ItemGroup>
     <Resource Include="Icons\icons8-edit-row-96.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-currency-exchange-96.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

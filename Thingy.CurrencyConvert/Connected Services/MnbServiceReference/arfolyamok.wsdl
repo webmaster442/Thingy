@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://www.mnb.hu/webservices/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.mnb.hu/webservices/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.mnb.hu/webservices/Imports">
+      <xsd:import schemaLocation="http://www.mnb.hu/arfolyamok.asmx?xsd=xsd1" namespace="http://www.mnb.hu/webservices/" />
+      <xsd:import schemaLocation="http://www.mnb.hu/arfolyamok.asmx?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="GetCurrenciesRequest">
+    <wsdl:part name="GetCurrencies" element="tns:GetCurrencies" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrenciesResponse">
+    <wsdl:part name="GetCurrenciesResponse" element="tns:GetCurrenciesResponse" />
+  </wsdl:message>
+  <wsdl:message name="MNBArfolyamServiceSoap_GetCurrencies_StringFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/" name="detail" element="q1:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrencyUnitsRequest">
+    <wsdl:part name="GetCurrencyUnits" element="tns:GetCurrencyUnits" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrencyUnitsResponse">
+    <wsdl:part name="GetCurrencyUnitsResponse" element="tns:GetCurrencyUnitsResponse" />
+  </wsdl:message>
+  <wsdl:message name="MNBArfolyamServiceSoap_GetCurrencyUnits_StringFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/" name="detail" element="q2:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentExchangeRatesRequest">
+    <wsdl:part name="GetCurrentExchangeRates" element="tns:GetCurrentExchangeRates" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentExchangeRatesResponse">
+    <wsdl:part name="GetCurrentExchangeRatesResponse" element="tns:GetCurrentExchangeRatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="MNBArfolyamServiceSoap_GetCurrentExchangeRates_StringFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/" name="detail" element="q3:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDateIntervalRequest">
+    <wsdl:part name="GetDateInterval" element="tns:GetDateInterval" />
+  </wsdl:message>
+  <wsdl:message name="GetDateIntervalResponse">
+    <wsdl:part name="GetDateIntervalResponse" element="tns:GetDateIntervalResponse" />
+  </wsdl:message>
+  <wsdl:message name="MNBArfolyamServiceSoap_GetDateInterval_StringFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/" name="detail" element="q4:string" />
+  </wsdl:message>
+  <wsdl:message name="GetExchangeRatesRequest">
+    <wsdl:part name="GetExchangeRates" element="tns:GetExchangeRates" />
+  </wsdl:message>
+  <wsdl:message name="GetExchangeRatesResponse">
+    <wsdl:part name="GetExchangeRatesResponse" element="tns:GetExchangeRatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="MNBArfolyamServiceSoap_GetExchangeRates_StringFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/" name="detail" element="q5:string" />
+  </wsdl:message>
+  <wsdl:message name="GetInfoRequest">
+    <wsdl:part name="GetInfo" element="tns:GetInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetInfoResponse">
+    <wsdl:part name="GetInfoResponse" element="tns:GetInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="MNBArfolyamServiceSoap_GetInfo_StringFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/" name="detail" element="q6:string" />
+  </wsdl:message>
+  <wsdl:portType name="MNBArfolyamServiceSoap">
+    <wsdl:operation name="GetCurrencies">
+      <wsdl:input wsaw:Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrencies" name="GetCurrenciesRequest" message="tns:GetCurrenciesRequest" />
+      <wsdl:output wsaw:Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrenciesResponse" name="GetCurrenciesResponse" message="tns:GetCurrenciesResponse" />
+      <wsdl:fault wsaw:Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrenciesStringFault" name="StringFault" message="tns:MNBArfolyamServiceSoap_GetCurrencies_StringFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrencyUnits">
+      <wsdl:input wsaw:Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrencyUnits" name="GetCurrencyUnitsRequest" message="tns:GetCurrencyUnitsRequest" />
+      <wsdl:output wsaw:Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrencyUnitsResponse" name="GetCurrencyUnitsResponse" message="tns:GetCurrencyUnitsResponse" />
+      <wsdl:fault wsaw:Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrencyUnitsStringFault" name="StringFault" message="tns:MNBArfolyamServiceSoap_GetCurrencyUnits_StringFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentExchangeRates">
+      <wsdl:input wsaw:Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrentExchangeRates" name="GetCurrentExchangeRatesRequest" message="tns:GetCurrentExchangeRatesRequest" />
+      <wsdl:output wsaw:Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrentExchangeRatesResponse" name="GetCurrentExchangeRatesResponse" message="tns:GetCurrentExchangeRatesResponse" />
+      <wsdl:fault wsaw:Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrentExchangeRatesStringFault" name="StringFault" message="tns:MNBArfolyamServiceSoap_GetCurrentExchangeRates_StringFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDateInterval">
+      <wsdl:input wsaw:Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetDateInterval" name="GetDateIntervalRequest" message="tns:GetDateIntervalRequest" />
+      <wsdl:output wsaw:Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetDateIntervalResponse" name="GetDateIntervalResponse" message="tns:GetDateIntervalResponse" />
+      <wsdl:fault wsaw:Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetDateIntervalStringFault" name="StringFault" message="tns:MNBArfolyamServiceSoap_GetDateInterval_StringFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetExchangeRates">
+      <wsdl:input wsaw:Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetExchangeRates" name="GetExchangeRatesRequest" message="tns:GetExchangeRatesRequest" />
+      <wsdl:output wsaw:Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetExchangeRatesResponse" name="GetExchangeRatesResponse" message="tns:GetExchangeRatesResponse" />
+      <wsdl:fault wsaw:Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetExchangeRatesStringFault" name="StringFault" message="tns:MNBArfolyamServiceSoap_GetExchangeRates_StringFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInfo">
+      <wsdl:input wsaw:Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetInfo" name="GetInfoRequest" message="tns:GetInfoRequest" />
+      <wsdl:output wsaw:Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetInfoResponse" name="GetInfoResponse" message="tns:GetInfoResponse" />
+      <wsdl:fault wsaw:Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetInfoStringFault" name="StringFault" message="tns:MNBArfolyamServiceSoap_GetInfo_StringFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy", "Thingy\Thingy.csproj", "{B02377D2-EBB9-407A-851C-E7E9E2B4914D}"
 EndProject
@@ -24,6 +24,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{1A2DD49E-E
 		PULL_REQUEST_TEMPLATE.md = PULL_REQUEST_TEMPLATE.md
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applib", "Applib", "{2F25642E-765F-4F1C-9C71-F329B53FCDF6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Calculators", "Calculators", "{9C3872E5-90F3-4F2A-9C9F-DE46FE4B45B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.CurrencyConvert", "Thingy.CurrencyConvert\Thingy.CurrencyConvert.csproj", "{94105275-CD32-4CF2-8D61-13D35E4FC2C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,9 +65,19 @@ Global
 		{848616A9-3D2F-42B1-B474-BE506E8019E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{848616A9-3D2F-42B1-B474-BE506E8019E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{848616A9-3D2F-42B1-B474-BE506E8019E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94105275-CD32-4CF2-8D61-13D35E4FC2C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94105275-CD32-4CF2-8D61-13D35E4FC2C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94105275-CD32-4CF2-8D61-13D35E4FC2C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94105275-CD32-4CF2-8D61-13D35E4FC2C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{516087B5-6AC5-44A5-8DF1-FE42D7A7A0E6} = {2F25642E-765F-4F1C-9C71-F329B53FCDF6}
+		{FAF19388-A6C0-46F9-A588-A46DB392ACE4} = {2F25642E-765F-4F1C-9C71-F329B53FCDF6}
+		{848616A9-3D2F-42B1-B474-BE506E8019E4} = {2F25642E-765F-4F1C-9C71-F329B53FCDF6}
+		{94105275-CD32-4CF2-8D61-13D35E4FC2C0} = {9C3872E5-90F3-4F2A-9C9F-DE46FE4B45B7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DD6722DD-E90E-429E-83DB-F90CCB4A136E}
