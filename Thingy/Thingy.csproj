@@ -79,6 +79,7 @@
     <Compile Include="Infrastructure\IModuleLoader.cs" />
     <Compile Include="Infrastructure\ModuleLoader.cs" />
     <Compile Include="Modules\CurrencyConverterModule.cs" />
+    <Compile Include="Modules\IronPythonModule.cs" />
     <Compile Include="Modules\ProgramsModule.cs" />
     <Compile Include="ViewModels\ProgramsViewModel.cs" />
     <Compile Include="Views\CopyOrZipDialog.xaml.cs">
@@ -277,6 +278,10 @@
     <ProjectReference Include="..\Thingy.Implementation\Thingy.Implementation.csproj">
       <Project>{5B8ED112-5CC6-4783-98BD-D6C5583D6A58}</Project>
       <Name>Thingy.Implementation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Thingy.IronPython\Thingy.IronPython.csproj">
+      <Project>{d66505d8-efdd-4d39-a8e2-02723b94b4b6}</Project>
+      <Name>Thingy.IronPython</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

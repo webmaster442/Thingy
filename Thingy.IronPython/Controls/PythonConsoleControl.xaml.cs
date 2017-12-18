@@ -37,7 +37,7 @@ namespace PythonConsoleControl
             grid.Children.Add(pad.Control);
             // Load our custom highlighting definition
             IHighlightingDefinition pythonHighlighting;
-            using (Stream s = typeof(IronPythonConsoleControl).Assembly.GetManifestResourceStream("PythonConsoleControl.Resources.Python.xshd"))
+            using (Stream s = typeof(IronPythonConsoleControl).Assembly.GetManifestResourceStream("Thingy.IronPython.Resources.Python.xshd"))
             {
                 if (s == null)
                     throw new InvalidOperationException("Could not find embedded resource");
