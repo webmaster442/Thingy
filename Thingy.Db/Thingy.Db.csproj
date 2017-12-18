@@ -50,6 +50,7 @@
     <Compile Include="DataBase.cs" />
     <Compile Include="Entity\FolderLink.cs" />
     <Compile Include="Entity\LauncherProgram.cs" />
+    <Compile Include="Entity\Note.cs" />
     <Compile Include="Entity\ToDoItem.cs" />
     <Compile Include="Entity\VirtualFolder.cs" />
     <Compile Include="IDataBase.cs" />

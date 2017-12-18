@@ -80,7 +80,9 @@
     <Compile Include="Infrastructure\ModuleLoader.cs" />
     <Compile Include="Modules\CurrencyConverterModule.cs" />
     <Compile Include="Modules\IronPythonModule.cs" />
+    <Compile Include="Modules\NoteModule.cs" />
     <Compile Include="Modules\ProgramsModule.cs" />
+    <Compile Include="ViewModels\NoteViewModel.cs" />
     <Compile Include="ViewModels\ProgramsViewModel.cs" />
     <Compile Include="Views\CopyOrZipDialog.xaml.cs">
       <DependentUpon>CopyOrZipDialog.xaml</DependentUpon>
@@ -119,6 +121,9 @@
     </Compile>
     <Compile Include="Views\Dialogs\NewVirtualFolder.xaml.cs">
       <DependentUpon>NewVirtualFolder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Note.xaml.cs">
+      <DependentUpon>Note.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Places.xaml.cs">
       <DependentUpon>Places.xaml</DependentUpon>
@@ -195,6 +200,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Dialogs\NewVirtualFolder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Note.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
