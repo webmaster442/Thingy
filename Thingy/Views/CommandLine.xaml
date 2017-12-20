@@ -25,7 +25,7 @@
             Orientation="Horizontal">
             <applib:ImageButton
                 Margin="3"
-                Image="pack://application:,,,/Thingy.Images;component/Icons/icons8-folder-tree.png"
+                Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-folder-tree.png"
                 Command="{Binding SetFolderCommand}"
                 ImageHeight="24"
                 ImageWidth="24"

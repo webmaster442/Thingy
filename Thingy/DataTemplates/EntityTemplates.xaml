@@ -100,7 +100,7 @@
                 Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.OpenLocationCommand}"
                 CommandParameter="{Binding Path}"
                 Content="{Binding Name}"
-                Image="pack://application:,,,/Thingy.Images;component/Icons/icons8-folder.png"
+                Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-folder.png"
                 ImageHeight="48"
                 ImageWidth="48"
                 Style="{StaticResource Flat}"/>
@@ -116,7 +116,7 @@
                 <Image
                     Width="16"
                     Height="16"
-                    Source="pack://application:,,,/Thingy.Images;component/Icons/icons8-clear-symbol.png" />
+                    Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-clear-symbol.png" />
             </Button>
         </Grid>
     </DataTemplate>
@@ -143,7 +143,7 @@
                 Grid.Column="0"
                 Width="48"
                 Height="48"
-                Source="pack://application:,,,/Thingy.Images;component/Icons/icons8-folder.png" />
+                Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-folder.png" />
             <TextBlock
                 Grid.Column="1"
                 Text="{Binding Name}" />
@@ -203,7 +203,7 @@
                     <Image
                         Width="16"
                         Height="16"
-                        Source="pack://application:,,,/Thingy.Images;component/Icons/icons8-clear-symbol.png" />
+                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-clear-symbol.png" />
                 </Button>
                 <Button
                     Height="20"
@@ -215,7 +215,7 @@
                     <Image
                         Width="16"
                         Height="16"
-                        Source="pack://application:,,,/Thingy.Images;component/Icons/icons8-edit-row-96.png" />
+                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-edit-row-96.png" />
                 </Button>
             </StackPanel>
 

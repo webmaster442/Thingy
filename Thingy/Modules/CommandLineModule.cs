@@ -14,7 +14,7 @@ namespace Thingy.Modules
 
         public override ImageSource Icon
         {
-            get { return new BitmapImage(new Uri("pack://application:,,,/Thingy.Images;component/Icons/icons8-console.png")); }
+            get { return new BitmapImage(new Uri("pack://application:,,,/Thingy.Resources;component/Icons/icons8-console.png")); }
         }
 
         public override UserControl RunModule()

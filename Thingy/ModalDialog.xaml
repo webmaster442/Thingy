@@ -33,7 +33,7 @@
             Visibility="Hidden">
             <Image
                 Width="30"
-                Source="pack://application:,,,/Thingy.Images;component/Icons/icons8-high-priority.png" />
+                Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-high-priority.png" />
             <TextBlock
                 Foreground="Red"
                 Text="There are Errors" />

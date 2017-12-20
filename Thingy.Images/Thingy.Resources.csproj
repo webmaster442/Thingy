@@ -7,8 +7,8 @@
     <ProjectGuid>{63A3EE73-078F-4DEC-8578-5AF6F158D383}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Thingy.Images</RootNamespace>
-    <AssemblyName>Thingy.Images</AssemblyName>
+    <RootNamespace>Thingy.Resources</RootNamespace>
+    <AssemblyName>Thingy.Resources</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

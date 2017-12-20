@@ -10,7 +10,7 @@
     Title="Thingy"
     Width="870"
     Height="480"
-    Icon="pack://application:,,,/Thingy.Images;component/Icons/icons8-gift.png"
+    Icon="pack://application:,,,/Thingy.Resources;component/Icons/icons8-gift.png"
     Loaded="ModernWindow_Loaded"
     mc:Ignorable="d">
     <applib:ModernWindow.DataContext>
