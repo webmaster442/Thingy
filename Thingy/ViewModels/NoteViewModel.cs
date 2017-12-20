@@ -1,25 +1,61 @@
 ﻿using AppLib.MVVM;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+using CommonMark;
+using System.IO;
+using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Thingy.ViewModels
 {
-    public class NoteViewModel: ViewModel
+    public class NoteViewModel : ViewModel
     {
+        private string _MarkDownText;
+        private string _RenderedText;
+        private string _Template;
+
         public NoteViewModel()
         {
-            FontSizes = new ObservableCollection<double>(new double[] { 8, 9, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72 });
+            var executing = Assembly.GetExecutingAssembly();
+            using (Stream stream = executing.GetManifestResourceStream("Thingy.Resources.MarkdownTemplate.html"))
+            {
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    _Template = reader.ReadToEnd();
+                }
+            }
         }
 
-        public ObservableCollection<double> FontSizes
+        public string Combine(string str)
         {
-            get;
-            private set;
+            StringBuilder output = new StringBuilder();
+            output.Append(_Template);
+            output.Append(str);
+            output.Append("</body></html>");
+            return output.ToString();
         }
 
+        public string MarkDownText
+        {
+            get { return _MarkDownText; }
+            set
+            {
+                if (SetValue(ref _MarkDownText, value))
+                {
+                    try
+                    {
+                        RenderedText = Combine(CommonMarkConverter.Convert(_MarkDownText));
+                    }
+                    catch (CommonMarkException ex)
+                    {
+                        RenderedText = Combine($"<pre>Render error:\r\n{ex.Message}</pre>");
+                    }
+                }
+            }
+        }
+
+        public string RenderedText
+        {
+            get { return _RenderedText; }
+            set { SetValue(ref _RenderedText, value); }
+        }
     }
 }
