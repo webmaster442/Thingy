@@ -49,8 +49,7 @@
             Grid.Row="1"
             Padding="5"
             AcceptsReturn="True"
-            Background="#7f8c8d"
-            FontFamily="Consolas"
+            FontFamily="{StaticResource UbuntuMono}"
             Foreground="Black"
             TextWrapping="Wrap"
             VerticalScrollBarVisibility="Visible">

@@ -118,10 +118,6 @@
       <Project>{faf19388-a6c0-46f9-a588-a46db392ace4}</Project>
       <Name>AppLib.WPF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Thingy.Images\Thingy.Resources.csproj">
-      <Project>{63a3ee73-078f-4dec-8578-5af6f158d383}</Project>
-      <Name>Thingy.Resources</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

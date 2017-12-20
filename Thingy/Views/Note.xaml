@@ -24,7 +24,7 @@
             <TabItem Header="Edit">
                 <TextBox
                     FontSize="14"
-                    FontFamily="Consolas"
+                    FontFamily="{StaticResource UbuntuMono}"
                     AcceptsReturn="True"
                     AcceptsTab="True"
                     Text="{Binding MarkDownText}"/>
