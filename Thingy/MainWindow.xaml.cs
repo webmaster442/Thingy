@@ -1,9 +1,8 @@
-﻿using AppLib.WPF.Controls;
+﻿using AppLib.MVVM;
+using AppLib.WPF.Controls;
 using Dragablz;
 using System.Windows.Controls;
-using System;
-using AppLib.MVVM;
-using Thingy.Infrastructure;
+using Thingy.Properties;
 
 namespace Thingy
 {
@@ -36,6 +35,11 @@ namespace Thingy
         private void ModernWindow_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             TabablzControl.AddItemCommand.Execute(this, TabControl);
+        }
+
+        private void ModernWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Settings.Default.Save();
         }
     }
 }

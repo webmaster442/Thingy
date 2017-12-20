@@ -132,6 +132,9 @@
     <Compile Include="Views\Dialogs\NewVirtualFolder.xaml.cs">
       <DependentUpon>NewVirtualFolder.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\IronPythonShell.xaml.cs">
+      <DependentUpon>IronPythonShell.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Note.xaml.cs">
       <DependentUpon>Note.xaml</DependentUpon>
     </Compile>
@@ -210,6 +213,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Dialogs\NewVirtualFolder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\IronPythonShell.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -293,10 +300,6 @@
     <ProjectReference Include="..\Thingy.Implementation\Thingy.Implementation.csproj">
       <Project>{5B8ED112-5CC6-4783-98BD-D6C5583D6A58}</Project>
       <Name>Thingy.Implementation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Thingy.IronPython\Thingy.IronPython.csproj">
-      <Project>{d66505d8-efdd-4d39-a8e2-02723b94b4b6}</Project>
-      <Name>Thingy.IronPython</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -6,6 +6,8 @@
     xmlns:local="clr-namespace:Thingy.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:htmlrenderer="clr-namespace:TheArtOfDev.HtmlRenderer.WPF;assembly=HtmlRenderer.WPF"
+    xmlns:applib="http://github.com/webmaster442/AppLib/WPF"
+    xmlns:properties="clr-namespace:Thingy.Properties"
     d:DesignHeight="300"
     d:DesignWidth="900"
     mc:Ignorable="d">
@@ -22,12 +24,35 @@
             Grid.Column="1"
             TabStripPlacement="Bottom">
             <TabItem Header="Edit">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel
+                        Grid.Row="0"
+                        Orientation="Horizontal">
+                        <TextBlock
+                Margin="3"
+                Text="Font size:" />
+                        <applib:EditableSlider
+                Margin="3"
+                x:Name="FontSizeSelector"
+                DisplayFormat="0"
+                Height="20"
+                Maximum="32"
+                Minimum="8"
+                Value="{Binding Source={x:Static properties:Settings.Default}, Path=NoteFontSize, Mode=TwoWay}"
+                DefaultValue="14"/>
+                    </StackPanel>
                 <TextBox
-                    FontSize="14"
+                    Grid.Row="1"
+                    FontSize="{Binding ElementName=FontSizeSelector, Path=Value, Converter={applib:FontPt2PxConverter}}"
                     FontFamily="{StaticResource UbuntuMono}"
                     AcceptsReturn="True"
                     AcceptsTab="True"
                     Text="{Binding MarkDownText}"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Preview">
                 <htmlrenderer:HtmlPanel Text="{Binding RenderedText}"/>

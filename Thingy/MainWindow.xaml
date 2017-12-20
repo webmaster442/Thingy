@@ -5,13 +5,15 @@
     xmlns:applib="http://github.com/webmaster442/AppLib/WPF"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+    xmlns:properties="clr-namespace:Thingy.Properties"
     xmlns:local="clr-namespace:Thingy"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Thingy"
-    Width="870"
-    Height="480"
+    Width="{Binding Source={x:Static properties:Settings.Default}, Path=WindowWidth, Mode=TwoWay}"
+    Height="{Binding Source={x:Static properties:Settings.Default}, Path=WindowHeight, Mode=TwoWay}"
     Icon="pack://application:,,,/Thingy.Resources;component/Icons/icons8-gift.png"
     Loaded="ModernWindow_Loaded"
+    Closing="ModernWindow_Closing"
     mc:Ignorable="d">
     <applib:ModernWindow.DataContext>
         <local:MainWindowViewModel />

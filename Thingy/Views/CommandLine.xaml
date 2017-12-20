@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:interactivity="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:Thingy.Properties"
     d:DesignHeight="300"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -38,13 +39,13 @@
                 x:Name="FontSizeSelector"
                 DisplayFormat="0"
                 Height="20"
-                Maximum="22"
+                Maximum="32"
                 Minimum="8"
-                Value="14"
+                Value="{Binding Source={x:Static properties:Settings.Default}, Path=TerminalFontSize, Mode=TwoWay}"
                 DefaultValue="14"/>
         </StackPanel>
         <TextBox
-            FontSize="{Binding ElementName=FontSizeSelector, Path=Value}"
+            FontSize="{Binding ElementName=FontSizeSelector, Path=Value, Converter={applib:FontPt2PxConverter}}"
             x:Name="Console"
             Grid.Row="1"
             Padding="5"
