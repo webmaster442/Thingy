@@ -25,11 +25,44 @@ namespace Thingy
             closable?.Close();
         }
 
-        public void SetCurrentTabContent(string title, UserControl control)
+        public void SetCurrentTabContent(string title, UserControl control, bool newtab)
         {
-            var selected = TabControl.SelectedItem as Dragablz.HeaderedItemViewModel;
-            selected.Header = title;
-            selected.Content = control;
+            AppMenu.IsChecked = false; //hide menu
+            if (newtab)
+            {
+                var model = new Dragablz.HeaderedItemViewModel
+                {
+                    Header = title,
+                    Content = control
+                };
+                int index = TabControl.Items.Add(model);
+                TabControl.SelectedIndex = index;
+            }
+            else
+            {
+                var selected = TabControl.SelectedItem as HeaderedItemViewModel;
+                selected.Header = title;
+                selected.Content = control;
+            }
+        }
+
+        public int FindTabByTitle(string title)
+        {
+            int counter = 0;
+            foreach (HeaderedItemViewModel model in TabControl.Items)
+            {
+                if (model.Header.ToString() == title)
+                {
+                    return counter;
+                }
+                ++counter;
+            }
+            return -1;
+        }
+
+        public void FocusTabByIndex(int index)
+        {
+            TabControl.SelectedIndex = index;
         }
 
         private void ModernWindow_Loaded(object sender, System.Windows.RoutedEventArgs e)

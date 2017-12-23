@@ -24,9 +24,24 @@ namespace Thingy
             App.Current.Shutdown();
         }
 
+        public int FindTabByTitle(string Title)
+        {
+            return (App.Current.MainWindow as MainWindow).FindTabByTitle(Title);
+        }
+
+        public void FocusTabByIndex(int index)
+        {
+            (App.Current.MainWindow as MainWindow).FocusTabByIndex(index);
+        }
+
+        public void OpenTabContent(string Title, UserControl control)
+        {
+            (App.Current.MainWindow as MainWindow).SetCurrentTabContent(Title, control, true);
+        }
+
         public void SetCurrentTabContent(string Title, UserControl control)
         {
-            (App.Current.MainWindow as MainWindow).SetCurrentTabContent(Title, control);
+            (App.Current.MainWindow as MainWindow).SetCurrentTabContent(Title, control, false);
         }
 
         public bool? ShowDialog(UserControl control, string Title, INotifyPropertyChanged model = null)

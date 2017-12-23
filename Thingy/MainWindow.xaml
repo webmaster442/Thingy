@@ -5,15 +5,16 @@
     xmlns:applib="http://github.com/webmaster442/AppLib/WPF"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
-    xmlns:properties="clr-namespace:Thingy.Properties"
     xmlns:local="clr-namespace:Thingy"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:Thingy.Properties"
+    x:Name="Window"
     Title="Thingy"
     Width="{Binding Source={x:Static properties:Settings.Default}, Path=WindowWidth, Mode=TwoWay}"
     Height="{Binding Source={x:Static properties:Settings.Default}, Path=WindowHeight, Mode=TwoWay}"
+    Closing="ModernWindow_Closing"
     Icon="pack://application:,,,/Thingy.Resources;component/Icons/icons8-gift.png"
     Loaded="ModernWindow_Loaded"
-    Closing="ModernWindow_Closing"
     mc:Ignorable="d">
     <applib:ModernWindow.DataContext>
         <local:MainWindowViewModel />
@@ -26,23 +27,64 @@
         <dragablz:TabablzControl
             x:Name="TabControl"
             Margin="3"
+            ClosingItemCallback="{Binding ClosingTabItemHandler}"
             HeaderMemberPath="Header"
             ItemContainerStyle="{StaticResource TrapezoidDragableTabItemStyle}"
             NewItemFactory="{Binding ItemFactory}"
             ShowDefaultAddButton="True"
             ShowDefaultCloseButton="True">
             <dragablz:TabablzControl.HeaderPrefixContent>
-                <StackPanel Orientation="Horizontal">
-                    <applib:ImageAwesome
-                        Width="20"
-                        Height="20"
-                        Icon="fa_arrow_circle_right" />
+                <StackPanel
+                    Orientation="Horizontal">
+                    <ToggleButton
+                        x:Name="AppMenu"
+                        Style="{StaticResource Flat}"
+                        ToolTip="Menu">
+                        <applib:ImageAwesome
+                            Width="22"
+                            Height="22"
+                            Icon="fa_bars" />
+                    </ToggleButton>
+                    <Popup
+                        Width="{Binding ElementName=TabControl, Path=ActualWidth}"
+                        Height="50"
+                        AllowsTransparency="True"
+                        IsOpen="{Binding ElementName=AppMenu, Path=IsChecked}"
+                        Placement="Bottom"
+                        StaysOpen="False">
+                        <Border
+                            Padding="3"
+                            Background="White"
+                            BorderBrush="Black"
+                            BorderThickness="1,0,1,1">
+                            <StackPanel
+                                Orientation="Horizontal">
+                                <applib:ImageButton
+                                    Margin="5,0"
+                                    Command="{Binding SettingCommand}"
+                                    Content="Settings..."
+                                    Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-services-96.png"
+                                    ImageHeight="28"
+                                    ImageWidth="28"
+                                    Style="{StaticResource Flat}" />
+                                <applib:ImageButton
+                                    Margin="5,0"
+                                    Command="{Binding ExitCommand}"
+                                    Content="Exit Program"
+                                    Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-exit-sign-96.png"
+                                    ImageHeight="28"
+                                    ImageWidth="28"
+                                    Style="{StaticResource Flat}" />
+                            </StackPanel>
+                        </Border>
+                    </Popup>
                 </StackPanel>
             </dragablz:TabablzControl.HeaderPrefixContent>
             <dragablz:TabablzControl.InterTabController>
                 <dragablz:InterTabController />
             </dragablz:TabablzControl.InterTabController>
         </dragablz:TabablzControl>
-        <local:Statusbar Grid.Row="1" />
+        <local:Statusbar
+            Grid.Row="1" />
     </Grid>
 </applib:ModernWindow>

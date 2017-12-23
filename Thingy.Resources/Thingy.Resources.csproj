@@ -147,7 +147,10 @@
   <ItemGroup>
     <Resource Include="Icons\icons8-note-96.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Icons\icons8-exit-sign-96.png" />
+    <Resource Include="Icons\icons8-services-96.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Fonts\UbuntuMono-R.ttf" />
   </ItemGroup>
