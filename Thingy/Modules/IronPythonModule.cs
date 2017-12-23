@@ -19,7 +19,7 @@ namespace Thingy.Modules
 
         public override UserControl RunModule()
         {
-            return new IronPython.IronPythonShell();
+            return new Views.IronPythonShell();
         }
     }
 }

@@ -70,5 +70,17 @@ namespace Thingy.Properties {
                 this["WindowHeight"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("14")]
+        public double PythonTerminalFontSize {
+            get {
+                return ((double)(this["PythonTerminalFontSize"]));
+            }
+            set {
+                this["PythonTerminalFontSize"] = value;
+            }
+        }
     }
 }
