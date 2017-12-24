@@ -6,5 +6,6 @@
         IFavoriteFolders FavoriteFolders { get; }
         IVirtualFolders VirtualFolders { get; }
         IPrograms Programs { get; }
+        INotes Notes { get; }
     }
 }

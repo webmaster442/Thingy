@@ -5,7 +5,7 @@
     xmlns:applib="http://github.com/webmaster442/AppLib/WPF"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:htmlrenderer="clr-namespace:TheArtOfDev.HtmlRenderer.WPF;assembly=HtmlRenderer.WPF"
-    xmlns:local="clr-namespace:Thingy.Views"
+    xmlns:interactivity="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:Thingy.Properties"
     d:DesignHeight="300"
@@ -13,14 +13,27 @@
     mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition
-                Width="200" />
+            <ColumnDefinition Width="200" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
         <ListBox
-            Grid.Column="0" />
+            x:Name="NotesList"
+            Grid.Column="0"
+            Grid.Row="0"
+            ItemsSource="{Binding Notes}">
+            <interactivity:Interaction.Triggers>
+                <interactivity:EventTrigger EventName="MouseDoubleClick">
+                    <interactivity:InvokeCommandAction Command="{Binding LoadNoteCommand}" CommandParameter="{Binding ElementName=NotesList, Path=SelectedItem}" />
+                </interactivity:EventTrigger>
+            </interactivity:Interaction.Triggers>
+        </ListBox>
         <TabControl
             Grid.Column="1"
+            Grid.Row="0"
             TabStripPlacement="Bottom">
             <TabItem
                 Header="Edit">
@@ -32,6 +45,14 @@
                     <StackPanel
                         Grid.Row="0"
                         Orientation="Horizontal">
+                        <Label
+                            Margin="10,0"
+                            Content="{Binding SelectedNote}"
+                            Style="{StaticResource Title}" />
+                        <Button
+                            Command="{Binding SaveNoteCommand}"
+                            Content="Save Note"
+                            Style="{StaticResource BigButton}" />
                         <TextBlock
                             Margin="3"
                             Text="Font size:" />
@@ -60,5 +81,27 @@
                     Text="{Binding RenderedText}" />
             </TabItem>
         </TabControl>
+        <StackPanel
+            x:Name="FileManagement"
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Orientation="Horizontal">
+            <Button
+                Command="{Binding NewNoteCommand}"
+                Content="New Note"
+                Style="{StaticResource BigButton}" />
+            <Button
+                Command="{Binding DeleteNoteCommand}"
+                Content="Delete note"
+                Style="{StaticResource BigButton}" />
+            <Button
+                Command="{Binding SaveToFileCommand}"
+                Content="Save to file"
+                Style="{StaticResource BigButton}" />
+            <Button
+                Command="{Binding ImportFileCommand}"
+                Content="Import file"
+                Style="{StaticResource BigButton}" />
+        </StackPanel>
     </Grid>
 </UserControl>

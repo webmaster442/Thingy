@@ -12,7 +12,8 @@ namespace Thingy.Db
                                    IVirtualFolders,
                                    ITodo,
                                    IFavoriteFolders,
-                                   IPrograms, 
+                                   IPrograms,
+                                   INotes,
                                    IDisposable
     {
         private LiteDatabase _db;
@@ -20,7 +21,8 @@ namespace Thingy.Db
         private LiteCollection<ToDoItem> _ToDoCollection;
         private LiteCollection<FolderLink> _FolderLinkCollection;
         private LiteCollection<VirtualFolder> _VirtualFolderCollection;
-        private LiteCollection<LauncherProgram> _Programs;
+        private LiteCollection<LauncherProgram> _ProgramsCollection;
+        private LiteCollection<Note> _NotesCollection;
 
         public DataBase(string file)
         {
@@ -29,8 +31,9 @@ namespace Thingy.Db
             _ToDoCollection = _db.GetCollection<ToDoItem>(nameof(_ToDoCollection));
             _FolderLinkCollection = _db.GetCollection<FolderLink>(nameof(_FolderLinkCollection));
             _VirtualFolderCollection = _db.GetCollection<VirtualFolder>(nameof(_VirtualFolderCollection));
-            _Programs = _db.GetCollection<LauncherProgram>(nameof(_Programs));
-            _Programs.EnsureIndex(p => p.Path);
+            _ProgramsCollection = _db.GetCollection<LauncherProgram>(nameof(_ProgramsCollection));
+            _NotesCollection = _db.GetCollection<Note>(nameof(_NotesCollection));
+            _ProgramsCollection.EnsureIndex(p => p.Path);
         }
 
         #region IDatabase Implementation
@@ -43,6 +46,7 @@ namespace Thingy.Db
 
         public IPrograms Programs => this;
 
+        public INotes Notes => this;
         #endregion
 
         public void Dispose()
@@ -153,28 +157,53 @@ namespace Thingy.Db
         #region Program launcher
         public IEnumerable<LauncherProgram> GetPrograms()
         {
-            return _Programs.FindAll();
+            return _ProgramsCollection.FindAll();
         }
 
         public void SaveLauncherProgram(LauncherProgram program)
         {
-
-                _Programs.Insert(program);
+            _ProgramsCollection.Insert(program);
         }
 
         public void DeleteLauncherProgram(string name)
         {
-            _Programs.Delete(p => p.Name == name);
+            _ProgramsCollection.Delete(p => p.Name == name);
         }
 
         public void UpdateLauncherProgramByName(string oldname, LauncherProgram newdata)
         {
-            var existing = _Programs.Find(f => f.Name == oldname).FirstOrDefault();
+            var existing = _ProgramsCollection.Find(f => f.Name == oldname).FirstOrDefault();
             if (existing != null)
             {
-                _Programs.Delete(p => p == existing);
-                _Programs.Insert(newdata);
+                _ProgramsCollection.Delete(p => p == existing);
+                _ProgramsCollection.Insert(newdata);
             }
+        }
+        #endregion
+
+        #region Notes
+        public IEnumerable<Note> GetNotes()
+        {
+            return _NotesCollection.FindAll();
+        }
+
+        public void SaveNote(Note note)
+        {
+            var existing = _NotesCollection.Find(f => f.Name == note.Name).FirstOrDefault();
+            if (existing != null)
+            {
+                existing.Content = string.Copy(note.Content);
+                _NotesCollection.Update(existing);
+            }
+            else
+            {
+                _NotesCollection.Insert(note);
+            }
+        }
+
+        public void DeleteNote(string noteName)
+        {
+            _NotesCollection.Delete(n => n.Name == noteName);
         }
         #endregion
     }
