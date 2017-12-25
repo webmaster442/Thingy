@@ -3,8 +3,10 @@ using CommonMark;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Windows;
 using Thingy.Db;
 using Thingy.Db.Entity;
 
@@ -14,6 +16,7 @@ namespace Thingy.ViewModels
     {
         private IApplication _app;
         private IDataBase _db;
+        private bool _changed;
 
         private string _MarkDownText;
         private string _RenderedText;
@@ -27,7 +30,7 @@ namespace Thingy.ViewModels
         public DelegateCommand<Note> SaveToFileCommand { get; private set; }
         public DelegateCommand ImportFileCommand { get; private set; }
 
-        public ObservableCollection<string> Notes { get; private set; }
+        public ObservableCollection<Note> Notes { get; private set; }
 
         public NoteViewModel(IApplication app, IDataBase db)
         {
@@ -48,6 +51,7 @@ namespace Thingy.ViewModels
                     _Template = reader.ReadToEnd();
                 }
             }
+            Notes = new ObservableCollection<Note>(_db.Notes.GetNotes());
         }
 
         public string SelectedNote
@@ -58,7 +62,15 @@ namespace Thingy.ViewModels
 
         private void SaveToFile(Note obj)
         {
-            throw new NotImplementedException();
+            var saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            saveFileDialog.Filter = "Markdown|*.md|Text|*.txt";
+            if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                using (var file = File.CreateText(saveFileDialog.FileName))
+                {
+                    file.Write(obj.Content);
+                }
+            }
         }
 
         private bool CanSaveFile(Note obj)
@@ -73,7 +85,11 @@ namespace Thingy.ViewModels
 
         private void DeleteNote(Note obj)
         {
-            throw new NotImplementedException();
+            var q = MessageBox.Show("Delete note?", "Note delete", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (q == MessageBoxResult.Yes)
+            {
+                _db.Notes.DeleteNote(obj.Name);
+            }
         }
 
         private void NewNote()
@@ -96,9 +112,29 @@ namespace Thingy.ViewModels
             throw new NotImplementedException();
         }
 
+        private void UpdateNote()
+        {
+            var loadednote = Notes.Where(n => n.Name == SelectedNote)
+                                      .FirstOrDefault();
+            if (loadednote != null)
+            {
+                loadednote.Content = string.Copy(MarkDownText);
+                _db.Notes.SaveNote(loadednote);
+            }
+        }
+
         private void LoadNote(Note obj)
         {
-            throw new NotImplementedException();
+            if (obj != null)
+            {
+                if (obj.Name != SelectedNote && _changed == true)
+                {
+                    UpdateNote();
+                }
+                MarkDownText = obj.Content;
+                SelectedNote = obj.Name;
+                _changed = false;
+            }
         }
 
         public string Combine(string str)
@@ -117,6 +153,7 @@ namespace Thingy.ViewModels
             {
                 if (SetValue(ref _MarkDownText, value))
                 {
+                    _changed = true;
                     try
                     {
                         RenderedText = Combine(CommonMarkConverter.Convert(_MarkDownText));

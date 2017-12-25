@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Windows;
 using Thingy.Db;
 using Thingy.Db.Entity;
 
@@ -129,7 +130,6 @@ namespace Thingy.ViewModels
             CurrentFolder.Clear();
         }
 
-
         private bool CanDeleteFolder(VirtualFolder obj)
         {
             return obj != null;
@@ -137,7 +137,11 @@ namespace Thingy.ViewModels
 
         private void DeleteFolder(VirtualFolder obj)
         {
-            _db.VirtualFolders.DeleteVirtualFolder(obj.Name);
+            var q = MessageBox.Show("Delete virtual folder?", "Virtual Folder delete", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (q == MessageBoxResult.Yes)
+            {
+                _db.VirtualFolders.DeleteVirtualFolder(obj.Name);
+            }
         }
 
         private void AddFiles()
