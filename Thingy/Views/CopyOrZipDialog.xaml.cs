@@ -35,10 +35,10 @@ namespace Thingy.Views
             }
         }
 
-        private async Task<bool> CopyTask(IList<string> files,
-                                          string destination,
-                                          IProgress<double> progress,
-                                          CancellationToken ct)
+        private bool CopyTaskJob(IList<string> files,
+                                 string destination,
+                                 IProgress<double> progress,
+                                 CancellationToken ct)
         {
             long totalsize = 0;
             long totaldone = 0;
@@ -87,10 +87,10 @@ namespace Thingy.Views
             return true;
         }
 
-        private async Task<bool> ZipTask(IList<string> files,
-                                  string destination,
-                                  IProgress<double> progress,
-                                  CancellationToken ct)
+        private bool ZipTaskJob(IList<string> files,
+                                string destination,
+                                IProgress<double> progress,
+                                CancellationToken ct)
         {
             long totalsize = 0;
             long totaldone = 0;
@@ -144,6 +144,28 @@ namespace Thingy.Views
             }
 
             return true;
+        }
+
+        private Task<bool> ZipTask(IList<string> files,
+                                   string destination,
+                                   IProgress<double> progress,
+                                   CancellationToken ct)
+        {
+            return Task.Run<bool>(() =>
+            {
+                return ZipTaskJob(files, destination, progress, ct);
+            });
+        }
+
+        private Task<bool> CopyTask(IList<string> files,
+                                    string destination,
+                                    IProgress<double> progress,
+                                    CancellationToken ct)
+        {
+            return Task.Run<bool>(() =>
+            {
+                return CopyTaskJob(files, destination, progress, ct);
+            });
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
