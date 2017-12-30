@@ -1,6 +1,7 @@
 ﻿using AppLib.MVVM;
 using AppLib.WPF.Controls;
 using Dragablz;
+using MahApps.Metro.Controls;
 using System.Windows.Controls;
 using Thingy.Properties;
 
@@ -9,7 +10,7 @@ namespace Thingy
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : ModernWindow
+    public partial class MainWindow : MetroWindow
     {
 
         public MainWindow()

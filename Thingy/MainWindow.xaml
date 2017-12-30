@@ -1,4 +1,4 @@
-﻿<applib:ModernWindow
+﻿<mah:MetroWindow
     x:Class="Thingy.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
     xmlns:local="clr-namespace:Thingy"
+    xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:Thingy.Properties"
     x:Name="Window"
@@ -16,9 +17,9 @@
     Icon="pack://application:,,,/Thingy.Resources;component/Icons/icons8-gift.png"
     Loaded="ModernWindow_Loaded"
     mc:Ignorable="d">
-    <applib:ModernWindow.DataContext>
+    <mah:MetroWindow.DataContext>
         <local:MainWindowViewModel />
-    </applib:ModernWindow.DataContext>
+    </mah:MetroWindow.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -87,4 +88,4 @@
         <local:Statusbar
             Grid.Row="1" />
     </Grid>
-</applib:ModernWindow>
+</mah:MetroWindow>
