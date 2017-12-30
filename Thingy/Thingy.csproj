@@ -120,6 +120,9 @@
     <Compile Include="Views\CommandLine.xaml.cs">
       <DependentUpon>CommandLine.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Dialogs\NewNote.xaml.cs">
+      <DependentUpon>NewNote.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ICommandLineView.cs" />
     <Compile Include="Views\Dialogs\NewFolderLink.xaml.cs">
       <DependentUpon>NewFolderLink.xaml</DependentUpon>
@@ -202,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Dialogs\NewFolderLink.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\NewNote.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -24,6 +24,7 @@
             x:Name="NotesList"
             Grid.Column="0"
             Grid.Row="0"
+            ItemTemplate="{StaticResource Note}"
             ItemsSource="{Binding Notes}">
             <interactivity:Interaction.Triggers>
                 <interactivity:EventTrigger EventName="MouseDoubleClick">
@@ -72,7 +73,7 @@
                         AcceptsTab="True"
                         FontFamily="{StaticResource UbuntuMono}"
                         FontSize="{Binding ElementName=FontSizeSelector, Path=Value, Converter={applib:FontPt2PxConverter}}"
-                        Text="{Binding MarkDownText}" />
+                        Text="{Binding MarkDownText, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
             </TabItem>
             <TabItem
@@ -92,7 +93,7 @@
                 Style="{StaticResource BigButton}" />
             <Button
                 Command="{Binding DeleteNoteCommand}"
-                Content="Delete note"
+                Content="Delete opened note"
                 Style="{StaticResource BigButton}" />
             <Button
                 Command="{Binding SaveToFileCommand}"

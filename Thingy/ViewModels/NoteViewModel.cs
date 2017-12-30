@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows;
 using Thingy.Db;
 using Thingy.Db.Entity;
+using AppLib.Common.Extensions;
 
 namespace Thingy.ViewModels
 {
@@ -26,8 +27,8 @@ namespace Thingy.ViewModels
         public DelegateCommand<Note> LoadNoteCommand { get; private set; }
         public DelegateCommand SaveNoteCommand { get; private set; }
         public DelegateCommand NewNoteCommand { get; private set; }
-        public DelegateCommand<Note> DeleteNoteCommand { get; private set; }
-        public DelegateCommand<Note> SaveToFileCommand { get; private set; }
+        public DelegateCommand DeleteNoteCommand { get; private set; }
+        public DelegateCommand SaveToFileCommand { get; private set; }
         public DelegateCommand ImportFileCommand { get; private set; }
 
         public ObservableCollection<Note> Notes { get; private set; }
@@ -39,9 +40,9 @@ namespace Thingy.ViewModels
             LoadNoteCommand = Command.ToCommand<Note>(LoadNote, HasSelectedNote);
             SaveNoteCommand = Command.ToCommand(SaveNote, CanSave);
             NewNoteCommand = Command.ToCommand(NewNote);
-            DeleteNoteCommand = Command.ToCommand<Note>(DeleteNote, HasSelectedNote);
+            DeleteNoteCommand = Command.ToCommand(DeleteNote, CanDeleteorSaveFile);
             ImportFileCommand = Command.ToCommand(ImportNote);
-            SaveToFileCommand = Command.ToCommand<Note>(SaveToFile, CanSaveFile);
+            SaveToFileCommand = Command.ToCommand(SaveToFile, CanDeleteorSaveFile);
 
             var executing = Assembly.GetExecutingAssembly();
             using (Stream stream = executing.GetManifestResourceStream("Thingy.Resources.MarkdownTemplate.html"))
@@ -54,13 +55,18 @@ namespace Thingy.ViewModels
             Notes = new ObservableCollection<Note>(_db.Notes.GetNotes());
         }
 
+        private bool HasSelectedNote(Note obj)
+        {
+            return obj != null;
+        }
+
         public string SelectedNote
         {
             get { return _SelectedNote; }
             set { SetValue(ref _SelectedNote, value); }
         }
 
-        private void SaveToFile(Note obj)
+        private void SaveToFile()
         {
             var saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             saveFileDialog.Filter = "Markdown|*.md|Text|*.txt";
@@ -68,48 +74,58 @@ namespace Thingy.ViewModels
             {
                 using (var file = File.CreateText(saveFileDialog.FileName))
                 {
-                    file.Write(obj.Content);
+                    file.Write(MarkDownText);
                 }
             }
         }
 
-        private bool CanSaveFile(Note obj)
-        {
-            throw new NotImplementedException();
-        }
-
         private void ImportNote()
         {
-            throw new NotImplementedException();
+            var ofd = new System.Windows.Forms.OpenFileDialog();
+            ofd.Filter = "Markdown|*.md|Text|*.txt";
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                using (var file = File.OpenText(ofd.FileName))
+                {
+                     MarkDownText += file.ReadToEnd();
+                }
+            }
         }
 
-        private void DeleteNote(Note obj)
+        private void DeleteNote()
         {
             var q = MessageBox.Show("Delete note?", "Note delete", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (q == MessageBoxResult.Yes)
             {
-                _db.Notes.DeleteNote(obj.Name);
+                _db.Notes.DeleteNote(SelectedNote);
+                Notes.UpdateWith(_db.Notes.GetNotes());
             }
         }
 
         private void NewNote()
         {
-            throw new NotImplementedException();
+            var model = new Note();
+            if (_app.ShowDialog(new Views.Dialogs.NewNote(), "New Note", model) == true)
+            {
+                _db.Notes.SaveNote(model);
+                Notes.UpdateWith(_db.Notes.GetNotes());
+            }
         }
 
         private bool CanSave()
         {
-            throw new NotImplementedException();
+            return _changed == true && !string.IsNullOrEmpty(SelectedNote);
         }
 
         private void SaveNote()
         {
-            throw new NotImplementedException();
+            UpdateNote();
+            _changed = false;
         }
 
-        private bool HasSelectedNote(Note obj)
+        private bool CanDeleteorSaveFile()
         {
-            throw new NotImplementedException();
+            return !string.IsNullOrEmpty(SelectedNote);
         }
 
         private void UpdateNote()

@@ -218,7 +218,23 @@
                         Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-edit-row-96.png" />
                 </Button>
             </StackPanel>
+        </Grid>
+    </DataTemplate>
 
+    <DataTemplate x:Key="Note">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Image
+                Grid.Column="0"
+                Width="48"
+                Height="48"
+                Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-note-96.png" />
+            <TextBlock
+                Grid.Column="1"
+                Text="{Binding Name}" />
         </Grid>
     </DataTemplate>
 
