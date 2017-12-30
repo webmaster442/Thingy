@@ -28,7 +28,7 @@ namespace Thingy
 
         public void SetCurrentTabContent(string title, UserControl control, bool newtab)
         {
-            AppMenu.IsChecked = false; //hide menu
+            MenuFlyout.IsOpen = false; //hide menu
             if (newtab)
             {
                 var model = new Dragablz.HeaderedItemViewModel
@@ -50,7 +50,8 @@ namespace Thingy
         public int FindTabByTitle(string title)
         {
             int counter = 0;
-            foreach (HeaderedItemViewModel model in TabControl.Items)
+            if (TabControl == null || TabControl.Items.Count < 1) return -1;
+            foreach (HeaderedItemViewModel model in TabControl?.Items)
             {
                 if (model.Header.ToString() == title)
                 {
@@ -74,6 +75,11 @@ namespace Thingy
         private void ModernWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Settings.Default.Save();
+        }
+
+        private void OpenMenu(object sender, System.Windows.RoutedEventArgs e)
+        {
+            MenuFlyout.IsOpen = true;
         }
     }
 }

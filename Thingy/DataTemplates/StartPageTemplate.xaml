@@ -2,23 +2,48 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Thingy.Controls"
-    xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz">
+    xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
+    xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro">
+
+    <Style TargetType="mah:Tile" x:Key="ShiftedIcon">
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <ContentPresenter Content="{Binding}">
+                        <ContentPresenter.RenderTransform>
+                            <TransformGroup>
+                                <TranslateTransform Y="-5" X="-10"/>
+                            </TransformGroup>
+                        </ContentPresenter.RenderTransform>
+                    </ContentPresenter>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <DataTemplate x:Key="StartPageTemplate">
-        <controls:Tile
-            Width="120"
-            Height="120"
+        <mah:Tile
+            Style="{StaticResource ShiftedIcon}"
+            Title="{Binding ModuleName}"
+            Width="128"
+            Height="128"
             Margin="3"
+            TitleFontSize="12"
+            Opacity="0.8"
             Background="{Binding ColorBrush}"
-            TileImage="{Binding Icon}"
-            TileText="{Binding ModuleName}"
-            ClickCommand="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.TileClickCommand}"
-            ClickCommandParameter="{Binding ModuleName}">
-        </controls:Tile>
+            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.TileClickCommand}"
+            CommandParameter="{Binding ModuleName}">
+            <Image
+                Source="{Binding Icon}"
+                Width="98"
+                Height="98"/>
+        </mah:Tile>
     </DataTemplate>
-
-    <DataTemplate DataType="{x:Type dragablz:HeaderedItemViewModel}">
-        <ContentControl Content="{Binding Content}" />
+    
+    <DataTemplate
+        DataType="{x:Type dragablz:HeaderedItemViewModel}">
+        <ContentControl
+            Content="{Binding Content}" />
     </DataTemplate>
 
 </ResourceDictionary>
