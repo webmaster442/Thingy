@@ -7,5 +7,6 @@
         IVirtualFolders VirtualFolders { get; }
         IPrograms Programs { get; }
         INotes Notes { get; }
+        IAlarms Alarms { get; }
     }
 }

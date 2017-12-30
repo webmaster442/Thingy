@@ -55,6 +55,7 @@
     <Compile Include="Entity\ToDoItem.cs" />
     <Compile Include="Entity\VirtualFolder.cs" />
     <Compile Include="IDataBase.cs" />
+    <Compile Include="Interfaces\IAlarms.cs" />
     <Compile Include="Interfaces\IFavoriteFolders.cs" />
     <Compile Include="Interfaces\INotes.cs" />
     <Compile Include="Interfaces\IPrograms.cs" />

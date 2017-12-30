@@ -14,6 +14,7 @@ namespace Thingy.Db
                                    IFavoriteFolders,
                                    IPrograms,
                                    INotes,
+                                   IAlarms,
                                    IDisposable
     {
         private LiteDatabase _db;
@@ -23,6 +24,7 @@ namespace Thingy.Db
         private LiteCollection<VirtualFolder> _VirtualFolderCollection;
         private LiteCollection<LauncherProgram> _ProgramsCollection;
         private LiteCollection<Note> _NotesCollection;
+        private LiteCollection<Alarm> _AlarmsCollection;
 
         public DataBase(string file)
         {
@@ -33,6 +35,7 @@ namespace Thingy.Db
             _VirtualFolderCollection = _db.GetCollection<VirtualFolder>(nameof(_VirtualFolderCollection));
             _ProgramsCollection = _db.GetCollection<LauncherProgram>(nameof(_ProgramsCollection));
             _NotesCollection = _db.GetCollection<Note>(nameof(_NotesCollection));
+            _AlarmsCollection = _db.GetCollection<Alarm>(nameof(_AlarmsCollection));
             _ProgramsCollection.EnsureIndex(p => p.Path);
         }
 
@@ -47,6 +50,8 @@ namespace Thingy.Db
         public IPrograms Programs => this;
 
         public INotes Notes => this;
+
+        public IAlarms Alarms => this;
         #endregion
 
         public void Dispose()
@@ -204,6 +209,18 @@ namespace Thingy.Db
         public void DeleteNote(string noteName)
         {
             _NotesCollection.Delete(n => n.Name == noteName);
+        }
+        #endregion
+
+        #region Alarms
+        public IEnumerable<Alarm> GetAlarms()
+        {
+            return _AlarmsCollection.FindAll();
+        }
+
+        public IEnumerable<Alarm> GetActiveAlarms()
+        {
+            return _AlarmsCollection.Find(alarm => alarm.Active == true);
         }
         #endregion
     }

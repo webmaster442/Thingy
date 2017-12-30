@@ -1,4 +1,5 @@
 ﻿using AppLib.MVVM;
+using LiteDB;
 using System;
 using System.Collections.Generic;
 
@@ -6,22 +7,25 @@ namespace Thingy.Db.Entity
 {
     public class Alarm: ValidatableBase, IEquatable<Alarm>
     {
-        private long? _dueDate;
+        private long _dueDate;
         private string _Description;
         private bool _active;
 
-        public long? DueDate
+        [BsonId]
+        public long DueDate
         {
             get { return _dueDate; }
             set { SetValue(ref _dueDate, value); }
         }
 
+        [BsonField]
         public string Description
         {
             get { return _Description; }
             set { SetValue(ref _Description, value); }
         }
 
+        [BsonField]
         public bool Active
         {
             get { return _active; }
