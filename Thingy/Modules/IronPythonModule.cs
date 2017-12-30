@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Thingy.Infrastructure;
 
 namespace Thingy.Modules
 {
@@ -20,6 +21,11 @@ namespace Thingy.Modules
         public override UserControl RunModule()
         {
             return new Views.IronPythonShell();
+        }
+
+        public override string Category
+        {
+            get { return ModuleCategories.CommandLine; }
         }
     }
 }

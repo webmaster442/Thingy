@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.IO;
+using Thingy.Infrastructure;
 
 namespace Thingy.Modules
 {
@@ -35,6 +36,11 @@ namespace Thingy.Modules
                 _gitPath = Path.Combine(pf, @"Git\git-cmd.exe");
                 return File.Exists(_gitPath);
             }
+        }
+
+        public override string Category
+        {
+            get { return ModuleCategories.CommandLine; }
         }
 
     }

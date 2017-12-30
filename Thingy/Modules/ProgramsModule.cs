@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Thingy.Db;
+using Thingy.Infrastructure;
 
 namespace Thingy.Modules
 {
@@ -24,6 +25,11 @@ namespace Thingy.Modules
             {
                 DataContext = new ViewModels.ProgramsViewModel(App.Instance, App.IoCContainer.ResolveSingleton<IDataBase>())
             };
+        }
+
+        public override string Category
+        {
+            get { return ModuleCategories.Utilities; }
         }
     }
 }

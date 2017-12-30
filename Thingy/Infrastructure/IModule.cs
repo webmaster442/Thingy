@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Thingy.Modules
+namespace Thingy.Infrastructure
 {
     public interface IModule
     {
@@ -12,5 +11,6 @@ namespace Thingy.Modules
         Color TileColor { get; }
         SolidColorBrush ColorBrush { get; }
         bool CanLoad { get; }
+        string Category { get; }
     }
 }

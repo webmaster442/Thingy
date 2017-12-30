@@ -2,7 +2,7 @@
 using System.Windows.Media;
 using Thingy.Implementation;
 
-namespace Thingy.Modules
+namespace Thingy.Infrastructure
 {
     public abstract class ModuleBase : IModule
     {
@@ -30,5 +30,7 @@ namespace Thingy.Modules
         {
             get { return new SolidColorBrush(TileColor); }
         }
+
+        public abstract string Category { get; }
     }
 }

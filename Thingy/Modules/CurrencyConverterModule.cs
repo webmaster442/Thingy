@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Thingy.Infrastructure;
 
 namespace Thingy.Modules
 {
@@ -23,6 +24,11 @@ namespace Thingy.Modules
             {
                 DataContext = new CurrencyConvert.CurrencyConverterModel()
             };
+        }
+
+        public override string Category
+        {
+            get { return ModuleCategories.Calculators; }
         }
     }
 }

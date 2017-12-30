@@ -92,6 +92,7 @@
     <Compile Include="Infrastructure\ModuleLoader.cs" />
     <Compile Include="Modules\CurrencyConverterModule.cs" />
     <Compile Include="Modules\IronPythonModule.cs" />
+    <Compile Include="Infrastructure\ModuleCategories.cs" />
     <Compile Include="Modules\NoteModule.cs" />
     <Compile Include="Modules\ProgramsModule.cs" />
     <Compile Include="ViewModels\NoteViewModel.cs" />
@@ -107,8 +108,8 @@
       <DependentUpon>ModalDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\CommandLineModule.cs" />
-    <Compile Include="Modules\IModule.cs" />
-    <Compile Include="Modules\ModuleBase.cs" />
+    <Compile Include="Infrastructure\IModule.cs" />
+    <Compile Include="Infrastructure\ModuleBase.cs" />
     <Compile Include="Modules\PlacesModule.cs" />
     <Compile Include="Modules\PowerShellModule.cs" />
     <Compile Include="Modules\ToDoListModule.cs" />
