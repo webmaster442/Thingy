@@ -45,4 +45,14 @@
             Content="{Binding Content}" />
     </DataTemplate>
 
+    <DataTemplate
+        x:Key="Categoiries">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding Key}"/>
+            <TextBlock Text="("/>
+            <TextBlock Text="{Binding Value}"/>
+            <TextBlock Text=")"/>
+        </StackPanel>
+    </DataTemplate>
+
 </ResourceDictionary>

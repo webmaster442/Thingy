@@ -7,6 +7,8 @@ namespace Thingy.Infrastructure
     public interface IModuleLoader
     {
         UserControl GetModuleByName(string name);
-        IEnumerable<IModule> Modules { get; }
+        IEnumerable<IModule> GetModulesForCategory(string category = null);
+        IEnumerable<IModule> GetModulesByName(string searchname);
+        IDictionary<string, int> CategoryModuleCount { get; }
     }
 }
