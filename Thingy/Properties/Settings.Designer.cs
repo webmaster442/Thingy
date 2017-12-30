@@ -82,5 +82,17 @@ namespace Thingy.Properties {
                 this["PythonTerminalFontSize"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Orange")]
+        public string SelectedAccent {
+            get {
+                return ((string)(this["SelectedAccent"]));
+            }
+            set {
+                this["SelectedAccent"] = value;
+            }
+        }
     }
 }

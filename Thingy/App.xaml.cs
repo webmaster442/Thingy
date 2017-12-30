@@ -1,4 +1,5 @@
 ﻿using AppLib.Common.IOC;
+using MahApps.Metro;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,7 @@ namespace Thingy
     public partial class App : Application, IApplication
     {
         public static AppLib.Common.IOC.IContainer IoCContainer { get; private set; }
+        public static string[] Accents { get; private set; }
 
         public static IApplication Instance
         {
@@ -57,12 +59,30 @@ namespace Thingy
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            Accents = new string[]
+            {
+                "Red", "Green", "Blue",
+                "Purple", "Orange", "Lime",
+                "Emerald", "Teal", "Cyan",
+                "Cobalt", "Indigo", "Violet",
+                "Pink", "Magenta", "Crimson",
+                "Amber", "Yellow", "Brown",
+                "Olive", "Steel", "Mauve",
+                "Taupe", "Sienna"
+            };
+
             IoCContainer = new AppLib.Common.IOC.Container();
             IoCContainer.RegisterSingleton<IDataBase>(() =>
             {
                 return new DataBase("test.db");
             });
             IoCContainer.RegisterSingleton<IModuleLoader, ModuleLoader>();
+
+            var accent = Thingy.Properties.Settings.Default.SelectedAccent;
+            ThemeManager.ChangeAppStyle(Application.Current,
+                              ThemeManager.GetAccent(accent),
+                              ThemeManager.GetAppTheme("BaseLight"));
+
             base.OnStartup(e);
         }
     }

@@ -17,5 +17,8 @@
     <Setting Name="PythonTerminalFontSize" Type="System.Double" Scope="User">
       <Value Profile="(Default)">14</Value>
     </Setting>
+    <Setting Name="SelectedAccent" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Orange</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

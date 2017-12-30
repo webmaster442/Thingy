@@ -8,15 +8,18 @@
     xmlns:properties="clr-namespace:Thingy.Properties"
     d:DesignHeight="300"
     d:DesignWidth="300"
+    Loaded="UserControl_Loaded"
     mc:Ignorable="d">
     <UserControl.Resources>
-        <Style TargetType="TextBlock">
-            <Setter Property="Margin" Value="2"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
+        <Style
+            TargetType="TextBlock">
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
-        <Style TargetType="applib:EditableSlider">
-            <Setter Property="Margin" Value="2"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
+        <Style
+            TargetType="applib:EditableSlider">
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
     </UserControl.Resources>
     <ScrollViewer>
@@ -25,8 +28,15 @@
                 Content="Program settings"
                 Style="{StaticResource Title}" />
             <Expander
-                IsExpanded="true"
-                Header="Font sizes of Editors">
+                Header="Application Color"
+                IsExpanded="True">
+                <ComboBox
+                    x:Name="AccentSelector"
+                    SelectionChanged="ComboBox_SelectionChanged" />
+            </Expander>
+            <Expander
+                Header="Font sizes of Editors"
+                IsExpanded="true">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
