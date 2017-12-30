@@ -124,6 +124,9 @@
     <Compile Include="Views\CommandLine.xaml.cs">
       <DependentUpon>CommandLine.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Dialogs\NewAlarm.xaml.cs">
+      <DependentUpon>NewAlarm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dialogs\NewNote.xaml.cs">
       <DependentUpon>NewNote.xaml</DependentUpon>
     </Compile>
@@ -209,6 +212,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CommandLine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\NewAlarm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
