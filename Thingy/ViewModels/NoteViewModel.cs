@@ -102,10 +102,11 @@ namespace Thingy.ViewModels
             }
         }
 
-        private void NewNote()
+        private async void NewNote()
         {
             var model = new Note();
-            if (_app.ShowDialog(new Views.Dialogs.NewNote(), "New Note", model) == true)
+            var result = await _app.ShowDialog(new Views.Dialogs.NewNote(), "New Note", model);
+            if (result)
             {
                 _db.Notes.SaveNote(model);
                 Notes.UpdateWith(_db.Notes.GetNotes());

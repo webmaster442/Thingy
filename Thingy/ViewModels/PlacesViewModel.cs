@@ -72,11 +72,12 @@ namespace Thingy.ViewModels
             p.Start();
         }
 
-        private void NewFolderLink()
+        private async void NewFolderLink()
         {
             var dialog = new Views.Dialogs.NewFolderLink();
             var item = new FolderLink();
-            if (_app.ShowDialog(dialog, "New Folder Link", item) == true)
+            var result = await _app.ShowDialog(dialog, "New Folder Link", item);
+            if (result)
             {
                 _db.FavoriteFolders.SaveFavoriteFolder(item);
                 ApplyFiltering();

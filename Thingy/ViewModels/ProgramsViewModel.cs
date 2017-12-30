@@ -79,13 +79,14 @@ namespace Thingy.ViewModels
             }
         }
 
-        private void Edit(string obj)
+        private async void Edit(string obj)
         {
             var dialog = new Views.Dialogs.NewProgram();
             var program = _db.Programs.GetPrograms().Where(p => p.Name == obj).FirstOrDefault();
             var oldname = string.Copy(program.Name);
+            var result = await _application.ShowDialog(dialog, "New Program", program);
 
-            if (_application.ShowDialog(dialog, "New Program", program) == true)
+            if (result)
             {
                 _db.Programs.UpdateLauncherProgramByName(oldname, program);
                 ApplyFiltering();
@@ -93,11 +94,12 @@ namespace Thingy.ViewModels
 
         }
 
-        private void Add()
+        private async void Add()
         {
             var dialog = new Views.Dialogs.NewProgram();
             var model = new LauncherProgram();
-            if (_application.ShowDialog(dialog, "New Program", model) == true)
+            var result = await _application.ShowDialog(dialog, "New Program", model);
+            if (result)
             {
                 _db.Programs.SaveLauncherProgram(model);
                 ApplyFiltering();

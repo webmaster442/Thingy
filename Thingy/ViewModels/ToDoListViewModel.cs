@@ -55,11 +55,12 @@ namespace Thingy.ViewModels
             return obj > -1;
         }
 
-        private void AddNewItem()
+        private async void AddNewItem()
         {
             var dialog = new Views.Dialogs.NewToDoItem();
             var item = new ToDoItem();
-            if (_application.ShowDialog(dialog, "New To Do Item", item) == true)
+            var result = await _application.ShowDialog(dialog, "New To Do Item", item);
+            if (result)
             {
                 Pending.Add(item);
                 _db.Todo.SaveToDoItem(item);

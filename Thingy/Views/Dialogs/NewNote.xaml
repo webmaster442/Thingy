@@ -7,23 +7,25 @@
     d:DesignHeight="300"
     d:DesignWidth="300"
     mc:Ignorable="d">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Label
-            Grid.Row="0"
-            Content="New Note"
-            Style="{StaticResource Title}" />
-        <StackPanel
-            Grid.Row="1"
-            Margin="5,2">
-            <TextBlock
-                Text="Note Name:" />
-            <TextBox
-                Style="{StaticResource Validatable}"
-                Text="{Binding Name}" />
-        </StackPanel>
-    </Grid>
+    <AdornerDecorator>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                Content="New Note"
+                Style="{StaticResource Title}" />
+            <StackPanel
+                Grid.Row="1"
+                Margin="5,2">
+                <TextBlock
+                    Text="Note Name:" />
+                <TextBox
+                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+
+        </Grid>
+    </AdornerDecorator>
 </UserControl>

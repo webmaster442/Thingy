@@ -1,17 +1,23 @@
-﻿<Window
+﻿<simpleChildWindow:ChildWindow
     x:Class="Thingy.ModalDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:applib="http://github.com/webmaster442/AppLib/WPF"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
     x:Name="Dialog"
-    MinWidth="400"
-    MinHeight="320"
-    ResizeMode="CanMinimize"
-    ShowInTaskbar="True"
-    SizeToContent="WidthAndHeight"
-    WindowStartupLocation="CenterOwner"
+    Padding="30"
+    AllowMove="True"
+    BorderBrush="{DynamicResource AccentBaseColorBrush}"
+    GlowBrush="{DynamicResource AccentColorBrush}"
+    ShowCloseButton="True"
     mc:Ignorable="d">
+    <simpleChildWindow:ChildWindow.OverlayBrush>
+        <SolidColorBrush
+            Opacity="0.8"
+            Color="{StaticResource Gray2}" />
+    </simpleChildWindow:ChildWindow.OverlayBrush>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -20,6 +26,7 @@
         <ContentControl
             x:Name="Content"
             Grid.Row="0"
+            MinWidth="350"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Content="{Binding ElementName=Dialog, Path=DailogContent}" />
@@ -30,7 +37,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
             Orientation="Horizontal"
-            Visibility="Hidden">
+            Visibility="{Binding HasErrors, Converter={applib:BoolToVisibilityConverter}}">
             <Image
                 Width="30"
                 Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-high-priority.png" />
@@ -55,4 +62,4 @@
                 Style="{StaticResource BigButton}" />
         </StackPanel>
     </Grid>
-</Window>
+</simpleChildWindow:ChildWindow>

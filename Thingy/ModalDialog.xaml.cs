@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MahApps.Metro.SimpleChildWindow;
+using System;
 using System.Collections;
 using System.ComponentModel;
 using System.Text;
@@ -9,7 +10,7 @@ namespace Thingy
     /// <summary>
     /// Interaction logic for ModalDialog.xaml
     /// </summary>
-    public partial class ModalDialog : Window
+    public partial class ModalDialog : ChildWindow
     {
         public static readonly DependencyProperty DialogContentProperty =
             DependencyProperty.Register("DailogContent", typeof(object), typeof(ModalDialog));
@@ -62,12 +63,12 @@ namespace Thingy
 
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
+            Close(true);
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
+            Close(false);
         }
     }
 }

@@ -1,6 +1,7 @@
-﻿using AppLib.Common.IOC;
-using MahApps.Metro;
+﻿using MahApps.Metro;
+using MahApps.Metro.SimpleChildWindow;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Thingy.Db;
@@ -46,15 +47,17 @@ namespace Thingy
             (App.Current.MainWindow as MainWindow).SetCurrentTabContent(Title, control, false);
         }
 
-        public bool? ShowDialog(UserControl control, string Title, INotifyPropertyChanged model = null)
+        public async Task<bool> ShowDialog(UserControl control, string Title, INotifyPropertyChanged model = null)
         {
             ModalDialog modalDialog = new ModalDialog();
             if (model != null)
                 control.DataContext = model;
             modalDialog.DailogContent = control;
             modalDialog.Title = Title;
-            modalDialog.Owner = App.Current.MainWindow;
-            return modalDialog.ShowDialog();
+
+            var result = await (App.Current.MainWindow as MainWindow).ShowChildWindowAsync<bool>(modalDialog);
+
+            return result;
         }
 
         protected override void OnStartup(StartupEventArgs e)

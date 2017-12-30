@@ -8,6 +8,7 @@
     xmlns:local="clr-namespace:Thingy"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
     xmlns:properties="clr-namespace:Thingy.Properties"
     x:Name="Window"
     Title="Thingy"
