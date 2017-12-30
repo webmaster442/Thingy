@@ -91,6 +91,7 @@
     <Compile Include="Infrastructure\IModuleLoader.cs" />
     <Compile Include="Infrastructure\ModuleLoader.cs" />
     <Compile Include="Modules\CurrencyConverterModule.cs" />
+    <Compile Include="Modules\GreekAlphabetModule.cs" />
     <Compile Include="Modules\IronPythonModule.cs" />
     <Compile Include="Infrastructure\ModuleCategories.cs" />
     <Compile Include="Modules\NoteModule.cs" />
@@ -130,6 +131,9 @@
     </Compile>
     <Compile Include="Views\Dialogs\NewNote.xaml.cs">
       <DependentUpon>NewNote.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GreekAlphabet.xaml.cs">
+      <DependentUpon>GreekAlphabet.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ICommandLineView.cs" />
     <Compile Include="Views\Dialogs\NewFolderLink.xaml.cs">
@@ -233,6 +237,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Dialogs\NewVirtualFolder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GreekAlphabet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

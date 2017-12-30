@@ -154,5 +154,8 @@
   <ItemGroup>
     <Resource Include="Fonts\UbuntuMono-R.ttf" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-alpha-96.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
