@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBase.cs" />
+    <Compile Include="Entity\Alarm.cs" />
     <Compile Include="Entity\FolderLink.cs" />
     <Compile Include="Entity\LauncherProgram.cs" />
     <Compile Include="Entity\Note.cs" />

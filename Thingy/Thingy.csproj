@@ -88,11 +88,14 @@
     <Compile Include="IApplication.cs" />
     <Compile Include="Infrastructure\DBFileIconConverter.cs" />
     <Compile Include="Infrastructure\IModuleLoader.cs" />
+    <Compile Include="Infrastructure\IServiceRunner.cs" />
     <Compile Include="Infrastructure\ModuleLoader.cs" />
+    <Compile Include="Infrastructure\ServiceRunner.cs" />
     <Compile Include="Modules\CurrencyConverterModule.cs" />
     <Compile Include="Modules\IronPythonModule.cs" />
     <Compile Include="Modules\NoteModule.cs" />
     <Compile Include="Modules\ProgramsModule.cs" />
+    <Compile Include="Services\IService.cs" />
     <Compile Include="ViewModels\NoteViewModel.cs" />
     <Compile Include="ViewModels\ProgramsViewModel.cs" />
     <Compile Include="Views\CopyOrZipDialog.xaml.cs">
