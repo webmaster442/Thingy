@@ -63,7 +63,6 @@ namespace Thingy
                 return new DataBase("test.db");
             });
             IoCContainer.RegisterSingleton<IModuleLoader, ModuleLoader>();
-            IoCContainer.RegisterSingleton<IServiceRunner, ServiceRunner>();
             base.OnStartup(e);
         }
     }
