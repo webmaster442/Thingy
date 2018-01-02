@@ -131,15 +131,6 @@
     <Resource Include="Icons\icons8-python-96.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icons\icons8-align-center-96.png" />
-    <Resource Include="Icons\icons8-align-justify-96.png" />
-    <Resource Include="Icons\icons8-align-left-96.png" />
-    <Resource Include="Icons\icons8-align-right-96.png" />
-    <Resource Include="Icons\icons8-bold-96.png" />
-    <Resource Include="Icons\icons8-italic-96.png" />
-    <Resource Include="Icons\icons8-underline-96.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Icons\icons8-copy-to-clipboard-96.png" />
     <Resource Include="Icons\icons8-cut-96.png" />
     <Resource Include="Icons\icons8-paste-96.png" />
@@ -156,6 +147,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\icons8-alpha-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-calculator-96.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

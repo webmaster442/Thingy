@@ -92,11 +92,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CalculatorKeyboard.xaml.cs">
+      <DependentUpon>CalculatorKeyboard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TrulyObservableCollection.cs" />
     <Compile Include="IApplication.cs" />
     <Compile Include="Infrastructure\DBFileIconConverter.cs" />
     <Compile Include="Infrastructure\IModuleLoader.cs" />
     <Compile Include="Infrastructure\ModuleLoader.cs" />
+    <Compile Include="Modules\CalculatorModule.cs" />
     <Compile Include="Modules\CurrencyConverterModule.cs" />
     <Compile Include="Modules\GreekAlphabetModule.cs" />
     <Compile Include="Modules\IronPythonModule.cs" />
@@ -108,6 +112,9 @@
     <Compile Include="ViewModels\ProgramsViewModel.cs" />
     <Compile Include="Views\Alarms.xaml.cs">
       <DependentUpon>Alarms.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Calculator.xaml.cs">
+      <DependentUpon>Calculator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CopyOrZipDialog.xaml.cs">
       <DependentUpon>CopyOrZipDialog.xaml</DependentUpon>
@@ -183,6 +190,10 @@
     <Compile Include="Views\VirtualFolders.xaml.cs">
       <DependentUpon>VirtualFolders.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\CalculatorKeyboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DataTemplates\EntityTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -192,6 +203,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Alarms.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Calculator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
