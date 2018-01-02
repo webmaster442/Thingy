@@ -27,7 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applib", "Applib", "{2F2564
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.Resources", "Thingy.Resources\Thingy.Resources.csproj", "{63A3EE73-078F-4DEC-8578-5AF6F158D383}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppLib.Maths", "..\applib\AppLib.Math\AppLib.Maths.csproj", "{0169FF46-6F3D-4CE8-BAD2-05F024EB24E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppLib.Maths", "applib\AppLib.Math\AppLib.Maths.csproj", "{0169FF46-6F3D-4CE8-BAD2-05F024EB24E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

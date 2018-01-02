@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Thingy.Db;
 using Thingy.Infrastructure;
+using AppLib.WPF;
 
 namespace Thingy
 {
@@ -85,6 +86,8 @@ namespace Thingy
             ThemeManager.ChangeAppStyle(Application.Current,
                               ThemeManager.GetAccent(accent),
                               ThemeManager.GetAppTheme("BaseLight"));
+
+            var dload = BingPhotoOfDay.WasSuccesfull;
 
             base.OnStartup(e);
         }

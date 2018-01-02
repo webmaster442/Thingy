@@ -45,15 +45,19 @@
                 </interactivity:Interaction.Triggers>
             </ComboBox>
         </StackPanel>
-        <ItemsControl
+        <ScrollViewer
+            x:Name="ItemList"
             Grid.Row="1"
-            ItemTemplate="{StaticResource StartPageTemplate}"
-            ItemsSource="{Binding Modules}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
+            VerticalScrollBarVisibility="Auto">
+            <ItemsControl
+                ItemTemplate="{StaticResource StartPageTemplate}"
+                ItemsSource="{Binding Modules}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </UserControl>

@@ -156,10 +156,6 @@
     <Compile Include="Providers.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\applib\AppLib.Math\AppLib.Maths.csproj">
-      <Project>{0169ff46-6f3d-4ce8-bad2-05f024eb24e2}</Project>
-      <Name>AppLib.Maths</Name>
-    </ProjectReference>
     <ProjectReference Include="..\applib\AppLib.Common\AppLib.Common.csproj">
       <Project>{516087b5-6ac5-44a5-8df1-fe42d7a7a0e6}</Project>
       <Name>AppLib.Common</Name>

@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using AppLib.WPF;
 
 namespace Thingy.Views
 {
@@ -11,6 +12,7 @@ namespace Thingy.Views
         public StartPage()
         {
             InitializeComponent();
+            ItemList.Background = BingPhotoOfDay.PhotoOfDayImageBrush;
         }
     }
 }
