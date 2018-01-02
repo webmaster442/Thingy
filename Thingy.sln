@@ -29,6 +29,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.Resources", "Thingy.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppLib.Maths", "applib\AppLib.Math\AppLib.Maths.csproj", "{0169FF46-6F3D-4CE8-BAD2-05F024EB24E2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Versioning", "Versioning", "{4B00102D-51B4-40F4-8461-C02CBC73A43D}"
+	ProjectSection(SolutionItems) = preProject
+		Build-tools\commonBuildInfo.xml = Build-tools\commonBuildInfo.xml
+		Build-tools\CommonVersion.cs = Build-tools\CommonVersion.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

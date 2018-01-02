@@ -47,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Build-tools\CommonVersion.cs">
+      <Link>CommonVersion.cs</Link>
+    </Compile>
     <Compile Include="DataBase.cs" />
     <Compile Include="Entity\Alarm.cs" />
     <Compile Include="Entity\FolderLink.cs" />

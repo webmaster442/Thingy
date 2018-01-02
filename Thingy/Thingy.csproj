@@ -87,6 +87,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="..\Build-tools\CommonVersion.cs">
+      <Link>Properties\CommonVersion.cs</Link>
+    </Compile>
     <Compile Include="Connected Services\MnbServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -440,5 +443,10 @@ del *.pdb
 del *.xml
 
 :exit</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>pushd $(SolutionDir)\Build-tools
+AppLib.VersionIncrementer.exe /increment commonBuildInfo.xml null CommonVersion.cs
+popd</PreBuildEvent>
   </PropertyGroup>
 </Project>
