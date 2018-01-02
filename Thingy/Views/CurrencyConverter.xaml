@@ -25,26 +25,13 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <StackPanel
-            Grid.Row="0"
-            Orientation="Horizontal">
-            <TextBlock
-                Margin="10,0"
-                Text="Last update: " />
-            <TextBlock
-                Text="{Binding LastUpdate}" />
-            <Button
-                Margin="5"
-                Command="{Binding UpdateCommand}"
-                Content="Update" />
-        </StackPanel>
         <TabControl
-            Grid.Row="1"
-            TabStripPlacement="Right">
+            Grid.Row="0"
+            TabStripPlacement="Top">
             <TabItem
                 Header="Converter">
                 <Grid
@@ -119,7 +106,7 @@
                     SelectionUnit="FullRow">
                     <DataGrid.Columns>
                         <DataGridTextColumn
-                            Binding="{Binding Curr}"
+                            Binding="{Binding CurrencyCode}"
                             FontSize="22"
                             Header="Currency Code" />
                         <DataGridTextColumn
@@ -135,6 +122,19 @@
                 </DataGrid>
             </TabItem>
         </TabControl>
+        <StackPanel
+            Grid.Row="1"
+            Orientation="Horizontal">
+            <TextBlock
+                Margin="10,0"
+                Text="Last update: " />
+            <TextBlock
+                Text="{Binding LastUpdate}" />
+            <Button
+                Margin="5"
+                Command="{Binding UpdateCommand}"
+                Content="Update" />
+        </StackPanel>
         <ProgressBar
             Grid.Row="2"
             Height="5"
