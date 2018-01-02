@@ -4,15 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Linq;
-using Thingy.CurrencyConvert.MnbServiceReference;
+using Thingy.Implementation.Models;
+using Thingy.MnbServiceReference;
 
-namespace Thingy.CurrencyConvert
+namespace Thingy.ViewModels
 {
-    public class CurrencyConverterModel : ViewModel
+    public class CurrencyConverterViewModel : ViewModel
     {
         private decimal _input;
         private decimal _output;
@@ -23,10 +23,10 @@ namespace Thingy.CurrencyConvert
 
         public DelegateCommand UpdateCommand { get; private set; }
 
-        public CurrencyConverterModel()
+        public CurrencyConverterViewModel()
         {
             CurrencyTypes = new ObservableCollection<string>();
-            CurrencyRates = new ObservableCollection<Rate>();
+            CurrencyRates = new ObservableCollection<CurrencyRate>();
             UpdateVisibility = Visibility.Collapsed;
             UpdateCommand = Command.ToCommand(Update);
         }
@@ -37,19 +37,19 @@ namespace Thingy.CurrencyConvert
             {
                 UpdateVisibility = Visibility.Visible;
                 var data = await UpdateRates();
-                data.Add(new Rate
+                data.Add(new CurrencyRate
                 {
-                    Curr = "HUF",
+                    CurrencyCode = "HUF",
                     Unit = 1,
                     ValueInForint = 1
                 });
                 CurrencyRates.Clear();
-                CurrencyRates.AddRange(data.OrderBy(d => d.Curr));
+                CurrencyRates.AddRange(data.OrderBy(d => d.CurrencyCode));
                 OnPropertyChanged(() => CurrencyRates);
 
                 var types = from rate in CurrencyRates
-                            orderby rate.Curr ascending
-                            select rate.Curr;
+                            orderby rate.CurrencyCode ascending
+                            select rate.CurrencyCode;
                 CurrencyTypes.Clear();
                 CurrencyTypes.AddRange(types);
                 OnPropertyChanged(() => CurrencyTypes);
@@ -71,19 +71,19 @@ namespace Thingy.CurrencyConvert
             }
         }
 
-        private async Task<IList<Rate>> UpdateRates()
+        private async Task<IList<CurrencyRate>> UpdateRates()
         {
             using (MNBArfolyamServiceSoapClient client = new MNBArfolyamServiceSoapClient())
             {
-                var respone = await client.GetCurrentExchangeRatesAsync(new GetCurrentExchangeRatesRequest());
+                var respone = await client.GetCurrentExchangeRatesAsync(new GetCurrentExchangeRatesRequestBody());
                 var current = respone.GetCurrentExchangeRatesResponse1.GetCurrentExchangeRatesResult;
                 XDocument xml = XDocument.Parse(current);
-                List<Rate> result = new List<Rate>();
+                List<CurrencyRate> result = new List<CurrencyRate>();
                 foreach (var rate in xml.Descendants("Rate"))
                 {
-                    var parsed = new Rate
+                    var parsed = new CurrencyRate
                     {
-                        Curr = rate.Attribute("curr").Value,
+                        CurrencyCode = rate.Attribute("curr").Value,
                         Unit = Convert.ToDecimal(rate.Attribute("unit").Value),
                         ValueInForint = Convert.ToDecimal(rate.Value),
                     };
@@ -101,13 +101,13 @@ namespace Thingy.CurrencyConvert
                 var outputtype = CurrencyTypes[SelectedOutputIndex];
 
                 var inputinforints = (from rate in CurrencyRates
-                                      where rate.Curr == inputtype
+                                      where rate.CurrencyCode == inputtype
                                       select rate.ValueInForint / rate.Unit).FirstOrDefault();
 
                 var outputinforints = inputinforints * value;
 
                 var outcurrencyinforints = (from rate in CurrencyRates
-                                            where rate.Curr == outputtype
+                                            where rate.CurrencyCode == outputtype
                                             select rate.ValueInForint / rate.Unit).FirstOrDefault();
 
                 var output = outputinforints / outcurrencyinforints;
@@ -120,7 +120,7 @@ namespace Thingy.CurrencyConvert
             }
         }
 
-        public ObservableCollection<Rate> CurrencyRates
+        public ObservableCollection<CurrencyRate> CurrencyRates
         {
             get;
             private set;

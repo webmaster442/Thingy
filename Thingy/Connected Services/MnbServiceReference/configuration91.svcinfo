@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="osKNNuM7D5be13kYkF1+RMjr7bs=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="pmAOd3RgpN2kPlwq6TBOMHVA/Ok=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="basicHttpBinding" name="CustomBinding_MNBArfolyamServiceSoap">
+    <bindingConfiguration bindingType="basicHttpBinding" name="CustomBinding_MNBArfolyamServiceSoap1">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>CustomBinding_MNBArfolyamServiceSoap</serializedValue>
+          <serializedValue>CustomBinding_MNBArfolyamServiceSoap1</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -112,7 +112,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="CustomBinding_MNBArfolyamServiceSoap" contract="MnbServiceReference.MNBArfolyamServiceSoap" bindingType="basicHttpBinding" address="http://www.mnb.hu/arfolyamok.asmx" bindingConfiguration="CustomBinding_MNBArfolyamServiceSoap">
+    <endpoint name="CustomBinding_MNBArfolyamServiceSoap1" contract="MnbServiceReference.MNBArfolyamServiceSoap" bindingType="basicHttpBinding" address="http://www.mnb.hu/arfolyamok.asmx" bindingConfiguration="CustomBinding_MNBArfolyamServiceSoap1">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://www.mnb.hu/arfolyamok.asmx</serializedValue>
@@ -124,7 +124,7 @@
           <serializedValue>basicHttpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>CustomBinding_MNBArfolyamServiceSoap</serializedValue>
+          <serializedValue>CustomBinding_MNBArfolyamServiceSoap1</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>MnbServiceReference.MNBArfolyamServiceSoap</serializedValue>
@@ -187,7 +187,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>CustomBinding_MNBArfolyamServiceSoap</serializedValue>
+          <serializedValue>CustomBinding_MNBArfolyamServiceSoap1</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

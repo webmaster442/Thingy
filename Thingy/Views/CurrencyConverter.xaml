@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="Thingy.CurrencyConvert.CurrencyConverter"
+    x:Class="Thingy.Views.CurrencyConverter"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,12 +9,15 @@
     d:DesignWidth="900"
     mc:Ignorable="d">
     <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding UpdateCommand}" />
+        <i:EventTrigger
+            EventName="Loaded">
+            <i:InvokeCommandAction
+                Command="{Binding UpdateCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <UserControl.Resources>
-        <Style TargetType="ComboBox">
+        <Style
+            TargetType="ComboBox">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="Margin" Value="2" />
             <Setter Property="Width" Value="100" />
@@ -32,7 +35,8 @@
             <TextBlock
                 Margin="10,0"
                 Text="Last update: " />
-            <TextBlock Text="{Binding LastUpdate}" />
+            <TextBlock
+                Text="{Binding LastUpdate}" />
             <Button
                 Margin="5"
                 Command="{Binding UpdateCommand}"
@@ -41,7 +45,8 @@
         <TabControl
             Grid.Row="1"
             TabStripPlacement="Right">
-            <TabItem Header="Converter">
+            <TabItem
+                Header="Converter">
                 <Grid
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
@@ -52,9 +57,12 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="200" />
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition
+                            Width="Auto" />
+                        <ColumnDefinition
+                            Width="200" />
+                        <ColumnDefinition
+                            Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock
                         Grid.Row="0"
@@ -102,7 +110,8 @@
                         Text="{Binding Output}" />
                 </Grid>
             </TabItem>
-            <TabItem Header="Rates">
+            <TabItem
+                Header="Rates">
                 <DataGrid
                     AutoGenerateColumns="False"
                     ItemsSource="{Binding CurrencyRates}"
@@ -110,16 +119,16 @@
                     SelectionUnit="FullRow">
                     <DataGrid.Columns>
                         <DataGridTextColumn
-                            FontSize="22"
                             Binding="{Binding Curr}"
+                            FontSize="22"
                             Header="Currency Code" />
                         <DataGridTextColumn
-                            FontSize="22"
                             Binding="{Binding Unit}"
+                            FontSize="22"
                             Header="Unit" />
                         <DataGridTextColumn
-                            FontSize="22"
                             Binding="{Binding ValueInForint}"
+                            FontSize="22"
                             Header="Value in Forint" />
                     </DataGrid.Columns>
 

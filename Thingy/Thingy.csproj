@@ -62,6 +62,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -85,6 +87,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connected Services\MnbServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TrulyObservableCollection.cs" />
     <Compile Include="IApplication.cs" />
     <Compile Include="Infrastructure\DBFileIconConverter.cs" />
@@ -96,6 +103,7 @@
     <Compile Include="Infrastructure\ModuleCategories.cs" />
     <Compile Include="Modules\NoteModule.cs" />
     <Compile Include="Modules\ProgramsModule.cs" />
+    <Compile Include="ViewModels\CurrencyConverterViewModel.cs" />
     <Compile Include="ViewModels\NoteViewModel.cs" />
     <Compile Include="ViewModels\ProgramsViewModel.cs" />
     <Compile Include="Views\Alarms.xaml.cs">
@@ -125,6 +133,9 @@
     <Compile Include="ViewModels\VirtualFoldersViewModel.cs" />
     <Compile Include="Views\CommandLine.xaml.cs">
       <DependentUpon>CommandLine.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CurrencyConverter.xaml.cs">
+      <DependentUpon>CurrencyConverter.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dialogs\NewAlarm.xaml.cs">
       <DependentUpon>NewAlarm.xaml</DependentUpon>
@@ -216,6 +227,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CurrencyConverter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Dialogs\NewAlarm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -295,6 +310,50 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\MnbServiceReference\arfolyamok.wsdl" />
+    <None Include="Connected Services\MnbServiceReference\arfolyamok.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\MnbServiceReference\arfolyamok1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\MnbServiceReference\MNBArfolyamServiceSoapImpl.wsdl" />
+    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetCurrenciesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetCurrenciesResponseBody.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetCurrencyUnitsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetCurrencyUnitsResponseBody.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetCurrentExchangeRatesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetCurrentExchangeRatesResponseBody.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetDateIntervalResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetDateIntervalResponseBody.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetExchangeRatesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetExchangeRatesResponseBody.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetInfoResponseBody.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -317,10 +376,6 @@
       <Project>{faf19388-a6c0-46f9-a588-a46db392ace4}</Project>
       <Name>AppLib.WPF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Thingy.CurrencyConvert\Thingy.CurrencyConvert.csproj">
-      <Project>{94105275-cd32-4cf2-8d61-13d35e4fc2c0}</Project>
-      <Name>Thingy.CurrencyConvert</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Thingy.Db\Thingy.Db.csproj">
       <Project>{2D7E8D87-74AC-402A-8E11-BDACC7B3839B}</Project>
       <Name>Thingy.Db</Name>
@@ -339,6 +394,27 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\MarkdownTemplate.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\MnbServiceReference\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MnbServiceReference\arfolyamok.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MnbServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MnbServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MnbServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

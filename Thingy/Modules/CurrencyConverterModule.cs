@@ -20,9 +20,9 @@ namespace Thingy.Modules
 
         public override UserControl RunModule()
         {
-            return new CurrencyConvert.CurrencyConverter
+            return new Views.CurrencyConverter
             {
-                DataContext = new CurrencyConvert.CurrencyConverterModel()
+                DataContext = new ViewModels.CurrencyConverterViewModel()
             };
         }
 
