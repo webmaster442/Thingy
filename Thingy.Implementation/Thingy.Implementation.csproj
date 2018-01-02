@@ -59,6 +59,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -70,6 +71,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculator\CalculatorEngine.cs" />
+    <Compile Include="Calculator\EventRedirectedStreamWriter.cs" />
+    <Compile Include="Calculator\FunctionLoader.cs" />
+    <Compile Include="Calculator\ICalculatorEngine.cs" />
+    <Compile Include="Calculator\PrefixDictionary.cs" />
     <Compile Include="CloudDrivesLocator.cs" />
     <Compile Include="CmdHost\CmdReader.cs" />
     <Compile Include="CmdHost\HistoryCommand.cs" />
@@ -139,7 +145,9 @@
     <Compile Include="CoreAudio\SessionCollection.cs" />
     <Compile Include="CoreAudio\SimpleAudioVolume.cs" />
     <Compile Include="ExeIconExtractor.cs" />
+    <Compile Include="Models\CalculatorResult.cs" />
     <Compile Include="Models\CurrencyRate.cs" />
+    <Compile Include="Calculator\StringFormatter.cs" />
     <Compile Include="PerformanceInfo.cs" />
     <Compile Include="TileColorProvider.cs" />
     <Compile Include="Models\Drive.cs" />
@@ -148,6 +156,10 @@
     <Compile Include="Providers.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\applib\AppLib.Math\AppLib.Maths.csproj">
+      <Project>{0169ff46-6f3d-4ce8-bad2-05f024eb24e2}</Project>
+      <Name>AppLib.Maths</Name>
+    </ProjectReference>
     <ProjectReference Include="..\applib\AppLib.Common\AppLib.Common.csproj">
       <Project>{516087b5-6ac5-44a5-8df1-fe42d7a7a0e6}</Project>
       <Name>AppLib.Common</Name>

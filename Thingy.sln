@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applib", "Applib", "{2F2564
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.Resources", "Thingy.Resources\Thingy.Resources.csproj", "{63A3EE73-078F-4DEC-8578-5AF6F158D383}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppLib.Maths", "..\applib\AppLib.Math\AppLib.Maths.csproj", "{0169FF46-6F3D-4CE8-BAD2-05F024EB24E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{63A3EE73-078F-4DEC-8578-5AF6F158D383}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63A3EE73-078F-4DEC-8578-5AF6F158D383}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63A3EE73-078F-4DEC-8578-5AF6F158D383}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0169FF46-6F3D-4CE8-BAD2-05F024EB24E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0169FF46-6F3D-4CE8-BAD2-05F024EB24E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0169FF46-6F3D-4CE8-BAD2-05F024EB24E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0169FF46-6F3D-4CE8-BAD2-05F024EB24E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +75,7 @@ Global
 		{516087B5-6AC5-44A5-8DF1-FE42D7A7A0E6} = {2F25642E-765F-4F1C-9C71-F329B53FCDF6}
 		{FAF19388-A6C0-46F9-A588-A46DB392ACE4} = {2F25642E-765F-4F1C-9C71-F329B53FCDF6}
 		{848616A9-3D2F-42B1-B474-BE506E8019E4} = {2F25642E-765F-4F1C-9C71-F329B53FCDF6}
+		{0169FF46-6F3D-4CE8-BAD2-05F024EB24E2} = {2F25642E-765F-4F1C-9C71-F329B53FCDF6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DD6722DD-E90E-429E-83DB-F90CCB4A136E}
