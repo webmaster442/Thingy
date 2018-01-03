@@ -9,9 +9,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Thingy.Implementation.Models;
 
-namespace Thingy.Implementation.Calculator
+namespace Thingy.CalculatorCore
 {
     public sealed class CalculatorEngine : ICalculatorEngine, IDisposable
     {

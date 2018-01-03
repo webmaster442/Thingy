@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Numerics;
 using System.Text;
 
-namespace Thingy.Implementation.Calculator
+namespace Thingy.CalculatorCore
 {
     public static class StringFormatter
     {

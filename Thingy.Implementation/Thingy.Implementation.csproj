@@ -74,11 +74,6 @@
     <Compile Include="..\Build-tools\CommonVersion.cs">
       <Link>Properties\CommonVersion.cs</Link>
     </Compile>
-    <Compile Include="Calculator\CalculatorEngine.cs" />
-    <Compile Include="Calculator\EventRedirectedStreamWriter.cs" />
-    <Compile Include="Calculator\FunctionLoader.cs" />
-    <Compile Include="Calculator\ICalculatorEngine.cs" />
-    <Compile Include="Calculator\PrefixDictionary.cs" />
     <Compile Include="CloudDrivesLocator.cs" />
     <Compile Include="CmdHost\CmdReader.cs" />
     <Compile Include="CmdHost\HistoryCommand.cs" />
@@ -148,9 +143,7 @@
     <Compile Include="CoreAudio\SessionCollection.cs" />
     <Compile Include="CoreAudio\SimpleAudioVolume.cs" />
     <Compile Include="ExeIconExtractor.cs" />
-    <Compile Include="Models\CalculatorResult.cs" />
     <Compile Include="Models\CurrencyRate.cs" />
-    <Compile Include="Calculator\StringFormatter.cs" />
     <Compile Include="PerformanceInfo.cs" />
     <Compile Include="TileColorProvider.cs" />
     <Compile Include="Models\Drive.cs" />

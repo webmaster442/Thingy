@@ -1,4 +1,4 @@
-﻿namespace Thingy.Implementation.Models
+﻿namespace Thingy.CalculatorCore
 {
     public class CalculatorResult
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Thingy.Implementation.Calculator
+namespace Thingy.CalculatorCore
 {
     /// <summary>
     /// Dictionary override with prefixes

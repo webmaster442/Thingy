@@ -1,9 +1,8 @@
 ﻿using AppLib.Maths;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Thingy.Implementation.Models;
 
-namespace Thingy.Implementation.Calculator
+namespace Thingy.CalculatorCore
 {
     public interface ICalculatorEngine
     {

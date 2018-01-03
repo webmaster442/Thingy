@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Thingy.Implementation.Calculator
+namespace Thingy.CalculatorCore
 {
     public class EventRedirectedStreamWriter : StreamWriter
     {

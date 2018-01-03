@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Thingy.Implementation.Calculator
+namespace Thingy.CalculatorCore
 {
     public class FunctionLoader
     {
