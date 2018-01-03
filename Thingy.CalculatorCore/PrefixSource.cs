@@ -9,7 +9,7 @@ namespace Thingy.CalculatorCore
 
         static PrefixSource()
         {
-            PrefixTable = new Dictionary<string, double>(19)
+            PrefixTable = new Dictionary<string, double>(20)
             {
                 { "y", 1E-24 },
                 { "z", 1E-21 },

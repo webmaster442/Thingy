@@ -7,28 +7,6 @@
     d:DesignHeight="500"
     d:DesignWidth="900"
     mc:Ignorable="d">
-    <UserControl.Resources>
-        <Style
-            BasedOn="{StaticResource {x:Type Button}}"
-            TargetType="Button">
-            <Setter Property="Margin" Value="2" />
-            <Setter Property="FontSize" Value="25" />
-            <Setter Property="Width" Value="90" />
-            <Setter Property="Height" Value="80" />
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="FontWeight" Value="Bold" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style
-            x:Key="DoubleWidth"
-            BasedOn="{StaticResource {x:Type Button}}"
-            TargetType="Button">
-            <Setter Property="Width" Value="180" />
-        </Style>
-    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -38,9 +16,7 @@
         <Grid
             x:Name="NumericPad"
             Grid.Row="1"
-            Grid.Column="1"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top">
+            Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
@@ -53,87 +29,133 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Button
+                Style="{StaticResource CalculatorButton}"
+                Grid.Column="0"
+                Grid.Row="0"
+                Content="BIN"/>
+            <Button
+                Style="{StaticResource CalculatorButton}"
+                Grid.Column="0"
+                Grid.Row="1"
+                Content="OCT"/>
+            <Button
+                Style="{StaticResource CalculatorButton}"
+                Grid.Column="0"
+                Grid.Row="2"
+                Content="HEX"/>
+            <Button
+                Style="{StaticResource CalculatorButton}"
+                Grid.Column="0"
+                Grid.Row="3"
+                Content="ROMAN"/>
+            <Button
+                Style="{StaticResource CalculatorButton}"
+                Grid.Column="0"
                 Grid.Row="4"
-                Grid.Column="0"
-                Content="0" />
+                Content="NumSys"/>
             <Button
                 Grid.Row="4"
                 Grid.Column="1"
-                Content="," />
+                Content="0"
+                Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="4"
                 Grid.Column="2"
-                Content="." />
-            <Button
-                Grid.Row="3"
-                Grid.Column="0"
-                Content="1" />
-            <Button
-                Grid.Row="3"
-                Grid.Column="1"
-                Content="2" />
-            <Button
-                Grid.Row="3"
-                Grid.Column="2"
-                Content="3" />
-            <Button
-                Grid.Row="2"
-                Grid.Column="0"
-                Content="4" />
-            <Button
-                Grid.Row="2"
-                Grid.Column="1"
-                Content="5" />
-            <Button
-                Grid.Row="2"
-                Grid.Column="2"
-                Content="6" />
-            <Button
-                Grid.Row="1"
-                Grid.Column="0"
-                Content="7" />
-            <Button
-                Grid.Row="1"
-                Grid.Column="1"
-                Content="8" />
-            <Button
-                Grid.Row="1"
-                Grid.Column="2"
-                Content="9" />
-            <Button
-                Grid.Row="0"
-                Grid.Column="0"
-                Content="(" />
-            <Button
-                Grid.Row="0"
-                Grid.Column="1"
-                Content=")" />
-            <Button
-                Grid.Row="0"
-                Grid.Column="2"
-                Content="MOD" />
-            <Button
-                Grid.Row="0"
-                Grid.Column="3"
-                Content="÷" />
-            <Button
-                Grid.Row="1"
-                Grid.Column="3"
-                Content="×" />
-            <Button
-                Grid.Row="2"
-                Grid.Column="3"
-                Content="-" />
-            <Button
-                Grid.Row="3"
-                Grid.Column="3"
-                Content="+" />
+                Content=","
+                Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="4"
                 Grid.Column="3"
-                Content="=" />
+                Content="."
+                Style="{StaticResource CalculatorButton}" />
+            <Button
+                Grid.Row="3"
+                Grid.Column="1"
+                Content="1"
+                Style="{StaticResource CalculatorButton}" />
+            <Button
+                Grid.Row="3"
+                Grid.Column="2"
+                Content="2"
+                Style="{StaticResource CalculatorButton}" />
+            <Button
+                Grid.Row="3"
+                Grid.Column="3"
+                Content="3"
+                Style="{StaticResource CalculatorButton}" />
+            <Button
+                Grid.Row="2"
+                Grid.Column="1"
+                Content="4"
+                Style="{StaticResource CalculatorButton}" />
+            <Button
+                Grid.Row="2"
+                Grid.Column="2"
+                Content="5"
+                Style="{StaticResource CalculatorButton}" />
+            <Button
+                Grid.Row="2"
+                Grid.Column="3"
+                Content="6"
+                Style="{StaticResource CalculatorButton}" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                Content="7"
+                Style="{StaticResource CalculatorButton}" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="2"
+                Content="8"
+                Style="{StaticResource CalculatorButton}" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="3"
+                Content="9"
+                Style="{StaticResource CalculatorButton}" />
+            <Button
+                Grid.Row="0"
+                Grid.Column="1"
+                Content="("
+                Style="{StaticResource CalculatorButton}" />
+            <Button
+                Grid.Row="0"
+                Grid.Column="2"
+                Content=")"
+                Style="{StaticResource CalculatorButton}" />
+            <Button
+                Grid.Row="0"
+                Grid.Column="3"
+                Content="MOD"
+                Style="{StaticResource CalculatorButton}" />
+            <Button
+                Grid.Row="0"
+                Grid.Column="4"
+                Content="÷"
+                Style="{StaticResource CalculatorButton}" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="4"
+                Content="×"
+                Style="{StaticResource CalculatorButton}" />
+            <Button
+                Grid.Row="2"
+                Grid.Column="4"
+                Content="-"
+                Style="{StaticResource CalculatorButton}" />
+            <Button
+                Grid.Row="3"
+                Grid.Column="4"
+                Content="+"
+                Style="{StaticResource CalculatorButton}" />
+            <Button
+                Grid.Row="4"
+                Grid.Column="4"
+                Content="="
+                Style="{StaticResource CalculatorButton}" />
         </Grid>
     </Grid>
 </UserControl>

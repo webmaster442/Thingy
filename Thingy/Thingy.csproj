@@ -98,6 +98,9 @@
     <Compile Include="Controls\CalculatorKeyboard.xaml.cs">
       <DependentUpon>CalculatorKeyboard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Prefixes.xaml.cs">
+      <DependentUpon>Prefixes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TrulyObservableCollection.cs" />
     <Compile Include="IApplication.cs" />
     <Compile Include="Infrastructure\DBFileIconConverter.cs" />
@@ -110,6 +113,7 @@
     <Compile Include="Infrastructure\ModuleCategories.cs" />
     <Compile Include="Modules\NoteModule.cs" />
     <Compile Include="Modules\ProgramsModule.cs" />
+    <Compile Include="ViewModels\CalculatorViewModel.cs" />
     <Compile Include="ViewModels\CurrencyConverterViewModel.cs" />
     <Compile Include="ViewModels\NoteViewModel.cs" />
     <Compile Include="ViewModels\ProgramsViewModel.cs" />
@@ -194,6 +198,10 @@
       <DependentUpon>VirtualFolders.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\CalculatorKeyboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Prefixes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -393,6 +401,10 @@
     <ProjectReference Include="..\applib\AppLib.WPF\AppLib.WPF.csproj">
       <Project>{faf19388-a6c0-46f9-a588-a46db392ace4}</Project>
       <Name>AppLib.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Thingy.CalculatorCore\Thingy.CalculatorCore.csproj">
+      <Project>{D0F12E16-59C0-4D6F-880D-621255FA708B}</Project>
+      <Name>Thingy.CalculatorCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\Thingy.Db\Thingy.Db.csproj">
       <Project>{2D7E8D87-74AC-402A-8E11-BDACC7B3839B}</Project>
