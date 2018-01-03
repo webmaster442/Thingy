@@ -32,11 +32,21 @@
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 BorderBrush="{x:Null}"
+                Text="{Binding Formula}"
                 TextAlignment="Right" />
             <mah:DropDownButton
                 Content="History"
+                ItemsSource="{Binding History}"
                 Grid.Row="0"
-                Grid.Column="2"/>
+                Grid.Column="2">
+                <mah:DropDownButton.ItemContainerStyle>
+                    <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
+                        <Setter Property="Header" Value="{Binding}"/>
+                        <Setter Property="Command" Value="{Binding DataContext.InsertHistoryCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"/>
+                        <Setter Property="CommandParameter" Value="{Binding}"/>
+                    </Style>
+                </mah:DropDownButton.ItemContainerStyle>
+            </mah:DropDownButton>
             <TextBox
                 x:Name="ResultBox"
                 Grid.Row="1"
@@ -45,8 +55,8 @@
                 Background="Transparent"
                 BorderBrush="{x:Null}"
                 FontSize="32"
+                Text="{Binding Result}"
                 IsReadOnly="True"
-                Text="0"
                 TextAlignment="Right" />
             <StackPanel
                 x:Name="SystemButtons"
@@ -56,9 +66,14 @@
                 HorizontalAlignment="Right"
                 Orientation="Horizontal">
                 <Button
-                    Content="Clear" />
+                    Content="Clear"
+                    Command="{Binding ClearCommand}"/>
                 <Button
-                    Content="Backspace" />
+                    Content="Clear History"
+                    Command="{Binding ClearHistoryCommand}"/>
+                <Button
+                    Content="Backspace"
+                    Command="{Binding BackSpaceCommand}"/>
             </StackPanel>
         </Grid>
 
@@ -66,11 +81,14 @@
             Grid.Row="1">
             <TabItem
                 Header="Keys">
-                <controls:CalculatorKeyboard />
+                <controls:CalculatorKeyboard
+                    ClickCommand="{Binding InsertFormulaCommand}"
+                    ExecuteCommand="{Binding ExecuteCommand}"/>
             </TabItem>
             <TabItem
                 Header="Powers/Prefixes">
-                <controls:Prefixes />
+                <controls:Prefixes
+                    ClickCommand="{Binding InsertFormulaCommand}"/>
             </TabItem>
         </TabControl>
     </Grid>

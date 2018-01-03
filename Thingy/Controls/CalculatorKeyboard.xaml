@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="keys"
     d:DesignHeight="500"
     d:DesignWidth="900"
     mc:Ignorable="d">
@@ -32,128 +33,167 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Button
-                Style="{StaticResource CalculatorButton}"
-                Grid.Column="0"
                 Grid.Row="0"
-                Content="BIN"/>
-            <Button
-                Style="{StaticResource CalculatorButton}"
                 Grid.Column="0"
+                Content="BIN"
+                Style="{StaticResource CalculatorButton}" />
+            <Button
                 Grid.Row="1"
-                Content="OCT"/>
-            <Button
-                Style="{StaticResource CalculatorButton}"
                 Grid.Column="0"
+                Content="OCT"
+                Style="{StaticResource CalculatorButton}" />
+            <Button
                 Grid.Row="2"
-                Content="HEX"/>
-            <Button
-                Style="{StaticResource CalculatorButton}"
                 Grid.Column="0"
+                Content="HEX"
+                Style="{StaticResource CalculatorButton}" />
+            <Button
                 Grid.Row="3"
-                Content="ROMAN"/>
-            <Button
-                Style="{StaticResource CalculatorButton}"
                 Grid.Column="0"
+                Content="ROMAN"
+                Style="{StaticResource CalculatorButton}" />
+            <Button
                 Grid.Row="4"
-                Content="NumSys"/>
+                Grid.Column="0"
+                Content="NumSys"
+                Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="4"
                 Grid.Column="1"
+                Command="{Binding ElementName=keys, Path=ClickCommand}"
+                CommandParameter="0"
                 Content="0"
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="4"
                 Grid.Column="2"
+                Command="{Binding ElementName=keys, Path=ClickCommand}"
+                CommandParameter=","
                 Content=","
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="4"
                 Grid.Column="3"
+                Command="{Binding ElementName=keys, Path=ClickCommand}"
+                CommandParameter="."
                 Content="."
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="3"
                 Grid.Column="1"
+                Command="{Binding ElementName=keys, Path=ClickCommand}"
+                CommandParameter="1"
                 Content="1"
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="3"
                 Grid.Column="2"
+                Command="{Binding ElementName=keys, Path=ClickCommand}"
+                CommandParameter="2"
                 Content="2"
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="3"
                 Grid.Column="3"
+                Command="{Binding ElementName=keys, Path=ClickCommand}"
+                CommandParameter="3"
                 Content="3"
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="2"
                 Grid.Column="1"
+                Command="{Binding ElementName=keys, Path=ClickCommand}"
+                CommandParameter="4"
                 Content="4"
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="2"
                 Grid.Column="2"
+                Command="{Binding ElementName=keys, Path=ClickCommand}"
+                CommandParameter="5"
                 Content="5"
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="2"
                 Grid.Column="3"
+                Command="{Binding ElementName=keys, Path=ClickCommand}"
+                CommandParameter="6"
                 Content="6"
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="1"
                 Grid.Column="1"
+                Command="{Binding ElementName=keys, Path=ClickCommand}"
+                CommandParameter="7"
                 Content="7"
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="1"
                 Grid.Column="2"
+                Command="{Binding ElementName=keys, Path=ClickCommand}"
+                CommandParameter="8"
                 Content="8"
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="1"
                 Grid.Column="3"
+                Command="{Binding ElementName=keys, Path=ClickCommand}"
+                CommandParameter="9"
                 Content="9"
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="0"
                 Grid.Column="1"
+                Command="{Binding ElementName=keys, Path=ClickCommand}"
+                CommandParameter="("
                 Content="("
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="0"
                 Grid.Column="2"
+                Command="{Binding ElementName=keys, Path=ClickCommand}"
+                CommandParameter=")"
                 Content=")"
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="0"
                 Grid.Column="3"
+                Command="{Binding ElementName=keys, Path=ClickCommand}"
+                CommandParameter="%"
                 Content="MOD"
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="0"
                 Grid.Column="4"
+                Command="{Binding ElementName=keys, Path=ClickCommand}"
+                CommandParameter="/"
                 Content="÷"
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="1"
                 Grid.Column="4"
+                Command="{Binding ElementName=keys, Path=ClickCommand}"
+                CommandParameter="*"
                 Content="×"
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="2"
                 Grid.Column="4"
+                Command="{Binding ElementName=keys, Path=ClickCommand}"
+                CommandParameter="-"
                 Content="-"
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="3"
                 Grid.Column="4"
+                Command="{Binding ElementName=keys, Path=ClickCommand}"
+                CommandParameter="+"
                 Content="+"
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="4"
                 Grid.Column="4"
+                Command="{Binding ElementName=keys, Path=ExecuteCommand}"
                 Content="="
                 Style="{StaticResource CalculatorButton}" />
         </Grid>

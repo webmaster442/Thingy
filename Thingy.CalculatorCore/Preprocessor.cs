@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using Thingy.CalculatorCore.PreprocessorInternals;
 
@@ -9,12 +8,13 @@ namespace Thingy.CalculatorCore
 {
     public class Preprocessor
     {
-        private readonly char[] _operators;
+        private readonly string[] _operators;
         private readonly List<IProcessor> _processors;
+        private readonly string _tokenizerregex;
 
         public Preprocessor()
         {
-            _operators = new char[] { '+', '-', '*', '%', '&', '|', '^', '~', '(', ')' };
+            _operators = new string[] { @"\+", @"\-", @"\*\*", @"\*", @"\/\/", @"\/", @"\%", @"\&", @"\|", @"\^", @"\~", @"\(", @"\)" };
             _processors = new List<IProcessor>
             {
                 new BinaryNumberParser(),
@@ -23,41 +23,26 @@ namespace Thingy.CalculatorCore
                 new RomanNumberParser(),
                 new PrefixedNumberParser()
             };
+            StringBuilder regex = new StringBuilder();
+            foreach (var @operator in _operators)
+            {
+                regex.AppendFormat("({0})|", @operator);
+            }
+            regex.Remove(regex.Length - 1, 1);
+            _tokenizerregex = regex.ToString();
         }
 
-        private IList<string> TokenizeExpression(string expr)
+        private string[] TokenizeInput(string input)
         {
-            var buffer = string.Empty;
-            var ret = new List<string>();
-            expr = expr.Replace(" ", "");
-            foreach (var c in expr)
-            {
-                if (_operators.Contains(c))
-                {
-                    if (buffer.Length > 0) ret.Add(buffer);
-                    ret.Add(c.ToString(CultureInfo.InvariantCulture));
-                    buffer = string.Empty;
-                }
-                else
-                {
-                    buffer += c;
-                }
-            }
-
-            if (buffer.Length > 0)
-            {
-                ret.Add(buffer);
-            }
-
-            return ret;
+            return Regex.Split(input, _tokenizerregex);
         }
 
         public string Process(string input)
         {
-            var tokens = TokenizeExpression(input);
+            var tokens = TokenizeInput(input);
 
             //foreach (var token in tokens)
-            for (int i=0; i<tokens.Count; i++)
+            for (int i=0; i<tokens.Length; i++)
             {
                 foreach (var processor in _processors)
                 {
