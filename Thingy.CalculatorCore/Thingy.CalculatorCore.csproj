@@ -75,6 +75,13 @@
     <Compile Include="FunctionLoader.cs" />
     <Compile Include="ICalculatorEngine.cs" />
     <Compile Include="PrefixDictionary.cs" />
+    <Compile Include="Preprocessor.cs" />
+    <Compile Include="PreprocessorInternals\BinaryNumberParser.cs" />
+    <Compile Include="PreprocessorInternals\HexaNumberParser.cs" />
+    <Compile Include="PreprocessorInternals\IProcessor.cs" />
+    <Compile Include="PreprocessorInternals\NumberParser.cs" />
+    <Compile Include="PreprocessorInternals\OctalNumberParser.cs" />
+    <Compile Include="PreprocessorInternals\RomanNumberParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringFormatter.cs" />
   </ItemGroup>
