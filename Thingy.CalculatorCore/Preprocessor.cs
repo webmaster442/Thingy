@@ -15,11 +15,14 @@ namespace Thingy.CalculatorCore
         public Preprocessor()
         {
             _operators = new char[] { '+', '-', '*', '%', '&', '|', '^', '~', '(', ')' };
-            _processors = new List<IProcessor>();
-            _processors.Add(new BinaryNumberParser());
-            _processors.Add(new HexaNumberParser());
-            _processors.Add(new OctalNumberParser());
-            _processors.Add(new RomanNumberParser());
+            _processors = new List<IProcessor>
+            {
+                new BinaryNumberParser(),
+                new HexaNumberParser(),
+                new OctalNumberParser(),
+                new RomanNumberParser(),
+                new PrefixedNumberParser()
+            };
         }
 
         private IList<string> TokenizeExpression(string expr)

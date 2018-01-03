@@ -40,6 +40,7 @@
     <Compile Include="BinaryNumberParserTests.cs" />
     <Compile Include="HexaNumberParserTests.cs" />
     <Compile Include="OctalNumberParserTests.cs" />
+    <Compile Include="PrefixNumberParserTests.cs" />
     <Compile Include="PreprocessorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

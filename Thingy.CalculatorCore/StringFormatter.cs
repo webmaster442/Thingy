@@ -37,8 +37,7 @@ namespace Thingy.CalculatorCore
         {
             if (preferPrefixes)
             {
-                var pfx = new PrefixDictionary();
-                return pfx.DivideToPrefix(input);
+                return PrefixSource.DivideToPrefix(input);
             }
             if (groupByThousands)
             {
