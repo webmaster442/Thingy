@@ -43,11 +43,16 @@
     <Compile Include="PrefixNumberParserTests.cs" />
     <Compile Include="PreprocessorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TrigonometryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\applib\AppLib.Math\AppLib.Maths.csproj">
+      <Project>{0169FF46-6F3D-4CE8-BAD2-05F024EB24E2}</Project>
+      <Name>AppLib.Maths</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Thingy.CalculatorCore\Thingy.CalculatorCore.csproj">
       <Project>{d0f12e16-59c0-4d6f-880d-621255fa708b}</Project>
       <Name>Thingy.CalculatorCore</Name>

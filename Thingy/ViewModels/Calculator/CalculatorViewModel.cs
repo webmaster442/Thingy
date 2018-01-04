@@ -129,6 +129,10 @@ namespace Thingy.ViewModels.Calculator
                 }
                 History.Add(item);
             }
+            else
+            {
+                History.Add(item);
+            }
         }
 
         private async void Execute()

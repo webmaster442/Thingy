@@ -22,6 +22,8 @@ namespace Thingy.CalculatorCore
 
         public CalculatorEngine()
         {
+            TrigonometryMode = TrigonometryMode.DEG;
+
             _functioncache = new Dictionary<string, string>();
             _preprocessor = new Preprocessor(_functioncache);
             var options = new Dictionary<string, object>();
