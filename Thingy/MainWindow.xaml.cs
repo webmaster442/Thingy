@@ -1,5 +1,4 @@
 ﻿using AppLib.MVVM;
-using AppLib.WPF.Controls;
 using Dragablz;
 using MahApps.Metro.Controls;
 using System.Windows.Controls;
@@ -16,7 +15,14 @@ namespace Thingy
         public MainWindow()
         {
             InitializeComponent();
+            Title = $"{Title} - {GetAssemblyVersion()}";
             TabControl.ClosingItemCallback = TabClosing;
+        }
+
+        private string GetAssemblyVersion()
+        {
+            var executing = System.Reflection.Assembly.GetExecutingAssembly();
+            return executing.GetName().Version.ToString();
         }
 
         private void TabClosing(ItemActionCallbackArgs<TabablzControl> args)
