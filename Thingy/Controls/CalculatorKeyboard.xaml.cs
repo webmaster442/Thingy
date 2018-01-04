@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -30,6 +31,15 @@ namespace Thingy.Controls
         {
             get { return (ICommand)GetValue(ExecuteCommandProperty); }
             set { SetValue(ExecuteCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty FunctionsProperty =
+            DependencyProperty.Register("Functions", typeof(IEnumerable), typeof(CalculatorKeyboard));
+
+        public IEnumerable Functions
+        {
+            get { return (IEnumerable)GetValue(FunctionsProperty); }
+            set { SetValue(FunctionsProperty, value); }
         }
     }
 }

@@ -4,8 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Thingy.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="600"
     d:DesignWidth="900"
     mc:Ignorable="d">
@@ -24,7 +24,8 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition
+                    Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBox
                 x:Name="FormulaBox"
@@ -33,17 +34,25 @@
                 Grid.ColumnSpan="2"
                 BorderBrush="{x:Null}"
                 Text="{Binding Formula}"
-                TextAlignment="Right" />
+                TextAlignment="Right">
+                <TextBox.InputBindings>
+                    <KeyBinding
+                        Key="Return"
+                        Command="{Binding ExecuteCommand}" />
+                </TextBox.InputBindings>
+            </TextBox>
             <mah:DropDownButton
-                Content="History"
-                ItemsSource="{Binding History}"
                 Grid.Row="0"
-                Grid.Column="2">
+                Grid.Column="2"
+                Content="History"
+                ItemsSource="{Binding History}">
                 <mah:DropDownButton.ItemContainerStyle>
-                    <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
-                        <Setter Property="Header" Value="{Binding}"/>
-                        <Setter Property="Command" Value="{Binding DataContext.InsertHistoryCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"/>
-                        <Setter Property="CommandParameter" Value="{Binding}"/>
+                    <Style
+                        BasedOn="{StaticResource {x:Type MenuItem}}"
+                        TargetType="MenuItem">
+                        <Setter Property="Header" Value="{Binding}" />
+                        <Setter Property="Command" Value="{Binding DataContext.InsertHistoryCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+                        <Setter Property="CommandParameter" Value="{Binding}" />
                     </Style>
                 </mah:DropDownButton.ItemContainerStyle>
             </mah:DropDownButton>
@@ -55,8 +64,8 @@
                 Background="Transparent"
                 BorderBrush="{x:Null}"
                 FontSize="32"
-                Text="{Binding Result}"
                 IsReadOnly="True"
+                Text="{Binding Result}"
                 TextAlignment="Right" />
             <StackPanel
                 x:Name="SystemButtons"
@@ -66,29 +75,31 @@
                 HorizontalAlignment="Right"
                 Orientation="Horizontal">
                 <Button
-                    Content="Clear"
-                    Command="{Binding ClearCommand}"/>
+                    Command="{Binding ClearCommand}"
+                    Content="Clear" />
                 <Button
-                    Content="Clear History"
-                    Command="{Binding ClearHistoryCommand}"/>
+                    Command="{Binding ClearHistoryCommand}"
+                    Content="Clear History" />
                 <Button
-                    Content="Backspace"
-                    Command="{Binding BackSpaceCommand}"/>
+                    Command="{Binding BackSpaceCommand}"
+                    Content="Backspace" />
             </StackPanel>
         </Grid>
 
         <TabControl
+            x:Name="KeyboardViewSwitcher"
             Grid.Row="1">
             <TabItem
                 Header="Keys">
                 <controls:CalculatorKeyboard
                     ClickCommand="{Binding InsertFormulaCommand}"
-                    ExecuteCommand="{Binding ExecuteCommand}"/>
+                    ExecuteCommand="{Binding ExecuteCommand}"
+                    Functions="{Binding Functions}" />
             </TabItem>
             <TabItem
                 Header="Powers/Prefixes">
                 <controls:Prefixes
-                    ClickCommand="{Binding InsertFormulaCommand}"/>
+                    ClickCommand="{Binding InsertFormulaCommand}" />
             </TabItem>
         </TabControl>
     </Grid>

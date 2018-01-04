@@ -160,7 +160,8 @@
     <Compile Include="Views\GreekAlphabet.xaml.cs">
       <DependentUpon>GreekAlphabet.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ICommandLineView.cs" />
+    <Compile Include="Views\Interfaces\ICalculatorView.cs" />
+    <Compile Include="Views\Interfaces\ICommandLineView.cs" />
     <Compile Include="Views\Dialogs\NewFolderLink.xaml.cs">
       <DependentUpon>NewFolderLink.xaml</DependentUpon>
     </Compile>

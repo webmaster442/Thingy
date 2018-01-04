@@ -2,10 +2,11 @@
 using System;
 using System.Collections.ObjectModel;
 using Thingy.CalculatorCore;
+using System.Linq;
 
 namespace Thingy.ViewModels
 {
-    public sealed class CalculatorViewModel : ViewModel, IDisposable
+    public sealed class CalculatorViewModel : ViewModel<Views.ICalculatorView>, IDisposable
     {
         private string _formula;
         private string _result;
@@ -13,6 +14,7 @@ namespace Thingy.ViewModels
         private const int MaxHistoryCount = 20;
 
         public DelegateCommand<string> InsertFormulaCommand { get; private set; }
+        public DelegateCommand<string> InsertFunctionFormulaCommand { get; private set; }
         public DelegateCommand<string> InsertHistoryCommand { get; private set; }
         public DelegateCommand ExecuteCommand { get; private set; }
         public DelegateCommand ClearCommand { get; private set; }
@@ -20,6 +22,7 @@ namespace Thingy.ViewModels
         public DelegateCommand BackSpaceCommand { get; private set; }
 
         public ObservableCollection<string> History { get; private set; }
+        public ObservableCollection<string> Functions { get; private set; }
 
         public string Formula
         {
@@ -33,16 +36,25 @@ namespace Thingy.ViewModels
             set { SetValue(ref _result, value); }
         }
 
-        public CalculatorViewModel()
+        public CalculatorViewModel(Views.ICalculatorView view): base(view)
         {
             _engine = new CalculatorEngine();
             History = new ObservableCollection<string>();
             ExecuteCommand = Command.ToCommand(Execute);
+            InsertFunctionFormulaCommand = Command.ToCommand<string>(InsertFunctionFormula);
             InsertFormulaCommand = Command.ToCommand<string>(InsertFormula);
             ClearCommand = Command.ToCommand(Clear);
             ClearHistoryCommand = Command.ToCommand(ClearHistory);
             BackSpaceCommand = Command.ToCommand(BackSpace);
             InsertHistoryCommand = Command.ToCommand<string>(InsertHistory);
+            Functions = new ObservableCollection<string>(_engine.Functions.OrderBy(x => x));
+        }
+
+        private void InsertFunctionFormula(string obj)
+        {
+            View.SwitchToMainKeyboard();
+            Formula += $"{obj}(";
+            View.FocusFormulaInput();
         }
 
         private void InsertHistory(string obj)
@@ -71,16 +83,21 @@ namespace Thingy.ViewModels
 
         private void InsertFormula(string obj)
         {
+            View.SwitchToMainKeyboard();
             Formula += obj;
+            View.FocusFormulaInput();
         }
 
         private void UpdateHistory(string item)
         {
-            if (History.Count > MaxHistoryCount)
+            if (History.Count > 0 && History[History.Count - 1] != item)
             {
-                History.RemoveAt(0);
+                if (History.Count > MaxHistoryCount)
+                {
+                    History.RemoveAt(0);
+                }
+                History.Add(item);
             }
-            History.Add(item);
         }
 
         private async void Execute()
@@ -100,6 +117,8 @@ namespace Thingy.ViewModels
                     Result = $"Error: {result.Content}";
                     break;
             }
+            View.SwitchToMainKeyboard();
+            View.FocusFormulaInput();
         }
 
         public void Dispose()

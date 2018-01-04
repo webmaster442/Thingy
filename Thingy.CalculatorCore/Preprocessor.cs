@@ -11,9 +11,11 @@ namespace Thingy.CalculatorCore
         private readonly string[] _operators;
         private readonly List<IProcessor> _processors;
         private readonly string _tokenizerregex;
+        private readonly IDictionary<string, string> _replacetable;
 
-        public Preprocessor()
+        public Preprocessor(IDictionary<string, string> replcacetable)
         {
+            _replacetable = replcacetable;
             _operators = new string[] { @"\+", @"\-", @"\*\*", @"\*", @"\/\/", @"\/", @"\%", @"\&", @"\|", @"\^", @"\~", @"\(", @"\)" };
             _processors = new List<IProcessor>
             {
@@ -41,27 +43,35 @@ namespace Thingy.CalculatorCore
         {
             var tokens = TokenizeInput(input);
 
-            //foreach (var token in tokens)
             for (int i=0; i<tokens.Length; i++)
             {
-                foreach (var processor in _processors)
+                if (_replacetable.Keys.Contains(tokens[i]))
                 {
-                    if (Regex.IsMatch(tokens[i], processor.PatternMatchRegex))
+                    //replace it if it's a recognized function
+                    tokens[i] = _replacetable[tokens[i]];
+                }
+                else
+                {
+                    //only run preprocessor modules, if it's not a function
+                    foreach (var processor in _processors)
                     {
-                        string temp;
-                        if (processor.Process(tokens[i], out temp))
+                        if (Regex.IsMatch(tokens[i], processor.PatternMatchRegex))
                         {
-                            tokens[i] = temp;
-                        }
-                        else
-                        {
-                            throw new Exception("Parse error");
+                            string temp;
+                            if (processor.Process(tokens[i], out temp))
+                            {
+                                tokens[i] = temp;
+                            }
+                            else
+                            {
+                                throw new Exception("Parse error");
+                            }
                         }
                     }
                 }
             }
 
-            return string.Join(" ", tokens);
+            return string.Join(" ", tokens).Trim();
         }
 
     }

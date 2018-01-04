@@ -23,7 +23,7 @@ namespace Thingy.CalculatorCore
         public CalculatorEngine()
         {
             _functioncache = new Dictionary<string, string>();
-            _preprocessor = new Preprocessor();
+            _preprocessor = new Preprocessor(_functioncache);
             var options = new Dictionary<string, object>();
             options["DivisionOptions"] = PythonDivisionOptions.New;
             _history = new ZeroStream();

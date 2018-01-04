@@ -25,10 +25,9 @@ namespace Thingy.Modules
 
         public override UserControl RunModule()
         {
-            return new Views.Calculator
-            {
-                DataContext = new ViewModels.CalculatorViewModel()
-            };
+            var view = new Views.Calculator();
+            view.DataContext = new ViewModels.CalculatorViewModel(view);
+            return view;
         }
     }
 }

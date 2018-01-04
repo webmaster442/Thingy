@@ -14,6 +14,19 @@
             <ColumnDefinition
                 Width="Auto" />
         </Grid.ColumnDefinitions>
+        <ScrollViewer
+            Grid.Column="0">
+            <ItemsControl
+                ItemTemplate="{StaticResource CalculatorFunction}"
+                ItemsSource="{Binding Functions}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="4" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
+
         <Grid
             x:Name="NumericPad"
             Grid.Row="1"
