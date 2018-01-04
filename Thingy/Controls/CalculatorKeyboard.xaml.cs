@@ -24,6 +24,15 @@ namespace Thingy.Controls
             set { SetValue(ClickCommandProperty, value); }
         }
 
+        public static readonly DependencyProperty NumSysCommandProperty =
+            DependencyProperty.Register("NumSysCommand", typeof(ICommand), typeof(CalculatorKeyboard), new FrameworkPropertyMetadata(null));
+
+        public ICommand NumSysCommand
+        {
+            get { return (ICommand)GetValue(NumSysCommandProperty); }
+            set { SetValue(NumSysCommandProperty, value); }
+        }
+
         public static readonly DependencyProperty ExecuteCommandProperty =
             DependencyProperty.Register("ExecuteCommand", typeof(ICommand), typeof(CalculatorKeyboard), new FrameworkPropertyMetadata(null));
 

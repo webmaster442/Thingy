@@ -37,6 +37,7 @@ namespace Thingy
                     if (ValidatableContent != null)
                         ValidatableContent.ErrorsChanged -= ErrorHandler;
                     Ok.IsEnabled = true;
+                    ErrorLabel.Visibility = Visibility.Collapsed;
                 }
             }
         }

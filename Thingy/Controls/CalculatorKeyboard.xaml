@@ -49,26 +49,36 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Content="BIN"
+                Command="{Binding ElementName=keys, Path=NumSysCommand}"
+                CommandParameter="2"
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="1"
                 Grid.Column="0"
                 Content="OCT"
+                Command="{Binding ElementName=keys, Path=NumSysCommand}"
+                CommandParameter="8"
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="2"
                 Grid.Column="0"
                 Content="HEX"
+                Command="{Binding ElementName=keys, Path=NumSysCommand}"
+                CommandParameter="16"
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="3"
                 Grid.Column="0"
                 Content="ROMAN"
+                Command="{Binding ElementName=keys, Path=NumSysCommand}"
+                CommandParameter="2"
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="4"
                 Grid.Column="0"
                 Content="NumSys"
+                Command="{Binding ElementName=keys, Path=NumSysCommand}"
+                CommandParameter="36"
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="4"

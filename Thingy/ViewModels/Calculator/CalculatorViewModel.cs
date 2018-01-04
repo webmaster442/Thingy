@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using Thingy.CalculatorCore;
 using System.Linq;
 
-namespace Thingy.ViewModels
+namespace Thingy.ViewModels.Calculator
 {
     public sealed class CalculatorViewModel : ViewModel<Views.ICalculatorView>, IDisposable
     {
@@ -12,6 +12,7 @@ namespace Thingy.ViewModels
         private string _result;
         private CalculatorEngine _engine;
         private const int MaxHistoryCount = 20;
+        private IApplication _app;
 
         public DelegateCommand<string> InsertFormulaCommand { get; private set; }
         public DelegateCommand<string> InsertFunctionFormulaCommand { get; private set; }
@@ -20,6 +21,7 @@ namespace Thingy.ViewModels
         public DelegateCommand ClearCommand { get; private set; }
         public DelegateCommand ClearHistoryCommand { get; private set; }
         public DelegateCommand BackSpaceCommand { get; private set; }
+        public DelegateCommand<string> NumSysInputCommand { get; private set; }
 
         public ObservableCollection<string> History { get; private set; }
         public ObservableCollection<string> Functions { get; private set; }
@@ -36,8 +38,9 @@ namespace Thingy.ViewModels
             set { SetValue(ref _result, value); }
         }
 
-        public CalculatorViewModel(Views.ICalculatorView view): base(view)
+        public CalculatorViewModel(Views.ICalculatorView view, IApplication app): base(view)
         {
+            _app = app;
             _engine = new CalculatorEngine();
             History = new ObservableCollection<string>();
             ExecuteCommand = Command.ToCommand(Execute);
@@ -47,7 +50,35 @@ namespace Thingy.ViewModels
             ClearHistoryCommand = Command.ToCommand(ClearHistory);
             BackSpaceCommand = Command.ToCommand(BackSpace);
             InsertHistoryCommand = Command.ToCommand<string>(InsertHistory);
+            NumSysInputCommand = Command.ToCommand<string>(NumSysInput);
             Functions = new ObservableCollection<string>(_engine.Functions.OrderBy(x => x));
+        }
+
+        private async void NumSysInput(string obj)
+        {
+            var dialog = new Views.CalculatorDialogs.NumberSystemInput();
+            dialog.Init(Convert.ToInt32(obj));
+            bool result = await _app.ShowDialog(dialog, "Input number in specified system", null);
+            if (result)
+            {
+                switch (dialog.SelectedNumberSystem)
+                {
+                    case 2:
+                        Formula += $"{dialog.NumberText}:BIN";
+                        break;
+                    case 8:
+                        Formula += $"{dialog.NumberText}:OCT";
+                        break;
+                    case 16:
+                        Formula += $"{dialog.NumberText}:HEX";
+                        break;
+                    default:
+                        Formula += $"{dialog.NumberText}:S{dialog.SelectedNumberSystem}";
+                        break;
+                }
+                View.SwitchToMainKeyboard();
+                View.FocusFormulaInput();
+            }
         }
 
         private void InsertFunctionFormula(string obj)

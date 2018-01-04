@@ -93,6 +93,7 @@
                 Header="Keys">
                 <controls:CalculatorKeyboard
                     ClickCommand="{Binding InsertFormulaCommand}"
+                    NumSysCommand="{Binding NumSysInputCommand}"
                     ExecuteCommand="{Binding ExecuteCommand}"
                     Functions="{Binding Functions}" />
             </TabItem>

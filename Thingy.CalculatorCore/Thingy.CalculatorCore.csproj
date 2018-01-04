@@ -74,6 +74,7 @@
     <Compile Include="EventRedirectedStreamWriter.cs" />
     <Compile Include="FunctionLoader.cs" />
     <Compile Include="ICalculatorEngine.cs" />
+    <Compile Include="NumberSystemConversion.cs" />
     <Compile Include="PrefixSource.cs" />
     <Compile Include="Preprocessor.cs" />
     <Compile Include="PreprocessorInternals\BinaryNumberParser.cs" />
