@@ -1,7 +1,6 @@
 ﻿using AppLib.Common.Log;
 using AppLib.MVVM;
 using Dragablz;
-using Dragablz.Dockablz;
 using System;
 using Thingy.Infrastructure;
 using Thingy.ViewModels;
@@ -15,8 +14,13 @@ namespace Thingy
         public DelegateCommand ExitCommand { get; set; }
         public DelegateCommand LogCommand { get; set; }
 
-        public MainWindowViewModel()
+        private ILogger _log;
+        private IApplication _app;
+
+        public MainWindowViewModel(IApplication app, ILogger log)
         {
+            _app = app;
+            _log = log;
             SettingCommand = Command.ToCommand(Setting, CanOpenSetting);
             ExitCommand = Command.ToCommand(Exit);
             LogCommand = Command.ToCommand(Log);
@@ -24,20 +28,22 @@ namespace Thingy
 
         private void Log()
         {
-            var logviewer = new AppLib.WPF.Dialogs.LogViewer();
-            logviewer.Log = App.IoCContainer.ResolveSingleton<ILogger>();
-            App.Instance.ShowDialog(logviewer, "Application Log");
+            var logviewer = new AppLib.WPF.Dialogs.LogViewer
+            {
+                Log = _log
+            };
+            _app.ShowDialog(logviewer, "Application Log");
         }
 
         private bool CanOpenSetting()
         {
-            int index = App.Instance.FindTabByTitle("Settings");
+            int index = _app.FindTabByTitle("Settings");
             return index == -1;
         }
 
         private void Setting()
         {
-            App.Instance.OpenTabContent("Settings", new Views.Settings());
+            _app.OpenTabContent("Settings", new Views.Settings());
         }
 
         private void Exit()

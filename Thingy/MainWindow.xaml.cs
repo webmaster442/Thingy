@@ -17,6 +17,7 @@ namespace Thingy
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainWindowViewModel(App.Instance, App.Log);
             Title = $"{Title} - {GetAssemblyVersion()}";
             TabControl.ClosingItemCallback = TabClosing;
         }
