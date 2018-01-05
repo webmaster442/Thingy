@@ -45,29 +45,6 @@ namespace Thingy
             App.Current.Shutdown();
         }
 
-        public ItemActionCallback ClosingTabItemHandler
-        {
-            get
-            {
-                return ClosingTabItemHandlerImpl;
-            }
-        }
-
-        private static void ClosingTabItemHandlerImpl(ItemActionCallbackArgs<TabablzControl> args)
-        {
-            var log = App.IoCContainer.ResolveSingleton<ILogger>();
-            var viewModel = args.DragablzItem.DataContext as HeaderedItemViewModel;
-            log.Info("Closing Tab:" + args.DragablzItem.Content.ToString());
-            if (viewModel.Content is IDisposable disposable)
-            {
-                log.Info("Dispose called for: " + viewModel.Content.GetType().FullName);
-                disposable.Dispose();
-            }
-            viewModel.Content = null;
-            GC.WaitForPendingFinalizers();
-            GC.Collect();
-        }
-
         public Func<HeaderedItemViewModel> ItemFactory
         {
             get

@@ -1,6 +1,8 @@
-﻿using AppLib.MVVM;
+﻿using AppLib.Common.Log;
+using AppLib.MVVM;
 using Dragablz;
 using MahApps.Metro.Controls;
+using System;
 using System.Windows.Controls;
 using Thingy.Properties;
 
@@ -27,9 +29,24 @@ namespace Thingy
 
         private void TabClosing(ItemActionCallbackArgs<TabablzControl> args)
         {
-            var content = args.DragablzItem?.DataContext as HeaderedItemViewModel;
-            var closable = content?.Content as ICloseableView;
-            closable?.Close();
+            var log = App.IoCContainer.ResolveSingleton<ILogger>();
+            var headerModel = args.DragablzItem?.DataContext as HeaderedItemViewModel;
+            log.Info($"Closing Tab: {headerModel.Header.ToString()}");
+            var viewInTab = headerModel.Content as UserControl;
+            if (viewInTab.DataContext is IDisposable viewModel)
+            {
+                log.Info($"Dispose called for: {viewInTab.DataContext.GetType().FullName}");
+                viewModel.Dispose();
+            }
+            viewInTab.DataContext = null;
+            if (viewInTab is IDisposable view)
+            {
+                log.Info($"Dispose called for: {viewInTab.GetType().FullName}");
+                view.Dispose();
+            }
+            viewInTab = null;
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
         }
 
         public void SetCurrentTabContent(string title, UserControl control, bool newtab)

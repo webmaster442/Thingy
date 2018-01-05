@@ -39,11 +39,11 @@ namespace Thingy.Infrastructure
                     {
                         SetCount(instance.Category);
                         _modules.Add(instance);
-                        log.Info("Module load was succesfull:" + module.Name);
+                        log.Info($"Module load was succesfull: {module.Name}");
                     }
                     else
                     {
-                        log.Info("Module load was succesfull, but it was not cached: " + module.Name);
+                        log.Info($"Module load was succesfull, but it was not cached: {module.Name}");
                     }
                 }
                 catch (Exception ex)
