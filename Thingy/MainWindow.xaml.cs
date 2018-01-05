@@ -29,19 +29,18 @@ namespace Thingy
 
         private void TabClosing(ItemActionCallbackArgs<TabablzControl> args)
         {
-            var log = App.IoCContainer.ResolveSingleton<ILogger>();
             var headerModel = args.DragablzItem?.DataContext as HeaderedItemViewModel;
-            log.Info($"Closing Tab: {headerModel.Header.ToString()}");
+            App.Log.Info($"Closing Tab: {headerModel.Header.ToString()}");
             var viewInTab = headerModel.Content as UserControl;
             if (viewInTab.DataContext is IDisposable viewModel)
             {
-                log.Info($"Dispose called for: {viewInTab.DataContext.GetType().FullName}");
+                App.Log.Info($"Dispose called for: {viewInTab.DataContext.GetType().FullName}");
                 viewModel.Dispose();
             }
             viewInTab.DataContext = null;
             if (viewInTab is IDisposable view)
             {
-                log.Info($"Dispose called for: {viewInTab.GetType().FullName}");
+                App.Log.Info($"Dispose called for: {viewInTab.GetType().FullName}");
                 view.Dispose();
             }
             viewInTab = null;

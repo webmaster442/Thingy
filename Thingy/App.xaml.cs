@@ -1,4 +1,5 @@
-﻿using MahApps.Metro;
+﻿using AppLib.WPF;
+using MahApps.Metro;
 using MahApps.Metro.SimpleChildWindow;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -6,8 +7,6 @@ using System.Windows;
 using System.Windows.Controls;
 using Thingy.Db;
 using Thingy.Infrastructure;
-using AppLib.WPF;
-using AppLib.Common.Log;
 
 namespace Thingy
 {
@@ -17,6 +16,8 @@ namespace Thingy
     public partial class App : Application, IApplication
     {
         public static AppLib.Common.IOC.IContainer IoCContainer { get; private set; }
+        public static AppLib.Common.Log.ILogger Log { get; private set; }
+
         public static string[] Accents { get; private set; }
 
         public static IApplication Instance
@@ -64,6 +65,9 @@ namespace Thingy
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            Log = new AppLib.Common.Log.Logger();
+            Log.Info("Application startup");
+            DispatcherUnhandledException += App_DispatcherUnhandledException;
             Accents = new string[]
             {
                 "Red", "Green", "Blue",
@@ -75,19 +79,15 @@ namespace Thingy
                 "Olive", "Steel", "Mauve",
                 "Taupe", "Sienna"
             };
-
             IoCContainer = new AppLib.Common.IOC.Container();
-            IoCContainer.RegisterSingleton<ILogger>(() =>
-            {
-                return new Logger();
-            });
             IoCContainer.RegisterSingleton<IDataBase>(() =>
             {
                 return new DataBase("test.db");
             });
+            Log.Info("Database initialized");
             IoCContainer.RegisterSingleton<IModuleLoader>(() =>
             {
-                return new ModuleLoader(IoCContainer.ResolveSingleton<ILogger>());
+                return new ModuleLoader(Log);
             });
 
             var accent = Thingy.Properties.Settings.Default.SelectedAccent;
@@ -98,6 +98,15 @@ namespace Thingy
             var dload = BingPhotoOfDay.WasSuccesfull;
 
             base.OnStartup(e);
+        }
+
+        private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            Log.Error(e.Exception);
+            var desktop = System.Environment.GetFolderPath(System.Environment.SpecialFolder.DesktopDirectory);
+            var log = System.IO.Path.Combine(desktop, "Thingy crash log.xml");
+            Log.SaveToFile(log);
+            AppLib.WPF.Dialogs.Dialogs.ShowErrorDialog(e.Exception);
         }
     }
 }
