@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using Thingy.Db;
 using Thingy.Infrastructure;
 using AppLib.WPF;
+using AppLib.Common.Log;
 
 namespace Thingy
 {
@@ -76,11 +77,18 @@ namespace Thingy
             };
 
             IoCContainer = new AppLib.Common.IOC.Container();
+            IoCContainer.RegisterSingleton<ILogger>(() =>
+            {
+                return new Logger();
+            });
             IoCContainer.RegisterSingleton<IDataBase>(() =>
             {
                 return new DataBase("test.db");
             });
-            IoCContainer.RegisterSingleton<IModuleLoader, ModuleLoader>();
+            IoCContainer.RegisterSingleton<IModuleLoader>(() =>
+            {
+                return new ModuleLoader(IoCContainer.ResolveSingleton<ILogger>());
+            });
 
             var accent = Thingy.Properties.Settings.Default.SelectedAccent;
             ThemeManager.ChangeAppStyle(Application.Current,

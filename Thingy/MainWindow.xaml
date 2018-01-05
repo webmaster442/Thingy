@@ -18,6 +18,16 @@
     Icon="pack://application:,,,/Thingy.Resources;component/Icons/icons8-gift.png"
     Loaded="ModernWindow_Loaded"
     mc:Ignorable="d">
+    <mah:MetroWindow.Resources>
+        <Style TargetType="dragablz:TabablzControl">
+            <Setter Property="ClosingItemCallback" Value="{Binding ClosingTabItemHandler}"/>
+            <Setter Property="HeaderMemberPath" Value="Header"/>
+            <Setter Property="ItemContainerStyle" Value="{StaticResource TrapezoidDragableTabItemStyle}"/>
+            <Setter Property="NewItemFactory" Value="{Binding ItemFactory}"/>
+            <Setter Property="ShowDefaultAddButton" Value="True"/>
+            <Setter Property="ShowDefaultCloseButton" Value="True"/>
+        </Style>
+    </mah:MetroWindow.Resources>
     <mah:MetroWindow.DataContext>
         <local:MainWindowViewModel />
     </mah:MetroWindow.DataContext>
@@ -62,6 +72,14 @@
                         Style="{StaticResource Flat}" />
                     <applib:ImageButton
                         Margin="5,0"
+                        Command="{Binding LogCommand}"
+                        Content="View Program Log"
+                        Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-edit-property-96.png"
+                        ImageHeight="28"
+                        ImageWidth="28"
+                        Style="{StaticResource Flat}" />
+                    <applib:ImageButton
+                        Margin="5,0"
                         Command="{Binding ExitCommand}"
                         Content="Exit Program"
                         Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-exit-sign-96.png"
@@ -79,13 +97,7 @@
         </Grid.RowDefinitions>
         <dragablz:TabablzControl
             x:Name="TabControl"
-            Margin="3"
-            ClosingItemCallback="{Binding ClosingTabItemHandler}"
-            HeaderMemberPath="Header"
-            ItemContainerStyle="{StaticResource TrapezoidDragableTabItemStyle}"
-            NewItemFactory="{Binding ItemFactory}"
-            ShowDefaultAddButton="True"
-            ShowDefaultCloseButton="True">
+            Margin="3">
             <dragablz:TabablzControl.HeaderPrefixContent>
                 <StackPanel
                     Orientation="Horizontal">

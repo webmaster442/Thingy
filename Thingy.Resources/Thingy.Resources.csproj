@@ -154,5 +154,8 @@
   <ItemGroup>
     <Resource Include="Icons\icons8-calculator-96.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-edit-property-96.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

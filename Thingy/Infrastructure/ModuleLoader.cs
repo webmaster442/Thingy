@@ -1,21 +1,25 @@
-﻿using System;
+﻿using AppLib.Common.Extensions;
+using AppLib.Common.Log;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows.Controls;
-using AppLib.Common.Extensions;
 
 namespace Thingy.Infrastructure
 {
     public class ModuleLoader : IModuleLoader
     {
         private List<IModule> _modules;
+        private ILogger _log;
         private Dictionary<string, int> _moudleCounter;
 
-        public ModuleLoader()
+        public ModuleLoader(ILogger log)
         {
-            _moudleCounter = new Dictionary<string, int>();
-            _moudleCounter.Add("All", 0);
+            _log = log;
+            _moudleCounter = new Dictionary<string, int>
+            {
+                { "All", 0 }
+            };
             _modules = new List<IModule>();
 
             var imodule = typeof(IModule);
@@ -35,11 +39,16 @@ namespace Thingy.Infrastructure
                     {
                         SetCount(instance.Category);
                         _modules.Add(instance);
+                        log.Info("Module load was succesfull:" + module.Name);
+                    }
+                    else
+                    {
+                        log.Info("Module load was succesfull, but it was not cached: " + module.Name);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("Module Load error: {0}", ex);
+                    log.Error(ex);
                 }
             }
         }
@@ -87,7 +96,7 @@ namespace Thingy.Infrastructure
             }
         }
 
-        public UserControl GetModuleByName(string name)
+        public UserControl RunModuleByName(string name)
         {
             var run = (from module in _modules
                        where module.ModuleName == name
@@ -95,6 +104,8 @@ namespace Thingy.Infrastructure
 
             if (run == null)
                 return null;
+
+            _log.Info("Starting module: " + name);
 
             return run.RunModule();
         }

@@ -37,7 +37,7 @@ namespace Thingy.ViewModels
 
         private void TileClick(string obj)
         {
-            var control = _moduleLoader.GetModuleByName(obj);
+            var control = _moduleLoader.RunModuleByName(obj);
             _application.SetCurrentTabContent(obj, control);
 
         }
