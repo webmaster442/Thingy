@@ -5,12 +5,12 @@ using System.Windows.Controls;
 using System.Windows.Threading;
 using Thingy.Implementation;
 
-namespace Thingy
+namespace Thingy.Views.Statusbar
 {
     /// <summary>
     /// Interaction logic for Statusbar.xaml
     /// </summary>
-    public partial class Statusbar : UserControl
+    public partial class StatusbarView : UserControl
     {
         private static PerformanceCounter _cpuCounter;
         private static long _availableMemory;
@@ -19,7 +19,7 @@ namespace Thingy
 
         private DispatcherTimer _timer;
 
-        public Statusbar()
+        public StatusbarView()
         {
             InitializeComponent();
 

@@ -1,6 +1,4 @@
-﻿using AppLib.Common.Log;
-using AppLib.MVVM;
-using Dragablz;
+﻿using Dragablz;
 using MahApps.Metro.Controls;
 using System;
 using System.Windows.Controls;
@@ -103,6 +101,18 @@ namespace Thingy
         private void OpenMenu(object sender, System.Windows.RoutedEventArgs e)
         {
             MenuFlyout.IsOpen = true;
+        }
+
+        private void StatusFlyOut_ClosingFinished(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (StatusFlyOut.Content != null)
+            {
+                if (StatusFlyOut.Content is IDisposable disposable)
+                {
+                    disposable.Dispose();
+                }
+                StatusFlyOut.Content = null;
+            }
         }
     }
 }

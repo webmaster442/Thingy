@@ -63,6 +63,13 @@ namespace Thingy
             return result;
         }
 
+        public void ShowStatusBarMenu(UserControl control, bool AutoClose = true)
+        {
+            var mainwindow = (App.Current.MainWindow as MainWindow);
+            mainwindow.StatusFlyOut.Content = control;
+            mainwindow.StatusFlyOut.IsAutoCloseEnabled = AutoClose;
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             Log = new AppLib.Common.Log.Logger();

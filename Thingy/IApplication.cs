@@ -7,6 +7,7 @@ namespace Thingy
     public interface IApplication
     {
         Task<bool> ShowDialog(UserControl control, string Title, INotifyPropertyChanged model = null);
+        void ShowStatusBarMenu(UserControl control, bool AutoClose = true);
         void SetCurrentTabContent(string Title, UserControl control);
         void OpenTabContent(string Title, UserControl control);
         int FindTabByTitle(string Title);

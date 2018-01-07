@@ -140,7 +140,7 @@
     <Compile Include="Modules\PowerShellModule.cs" />
     <Compile Include="Modules\ToDoListModule.cs" />
     <Compile Include="Modules\VirtualFoldersModule.cs" />
-    <Compile Include="Statusbar.xaml.cs">
+    <Compile Include="Views\Statusbar\Statusbar.xaml.cs">
       <DependentUpon>Statusbar.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CommandLineViewModel.cs" />
@@ -249,7 +249,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Statusbar.xaml">
+    <Page Include="Views\Statusbar\Statusbar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
