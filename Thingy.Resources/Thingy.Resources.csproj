@@ -62,9 +62,6 @@
     <Resource Include="Icons\icons8-folder.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icons\icons8-gift.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Icons\icons8-google-drive.png" />
   </ItemGroup>
   <ItemGroup>
@@ -101,7 +98,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\icons8-console.png" />
-    <Resource Include="Icons\icons8-git.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\icons8-powershell.png" />
@@ -156,6 +152,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\icons8-edit-property-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-swiss-army-knife-256.png" />
+    <Resource Include="Icons\icons8-swiss-army-knife-540.png" />
+    <Resource Include="Icons\icons8-swiss-army-knife-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-git.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

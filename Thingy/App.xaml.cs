@@ -77,6 +77,7 @@ namespace Thingy
         {
             Log = new AppLib.Common.Log.Logger();
             Log.Info("Application startup");
+            var trayIcon = new Infrastructure.Tray.TrayIcon();
             DispatcherUnhandledException += App_DispatcherUnhandledException;
             Accents = new string[]
             {

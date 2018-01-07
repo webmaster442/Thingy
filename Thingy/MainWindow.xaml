@@ -14,7 +14,7 @@
     Width="{Binding Source={x:Static properties:Settings.Default}, Path=WindowWidth, Mode=TwoWay}"
     Height="{Binding Source={x:Static properties:Settings.Default}, Path=WindowHeight, Mode=TwoWay}"
     Closing="ModernWindow_Closing"
-    Icon="pack://application:,,,/Thingy.Resources;component/Icons/icons8-gift.png"
+    Icon="pack://application:,,,/Thingy.Resources;component/Icons/icons8-swiss-army-knife-96.png"
     Loaded="ModernWindow_Loaded"
     mc:Ignorable="d">
     <mah:MetroWindow.Resources>
