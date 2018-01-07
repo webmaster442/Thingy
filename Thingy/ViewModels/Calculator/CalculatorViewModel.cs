@@ -38,10 +38,16 @@ namespace Thingy.ViewModels.Calculator
             set { SetValue(ref _result, value); }
         }
 
+        public CalculatorEngine Engine
+        {
+            get { return _engine; }
+            set { SetValue(ref _engine, value);  }
+        }
+
         public CalculatorViewModel(Views.ICalculatorView view, IApplication app): base(view)
         {
             _app = app;
-            _engine = new CalculatorEngine();
+            Engine = new CalculatorEngine();
             History = new ObservableCollection<string>();
             ExecuteCommand = Command.ToCommand(Execute);
             InsertFunctionFormulaCommand = Command.ToCommand<string>(InsertFunctionFormula);

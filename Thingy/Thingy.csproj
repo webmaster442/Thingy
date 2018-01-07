@@ -402,6 +402,10 @@
       <Project>{516087b5-6ac5-44a5-8df1-fe42d7a7a0e6}</Project>
       <Name>AppLib.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\applib\AppLib.Math\AppLib.Maths.csproj">
+      <Project>{0169ff46-6f3d-4ce8-bad2-05f024eb24e2}</Project>
+      <Name>AppLib.Maths</Name>
+    </ProjectReference>
     <ProjectReference Include="..\applib\AppLib.MVVM\AppLib.MVVM.csproj">
       <Project>{848616A9-3D2F-42B1-B474-BE506E8019E4}</Project>
       <Name>AppLib.MVVM</Name>

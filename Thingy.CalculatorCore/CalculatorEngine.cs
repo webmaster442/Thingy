@@ -7,10 +7,11 @@ using Microsoft.Scripting.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AppLib.MVVM;
 
 namespace Thingy.CalculatorCore
 {
-    public sealed class CalculatorEngine : ICalculatorEngine, IDisposable
+    public sealed class CalculatorEngine : BindableBase, ICalculatorEngine, IDisposable
     {
         private ScriptEngine _engine;
         private ScriptScope _scope;
@@ -19,6 +20,9 @@ namespace Thingy.CalculatorCore
         private Dictionary<string, string> _functioncache;
         private FunctionLoader _loader;
         private Preprocessor _preprocessor;
+
+        private bool _PreferPrefixes;
+        private bool _GroupByThousands;
 
         public CalculatorEngine()
         {
@@ -50,14 +54,26 @@ namespace Thingy.CalculatorCore
             get { return _functioncache.Keys; }
         }
 
-        public bool PreferPrefixes { get; set; }
+        public bool PreferPrefixes
+        {
+            get { return _PreferPrefixes; }
+            set { SetValue(ref _PreferPrefixes, value); }
+        }
 
-        public bool GroupByThousands { get; set; }
+        public bool GroupByThousands
+        {
+            get { return _GroupByThousands; }
+            set { SetValue(ref _GroupByThousands, value); }
+        }
 
         public TrigonometryMode TrigonometryMode
         {
             get { return Trigonometry.Mode; }
-            set { Trigonometry.Mode = value; }
+            set
+            {
+                Trigonometry.Mode = value;
+                OnPropertyChanged(() => TrigonometryMode);
+            }
         }
 
         public Task<CalculatorResult> Calculate(string commandLine)
