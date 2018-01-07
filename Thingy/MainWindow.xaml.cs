@@ -2,6 +2,7 @@
 using MahApps.Metro.Controls;
 using System;
 using System.Windows.Controls;
+using System.Windows.Input;
 using Thingy.Properties;
 
 namespace Thingy
@@ -9,15 +10,20 @@ namespace Thingy
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class MainWindow : MetroWindow, IMainWindow
     {
 
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel(App.Instance, App.Log);
+            DataContext = new MainWindowViewModel(this, App.Instance, App.Log);
             Title = $"{Title} - {GetAssemblyVersion()}";
             TabControl.ClosingItemCallback = TabClosing;
+        }
+
+        public void ShowMenu()
+        {
+            MenuFlyout.IsOpen = true;
         }
 
         private string GetAssemblyVersion()
@@ -98,21 +104,24 @@ namespace Thingy
             Settings.Default.Save();
         }
 
-        private void OpenMenu(object sender, System.Windows.RoutedEventArgs e)
-        {
-            MenuFlyout.IsOpen = true;
-        }
-
         private void StatusFlyOut_ClosingFinished(object sender, System.Windows.RoutedEventArgs e)
         {
+            App.Log.Info("Closing Status flyout");
             if (StatusFlyOut.Content != null)
             {
                 if (StatusFlyOut.Content is IDisposable disposable)
                 {
+                    App.Log.Info($"Dispodsing type: {StatusFlyOut.Content.GetType().FullName}");
                     disposable.Dispose();
                 }
                 StatusFlyOut.Content = null;
             }
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.SystemKey == Key.LeftAlt) ShowMenu();
+            base.OnKeyDown(e);
         }
     }
 }

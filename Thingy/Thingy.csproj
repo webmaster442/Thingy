@@ -103,6 +103,7 @@
     </Compile>
     <Compile Include="Controls\TrulyObservableCollection.cs" />
     <Compile Include="IApplication.cs" />
+    <Compile Include="IMainWindow.cs" />
     <Compile Include="Infrastructure\DBFileIconConverter.cs" />
     <Compile Include="Infrastructure\IModuleLoader.cs" />
     <Compile Include="Infrastructure\ModuleLoader.cs" />
@@ -140,6 +141,9 @@
     <Compile Include="Modules\PowerShellModule.cs" />
     <Compile Include="Modules\ToDoListModule.cs" />
     <Compile Include="Modules\VirtualFoldersModule.cs" />
+    <Compile Include="Views\Statusbar\MonitorSwitcher.xaml.cs">
+      <DependentUpon>MonitorSwitcher.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Statusbar\Statusbar.xaml.cs">
       <DependentUpon>Statusbar.xaml</DependentUpon>
     </Compile>
@@ -246,6 +250,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ModalDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Statusbar\MonitorSwitcher.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -63,11 +63,14 @@ namespace Thingy
             return result;
         }
 
-        public void ShowStatusBarMenu(UserControl control, bool AutoClose = true)
+        public void ShowStatusBarMenu(UserControl control, string title, bool AutoClose = true, int AutoCloseTimeMs = 5000)
         {
             var mainwindow = (App.Current.MainWindow as MainWindow);
             mainwindow.StatusFlyOut.Content = control;
+            mainwindow.StatusFlyOut.AutoCloseInterval = AutoCloseTimeMs;
             mainwindow.StatusFlyOut.IsAutoCloseEnabled = AutoClose;
+            mainwindow.StatusFlyOut.Header = title;
+            mainwindow.StatusFlyOut.IsOpen = true;
         }
 
         protected override void OnStartup(StartupEventArgs e)

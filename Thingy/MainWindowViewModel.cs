@@ -8,22 +8,29 @@ using Thingy.Views;
 
 namespace Thingy
 {
-    public class MainWindowViewModel: ViewModel
+    public class MainWindowViewModel: ViewModel<IMainWindow>
     {
         public DelegateCommand SettingCommand { get; set; }
         public DelegateCommand ExitCommand { get; set; }
         public DelegateCommand LogCommand { get; set; }
+        public DelegateCommand OpenMenuCommand { get; set; }
 
         private ILogger _log;
         private IApplication _app;
 
-        public MainWindowViewModel(IApplication app, ILogger log)
+        public MainWindowViewModel(IMainWindow view, IApplication app, ILogger log): base(view)
         {
             _app = app;
             _log = log;
             SettingCommand = Command.ToCommand(Setting, CanOpenSetting);
             ExitCommand = Command.ToCommand(Exit);
             LogCommand = Command.ToCommand(Log);
+            OpenMenuCommand = Command.ToCommand(OpenMenu);
+        }
+
+        private void OpenMenu()
+        {
+            View.ShowMenu();
         }
 
         private void Log()

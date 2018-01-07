@@ -72,17 +72,6 @@ namespace Thingy.Views.Statusbar
             RAMAmount.Text = string.Format("{0} MB", PerformanceInfo.GetPhysicalAvailableMemoryInMiB());
         }
 
-        private void ScreenClick(object sender, System.Windows.RoutedEventArgs e)
-        {
-            if (sender is MenuItem caller)
-            {
-                Process p = new Process();
-                p.StartInfo.FileName = "DisplaySwitch.exe";
-                p.StartInfo.Arguments = caller.Tag.ToString();
-                p.Start();
-            }
-        }
-
         private void Slider_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
         {
             if (!external)
@@ -94,6 +83,11 @@ namespace Thingy.Views.Statusbar
         private void BtnMute_Checked(object sender, System.Windows.RoutedEventArgs e)
         {
             defaultDevice.AudioEndpointVolume.Mute = (bool)BtnMute.IsChecked;
+        }
+
+        private void DisplaySwitch_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            App.Instance.ShowStatusBarMenu(new MonitorSwitcher(), "Display swithcer");
         }
     }
 }

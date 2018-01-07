@@ -31,7 +31,7 @@
             <StackPanel
                 Orientation="Horizontal">
                 <Button
-                    Click="OpenMenu">
+                    Command="{Binding OpenMenuCommand}">
                     <StackPanel
                         Orientation="Horizontal">
                         <applib:ImageAwesome
@@ -61,24 +61,24 @@
                         Command="{Binding SettingCommand}"
                         Content="Settings..."
                         Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-services-96.png"
-                        ImageHeight="28"
-                        ImageWidth="28"
+                        ImageHeight="32"
+                        ImageWidth="32"
                         Style="{StaticResource Flat}" />
                     <applib:ImageButton
                         Margin="5,0"
                         Command="{Binding LogCommand}"
                         Content="View Program Log"
                         Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-edit-property-96.png"
-                        ImageHeight="28"
-                        ImageWidth="28"
+                        ImageHeight="32"
+                        ImageWidth="32"
                         Style="{StaticResource Flat}" />
                     <applib:ImageButton
                         Margin="5,0"
                         Command="{Binding ExitCommand}"
                         Content="Exit Program"
                         Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-exit-sign-96.png"
-                        ImageHeight="28"
-                        ImageWidth="28"
+                        ImageHeight="32"
+                        ImageWidth="32"
                         Style="{StaticResource Flat}" />
                 </StackPanel>
             </mah:Flyout>
@@ -86,7 +86,6 @@
                 x:Name="StatusFlyOut"
                 Theme="Inverse"
                 Position="Bottom"
-                AutoCloseInterval="5000"
                 ClosingFinished="StatusFlyOut_ClosingFinished"
                 IsAutoCloseEnabled="True">
             </mah:Flyout>
