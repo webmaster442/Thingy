@@ -1,15 +1,13 @@
-﻿using AppLib.MVVM;
+﻿using AppLib.Common.Extensions;
+using AppLib.MVVM;
 using CommonMark;
-using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Windows;
 using Thingy.Db;
 using Thingy.Db.Entity;
-using AppLib.Common.Extensions;
 
 namespace Thingy.ViewModels
 {
@@ -44,14 +42,8 @@ namespace Thingy.ViewModels
             ImportFileCommand = Command.ToCommand(ImportNote);
             SaveToFileCommand = Command.ToCommand(SaveToFile, CanDeleteorSaveFile);
 
-            var executing = Assembly.GetExecutingAssembly();
-            using (Stream stream = executing.GetManifestResourceStream("Thingy.Resources.MarkdownTemplate.html"))
-            {
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    _Template = reader.ReadToEnd();
-                }
-            }
+            _Template = Resources.ResourceLocator.Get("html.MarkdownTemplate.html");
+
             Notes = new ObservableCollection<Note>(_db.Notes.GetNotes());
         }
 

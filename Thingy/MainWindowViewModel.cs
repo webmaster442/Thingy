@@ -3,17 +3,16 @@ using AppLib.MVVM;
 using Dragablz;
 using System;
 using Thingy.Infrastructure;
-using Thingy.ViewModels;
-using Thingy.Views;
 
 namespace Thingy
 {
     public class MainWindowViewModel: ViewModel<IMainWindow>
     {
-        public DelegateCommand SettingCommand { get; set; }
-        public DelegateCommand ExitCommand { get; set; }
-        public DelegateCommand LogCommand { get; set; }
-        public DelegateCommand OpenMenuCommand { get; set; }
+        public DelegateCommand SettingCommand { get; private set; }
+        public DelegateCommand ExitCommand { get; private set; }
+        public DelegateCommand LogCommand { get; private set; }
+        public DelegateCommand OpenMenuCommand { get; private set; }
+        public DelegateCommand AboutCommand { get; private set; }
 
         private ILogger _log;
         private IApplication _app;
@@ -26,6 +25,12 @@ namespace Thingy
             ExitCommand = Command.ToCommand(Exit);
             LogCommand = Command.ToCommand(Log);
             OpenMenuCommand = Command.ToCommand(OpenMenu);
+            AboutCommand = Command.ToCommand(OpenAbout);
+        }
+
+        private void OpenAbout()
+        {
+            _app.OpenTabContent("About", new Views.About());
         }
 
         private void OpenMenu()
@@ -64,9 +69,9 @@ namespace Thingy
             {
                 return () =>
                 {
-                    var start = new StartPage
+                    var start = new Views.StartPage
                     {
-                        DataContext = new StartPageViewModel(App.Instance, App.IoCContainer.ResolveSingleton<IModuleLoader>())
+                        DataContext = new ViewModels.StartPageViewModel(App.Instance, App.IoCContainer.ResolveSingleton<IModuleLoader>())
                     };
 
                     return new HeaderedItemViewModel

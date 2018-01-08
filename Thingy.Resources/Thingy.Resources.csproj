@@ -45,6 +45,7 @@
       <Link>Properties\CommonVersion.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceLocator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\icons8-cd.png" />
@@ -160,6 +161,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\icons8-git.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="html\AboutPage.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-about-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="html\MarkdownTemplate.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -36,16 +36,16 @@ namespace Thingy.Infrastructure.Tray
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show(Resources.ActivatorKeyRegisterError, 
-                                    Resources.ActivatorKeyResiterErrorTitle, 
+                    MessageBox.Show(Properties.Resources.ActivatorKeyRegisterError,
+                                    Properties.Resources.ActivatorKeyResiterErrorTitle, 
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show(Resources.ActivatorKeyInvalidSetting,
-                Resources.ActivatorKeyResiterErrorTitle,
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Properties.Resources.ActivatorKeyInvalidSetting,
+                                Properties.Resources.ActivatorKeyResiterErrorTitle,
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -101,9 +101,9 @@ namespace Thingy.Infrastructure.Tray
         {
             _MenuItems = new ToolStripItem[]
             {
-                new ToolStripMenuItem("Open Program", Resources.icons8_advertisement_page, OpenProgramHandler),
+                new ToolStripMenuItem("Open Program", Properties.Resources.icons8_advertisement_page, OpenProgramHandler),
                 new ToolStripSeparator(),
-                new ToolStripMenuItem("Exit Program", Resources.icons8_exit_sign, ExitProgramHandler)
+                new ToolStripMenuItem("Exit Program", Properties.Resources.icons8_exit_sign, ExitProgramHandler)
             };
 
         }

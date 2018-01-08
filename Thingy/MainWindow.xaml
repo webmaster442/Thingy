@@ -66,6 +66,14 @@
                         Style="{StaticResource Flat}" />
                     <applib:ImageButton
                         Margin="5,0"
+                        Command="{Binding AboutCommand}"
+                        Content="About..."
+                        Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-about-96.png"
+                        ImageHeight="32"
+                        ImageWidth="32"
+                        Style="{StaticResource Flat}" />
+                    <applib:ImageButton
+                        Margin="5,0"
                         Command="{Binding LogCommand}"
                         Content="View Program Log"
                         Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-edit-property-96.png"
