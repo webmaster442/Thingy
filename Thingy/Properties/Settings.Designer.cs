@@ -94,5 +94,41 @@ namespace Thingy.Properties {
                 this["SelectedAccent"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F12")]
+        public string ActivatorKey {
+            get {
+                return ((string)(this["ActivatorKey"]));
+            }
+            set {
+                this["ActivatorKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Alt")]
+        public string ActivatorModifier1 {
+            get {
+                return ((string)(this["ActivatorModifier1"]));
+            }
+            set {
+                this["ActivatorModifier1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ActivatorModifier2 {
+            get {
+                return ((string)(this["ActivatorModifier2"]));
+            }
+            set {
+                this["ActivatorModifier2"] = value;
+            }
+        }
     }
 }

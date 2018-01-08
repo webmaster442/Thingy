@@ -1,6 +1,7 @@
 ﻿using AppLib.WPF;
 using MahApps.Metro;
 using MahApps.Metro.SimpleChildWindow;
+using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,7 +14,7 @@ namespace Thingy
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application, IApplication
+    public partial class App : Application, IApplication, IDisposable
     {
         public static AppLib.Common.IOC.IContainer IoCContainer { get; private set; }
         public static AppLib.Common.Log.ILogger Log { get; private set; }
@@ -28,6 +29,11 @@ namespace Thingy
         public void Close()
         {
             App.Current.Shutdown();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
 
         public int FindTabByTitle(string Title)
@@ -77,7 +83,10 @@ namespace Thingy
         {
             Log = new AppLib.Common.Log.Logger();
             Log.Info("Application startup");
+
+
             var trayIcon = new Infrastructure.Tray.TrayIcon();
+
             DispatcherUnhandledException += App_DispatcherUnhandledException;
             Accents = new string[]
             {

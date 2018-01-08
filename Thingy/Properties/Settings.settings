@@ -20,5 +20,14 @@
     <Setting Name="SelectedAccent" Type="System.String" Scope="User">
       <Value Profile="(Default)">Orange</Value>
     </Setting>
+    <Setting Name="ActivatorKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">F12</Value>
+    </Setting>
+    <Setting Name="ActivatorModifier1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Alt</Value>
+    </Setting>
+    <Setting Name="ActivatorModifier2" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
