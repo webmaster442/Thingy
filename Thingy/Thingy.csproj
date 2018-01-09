@@ -98,11 +98,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CalculatorConstants.xaml.cs">
+      <DependentUpon>CalculatorConstants.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CalculatorKeyboard.xaml.cs">
       <DependentUpon>CalculatorKeyboard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Prefixes.xaml.cs">
-      <DependentUpon>Prefixes.xaml</DependentUpon>
+    <Compile Include="Controls\CalculatorPrefixes.xaml.cs">
+      <DependentUpon>CalculatorPrefixes.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\TrulyObservableCollection.cs" />
     <Compile Include="IApplication.cs" />
@@ -212,11 +215,19 @@
     <Compile Include="Views\VirtualFolders.xaml.cs">
       <DependentUpon>VirtualFolders.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\CalculatorConstants.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\CalculatorKeyboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Prefixes.xaml">
+    <Page Include="Controls\CalculatorPrefixes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates\CalculatorTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -224,7 +235,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DataTemplates\StartPageTemplate.xaml">
+    <Page Include="DataTemplates\StartPageTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

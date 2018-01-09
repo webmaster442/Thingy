@@ -7,15 +7,15 @@ namespace Thingy.Controls
     /// <summary>
     /// Interaction logic for Prefixes.xaml
     /// </summary>
-    public partial class Prefixes : UserControl
+    public partial class CalculatorPrefixes : UserControl
     {
-        public Prefixes()
+        public CalculatorPrefixes()
         {
             InitializeComponent();
         }
 
         public static readonly DependencyProperty ClickCommandProperty =
-            DependencyProperty.Register("ClickCommand", typeof(ICommand), typeof(Prefixes), new FrameworkPropertyMetadata(null));
+            DependencyProperty.Register("ClickCommand", typeof(ICommand), typeof(CalculatorPrefixes), new FrameworkPropertyMetadata(null));
 
         public ICommand ClickCommand
         {

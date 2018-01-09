@@ -19,7 +19,8 @@
                 <!--Styles and data templates-->
                 <ResourceDictionary Source="Styles.xaml" />
                 <ResourceDictionary Source="DataTemplates/EntityTemplates.xaml" />
-                <ResourceDictionary Source="DataTemplates/StartPageTemplate.xaml" />
+                <ResourceDictionary Source="DataTemplates/CalculatorTemplates.xaml"/>
+                <ResourceDictionary Source="DataTemplates/StartPageTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

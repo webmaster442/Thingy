@@ -238,26 +238,4 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="CalculatorFunction">
-        <Button
-            Content="{Binding}"
-            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.InsertFunctionFormulaCommand}"
-            CommandParameter="{Binding}"
-            Padding="3"
-            Margin="2"
-            FontSize="16"
-            MinWidth="80"/>
-    </DataTemplate>
-
-    <DataTemplate x:Key="NumSysKeyboard">
-        <Button
-            Content="{Binding}"
-            Command="{Binding ElementName=ctrl, Path=InsertCommand}"
-            CommandParameter="{Binding}"
-            Padding="3"
-            Margin="2"
-            FontSize="16"
-            MinWidth="80"/>
-    </DataTemplate>
-
 </ResourceDictionary>

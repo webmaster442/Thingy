@@ -128,8 +128,11 @@
             </TabItem>
             <TabItem
                 Header="Powers/Prefixes">
-                <controls:Prefixes
+                <controls:CalculatorPrefixes
                     ClickCommand="{Binding InsertFormulaCommand}" />
+            </TabItem>
+            <TabItem Header="Constants">
+                <controls:CalculatorConstants/>
             </TabItem>
         </TabControl>
     </Grid>

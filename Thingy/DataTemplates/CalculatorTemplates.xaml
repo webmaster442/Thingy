@@ -1,0 +1,54 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <DataTemplate x:Key="CalculatorFunction">
+        <Button
+            Content="{Binding}"
+            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.InsertFunctionFormulaCommand}"
+            CommandParameter="{Binding}"
+            Padding="3"
+            Margin="2"
+            FontSize="16"
+            MinWidth="80"/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="NumSysKeyboard">
+        <Button
+            Content="{Binding}"
+            Command="{Binding ElementName=ctrl, Path=InsertCommand}"
+            CommandParameter="{Binding}"
+            Padding="3"
+            Margin="2"
+            FontSize="16"
+            MinWidth="80"/>
+    </DataTemplate>
+
+    <DataTemplate
+        x:Key="Constant">
+        <Grid
+            Margin="0,3">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock
+                Grid.Row="0"
+                FontSize="16"
+                FontWeight="Bold"
+                Text="{Binding Name}" />
+            <TextBlock
+                Grid.Row="1"
+                Margin="3"
+                Text="{Binding Description}"
+                TextWrapping="Wrap" />
+            <TextBlock
+                Grid.Row="2"
+                FontStyle="Italic"
+                FontWeight="Bold"
+                Text="{Binding Value}" />
+        </Grid>
+    </DataTemplate>
+
+</ResourceDictionary>
