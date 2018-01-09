@@ -71,7 +71,7 @@
     <Compile Include="Constants\Atomic.cs" />
     <Compile Include="Constants\Constant.cs" />
     <Compile Include="Constants\ConstantDB.cs" />
-    <Compile Include="ElectroMagnetic.cs" />
+    <Compile Include="Constants\ElectroMagnetic.cs" />
     <Compile Include="Constants\Interfaces.cs" />
     <Compile Include="Constants\Mathematical.cs" />
     <Compile Include="Constants\Universal.cs" />
