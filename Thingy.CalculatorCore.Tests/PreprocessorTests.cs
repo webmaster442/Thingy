@@ -9,6 +9,7 @@ namespace Thingy.CalculatorCore.Tests
         [TestCase("33 + 22", "33+22   ")]                    //white space test 1
         [TestCase("33 + 22", "33+22")]                       //white space test 2
         [TestCase("33 + 255 * 3", "33+FF:HEX*3")]            //Custom format parsing: HEX
+        [TestCase("33 + 255 * 3", "33+FF:S16*3")]            //Custom format parsing: S16
         [TestCase("33 + XXX:HEX * 3", "33+XXX:HEX*3")]       //Invalid Custom format parsing
         [TestCase("ClassName.Sin ( 90 )", "sin(90)")]        //Function name replacing
         [TestCase("ClassName.Sin ( 255 )", "sin(FF:HEX)")]   //Function name replacing with custom format

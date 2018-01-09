@@ -75,6 +75,7 @@
     <Compile Include="PrefixSource.cs" />
     <Compile Include="Preprocessor.cs" />
     <Compile Include="PreprocessorInternals\BinaryNumberParser.cs" />
+    <Compile Include="PreprocessorInternals\CustomNumberSystemParser.cs" />
     <Compile Include="PreprocessorInternals\HexaNumberParser.cs" />
     <Compile Include="PreprocessorInternals\IProcessor.cs" />
     <Compile Include="PreprocessorInternals\NumberParser.cs" />

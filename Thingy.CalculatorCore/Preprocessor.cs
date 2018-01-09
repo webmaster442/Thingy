@@ -23,7 +23,8 @@ namespace Thingy.CalculatorCore
                 new HexaNumberParser(),
                 new OctalNumberParser(),
                 new RomanNumberParser(),
-                new PrefixedNumberParser()
+                new PrefixedNumberParser(),
+                new CustomNumberSystemParser()
             };
             StringBuilder regex = new StringBuilder();
             foreach (var @operator in _operators)

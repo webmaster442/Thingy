@@ -39,11 +39,11 @@
   <ItemGroup>
     <Compile Include="BinaryNumberParserTests.cs" />
     <Compile Include="HexaNumberParserTests.cs" />
+    <Compile Include="NumberSystemParserTests.cs" />
     <Compile Include="OctalNumberParserTests.cs" />
     <Compile Include="PrefixNumberParserTests.cs" />
     <Compile Include="PreprocessorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TrigonometryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
