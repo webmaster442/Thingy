@@ -71,7 +71,7 @@
                 Grid.Column="0"
                 Content="ROMAN"
                 Command="{Binding ElementName=keys, Path=NumSysCommand}"
-                CommandParameter="2"
+                CommandParameter="ROMAN"
                 Style="{StaticResource CalculatorButton}" />
             <Button
                 Grid.Row="4"

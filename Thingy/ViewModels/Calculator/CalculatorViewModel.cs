@@ -63,8 +63,14 @@ namespace Thingy.ViewModels.Calculator
         private async void NumSysInput(string obj)
         {
             var dialog = new Views.CalculatorDialogs.NumberSystemInput();
-            dialog.Init(Convert.ToInt32(obj));
+
+            if (obj == "ROMAN")
+                dialog.Init(42);
+            else
+                dialog.Init(Convert.ToInt32(obj));
+
             bool result = await _app.ShowDialog(dialog, "Input number in specified system", null);
+
             if (result)
             {
                 switch (dialog.SelectedNumberSystem)
@@ -79,7 +85,10 @@ namespace Thingy.ViewModels.Calculator
                         Formula += $"{dialog.NumberText}:HEX";
                         break;
                     default:
-                        Formula += $"{dialog.NumberText}:S{dialog.SelectedNumberSystem}";
+                        if (dialog.SelectedNumberSystem == 42)
+                            Formula += $"{dialog.NumberText}:ROMAN";
+                        else
+                            Formula += $"{dialog.NumberText}:S{dialog.SelectedNumberSystem}";
                         break;
                 }
                 View.SwitchToMainKeyboard();

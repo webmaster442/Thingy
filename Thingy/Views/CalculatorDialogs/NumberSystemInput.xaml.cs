@@ -10,19 +10,10 @@ namespace Thingy.Views.CalculatorDialogs
     /// </summary>
     public partial class NumberSystemInput : UserControl
     {
-
-        private int _selectedSystem;
-
         public int SelectedNumberSystem
         {
-            get { return _selectedSystem; }
-            set
-            {
-                _selectedSystem = value;
-                var source = _supportedSymbols.Take(value).ToList();
-                Keys.ItemsSource = null;
-                Keys.ItemsSource = source;
-            }
+            get;
+            private set;
         }
 
         public DelegateCommand<char> InsertCommand { get; private set; }
@@ -33,12 +24,28 @@ namespace Thingy.Views.CalculatorDialogs
             set { InputTextBox.Text = value; }
         }
 
+        /// <summary>
+        /// Init dialog with given system. If system is bigger than 36 it will be treated as roman system
+        /// </summary>
+        /// <param name="system">number system</param>
         public void Init(int system)
         {
-            if (system < 36)
-                SystemSelector.IsEnabled = false;
             SelectedNumberSystem = system;
-            SystemSelector.Value = system;
+            if (system > 36)
+            {
+                SystemSelector.IsEnabled = false;
+                Keys.ItemsSource = null;
+                Keys.ItemsSource = new char[] { 'I', 'V', 'X', 'L', 'C', 'D', 'M' };
+            }
+            else
+            {
+                var source = _supportedSymbols.Take(system).ToList();
+                Keys.ItemsSource = null;
+                Keys.ItemsSource = source;
+                if (system < 36)
+                    SystemSelector.IsEnabled = false;
+                SystemSelector.Value = system;
+            }
         }
 
         private char[] _supportedSymbols;
