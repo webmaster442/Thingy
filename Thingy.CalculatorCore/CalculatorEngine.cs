@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AppLib.MVVM;
+using Thingy.CalculatorCore.Constants;
 
 namespace Thingy.CalculatorCore
 {
@@ -27,9 +28,9 @@ namespace Thingy.CalculatorCore
         public CalculatorEngine()
         {
             TrigonometryMode = TrigonometryMode.DEG;
-
+            ConstantDB = new ConstantDB();
             _functioncache = new Dictionary<string, string>();
-            _preprocessor = new Preprocessor(_functioncache);
+            _preprocessor = new Preprocessor(_functioncache, ConstantDB);
             var options = new Dictionary<string, object>();
             options["DivisionOptions"] = PythonDivisionOptions.New;
             _history = new ZeroStream();
@@ -74,6 +75,12 @@ namespace Thingy.CalculatorCore
                 Trigonometry.Mode = value;
                 OnPropertyChanged(() => TrigonometryMode);
             }
+        }
+
+        public ConstantDB ConstantDB
+        {
+            get;
+            private set;
         }
 
         public Task<CalculatorResult> Calculate(string commandLine)

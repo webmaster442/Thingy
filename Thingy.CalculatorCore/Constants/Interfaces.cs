@@ -15,5 +15,6 @@ namespace Thingy.CalculatorCore.Constants
         IEnumerable<Constant> SearchByName(string name);
         IEnumerable<Constant> GetCategory(string category);
         Constant Lookup(string name);
+        bool CanServeConstant(string name);
     }
 }

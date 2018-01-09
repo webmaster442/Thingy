@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using Thingy.CalculatorCore.Constants;
 using Thingy.CalculatorCore.PreprocessorInternals;
 
 namespace Thingy.CalculatorCore
@@ -11,11 +12,13 @@ namespace Thingy.CalculatorCore
         private readonly string[] _operators;
         private readonly List<IProcessor> _processors;
         private readonly string _tokenizerregex;
-        private readonly IDictionary<string, string> _replacetable;
+        private readonly IDictionary<string, string> _functionReplaceTable;
+        private readonly IConstantDB _constantDB;
 
-        public Preprocessor(IDictionary<string, string> replcacetable)
+        public Preprocessor(IDictionary<string, string> functionReplcaceTable, IConstantDB constantDB)
         {
-            _replacetable = replcacetable;
+            _functionReplaceTable = functionReplcaceTable;
+            _constantDB = constantDB;
             _operators = new string[] { @"\+", @"\-", @"\*\*", @"\*", @"\/\/", @"\/", @"\%", @"\&", @"\|", @"\^", @"\~", @"\(", @"\)" };
             _processors = new List<IProcessor>
             {
@@ -46,10 +49,15 @@ namespace Thingy.CalculatorCore
 
             for (int i=0; i<tokens.Length; i++)
             {
-                if (_replacetable.Keys.Contains(tokens[i]))
+                if (_functionReplaceTable.Keys.Contains(tokens[i]))
                 {
                     //replace it if it's a recognized function
-                    tokens[i] = _replacetable[tokens[i]];
+                    tokens[i] = _functionReplaceTable[tokens[i]];
+                }
+                else if (_constantDB.CanServeConstant(tokens[i]))
+                {
+                    //replace it if it's found in the constants
+                    tokens[i] = _constantDB.Lookup(tokens[i]).Value.ToString();
                 }
                 else
                 {
