@@ -22,6 +22,7 @@ namespace Thingy.CalculatorCore
         private FunctionLoader _loader;
         private Preprocessor _preprocessor;
 
+        private IConstantDB _db;
         private bool _PreferPrefixes;
         private bool _GroupByThousands;
 
@@ -77,10 +78,10 @@ namespace Thingy.CalculatorCore
             }
         }
 
-        public ConstantDB ConstantDB
+        public IConstantDB ConstantDB
         {
-            get;
-            private set;
+            get { return _db; }
+            private set { SetValue(ref _db, value); }
         }
 
         public Task<CalculatorResult> Calculate(string commandLine)

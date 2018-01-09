@@ -28,7 +28,8 @@
                 x:Name="Categories"
                 ItemsSource="{Binding ElementName=ctrl, Path=ConstantCategories}"
                 Width="150"
-                Margin="5,0" />
+                Margin="5,0"
+                SelectionChanged="Categories_SelectionChanged"/>
             <TextBox
                 Width="200"
                 mah:TextBoxHelper.ClearTextButton="True"
@@ -38,17 +39,23 @@
             Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="0"
+            x:Name="ConstantList"
             ItemsSource="{Binding ElementName=ctrl, Path=VisibleConstants}"
             ItemTemplate="{StaticResource Constant}" />
         <Button
             Grid.Row="1"
             Grid.Column="1"
             Margin="2"
-            Content="Insert" />
+            Content="Insert"
+            CommandParameter="{Binding ElementName=ConstantList, Path=SelectedItem}"
+            Command="{Binding ElementName=ctrl, Path=InsertCommand}"
+            x:Name="BtnInsert"/>
         <Button
             Grid.Row="2"
             Grid.Column="1"
             Margin="2"
-            Content="Cancel" />
+            Content="Cancel"
+            Command="{Binding ElementName=ctrl, Path=CancelCommand}"
+            x:Name="BtnCancel"/>
     </Grid>
 </UserControl>
