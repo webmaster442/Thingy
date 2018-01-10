@@ -31,6 +31,7 @@ namespace Thingy.CalculatorCore
             var methods = type.GetMethods(BindingFlags.Public | BindingFlags.Static);
             foreach (var method in methods)
             {
+                if (method.IsSpecialName) continue;
                 var FullName = string.Format("{0}.{1}", method.ReflectedType.Name, method.Name);
                 var Name = method.Name;
 

@@ -13,12 +13,10 @@ namespace Thingy.CalculatorCore
         private readonly List<IProcessor> _processors;
         private readonly string _tokenizerregex;
         private readonly IDictionary<string, string> _functionReplaceTable;
-        private readonly IConstantDB _constantDB;
 
         public Preprocessor(IDictionary<string, string> functionReplcaceTable, IConstantDB constantDB)
         {
             _functionReplaceTable = functionReplcaceTable;
-            _constantDB = constantDB;
             _operators = new string[] { @"\+", @"\-", @"\*\*", @"\*", @"\/\/", @"\/", @"\%", @"\&", @"\|", @"\^", @"\~", @"\(", @"\)" };
             _processors = new List<IProcessor>
             {
@@ -27,7 +25,8 @@ namespace Thingy.CalculatorCore
                 new OctalNumberParser(),
                 new RomanNumberParser(),
                 new PrefixedNumberParser(),
-                new CustomNumberSystemParser()
+                new CustomNumberSystemParser(),
+                new ConstantParser(constantDB)
             };
             StringBuilder regex = new StringBuilder();
             foreach (var @operator in _operators)
@@ -53,11 +52,6 @@ namespace Thingy.CalculatorCore
                 {
                     //replace it if it's a recognized function
                     tokens[i] = _functionReplaceTable[tokens[i]];
-                }
-                else if (_constantDB.CanServeConstant(tokens[i]))
-                {
-                    //replace it if it's found in the constants
-                    tokens[i] = _constantDB.Lookup(tokens[i]).Value.ToString();
                 }
                 else
                 {

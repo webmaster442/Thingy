@@ -16,11 +16,13 @@ namespace Thingy.ViewModels.Calculator
 
         public DelegateCommand<string> InsertFormulaCommand { get; private set; }
         public DelegateCommand<string> InsertFunctionFormulaCommand { get; private set; }
+        public DelegateCommand<string> InsertConstantCommand { get; private set; }
         public DelegateCommand<string> InsertHistoryCommand { get; private set; }
         public DelegateCommand ExecuteCommand { get; private set; }
         public DelegateCommand ClearCommand { get; private set; }
         public DelegateCommand ClearHistoryCommand { get; private set; }
         public DelegateCommand BackSpaceCommand { get; private set; }
+        public DelegateCommand ConstantCancelCommand { get; private set; }
         public DelegateCommand<string> NumSysInputCommand { get; private set; }
 
         public ObservableCollection<string> History { get; private set; }
@@ -52,12 +54,14 @@ namespace Thingy.ViewModels.Calculator
             ExecuteCommand = Command.ToCommand(Execute);
             InsertFunctionFormulaCommand = Command.ToCommand<string>(InsertFunctionFormula);
             InsertFormulaCommand = Command.ToCommand<string>(InsertFormula);
+            InsertConstantCommand = Command.ToCommand<string>(InsertConstant);
             ClearCommand = Command.ToCommand(Clear);
             ClearHistoryCommand = Command.ToCommand(ClearHistory);
             BackSpaceCommand = Command.ToCommand(BackSpace);
             InsertHistoryCommand = Command.ToCommand<string>(InsertHistory);
             NumSysInputCommand = Command.ToCommand<string>(NumSysInput);
             Functions = new ObservableCollection<string>(_engine.Functions.OrderBy(x => x));
+            ConstantCancelCommand = Command.ToCommand(ConstantCancel);
         }
 
         private async void NumSysInput(string obj)
@@ -132,6 +136,16 @@ namespace Thingy.ViewModels.Calculator
             View.SwitchToMainKeyboard();
             Formula += obj;
             View.FocusFormulaInput();
+        }
+
+        private void InsertConstant(string obj)
+        {
+            InsertFormula("C:" + obj);
+        }
+
+        private void ConstantCancel()
+        {
+            View.SwitchToMainKeyboard();
         }
 
         private void UpdateHistory(string item)

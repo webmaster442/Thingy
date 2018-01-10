@@ -132,7 +132,10 @@
                     ClickCommand="{Binding InsertFormulaCommand}" />
             </TabItem>
             <TabItem Header="Constants">
-                <controls:CalculatorConstants/>
+                <controls:CalculatorConstants
+                    CancelCommand="{Binding ConstantCancelCommand}"
+                    InsertCommand="{Binding InsertConstantCommand}"
+                    ConstantDB="{Binding Engine.ConstantDB}"/>
             </TabItem>
         </TabControl>
     </Grid>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace Thingy.CalculatorCore.PreprocessorInternals
@@ -33,7 +34,7 @@ namespace Thingy.CalculatorCore.PreprocessorInternals
                     throw new Exception("Pattern match error");
 
                 string[] tokens = input.Split(':');
-                output = ParseRoman(tokens[0]).ToString();
+                output = ParseRoman(tokens[0]).ToString(new CultureInfo("en-US"));
                 return true;
             }
             catch (Exception)

@@ -15,7 +15,7 @@ namespace Thingy.Controls
         }
 
         public static readonly DependencyProperty ClickCommandProperty =
-            DependencyProperty.Register("CancelCommand", typeof(ICommand), typeof(CalculatorPrefixes), new FrameworkPropertyMetadata(null));
+            DependencyProperty.Register("ClickCommand", typeof(ICommand), typeof(CalculatorPrefixes), new FrameworkPropertyMetadata(null));
 
         public ICommand ClickCommand
         {

@@ -13,6 +13,6 @@ namespace Thingy.CalculatorCore
         bool PreferPrefixes { get; set; }
         bool GroupByThousands { get; set; }
         TrigonometryMode TrigonometryMode { get; set; }
-        ConstantDB ConstantDB { get; }
+        IConstantDB ConstantDB { get; }
     }
 }

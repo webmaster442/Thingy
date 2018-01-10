@@ -31,11 +31,18 @@ namespace Thingy.Controls
         {
             if (d is CalculatorConstants sender)
             {
-                if (e.NewValue is ConstantDB db)
+                if (e.NewValue is IConstantDB db)
                 {
-                    sender.VisibleConstants = db.GetCategory(db.Categories.First());
+                    sender.ResetCategoryFiltering(db);
                 }
             }
+        }
+
+        private void ResetCategoryFiltering(IConstantDB db)
+        {
+            VisibleConstants = db.GetCategory(db.Categories.First());
+            ConstantCategories = db.Categories;
+            Categories.SelectedIndex = 0;
         }
 
         public static readonly DependencyProperty VisibleConstantsProperty =
@@ -78,8 +85,21 @@ namespace Thingy.Controls
 
         private void Categories_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Search.Text = "";
             var selected = Categories.SelectedItem as string;
             VisibleConstants = ConstantDB?.GetCategory(selected);
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(Search.Text))
+            {
+                ResetCategoryFiltering(ConstantDB);
+            }
+            else
+            {
+                VisibleConstants = ConstantDB.SearchByName(Search.Text);
+            }
         }
     }
 }

@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using Thingy.CalculatorCore.Constants;
 
 namespace Thingy.CalculatorCore.PreprocessorInternals
 {
-    internal abstract class NumberParser : IProcessor
+    internal class ConstantParser: IProcessor
     {
-        private int _system;
+        private IConstantDB _db;
 
-        public NumberParser(int system)
+        public ConstantParser(IConstantDB db)
         {
-            _system = system;
+            _db = db;
         }
 
-        public abstract string PatternMatchRegex
+        public string PatternMatchRegex
         {
-            get;
+            get { return "^C:[A-Za-z1-9].+"; }
         }
 
         public bool Process(string input, out string output)
@@ -26,7 +27,7 @@ namespace Thingy.CalculatorCore.PreprocessorInternals
                     throw new Exception("Pattern match error");
 
                 string[] tokens = input.Split(':');
-                output = Convert.ToInt64(tokens[0], _system).ToString(new CultureInfo("en-US"));
+                output = _db.Lookup(tokens[1]).Value.ToString(new CultureInfo("en-US"));
                 return true;
             }
             catch (Exception)

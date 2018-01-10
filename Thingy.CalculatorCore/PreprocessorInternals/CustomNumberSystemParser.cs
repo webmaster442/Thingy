@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace Thingy.CalculatorCore.PreprocessorInternals
@@ -19,7 +20,7 @@ namespace Thingy.CalculatorCore.PreprocessorInternals
 
                 string[] tokens = input.Split(':');
                 var system = Convert.ToInt32(tokens[1].Replace("S", ""));
-                output = NumberSystemConversion.FromSystem(tokens[0], system).ToString();
+                output = NumberSystemConversion.FromSystem(tokens[0], system).ToString(new CultureInfo("en-US"));
                 return true;
             }
             catch (Exception)
