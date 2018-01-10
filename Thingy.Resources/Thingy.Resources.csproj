@@ -175,5 +175,17 @@
     <Resource Include="Icons\icons8-ascending-sorting-96.png" />
     <Resource Include="Icons\icons8-descending-sorting-96.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SmallIcons\ans.png" />
+    <Resource Include="SmallIcons\D.png" />
+    <Resource Include="SmallIcons\Delete.png" />
+    <Resource Include="SmallIcons\F.png" />
+    <Resource Include="SmallIcons\fractions.png" />
+    <Resource Include="SmallIcons\mu.png" />
+    <Resource Include="SmallIcons\N.png" />
+    <Resource Include="SmallIcons\T.png" />
+    <Resource Include="SmallIcons\test.png" />
+    <Resource Include="SmallIcons\Undo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
