@@ -5,6 +5,7 @@
     <DataTemplate x:Key="CalculatorFunction">
         <Button
             Content="{Binding}"
+            ToolTip="{Binding}"
             Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.InsertFunctionFormulaCommand}"
             CommandParameter="{Binding}"
             Padding="3"

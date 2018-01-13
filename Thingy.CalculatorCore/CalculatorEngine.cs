@@ -43,7 +43,12 @@ namespace Thingy.CalculatorCore
             _scope = _engine.CreateScope();
 
             _loader = new FunctionLoader(_scope, _functioncache);
-            _loader.LoadTypesToScope(typeof(Trigonometry));
+
+            _loader.LoadTypesToScope(typeof(Trigonometry), 
+                                     typeof(Engineering),
+                                     typeof(GeneralFunctions), 
+                                     typeof(Variations),
+                                     typeof(TypeFunctions));
         }
 
         private void _output_StreamWasWritten(object sender, string e)
