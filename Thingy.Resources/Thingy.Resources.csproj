@@ -177,15 +177,23 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="SmallIcons\ans.png" />
-    <Resource Include="SmallIcons\D.png" />
-    <Resource Include="SmallIcons\Delete.png" />
-    <Resource Include="SmallIcons\F.png" />
-    <Resource Include="SmallIcons\fractions.png" />
-    <Resource Include="SmallIcons\mu.png" />
-    <Resource Include="SmallIcons\N.png" />
-    <Resource Include="SmallIcons\T.png" />
-    <Resource Include="SmallIcons\test.png" />
-    <Resource Include="SmallIcons\Undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SmallIcons\icons8-backspace-48.png" />
+    <Resource Include="SmallIcons\icons8-circled-d-48.png" />
+    <Resource Include="SmallIcons\icons8-circled-f-48.png" />
+    <Resource Include="SmallIcons\icons8-circled-n-48.png" />
+    <Resource Include="SmallIcons\icons8-circled-t-48.png" />
+    <Resource Include="SmallIcons\icons8-erase-48.png" />
+    <Resource Include="SmallIcons\icons8-fraction-48.png" />
+    <Resource Include="SmallIcons\icons8-mu-48.png" />
+    <Resource Include="SmallIcons\icons8-report-card-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SmallIcons\icons8-empty-trash-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SmallIcons\icons8-percentage-48.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
