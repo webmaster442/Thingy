@@ -4,6 +4,7 @@
     {
         public Status Status { get; set; } 
         public string Content { get; set; }
+        public object RawObject { get; set; }
 
         public CalculatorResult()
         {
@@ -11,10 +12,11 @@
             Content = null;
         }
 
-        public CalculatorResult(Status status, string content)
+        public CalculatorResult(Status status, string content, object raw)
         {
             Status = status;
             Content = content;
+            RawObject = raw;
         }
     }
 

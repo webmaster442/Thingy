@@ -90,20 +90,20 @@ namespace Thingy.CalculatorCore
             {
                 try
                 {
-                    if (string.IsNullOrEmpty(commandLine)) return new CalculatorResult(Status.ResultOk, "0");
+                    if (string.IsNullOrEmpty(commandLine)) return new CalculatorResult(Status.ResultOk, "0", 0.0d);
                     var processed = _preprocessor.Process(commandLine);
                     ScriptSource source = _engine.CreateScriptSourceFromString(processed, SourceCodeKind.AutoDetect);
                     object result = source.Execute(_scope);
                     if (result != null)
                     {
-                        _scope.SetVariable("last", result);
-                        return new CalculatorResult(Status.ResultOk, StringFormatter.DisplayString(result, PreferPrefixes, GroupByThousands, TrigonometryMode));
+                        _scope.SetVariable("ans", result);
+                        return new CalculatorResult(Status.ResultOk, StringFormatter.DisplayString(result, PreferPrefixes, GroupByThousands, TrigonometryMode), result);
                     }
-                    else return new CalculatorResult(Status.NoResult, null);
+                    else return new CalculatorResult(Status.NoResult, null, null);
                 }
                 catch (Exception ex)
                 {
-                    return new CalculatorResult(Status.ResultError, ex.Message);
+                    return new CalculatorResult(Status.ResultError, ex.Message, null);
                 }
             });
         }
