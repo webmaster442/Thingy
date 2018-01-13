@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Thingy.Controls"
     xmlns:mahdialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
-    Style="{StaticResource FullSizeDialog}">
+    Style="{StaticResource FullSizeMessageBox}">
     <mahdialogs:CustomDialog.Title>Result in various number systems</mahdialogs:CustomDialog.Title>
     <mahdialogs:CustomDialog.Content>
         <Grid>

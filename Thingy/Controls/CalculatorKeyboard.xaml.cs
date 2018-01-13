@@ -81,11 +81,13 @@ namespace Thingy.Controls
             else
                 draw = InputFunctions.Where(f => f.StartsWith(FilterText.Text, StringComparison.InvariantCultureIgnoreCase));
 
-            if (_sortAscending)
-                VisibleFunctions = draw.OrderBy(f => f);
-            else
-                VisibleFunctions = draw.OrderByDescending(f => f);
-            
+            if (draw != null)
+            {
+                if (_sortAscending)
+                    VisibleFunctions = draw.OrderBy(f => f);
+                else
+                    VisibleFunctions = draw.OrderByDescending(f => f);
+            }
         }
 
         private void FilterText_TextChanged(object sender, TextChangedEventArgs e)
