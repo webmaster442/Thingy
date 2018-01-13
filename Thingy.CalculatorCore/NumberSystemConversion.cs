@@ -130,5 +130,40 @@ namespace Thingy.CalculatorCore
             return value;
         }
 
+        /// <summary>
+        /// Convert a byte array to hexadecimal representation
+        /// </summary>
+        /// <param name="array">array to convert</param>
+        /// <returns>hexadecimal string</returns>
+        public static string ByteArrayToHex(byte[] array)
+        {
+            var ret = new StringBuilder();
+            foreach (var b in array)
+            {
+                string s = Convert.ToString(b, 16);
+                if (s.Length < 2) s = "0" + s;
+                ret.Append(s);
+            }
+            return ret.ToString();
+        }
+
+
+        public static string FormatBin(string input)
+        {
+            var buffer = new StringBuilder();
+            int counter = 0;
+            for (int i = input.Length - 1; i >= 0; i--)
+            {
+                if (counter == 4)
+                {
+                    buffer.Append(" ");
+                    counter = 0;
+                }
+                buffer.Append(input[i]);
+                counter++;
+            }
+            for (int i = 0; i < (4 - counter); i++) buffer.Append(" ");
+            return Reverse(buffer).ToString();
+        }
     }
 }

@@ -123,12 +123,15 @@ namespace Thingy.ViewModels.Calculator
             await _app.ShowMessageBox("Result with prefixes", prefixed, MessageDialogStyle.Affirmative);
         }
 
-        private void ConvertText(object obj)
+        private async void ConvertText(object obj)
         {
         }
 
-        private void ConvertNumberSystem(object obj)
+        private async void ConvertNumberSystem(object obj)
         {
+            var content = new Views.CalculatorDialogs.NumberSystemDisplayMessageBox(_app);
+            content.SetDisplay(obj);
+            await _app.ShowMessageBox(content);
         }
     }
 }

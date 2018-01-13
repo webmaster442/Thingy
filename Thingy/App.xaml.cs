@@ -76,6 +76,18 @@ namespace Thingy
             return mainwindow.ShowMessageAsync(title, content, style);
         }
 
+        public Task ShowMessageBox(CustomDialog messageBoxContent)
+        {
+            var mainwindow = (App.Current.MainWindow as MainWindow);
+            return mainwindow.ShowMetroDialogAsync(messageBoxContent);
+        }
+
+        public Task HideMessageBox(CustomDialog messageBoxContent)
+        {
+            var mainwindow = (App.Current.MainWindow as MainWindow);
+            return mainwindow.HideMetroDialogAsync(messageBoxContent);
+        }
+
         public void ShowStatusBarMenu(UserControl control, string title, bool AutoClose = true, int AutoCloseTimeMs = 5000)
         {
             var mainwindow = (App.Current.MainWindow as MainWindow);

@@ -9,6 +9,8 @@ namespace Thingy
     {
         Task<bool> ShowDialog(UserControl control, string Title, INotifyPropertyChanged model = null);
         Task<MessageDialogResult> ShowMessageBox(string title, string content, MessageDialogStyle style);
+        Task ShowMessageBox(CustomDialog messageBoxContent);
+        Task HideMessageBox(CustomDialog messageBoxContent);
         void ShowStatusBarMenu(UserControl control, string title, bool AutoClose = true, int AutoCloseTimeMs = 5000);
         void SetCurrentTabContent(string Title, UserControl control);
         void OpenTabContent(string Title, UserControl control);
