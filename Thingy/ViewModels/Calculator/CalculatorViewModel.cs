@@ -65,6 +65,7 @@ namespace Thingy.ViewModels.Calculator
             _app = app;
             Engine = new CalculatorEngine();
             History = new ObservableCollection<string>();
+            DisplayChanger = new DisplayChangerModel(app);
             ExecuteCommand = Command.ToCommand(Execute);
             InsertFunctionFormulaCommand = Command.ToCommand<string>(InsertFunctionFormula);
             InsertFormulaCommand = Command.ToCommand<string>(InsertFormula);
@@ -76,6 +77,9 @@ namespace Thingy.ViewModels.Calculator
             NumSysInputCommand = Command.ToCommand<string>(NumSysInput);
             Functions = new ObservableCollection<string>(_engine.Functions.OrderBy(x => x));
             ConstantCancelCommand = Command.ToCommand(ConstantCancel);
+
+            Result = "0";
+            ReturnObject = 0.0d;
         }
 
         private async void NumSysInput(string obj)
@@ -144,6 +148,7 @@ namespace Thingy.ViewModels.Calculator
         {
             Formula = string.Empty;
             Result = "0";
+            ReturnObject = 0.0d;
         }
 
         private void InsertFormula(string obj)

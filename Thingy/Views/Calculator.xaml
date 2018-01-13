@@ -104,87 +104,53 @@
                 HorizontalAlignment="Right"
                 Orientation="Horizontal">
                 <applib:ImageButton
-                    x:Name="DisplayModes"
-                    Click="DisplayModes_Click"
-                    Image="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-circled-d-48.png"
+                    Margin="2,0"
+                    Command="{Binding DisplayChanger.ConvertFileSizeCommand}"
+                    CommandParameter="{Binding ReturnObject}"
+                    Image="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-circled-f-48.png"
                     ImageHeight="24"
                     ImageWidth="24"
                     Style="{StaticResource Flat}"
-                    ToolTip="Display result in various formats">
-                    <applib:ImageButton.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem
-                                x:Name="DispFileSize"
-                                Command="{Binding DisplayChanger.ConvertFileSizeCommand}"
-                                CommandParameter="{Binding ReturnObject}"
-                                CommandTarget="{Binding DisplayChanger}"
-                                Header="As File size...">
-                                <MenuItem.Icon>
-                                    <Image
-                                        Width="24"
-                                        Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-circled-f-48.png" />
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem
-                                x:Name="DispPercent"
-                                Command="{Binding DisplayChanger.ConvertPercentageCommand}"
-                                CommandParameter="{Binding ReturnObject}"
-                                Header="As Percentage...">
-                                <MenuItem.Icon>
-                                    <Image
-                                        Width="24"
-                                        Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-percentage-48.png" />
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem
-                                x:Name="DispText"
-                                Command="{Binding DisplayChanger.ConvertTextCommand}"
-                                CommandParameter="{Binding ReturnObject}"
-                                Header="As Text...">
-                                <MenuItem.Icon>
-                                    <Image
-                                        Width="24"
-                                        Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-circled-t-48.png" />
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem
-                                x:Name="DispFractions"
-                                Command="{Binding DisplayChanger.ConvertFractionsCommand}"
-                                CommandParameter="{Binding ReturnObject}"
-                                Header="As Fractions...">
-                                <MenuItem.Icon>
-                                    <Image
-                                        Width="24"
-                                        Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-fraction-48.png" />
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem
-                                x:Name="DispPrefixes"
-                                Command="{Binding DisplayChanger.ConvertPrefixesCommand}"
-                                CommandParameter="{Binding ReturnObject}"
-                                CommandTarget="{Binding DisplayChanger}"
-                                Header="With prefixes...">
-                                <MenuItem.Icon>
-                                    <Image
-                                        Width="24"
-                                        Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-mu-48.png" />
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem
-                                x:Name="DispNumSys"
-                                Command="{Binding DisplayChanger.ConvertNumberSystemCommand}"
-                                CommandParameter="{Binding ReturnObject}"
-                                Header="Number Systems...">
-                                <MenuItem.Icon>
-                                    <Image
-                                        Width="24"
-                                        Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-circled-n-48.png" />
-                                </MenuItem.Icon>
-                            </MenuItem>
-                        </ContextMenu>
-                    </applib:ImageButton.ContextMenu>
-                </applib:ImageButton>
+                    ToolTip="Display Result as File size..." />
                 <applib:ImageButton
+                    Margin="2,0"
+                    Command="{Binding DisplayChanger.ConvertPercentageCommand}"
+                    CommandParameter="{Binding ReturnObject}"
+                    Image="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-percentage-48.png"
+                    ImageHeight="24"
+                    ImageWidth="24"
+                    Style="{StaticResource Flat}"
+                    ToolTip="Display Result as Percentage..." />
+                <applib:ImageButton
+                    Margin="2,0"
+                    Command="{Binding DisplayChanger.ConvertTextCommand}"
+                    CommandParameter="{Binding ReturnObject}"
+                    Image="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-circled-t-48.png"
+                    ImageHeight="24"
+                    ImageWidth="24"
+                    Style="{StaticResource Flat}"
+                    ToolTip="Display Result as Text..." />
+                <applib:ImageButton
+                    Margin="2,0"
+                    Command="{Binding DisplayChanger.ConvertPrefixesCommand}"
+                    CommandParameter="{Binding ReturnObject}"
+                    Image="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-mu-48.png"
+                    ImageHeight="24"
+                    ImageWidth="24"
+                    Style="{StaticResource Flat}"
+                    ToolTip="Display Result with prefixes..." />
+                <applib:ImageButton
+                    Margin="2,0"
+                    Command="{Binding DisplayChanger.ConvertNumberSystemCommand}"
+                    CommandParameter="{Binding ReturnObject}"
+                    Image="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-circled-n-48.png"
+                    ImageHeight="24"
+                    ImageWidth="24"
+                    Style="{StaticResource Flat}"
+                    ToolTip="Display Result in Number systems..." />
+
+                <applib:ImageButton
+                    Margin="2,0"
                     Command="{Binding ClearHistoryCommand}"
                     Image="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-empty-trash-48.png"
                     ImageHeight="24"
@@ -192,6 +158,7 @@
                     Style="{StaticResource Flat}"
                     ToolTip="Clear History" />
                 <applib:ImageButton
+                    Margin="2,0"
                     Command="{Binding ClearCommand}"
                     Image="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-erase-48.png"
                     ImageHeight="24"
@@ -199,6 +166,7 @@
                     Style="{StaticResource Flat}"
                     ToolTip="Clear" />
                 <applib:ImageButton
+                    Margin="2,0"
                     Command="{Binding BackSpaceCommand}"
                     Image="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-backspace-48.png"
                     ImageHeight="24"
