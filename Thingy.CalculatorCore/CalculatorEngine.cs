@@ -48,7 +48,8 @@ namespace Thingy.CalculatorCore
                                      typeof(Engineering),
                                      typeof(GeneralFunctions), 
                                      typeof(Variations),
-                                     typeof(TypeFunctions));
+                                     typeof(TypeFunctions),
+                                     typeof(Statistics));
         }
 
         private void _output_StreamWasWritten(object sender, string e)
