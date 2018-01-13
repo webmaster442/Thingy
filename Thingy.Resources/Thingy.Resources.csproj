@@ -180,7 +180,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="SmallIcons\icons8-backspace-48.png" />
-    <Resource Include="SmallIcons\icons8-circled-d-48.png" />
     <Resource Include="SmallIcons\icons8-circled-f-48.png" />
     <Resource Include="SmallIcons\icons8-circled-n-48.png" />
     <Resource Include="SmallIcons\icons8-circled-t-48.png" />
