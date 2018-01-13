@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppLib.Common.Log;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -6,15 +7,16 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Thingy.Views
+namespace Thingy.Views.Dialogs
 {
     public partial class CopyorZipDialog : Window
     {
         private CancellationTokenSource _cancellationTokenSource;
         private bool _taskrunning;
         private Progress<double> _progress;
+        private ILogger _log;
 
-        public CopyorZipDialog()
+        public CopyorZipDialog(ILogger log)
         {
             InitializeComponent();
             _progress = new Progress<double>(DisplayProgress);
@@ -75,12 +77,14 @@ namespace Thingy.Views
                     }
                 }
             }
-            catch (OperationCanceledException)
+            catch (OperationCanceledException ocex)
             {
+                _log.Error(ocex);
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _log.Error(ex);
                 return false;
             }
 
@@ -134,12 +138,14 @@ namespace Thingy.Views
                     }
                 }
             }
-            catch (OperationCanceledException)
+            catch (OperationCanceledException ocex)
             {
+                _log.Error(ocex);
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _log.Error(ex);
                 return false;
             }
 
@@ -199,15 +205,18 @@ namespace Thingy.Views
                 if (!result)
                 {
                     MessageBox.Show("Error on copy", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Close();
                 }
                 else
                 {
                     Close();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _log.Error(ex);
                 _taskrunning = false;
+                Close();
             }
         }
 
@@ -224,15 +233,18 @@ namespace Thingy.Views
                 if (!result)
                 {
                     MessageBox.Show("Error on packing", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Close();
                 }
                 else
                 {
                     Close();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _log.Error(ex);
                 _taskrunning = false;
+                Close();
             }
         }
     }

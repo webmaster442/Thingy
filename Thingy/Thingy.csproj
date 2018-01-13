@@ -148,7 +148,7 @@
     <Compile Include="Views\CalculatorDialogs\NumberToTextMessageBox.xaml.cs">
       <DependentUpon>NumberToTextMessageBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CopyOrZipDialog.xaml.cs">
+    <Compile Include="Views\Dialogs\CopyOrZipDialog.xaml.cs">
       <DependentUpon>CopyOrZipDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindowViewModel.cs" />
@@ -290,7 +290,7 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="Views\CopyOrZipDialog.xaml">
+    <Page Include="Views\Dialogs\CopyOrZipDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

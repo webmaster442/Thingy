@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppLib.Common.Log;
+using System;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -23,7 +24,9 @@ namespace Thingy.Modules
         {
             return new Views.VirtualFolders
             {
-                DataContext = new ViewModels.VirtualFoldersViewModel(App.Instance, App.IoCContainer.ResolveSingleton<IDataBase>())
+                DataContext = new ViewModels.VirtualFoldersViewModel(App.Instance,
+                                                                     App.IoCContainer.ResolveSingleton<IDataBase>(),
+                                                                     App.IoCContainer.ResolveSingleton<ILogger>())
             };
         }
 

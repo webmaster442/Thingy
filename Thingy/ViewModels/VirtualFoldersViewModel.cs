@@ -1,4 +1,5 @@
 ﻿using AppLib.Common.Extensions;
+using AppLib.Common.Log;
 using AppLib.MVVM;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace Thingy.ViewModels
     {
         private IDataBase _db;
         private IApplication _app;
+        private ILogger _log;
         private bool _changed;
         private string _selectedfolder;
 
@@ -33,10 +35,11 @@ namespace Thingy.ViewModels
         public DelegateCommand CopyContentsCommand { get; private set; }
         public DelegateCommand CreateZipCommand { get; private set; }
 
-        public VirtualFoldersViewModel(IApplication app, IDataBase db)
+        public VirtualFoldersViewModel(IApplication app, IDataBase db, ILogger log)
         {
             _app = app;
             _db = db;
+            _log = log;
             Folders = new ObservableCollection<VirtualFolder>();
             CurrentFolder = new ObservableCollection<string>();
             CurrentFolder.CollectionChanged += CurrentFolder_CollectionChanged;
@@ -188,7 +191,7 @@ namespace Thingy.ViewModels
             };
             if (folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                var dialog = new Views.CopyorZipDialog();
+                var dialog = new Views.Dialogs.CopyorZipDialog(_log);
                 dialog.Show();
                 dialog.StartCopy(CurrentFolder, folderBrowserDialog.SelectedPath);
 
@@ -201,7 +204,7 @@ namespace Thingy.ViewModels
             saveFileDialog.Filter = "Zip files|*.zip";
             if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                var dialog = new Views.CopyorZipDialog();
+                var dialog = new Views.Dialogs.CopyorZipDialog(_log);
                 dialog.Show();
                 dialog.StartZip(CurrentFolder, saveFileDialog.FileName);
             }
