@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:Thingy.Controls"
     x:Name="keys"
     d:DesignHeight="500"
     d:DesignWidth="900"
@@ -59,18 +60,21 @@
             Grid.Row="1"
             Grid.Column="0">
             <ItemsControl
+                VerticalAlignment="Top"
                 ItemTemplate="{StaticResource CalculatorFunction}"
                 ItemsSource="{Binding ElementName=keys, Path=VisibleFunctions}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid
-                            Columns="4" />
+                            x:Name="Grid"
+                            Columns="{Binding ElementName=Grid, Path=ActualWidth, Converter={controls:UniformGridColunConverter}}" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </ScrollViewer>
 
         <Grid
+            VerticalAlignment="Top"
             x:Name="NumericPad"
             Grid.Row="0"
             Grid.RowSpan="2"

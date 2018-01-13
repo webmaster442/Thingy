@@ -10,7 +10,8 @@
             Padding="3"
             Margin="2"
             FontSize="16"
-            MinWidth="80"/>
+            MaxHeight="40"
+            MinWidth="90"/>
     </DataTemplate>
 
     <DataTemplate x:Key="NumSysKeyboard">

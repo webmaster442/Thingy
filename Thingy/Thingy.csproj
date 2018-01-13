@@ -111,6 +111,7 @@
     </Compile>
     <Compile Include="Controls\NumberSystemTextBox.cs" />
     <Compile Include="Controls\TrulyObservableCollection.cs" />
+    <Compile Include="Controls\UniformGridColunConverter.cs" />
     <Compile Include="IApplication.cs" />
     <Compile Include="IMainWindow.cs" />
     <Compile Include="Infrastructure\DBFileIconConverter.cs" />
