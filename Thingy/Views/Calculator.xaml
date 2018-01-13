@@ -117,6 +117,7 @@
                                 x:Name="DispFileSize"
                                 Command="{Binding DisplayChanger.ConvertFileSizeCommand}"
                                 CommandParameter="{Binding ReturnObject}"
+                                CommandTarget="{Binding DisplayChanger}"
                                 Header="As File size...">
                                 <MenuItem.Icon>
                                     <Image
@@ -161,6 +162,7 @@
                                 x:Name="DispPrefixes"
                                 Command="{Binding DisplayChanger.ConvertPrefixesCommand}"
                                 CommandParameter="{Binding ReturnObject}"
+                                CommandTarget="{Binding DisplayChanger}"
                                 Header="With prefixes...">
                                 <MenuItem.Icon>
                                     <Image
