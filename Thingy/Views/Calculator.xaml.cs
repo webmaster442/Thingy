@@ -27,5 +27,10 @@ namespace Thingy.Views
                 KeyboardViewSwitcher.SelectedIndex = 0;
             });
         }
+
+        private void DisplayModes_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            DisplayModes.ContextMenu.IsOpen = true;
+        }
     }
 }

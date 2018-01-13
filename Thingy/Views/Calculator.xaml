@@ -103,15 +103,106 @@
                 Grid.ColumnSpan="2"
                 HorizontalAlignment="Right"
                 Orientation="Horizontal">
-                <Button
-                    Command="{Binding ClearCommand}"
-                    Content="Clear" />
-                <Button
+                <applib:ImageButton
+                    x:Name="DisplayModes"
+                    Click="DisplayModes_Click"
+                    Image="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-circled-d-48.png"
+                    ImageHeight="24"
+                    ImageWidth="24"
+                    Style="{StaticResource Flat}"
+                    ToolTip="Display result in various formats">
+                    <applib:ImageButton.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem
+                                x:Name="DispFileSize"
+                                Command="{Binding DisplayChanger.ConvertFileSizeCommand}"
+                                CommandParameter="{Binding ReturnObject}"
+                                Header="As File size...">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-circled-f-48.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem
+                                x:Name="DispPercent"
+                                Command="{Binding DisplayChanger.ConvertPercentageCommand}"
+                                CommandParameter="{Binding ReturnObject}"
+                                Header="As Percentage...">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-percentage-48.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem
+                                x:Name="DispText"
+                                Command="{Binding DisplayChanger.ConvertTextCommand}"
+                                CommandParameter="{Binding ReturnObject}"
+                                Header="As Text...">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-circled-t-48.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem
+                                x:Name="DispFractions"
+                                Command="{Binding DisplayChanger.ConvertFractionsCommand}"
+                                CommandParameter="{Binding ReturnObject}"
+                                Header="As Fractions...">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-fraction-48.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem
+                                x:Name="DispPrefixes"
+                                Command="{Binding DisplayChanger.ConvertPrefixesCommand}"
+                                CommandParameter="{Binding ReturnObject}"
+                                Header="With prefixes...">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-mu-48.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem
+                                x:Name="DispNumSys"
+                                Command="{Binding DisplayChanger.ConvertNumberSystemCommand}"
+                                CommandParameter="{Binding ReturnObject}"
+                                Header="Number Systems...">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-circled-n-48.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </applib:ImageButton.ContextMenu>
+                </applib:ImageButton>
+                <applib:ImageButton
                     Command="{Binding ClearHistoryCommand}"
-                    Content="Clear History" />
-                <Button
+                    Image="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-empty-trash-48.png"
+                    ImageHeight="24"
+                    ImageWidth="24"
+                    Style="{StaticResource Flat}"
+                    ToolTip="Clear History" />
+                <applib:ImageButton
+                    Command="{Binding ClearCommand}"
+                    Image="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-erase-48.png"
+                    ImageHeight="24"
+                    ImageWidth="24"
+                    Style="{StaticResource Flat}"
+                    ToolTip="Clear" />
+                <applib:ImageButton
                     Command="{Binding BackSpaceCommand}"
-                    Content="Backspace" />
+                    Image="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-backspace-48.png"
+                    ImageHeight="24"
+                    ImageWidth="24"
+                    Style="{StaticResource Flat}"
+                    ToolTip="Backspace" />
             </StackPanel>
         </Grid>
 
@@ -131,11 +222,12 @@
                 <controls:CalculatorPrefixes
                     ClickCommand="{Binding InsertFormulaCommand}" />
             </TabItem>
-            <TabItem Header="Constants">
+            <TabItem
+                Header="Constants">
                 <controls:CalculatorConstants
                     CancelCommand="{Binding ConstantCancelCommand}"
-                    InsertCommand="{Binding InsertConstantCommand}"
-                    ConstantDB="{Binding Engine.ConstantDB}"/>
+                    ConstantDB="{Binding Engine.ConstantDB}"
+                    InsertCommand="{Binding InsertConstantCommand}" />
             </TabItem>
         </TabControl>
     </Grid>

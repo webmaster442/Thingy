@@ -1,5 +1,6 @@
 ﻿using AppLib.WPF;
 using MahApps.Metro;
+using MahApps.Metro.Controls.Dialogs;
 using MahApps.Metro.SimpleChildWindow;
 using System;
 using System.ComponentModel;
@@ -67,6 +68,12 @@ namespace Thingy
             var result = await (App.Current.MainWindow as MainWindow).ShowChildWindowAsync<bool>(modalDialog);
 
             return result;
+        }
+
+        public Task<MessageDialogResult> ShowMessageBox(string title, string content, MessageDialogStyle style)
+        {
+            var mainwindow = (App.Current.MainWindow as MainWindow);
+            return mainwindow.ShowMessageAsync(title, content, style);
         }
 
         public void ShowStatusBarMenu(UserControl control, string title, bool AutoClose = true, int AutoCloseTimeMs = 5000)

@@ -13,6 +13,8 @@ namespace Thingy.ViewModels.Calculator
         private CalculatorEngine _engine;
         private const int MaxHistoryCount = 20;
         private IApplication _app;
+        private DisplayChangerModel _displayChanger;
+        private object _returnObject;
 
         public DelegateCommand<string> InsertFormulaCommand { get; private set; }
         public DelegateCommand<string> InsertFunctionFormulaCommand { get; private set; }
@@ -44,6 +46,18 @@ namespace Thingy.ViewModels.Calculator
         {
             get { return _engine; }
             set { SetValue(ref _engine, value);  }
+        }
+
+        public DisplayChangerModel DisplayChanger
+        {
+            get { return _displayChanger; }
+            set { SetValue(ref _displayChanger, value); }
+        }
+
+        public object ReturnObject
+        {
+            get { return _returnObject; }
+            set { SetValue(ref _returnObject, value); }
         }
 
         public CalculatorViewModel(Views.ICalculatorView view, IApplication app): base(view)
@@ -114,6 +128,7 @@ namespace Thingy.ViewModels.Calculator
 
         private void BackSpace()
         {
+            if (string.IsNullOrEmpty(Formula)) return;
             if (Formula.Length - 1 > -1)
             {
                 Formula = Formula.Substring(0, Formula.Length - 1);
@@ -173,12 +188,15 @@ namespace Thingy.ViewModels.Calculator
             {
                 case Status.ResultOk:
                     Result = result.Content;
+                    ReturnObject = result.RawObject;
                     break;
                 case Status.NoResult:
                     Result = "Ok";
+                    ReturnObject = result.RawObject;
                     break;
                 case Status.ResultError:
                     Result = $"Error: {result.Content}";
+                    ReturnObject = result.RawObject;
                     break;
             }
             View.SwitchToMainKeyboard();
