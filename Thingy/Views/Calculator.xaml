@@ -114,6 +114,15 @@
                     ToolTip="Display Result as File size..." />
                 <applib:ImageButton
                     Margin="2,0"
+                    Command="{Binding DisplayChanger.ConvertFractionsCommand}"
+                    CommandParameter="{Binding ReturnObject}"
+                    Image="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-fraction-48.png"
+                    ImageHeight="24"
+                    ImageWidth="24"
+                    Style="{StaticResource Flat}"
+                    ToolTip="Display Result as Fraction..." />
+                <applib:ImageButton
+                    Margin="2,0"
                     Command="{Binding DisplayChanger.ConvertPercentageCommand}"
                     CommandParameter="{Binding ReturnObject}"
                     Image="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-percentage-48.png"
@@ -180,6 +189,7 @@
             x:Name="KeyboardViewSwitcher"
             Grid.Row="1">
             <TabItem
+                Style="{StaticResource CompactTabItem}"
                 Header="Keys">
                 <controls:CalculatorKeyboard
                     ClickCommand="{Binding InsertFormulaCommand}"
@@ -188,11 +198,13 @@
                     NumSysCommand="{Binding NumSysInputCommand}" />
             </TabItem>
             <TabItem
+                Style="{StaticResource CompactTabItem}"
                 Header="Powers/Prefixes">
                 <controls:CalculatorPrefixes
                     ClickCommand="{Binding InsertFormulaCommand}" />
             </TabItem>
             <TabItem
+                Style="{StaticResource CompactTabItem}"
                 Header="Constants">
                 <controls:CalculatorConstants
                     CancelCommand="{Binding ConstantCancelCommand}"

@@ -18,6 +18,7 @@
                 <ResourceDictionary Source="pack://application:,,,/Dragablz;component/Themes/Generic.xaml" />
                 <!-- App Styles -->
                 <ResourceDictionary Source="Styles/BasicStyles.xaml" />
+                <ResourceDictionary Source="Styles/CompactTabItem.xaml" />
                 <ResourceDictionary Source="Styles/BorderlessTextBox.xaml" />
                 <ResourceDictionary Source="Styles/FullSizeMessageBox.xaml" />
                 <ResourceDictionary Source="Styles/ValidationErrorTemplate.xaml" />
