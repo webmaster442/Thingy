@@ -1,13 +1,12 @@
-﻿using ECalc.Classes;
-using ECalc.IronPythonEngine.Types;
-using ECalc.Maths;
+﻿using AppLib.Maths;
 using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Numerics;
 using System.Speech.Synthesis;
 using System.Windows;
+using Thingy.CalculatorCore;
 
-namespace ECalc.Controls
+namespace Thingy.Views.CalculatorDialogs
 {
     /// <summary>
     /// Interaction logic for NumberToTextWindow.xaml
@@ -15,10 +14,12 @@ namespace ECalc.Controls
     public partial class NumberToTexMessageBox : CustomDialog, IDisposable
     {
         private SpeechSynthesizer _synthesizer;
+        private IApplication _app;
 
-        public NumberToTexMessageBox()
+        public NumberToTexMessageBox(IApplication application)
         {
             InitializeComponent();
+            _app = application;
             _synthesizer = new SpeechSynthesizer();
             _synthesizer.SpeakCompleted += _synthesizer_SpeakCompleted;
         }
@@ -28,7 +29,7 @@ namespace ECalc.Controls
             Dispose(true);
         }
 
-        public void SetNumber(object o)
+        public void SetDisplay(object o)
         {
             if (o is Complex)
             {
@@ -76,8 +77,7 @@ namespace ECalc.Controls
 
         private async void PART_NegativeButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            var main = (MainWindow)Application.Current.MainWindow;
-            await main.HideMetroDialogAsync(this);
+            await _app.HideMessageBox(this);
         }
 
         protected virtual void Dispose(bool native)

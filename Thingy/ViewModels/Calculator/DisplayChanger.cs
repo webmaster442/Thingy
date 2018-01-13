@@ -125,6 +125,9 @@ namespace Thingy.ViewModels.Calculator
 
         private async void ConvertText(object obj)
         {
+            var content = new Views.CalculatorDialogs.NumberToTexMessageBox(_app);
+            content.SetDisplay(obj);
+            await _app.ShowMessageBox(content);
         }
 
         private async void ConvertNumberSystem(object obj)

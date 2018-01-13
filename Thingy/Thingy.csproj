@@ -65,8 +65,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Speech" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -141,6 +143,9 @@
     </Compile>
     <Compile Include="Views\CalculatorDialogs\NumberSystemInput.xaml.cs">
       <DependentUpon>NumberSystemInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CalculatorDialogs\NumberToTextMessageBox.xaml.cs">
+      <DependentUpon>NumberToTextMessageBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CopyOrZipDialog.xaml.cs">
       <DependentUpon>CopyOrZipDialog.xaml</DependentUpon>
@@ -263,6 +268,10 @@
     <Page Include="Views\CalculatorDialogs\NumberSystemInput.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CalculatorDialogs\NumberToTextMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Views\CopyOrZipDialog.xaml">
       <SubType>Designer</SubType>
