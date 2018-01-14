@@ -14,5 +14,6 @@ namespace Thingy.CalculatorCore
         bool GroupByThousands { get; set; }
         TrigonometryMode TrigonometryMode { get; set; }
         IConstantDB ConstantDB { get; }
+        IEnumerable<MemoryItem> GetMemory();
     }
 }

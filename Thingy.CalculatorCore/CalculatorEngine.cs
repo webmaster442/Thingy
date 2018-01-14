@@ -127,5 +127,18 @@ namespace Thingy.CalculatorCore
                 _history = null;
             }
         }
+
+        public IEnumerable<MemoryItem> GetMemory()
+        {
+            var variables = _scope.GetVariableNames();
+            foreach (var variable in variables)
+            {
+                yield return new MemoryItem
+                {
+                    VariableName = variable,
+                    TypeName = _scope.GetVariable(variable).GetType().Name;
+                };
+            }
+        }
     }
 }
