@@ -16,7 +16,7 @@ namespace Thingy.CalculatorCore.PreprocessorInternals
 
         public string PatternMatchRegex
         {
-            get { return "^C:[A-Za-z1-9].+"; }
+            get { return "^C:[A-Za-z1-9]+"; }
         }
 
         public bool Process(string input, out string output)
@@ -27,7 +27,9 @@ namespace Thingy.CalculatorCore.PreprocessorInternals
                     throw new Exception("Pattern match error");
 
                 string[] tokens = input.Split(':');
-                output = _db.Lookup(tokens[1]).Value.ToString(new CultureInfo("en-US"));
+
+                var str = DoubleConverter.ToExactString(_db.Lookup(tokens[1]).Value);
+                output = str;
                 return true;
             }
             catch (Exception)

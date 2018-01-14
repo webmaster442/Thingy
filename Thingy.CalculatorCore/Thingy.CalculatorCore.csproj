@@ -67,6 +67,7 @@
       <Link>Properties\CommonVersion.cs</Link>
     </Compile>
     <Compile Include="CalculatorEngine.cs" />
+    <Compile Include="DoubleConverter.cs" />
     <Compile Include="Types\CalculatorResult.cs" />
     <Compile Include="Constants\Atomic.cs" />
     <Compile Include="Constants\Constant.cs" />

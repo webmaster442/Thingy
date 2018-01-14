@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Thingy.CalculatorCore.Tests
 {
@@ -13,21 +14,29 @@ namespace Thingy.CalculatorCore.Tests
         [TestCase("33 + XXX:HEX * 3", "33+XXX:HEX*3")]       //Invalid Custom format parsing
         [TestCase("ClassName.Sin ( 90 )", "sin(90)")]        //Function name replacing
         [TestCase("ClassName.Sin ( 255 )", "sin(FF:HEX)")]   //Function name replacing with custom format
-        [TestCase("3.1415926535897932384626433832795028841971693993751", "C:Pi")]
         public void EnsureThatPreprocessorWorks(string expected, string input)
         {
-
-            var db = new Constants.ConstantDB();
-
             Dictionary<string, string> table = new Dictionary<string, string>
             {
                 { "sin", "ClassName.Sin" },
                 { "cos", "ClassName.Cos" }
             };
 
-            Preprocessor p = new Preprocessor(table,db);
+            Preprocessor p = new Preprocessor(table, null);
             string output = p.Process(input);
             Assert.AreEqual(expected, output);
+        }
+
+        [TestCase(2.7182818284590452353602874713526624977572470937000d, "C:e")]
+        [TestCase(3.1415926535897932384626433832795028841971693993751d, "C:Pi")]
+        public void EnsureThatPreprocessorProcessesConstants(double expected, string input)
+        {
+            var db = new Constants.ConstantDB();
+
+            Preprocessor p = new Preprocessor(null, db);
+            string output = p.Process(input);
+            double d = System.Convert.ToDouble(output, new CultureInfo("en-US"));
+            Assert.AreEqual(expected, d, 0.0001);
         }
     }
 }

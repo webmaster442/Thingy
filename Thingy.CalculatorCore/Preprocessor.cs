@@ -26,8 +26,13 @@ namespace Thingy.CalculatorCore
                 new RomanNumberParser(),
                 new PrefixedNumberParser(),
                 new CustomNumberSystemParser(),
-                new ConstantParser(constantDB)
             };
+
+            if (constantDB != null)
+            {
+                _processors.Add(new ConstantParser(constantDB));
+            }
+
             StringBuilder regex = new StringBuilder();
             foreach (var @operator in _operators)
             {
@@ -48,7 +53,8 @@ namespace Thingy.CalculatorCore
 
             for (int i=0; i<tokens.Length; i++)
             {
-                if (_functionReplaceTable.Keys.Contains(tokens[i]))
+                if (_functionReplaceTable != null &&
+                    _functionReplaceTable.Keys.Contains(tokens[i]))
                 {
                     //replace it if it's a recognized function
                     tokens[i] = _functionReplaceTable[tokens[i]];
