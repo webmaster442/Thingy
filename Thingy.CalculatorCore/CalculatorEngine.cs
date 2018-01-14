@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AppLib.MVVM;
 using Thingy.CalculatorCore.Constants;
+using System.Text;
 
 namespace Thingy.CalculatorCore
 {
@@ -21,6 +22,7 @@ namespace Thingy.CalculatorCore
         private Dictionary<string, string> _functioncache;
         private FunctionLoader _loader;
         private Preprocessor _preprocessor;
+        private StringBuilder _linebuffer;
 
         private IConstantDB _db;
         private bool _PreferPrefixes;
@@ -30,6 +32,7 @@ namespace Thingy.CalculatorCore
         {
             TrigonometryMode = TrigonometryMode.DEG;
             ConstantDB = new ConstantDB();
+            _linebuffer = new StringBuilder();
             _functioncache = new Dictionary<string, string>();
             _preprocessor = new Preprocessor(_functioncache, ConstantDB);
             var options = new Dictionary<string, object>();
@@ -54,7 +57,7 @@ namespace Thingy.CalculatorCore
 
         private void _output_StreamWasWritten(object sender, string e)
         {
-            throw new NotImplementedException();
+            _linebuffer.Append(e);
         }
 
         public IEnumerable<string> Functions
@@ -96,20 +99,29 @@ namespace Thingy.CalculatorCore
             {
                 try
                 {
-                    if (string.IsNullOrEmpty(commandLine)) return new CalculatorResult(Status.ResultOk, "0", 0.0d);
+                    _linebuffer.Clear();
+
+                    if (string.IsNullOrEmpty(commandLine)) return new CalculatorResult(Status.ResultOk, "0", string.Empty, 0.0d);
+
                     var processed = _preprocessor.Process(commandLine);
+
                     ScriptSource source = _engine.CreateScriptSourceFromString(processed, SourceCodeKind.AutoDetect);
+
                     object result = source.Execute(_scope);
+
                     if (result != null)
                     {
                         _scope.SetVariable("ans", result);
-                        return new CalculatorResult(Status.ResultOk, StringFormatter.DisplayString(result, PreferPrefixes, GroupByThousands, TrigonometryMode), result);
+                        return new CalculatorResult(Status.ResultOk, 
+                                                    StringFormatter.DisplayString(result, PreferPrefixes, GroupByThousands, TrigonometryMode),
+                                                    _linebuffer.ToString(),
+                                                    result);
                     }
-                    else return new CalculatorResult(Status.NoResult, null, null);
+                    else return new CalculatorResult(Status.NoResult, string.Empty, _linebuffer.ToString(), null);
                 }
                 catch (Exception ex)
                 {
-                    return new CalculatorResult(Status.ResultError, ex.Message, null);
+                    return new CalculatorResult(Status.ResultError, _linebuffer.ToString(), ex.Message, null);
                 }
             });
         }
@@ -136,7 +148,7 @@ namespace Thingy.CalculatorCore
                 yield return new MemoryItem
                 {
                     VariableName = variable,
-                    TypeName = _scope.GetVariable(variable).GetType().Name;
+                    TypeName = _scope.GetVariable(variable).GetType().Name
                 };
             }
         }

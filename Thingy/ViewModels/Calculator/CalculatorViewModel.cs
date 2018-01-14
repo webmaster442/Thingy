@@ -15,6 +15,7 @@ namespace Thingy.ViewModels.Calculator
         private IApplication _app;
         private DisplayChangerModel _displayChanger;
         private object _returnObject;
+        private bool _calculating;
 
         public DelegateCommand<string> InsertFormulaCommand { get; private set; }
         public DelegateCommand<string> InsertFunctionFormulaCommand { get; private set; }
@@ -58,6 +59,12 @@ namespace Thingy.ViewModels.Calculator
         {
             get { return _returnObject; }
             set { SetValue(ref _returnObject, value); }
+        }
+
+        public bool Calculating
+        {
+            get { return _calculating; }
+            set { SetValue(ref _calculating, value); }
         }
 
         public CalculatorViewModel(Views.ICalculatorView view, IApplication app): base(view)
@@ -186,9 +193,11 @@ namespace Thingy.ViewModels.Calculator
 
         private async void Execute()
         {
+            Calculating = true;
             var result = await _engine.Calculate(Formula.Trim());
             UpdateHistory(Formula);
             Formula = string.Empty;
+            Calculating = false;
             switch (result.Status)
             {
                 case Status.ResultOk:
@@ -203,6 +212,14 @@ namespace Thingy.ViewModels.Calculator
                     Result = $"Error: {result.Content}";
                     ReturnObject = result.RawObject;
                     break;
+            }
+            if (result.LineBuffer.Length > 2)
+            {
+                var multiline = new Views.CalculatorDialogs.MultiLineResultMessageBox(_app)
+                {
+                    Text = result.LineBuffer
+                };
+                await _app.ShowMessageBox(multiline);
             }
             View.SwitchToMainKeyboard();
             View.FocusFormulaInput();
