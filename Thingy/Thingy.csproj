@@ -106,6 +106,9 @@
     <Compile Include="Controls\CalculatorKeyboard.xaml.cs">
       <DependentUpon>CalculatorKeyboard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CalculatorMemoryView.xaml.cs">
+      <DependentUpon>CalculatorMemoryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CalculatorPrefixes.xaml.cs">
       <DependentUpon>CalculatorPrefixes.xaml</DependentUpon>
     </Compile>
@@ -234,6 +237,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\CalculatorKeyboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CalculatorMemoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

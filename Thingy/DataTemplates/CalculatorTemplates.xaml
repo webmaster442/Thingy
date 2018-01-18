@@ -58,4 +58,21 @@
         </Grid>
     </DataTemplate>
 
+    <DataTemplate
+        x:Key="MemoryItem">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock
+                Grid.Column="0"
+                Text="{Binding VariableName}" />
+            <TextBlock
+                Grid.Column="1"
+                Text="{Binding TypeName}" />
+        </Grid>
+    </DataTemplate>
+
 </ResourceDictionary>
