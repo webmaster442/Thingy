@@ -121,7 +121,8 @@ namespace Thingy
             IoCContainer = new AppLib.Common.IOC.Container();
             IoCContainer.RegisterSingleton<IDataBase>(() =>
             {
-                return new DataBase("test.db");
+                var dbfile = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ThingyDataBase.litedb");
+                return new DataBase(dbfile);
             });
             Log.Info("Database initialized");
             IoCContainer.RegisterSingleton<IModuleLoader>(() =>
