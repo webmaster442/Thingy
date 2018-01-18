@@ -13,9 +13,11 @@ namespace Thingy.ViewModels.Calculator
         private CalculatorEngine _engine;
         private const int MaxHistoryCount = 20;
         private IApplication _app;
-        private DisplayChangerModel _displayChanger;
+        private DisplayChangerViewModel _displayChanger;
         private object _returnObject;
         private bool _calculating;
+
+        private int _variableCounter;
 
         public DelegateCommand<string> InsertFormulaCommand { get; private set; }
         public DelegateCommand<string> InsertFunctionFormulaCommand { get; private set; }
@@ -28,8 +30,14 @@ namespace Thingy.ViewModels.Calculator
         public DelegateCommand ConstantCancelCommand { get; private set; }
         public DelegateCommand<string> NumSysInputCommand { get; private set; }
 
+        public DelegateCommand<MemoryItem> DeleteVariableCommand { get; private set; }
+        public DelegateCommand<MemoryItem> InsertVariableCommand { get; private set; }
+        public DelegateCommand EvalAndAddVariableCommand { get; private set; }
+        public DelegateCommand AddResultVarableCommand { get; private set; }
+
         public ObservableCollection<string> History { get; private set; }
         public ObservableCollection<string> Functions { get; private set; }
+        public ObservableCollection<MemoryItem> Variables { get; private set; }
 
         public string Formula
         {
@@ -49,7 +57,7 @@ namespace Thingy.ViewModels.Calculator
             set { SetValue(ref _engine, value);  }
         }
 
-        public DisplayChangerModel DisplayChanger
+        public DisplayChangerViewModel DisplayChanger
         {
             get { return _displayChanger; }
             set { SetValue(ref _displayChanger, value); }
@@ -72,7 +80,7 @@ namespace Thingy.ViewModels.Calculator
             _app = app;
             Engine = new CalculatorEngine();
             History = new ObservableCollection<string>();
-            DisplayChanger = new DisplayChangerModel(app);
+            DisplayChanger = new DisplayChangerViewModel(app);
             ExecuteCommand = Command.ToCommand(Execute);
             InsertFunctionFormulaCommand = Command.ToCommand<string>(InsertFunctionFormula);
             InsertFormulaCommand = Command.ToCommand<string>(InsertFormula);
@@ -85,8 +93,62 @@ namespace Thingy.ViewModels.Calculator
             Functions = new ObservableCollection<string>(_engine.Functions.OrderBy(x => x));
             ConstantCancelCommand = Command.ToCommand(ConstantCancel);
 
+            Variables = new ObservableCollection<MemoryItem>();
+            InsertVariableCommand = Command.ToCommand<MemoryItem>(InsertVarialbe, CanInsertOrDelete);
+            DeleteVariableCommand = Command.ToCommand<MemoryItem>(DeleteVarialbe, CanInsertOrDelete);
+            EvalAndAddVariableCommand = Command.ToCommand(EvalAndAddVariable);
+            AddResultVarableCommand = Command.ToCommand(AddResultVariable);
+
             Result = "0";
             ReturnObject = 0.0d;
+        }
+
+        private string GenerateName()
+        {
+            var str = $"var{_variableCounter}";
+            _variableCounter++;
+            return str;
+        }
+
+        private void AddResultVariable()
+        {
+            Engine.SetVariable(GenerateName(), ReturnObject);
+            View.SwitchToMainKeyboard();
+        }
+
+        private async void EvalAndAddVariable()
+        {
+            Calculating = true;
+            var result = await _engine.Calculate(Formula.Trim());
+            Formula = string.Empty;
+            Calculating = false;
+            switch (result.Status)
+            {
+                case Status.ResultOk:
+                    Engine.SetVariable(GenerateName(), result.RawObject);
+                    break;
+                default:
+                    await _app.ShowMessageBox("Error", "Can't add variable, because operation didn't had a result", MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
+                    break;
+            }
+            View.SwitchToMainKeyboard();
+        }
+
+        private bool CanInsertOrDelete(MemoryItem obj)
+        {
+            return obj != null;
+        }
+
+        private void DeleteVarialbe(MemoryItem obj)
+        {
+            Engine.DeleteVariableByName(obj.VariableName);
+        }
+
+        private void InsertVarialbe(MemoryItem obj)
+        {
+            View.SwitchToMainKeyboard();
+            Formula += obj.VariableName;
+            View.FocusFormulaInput();
         }
 
         private async void NumSysInput(string obj)

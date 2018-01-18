@@ -221,6 +221,17 @@
                     ConstantDB="{Binding Engine.ConstantDB}"
                     InsertCommand="{Binding InsertConstantCommand}" />
             </TabItem>
+            <TabItem
+                Header="Memory"
+                Style="{StaticResource CompactTabItem}">
+                <controls:CalculatorMemoryView
+                    CancelCommand="{Binding ConstantCancelCommand}"
+                    DeleteCommand="{Binding DeleteVariableCommand}"
+                    EvalResultCommand="{Binding EvalAndAddVariableCommand}"
+                    InsertCommand="{Binding InsertVariableCommand}"
+                    MemoryList="{Binding Variables}"
+                    ResultCommand="{Binding AddResultVarableCommand}" />
+            </TabItem>
         </TabControl>
     </Grid>
 </UserControl>

@@ -152,5 +152,15 @@ namespace Thingy.CalculatorCore
                 };
             }
         }
+
+        public bool DeleteVariableByName(string name)
+        {
+            _scope.RemoveVariable(name);
+        }
+
+        public void SetVariable(string name, object value)
+        {
+            _scope.SetVariable(name, value);
+        }
     }
 }

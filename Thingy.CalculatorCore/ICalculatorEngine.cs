@@ -15,5 +15,7 @@ namespace Thingy.CalculatorCore
         TrigonometryMode TrigonometryMode { get; set; }
         IConstantDB ConstantDB { get; }
         IEnumerable<MemoryItem> GetMemory();
+        bool DeleteVariableByName(string name);
+        void SetVariable(string name, object value);
     }
 }

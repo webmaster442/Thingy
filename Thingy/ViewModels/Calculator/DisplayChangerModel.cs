@@ -6,7 +6,7 @@ using Thingy.CalculatorCore;
 
 namespace Thingy.ViewModels.Calculator
 {
-    public class DisplayChangerModel : BindableBase
+    public class DisplayChangerViewModel : ViewModel
     {
         private IApplication _app;
 
@@ -17,7 +17,7 @@ namespace Thingy.ViewModels.Calculator
         public DelegateCommand<object> ConvertPrefixesCommand { get; private set; }
         public DelegateCommand<object> ConvertNumberSystemCommand { get; private set; }
 
-        public DisplayChangerModel(IApplication app)
+        public DisplayChangerViewModel(IApplication app)
         {
             _app = app;
             ConvertFileSizeCommand = Command.ToCommand<object>(ConvertFileSize, CanExecute);
