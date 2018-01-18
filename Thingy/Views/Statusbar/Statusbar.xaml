@@ -5,8 +5,8 @@
     xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Height="35"
-    d:DesignWidth="870"
+    Height="38"
+    d:DesignWidth="900"
     Background="White"
     mc:Ignorable="d">
     <Grid>
@@ -101,6 +101,15 @@
                 Click="DisplaySwitch_Click"
                 Content="Displays"
                 Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-monitor.png"
+                ImageHeight="28"
+                ImageWidth="28"
+                Style="{StaticResource Flat}" />
+            <applib:ImageButton
+                x:Name="Power"
+                Margin="10,0,5,0"
+                Click="Power_Click"
+                Content="Power"
+                Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-shutdown-96.png"
                 ImageHeight="28"
                 ImageWidth="28"
                 Style="{StaticResource Flat}" />

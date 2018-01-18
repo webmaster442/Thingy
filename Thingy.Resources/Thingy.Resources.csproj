@@ -194,5 +194,23 @@
   <ItemGroup>
     <Resource Include="SmallIcons\icons8-percentage-48.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-lock-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-sleep-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-logout-rounded-down-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-hibernate-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-shutdown-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-restart-96.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

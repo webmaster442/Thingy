@@ -1,0 +1,56 @@
+﻿<UserControl
+    x:Class="Thingy.Views.Statusbar.WindowsPower"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="100"
+    d:DesignWidth="300"
+    mc:Ignorable="d">
+    <StackPanel
+        Orientation="Horizontal">
+        <applib:ImageButton
+            Margin="2,0"
+            Content="Lock"
+            Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-lock-96.png"
+            ImageHeight="32"
+            ImageWidth="32"
+            Style="{StaticResource Flat}" />
+        <applib:ImageButton
+            Margin="2,0"
+            Content="Sleep"
+            Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-sleep-96.png"
+            ImageHeight="32"
+            ImageWidth="32"
+            Style="{StaticResource Flat}" />
+        <applib:ImageButton
+            Margin="2,0"
+            Content="Logout"
+            Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-logout-rounded-down-96.png"
+            ImageHeight="32"
+            ImageWidth="32"
+            Style="{StaticResource Flat}" />
+        <applib:ImageButton
+            Margin="2,0"
+            Content="Hybernate"
+            Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-hibernate-96.png"
+            ImageHeight="32"
+            ImageWidth="32"
+            Style="{StaticResource Flat}" />
+        <applib:ImageButton
+            Margin="2,0"
+            Content="Shutdown"
+            Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-shutdown-96.png"
+            ImageHeight="32"
+            ImageWidth="32"
+            Style="{StaticResource Flat}" />
+        <applib:ImageButton
+            Margin="2,0"
+            Content="Restart"
+            Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-restart-96.png"
+            ImageHeight="32"
+            ImageWidth="32"
+            Style="{StaticResource Flat}" />
+    </StackPanel>
+</UserControl>

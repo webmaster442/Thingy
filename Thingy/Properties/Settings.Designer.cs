@@ -49,7 +49,7 @@ namespace Thingy.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("870")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
         public double WindowWidth {
             get {
                 return ((double)(this["WindowWidth"]));
@@ -61,7 +61,7 @@ namespace Thingy.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("480")]
+        [global::System.Configuration.DefaultSettingValueAttribute("520")]
         public double WindowHeight {
             get {
                 return ((double)(this["WindowHeight"]));

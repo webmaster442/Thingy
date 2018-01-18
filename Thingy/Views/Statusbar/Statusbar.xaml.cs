@@ -89,5 +89,10 @@ namespace Thingy.Views.Statusbar
         {
             App.Instance.ShowStatusBarMenu(new MonitorSwitcher(), "Display swithcer");
         }
+
+        private void Power_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            App.Instance.ShowStatusBarMenu(new WindowsPower(), "Power options");
+        }
     }
 }

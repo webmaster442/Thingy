@@ -226,6 +226,9 @@
     <Compile Include="Views\StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Statusbar\WindowsPower.xaml.cs">
+      <DependentUpon>WindowsPower.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ToDoList.xaml.cs">
       <DependentUpon>ToDoList.xaml</DependentUpon>
     </Compile>
@@ -393,6 +396,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\StartPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Statusbar\WindowsPower.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
