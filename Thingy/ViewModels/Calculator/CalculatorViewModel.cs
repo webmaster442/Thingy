@@ -3,6 +3,7 @@ using System;
 using System.Collections.ObjectModel;
 using Thingy.CalculatorCore;
 using System.Linq;
+using AppLib.Common.Extensions;
 
 namespace Thingy.ViewModels.Calculator
 {
@@ -113,7 +114,7 @@ namespace Thingy.ViewModels.Calculator
         private void AddResultVariable()
         {
             Engine.SetVariable(GenerateName(), ReturnObject);
-            View.SwitchToMainKeyboard();
+            Variables.UpdateWith(Engine.GetMemory());
         }
 
         private async void EvalAndAddVariable()
@@ -131,7 +132,7 @@ namespace Thingy.ViewModels.Calculator
                     await _app.ShowMessageBox("Error", "Can't add variable, because operation didn't had a result", MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
                     break;
             }
-            View.SwitchToMainKeyboard();
+            Variables.UpdateWith(Engine.GetMemory());
         }
 
         private bool CanInsertOrDelete(MemoryItem obj)
@@ -256,7 +257,7 @@ namespace Thingy.ViewModels.Calculator
         private async void Execute()
         {
             Calculating = true;
-            var result = await _engine.Calculate(Formula.Trim());
+            var result = await _engine.Calculate(Formula?.Trim());
             UpdateHistory(Formula);
             Formula = string.Empty;
             Calculating = false;
@@ -285,6 +286,7 @@ namespace Thingy.ViewModels.Calculator
             }
             View.SwitchToMainKeyboard();
             View.FocusFormulaInput();
+            Variables.UpdateWith(Engine.GetMemory());
         }
 
         public void Dispose()

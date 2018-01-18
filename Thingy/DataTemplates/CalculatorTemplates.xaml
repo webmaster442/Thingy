@@ -62,16 +62,30 @@
         x:Key="MemoryItem">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition
-                    Width="Auto" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
             <TextBlock
+                Grid.Row="0"
                 Grid.Column="0"
+                FontSize="16"
+                FontWeight="Bold"
                 Text="{Binding VariableName}" />
             <TextBlock
+                Grid.Row="0"
                 Grid.Column="1"
+                Margin="10,0"
+                FontStyle="Italic"
                 Text="{Binding TypeName}" />
+            <TextBlock
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                FontFamily="{StaticResource UbuntuMono}"
+                Text="{Binding Value}" />
         </Grid>
     </DataTemplate>
 

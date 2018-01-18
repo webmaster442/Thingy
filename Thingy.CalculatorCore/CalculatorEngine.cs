@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using AppLib.MVVM;
 using Thingy.CalculatorCore.Constants;
 using System.Text;
+using System.Linq;
 
 namespace Thingy.CalculatorCore
 {
@@ -27,6 +28,8 @@ namespace Thingy.CalculatorCore
         private IConstantDB _db;
         private bool _PreferPrefixes;
         private bool _GroupByThousands;
+
+        private Type[] _functionTypes;
 
         public CalculatorEngine()
         {
@@ -47,12 +50,17 @@ namespace Thingy.CalculatorCore
 
             _loader = new FunctionLoader(_scope, _functioncache);
 
-            _loader.LoadTypesToScope(typeof(Trigonometry), 
-                                     typeof(Engineering),
-                                     typeof(GeneralFunctions), 
-                                     typeof(Variations),
-                                     typeof(TypeFunctions),
-                                     typeof(Statistics));
+            _functionTypes = new Type[]
+            {
+                typeof(Trigonometry),
+                typeof(Engineering),
+                typeof(GeneralFunctions),
+                typeof(Variations),
+                typeof(TypeFunctions),
+                typeof(Statistics)
+            };
+
+            _loader.LoadTypesToScope(_functionTypes);
         }
 
         private void _output_StreamWasWritten(object sender, string e)
@@ -112,7 +120,7 @@ namespace Thingy.CalculatorCore
                     if (result != null)
                     {
                         _scope.SetVariable("ans", result);
-                        return new CalculatorResult(Status.ResultOk, 
+                        return new CalculatorResult(Status.ResultOk,
                                                     StringFormatter.DisplayString(result, PreferPrefixes, GroupByThousands, TrigonometryMode),
                                                     _linebuffer.ToString(),
                                                     result);
@@ -145,17 +153,24 @@ namespace Thingy.CalculatorCore
             var variables = _scope.GetVariableNames();
             foreach (var variable in variables)
             {
-                yield return new MemoryItem
+                if (!variable.StartsWith("_") && !_functionTypes.Where(t => t.Name == variable).Any())
                 {
-                    VariableName = variable,
-                    TypeName = _scope.GetVariable(variable).GetType().Name
-                };
+                    object var = _scope.GetVariable(variable);
+
+                    var result = new MemoryItem
+                    {
+                        VariableName = variable,
+                        TypeName = var?.GetType()?.Name,
+                        Value = StringFormatter.DisplayString(var, false, true, TrigonometryMode)
+                    };
+                    yield return result;
+                }
             }
         }
 
         public bool DeleteVariableByName(string name)
         {
-            _scope.RemoveVariable(name);
+            return _scope.RemoveVariable(name);
         }
 
         public void SetVariable(string name, object value)

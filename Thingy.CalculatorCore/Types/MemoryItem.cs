@@ -4,5 +4,6 @@
     {
         public string VariableName { get; set; }
         public string TypeName { get; set; }
+        public string Value { get; set; }
     }
 }
