@@ -134,7 +134,7 @@ namespace Thingy.CalculatorCore
                 }
                 catch (Exception ex)
                 {
-                    return new CalculatorResult(Status.ResultError, _linebuffer.ToString(), ex.Message, null);
+                    return new CalculatorResult(Status.ResultError, ex.Message, _linebuffer.ToString(), null);
                 }
             });
         }

@@ -18,7 +18,7 @@ namespace Thingy.CalculatorCore
         public Preprocessor(IDictionary<string, FunctionInformation> functionReplcaceTable, IConstantDB constantDB)
         {
             _functionReplaceTable = functionReplcaceTable;
-            _operators = new string[] { @"\+", @"\-", @"\*\*", @"\*", @"\/\/", @"\/", @"\%", @"\&", @"\|", @"\^", @"\~", @"\(", @"\)" };
+            _operators = new string[] { @"\+", @"\-", @"\*\*", @"\*", @"\/\/", @"\/", @"\%", @"\&", @"\|", @"\^", @"\~", @"\(", @"\)", @"\," };
             _processors = new List<IProcessor>
             {
                 new BinaryNumberParser(),
