@@ -19,7 +19,7 @@ namespace Thingy.CalculatorCore.UnitConversion
                 new Unit("Furlong", 0.00497097, Actions.Multiply)
             });
             Add("Flow", new Unit[]
-{
+            {
                 new Unit("Liters/second",1, Actions.None),
                 new Unit("Liters/minute" ,60 , Actions.Multiply),
                 new Unit("Litres/hour" ,3600 , Actions.Multiply),
@@ -29,8 +29,7 @@ namespace Thingy.CalculatorCore.UnitConversion
                 new Unit("Meters3/hour" ,39878 , Actions.Multiply),
                 new Unit("Meters3/minute", 0.06 , Actions.Multiply),
                 new Unit("Meters3/second", 0.001 , Actions.Multiply)
-});
-
+            });
             Add("Area", new Unit[]
             {
                 new Unit("Meters2" , 1, Actions.None),
