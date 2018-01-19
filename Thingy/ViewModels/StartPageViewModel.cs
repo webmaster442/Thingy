@@ -35,11 +35,18 @@ namespace Thingy.ViewModels
             Modules.UpdateWith(_moduleLoader.GetModulesForCategory(obj.Key));
         }
 
-        private void TileClick(string obj)
+        private async void TileClick(string obj)
         {
-            var control = _moduleLoader.RunModuleByName(obj);
-            _application.SetCurrentTabContent(obj, control);
-
+            var module = _moduleLoader.GetModuleByName(obj);
+            if (module == null) return;
+            if (module.OpenAsWindow)
+            {
+                await _application.ShowDialog(module.RunModule(), module.ModuleName);
+            }
+            else
+            {
+                _application.SetCurrentTabContent(obj, module.RunModule());
+            }
         }
 
         public ObservableCollection<IModule> Modules

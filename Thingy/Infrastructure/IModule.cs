@@ -12,5 +12,6 @@ namespace Thingy.Infrastructure
         SolidColorBrush ColorBrush { get; }
         bool CanLoad { get; }
         string Category { get; }
+        bool OpenAsWindow { get; }
     }
 }

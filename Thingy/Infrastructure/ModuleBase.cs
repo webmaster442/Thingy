@@ -32,5 +32,10 @@ namespace Thingy.Infrastructure
         }
 
         public abstract string Category { get; }
+
+        public virtual bool OpenAsWindow
+        {
+            get { return false; }
+        }
     }
 }

@@ -3,7 +3,6 @@ using AppLib.Common.Log;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Controls;
 
 namespace Thingy.Infrastructure
 {
@@ -96,18 +95,21 @@ namespace Thingy.Infrastructure
             }
         }
 
-        public UserControl RunModuleByName(string name)
+        public IModule GetModuleByName(string name)
         {
-            var run = (from module in _modules
-                       where module.ModuleName == name
-                       select module).FirstOrDefault();
+            var moduleToRun = (from module in _modules
+                               where module.ModuleName == name
+                               select module).FirstOrDefault();
 
-            if (run == null)
+            if (moduleToRun == null)
+            {
+                _log.Error("couldn't find module: " + name);
                 return null;
+            }
 
-            _log.Info("Starting module: " + name);
+            _log.Info("Found Module: " + name);
 
-            return run.RunModule();
+            return moduleToRun;
         }
     }
 }
