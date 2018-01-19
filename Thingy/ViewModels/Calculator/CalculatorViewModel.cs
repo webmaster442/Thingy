@@ -37,7 +37,7 @@ namespace Thingy.ViewModels.Calculator
         public DelegateCommand AddResultVarableCommand { get; private set; }
 
         public ObservableCollection<string> History { get; private set; }
-        public ObservableCollection<string> Functions { get; private set; }
+        public ObservableCollection<Tuple<string, string>> Functions { get; private set; }
         public ObservableCollection<MemoryItem> Variables { get; private set; }
 
         public string Formula
@@ -91,7 +91,7 @@ namespace Thingy.ViewModels.Calculator
             BackSpaceCommand = Command.ToCommand(BackSpace);
             InsertHistoryCommand = Command.ToCommand<string>(InsertHistory);
             NumSysInputCommand = Command.ToCommand<string>(NumSysInput);
-            Functions = new ObservableCollection<string>(_engine.Functions.OrderBy(x => x));
+            Functions = new ObservableCollection<Tuple<string, string>>(_engine.FunctionsNamesAndPrototypes.OrderBy(x => x.Item1));
             ConstantCancelCommand = Command.ToCommand(ConstantCancel);
 
             Variables = new ObservableCollection<MemoryItem>();

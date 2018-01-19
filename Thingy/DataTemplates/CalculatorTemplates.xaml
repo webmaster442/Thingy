@@ -10,12 +10,12 @@
             Margin="2"
             Padding="3"
             Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.InsertFunctionFormulaCommand}"
-            CommandParameter="{Binding}"
+            CommandParameter="{Binding Item1}"
             FontSize="16"
-            ToolTip="{Binding}">
+            ToolTip="{Binding Item2}">
             <TextBlock
                 FontSize="14"
-                Text="{Binding}" />
+                Text="{Binding Item1}" />
         </Button>
     </DataTemplate>
 

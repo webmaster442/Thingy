@@ -68,6 +68,8 @@
     </Compile>
     <Compile Include="CalculatorEngine.cs" />
     <Compile Include="DoubleConverter.cs" />
+    <Compile Include="FunctionCaching\FunctionInformation.cs" />
+    <Compile Include="FunctionCaching\FunctionCache.cs" />
     <Compile Include="Types\CalculatorResult.cs" />
     <Compile Include="Constants\Atomic.cs" />
     <Compile Include="Constants\Constant.cs" />
@@ -77,7 +79,6 @@
     <Compile Include="Constants\Mathematical.cs" />
     <Compile Include="Constants\Universal.cs" />
     <Compile Include="EventRedirectedStreamWriter.cs" />
-    <Compile Include="FunctionLoader.cs" />
     <Compile Include="ICalculatorEngine.cs" />
     <Compile Include="NumberSystemConversion.cs" />
     <Compile Include="NumberToTextConverter.cs" />
@@ -116,6 +117,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="FunctionCacing\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

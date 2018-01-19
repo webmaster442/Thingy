@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
 using System.Globalization;
+using Thingy.CalculatorCore.FunctionCaching;
 
 namespace Thingy.CalculatorCore.Tests
 {
@@ -16,10 +17,10 @@ namespace Thingy.CalculatorCore.Tests
         [TestCase("ClassName.Sin ( 255 )", "sin(FF:HEX)")]   //Function name replacing with custom format
         public void EnsureThatPreprocessorWorks(string expected, string input)
         {
-            Dictionary<string, string> table = new Dictionary<string, string>
+            Dictionary<string, FunctionInformation> table = new Dictionary<string, FunctionInformation>
             {
-                { "sin", "ClassName.Sin" },
-                { "cos", "ClassName.Cos" }
+                { "sin", new FunctionInformation("ClassName.Sin", "double Sin(double value)") },
+                { "cos", new FunctionInformation("ClassName.Sin", "double Cos(double value)") }
             };
 
             Preprocessor p = new Preprocessor(table, null);

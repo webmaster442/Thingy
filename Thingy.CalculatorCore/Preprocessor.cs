@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using Thingy.CalculatorCore.Constants;
+using Thingy.CalculatorCore.FunctionCaching;
 using Thingy.CalculatorCore.PreprocessorInternals;
 
 namespace Thingy.CalculatorCore
@@ -12,9 +13,9 @@ namespace Thingy.CalculatorCore
         private readonly string[] _operators;
         private readonly List<IProcessor> _processors;
         private readonly string _tokenizerregex;
-        private readonly IDictionary<string, string> _functionReplaceTable;
+        private readonly IDictionary<string, FunctionInformation> _functionReplaceTable;
 
-        public Preprocessor(IDictionary<string, string> functionReplcaceTable, IConstantDB constantDB)
+        public Preprocessor(IDictionary<string, FunctionInformation> functionReplcaceTable, IConstantDB constantDB)
         {
             _functionReplaceTable = functionReplcaceTable;
             _operators = new string[] { @"\+", @"\-", @"\*\*", @"\*", @"\/\/", @"\/", @"\%", @"\&", @"\|", @"\^", @"\~", @"\(", @"\)" };
@@ -57,7 +58,7 @@ namespace Thingy.CalculatorCore
                     _functionReplaceTable.Keys.Contains(tokens[i]))
                 {
                     //replace it if it's a recognized function
-                    tokens[i] = _functionReplaceTable[tokens[i]];
+                    tokens[i] = _functionReplaceTable[tokens[i]].FullName;
                 }
                 else
                 {

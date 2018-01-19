@@ -48,16 +48,16 @@ namespace Thingy.Controls
         }
 
         public static readonly DependencyProperty VisibleFunctionsProperty =
-            DependencyProperty.Register("VisibleFunctions", typeof(IEnumerable<string>), typeof(CalculatorKeyboard));
+            DependencyProperty.Register("VisibleFunctions", typeof(IEnumerable<Tuple<string, string>>), typeof(CalculatorKeyboard));
 
-        public IEnumerable<string> VisibleFunctions
+        public IEnumerable<Tuple<string, string>> VisibleFunctions
         {
-            get { return (IEnumerable<string>)GetValue(VisibleFunctionsProperty); }
+            get { return (IEnumerable<Tuple<string, string>>)GetValue(VisibleFunctionsProperty); }
             set { SetValue(VisibleFunctionsProperty, value); }
         }
 
         public static readonly DependencyProperty InputFunctionsProperty =
-            DependencyProperty.Register("InputFunctions", typeof(IEnumerable<string>), typeof(CalculatorKeyboard), new PropertyMetadata(null, InputChanged));
+            DependencyProperty.Register("InputFunctions", typeof(IEnumerable<Tuple<string, string>>), typeof(CalculatorKeyboard), new PropertyMetadata(null, InputChanged));
 
         private static void InputChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -67,26 +67,26 @@ namespace Thingy.Controls
             }
         }
 
-        public IEnumerable<string> InputFunctions
+        public IEnumerable<Tuple<string, string>> InputFunctions
         {
-            get { return (IEnumerable<string>)GetValue(InputFunctionsProperty); }
+            get { return (IEnumerable<Tuple<string, string>>)GetValue(InputFunctionsProperty); }
             set { SetValue(InputFunctionsProperty, value); }
         }
 
         private void DoFiltering()
         {
-            IEnumerable<string> draw;
+            IEnumerable<Tuple<string, string>> draw;
             if (string.IsNullOrEmpty(FilterText.Text))
                 draw = InputFunctions;
             else
-                draw = InputFunctions.Where(f => f.StartsWith(FilterText.Text, StringComparison.InvariantCultureIgnoreCase));
+                draw = InputFunctions.Where(f => f.Item1.StartsWith(FilterText.Text, StringComparison.InvariantCultureIgnoreCase));
 
             if (draw != null)
             {
                 if (_sortAscending)
-                    VisibleFunctions = draw.OrderBy(f => f);
+                    VisibleFunctions = draw.OrderBy(f => f.Item1);
                 else
-                    VisibleFunctions = draw.OrderByDescending(f => f);
+                    VisibleFunctions = draw.OrderByDescending(f => f.Item1);
             }
         }
 

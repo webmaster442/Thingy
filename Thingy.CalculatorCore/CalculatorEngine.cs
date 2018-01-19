@@ -11,6 +11,7 @@ using AppLib.MVVM;
 using Thingy.CalculatorCore.Constants;
 using System.Text;
 using System.Linq;
+using Thingy.CalculatorCore.FunctionCaching;
 
 namespace Thingy.CalculatorCore
 {
@@ -20,8 +21,7 @@ namespace Thingy.CalculatorCore
         private ScriptScope _scope;
         private ZeroStream _history;
         private EventRedirectedStreamWriter _output;
-        private Dictionary<string, string> _functioncache;
-        private FunctionLoader _loader;
+        private Dictionary<string, FunctionInformation> _functioncache;
         private Preprocessor _preprocessor;
         private StringBuilder _linebuffer;
 
@@ -36,7 +36,7 @@ namespace Thingy.CalculatorCore
             TrigonometryMode = TrigonometryMode.DEG;
             ConstantDB = new ConstantDB();
             _linebuffer = new StringBuilder();
-            _functioncache = new Dictionary<string, string>();
+            _functioncache = new Dictionary<string, FunctionInformation>();
             _preprocessor = new Preprocessor(_functioncache, ConstantDB);
             var options = new Dictionary<string, object>();
             options["DivisionOptions"] = PythonDivisionOptions.New;
@@ -48,8 +48,6 @@ namespace Thingy.CalculatorCore
             _engine.Runtime.IO.SetErrorOutput(_history, _output);
             _scope = _engine.CreateScope();
 
-            _loader = new FunctionLoader(_scope, _functioncache);
-
             _functionTypes = new Type[]
             {
                 typeof(Trigonometry),
@@ -60,7 +58,7 @@ namespace Thingy.CalculatorCore
                 typeof(Statistics)
             };
 
-            _loader.LoadTypesToScope(_functionTypes);
+            FunctionCache.Fill(ref _functioncache, ref _scope, _functionTypes);
         }
 
         private void _output_StreamWasWritten(object sender, string e)
@@ -68,9 +66,16 @@ namespace Thingy.CalculatorCore
             _linebuffer.Append(e);
         }
 
-        public IEnumerable<string> Functions
+        public IEnumerable<Tuple<string, string>> FunctionsNamesAndPrototypes
         {
-            get { return _functioncache.Keys; }
+            get
+            {
+                foreach (var item in _functioncache)
+                {
+                    yield return Tuple.Create(item.Key,
+                                              string.Join("\n", item.Value.Prototypes));
+                }
+            }
         }
 
         public bool PreferPrefixes
