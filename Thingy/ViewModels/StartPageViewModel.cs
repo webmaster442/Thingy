@@ -39,13 +39,17 @@ namespace Thingy.ViewModels
         {
             var module = _moduleLoader.GetModuleByName(obj);
             if (module == null) return;
-            if (module.OpenAsWindow)
+            var control = module.RunModule();
+            if (control != null)
             {
-                await _application.ShowDialog(module.RunModule(), module.ModuleName);
-            }
-            else
-            {
-                _application.SetCurrentTabContent(obj, module.RunModule());
+                if (module.OpenAsWindow)
+                {
+                    await _application.ShowDialog(control, module.ModuleName);
+                }
+                else
+                {
+                    _application.SetCurrentTabContent(obj, control);
+                }
             }
         }
 

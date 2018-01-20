@@ -53,11 +53,6 @@ namespace CmdHost
 			cmdReader.Shell = shell;
 		}
 
-        public void SetArguments(string arguments)
-        {
-            cmdReader.Arguments = arguments;
-        }
-
 		public void AddData(string outputs)
 		{
 			tabHandler.ExtractDir(outputs);

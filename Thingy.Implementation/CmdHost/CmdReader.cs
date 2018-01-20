@@ -24,7 +24,6 @@ namespace CmdHost
 
 		public string InitDir { get; set; }
 		public string Shell { get; set; } = "Cmd.exe";
-        public string Arguments { get; set; } = "";
 
 		public void Register(ICmdReceiver newReceiver)
 		{
@@ -60,11 +59,9 @@ namespace CmdHost
 
 		private Process CreateProc()
 		{
-			ProcessStartInfo proArgs = new ProcessStartInfo()
+			ProcessStartInfo proArgs = new ProcessStartInfo(Shell)
 			{
-                FileName = Shell,
-                Arguments = this.Arguments,
-                CreateNoWindow = true,
+				CreateNoWindow = true,
 				RedirectStandardOutput = true,
 				RedirectStandardInput = true,
 				RedirectStandardError = true,

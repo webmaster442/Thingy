@@ -15,6 +15,7 @@ namespace Thingy.Cmd
                 switch (args[0])
                 {
                     case "ipy":
+                        Console.Title = "IronPython";
                         Modules.PythonConsoleHost.PythonShell(trimmedArgs);
                         break;
                     default:

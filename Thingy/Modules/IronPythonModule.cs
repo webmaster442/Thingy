@@ -9,7 +9,7 @@ namespace Thingy.Modules
 {
     public class IronPythonModule : ModuleBase
     {
-        private string _ipy;
+        private string _thingycmd;
 
         public override string ModuleName
         {
@@ -23,9 +23,11 @@ namespace Thingy.Modules
 
         public override UserControl RunModule()
         {
-            var view = new Views.CommandLine();
-            view.DataContext = new ViewModels.CommandLineViewModel(view, _ipy, "ipy");
-            return view;
+            var ipy = new System.Diagnostics.Process();
+            ipy.StartInfo.FileName = _thingycmd;
+            ipy.StartInfo.Arguments = "ipy";
+            ipy.Start();
+            return null;
         }
 
         public override bool CanLoad
@@ -33,8 +35,8 @@ namespace Thingy.Modules
             get
             {
                 var app = AppDomain.CurrentDomain.BaseDirectory;
-                _ipy = Path.Combine(app, @"Thingy.Cmd.exe");
-                return File.Exists(_ipy);
+                _thingycmd = Path.Combine(app, @"Thingy.Cmd.exe");
+                return File.Exists(_thingycmd);
             }
         }
 
