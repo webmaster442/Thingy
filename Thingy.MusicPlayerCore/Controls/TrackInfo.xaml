@@ -19,7 +19,11 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Image Grid.Row="0" Grid.Column="0" />
+        <Image
+            x:Name="Cover"
+            Grid.Row="0"
+            Grid.RowSpan="10"
+            Grid.Column="0" />
         <TextBlock
             x:Name="Title"
             Grid.Row="0"

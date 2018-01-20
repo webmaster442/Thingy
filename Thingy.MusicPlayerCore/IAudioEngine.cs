@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Thingy.MusicPlayerCore.DataObjects;
 
 namespace Thingy.MusicPlayerCore
 {
@@ -42,12 +43,17 @@ namespace Thingy.MusicPlayerCore
         /// </summary>
         void Play();
         /// <summary>
-        /// Pause
+        /// Pause playback
         /// </summary>
         void Pause();
         /// <summary>
-        /// Stop
+        /// Stop playback
         /// </summary>
         void Stop();
+        /// <summary>
+        /// Currently played song's metadata
+        /// </summary>
+        TagInformation CurrentTags { get; }
+
     }
 }

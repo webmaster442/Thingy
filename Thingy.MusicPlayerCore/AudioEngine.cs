@@ -4,6 +4,7 @@ using ManagedBass.Wasapi;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Thingy.MusicPlayerCore.DataObjects;
 
 namespace Thingy.MusicPlayerCore
 {
@@ -15,6 +16,7 @@ namespace Thingy.MusicPlayerCore
         private float _LastVolume;
 
         private WasapiProcedure _wasapiProcess;
+        private TagInformation _currentTags;
 
         public AudioEngineLog Log { get; }
 
@@ -115,8 +117,11 @@ namespace Thingy.MusicPlayerCore
             get { return _deviceIndex; }
             set
             {
+                Stop();
                 if (_decodeChannel != 0)
-                    Bass.StreamFree(0);
+                    Bass.StreamFree(_decodeChannel);
+                if (_mixerChannel != 0)
+                    Bass.StreamFree(_mixerChannel);
                 Bass.Free();
                 _deviceIndex = value;
                 InitBassDLL();
@@ -155,6 +160,11 @@ namespace Thingy.MusicPlayerCore
             }
         }
 
+        public TagInformation CurrentTags
+        {
+            get { return _currentTags; }
+        }
+
         /// <inheritdoc />
         public void Load(string fileName)
         {
@@ -190,6 +200,10 @@ namespace Thingy.MusicPlayerCore
                 return;
             }
             BassWasapi.Lock(true);
+
+            Log.Info("Geting track metadata...");
+            _currentTags = TagFactory.CreateTagInfoFromFile(fileName);
+
             Bass.ChannelSetAttribute(_mixerChannel, ChannelAttribute.Volume, _LastVolume);
             Log.Info("Loaded file {0}", fileName);
         }

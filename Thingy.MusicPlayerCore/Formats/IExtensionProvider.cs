@@ -14,5 +14,6 @@ namespace Thingy.MusicPlayerCore.Formats
         string AllFormatsFilterString { get; }
         IEnumerable<string> AllSupportedFormats { get; }
         bool IsMatchForFormat(FormatKind formatKind, string file);
+        bool IsNetworkStream(string file);
     }
 }

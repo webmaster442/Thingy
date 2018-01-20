@@ -69,5 +69,11 @@ namespace Thingy.MusicPlayerCore.Formats
                     return false;
             }
         }
+
+        public bool IsNetworkStream(string file)
+        {
+            var lowercase = file.ToLower();
+            return lowercase.StartsWith("http://") || lowercase.StartsWith("https://") || lowercase.StartsWith("ftp://");
+        }
     }
 }
