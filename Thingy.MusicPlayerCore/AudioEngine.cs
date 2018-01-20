@@ -59,6 +59,20 @@ namespace Thingy.MusicPlayerCore
             BassWasapi.Load(NativeLibPath);
             Log.Info("Loading bassmix.dll...");
             BassMix.Load(NativeLibPath);
+            LoadPlugins("bass_aac.dll", "bass_ac3.dll", 
+                        "bassalac.dll", "basscd.dll", 
+                        "bassflac.dll", "basswma.dll",
+                        "basswv.dll");
+        }
+
+        private void LoadPlugins(params string[] plugins)
+        {
+            foreach (var plugin in plugins)
+            {
+                Log.Info("Loading Plugin {0}...", plugin);
+                var fullpath = Path.Combine(NativeLibPath, plugin);
+                Bass.PluginLoad(fullpath);
+            }
         }
 
         private void InitBassDLL()
