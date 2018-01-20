@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -8,6 +9,8 @@ namespace Thingy.Modules
 {
     public class IronPythonModule : ModuleBase
     {
+        private string _ipy;
+
         public override string ModuleName
         {
             get { return "Iron Python"; }
@@ -20,7 +23,19 @@ namespace Thingy.Modules
 
         public override UserControl RunModule()
         {
-            return null;
+            var view = new Views.CommandLine();
+            view.DataContext = new ViewModels.CommandLineViewModel(view, _ipy, "ipy");
+            return view;
+        }
+
+        public override bool CanLoad
+        {
+            get
+            {
+                var app = AppDomain.CurrentDomain.BaseDirectory;
+                _ipy = Path.Combine(app, @"Thingy.Cmd.exe");
+                return File.Exists(_ipy);
+            }
         }
 
         public override string Category

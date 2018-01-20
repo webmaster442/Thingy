@@ -5,7 +5,7 @@ using Thingy.Views;
 
 namespace Thingy.ViewModels
 {
-    public class CommandLineViewModel: ViewModel<ICommandLineView>
+    public class CommandLineViewModel : ViewModel<ICommandLineView>
     {
         private readonly TerminalController controller;
 
@@ -18,10 +18,11 @@ namespace Thingy.ViewModels
         public DelegateCommand PasteCommand { get; private set; }
         public DelegateCommand SetFolderCommand { get; private set; }
 
-        public CommandLineViewModel(ICommandLineView view, string shell = "cmd.exe") : base(view)
-            {
+        public CommandLineViewModel(ICommandLineView view, string shell = "cmd.exe", string args = "") : base(view)
+        {
             controller = new TerminalController(view);
             controller.SetShell(shell);
+            controller.SetArguments(args);
             LoadedCommand = Command.ToCommand(Loaded);
             ClosingCommand = Command.ToCommand(Closing);
             SetFolderCommand = Command.ToCommand(SetFolder);

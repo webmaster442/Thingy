@@ -506,6 +506,10 @@
       <Project>{D0F12E16-59C0-4D6F-880D-621255FA708B}</Project>
       <Name>Thingy.CalculatorCore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Thingy.Cmd\Thingy.Cmd.csproj">
+      <Project>{740b535e-9799-4749-8a18-917debceeaa4}</Project>
+      <Name>Thingy.Cmd</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Thingy.Db\Thingy.Db.csproj">
       <Project>{2D7E8D87-74AC-402A-8E11-BDACC7B3839B}</Project>
       <Name>Thingy.Db</Name>

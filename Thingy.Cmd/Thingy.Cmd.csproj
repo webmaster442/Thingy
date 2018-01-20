@@ -69,30 +69,14 @@
     <Compile Include="..\Build-tools\CommonVersion.cs">
       <Link>Properties\CommonVersion.cs</Link>
     </Compile>
+    <Compile Include="Modules\Logo.cs" />
+    <Compile Include="Modules\PythonConsoleHost.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\packages\IronPython.2.7.7\tools\ipy.exe.config">
-      <Link>ipy.exe.config</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\packages\IronPython.2.7.7\tools\ipy64.exe.config">
-      <Link>ipy64.exe.config</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\packages\IronPython.2.7.7\tools\ipy.exe">
-      <Link>ipy.exe</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\packages\IronPython.2.7.7\tools\ipy64.exe">
-      <Link>ipy64.exe</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
