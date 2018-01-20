@@ -51,7 +51,6 @@
     <Compile Include="Formats\ExtensionProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="contest.c" />
     <Content Include="NativeLibs\x64\bass.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

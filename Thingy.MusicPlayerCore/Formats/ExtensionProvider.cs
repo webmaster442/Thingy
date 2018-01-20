@@ -6,22 +6,11 @@ namespace Thingy.MusicPlayerCore.Formats
 {
     public class ExtensionProvider : IExtensionProvider
     {
-        private readonly string[] _TrackerExtensions;
-        private readonly string[] _MidiExtensions;
         private readonly string[] _StreamExtensions;
         private readonly string[] _PlaylistExtensions;
 
         public ExtensionProvider()
         {
-            _TrackerExtensions = new string[]
-            {
-                ".xm",".it",".s3m",".mod",
-                ".mtm",".umx",".mo3"
-            };
-            _MidiExtensions = new string[]
-            {
-                ".midi",".mid",".rmi",".kar",
-            };
             _StreamExtensions = new string[]
             {
                 ".mp1",".mp2",".mp3",".mp4",
@@ -62,10 +51,6 @@ namespace Thingy.MusicPlayerCore.Formats
         {
             get
             {
-                foreach (var item in _TrackerExtensions)
-                    yield return item;
-                foreach (var item in _MidiExtensions)
-                    yield return item;
                 foreach (var item in _StreamExtensions)
                     yield return item;
             }
@@ -76,13 +61,9 @@ namespace Thingy.MusicPlayerCore.Formats
             var extension = System.IO.Path.GetExtension(file);
             switch (formatKind)
             {
-                case FormatKind.Midi:
-                    return _MidiExtensions.Contains(extension);
                 case FormatKind.Playlist:
                     return _PlaylistExtensions.Contains(extension);
                 case FormatKind.Stream:
-                    return _StreamExtensions.Contains(extension);
-                case FormatKind.Tracker:
                     return _StreamExtensions.Contains(extension);
                 default:
                     return false;

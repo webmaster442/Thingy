@@ -5,8 +5,6 @@ namespace Thingy.MusicPlayerCore.Formats
     public enum FormatKind
     {
         Stream,
-        Tracker,
-        Midi,
         Playlist
     }
 
