@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Thingy.MusicPlayerCore
 {
@@ -33,5 +29,25 @@ namespace Thingy.MusicPlayerCore
         /// </summary>
         /// <param name="file">File path</param>
         void Load(string file);
+        /// <summary>
+        /// Get or set stream position in seconds
+        /// </summary>
+        double Position { get; set; }
+        /// <summary>
+        /// Get or set channel volume
+        /// </summary>
+        float Volume { get; set; }
+        /// <summary>
+        /// Play
+        /// </summary>
+        void Play();
+        /// <summary>
+        /// Pause
+        /// </summary>
+        void Pause();
+        /// <summary>
+        /// Stop
+        /// </summary>
+        void Stop();
     }
 }
