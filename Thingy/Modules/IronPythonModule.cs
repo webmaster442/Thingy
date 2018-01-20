@@ -20,7 +20,7 @@ namespace Thingy.Modules
 
         public override UserControl RunModule()
         {
-            return new Views.IronPythonShell();
+            return null;
         }
 
         public override string Category

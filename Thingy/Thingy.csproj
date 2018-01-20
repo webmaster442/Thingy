@@ -211,9 +211,6 @@
     <Compile Include="Views\Dialogs\NewVirtualFolder.xaml.cs">
       <DependentUpon>NewVirtualFolder.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\IronPythonShell.xaml.cs">
-      <DependentUpon>IronPythonShell.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Note.xaml.cs">
       <DependentUpon>Note.xaml</DependentUpon>
     </Compile>
@@ -379,10 +376,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\GreekAlphabet.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\IronPythonShell.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

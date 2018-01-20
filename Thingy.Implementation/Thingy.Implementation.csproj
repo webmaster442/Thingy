@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
-      <HintPath>..\packages\AvalonEdit.5.0.4\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
-    </Reference>
     <Reference Include="IronPython, Version=2.7.7.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
       <HintPath>..\packages\IronPython.2.7.7\lib\Net45\IronPython.dll</HintPath>
     </Reference>
@@ -81,21 +78,6 @@
     <Compile Include="CmdHost\TabHandler.cs" />
     <Compile Include="CmdHost\TerminalContentMgr.cs" />
     <Compile Include="CmdHost\TerminalController.cs" />
-    <Compile Include="Controls\CommandLineHistory.cs" />
-    <Compile Include="Controls\PythonCompletionData.cs" />
-    <Compile Include="Controls\PythonConfig.cs" />
-    <Compile Include="Controls\PythonConsole.cs" />
-    <Compile Include="Controls\PythonConsoleCompletionDataProvider.cs" />
-    <Compile Include="Controls\PythonConsoleCompletionWindow.cs" />
-    <Compile Include="Controls\PythonConsoleControl.xaml.cs">
-      <DependentUpon>PythonConsoleControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\PythonConsoleHighlightingColorizer.cs" />
-    <Compile Include="Controls\PythonConsoleHost.cs" />
-    <Compile Include="Controls\PythonConsolePad.cs" />
-    <Compile Include="Controls\PythonEditingCommandHandler.cs" />
-    <Compile Include="Controls\PythonOutputStream.cs" />
-    <Compile Include="Controls\PythonTextEditor.cs" />
     <Compile Include="CoreAudio\AudioEndpointVolume.cs" />
     <Compile Include="CoreAudio\AudioEndpointVolumeCallback.cs" />
     <Compile Include="CoreAudio\AudioEndpointVolumeChannel.cs" />
@@ -168,12 +150,6 @@
       <Project>{faf19388-a6c0-46f9-a588-a46db392ace4}</Project>
       <Name>AppLib.WPF</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Controls\PythonConsoleControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Python.xshd" />
