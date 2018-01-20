@@ -12,6 +12,7 @@ namespace Thingy.MusicPlayerCore
     public sealed class AudioEngine : IAudioEngine, IDisposable
     {
         private int _deviceIndex;
+        private int _audiochanel;
 
         public AudioEngineLog Log { get; }
 
@@ -90,15 +91,26 @@ namespace Thingy.MusicPlayerCore
             get { return _deviceIndex; }
             set
             {
+                if (_audiochanel != 0)
+                    Bass.StreamFree(0);
                 Bass.Free();
                 _deviceIndex = value;
                 InitBassDLL();
             }
         }
 
+        public void Load(string file)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <inheritdoc />
         public void Dispose()
         {
+            if (_audiochanel != 0)
+            {
+                Bass.StreamFree(_audiochanel);
+            }
             BassWasapi.Unload();
             Bass.PluginFree(0);
             Bass.Unload();

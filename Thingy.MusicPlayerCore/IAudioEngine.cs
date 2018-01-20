@@ -28,5 +28,10 @@ namespace Thingy.MusicPlayerCore
         /// Gets or sets the Currently used playback device
         /// </summary>
         int PlayBackDeviceIndex { get; set; }
+        /// <summary>
+        /// Load a file for playback
+        /// </summary>
+        /// <param name="file">File path</param>
+        void Load(string file);
     }
 }

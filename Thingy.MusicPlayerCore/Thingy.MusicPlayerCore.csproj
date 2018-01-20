@@ -45,19 +45,23 @@
   <ItemGroup>
     <Compile Include="AudioEngine.cs" />
     <Compile Include="AudioEngineLog.cs" />
+    <Compile Include="Formats\IExtensionProvider.cs" />
     <Compile Include="IAudioEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Formats\ExtensionProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="NativeLibs\x64\bass.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="NativeLibs\x64\bassmix.dll" />
     <Content Include="NativeLibs\x64\basswasapi.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="NativeLibs\x86\bass.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="NativeLibs\x86\bassmix.dll" />
     <Content Include="NativeLibs\x86\basswasapi.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
