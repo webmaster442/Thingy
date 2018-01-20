@@ -12,11 +12,13 @@ namespace Thingy.Views.CalculatorDialogs
     public partial class UnitConversionMessageBox : CustomDialog
     {
         private UnitConverter _unitConverter;
+        private IApplication _app;
 
-        public UnitConversionMessageBox()
+        public UnitConversionMessageBox(IApplication application)
         {
             InitializeComponent();
             _unitConverter = new UnitConverter();
+            _app = application;
             Categories.ItemsSource = _unitConverter.Categories;
             Categories.SelectedIndex = 0;
         }
@@ -65,6 +67,11 @@ namespace Thingy.Views.CalculatorDialogs
         private void TargetType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Recalculate();
+        }
+
+        private async void PART_NegativeButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            await _app.HideMessageBox(this);
         }
     }
 }

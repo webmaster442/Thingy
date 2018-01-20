@@ -11,9 +11,7 @@
     d:DesignWidth="300"
     mc:Ignorable="d">
     <mahdialogs:CustomDialog.Resources>
-        <Style
-            BasedOn="{StaticResource {x:Type ComboBox}}"
-            TargetType="ComboBox">
+        <Style BasedOn="{StaticResource {x:Type ComboBox}}" TargetType="ComboBox">
             <Setter Property="Margin" Value="5,2" />
         </Style>
     </mahdialogs:CustomDialog.Resources>
@@ -24,12 +22,9 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Grid
-                x:Name="DialogContent"
-                Grid.Row="0">
+            <Grid x:Name="DialogContent" Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition
-                        Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
