@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ManagedBass.PInvoke, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\ManagedBass.PInvoke.0.6.1\lib\net45\ManagedBass.PInvoke.dll</HintPath>
+      <HintPath>..\packages\ManagedBass.PInvoke.0.6.1\lib\net45\ManagedBass.PInvoke.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -49,6 +49,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Build-tools\CommonVersion.cs">
+      <Link>Properties\CommonVersion.cs</Link>
+    </Compile>
     <Compile Include="AudioEngine.cs" />
     <Compile Include="AudioEngineLog.cs" />
     <Compile Include="ChapterFactory.cs" />
