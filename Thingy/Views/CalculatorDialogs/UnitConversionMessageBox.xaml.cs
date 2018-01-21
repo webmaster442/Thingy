@@ -13,6 +13,7 @@ namespace Thingy.Views.CalculatorDialogs
     {
         private UnitConverter _unitConverter;
         private IApplication _app;
+        private double _input;
 
         public UnitConversionMessageBox(IApplication application)
         {
@@ -27,13 +28,23 @@ namespace Thingy.Views.CalculatorDialogs
         {
             if (Categories.SelectedItem is string selected)
             {
-                _unitConverter.GetUnitsForCategory(selected);
+                var units = _unitConverter.GetUnitsForCategory(selected);
+                InputType.ItemsSource = units;
+                TargetType.ItemsSource = units;
                 InputType.SelectedIndex = 0;
                 TargetType.SelectedIndex = 1;
             }
         }
 
-        public double InputNumber { get; set; }
+        public double InputNumber
+        {
+            get { return _input; }
+            set
+            {
+                _input = value;
+                Recalculate();
+            }
+        }
 
         public double OutputNumber { get; set; }
 
