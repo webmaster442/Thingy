@@ -17,11 +17,12 @@ namespace Thingy.MusicPlayerCore
         private int _decodeChannel;
         private int _mixerChannel;
         private float _LastVolume;
+        private TagInformation _currentTags;
+        private List<Chapter> _chapters;
+        private double _length;
 
         private DispatcherTimer _updateTimer;
-
         private WasapiProcedure _wasapiProcess;
-        private TagInformation _currentTags;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -55,6 +56,10 @@ namespace Thingy.MusicPlayerCore
 
         private void _updateTimer_Tick(object sender, EventArgs e)
         {
+            if (Position > Length - 0.05)
+            {
+                
+            }
             NotifyChanged(nameof(Position));
         }
 
@@ -200,6 +205,16 @@ namespace Thingy.MusicPlayerCore
             get { return _currentTags; }
         }
 
+        public double Length
+        {
+            get { return _length; }
+        }
+
+        public IList<Chapter> Chapters
+        {
+            get { return _chapters; }
+        }
+
         /// <inheritdoc />
         public void Load(string fileName)
         {
@@ -239,6 +254,16 @@ namespace Thingy.MusicPlayerCore
             Log.Info("Geting track metadata...");
             _currentTags = TagFactory.CreateTagInfoFromFile(fileName);
             NotifyChanged(nameof(CurrentTags));
+
+            Log.Info("Getting track length...");
+            var len = Bass.ChannelGetLength(_decodeChannel, PositionFlags.Bytes);
+            _length = Bass.ChannelBytes2Seconds(_decodeChannel, len);
+            NotifyChanged(nameof(Length));
+
+            Log.Info("Getting Chapters...");
+            _chapters.Clear();
+            _chapters.AddRange(ChapterFactory.GetChapters(fileName, _length));
+            NotifyChanged(nameof(Chapters));
 
             Bass.ChannelSetAttribute(_mixerChannel, ChannelAttribute.Volume, _LastVolume);
             Log.Info("Loaded file {0}", fileName);

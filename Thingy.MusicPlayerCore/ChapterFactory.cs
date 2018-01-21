@@ -10,7 +10,7 @@ namespace Thingy.MusicPlayerCore
     {
         private const double Minute = 60.0d;
 
-        public static IEnumerable<Chapter> GetChapters(string filename, double parsedlength)
+        public static IList<Chapter> GetChapters(string filename, double parsedlength)
         {
             var extension = System.IO.Path.GetExtension(filename).ToLower();
             List<Chapter> ret = new List<Chapter>();

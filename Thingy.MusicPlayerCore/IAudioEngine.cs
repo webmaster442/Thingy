@@ -36,6 +36,10 @@ namespace Thingy.MusicPlayerCore
         /// </summary>
         double Position { get; set; }
         /// <summary>
+        /// Gets the current stream's length in seconds
+        /// </summary>
+        double Length { get; }
+        /// <summary>
         /// Get or set channel volume
         /// </summary>
         float Volume { get; set; }
@@ -55,6 +59,9 @@ namespace Thingy.MusicPlayerCore
         /// Currently played song's metadata
         /// </summary>
         TagInformation CurrentTags { get; }
-
+        /// <summary>
+        /// Chapter list for currently played song
+        /// </summary>
+        IList<Chapter> Chapters { get; }
     }
 }
