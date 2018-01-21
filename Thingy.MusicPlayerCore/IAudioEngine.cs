@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using Thingy.MusicPlayerCore.DataObjects;
 
 namespace Thingy.MusicPlayerCore
 {
-    public interface IAudioEngine
+    public interface IAudioEngine: INotifyPropertyChanged
     {
         /// <summary>
         /// Engine Log

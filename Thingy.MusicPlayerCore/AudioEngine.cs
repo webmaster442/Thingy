@@ -3,7 +3,10 @@ using ManagedBass.Mix;
 using ManagedBass.Wasapi;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Runtime.CompilerServices;
+using System.Windows.Threading;
 using Thingy.MusicPlayerCore.DataObjects;
 
 namespace Thingy.MusicPlayerCore
@@ -15,8 +18,12 @@ namespace Thingy.MusicPlayerCore
         private int _mixerChannel;
         private float _LastVolume;
 
+        private DispatcherTimer _updateTimer;
+
         private WasapiProcedure _wasapiProcess;
         private TagInformation _currentTags;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public AudioEngineLog Log { get; }
 
@@ -38,6 +45,17 @@ namespace Thingy.MusicPlayerCore
             Log.Info("Setting up WASAPI process...");
             _wasapiProcess = WasapiProcessFunction;
             _LastVolume = 1.0f;
+            _updateTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(0.20),
+                IsEnabled = false
+            };
+            _updateTimer.Tick += _updateTimer_Tick;
+        }
+
+        private void _updateTimer_Tick(object sender, EventArgs e)
+        {
+            NotifyChanged(nameof(Position));
         }
 
         /// <inheritdoc />
@@ -75,6 +93,22 @@ namespace Thingy.MusicPlayerCore
                 var fullpath = Path.Combine(NativeLibPath, plugin);
                 Bass.PluginLoad(fullpath);
             }
+        }
+
+        private void NotifyChanged(params string[] properties)
+        {
+            if (PropertyChanged != null)
+            {
+                foreach (var property in properties)
+                {
+                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs(property));
+                }
+            }
+        }
+
+        private void NotifyChanged([CallerMemberName]string property = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
         private void InitBassDLL()
@@ -157,6 +191,7 @@ namespace Thingy.MusicPlayerCore
             {
                 Bass.ChannelSetAttribute(_mixerChannel, ChannelAttribute.Volume, value);
                 _LastVolume = value;
+                NotifyChanged();
             }
         }
 
@@ -168,7 +203,7 @@ namespace Thingy.MusicPlayerCore
         /// <inheritdoc />
         public void Load(string fileName)
         {
-            _decodeChannel = Bass.CreateStream(fileName, 0, 0, BassFlags.Decode | BassFlags.Float);
+            _decodeChannel = Bass.CreateStream(fileName, 0, 0, BassFlags.Decode | BassFlags.Float | BassFlags.AutoFree);
             var channelInfo = Bass.ChannelGetInfo(_decodeChannel);
             //BASS_WASAPI_Init(device,ci.freq,ci.chans,flags,buflen,0.05,WasapiProc,NULL)
 
@@ -203,6 +238,7 @@ namespace Thingy.MusicPlayerCore
 
             Log.Info("Geting track metadata...");
             _currentTags = TagFactory.CreateTagInfoFromFile(fileName);
+            NotifyChanged(nameof(CurrentTags));
 
             Bass.ChannelSetAttribute(_mixerChannel, ChannelAttribute.Volume, _LastVolume);
             Log.Info("Loaded file {0}", fileName);
@@ -235,18 +271,21 @@ namespace Thingy.MusicPlayerCore
         /// <inheritdoc />
         public void Play()
         {
+            _updateTimer.Start();
             Bass.ChannelPlay(_mixerChannel, false);
         }
 
         /// <inheritdoc />
         public void Pause()
         {
+            _updateTimer.Stop();
             Bass.ChannelPause(_mixerChannel);
         }
 
         /// <inheritdoc />
         public void Stop()
         {
+            _updateTimer.Stop();
             Bass.ChannelStop(_mixerChannel);
         }
     }
