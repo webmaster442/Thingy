@@ -123,6 +123,15 @@
                     ToolTip="Display Result as File size..." />
                 <applib:ImageButton
                     Margin="2,0"
+                    Command="{Binding DisplayChanger.ConvertUnitCommand}"
+                    CommandParameter="{Binding ReturnObject}"
+                    Image="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-design-48.png"
+                    ImageHeight="24"
+                    ImageWidth="24"
+                    Style="{StaticResource Flat}"
+                    ToolTip="Unit Conversion..." />
+                <applib:ImageButton
+                    Margin="2,0"
                     Command="{Binding DisplayChanger.ConvertFractionsCommand}"
                     CommandParameter="{Binding ReturnObject}"
                     Image="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-fraction-48.png"

@@ -16,6 +16,7 @@ namespace Thingy.ViewModels.Calculator
         public DelegateCommand<object> ConvertFractionsCommand { get; private set; }
         public DelegateCommand<object> ConvertPrefixesCommand { get; private set; }
         public DelegateCommand<object> ConvertNumberSystemCommand { get; private set; }
+        public DelegateCommand<object> ConvertUnitCommand { get; private set; }
 
         public DisplayChangerViewModel(IApplication app)
         {
@@ -26,6 +27,7 @@ namespace Thingy.ViewModels.Calculator
             ConvertFractionsCommand = Command.ToCommand<object>(ConvertFractions, CanExecute);
             ConvertPrefixesCommand = Command.ToCommand<object>(ConvertPrefixes, CanExecute);
             ConvertNumberSystemCommand = Command.ToCommand<object>(ConvertNumberSystem, CanExecute);
+            ConvertUnitCommand = Command.ToCommand<object>(ConvertUnit, CanExecute);
         }
 
         private bool CanExecute(object obj)
@@ -51,6 +53,13 @@ namespace Thingy.ViewModels.Calculator
         private double ConvertBeforeProcess(object obj)
         {
             return Convert.ToDouble(obj);
+        }
+
+        private void ConvertUnit(object obj)
+        {
+            var content = new Views.CalculatorDialogs.UnitConversionMessageBox(_app);
+            content.InputNumber = ConvertBeforeProcess(obj);
+            _app.ShowMessageBox(content);
         }
 
         private async void ConvertFileSize(object obj)
