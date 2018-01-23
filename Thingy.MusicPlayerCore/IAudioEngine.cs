@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows;
 using Thingy.MusicPlayerCore.DataObjects;
 
 namespace Thingy.MusicPlayerCore
@@ -63,5 +64,13 @@ namespace Thingy.MusicPlayerCore
         /// Chapter list for currently played song
         /// </summary>
         IList<Chapter> Chapters { get; }
+        /// <summary>
+        /// Event, that gets fired when the current song is finished
+        /// </summary>
+        event RoutedEventHandler SongFinishedEvent;
+        /// <summary>
+        /// Set to true, when you want to change position in song
+        /// </summary>
+        bool Seeking { get; set; }
     }
 }

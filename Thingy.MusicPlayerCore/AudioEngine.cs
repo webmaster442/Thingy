@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Threading;
 using Thingy.MusicPlayerCore.DataObjects;
 
@@ -25,6 +26,7 @@ namespace Thingy.MusicPlayerCore
         private WasapiProcedure _wasapiProcess;
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public event RoutedEventHandler SongFinishedEvent;
 
         public AudioEngineLog Log { get; }
 
@@ -51,16 +53,19 @@ namespace Thingy.MusicPlayerCore
                 Interval = TimeSpan.FromSeconds(0.20),
                 IsEnabled = false
             };
-            _updateTimer.Tick += _updateTimer_Tick;
+            _updateTimer.Tick += TimerTick;
         }
 
-        private void _updateTimer_Tick(object sender, EventArgs e)
+        private void TimerTick(object sender, EventArgs e)
         {
-            if (Position > Length - 0.05)
+            if (!Seeking)
             {
-                
+                if (Position > Length - 0.05)
+                {
+                    SongFinishedEvent?.Invoke(this, new RoutedEventArgs());
+                }
+                NotifyChanged(nameof(Position));
             }
-            NotifyChanged(nameof(Position));
         }
 
         /// <inheritdoc />
@@ -214,6 +219,8 @@ namespace Thingy.MusicPlayerCore
         {
             get { return _chapters; }
         }
+
+        public bool Seeking { get; set; }
 
         /// <inheritdoc />
         public void Load(string fileName)
