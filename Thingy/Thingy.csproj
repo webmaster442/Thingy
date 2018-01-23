@@ -124,12 +124,14 @@
     <Compile Include="Modules\GreekAlphabetModule.cs" />
     <Compile Include="Modules\IronPythonModule.cs" />
     <Compile Include="Infrastructure\ModuleCategories.cs" />
+    <Compile Include="Modules\MusicPlayerModule.cs" />
     <Compile Include="Modules\NoteModule.cs" />
     <Compile Include="Modules\ProgramsModule.cs" />
     <Compile Include="Infrastructure\Tray\TrayIcon.cs" />
     <Compile Include="ViewModels\Calculator\CalculatorViewModel.cs" />
     <Compile Include="ViewModels\Calculator\DisplayChangerModel.cs" />
     <Compile Include="ViewModels\CurrencyConverterViewModel.cs" />
+    <Compile Include="ViewModels\MusicPlayer\MusicPlayerViewModel.cs" />
     <Compile Include="ViewModels\NoteViewModel.cs" />
     <Compile Include="ViewModels\ProgramsViewModel.cs" />
     <Compile Include="Views\About.xaml.cs">
@@ -170,6 +172,9 @@
     <Compile Include="Modules\PowerShellModule.cs" />
     <Compile Include="Modules\ToDoListModule.cs" />
     <Compile Include="Modules\VirtualFoldersModule.cs" />
+    <Compile Include="Views\MusicPlayer\MusicPlayer.xaml.cs">
+      <DependentUpon>MusicPlayer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Statusbar\MonitorSwitcher.xaml.cs">
       <DependentUpon>MonitorSwitcher.xaml</DependentUpon>
     </Compile>
@@ -327,6 +332,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ModalDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MusicPlayer\MusicPlayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -516,6 +525,10 @@
     <ProjectReference Include="..\Thingy.Implementation\Thingy.Implementation.csproj">
       <Project>{5B8ED112-5CC6-4783-98BD-D6C5583D6A58}</Project>
       <Name>Thingy.Implementation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Thingy.MusicPlayerCore\Thingy.MusicPlayerCore.csproj">
+      <Project>{a87fd57d-b36f-4747-8afa-989e5181705f}</Project>
+      <Name>Thingy.MusicPlayerCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\Thingy.Resources\Thingy.Resources.csproj">
       <Project>{63a3ee73-078f-4dec-8578-5af6f158d383}</Project>
