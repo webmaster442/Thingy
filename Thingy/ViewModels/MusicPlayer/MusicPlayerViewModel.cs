@@ -8,7 +8,7 @@ using Thingy.MusicPlayerCore;
 
 namespace Thingy.ViewModels.MusicPlayer
 {
-    public class MusicPlayerViewModel: BindableBase
+    public class MusicPlayerViewModel: BindableBase, IDisposable
     {
         private IAudioEngine _audioEngine;
 
@@ -18,34 +18,64 @@ namespace Thingy.ViewModels.MusicPlayer
         public DelegateCommand SeekFwdCommand { get; private set; }
         public DelegateCommand SeekBackCommand { get; private set; }
 
+        public IAudioEngine AudioEngine
+        {
+            get { return _audioEngine; }
+            set { SetValue(ref _audioEngine, value); }
+        }
+
         public MusicPlayerViewModel(IAudioEngine engine)
         {
-            _audioEngine = engine;
+            AudioEngine = engine;
             OpenFileCommand = Command.ToCommand(OpenFile);
             PlayCommand = Command.ToCommand(Play);
             PauseCommand = Command.ToCommand(Pause);
             SeekBackCommand = Command.ToCommand(SeekBack);
-            SeekFwdCommand = Command.ToCommand(SeekFwdCommand);
+            SeekFwdCommand = Command.ToCommand(SeekFwd);
+        }
+
+        private void SeekFwd()
+        {
+            _audioEngine.Seeking = true;
+            double position = _audioEngine.Position;
+            _audioEngine.Position = position + 5;
+            _audioEngine.Seeking = false;
         }
 
         private void SeekBack()
         {
-            throw new NotImplementedException();
-        }
-
-        private void Pause()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Play()
-        {
-            throw new NotImplementedException();
+            _audioEngine.Seeking = true;
+            double position = _audioEngine.Position;
+            _audioEngine.Position = position - 5;
+            _audioEngine.Seeking = false;
         }
 
         private void OpenFile()
         {
-            throw new NotImplementedException();
+            var ofd = new System.Windows.Forms.OpenFileDialog();
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                _audioEngine.Load(ofd.FileName);
+            }
+        }
+
+        private void Pause()
+        {
+            _audioEngine.Pause();
+        }
+
+        private void Play()
+        {
+            _audioEngine.Play();
+        }
+
+        public void Dispose()
+        {
+            if (AudioEngine != null)
+            {
+                AudioEngine.Dispose();
+                AudioEngine = null;
+            }
         }
     }
 }

@@ -321,31 +321,57 @@
     <Content Include="NativeLibs\x64\bass.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="NativeLibs\x64\bassalac.dll" />
-    <Content Include="NativeLibs\x64\basscd.dll" />
-    <Content Include="NativeLibs\x64\bassflac.dll" />
-    <Content Include="NativeLibs\x64\bassmix.dll" />
-    <Content Include="NativeLibs\x64\basswasapi.dll">
+    <Content Include="NativeLibs\x64\bassalac.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="NativeLibs\x64\basswma.dll" />
-    <Content Include="NativeLibs\x64\basswv.dll" />
-    <Content Include="NativeLibs\x64\bass_aac.dll" />
-    <Content Include="NativeLibs\x64\bass_ac3.dll" />
+    <Content Include="NativeLibs\x64\basscd.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NativeLibs\x64\bassflac.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NativeLibs\x64\bassmix.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NativeLibs\x64\basswma.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NativeLibs\x64\basswv.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NativeLibs\x64\bass_aac.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NativeLibs\x64\bass_ac3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="NativeLibs\x86\bass.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="NativeLibs\x86\bassalac.dll" />
-    <Content Include="NativeLibs\x86\basscd.dll" />
-    <Content Include="NativeLibs\x86\bassflac.dll" />
-    <Content Include="NativeLibs\x86\bassmix.dll" />
-    <Content Include="NativeLibs\x86\basswasapi.dll">
+    <Content Include="NativeLibs\x86\bassalac.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="NativeLibs\x86\basswma.dll" />
-    <Content Include="NativeLibs\x86\basswv.dll" />
-    <Content Include="NativeLibs\x86\bass_aac.dll" />
-    <Content Include="NativeLibs\x86\bass_ac3.dll" />
+    <Content Include="NativeLibs\x86\basscd.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NativeLibs\x86\bassflac.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NativeLibs\x86\bassmix.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NativeLibs\x86\basswma.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NativeLibs\x86\basswv.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NativeLibs\x86\bass_aac.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NativeLibs\x86\bass_ac3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

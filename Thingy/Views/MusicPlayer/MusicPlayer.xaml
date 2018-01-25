@@ -32,11 +32,13 @@
                             Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-eject-96.png"
                             ImageHeight="48"
                             ImageWidth="48"
+                            Command="{Binding OpenFileCommand}"
                             Style="{StaticResource Flat}" />
                         <applib:ImageButton
                             Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-play-96.png"
                             ImageHeight="48"
                             ImageWidth="48"
+                            Command="{Binding PlayCommand}"
                             Style="{StaticResource Flat}" />
                         <applib:ImageButton
                             Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-rewind-96.png"
@@ -63,10 +65,22 @@
                             ImageHeight="48"
                             ImageWidth="48"
                             Style="{StaticResource Flat}" />
+
+                        <Slider
+                            Minimum="0"
+                            Maximum="1"
+                            Value="{Binding AudioEngine.Volume}"
+                            Width="150"
+                            Style="{StaticResource ProgressSlider}"
+                            VerticalAlignment="Center"/>
                     </StackPanel>
                     <Slider
                         Grid.Row="2"
-                        Grid.ColumnSpan="99" />
+                        Style="{StaticResource ProgressSlider}"
+                        Grid.ColumnSpan="99"
+                        Minimum="0"
+                        Maximum="{Binding AudioEngine.Length}"
+                        Value="{Binding AudioEngine.Position, Mode=OneWay}"/>
                 </Grid>
             </TabItem>
         </TabControl>

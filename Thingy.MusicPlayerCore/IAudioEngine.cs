@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using Thingy.MusicPlayerCore.DataObjects;
 
 namespace Thingy.MusicPlayerCore
 {
-    public interface IAudioEngine: INotifyPropertyChanged
+    public interface IAudioEngine: INotifyPropertyChanged, IDisposable
     {
         /// <summary>
         /// Engine Log

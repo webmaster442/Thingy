@@ -1,10 +1,10 @@
 ﻿using ManagedBass;
 using ManagedBass.Mix;
-using ManagedBass.Wasapi;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Threading;
@@ -12,7 +12,7 @@ using Thingy.MusicPlayerCore.DataObjects;
 
 namespace Thingy.MusicPlayerCore
 {
-    public sealed class AudioEngine : IAudioEngine, IDisposable
+    public sealed class AudioEngine : IAudioEngine
     {
         private int _deviceIndex;
         private int _decodeChannel;
@@ -23,7 +23,6 @@ namespace Thingy.MusicPlayerCore
         private double _length;
 
         private DispatcherTimer _updateTimer;
-        private WasapiProcedure _wasapiProcess;
 
         public event PropertyChangedEventHandler PropertyChanged;
         public event RoutedEventHandler SongFinishedEvent;
@@ -43,10 +42,6 @@ namespace Thingy.MusicPlayerCore
             Log.Info("Audio Engine Load started");
             SetNativeLibPath();
             LoadLibs();
-            Log.Info("Setting output to Default Device...");
-            PlayBackDeviceIndex = BassWasapi.DefaultDevice;
-            Log.Info("Setting up WASAPI process...");
-            _wasapiProcess = WasapiProcessFunction;
             _LastVolume = 1.0f;
             _updateTimer = new DispatcherTimer
             {
@@ -54,6 +49,9 @@ namespace Thingy.MusicPlayerCore
                 IsEnabled = false
             };
             _updateTimer.Tick += TimerTick;
+            Log.Info("Setting output to Default Device...");
+            PlayBackDeviceIndex = -1;
+            _chapters = new List<Chapter>();
         }
 
         private void TimerTick(object sender, EventArgs e)
@@ -85,12 +83,10 @@ namespace Thingy.MusicPlayerCore
         {
             Log.Info("Loading bass.dll...");
             Bass.Load(NativeLibPath);
-            Log.Info("Loading basswasapi.dll...");
-            BassWasapi.Load(NativeLibPath);
             Log.Info("Loading bassmix.dll...");
             BassMix.Load(NativeLibPath);
-            LoadPlugins("bass_aac.dll", "bass_ac3.dll", 
-                        "bassalac.dll", "basscd.dll", 
+            LoadPlugins("bass_aac.dll", "bass_ac3.dll",
+                        "bassalac.dll", "basscd.dll",
                         "bassflac.dll", "basswma.dll",
                         "basswv.dll");
         }
@@ -116,22 +112,23 @@ namespace Thingy.MusicPlayerCore
             }
         }
 
+        private void InitDevice()
+        {
+            if (!Bass.Init(_deviceIndex, 48000, DeviceInitFlags.Frequency))
+            {
+                Log.Error("Device init failed: {0}", _deviceIndex);
+            }
+            else
+            {
+                Log.Info("Device init ok: {0}", _deviceIndex);
+                Bass.Start();
+            }
+
+        }
+
         private void NotifyChanged([CallerMemberName]string property = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
-        }
-
-        private void InitBassDLL()
-        {
-            // not playing anything via BASS, so don't need an update thread
-            Bass.UpdateThreads = 0;
-            WasapiDeviceInfo di;
-            BassWasapi.GetDeviceInfo(PlayBackDeviceIndex, out di);
-            //Bass is only used for decoding, default device mix frequency is used for MOD
-            if (!Bass.Init(0, di.MixFrequency, DeviceInitFlags.Default))
-            {   
-                Log.Error(Bass.LastError.ToString());
-            }
         }
 
         /// <inheritdoc />
@@ -139,18 +136,12 @@ namespace Thingy.MusicPlayerCore
         {
             get
             {
-                Log.Info("Querying WASAPI output devices....");
-                Dictionary<string, int> devices = new Dictionary<string, int>();
-                for (int i=0; i<BassWasapi.DeviceCount; i++)
+                var devices = new Dictionary<string, int>();
+                for (int i = 1; i < Bass.DeviceCount; i++)
                 {
-                    WasapiDeviceInfo info;
-                    BassWasapi.GetDeviceInfo(i, out info);
-                    if (info.IsEnabled && !info.IsInput)
-                    {
-                        devices.Add(info.Name, i);
-                    }
+                    var device = Bass.GetDeviceInfo(i);
+                    if (device.IsEnabled) devices.Add(device.Name, i);
                 }
-                Log.Info("Total number of WASAPI output devices: {0}", devices.Count);
                 return devices;
             }
         }
@@ -166,9 +157,9 @@ namespace Thingy.MusicPlayerCore
                     Bass.StreamFree(_decodeChannel);
                 if (_mixerChannel != 0)
                     Bass.StreamFree(_mixerChannel);
-                Bass.Free();
                 _deviceIndex = value;
-                InitBassDLL();
+                Bass.Free();
+                InitDevice();
             }
         }
 
@@ -177,8 +168,7 @@ namespace Thingy.MusicPlayerCore
         {
             get
             {
-                int delay = BassWasapi.GetData(null, 0);
-                var pos = BassMix.ChannelGetPosition(_decodeChannel, PositionFlags.Bytes, delay);
+                var pos = BassMix.ChannelGetPosition(_decodeChannel, PositionFlags.Bytes);
                 return Bass.ChannelBytes2Seconds(_decodeChannel, pos);
             }
             set
@@ -225,38 +215,40 @@ namespace Thingy.MusicPlayerCore
         /// <inheritdoc />
         public void Load(string fileName)
         {
-            _decodeChannel = Bass.CreateStream(fileName, 0, 0, BassFlags.Decode | BassFlags.Float | BassFlags.AutoFree);
+            if (_decodeChannel != 0)
+            {
+                Stop();
+                Bass.StreamFree(_decodeChannel);
+                _decodeChannel = 0;
+            }
+            if (_mixerChannel != 0)
+            {
+                Bass.StreamFree(_mixerChannel);
+                _mixerChannel = 0;
+            }
+
+            var sourceflags = BassFlags.Decode | BassFlags.Loop | BassFlags.Float | BassFlags.Prescan;
+            var mixerflags = BassFlags.MixerDownMix | BassFlags.MixerPositionEx | BassFlags.AutoFree;
+
+            _decodeChannel = Bass.CreateStream(fileName, 0, 0, sourceflags);
+            if (_decodeChannel == 0)
+            {
+                Log.Error("Decode chanel creation failed: {0}", Bass.LastError);
+                return;
+            }
+
             var channelInfo = Bass.ChannelGetInfo(_decodeChannel);
-            //BASS_WASAPI_Init(device,ci.freq,ci.chans,flags,buflen,0.05,WasapiProc,NULL)
-
-            WasapiInitFlags initFlags = WasapiInitFlags.Shared | WasapiInitFlags.EventDriven;
-
-            bool wasapi_init = BassWasapi.Init(PlayBackDeviceIndex,
-                                               channelInfo.Frequency,
-                                               channelInfo.Channels,
-                                               initFlags, 0.05f, 0.05f, _wasapiProcess);
-            if (!wasapi_init)
+            _mixerChannel = BassMix.CreateMixerStream(channelInfo.Frequency, channelInfo.Channels, mixerflags);
+            if (_mixerChannel == 0)
             {
-                Log.Error(Bass.LastError.ToString());
+                Log.Error("Mixer chanel creation failed: {0}", Bass.LastError);
                 return;
             }
-            WasapiInfo wasapi_info;
-            if (!BassWasapi.GetInfo(out wasapi_info))
+            if (!BassMix.MixerAddChannel(_mixerChannel, _decodeChannel, BassFlags.MixerDownMix))
             {
-                Log.Error(Bass.LastError.ToString());
+                Log.Error("Failed to route decoded stream to mixer: {0}", Bass.LastError);
                 return;
             }
-            Log.Info("Initialized Device {0} Hz {0} Ch output", wasapi_info.Frequency, wasapi_info.Channels);
-
-            BassFlags mixerflags = BassFlags.Float | BassFlags.MixerPositionEx | BassFlags.AutoFree;
-            _mixerChannel = BassMix.CreateMixerStream(wasapi_info.Frequency, wasapi_info.Channels, mixerflags);
-            BassMix.MixerAddChannel(_mixerChannel, _decodeChannel, BassFlags.MixerDownMix);
-            if (!BassWasapi.Start())
-            {
-                Log.Error(Bass.LastError.ToString());
-                return;
-            }
-            BassWasapi.Lock(true);
 
             Log.Info("Geting track metadata...");
             _currentTags = TagFactory.CreateTagInfoFromFile(fileName);
@@ -272,7 +264,8 @@ namespace Thingy.MusicPlayerCore
             _chapters.AddRange(ChapterFactory.GetChapters(fileName, _length));
             NotifyChanged(nameof(Chapters));
 
-            Bass.ChannelSetAttribute(_mixerChannel, ChannelAttribute.Volume, _LastVolume);
+            Volume = _LastVolume;
+            Bass.ChannelSetAttribute(_mixerChannel, ChannelAttribute.Volume, Volume);
             Log.Info("Loaded file {0}", fileName);
         }
 
@@ -284,7 +277,7 @@ namespace Thingy.MusicPlayerCore
         /// <inheritdoc />
         public void Dispose()
         {
-            BassWasapi.Lock(false);
+            Stop();
             if (_mixerChannel != 0)
             {
                 Bass.StreamFree(_mixerChannel);
@@ -294,7 +287,6 @@ namespace Thingy.MusicPlayerCore
                 Bass.StreamFree(_decodeChannel);
             }
             BassMix.Unload();
-            BassWasapi.Unload();
             Bass.PluginFree(0);
             Bass.Unload();
             GC.SuppressFinalize(this);

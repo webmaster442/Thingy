@@ -22,6 +22,7 @@
                 <ResourceDictionary Source="Styles/BorderlessTextBox.xaml" />
                 <ResourceDictionary Source="Styles/FullSizeMessageBox.xaml" />
                 <ResourceDictionary Source="Styles/ValidationErrorTemplate.xaml" />
+                <ResourceDictionary Source="Styles/ProgressSlider.xaml"/>
                 <!-- data templates-->
                 <ResourceDictionary Source="DataTemplates/EntityTemplates.xaml" />
                 <ResourceDictionary Source="DataTemplates/CalculatorTemplates.xaml"/>

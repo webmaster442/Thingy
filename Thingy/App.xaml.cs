@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Thingy.Db;
 using Thingy.Infrastructure;
+using Thingy.MusicPlayerCore;
 
 namespace Thingy
 {
@@ -129,6 +130,10 @@ namespace Thingy
             {
                 return new ModuleLoader(Log);
             });
+            IoCContainer.RegisterSingleton<IAudioEngine>(() =>
+            {
+                return new AudioEngine();
+            });
 
             var accent = Thingy.Properties.Settings.Default.SelectedAccent;
             ThemeManager.ChangeAppStyle(Application.Current,
@@ -143,7 +148,7 @@ namespace Thingy
         private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
             Log.Error(e.Exception);
-            var desktop = System.Environment.GetFolderPath(System.Environment.SpecialFolder.DesktopDirectory);
+            var desktop = Environment.GetFolderPath(System.Environment.SpecialFolder.DesktopDirectory);
             var log = System.IO.Path.Combine(desktop, "Thingy crash log.xml");
             Log.SaveToFile(log);
             AppLib.WPF.Dialogs.Dialogs.ShowErrorDialog(e.Exception);
