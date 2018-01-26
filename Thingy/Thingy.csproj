@@ -146,6 +146,9 @@
     <Compile Include="Views\Calculator.xaml.cs">
       <DependentUpon>Calculator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CalculatorDialogs\BinaryKeyboard.xaml.cs">
+      <DependentUpon>BinaryKeyboard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CalculatorDialogs\MultiLineResultMessageBox.xaml.cs">
       <DependentUpon>MultiLineResultMessageBox.xaml</DependentUpon>
     </Compile>
@@ -303,6 +306,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Calculator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CalculatorDialogs\BinaryKeyboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

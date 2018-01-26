@@ -30,6 +30,7 @@ namespace Thingy.ViewModels.Calculator
         public DelegateCommand BackSpaceCommand { get; private set; }
         public DelegateCommand ConstantCancelCommand { get; private set; }
         public DelegateCommand<string> NumSysInputCommand { get; private set; }
+        public DelegateCommand AdvancedBinaryInputCommand { get; private set; }
 
         public DelegateCommand<MemoryItem> DeleteVariableCommand { get; private set; }
         public DelegateCommand<MemoryItem> InsertVariableCommand { get; private set; }
@@ -99,9 +100,20 @@ namespace Thingy.ViewModels.Calculator
             DeleteVariableCommand = Command.ToCommand<MemoryItem>(DeleteVarialbe, CanInsertOrDelete);
             EvalAndAddVariableCommand = Command.ToCommand(EvalAndAddVariable);
             AddResultVarableCommand = Command.ToCommand(AddResultVariable);
+            AdvancedBinaryInputCommand = Command.ToCommand(AdvancedBinaryInput);
 
             Result = "0";
             ReturnObject = 0.0d;
+        }
+
+        private async void AdvancedBinaryInput()
+        {
+            var dialog = new Views.CalculatorDialogs.BinaryKeyboard();
+            bool result = await _app.ShowDialog(dialog, "Advanced Binary input");
+            if (result)
+            {
+                Formula += dialog.Result;
+            }
         }
 
         private string GenerateName()

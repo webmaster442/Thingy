@@ -1,0 +1,232 @@
+﻿<UserControl
+    x:Class="Thingy.Views.CalculatorDialogs.BinaryKeyboard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"
+    xmlns:controls="clr-namespace:Thingy.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="300"
+    d:DesignWidth="900"
+    Loaded="UserControl_Loaded"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style
+            TargetType="RadioButton">
+            <Setter Property="Margin" Value="5,0" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <TextBox
+            x:Name="Preview"
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            IsReadOnly="True" />
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Orientation="Horizontal">
+
+            <StackPanel
+                Orientation="Horizontal">
+                <RadioButton
+                    x:Name="Signed"
+                    Checked="Radio_Checked"
+                    Content="Signed"
+                    IsChecked="True"
+                    Unchecked="Radio_Checked">
+                    <RadioButton.IsEnabled>
+                        <MultiBinding Converter="{applib:MultiBoolOrConverter}">
+                            <Binding ElementName="TypeByte" Path="IsChecked" />
+                            <Binding ElementName="TypeShort" Path="IsChecked" />
+                            <Binding ElementName="TypeInt" Path="IsChecked" />
+                            <Binding ElementName="TypeLong" Path="IsChecked" />
+                        </MultiBinding>
+                    </RadioButton.IsEnabled>
+                </RadioButton>
+                <RadioButton
+                    x:Name="Unsigned"
+                    Checked="Radio_Checked"
+                    Content="Unsigned"
+                    Unchecked="Radio_Checked">
+                    <RadioButton.IsEnabled>
+                        <MultiBinding Converter="{applib:MultiBoolOrConverter}">
+                            <Binding ElementName="TypeByte" Path="IsChecked" />
+                            <Binding ElementName="TypeShort" Path="IsChecked" />
+                            <Binding ElementName="TypeInt" Path="IsChecked" />
+                            <Binding ElementName="TypeLong" Path="IsChecked" />
+                        </MultiBinding>
+                    </RadioButton.IsEnabled>
+                </RadioButton>
+            </StackPanel>
+
+            <RadioButton
+                x:Name="TypeDouble"
+                Checked="Radio_Checked"
+                Content="double"
+                Unchecked="Radio_Checked" />
+            <RadioButton
+                x:Name="TypeFloat"
+                Checked="Radio_Checked"
+                Content="float"
+                Unchecked="Radio_Checked" />
+            <RadioButton
+                x:Name="TypeLong"
+                Checked="Radio_Checked"
+                Content="long"
+                Unchecked="Radio_Checked" />
+            <RadioButton
+                x:Name="TypeInt"
+                Checked="Radio_Checked"
+                Content="int"
+                IsChecked="True"
+                Unchecked="Radio_Checked" />
+            <RadioButton
+                x:Name="TypeShort"
+                Checked="Radio_Checked"
+                Content="short"
+                Unchecked="Radio_Checked" />
+            <RadioButton
+                x:Name="TypeByte"
+                Checked="Radio_Checked"
+                Content="byte"
+                Unchecked="Radio_Checked" />
+        </StackPanel>
+        <controls:BinaryEditor
+            x:Name="Address7"
+            Grid.Row="2"
+            Grid.Column="0"
+            BinaryValueChanged="BinaryEditor_BinaryValueChanged"
+            LsbIndex="56"
+            MsbIndex="63">
+            <controls:BinaryEditor.IsEnabled>
+                <MultiBinding Converter="{applib:MultiBoolOrConverter}">
+                    <Binding ElementName="TypeLong" Path="IsChecked" />
+                    <Binding ElementName="TypeDouble" Path="IsChecked" />
+                </MultiBinding>
+            </controls:BinaryEditor.IsEnabled>
+        </controls:BinaryEditor>
+        <controls:BinaryEditor
+            x:Name="Address6"
+            Grid.Row="2"
+            Grid.Column="1"
+            BinaryValueChanged="BinaryEditor_BinaryValueChanged"
+            LsbIndex="48"
+            MsbIndex="55">
+            <controls:BinaryEditor.IsEnabled>
+                <MultiBinding Converter="{applib:MultiBoolOrConverter}">
+                    <Binding ElementName="TypeLong" Path="IsChecked" />
+                    <Binding ElementName="TypeDouble" Path="IsChecked" />
+                </MultiBinding>
+            </controls:BinaryEditor.IsEnabled>
+        </controls:BinaryEditor>
+        <controls:BinaryEditor
+            x:Name="Address5"
+            Grid.Row="3"
+            Grid.Column="0"
+            BinaryValueChanged="BinaryEditor_BinaryValueChanged"
+            LsbIndex="40"
+            MsbIndex="47">
+            <controls:BinaryEditor.IsEnabled>
+                <MultiBinding Converter="{applib:MultiBoolOrConverter}">
+                    <Binding ElementName="TypeLong" Path="IsChecked" />
+                    <Binding ElementName="TypeDouble" Path="IsChecked" />
+                </MultiBinding>
+            </controls:BinaryEditor.IsEnabled>
+        </controls:BinaryEditor>
+        <controls:BinaryEditor
+            x:Name="Address4"
+            Grid.Row="3"
+            Grid.Column="1"
+            LsbIndex="32"
+            MsbIndex="39">
+            <controls:BinaryEditor.IsEnabled>
+                <MultiBinding Converter="{applib:MultiBoolOrConverter}">
+                    <Binding ElementName="TypeLong" Path="IsChecked" />
+                    <Binding ElementName="TypeDouble" Path="IsChecked" />
+                </MultiBinding>
+            </controls:BinaryEditor.IsEnabled>
+        </controls:BinaryEditor>
+
+        <controls:BinaryEditor
+            x:Name="Address3"
+            Grid.Row="4"
+            Grid.Column="0"
+            BinaryValueChanged="BinaryEditor_BinaryValueChanged"
+            LsbIndex="24"
+            MsbIndex="31">
+            <controls:BinaryEditor.IsEnabled>
+                <MultiBinding Converter="{applib:MultiBoolOrConverter}">
+                    <Binding ElementName="TypeInt" Path="IsChecked" />
+                    <Binding ElementName="TypeLong" Path="IsChecked" />
+                    <Binding ElementName="TypeFloat" Path="IsChecked" />
+                    <Binding ElementName="TypeDouble" Path="IsChecked" />
+                </MultiBinding>
+            </controls:BinaryEditor.IsEnabled>
+        </controls:BinaryEditor>
+        <controls:BinaryEditor
+            x:Name="Address2"
+            Grid.Row="4"
+            Grid.Column="1"
+            BinaryValueChanged="BinaryEditor_BinaryValueChanged"
+            LsbIndex="16"
+            MsbIndex="23">
+            <controls:BinaryEditor.IsEnabled>
+                <MultiBinding Converter="{applib:MultiBoolOrConverter}">
+                    <Binding ElementName="TypeInt" Path="IsChecked" />
+                    <Binding ElementName="TypeLong" Path="IsChecked" />
+                    <Binding ElementName="TypeFloat" Path="IsChecked" />
+                    <Binding ElementName="TypeDouble" Path="IsChecked" />
+                </MultiBinding>
+            </controls:BinaryEditor.IsEnabled>
+        </controls:BinaryEditor>
+        <controls:BinaryEditor
+            x:Name="Address1"
+            Grid.Row="5"
+            Grid.Column="0"
+            BinaryValueChanged="BinaryEditor_BinaryValueChanged"
+            LsbIndex="8"
+            MsbIndex="15">
+            <controls:BinaryEditor.IsEnabled>
+                <MultiBinding Converter="{applib:MultiBoolOrConverter}">
+                    <Binding ElementName="TypeShort" Path="IsChecked" />
+                    <Binding ElementName="TypeInt" Path="IsChecked" />
+                    <Binding ElementName="TypeLong" Path="IsChecked" />
+                    <Binding ElementName="TypeFloat" Path="IsChecked" />
+                    <Binding ElementName="TypeDouble" Path="IsChecked" />
+                </MultiBinding>
+            </controls:BinaryEditor.IsEnabled>
+        </controls:BinaryEditor>
+        <controls:BinaryEditor
+            x:Name="Address0"
+            Grid.Row="5"
+            Grid.Column="1"
+            BinaryValueChanged="BinaryEditor_BinaryValueChanged"
+            LsbIndex="0"
+            MsbIndex="7">
+            <controls:BinaryEditor.IsEnabled>
+                <MultiBinding Converter="{applib:MultiBoolOrConverter}">
+                    <Binding ElementName="TypeByte" Path="IsChecked" />
+                    <Binding ElementName="TypeShort" Path="IsChecked" />
+                    <Binding ElementName="TypeInt" Path="IsChecked" />
+                    <Binding ElementName="TypeLong" Path="IsChecked" />
+                    <Binding ElementName="TypeFloat" Path="IsChecked" />
+                    <Binding ElementName="TypeDouble" Path="IsChecked" />
+                </MultiBinding>
+            </controls:BinaryEditor.IsEnabled>
+        </controls:BinaryEditor>
+    </Grid>
+</UserControl>

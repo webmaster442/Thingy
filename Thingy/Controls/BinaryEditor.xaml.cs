@@ -11,14 +11,15 @@ namespace Thingy.Controls
     /// </summary>
     public partial class BinaryEditor : UserControl
     {
-        public static readonly DependencyProperty ByteValueProperty = DependencyProperty.Register(
-        "ByteValue", typeof(byte), typeof(BinaryEditor), new PropertyMetadata(default(byte), UpdateUi));
-
         public static readonly DependencyProperty MsbIndexProperty = DependencyProperty.Register(
             "MsbIndex", typeof(int), typeof(BinaryEditor), new PropertyMetadata(7, MsbIndexChange));
 
         public static readonly DependencyProperty LsbIndexProperty = DependencyProperty.Register(
             "LsbIndex", typeof(int), typeof(BinaryEditor), new PropertyMetadata(0, LsbIndexChange));
+
+        public event RoutedEventHandler BinaryValueChanged;
+
+        private byte _bytevalue;
 
         public BinaryEditor()
         {
@@ -27,8 +28,12 @@ namespace Thingy.Controls
 
         public byte ByteValue
         {
-            get { return (byte)GetValue(ByteValueProperty); }
-            set { SetValue(ByteValueProperty, value); }
+            get { return _bytevalue; }
+            set
+            {
+                _bytevalue = value;
+                UpdateUi(value);
+            }
         }
 
         public int MsbIndex
@@ -43,90 +48,88 @@ namespace Thingy.Controls
             set { SetValue(LsbIndexProperty, value); }
         }
 
-        private static void UpdateUi(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private void UpdateUi(byte NewValue)
         {
-            var binEditor = d as BinaryEditor;
-            if (binEditor == null) return;
-            var value = (byte)e.NewValue;
+            var value = NewValue;
 
             if (value - 128 >= 0)
             {
                 value -= 128;
-                binEditor.Val128.IsChecked = true;
+                Val128.IsChecked = true;
             }
             else
             {
-                binEditor.Val128.IsChecked = false;
+                Val128.IsChecked = false;
             }
 
             if (value - 64 >= 0)
             {
                 value -= 64;
-                binEditor.Val64.IsChecked = true;
+                Val64.IsChecked = true;
             }
             else
             {
-                binEditor.Val64.IsChecked = false;
+                Val64.IsChecked = false;
             }
 
             if (value - 32 >= 0)
             {
                 value -= 32;
-                binEditor.Val32.IsChecked = true;
+                Val32.IsChecked = true;
             }
             else
             {
-                binEditor.Val32.IsChecked = false;
+                Val32.IsChecked = false;
             }
 
             if (value - 16 >= 0)
             {
                 value -= 16;
-                binEditor.Val16.IsChecked = true;
+                Val16.IsChecked = true;
             }
             else
             {
-                binEditor.Val16.IsChecked = false;
+                Val16.IsChecked = false;
             }
 
             if (value - 8 >= 0)
             {
                 value -= 8;
-                binEditor.Val8.IsChecked = true;
+                Val8.IsChecked = true;
             }
             else
             {
-                binEditor.Val8.IsChecked = false;
+                Val8.IsChecked = false;
             }
 
             if (value - 4 >= 0)
             {
                 value -= 4;
-                binEditor.Val4.IsChecked = true;
+                Val4.IsChecked = true;
             }
             else
             {
-                binEditor.Val4.IsChecked = false;
+                Val4.IsChecked = false;
             }
 
             if (value - 2 >= 0)
             {
                 value -= 2;
-                binEditor.Val2.IsChecked = true;
+                Val2.IsChecked = true;
             }
             else
             {
-                binEditor.Val2.IsChecked = false;
+                Val2.IsChecked = false;
             }
 
             if (value - 1 >= 0)
             {
                 value -= 1;
-                binEditor.Val1.IsChecked = true;
+                Val1.IsChecked = true;
             }
             else
             {
-                binEditor.Val1.IsChecked = false;
+                Val1.IsChecked = false;
             }
         }
 
@@ -200,7 +203,8 @@ namespace Thingy.Controls
             if (eventSource.IsChecked == true) current += value;
             else current -= value;
 
-            ByteValue = current;
+            _bytevalue = current;
+            BinaryValueChanged?.Invoke(this, new RoutedEventArgs());
         }
     }
 }

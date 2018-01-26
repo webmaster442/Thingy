@@ -26,8 +26,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
-                <ColumnDefinition
-                    Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <!--  Display  -->
             <TextBox
@@ -45,22 +44,29 @@
                         Command="{Binding ExecuteCommand}" />
                 </TextBox.InputBindings>
             </TextBox>
-            <mah:DropDownButton
+            <StackPanel
                 Grid.Row="0"
                 Grid.Column="2"
-                Content="History"
-                IsEnabled="{Binding Calculating, Converter={applib:NegateConverter}}"
-                ItemsSource="{Binding History}">
-                <mah:DropDownButton.ItemContainerStyle>
-                    <Style
-                        BasedOn="{StaticResource {x:Type MenuItem}}"
-                        TargetType="MenuItem">
-                        <Setter Property="Header" Value="{Binding}" />
-                        <Setter Property="Command" Value="{Binding DataContext.InsertHistoryCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
-                        <Setter Property="CommandParameter" Value="{Binding}" />
-                    </Style>
-                </mah:DropDownButton.ItemContainerStyle>
-            </mah:DropDownButton>
+                Orientation="Horizontal">
+                <mah:DropDownButton
+                    Content="History"
+                    IsEnabled="{Binding Calculating, Converter={applib:NegateConverter}}"
+                    ItemsSource="{Binding History}">
+                    <mah:DropDownButton.ItemContainerStyle>
+                        <Style
+                            BasedOn="{StaticResource {x:Type MenuItem}}"
+                            TargetType="MenuItem">
+                            <Setter Property="Header" Value="{Binding}" />
+                            <Setter Property="Command" Value="{Binding DataContext.InsertHistoryCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+                            <Setter Property="CommandParameter" Value="{Binding}" />
+                        </Style>
+                    </mah:DropDownButton.ItemContainerStyle>
+                </mah:DropDownButton>
+                <Button 
+                    Margin="2,0"
+                    Content="Adv. Bin."
+                    Command="{Binding AdvancedBinaryInputCommand}"/>
+            </StackPanel>
             <TextBox
                 x:Name="ResultBox"
                 Grid.Row="1"
