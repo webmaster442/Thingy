@@ -99,6 +99,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BinaryEditor.xaml.cs">
+      <DependentUpon>BinaryEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CalculatorConstants.xaml.cs">
       <DependentUpon>CalculatorConstants.xaml</DependentUpon>
     </Compile>
@@ -239,6 +242,10 @@
     <Compile Include="Views\VirtualFolders.xaml.cs">
       <DependentUpon>VirtualFolders.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\BinaryEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\CalculatorConstants.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
