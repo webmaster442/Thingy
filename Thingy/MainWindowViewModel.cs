@@ -30,7 +30,7 @@ namespace Thingy
 
         private void OpenAbout()
         {
-            _app.OpenTabContent("About", new Views.About());
+            _app.ShowTabContent("About", new Views.About());
         }
 
         private void OpenMenu()
@@ -55,7 +55,7 @@ namespace Thingy
 
         private void Setting()
         {
-            _app.OpenTabContent("Settings", new Views.Settings());
+            _app.ShowTabContent("Settings", new Views.Settings());
         }
 
         private void Exit()

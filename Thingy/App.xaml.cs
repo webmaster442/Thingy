@@ -48,7 +48,7 @@ namespace Thingy
             (App.Current.MainWindow as MainWindow).FocusTabByIndex(index);
         }
 
-        public void OpenTabContent(string Title, UserControl control)
+        public void ShowTabContent(string Title, UserControl control)
         {
             (App.Current.MainWindow as MainWindow).SetCurrentTabContent(Title, control, true);
         }

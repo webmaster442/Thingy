@@ -31,5 +31,10 @@ namespace Thingy.Modules
                 DataContext = new ViewModels.MusicPlayer.MusicPlayerViewModel(App.IoCContainer.ResolveSingleton<IAudioEngine>())
             };
         }
+
+        public override bool IsSingleInstance
+        {
+            get { return true; }
+        }
     }
 }

@@ -48,7 +48,21 @@ namespace Thingy.ViewModels
                 }
                 else
                 {
-                    _application.SetCurrentTabContent(obj, control);
+                    if (module.IsSingleInstance)
+                    {
+                        var index = _application.FindTabByTitle(module.ModuleName);
+                        if (index != -1)
+                        {
+                            await _application.ShowMessageBox("Single instance module", 
+                                                              "This module can only run in one instance. Switching to running module", 
+                                                              MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
+                            _application.FocusTabByIndex(index);
+                        }
+                        else
+                            _application.SetCurrentTabContent(obj, control);
+                    }
+                    else
+                        _application.SetCurrentTabContent(obj, control);
                 }
             }
         }

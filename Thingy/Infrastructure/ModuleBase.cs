@@ -37,5 +37,10 @@ namespace Thingy.Infrastructure
         {
             get { return false; }
         }
+
+        public virtual bool IsSingleInstance
+        {
+            get { return false; }
+        }
     }
 }

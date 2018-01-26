@@ -13,5 +13,6 @@ namespace Thingy.Infrastructure
         bool CanLoad { get; }
         string Category { get; }
         bool OpenAsWindow { get; }
+        bool IsSingleInstance { get; }
     }
 }
