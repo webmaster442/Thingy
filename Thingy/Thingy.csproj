@@ -125,6 +125,7 @@
     <Compile Include="Infrastructure\DBFileIconConverter.cs" />
     <Compile Include="Infrastructure\IModuleLoader.cs" />
     <Compile Include="Infrastructure\ModuleLoader.cs" />
+    <Compile Include="JumpListFactory.cs" />
     <Compile Include="Modules\CalculatorModule.cs" />
     <Compile Include="Modules\CurrencyConverterModule.cs" />
     <Compile Include="Modules\GreekAlphabetModule.cs" />
