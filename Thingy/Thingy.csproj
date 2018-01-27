@@ -97,7 +97,6 @@
     <Compile Include="..\Build-tools\CommonVersion.cs">
       <Link>Properties\CommonVersion.cs</Link>
     </Compile>
-    <Compile Include="CommandLineParser.cs" />
     <Compile Include="Connected Services\MnbServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -123,10 +122,11 @@
     <Compile Include="Controls\UniformGridColunConverter.cs" />
     <Compile Include="IApplication.cs" />
     <Compile Include="IMainWindow.cs" />
+    <Compile Include="Infrastructure\CommandLineParser.cs" />
     <Compile Include="Infrastructure\DBFileIconConverter.cs" />
     <Compile Include="Infrastructure\IModuleLoader.cs" />
+    <Compile Include="Infrastructure\JumpListFactory.cs" />
     <Compile Include="Infrastructure\ModuleLoader.cs" />
-    <Compile Include="JumpListFactory.cs" />
     <Compile Include="Modules\CalculatorModule.cs" />
     <Compile Include="Modules\CurrencyConverterModule.cs" />
     <Compile Include="Modules\GreekAlphabetModule.cs" />

@@ -16,11 +16,12 @@ namespace Thingy
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application, IApplication, IDisposable
+    public partial class App : Application, IApplication
     {
         public static AppLib.Common.IOC.IContainer IoCContainer { get; private set; }
         public static AppLib.Common.Log.ILogger Log { get; private set; }
         public static string[] Accents { get; private set; }
+        public static CommandLineParser CommandLineParser { get; private set; }
 
         public static IApplication Instance
         {
@@ -47,7 +48,10 @@ namespace Thingy
 
         private static void CommandLineArgumentsRecieved(string obj)
         {
-            //Handle arguments here
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                CommandLineParser.Parse(obj);
+            });
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -93,6 +97,11 @@ namespace Thingy
 
             var dload = BingPhotoOfDay.WasSuccesfull;
 
+            CommandLineParser = new CommandLineParser(App.Instance, IoCContainer.ResolveSingleton<IModuleLoader>());
+
+            JumpListFactory.CreateJumplist();
+
+            CommandLineArgumentsRecieved(Environment.CommandLine);
             base.OnStartup(e);
         }
 
@@ -105,16 +114,11 @@ namespace Thingy
             AppLib.WPF.Dialogs.Dialogs.ShowErrorDialog(e.Exception);
         }
 
-
         #region IApplication implementation
         public void Close()
         {
+            Thingy.Properties.Settings.Default.Save();
             App.Current.Shutdown();
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
         }
 
         public int FindTabByTitle(string Title)
@@ -176,6 +180,13 @@ namespace Thingy
             mainwindow.StatusFlyOut.IsAutoCloseEnabled = AutoClose;
             mainwindow.StatusFlyOut.Header = title;
             mainwindow.StatusFlyOut.IsOpen = true;
+        }
+
+        public void Restart()
+        {
+            Thingy.Properties.Settings.Default.Save();
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
         }
         #endregion
     }

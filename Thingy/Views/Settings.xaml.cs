@@ -30,9 +30,7 @@ namespace Thingy.Views
 
         private void BtnRestart_Click(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.Save();
-            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-            Application.Current.Shutdown();
+            App.Instance.Restart();
         }
 
         private void ActivatorKeyItems_SelectionChanged(object sender, SelectionChangedEventArgs e)

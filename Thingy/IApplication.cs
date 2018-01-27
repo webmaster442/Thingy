@@ -17,5 +17,6 @@ namespace Thingy
         int FindTabByTitle(string Title);
         void FocusTabByIndex(int index);
         void Close();
+        void Restart();
     }
 }
