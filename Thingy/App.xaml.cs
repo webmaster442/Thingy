@@ -20,7 +20,6 @@ namespace Thingy
     {
         public static AppLib.Common.IOC.IContainer IoCContainer { get; private set; }
         public static AppLib.Common.Log.ILogger Log { get; private set; }
-
         public static string[] Accents { get; private set; }
 
         public static IApplication Instance
@@ -28,6 +27,86 @@ namespace Thingy
             get { return App.Current as IApplication; }
         }
 
+        [STAThread]
+        public static void Main()
+        {
+            const string appName = "Thingy";
+            var singleInstance = new AppLib.Common.SingleInstanceApp(appName);
+            singleInstance.CommandLineArgumentsRecieved += CommandLineArgumentsRecieved;
+            if (singleInstance.IsFirstInstance)
+            {
+                var application = new App();
+                application.InitializeComponent();
+                application.ShutdownMode = ShutdownMode.OnMainWindowClose;
+                application.Run();
+                singleInstance.Close();
+            }
+            else singleInstance.SubmitParameters();
+
+        }
+
+        private static void CommandLineArgumentsRecieved(string obj)
+        {
+            //Handle arguments here
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            Log = new AppLib.Common.Log.Logger();
+            Log.Info("Application startup");
+
+
+            var trayIcon = new Infrastructure.Tray.TrayIcon();
+
+            DispatcherUnhandledException += App_DispatcherUnhandledException;
+            Accents = new string[]
+            {
+                "Red", "Green", "Blue",
+                "Purple", "Orange", "Lime",
+                "Emerald", "Teal", "Cyan",
+                "Cobalt", "Indigo", "Violet",
+                "Pink", "Magenta", "Crimson",
+                "Amber", "Yellow", "Brown",
+                "Olive", "Steel", "Mauve",
+                "Taupe", "Sienna"
+            };
+            IoCContainer = new AppLib.Common.IOC.Container();
+            IoCContainer.RegisterSingleton<IDataBase>(() =>
+            {
+                var dbfile = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ThingyDataBase.litedb");
+                return new DataBase(dbfile);
+            });
+            Log.Info("Database initialized");
+            IoCContainer.RegisterSingleton<IModuleLoader>(() =>
+            {
+                return new ModuleLoader(Log);
+            });
+            IoCContainer.RegisterSingleton<IAudioEngine>(() =>
+            {
+                return new AudioEngine();
+            });
+
+            var accent = Thingy.Properties.Settings.Default.SelectedAccent;
+            ThemeManager.ChangeAppStyle(Application.Current,
+                              ThemeManager.GetAccent(accent),
+                              ThemeManager.GetAppTheme("BaseLight"));
+
+            var dload = BingPhotoOfDay.WasSuccesfull;
+
+            base.OnStartup(e);
+        }
+
+        private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            Log.Error(e.Exception);
+            var desktop = Environment.GetFolderPath(System.Environment.SpecialFolder.DesktopDirectory);
+            var log = System.IO.Path.Combine(desktop, "Thingy crash log.xml");
+            Log.SaveToFile(log);
+            AppLib.WPF.Dialogs.Dialogs.ShowErrorDialog(e.Exception);
+        }
+
+
+        #region IApplication implementation
         public void Close()
         {
             App.Current.Shutdown();
@@ -98,60 +177,6 @@ namespace Thingy
             mainwindow.StatusFlyOut.Header = title;
             mainwindow.StatusFlyOut.IsOpen = true;
         }
-
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            Log = new AppLib.Common.Log.Logger();
-            Log.Info("Application startup");
-
-
-            var trayIcon = new Infrastructure.Tray.TrayIcon();
-
-            DispatcherUnhandledException += App_DispatcherUnhandledException;
-            Accents = new string[]
-            {
-                "Red", "Green", "Blue",
-                "Purple", "Orange", "Lime",
-                "Emerald", "Teal", "Cyan",
-                "Cobalt", "Indigo", "Violet",
-                "Pink", "Magenta", "Crimson",
-                "Amber", "Yellow", "Brown",
-                "Olive", "Steel", "Mauve",
-                "Taupe", "Sienna"
-            };
-            IoCContainer = new AppLib.Common.IOC.Container();
-            IoCContainer.RegisterSingleton<IDataBase>(() =>
-            {
-                var dbfile = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ThingyDataBase.litedb");
-                return new DataBase(dbfile);
-            });
-            Log.Info("Database initialized");
-            IoCContainer.RegisterSingleton<IModuleLoader>(() =>
-            {
-                return new ModuleLoader(Log);
-            });
-            IoCContainer.RegisterSingleton<IAudioEngine>(() =>
-            {
-                return new AudioEngine();
-            });
-
-            var accent = Thingy.Properties.Settings.Default.SelectedAccent;
-            ThemeManager.ChangeAppStyle(Application.Current,
-                              ThemeManager.GetAccent(accent),
-                              ThemeManager.GetAppTheme("BaseLight"));
-
-            var dload = BingPhotoOfDay.WasSuccesfull;
-
-            base.OnStartup(e);
-        }
-
-        private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
-        {
-            Log.Error(e.Exception);
-            var desktop = Environment.GetFolderPath(System.Environment.SpecialFolder.DesktopDirectory);
-            var log = System.IO.Path.Combine(desktop, "Thingy crash log.xml");
-            Log.SaveToFile(log);
-            AppLib.WPF.Dialogs.Dialogs.ShowErrorDialog(e.Exception);
-        }
+        #endregion
     }
 }
