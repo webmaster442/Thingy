@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Shell;
 
-namespace Thingy
+namespace Thingy.Infrastructure
 {
     internal static class JumpListFactory
     {
