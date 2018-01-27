@@ -233,5 +233,9 @@
   <ItemGroup>
     <Resource Include="Icons\icons8-boombox-96.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Fonts\Exo2-Regular.otf" />
+    <Resource Include="Fonts\Ubuntu-R.ttf" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

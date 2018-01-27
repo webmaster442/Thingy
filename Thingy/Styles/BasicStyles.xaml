@@ -3,9 +3,20 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:shaders="clr-namespace:AppLib.WPF.Shaders;assembly=AppLib.WPF">
 
+
+    <FontFamily
+        x:Key="Ubuntu">
+        pack://application:,,,/Thingy.Resources;component/Fonts/#Ubuntu
+    </FontFamily>
+
     <FontFamily
         x:Key="UbuntuMono">
         pack://application:,,,/Thingy.Resources;component/Fonts/#Ubuntu Mono
+    </FontFamily>
+
+    <FontFamily
+        x:Key="Exo2">
+        pack://application:,,,/Thingy.Resources;component/Fonts/#Exo2-Regular
     </FontFamily>
 
     <Style
@@ -47,6 +58,7 @@
                         BorderBrush="Black"
                         BorderThickness="0,0,0,1">
                         <TextBlock
+                            FontFamily="{StaticResource Exo2}"
                             FontSize="16"
                             Text="{Binding}" />
                     </Border>
@@ -66,12 +78,15 @@
                 <Setter Property="Control.FontWeight" Value="Bold" />
                 <Setter Property="Control.Effect">
                     <Setter.Value>
-                        <shaders:HueShiftEffect HueShift="60"/>
+                        <shaders:HueShiftEffect
+                            HueShift="60" />
                     </Setter.Value>
                 </Setter>
                 <Setter Property="Control.LayoutTransform">
                     <Setter.Value>
-                        <ScaleTransform ScaleX="1.05" ScaleY="1.05"/>
+                        <ScaleTransform
+                            ScaleX="1.05"
+                            ScaleY="1.05" />
                     </Setter.Value>
                 </Setter>
             </Trigger>

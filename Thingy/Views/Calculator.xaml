@@ -34,6 +34,7 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
+                FontFamily="{StaticResource UbuntuMono}"
                 IsEnabled="{Binding Calculating, Converter={applib:NegateConverter}}"
                 Style="{StaticResource BorderlessTextBox}"
                 Text="{Binding Formula}"
@@ -62,10 +63,10 @@
                         </Style>
                     </mah:DropDownButton.ItemContainerStyle>
                 </mah:DropDownButton>
-                <Button 
+                <Button
                     Margin="2,0"
-                    Content="Adv. Bin."
-                    Command="{Binding AdvancedBinaryInputCommand}"/>
+                    Command="{Binding AdvancedBinaryInputCommand}"
+                    Content="Adv. Bin." />
             </StackPanel>
             <TextBox
                 x:Name="ResultBox"
@@ -73,6 +74,7 @@
                 Grid.ColumnSpan="5"
                 AcceptsReturn="True"
                 Background="Transparent"
+                FontFamily="{StaticResource Exo2}"
                 FontSize="32"
                 IsReadOnly="True"
                 Style="{StaticResource BorderlessTextBox}"
