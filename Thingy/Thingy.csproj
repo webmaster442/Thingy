@@ -140,6 +140,7 @@
     <Compile Include="ViewModels\Calculator\DisplayChangerModel.cs" />
     <Compile Include="ViewModels\CurrencyConverterViewModel.cs" />
     <Compile Include="ViewModels\MusicPlayer\MusicPlayerViewModel.cs" />
+    <Compile Include="ViewModels\MusicPlayer\PlayListViewModel.cs" />
     <Compile Include="ViewModels\NoteViewModel.cs" />
     <Compile Include="ViewModels\ProgramsViewModel.cs" />
     <Compile Include="Views\About.xaml.cs">

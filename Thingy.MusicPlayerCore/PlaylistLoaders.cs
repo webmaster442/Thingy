@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace Thingy.MusicPlayerCore
 {
-    internal static class PlaylistLoaders
+    public static class PlaylistLoaders
     {
         private async static Task<TextReader> LoadFile(string file)
         {
@@ -22,7 +22,7 @@ namespace Thingy.MusicPlayerCore
             else return File.OpenText(file);
         }
 
-        public static async Task<string[]> LoadM3u(string file)
+        public static async Task<IEnumerable<string>> LoadM3u(string file)
         {
             List<string> ret = new List<string>();
             string filedir = System.IO.Path.GetDirectoryName(file);
@@ -52,10 +52,10 @@ namespace Thingy.MusicPlayerCore
                 }
                 while (line != null);
             }
-            return ret.ToArray();
+            return ret;
         }
 
-        public static async Task<string[]> LoadWPL(string file)
+        public static async Task<IEnumerable<string>> LoadWPL(string file)
         {
 
             var content = await LoadFile(file);
@@ -66,10 +66,10 @@ namespace Thingy.MusicPlayerCore
                 var src = media.Attribute("src").Value;
                 ret.Add(src);
             }
-            return ret.ToArray();
+            return ret;
         }
 
-        public static async Task<string[]> LoadASX(string file)
+        public static async Task<IEnumerable<string>> LoadASX(string file)
         {
             var content = await LoadFile(file);
             var doc = XDocument.Load(content).Descendants("asx").Elements("entry").Elements("ref");
@@ -79,11 +79,11 @@ namespace Thingy.MusicPlayerCore
                 var src = media.Attribute("href").Value;
                 ret.Add(src);
             }
-            return ret.ToArray();
+            return ret;
         }
 
 
-        public static async Task<string[]> LoadPls(string file)
+        public static async Task<IEnumerable<string>> LoadPls(string file)
         {
             string filedir = System.IO.Path.GetDirectoryName(file);
             List<string> ret = new List<string>();
@@ -114,7 +114,7 @@ namespace Thingy.MusicPlayerCore
                     }
                 }
                 while (line != null);
-                return ret.ToArray();
+                return ret;
             }
         }
     }

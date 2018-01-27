@@ -71,12 +71,10 @@
                             Maximum="1"
                             Value="{Binding AudioEngine.Volume}"
                             Width="150"
-                            Style="{StaticResource ProgressSlider}"
                             VerticalAlignment="Center"/>
                     </StackPanel>
                     <Slider
                         Grid.Row="2"
-                        Style="{StaticResource ProgressSlider}"
                         Grid.ColumnSpan="99"
                         Minimum="0"
                         Maximum="{Binding AudioEngine.Length}"
