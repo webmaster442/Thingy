@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Thingy.Controls;
 
 namespace Thingy.Views.CalculatorDialogs
 {
@@ -34,6 +35,12 @@ namespace Thingy.Views.CalculatorDialogs
             set;
         }
 
+        private byte GetValueOrDefault(BinaryEditor binaryEditor)
+        {
+            if (binaryEditor.IsEnabled) return binaryEditor.ByteValue;
+            else return 0;
+        }
+
         private void GetResult()
         {
             if (!_loaded) return;
@@ -42,10 +49,10 @@ namespace Thingy.Views.CalculatorDialogs
             {
                 byte[] f = new byte[]
                 {
-                    Address0.ByteValue,
-                    Address1.ByteValue,
-                    Address2.ByteValue,
-                    Address3.ByteValue
+                    GetValueOrDefault(Address0),
+                    GetValueOrDefault(Address1),
+                    GetValueOrDefault(Address2),
+                    GetValueOrDefault(Address3)
                 };
                 Result = BitConverter.ToSingle(f, 0).ToString(new CultureInfo("en-US"));
             }
@@ -53,14 +60,14 @@ namespace Thingy.Views.CalculatorDialogs
             {
                 byte[] d = new byte[]
                 {
-                    Address0.ByteValue,
-                    Address1.ByteValue,
-                    Address2.ByteValue,
-                    Address3.ByteValue,
-                    Address4.ByteValue,
-                    Address5.ByteValue,
-                    Address6.ByteValue,
-                    Address7.ByteValue,
+                    GetValueOrDefault(Address0),
+                    GetValueOrDefault(Address1),
+                    GetValueOrDefault(Address2),
+                    GetValueOrDefault(Address3),
+                    GetValueOrDefault(Address4),
+                    GetValueOrDefault(Address5),
+                    GetValueOrDefault(Address6),
+                    GetValueOrDefault(Address7)
                 };
                 Result = BitConverter.ToDouble(d, 0).ToString(new CultureInfo("en-US"));
             }
@@ -68,14 +75,14 @@ namespace Thingy.Views.CalculatorDialogs
             {
                 byte[] i = new byte[]
                 {
-                    Address0.ByteValue,
-                    Address1.ByteValue,
-                    Address2.ByteValue,
-                    Address3.ByteValue,
-                    Address4.ByteValue,
-                    Address5.ByteValue,
-                    Address6.ByteValue,
-                    Address7.ByteValue
+                    GetValueOrDefault(Address0),
+                    GetValueOrDefault(Address1),
+                    GetValueOrDefault(Address2),
+                    GetValueOrDefault(Address3),
+                    GetValueOrDefault(Address4),
+                    GetValueOrDefault(Address5),
+                    GetValueOrDefault(Address6),
+                    GetValueOrDefault(Address7)
                 };
 
                 if (Signed.IsChecked == true)
@@ -95,8 +102,9 @@ namespace Thingy.Views.CalculatorDialogs
             GetResult();
         }
 
-        private void Radio_Checked(object sender, RoutedEventArgs e)
+        private async void Radio_Checked(object sender, RoutedEventArgs e)
         {
+            await Task.Delay(100);
             GetResult();
         }
 
