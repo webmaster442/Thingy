@@ -4,8 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:musicplayer="clr-namespace:Thingy.MusicPlayerCore.Controls;assembly=Thingy.MusicPlayerCore"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:musicplayer="clr-namespace:Thingy.MusicPlayerCore.Controls;assembly=Thingy.MusicPlayerCore"
     d:DesignHeight="300"
     d:DesignWidth="300"
     mc:Ignorable="d">
@@ -22,10 +22,23 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <Label
+                    <StackPanel
                         Grid.Row="0"
-                        Content="Mini display"
-                        Style="{StaticResource Title}" />
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            FontFamily="{StaticResource Exo2}"
+                            FontSize="18"
+                            Text="{Binding AudioEngine.Position}" />
+                        <TextBlock
+                            FontFamily="{StaticResource Exo2}"
+                            FontSize="18"
+                            Text="/" />
+                        <TextBlock
+                            FontFamily="{StaticResource Exo2}"
+                            FontSize="18"
+                            Text="{Binding AudioEngine.Length}" />
+                    </StackPanel>
                     <StackPanel
                         Grid.Row="1"
                         Orientation="Horizontal">
@@ -66,7 +79,9 @@
                             ImageHeight="48"
                             ImageWidth="48"
                             Style="{StaticResource Flat}" />
-
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            Text="Vol.:" />
                         <Slider
                             x:Name="VolumeSlider"
                             Width="150"
@@ -93,11 +108,17 @@
                         Thumb.DragCompleted="SeekBar_DragCompleted"
                         Thumb.DragStarted="SeekBar_DragStarted"
                         Value="{Binding AudioEngine.Position, Mode=OneWay}" />
+                    <musicplayer:TrackInfo
+                        FontSize="20"
+                        FontFamily="{StaticResource Exo2}"
+                        Tags="{Binding AudioEngine.CurrentTags}"
+                        Grid.Row="3"
+                        Grid.ColumnSpan="99"/>
                 </Grid>
             </TabItem>
             <TabItem
-                Style="{StaticResource CompactTabItem}"
-                Header="Playlist">
+                Header="Playlist"
+                Style="{StaticResource CompactTabItem}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -149,11 +170,12 @@
                     </Menu>
                     <ListBox
                         x:Name="PlaylistView"
-                        ItemsSource="{Binding Playlist.Playlist}"
-                        Grid.Row="1">
+                        Grid.Row="1"
+                        ItemsSource="{Binding Playlist.Playlist}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Converter={musicplayer:PlaylistTagConverter}}"/>
+                                <TextBlock
+                                    Text="{Binding Converter={musicplayer:PlaylistTagConverter}}" />
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>

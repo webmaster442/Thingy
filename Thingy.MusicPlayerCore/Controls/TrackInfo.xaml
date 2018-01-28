@@ -4,45 +4,69 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="Ctrl"
     d:DesignHeight="300"
     d:DesignWidth="300"
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Image
             x:Name="Cover"
             Grid.Row="0"
             Grid.RowSpan="10"
-            Grid.Column="0" />
+            Grid.Column="0"
+            MaxWidth="500"
+            MaxHeight="500"
+            Margin="10"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            StretchDirection="DownOnly" />
         <TextBlock
             x:Name="Title"
             Grid.Row="0"
-            Grid.Column="1" />
+            Grid.Column="1"
+            Margin="5,10,0,3"
+            FontFamily="{Binding ElementName=Ctrl, Path=FontFamily}"
+            FontSize="{Binding ElementName=Ctrl, Path=FontSize}" />
         <TextBlock
             x:Name="Artist"
             Grid.Row="1"
-            Grid.Column="1" />
+            Grid.Column="1"
+            Margin="5,0,0,3"
+            FontFamily="{Binding ElementName=Ctrl, Path=FontFamily}"
+            FontSize="{Binding ElementName=Ctrl, Path=FontSize}" />
         <TextBlock
             x:Name="Album"
             Grid.Row="2"
-            Grid.Column="1" />
+            Grid.Column="1"
+            Margin="5,0,0,3"
+            FontFamily="{Binding ElementName=Ctrl, Path=FontFamily}"
+            FontSize="{Binding ElementName=Ctrl, Path=FontSize}" />
         <TextBlock
             x:Name="Year"
             Grid.Row="3"
-            Grid.Column="1" />
+            Grid.Column="1"
+            Margin="5,0,0,3"
+            FontFamily="{Binding ElementName=Ctrl, Path=FontFamily}"
+            FontSize="{Binding ElementName=Ctrl, Path=FontSize}" />
         <TextBlock
             x:Name="Filename"
             Grid.Row="4"
-            Grid.Column="1" />
+            Grid.Column="1"
+            Margin="5,0,0,3"
+            FontFamily="{Binding ElementName=Ctrl, Path=FontFamily}"
+            FontSize="{Binding ElementName=Ctrl, Path=FontSize}" />
     </Grid>
 </UserControl>

@@ -76,13 +76,16 @@ namespace Thingy.MusicPlayerCore
             {
                 var extractor = new ChapterExtractor(new StreamWrapper(stream));
                 extractor.Run();
-                foreach (var chapter in extractor.Chapters)
+                if (extractor.Chapters != null  && extractor.Chapters.Length > 0)
                 {
-                    ret.Add(new Chapter
+                    foreach (var chapter in extractor.Chapters)
                     {
-                        Title = chapter.Name,
-                        Position = chapter.Time.TotalSeconds
-                    });
+                        ret.Add(new Chapter
+                        {
+                            Title = chapter.Name,
+                            Position = chapter.Time.TotalSeconds
+                        });
+                    }
                 }
             }
             return ret;
