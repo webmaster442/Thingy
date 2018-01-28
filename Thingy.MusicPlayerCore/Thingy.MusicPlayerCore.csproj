@@ -55,6 +55,7 @@
     <Compile Include="AudioEngine.cs" />
     <Compile Include="AudioEngineLog.cs" />
     <Compile Include="ChapterFactory.cs" />
+    <Compile Include="Controls\PlaylistTagConverter.cs" />
     <Compile Include="Controls\TrackInfo.xaml.cs">
       <DependentUpon>TrackInfo.xaml</DependentUpon>
     </Compile>

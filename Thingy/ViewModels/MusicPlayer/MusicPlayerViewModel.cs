@@ -11,7 +11,6 @@ namespace Thingy.ViewModels.MusicPlayer
     public class MusicPlayerViewModel: BindableBase, IDisposable
     {
         private IAudioEngine _audioEngine;
-        private IApplication _application;
         private PlayListViewModel _playlist;
 
         public DelegateCommand OpenFileCommand { get; private set; }

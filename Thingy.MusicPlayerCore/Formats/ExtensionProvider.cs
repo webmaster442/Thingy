@@ -29,7 +29,7 @@ namespace Thingy.MusicPlayerCore.Formats
         private string CombineExtensions(string header, IEnumerable<string> input)
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("{0}|");
+            sb.AppendFormat("{0}|", header);
             foreach (var item in input)
             {
                 sb.AppendFormat("*{0};", item);

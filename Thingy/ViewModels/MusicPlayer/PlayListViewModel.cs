@@ -97,6 +97,7 @@ namespace Thingy.ViewModels.MusicPlayer
         {
             var ofd = new System.Windows.Forms.OpenFileDialog();
             ofd.Filter = _extensions.AllFormatsFilterString;
+            ofd.Multiselect = true;
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 Playlist.AddRange(ofd.FileNames);

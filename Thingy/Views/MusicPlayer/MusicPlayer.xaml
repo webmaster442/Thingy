@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:interactivity="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:musicplayer="clr-namespace:Thingy.MusicPlayerCore.Controls;assembly=Thingy.MusicPlayerCore"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="300"
     d:DesignWidth="300"
@@ -90,12 +90,13 @@
                         Maximum="{Binding AudioEngine.Length}"
                         Minimum="0"
                         Style="{StaticResource FlatSlider}"
-                        Value="{Binding AudioEngine.Position, Mode=OneWay}"
+                        Thumb.DragCompleted="SeekBar_DragCompleted"
                         Thumb.DragStarted="SeekBar_DragStarted"
-                        Thumb.DragCompleted="SeekBar_DragCompleted"/>
+                        Value="{Binding AudioEngine.Position, Mode=OneWay}" />
                 </Grid>
             </TabItem>
             <TabItem
+                Style="{StaticResource CompactTabItem}"
                 Header="Playlist">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -103,9 +104,59 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     <Menu
-                        Grid.Row="0" />
+                        Grid.Row="0">
+                        <MenuItem
+                            Header="Manage">
+                            <MenuItem
+                                Command="{Binding Playlist.OpenListCommand}"
+                                Header="Load Playlist..." />
+                            <MenuItem
+                                Command="{Binding Playlist.ApendListCommand}"
+                                Header="Apend Playlist.." />
+                            <Separator />
+                            <MenuItem
+                                Command="{Binding Playlist.AddFilesCommand}"
+                                Header="Add Files..." />
+                            <MenuItem
+                                Command="{Binding Playlist.AddFolderCommand}"
+                                Header="Add Folder..." />
+                            <MenuItem
+                                Command="{Binding Playlist.AddUrlCommand}"
+                                Header="Add URL..." />
+                        </MenuItem>
+                        <MenuItem
+                            Header="Delete">
+                            <MenuItem
+                                Command="{Binding Playlist.DeleteSelectedCommand}"
+                                CommandParameter="{Binding ElementName=PlaylistView, Path=SelectedItems}"
+                                Header="Remove Selected items..." />
+                            <MenuItem
+                                Command="{Binding Playlist.ClearListCommand}"
+                                Header="Clear List" />
+                        </MenuItem>
+                        <MenuItem
+                            Header="Ordering">
+                            <MenuItem
+                                Command="{Binding Playlist.SortAscendingCommand}"
+                                Header="Order by FileName Ascending" />
+                            <MenuItem
+                                Command="{Binding Playlist.SortDescendingCommand}"
+                                Header="Order by FileName Descending" />
+                            <MenuItem
+                                Command="{Binding Playlist.SortSuffleCommand}"
+                                Header="Suffle" />
+                        </MenuItem>
+                    </Menu>
                     <ListBox
-                        Grid.Row="1" />
+                        x:Name="PlaylistView"
+                        ItemsSource="{Binding Playlist.Playlist}"
+                        Grid.Row="1">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={musicplayer:PlaylistTagConverter}}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </Grid>
             </TabItem>
         </TabControl>
