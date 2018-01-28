@@ -28,7 +28,7 @@ namespace Thingy.Modules
         {
             return new Views.MusicPlayer.MusicPlayer
             {
-                DataContext = new ViewModels.MusicPlayer.MusicPlayerViewModel(App.IoCContainer.ResolveSingleton<IAudioEngine>())
+                DataContext = new ViewModels.MusicPlayer.MusicPlayerViewModel(App.Instance, App.IoCContainer.ResolveSingleton<IAudioEngine>())
             };
         }
 

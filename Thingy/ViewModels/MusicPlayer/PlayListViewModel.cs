@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Thingy.MusicPlayerCore;
 using Thingy.MusicPlayerCore.Formats;
@@ -43,6 +44,10 @@ namespace Thingy.ViewModels.MusicPlayer
 
             ClearListCommand = Command.ToCommand(ClearList);
             DeleteSelectedCommand = Command.ToCommand<string[]>(DeleteSelected);
+
+            SortAscendingCommand = Command.ToCommand(SortAscending);
+            SortDescendingCommand = Command.ToCommand(SortDescending);
+            SortSuffleCommand = Command.ToCommand(SortSuffle);
         }
 
         private async Task DoOpenList(bool apend)
@@ -126,7 +131,42 @@ namespace Thingy.ViewModels.MusicPlayer
 
         private void DeleteSelected(string[] obj)
         {
-            throw new NotImplementedException();
+            foreach (var item in obj)
+            {
+                Playlist.Remove(item);
+            }
+        }
+
+        private static IEnumerable<string> Copy(IEnumerable<string> source)
+        {
+            foreach (var item in source)
+            {
+                yield return string.Copy(item);
+            }
+        }
+
+        private void SortAscending()
+        {
+            var q = from track in Copy(Playlist)
+                    orderby track ascending
+                    select track;
+            Playlist.UpdateWith(q);
+        }
+
+        private void SortDescending()
+        {
+            var q = from track in Copy(Playlist)
+                    orderby track descending
+                    select track;
+            Playlist.UpdateWith(q);
+        }
+
+        private void SortSuffle()
+        {
+            var q = from track in Copy(Playlist)
+                    orderby Guid.NewGuid()
+                    select track;
+            Playlist.UpdateWith(q);
         }
     }
 }

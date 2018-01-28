@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:interactivity="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="300"
     d:DesignWidth="300"
@@ -16,7 +17,7 @@
                 Style="{StaticResource CompactTabItem}">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition />
@@ -29,16 +30,16 @@
                         Grid.Row="1"
                         Orientation="Horizontal">
                         <applib:ImageButton
+                            Command="{Binding OpenFileCommand}"
                             Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-eject-96.png"
                             ImageHeight="48"
                             ImageWidth="48"
-                            Command="{Binding OpenFileCommand}"
                             Style="{StaticResource Flat}" />
                         <applib:ImageButton
+                            Command="{Binding PlayCommand}"
                             Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-play-96.png"
                             ImageHeight="48"
                             ImageWidth="48"
-                            Command="{Binding PlayCommand}"
                             Style="{StaticResource Flat}" />
                         <applib:ImageButton
                             Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-rewind-96.png"
@@ -67,18 +68,44 @@
                             Style="{StaticResource Flat}" />
 
                         <Slider
-                            Minimum="0"
-                            Maximum="1"
-                            Value="{Binding AudioEngine.Volume}"
+                            x:Name="VolumeSlider"
                             Width="150"
-                            VerticalAlignment="Center"/>
+                            VerticalAlignment="Center"
+                            Maximum="1"
+                            Minimum="0"
+                            Value="{Binding AudioEngine.Volume}">
+                            <Slider.ToolTip>
+                                <ToolTip
+                                    Content="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget.Value}"
+                                    ContentStringFormat="Volume: {0:P1}" />
+                            </Slider.ToolTip>
+                        </Slider>
                     </StackPanel>
                     <Slider
+                        x:Name="SeekBar"
                         Grid.Row="2"
                         Grid.ColumnSpan="99"
-                        Minimum="0"
+                        Margin="5,0"
+                        IsMoveToPointEnabled="True"
                         Maximum="{Binding AudioEngine.Length}"
-                        Value="{Binding AudioEngine.Position, Mode=OneWay}"/>
+                        Minimum="0"
+                        Style="{StaticResource FlatSlider}"
+                        Value="{Binding AudioEngine.Position, Mode=OneWay}"
+                        Thumb.DragStarted="SeekBar_DragStarted"
+                        Thumb.DragCompleted="SeekBar_DragCompleted"/>
+                </Grid>
+            </TabItem>
+            <TabItem
+                Header="Playlist">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Menu
+                        Grid.Row="0" />
+                    <ListBox
+                        Grid.Row="1" />
                 </Grid>
             </TabItem>
         </TabControl>
