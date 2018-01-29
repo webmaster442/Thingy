@@ -227,6 +227,8 @@ namespace Thingy.MusicPlayerCore
         /// <inheritdoc />
         public void Load(string fileName)
         {
+            Log.Info("Loading file: {0}", fileName);
+
             if (_decodeChannel != 0)
             {
                 Stop();
@@ -240,6 +242,12 @@ namespace Thingy.MusicPlayerCore
             }
 
             Reset();
+
+            if (string.IsNullOrEmpty(fileName))
+            {
+                Log.Error("Filename was null or empty. Aborted load");
+                return;
+            }
 
             var sourceflags = BassFlags.Decode | BassFlags.Loop | BassFlags.Float | BassFlags.Prescan;
             var mixerflags = BassFlags.MixerDownMix | BassFlags.MixerPositionEx | BassFlags.AutoFree;

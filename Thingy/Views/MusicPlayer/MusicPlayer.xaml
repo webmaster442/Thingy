@@ -55,25 +55,33 @@
                             ImageWidth="48"
                             Style="{StaticResource Flat}" />
                         <applib:ImageButton
+                            Command="{Binding SeekBackCommand}"
                             Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-rewind-96.png"
                             ImageHeight="48"
                             ImageWidth="48"
-                            Style="{StaticResource Flat}" />
+                            Style="{StaticResource Flat}"
+                            ToolTip="Seek 5 sec. backward" />
                         <applib:ImageButton
+                            Command="{Binding SeekFwdCommand}"
                             Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-fast-forward-96.png"
                             ImageHeight="48"
                             ImageWidth="48"
-                            Style="{StaticResource Flat}" />
+                            Style="{StaticResource Flat}"
+                            ToolTip="Seek 5 sec. forward" />
                         <applib:ImageButton
+                            Command="{Binding PrevousTrackCommand}"
                             Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-skip-to-start-96.png"
                             ImageHeight="48"
                             ImageWidth="48"
-                            Style="{StaticResource Flat}" />
+                            Style="{StaticResource Flat}"
+                            ToolTip="Previous track" />
                         <applib:ImageButton
+                            Command="{Binding NextTrackCommand}"
                             Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-end-96.png"
                             ImageHeight="48"
                             ImageWidth="48"
-                            Style="{StaticResource Flat}" />
+                            Style="{StaticResource Flat}"
+                            ToolTip="Next track" />
                         <TextBlock
                             VerticalAlignment="Center"
                             Text="Vol.:" />
@@ -99,11 +107,11 @@
                         IsMoveToPointEnabled="True"
                         Maximum="{Binding AudioEngine.Length}"
                         Minimum="0"
+                        MouseMove="SeekBar_MouseMove"
+                        MouseUp="SeekBar_MouseUp"
                         Style="{StaticResource FlatSlider}"
                         Thumb.DragCompleted="SeekBar_DragCompleted"
                         Thumb.DragStarted="SeekBar_DragStarted"
-                        MouseMove="SeekBar_MouseMove"
-                        MouseUp="SeekBar_MouseUp"
                         Value="{Binding AudioEngine.Position, Mode=OneWay}">
                         <Slider.ToolTip>
                             <ToolTip
@@ -127,7 +135,8 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     <Menu
-                        Grid.Row="0">
+                        
+                        Grid.Row="0" BorderThickness="0,0,0,1.1" BorderBrush="#FFBFBFBF">
                         <MenuItem
                             Header="Manage">
                             <MenuItem

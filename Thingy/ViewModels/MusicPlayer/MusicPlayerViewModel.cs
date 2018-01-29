@@ -19,6 +19,10 @@ namespace Thingy.ViewModels.MusicPlayer
         public DelegateCommand PauseCommand { get; private set; }
         public DelegateCommand SeekFwdCommand { get; private set; }
         public DelegateCommand SeekBackCommand { get; private set; }
+
+        public DelegateCommand NextTrackCommand { get; private set; }
+        public DelegateCommand PrevousTrackCommand { get; private set; }
+
         public DelegateCommand DragStartedCommand { get; private set; }
         public DelegateCommand<double> DragCompletedCommand { get; private set; }
 
@@ -31,6 +35,7 @@ namespace Thingy.ViewModels.MusicPlayer
                 if (value == null &&_audioEngine != null)
                 {
                     _audioEngine.SongFinishedEvent -= songFinished;
+                    _audioEngine.Dispose();
                 }
                 else if (value != null)
                 {
@@ -46,7 +51,16 @@ namespace Thingy.ViewModels.MusicPlayer
 
         private void songFinished(object sender, RoutedEventArgs e)
         {
-            _audioEngine.Stop();
+            if (Playlist.IsPossibleToChangeTrack(1))
+            {
+                Playlist.CurrentIndex = Playlist.CurrentIndex + 1;
+                _audioEngine.Load(Playlist.CurrrentFile);
+                _audioEngine.Play();
+            }
+            else
+            {
+                _audioEngine.Stop();
+            }
         }
 
         public PlayListViewModel Playlist
@@ -66,6 +80,8 @@ namespace Thingy.ViewModels.MusicPlayer
             SeekFwdCommand = Command.ToCommand(SeekFwd);
             DragStartedCommand = Command.ToCommand(DragStarted);
             DragCompletedCommand = Command.ToCommand<double>(DragCompleted);
+            PrevousTrackCommand = Command.ToCommand(PrevousTrack);
+            NextTrackCommand = Command.ToCommand(NextTrack);
         }
 
         private void DragCompleted(double obj)
@@ -79,6 +95,15 @@ namespace Thingy.ViewModels.MusicPlayer
             AudioEngine.Seeking = true;
         }
 
+
+        private void SeekBack()
+        {
+            _audioEngine.Seeking = true;
+            double position = _audioEngine.Position;
+            _audioEngine.Position = position - 5;
+            _audioEngine.Seeking = false;
+        }
+
         private void SeekFwd()
         {
             _audioEngine.Seeking = true;
@@ -87,12 +112,24 @@ namespace Thingy.ViewModels.MusicPlayer
             _audioEngine.Seeking = false;
         }
 
-        private void SeekBack()
+        private void PrevousTrack()
         {
-            _audioEngine.Seeking = true;
-            double position = _audioEngine.Position;
-            _audioEngine.Position = position - 5;
-            _audioEngine.Seeking = false;
+            if (Playlist.IsPossibleToChangeTrack(-1))
+            {
+                Playlist.CurrentIndex = Playlist.CurrentIndex - 1;
+                _audioEngine.Load(Playlist.CurrrentFile);
+                _audioEngine.Play();
+            }
+        }
+
+        private void NextTrack()
+        {
+            if (Playlist.IsPossibleToChangeTrack(1))
+            {
+                Playlist.CurrentIndex = Playlist.CurrentIndex + 1;
+                _audioEngine.Load(Playlist.CurrrentFile);
+                _audioEngine.Play();
+            }
         }
 
         private void OpenFile()

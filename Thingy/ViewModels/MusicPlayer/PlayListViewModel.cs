@@ -39,6 +39,18 @@ namespace Thingy.ViewModels.MusicPlayer
             set { SetValue(ref _currentIndex, value); }
         }
 
+        public string CurrrentFile
+        {
+            get
+            {
+                if (CurrentIndex > -1 && CurrentIndex < Playlist.Count - 1)
+                {
+                    return Playlist[CurrentIndex];
+                }
+                else return null;
+            }
+        }
+
         public PlayListViewModel(IApplication app)
         {
             _app = app;
