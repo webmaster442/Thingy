@@ -29,7 +29,7 @@
                             Margin="5,0,0,0"
                             FontFamily="{StaticResource Exo2}"
                             FontSize="18"
-                            Text="{Binding AudioEngine.Position}" />
+                            Text="{Binding AudioEngine.Position, Converter={applib:SecondsToTimeStringConverter}}" />
                         <TextBlock
                             FontFamily="{StaticResource Exo2}"
                             FontSize="18"
@@ -37,7 +37,7 @@
                         <TextBlock
                             FontFamily="{StaticResource Exo2}"
                             FontSize="18"
-                            Text="{Binding AudioEngine.Length}" />
+                            Text="{Binding AudioEngine.Length, Converter={applib:SecondsToTimeStringConverter}}" />
                     </StackPanel>
                     <StackPanel
                         Grid.Row="1"
@@ -61,11 +61,6 @@
                             Style="{StaticResource Flat}" />
                         <applib:ImageButton
                             Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-fast-forward-96.png"
-                            ImageHeight="48"
-                            ImageWidth="48"
-                            Style="{StaticResource Flat}" />
-                        <applib:ImageButton
-                            Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-rewind-96.png"
                             ImageHeight="48"
                             ImageWidth="48"
                             Style="{StaticResource Flat}" />
@@ -107,13 +102,20 @@
                         Style="{StaticResource FlatSlider}"
                         Thumb.DragCompleted="SeekBar_DragCompleted"
                         Thumb.DragStarted="SeekBar_DragStarted"
-                        Value="{Binding AudioEngine.Position, Mode=OneWay}" />
+                        MouseMove="SeekBar_MouseMove"
+                        MouseUp="SeekBar_MouseUp"
+                        Value="{Binding AudioEngine.Position, Mode=OneWay}">
+                        <Slider.ToolTip>
+                            <ToolTip
+                                Content="{Binding ElementName=SeekBar, Path=Value, Converter={applib:SecondsToTimeStringConverter}}" />
+                        </Slider.ToolTip>
+                    </Slider>
                     <musicplayer:TrackInfo
-                        FontSize="20"
-                        FontFamily="{StaticResource Exo2}"
-                        Tags="{Binding AudioEngine.CurrentTags}"
                         Grid.Row="3"
-                        Grid.ColumnSpan="99"/>
+                        Grid.ColumnSpan="99"
+                        FontFamily="{StaticResource Exo2}"
+                        FontSize="20"
+                        Tags="{Binding AudioEngine.CurrentTags}" />
                 </Grid>
             </TabItem>
             <TabItem

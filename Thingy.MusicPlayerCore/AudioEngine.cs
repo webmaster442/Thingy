@@ -45,13 +45,25 @@ namespace Thingy.MusicPlayerCore
             _LastVolume = 1.0f;
             _updateTimer = new DispatcherTimer
             {
-                Interval = TimeSpan.FromSeconds(0.20),
+                Interval = TimeSpan.FromMilliseconds(40),
                 IsEnabled = false
             };
             _updateTimer.Tick += TimerTick;
             Log.Info("Setting output to Default Device...");
             PlayBackDeviceIndex = -1;
             _chapters = new List<Chapter>();
+        }
+
+        private void Reset()
+        {
+            Position = 0;
+            _currentTags = null;
+            _chapters.Clear();
+            _length = 0;
+            NotifyChanged(nameof(Position));
+            NotifyChanged(nameof(CurrentTags));
+            NotifyChanged(nameof(Chapters));
+            NotifyChanged(nameof(Length));
         }
 
         private void TimerTick(object sender, EventArgs e)
@@ -226,6 +238,8 @@ namespace Thingy.MusicPlayerCore
                 Bass.StreamFree(_mixerChannel);
                 _mixerChannel = 0;
             }
+
+            Reset();
 
             var sourceflags = BassFlags.Decode | BassFlags.Loop | BassFlags.Float | BassFlags.Prescan;
             var mixerflags = BassFlags.MixerDownMix | BassFlags.MixerPositionEx | BassFlags.AutoFree;

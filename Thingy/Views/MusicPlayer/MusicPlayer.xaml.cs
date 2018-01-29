@@ -1,5 +1,7 @@
 ﻿using AppLib.MVVM;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using Thingy.ViewModels.MusicPlayer;
 
 namespace Thingy.Views.MusicPlayer
@@ -9,6 +11,8 @@ namespace Thingy.Views.MusicPlayer
     /// </summary>
     public partial class MusicPlayer : UserControl, IView<MusicPlayerViewModel>
     {
+        private double? _dragedto;
+
         public MusicPlayerViewModel ViewModel
         {
             get
@@ -30,6 +34,27 @@ namespace Thingy.Views.MusicPlayer
         private void SeekBar_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
         {
             ViewModel?.DragCompletedCommand.Execute(SeekBar.Value);
+        }
+
+        private void SeekBar_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                ViewModel?.DragStartedCommand.Execute(null);
+                var slider = (Slider)sender;
+                Point position = e.GetPosition(slider);
+                double d = 1.0d / slider.ActualWidth * position.X;
+                _dragedto = slider.Maximum * d;
+            }
+        }
+
+        private void SeekBar_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (_dragedto != null)
+            {
+                ViewModel?.DragCompletedCommand.Execute(_dragedto.Value);
+                _dragedto = null;
+            }
         }
     }
 }

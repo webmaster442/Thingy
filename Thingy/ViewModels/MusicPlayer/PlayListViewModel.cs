@@ -13,6 +13,8 @@ namespace Thingy.ViewModels.MusicPlayer
 {
     public class PlayListViewModel: ViewModel
     {
+        private int _currentIndex;
+
         public ObservableCollection<string> Playlist { get; set; }
 
         public DelegateCommand OpenListCommand  { get; private set; }
@@ -30,6 +32,12 @@ namespace Thingy.ViewModels.MusicPlayer
 
         private IApplication _app;
         private IExtensionProvider _extensions;
+
+        public int CurrentIndex
+        {
+            get { return _currentIndex; }
+            set { SetValue(ref _currentIndex, value); }
+        }
 
         public PlayListViewModel(IApplication app)
         {
@@ -168,6 +176,18 @@ namespace Thingy.ViewModels.MusicPlayer
                     orderby Guid.NewGuid()
                     select track;
             Playlist.UpdateWith(q);
+        }
+
+        public bool IsPossibleToChangeTrack(int trackstoChange)
+        {
+            if (trackstoChange < 0)
+            {
+                return (CurrentIndex - trackstoChange) >= 0;
+            }
+            else
+            {
+                return (CurrentIndex + trackstoChange) <= (Playlist.Count - 1);
+            }
         }
     }
 }

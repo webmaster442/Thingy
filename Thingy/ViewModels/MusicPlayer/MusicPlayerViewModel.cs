@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Thingy.MusicPlayerCore;
 
 namespace Thingy.ViewModels.MusicPlayer
@@ -24,7 +25,28 @@ namespace Thingy.ViewModels.MusicPlayer
         public IAudioEngine AudioEngine
         {
             get { return _audioEngine; }
-            set { SetValue(ref _audioEngine, value); }
+            set
+            {
+                bool subscribe = false;
+                if (value == null &&_audioEngine != null)
+                {
+                    _audioEngine.SongFinishedEvent -= songFinished;
+                }
+                else if (value != null)
+                {
+                    subscribe = true;
+                }
+                SetValue(ref _audioEngine, value);
+                if (subscribe)
+                {
+                    _audioEngine.SongFinishedEvent += songFinished;
+                }
+            }
+        }
+
+        private void songFinished(object sender, RoutedEventArgs e)
+        {
+            _audioEngine.Stop();
         }
 
         public PlayListViewModel Playlist
