@@ -15,7 +15,7 @@ namespace Thingy.ViewModels.MusicPlayer
     {
         private int _currentIndex;
 
-        public ObservableCollection<string> Playlist { get; set; }
+        public ObservableCollection<string> List { get; set; }
 
         public DelegateCommand OpenListCommand { get; private set; }
         public DelegateCommand ApendListCommand { get; private set; }
@@ -43,9 +43,9 @@ namespace Thingy.ViewModels.MusicPlayer
         {
             get
             {
-                if (CurrentIndex > -1 && CurrentIndex < Playlist.Count - 1)
+                if (CurrentIndex > -1 && CurrentIndex < List.Count - 1)
                 {
-                    return Playlist[CurrentIndex];
+                    return List[CurrentIndex];
                 }
                 else return null;
             }
@@ -55,7 +55,7 @@ namespace Thingy.ViewModels.MusicPlayer
         {
             _app = app;
             _extensions = new ExtensionProvider();
-            Playlist = new ObservableCollection<string>();
+            List = new ObservableCollection<string>();
             OpenListCommand = Command.ToCommand(OpenList);
             ApendListCommand = Command.ToCommand(AppendList);
             AddFilesCommand = Command.ToCommand(AddFiles);
@@ -92,8 +92,8 @@ namespace Thingy.ViewModels.MusicPlayer
 
             if (result != null)
             {
-                if (!apend) Playlist.Clear();
-                Playlist.AddRange(result);
+                if (!apend) List.Clear();
+                List.AddRange(result);
             }
         }
 
@@ -124,7 +124,7 @@ namespace Thingy.ViewModels.MusicPlayer
             ofd.Multiselect = true;
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                Playlist.AddRange(ofd.FileNames);
+                List.AddRange(ofd.FileNames);
             }
         }
 
@@ -140,7 +140,7 @@ namespace Thingy.ViewModels.MusicPlayer
                     Files.AddRange(Directory.GetFiles(fbd.SelectedPath, filter));
                 }
                 Files.Sort();
-                Playlist.AddRange(Files);
+                List.AddRange(Files);
             }
         }
 
@@ -151,14 +151,14 @@ namespace Thingy.ViewModels.MusicPlayer
 
         private void ClearList()
         {
-            Playlist.Clear();
+            List.Clear();
         }
 
         private void DeleteSelected(string[] obj)
         {
             foreach (var item in obj)
             {
-                Playlist.Remove(item);
+                List.Remove(item);
             }
         }
 
@@ -172,26 +172,26 @@ namespace Thingy.ViewModels.MusicPlayer
 
         private void SortAscending()
         {
-            var q = from track in Copy(Playlist)
+            var q = from track in Copy(List)
                     orderby track ascending
                     select track;
-            Playlist.UpdateWith(q);
+            List.UpdateWith(q);
         }
 
         private void SortDescending()
         {
-            var q = from track in Copy(Playlist)
+            var q = from track in Copy(List)
                     orderby track descending
                     select track;
-            Playlist.UpdateWith(q);
+            List.UpdateWith(q);
         }
 
         private void SortSuffle()
         {
-            var q = from track in Copy(Playlist)
+            var q = from track in Copy(List)
                     orderby Guid.NewGuid()
                     select track;
-            Playlist.UpdateWith(q);
+            List.UpdateWith(q);
         }
 
         public bool IsPossibleToChangeTrack(int trackstoChange)
@@ -202,7 +202,7 @@ namespace Thingy.ViewModels.MusicPlayer
             }
             else
             {
-                return (CurrentIndex + trackstoChange) <= (Playlist.Count - 1);
+                return (CurrentIndex + trackstoChange) <= (List.Count - 1);
             }
         }
     }

@@ -183,7 +183,7 @@
                     <ListBox
                         x:Name="PlaylistView"
                         Grid.Row="1"
-                        ItemsSource="{Binding Playlist.Playlist}">
+                        ItemsSource="{Binding Playlist.List}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock

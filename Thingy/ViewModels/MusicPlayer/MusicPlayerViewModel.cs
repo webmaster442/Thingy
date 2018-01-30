@@ -13,7 +13,6 @@ namespace Thingy.ViewModels.MusicPlayer
         private PlayListViewModel _playlist;
         private IExtensionProvider _extensions;
 
-
         public DelegateCommand OpenFileCommand { get; private set; }
         public DelegateCommand PlayCommand { get; private set; }
         public DelegateCommand PauseCommand { get; private set; }
@@ -34,7 +33,7 @@ namespace Thingy.ViewModels.MusicPlayer
                 bool subscribe = false;
                 if (value == null &&_audioEngine != null)
                 {
-                    _audioEngine.SongFinishedEvent -= songFinished;
+                    _audioEngine.SongFinishedEvent -= SongFinished;
                     _audioEngine.Dispose();
                 }
                 else if (value != null)
@@ -44,12 +43,12 @@ namespace Thingy.ViewModels.MusicPlayer
                 SetValue(ref _audioEngine, value);
                 if (subscribe)
                 {
-                    _audioEngine.SongFinishedEvent += songFinished;
+                    _audioEngine.SongFinishedEvent += SongFinished;
                 }
             }
         }
 
-        private void songFinished(object sender, RoutedEventArgs e)
+        private void SongFinished(object sender, RoutedEventArgs e)
         {
             if (Playlist.IsPossibleToChangeTrack(1))
             {
@@ -148,7 +147,7 @@ namespace Thingy.ViewModels.MusicPlayer
                         if (format == FormatKind.Playlist)
                             await Playlist.DoOpenList(file, true);
                         else if (format == FormatKind.Stream)
-                            Playlist.Playlist.Add(file);
+                            Playlist.List.Add(file);
                     }
                     View.SwithToTab(MusicPlayerTabs.Playlist);
                 }
@@ -162,10 +161,10 @@ namespace Thingy.ViewModels.MusicPlayer
                     }
                     else if (format == FormatKind.Stream)
                     {
-                        Playlist.Playlist.Add(ofd.FileName);
-                        if (Playlist.Playlist.Count == 1)
+                        Playlist.List.Add(ofd.FileName);
+                        if (Playlist.List.Count == 1)
                         {
-                            _audioEngine.Load(Playlist.Playlist[0]);
+                            _audioEngine.Load(Playlist.List[0]);
                             _audioEngine.Play();
                             View.SwithToTab(MusicPlayerTabs.Player);
                         }
