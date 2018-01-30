@@ -11,6 +11,7 @@
     mc:Ignorable="d">
     <Grid>
         <TabControl
+            x:Name="MainTabs"
             TabStripPlacement="Bottom">
             <TabItem
                 Header="Player"

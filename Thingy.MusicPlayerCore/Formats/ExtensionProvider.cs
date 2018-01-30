@@ -28,13 +28,17 @@ namespace Thingy.MusicPlayerCore.Formats
 
         private string CombineExtensions(string header, IEnumerable<string> input)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("{0}|", header);
+            StringBuilder summed = new StringBuilder();
+            StringBuilder individual = new StringBuilder();
+            summed.AppendFormat("{0}|", header);
             foreach (var item in input)
             {
-                sb.AppendFormat("*{0};", item);
+                summed.AppendFormat("*{0};", item);
+                individual.AppendFormat("*{0}|{0};", item);
             }
-            return sb.ToString();
+            summed.Append("|");
+            summed.Append(individual);
+            return summed.ToString();
         }
 
         public string PlalistsFilterString
@@ -44,7 +48,7 @@ namespace Thingy.MusicPlayerCore.Formats
 
         public string AllFormatsFilterString
         {
-            get { return CombineExtensions("Supported Files", AllSupportedFormats); }
+            get { return CombineExtensions("Supported Files", _StreamExtensions); }
         }
 
         public IEnumerable<string> AllSupportedFormats
@@ -53,27 +57,35 @@ namespace Thingy.MusicPlayerCore.Formats
             {
                 foreach (var item in _StreamExtensions)
                     yield return item;
+                foreach (var item in _PlaylistExtensions)
+                    yield return item;
             }
         }
 
-        public bool IsMatchForFormat(FormatKind formatKind, string file)
+        public string AllFormatsAndPlaylistsFilterString
         {
-            var extension = System.IO.Path.GetExtension(file);
-            switch (formatKind)
-            {
-                case FormatKind.Playlist:
-                    return _PlaylistExtensions.Contains(extension);
-                case FormatKind.Stream:
-                    return _StreamExtensions.Contains(extension);
-                default:
-                    return false;
-            }
+            get { return CombineExtensions("Supported formats", AllSupportedFormats); }
         }
 
         public bool IsNetworkStream(string file)
         {
             var lowercase = file.ToLower();
             return lowercase.StartsWith("http://") || lowercase.StartsWith("https://") || lowercase.StartsWith("ftp://");
+        }
+
+        public FormatKind GetFormatKind(string file)
+        {
+            if (string.IsNullOrEmpty(file))
+                return FormatKind.Unknown;
+
+            var extension = System.IO.Path.GetExtension(file);
+
+            if (_PlaylistExtensions.Contains(extension))
+                return FormatKind.Playlist;
+            else if (_StreamExtensions.Contains(extension))
+                return FormatKind.Stream;
+            else
+                return FormatKind.Unknown;
         }
     }
 }

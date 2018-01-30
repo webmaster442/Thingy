@@ -11,13 +11,13 @@ using Thingy.MusicPlayerCore.Formats;
 
 namespace Thingy.ViewModels.MusicPlayer
 {
-    public class PlayListViewModel: ViewModel
+    public class PlayListViewModel : ViewModel
     {
         private int _currentIndex;
 
         public ObservableCollection<string> Playlist { get; set; }
 
-        public DelegateCommand OpenListCommand  { get; private set; }
+        public DelegateCommand OpenListCommand { get; private set; }
         public DelegateCommand ApendListCommand { get; private set; }
         public DelegateCommand AddFilesCommand { get; private set; }
         public DelegateCommand AddUrlCommand { get; private set; }
@@ -70,47 +70,51 @@ namespace Thingy.ViewModels.MusicPlayer
             SortSuffleCommand = Command.ToCommand(SortSuffle);
         }
 
-        private async Task DoOpenList(bool apend)
+        public async Task DoOpenList(string file, bool apend)
         {
-            var ofd = new System.Windows.Forms.OpenFileDialog();
-            ofd.Filter = _extensions.PlalistsFilterString;
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            string ext = Path.GetExtension(file);
+            IEnumerable<string> result = null;
+            switch (ext)
             {
-                string ext = Path.GetExtension(ofd.FileName);
-                IEnumerable<string> result = null;
-                switch (ext)
-                {
-                    case ".pls":
-                        result = await PlaylistLoaders.LoadPls(ofd.FileName);
-                        break;
-                    case ".m3u":
-                        result = await PlaylistLoaders.LoadM3u(ofd.FileName);
-                        break;
-                    case ".wpl":
-                        result = await PlaylistLoaders.LoadWPL(ofd.FileName);
-                        break;
-                    case ".asx":
-                        result = await PlaylistLoaders.LoadASX(ofd.FileName);
-                        break;
-                }
+                case ".pls":
+                    result = await PlaylistLoaders.LoadPls(file);
+                    break;
+                case ".m3u":
+                    result = await PlaylistLoaders.LoadM3u(file);
+                    break;
+                case ".wpl":
+                    result = await PlaylistLoaders.LoadWPL(file);
+                    break;
+                case ".asx":
+                    result = await PlaylistLoaders.LoadASX(file);
+                    break;
+            }
 
-                if (result != null)
-                {
-                    if (!apend) Playlist.Clear();
-                    Playlist.AddRange(result);
-                }
-
+            if (result != null)
+            {
+                if (!apend) Playlist.Clear();
+                Playlist.AddRange(result);
             }
         }
 
         private async void AppendList()
         {
-            await DoOpenList(true);
+            var ofd = new System.Windows.Forms.OpenFileDialog();
+            ofd.Filter = _extensions.PlalistsFilterString;
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                await DoOpenList(ofd.FileName, true);
+            }
         }
 
         private async void OpenList()
         {
-            await DoOpenList(false);
+            var ofd = new System.Windows.Forms.OpenFileDialog();
+            ofd.Filter = _extensions.PlalistsFilterString;
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                await DoOpenList(ofd.FileName, false);
+            }
         }
 
         private void AddFiles()

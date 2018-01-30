@@ -1,18 +1,18 @@
 ﻿using AppLib.MVVM;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using Thingy.MusicPlayerCore;
+using Thingy.MusicPlayerCore.Formats;
+using Thingy.Views.Interfaces;
 
 namespace Thingy.ViewModels.MusicPlayer
 {
-    public class MusicPlayerViewModel: BindableBase, IDisposable
+    public class MusicPlayerViewModel: ViewModel<IMusicPlayer>, IDisposable
     {
         private IAudioEngine _audioEngine;
         private PlayListViewModel _playlist;
+        private IExtensionProvider _extensions;
+
 
         public DelegateCommand OpenFileCommand { get; private set; }
         public DelegateCommand PlayCommand { get; private set; }
@@ -69,10 +69,11 @@ namespace Thingy.ViewModels.MusicPlayer
             set { SetValue(ref _playlist, value); }
         }
 
-        public MusicPlayerViewModel(IApplication app, IAudioEngine engine)
+        public MusicPlayerViewModel(IMusicPlayer view, IApplication app, IAudioEngine engine) : base(view)
         {
             AudioEngine = engine;
             Playlist = new PlayListViewModel(app);
+            _extensions = new ExtensionProvider();
             OpenFileCommand = Command.ToCommand(OpenFile);
             PlayCommand = Command.ToCommand(Play);
             PauseCommand = Command.ToCommand(Pause);
@@ -132,12 +133,44 @@ namespace Thingy.ViewModels.MusicPlayer
             }
         }
 
-        private void OpenFile()
+        private async void OpenFile()
         {
             var ofd = new System.Windows.Forms.OpenFileDialog();
+            ofd.Filter = _extensions.AllFormatsAndPlaylistsFilterString;
+            ofd.Multiselect = true;
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                _audioEngine.Load(ofd.FileName);
+                if (ofd.FileNames.Length > 1)
+                {
+                    foreach (var file in ofd.FileNames)
+                    {
+                        var format = _extensions.GetFormatKind(file);
+                        if (format == FormatKind.Playlist)
+                            await Playlist.DoOpenList(file, true);
+                        else if (format == FormatKind.Stream)
+                            Playlist.Playlist.Add(file);
+                    }
+                    View.SwithToTab(MusicPlayerTabs.Playlist);
+                }
+                else
+                {
+                    var format = _extensions.GetFormatKind(ofd.FileName);
+                    if (format == FormatKind.Playlist)
+                    {
+                        await Playlist.DoOpenList(ofd.FileName, true);
+                        View.SwithToTab(MusicPlayerTabs.Playlist);
+                    }
+                    else if (format == FormatKind.Stream)
+                    {
+                        Playlist.Playlist.Add(ofd.FileName);
+                        if (Playlist.Playlist.Count == 1)
+                        {
+                            _audioEngine.Load(Playlist.Playlist[0]);
+                            _audioEngine.Play();
+                            View.SwithToTab(MusicPlayerTabs.Player);
+                        }
+                    }
+                }
             }
         }
 

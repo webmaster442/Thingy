@@ -26,10 +26,9 @@ namespace Thingy.Modules
 
         public override UserControl RunModule()
         {
-            return new Views.MusicPlayer.MusicPlayer
-            {
-                DataContext = new ViewModels.MusicPlayer.MusicPlayerViewModel(App.Instance, App.IoCContainer.ResolveSingleton<IAudioEngine>())
-            };
+            var view = new Views.MusicPlayer.MusicPlayer();
+            view.DataContext = new ViewModels.MusicPlayer.MusicPlayerViewModel(view, App.Instance, App.IoCContainer.ResolveSingleton<IAudioEngine>());
+            return view;
         }
 
         public override bool IsSingleInstance

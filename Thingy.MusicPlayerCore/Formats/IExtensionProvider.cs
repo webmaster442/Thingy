@@ -5,15 +5,17 @@ namespace Thingy.MusicPlayerCore.Formats
     public enum FormatKind
     {
         Stream,
-        Playlist
+        Playlist,
+        Unknown
     }
 
     public interface IExtensionProvider
     {
         string PlalistsFilterString { get; }
         string AllFormatsFilterString { get; }
+        string AllFormatsAndPlaylistsFilterString { get; }
         IEnumerable<string> AllSupportedFormats { get; }
-        bool IsMatchForFormat(FormatKind formatKind, string file);
+        FormatKind GetFormatKind(string file);
         bool IsNetworkStream(string file);
     }
 }

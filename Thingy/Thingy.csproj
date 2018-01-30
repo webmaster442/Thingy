@@ -184,6 +184,7 @@
     <Compile Include="Modules\PowerShellModule.cs" />
     <Compile Include="Modules\ToDoListModule.cs" />
     <Compile Include="Modules\VirtualFoldersModule.cs" />
+    <Compile Include="Views\Interfaces\IMusicPlayer.cs" />
     <Compile Include="Views\MusicPlayer\MusicPlayer.xaml.cs">
       <DependentUpon>MusicPlayer.xaml</DependentUpon>
     </Compile>

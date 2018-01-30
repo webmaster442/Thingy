@@ -3,13 +3,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Thingy.ViewModels.MusicPlayer;
+using Thingy.Views.Interfaces;
 
 namespace Thingy.Views.MusicPlayer
 {
     /// <summary>
     /// Interaction logic for MusicPlayer.xaml
     /// </summary>
-    public partial class MusicPlayer : UserControl, IView<MusicPlayerViewModel>
+    public partial class MusicPlayer : UserControl, IMusicPlayer
     {
         private double? _dragedto;
 
@@ -55,6 +56,14 @@ namespace Thingy.Views.MusicPlayer
                 ViewModel?.DragCompletedCommand.Execute(_dragedto.Value);
                 _dragedto = null;
             }
+        }
+
+        public void SwithToTab(MusicPlayerTabs tab)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                MainTabs.SelectedIndex = (int)tab;
+            });
         }
     }
 }
