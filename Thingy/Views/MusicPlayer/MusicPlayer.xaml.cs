@@ -1,5 +1,4 @@
-﻿using AppLib.MVVM;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Thingy.ViewModels.MusicPlayer;
@@ -64,6 +63,12 @@ namespace Thingy.Views.MusicPlayer
             {
                 MainTabs.SelectedIndex = (int)tab;
             });
+        }
+
+        private void DeviceSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = DeviceSelector.SelectedIndex;
+            ViewModel?.SelectedDeviceChangedCommand.Execute(index);
         }
     }
 }

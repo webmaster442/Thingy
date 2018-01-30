@@ -1,5 +1,6 @@
 ﻿using AppLib.MVVM;
 using System;
+using System.Linq;
 using System.Windows;
 using Thingy.MusicPlayerCore;
 using Thingy.MusicPlayerCore.Formats;
@@ -24,6 +25,7 @@ namespace Thingy.ViewModels.MusicPlayer
 
         public DelegateCommand DragStartedCommand { get; private set; }
         public DelegateCommand<double> DragCompletedCommand { get; private set; }
+        public DelegateCommand<int> SelectedDeviceChangedCommand { get; private set; }
 
         public IAudioEngine AudioEngine
         {
@@ -82,6 +84,21 @@ namespace Thingy.ViewModels.MusicPlayer
             DragCompletedCommand = Command.ToCommand<double>(DragCompleted);
             PrevousTrackCommand = Command.ToCommand(PrevousTrack);
             NextTrackCommand = Command.ToCommand(NextTrack);
+            SelectedDeviceChangedCommand = Command.ToCommand<int>(SelectedDeviceChanged);
+        }
+
+        private void SelectedDeviceChanged(int obj)
+        {
+            int counter = 0;
+            foreach (var item in AudioEngine.OutputDevices)
+            {
+                if (counter == obj)
+                {
+                    _audioEngine.PlayBackDeviceIndex = item.Value;
+                    break;
+                }
+                ++counter;
+            }
         }
 
         private void DragCompleted(double obj)
@@ -168,6 +185,8 @@ namespace Thingy.ViewModels.MusicPlayer
                             _audioEngine.Play();
                             View.SwithToTab(MusicPlayerTabs.Player);
                         }
+                        else
+                            View.SwithToTab(MusicPlayerTabs.Playlist);
                     }
                 }
             }
@@ -187,8 +206,7 @@ namespace Thingy.ViewModels.MusicPlayer
         {
             if (AudioEngine != null)
             {
-                AudioEngine.Dispose();
-                AudioEngine = null;
+                AudioEngine.Stop();
             }
         }
     }

@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:infrastructure="clr-namespace:Thingy.Infrastructure"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:musicplayer="clr-namespace:Thingy.MusicPlayerCore.Controls;assembly=Thingy.MusicPlayerCore"
     d:DesignHeight="300"
@@ -23,8 +24,13 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
                     <StackPanel
                         Grid.Row="0"
+                        Grid.Column="0"
                         Orientation="Horizontal">
                         <TextBlock
                             Margin="5,0,0,0"
@@ -41,7 +47,32 @@
                             Text="{Binding AudioEngine.Length, Converter={applib:SecondsToTimeStringConverter}}" />
                     </StackPanel>
                     <StackPanel
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            FontFamily="{StaticResource Ubuntu}"
+                            Text="Output Device:" 
+                            Margin="5,0"/>
+
+                        <ComboBox
+                            x:Name="DeviceSelector"
+                            ItemsSource="{Binding AudioEngine.OutputDevices}"
+                            SelectedIndex="{Binding AudioEngine.DefaultDeviceIndex, Converter={infrastructure:AudioDeviceIndexToListIndexConverter}, Mode=OneWay}"
+                            SelectionChanged="DeviceSelector_SelectionChanged">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                        Text="{Binding Key}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                    </StackPanel>
+                    <StackPanel
                         Grid.Row="1"
+                        Grid.ColumnSpan="2"
                         Orientation="Horizontal">
                         <applib:ImageButton
                             Command="{Binding OpenFileCommand}"
@@ -136,8 +167,9 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     <Menu
-                        
-                        Grid.Row="0" BorderThickness="0,0,0,1.1" BorderBrush="#FFBFBFBF">
+                        Grid.Row="0"
+                        BorderBrush="#FFBFBFBF"
+                        BorderThickness="0,0,0,1.1">
                         <MenuItem
                             Header="Manage">
                             <MenuItem

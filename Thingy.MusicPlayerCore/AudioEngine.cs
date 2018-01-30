@@ -37,6 +37,7 @@ namespace Thingy.MusicPlayerCore
 
         public AudioEngine()
         {
+            DefaultDeviceIndex = -1;
             Log = new AudioEngineLog();
             Log.Info("Audio Engine Load started");
             SetNativeLibPath();
@@ -57,7 +58,7 @@ namespace Thingy.MusicPlayerCore
         {
             Position = 0;
             _currentTags = null;
-            _chapters.Clear();
+            _chapters?.Clear();
             _length = 0;
             NotifyChanged(nameof(Position));
             NotifyChanged(nameof(CurrentTags));
@@ -151,10 +152,28 @@ namespace Thingy.MusicPlayerCore
                 for (int i = 1; i < Bass.DeviceCount; i++)
                 {
                     var device = Bass.GetDeviceInfo(i);
-                    if (device.IsEnabled) devices.Add(device.Name, i);
+                    if (device.IsEnabled)
+                    {
+                        devices.Add(device.Name, i);
+                        if (device.IsDefault)
+                        {
+                            if (DefaultDeviceIndex == -1)
+                            {
+                                DefaultDeviceIndex = i;
+                                NotifyChanged(nameof(DefaultDeviceIndex));
+                            }
+                        }
+                    }
                 }
                 return devices;
             }
+        }
+
+        /// <inheritdoc />
+        public int DefaultDeviceIndex
+        {
+            get;
+            set;
         }
 
         /// <inheritdoc />
@@ -171,6 +190,7 @@ namespace Thingy.MusicPlayerCore
                 _deviceIndex = value;
                 Bass.Free();
                 InitDevice();
+                NotifyChanged(nameof(PlayBackDeviceIndex));
             }
         }
 
@@ -180,7 +200,9 @@ namespace Thingy.MusicPlayerCore
             get
             {
                 var pos = BassMix.ChannelGetPosition(_decodeChannel, PositionFlags.Bytes);
-                return Bass.ChannelBytes2Seconds(_decodeChannel, pos);
+                double seconds = Bass.ChannelBytes2Seconds(_decodeChannel, pos);
+                if (seconds < 0) return 0;
+                else return seconds;
             }
             set
             {
@@ -332,6 +354,7 @@ namespace Thingy.MusicPlayerCore
         {
             _updateTimer.Stop();
             Bass.ChannelStop(_mixerChannel);
+            Reset();
         }
     }
 }

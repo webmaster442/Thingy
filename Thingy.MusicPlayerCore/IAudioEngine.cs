@@ -25,6 +25,10 @@ namespace Thingy.MusicPlayerCore
         /// </summary>
         IDictionary<string, int> OutputDevices { get; }
         /// <summary>
+        /// Returns the default device index
+        /// </summary>
+        int DefaultDeviceIndex { get; }
+        /// <summary>
         /// Gets or sets the Currently used playback device
         /// </summary>
         int PlayBackDeviceIndex { get; set; }
