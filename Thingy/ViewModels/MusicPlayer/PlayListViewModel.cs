@@ -203,7 +203,8 @@ namespace Thingy.ViewModels.MusicPlayer
             {
                 if (!string.IsNullOrEmpty(dialog.SelectedDrive))
                 {
-                    List.AddRange(CDInforProvider.GetCdTracks(dialog.SelectedDrive));
+                    var tracks = await CDInfoProvider.GetCdTracks(dialog.SelectedDrive);
+                    List.AddRange(tracks);
                 }
             }
         }

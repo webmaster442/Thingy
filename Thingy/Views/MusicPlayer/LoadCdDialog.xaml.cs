@@ -28,7 +28,7 @@ namespace Thingy.Views.MusicPlayer
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            CdDrives.ItemsSource = CDInforProvider.AvailableCDDrives;
+            CdDrives.ItemsSource = CDInfoProvider.AvailableCDDrives;
             if (CdDrives.Items.Count < 0)
             {
                 CdDrives.IsEnabled = false;

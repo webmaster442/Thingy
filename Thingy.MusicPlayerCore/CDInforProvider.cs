@@ -2,11 +2,20 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Thingy.MusicPlayerCore
 {
-    public class CDInforProvider
+    public class CDInfoProvider
     {
+        private static string CurrentDiscID;
+        public static Dictionary<string, string> CdData { get; }
+
+        static CDInfoProvider()
+        {
+            CdData = new Dictionary<string, string>();
+        }
+
         /// <summary>
         /// Get available laded cd drives indexes
         /// </summary>
@@ -28,35 +37,50 @@ namespace Thingy.MusicPlayerCore
         /// </summary>
         /// <param name="drive">CD drive path</param>
         /// <returns>An array of playlist entry's</returns>
-        public static string[] GetCdTracks(string drive)
+        public static Task<string[]> GetCdTracks(string drive)
         {
-            var list = new List<string>();
-
-            int drivecount = BassCd.DriveCount;
-            int driveindex = 0;
-            for (int i = 0; i < drivecount; i++)
+            return Task.Run(() =>
             {
+                var list = new List<string>();
 
-                var info = BassCd.GetInfo(i);
-                if (info.DriveLetter == drive[0])
+                int drivecount = BassCd.DriveCount;
+                int driveindex = 0;
+                for (int i = 0; i < drivecount; i++)
                 {
-                    driveindex = i;
-                    break;
-                }
-            }
 
-            if (BassCd.IsReady(driveindex))
-            {
-                var numtracks = BassCd.GetTracks(driveindex);
-                var discid = BassCd.GetID(0, CDID.CDDB); //cddb connect
-                for (int i = 0; i < numtracks; i++)
-                {
-                    var entry = string.Format("cd://{0}/{1}", driveindex, i);
-                    list.Add(entry);
+                    var info = BassCd.GetInfo(i);
+                    if (info.DriveLetter == drive[0])
+                    {
+                        driveindex = i;
+                        break;
+                    }
                 }
-            }
-            BassCd.Release(driveindex);
-            return list.ToArray();
+
+                if (BassCd.IsReady(driveindex))
+                {
+                    var numtracks = BassCd.GetTracks(driveindex);
+                    var discid = BassCd.GetID(0, CDID.CDDB); //cddb connect
+                    if (discid != CurrentDiscID)
+                    {
+                        var datas = BassCd.GetIDText(driveindex);
+                        CurrentDiscID = discid;
+                        CdData.Clear();
+                        foreach (var data in datas)
+                        {
+                            var item = data.Split('=');
+                            CdData.Add(item[0], item[1]);
+                        }
+                    }
+
+                    for (int i = 0; i < numtracks; i++)
+                    {
+                        var entry = string.Format("cd://{0}/{1}", driveindex, i);
+                        list.Add(entry);
+                    }
+                }
+                BassCd.Release(driveindex);
+                return list.ToArray();
+            });
         }
     }
 }
