@@ -21,25 +21,28 @@ namespace Thingy.MusicPlayerCore.Controls
         {
             if (d is TrackInfo control)
             {
-                var tags = e.NewValue as TagInformation;
-                if (tags == null)
+                control.Dispatcher.Invoke(() =>
                 {
-                    control.Artist.Text= "";
-                    control.Title.Text = "";
-                    control.Year.Text = "";
-                    control.Album.Text = "";
-                    control.Filename.Text = "";
-                    control.Cover.Source = null;
-                }
-                else
-                {
-                    control.Artist.Text = tags.Artist;
-                    control.Title.Text = tags.Title;
-                    control.Year.Text = tags.Year;
-                    control.Album.Text = tags.Album;
-                    control.Filename.Text = tags.FileName;
-                    control.Cover.Source = tags.Cover;
-                }
+                    var tags = e.NewValue as TagInformation;
+                    if (tags == null)
+                    {
+                        control.Artist.Text = "";
+                        control.Title.Text = "";
+                        control.Year.Text = "";
+                        control.Album.Text = "";
+                        control.Filename.Text = "";
+                        control.Cover.Source = null;
+                    }
+                    else
+                    {
+                        control.Artist.Text = tags.Artist;
+                        control.Title.Text = tags.Title;
+                        control.Year.Text = tags.Year;
+                        control.Album.Text = tags.Album;
+                        control.Filename.Text = tags.FileName;
+                        control.Cover.Source = tags.Cover;
+                    }
+                });
             }
         }
 

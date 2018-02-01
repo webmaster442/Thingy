@@ -43,7 +43,7 @@ namespace Thingy.Resources
             }
 
             string final = $"pack://application:,,,/Thingy.Resources;component/{strcategory}/{name}";
-            return new Uri(final);
+            return new Uri(final, UriKind.Absolute);
         }
     }
 }

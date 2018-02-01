@@ -7,9 +7,11 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Thingy.MusicPlayerCore.DataObjects;
 using Thingy.MusicPlayerCore.Formats;
+using Thingy.Resources;
 
 namespace Thingy.MusicPlayerCore
 {
@@ -397,8 +399,12 @@ namespace Thingy.MusicPlayerCore
                 var newtags = TagFactory.CreateTagInfoForNetStream(_netadress, title, artist);
                 if (newtags != _currentTags)
                 {
-                    _currentTags = newtags;
-                    NotifyChanged(nameof(CurrentTags));
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        _currentTags = newtags;
+                        _currentTags.Cover = new BitmapImage(ResourceLocator.GetIcon(IconCategories.Big, "icons8-radio-540.png"));
+                        NotifyChanged(nameof(CurrentTags));
+                    });
                 }
             }
             else
@@ -412,8 +418,12 @@ namespace Thingy.MusicPlayerCore
                 var newtags = TagFactory.CreateTagInfoForNetStream(_netadress, title, artist);
                 if (newtags != _currentTags)
                 {
-                    _currentTags = newtags;
-                    NotifyChanged(nameof(CurrentTags));
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        _currentTags = newtags;
+                        _currentTags.Cover = new BitmapImage(ResourceLocator.GetIcon(IconCategories.Big, "icons8-radio-540.png"));
+                        NotifyChanged(nameof(CurrentTags));
+                    });
                 }
             }
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Media.Imaging;
 using Thingy.MusicPlayerCore.DataObjects;
+using Thingy.Resources;
 
 namespace Thingy.MusicPlayerCore
 {
@@ -46,7 +47,7 @@ namespace Thingy.MusicPlayerCore
                 Artist = artist,
                 Title = title,
                 Year = DateTime.Now.Year.ToString(),
-                Album = "Internet stream"
+                Album = "Internet stream",
             };
         }
 
@@ -66,7 +67,7 @@ namespace Thingy.MusicPlayerCore
                     return ret;
                 }
             }
-            return null;
+            return new BitmapImage(ResourceLocator.GetIcon(IconCategories.Big, "icons8-audio-wave-540.png"));
         }
     }
 }
