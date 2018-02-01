@@ -22,6 +22,8 @@ namespace Thingy.MusicPlayerCore
         private TagInformation _currentTags;
         private List<Chapter> _chapters;
         private double _length;
+        private DownloadProcedure _streamDloadProc;
+        private bool _networkstream;
 
         private static readonly object Lock = new object();
         private int _req;
@@ -67,6 +69,7 @@ namespace Thingy.MusicPlayerCore
             PlayBackDeviceIndex = -1;
             _chapters = new List<Chapter>();
             ExtensionProvider = new ExtensionProvider();
+            _streamDloadProc = StreamDownloadProcedure;
         }
 
         private void Reset()
@@ -85,7 +88,7 @@ namespace Thingy.MusicPlayerCore
         {
             if (!Seeking)
             {
-                if (Position > Length - 0.05)
+                if (Position > Length - 0.05 && !_networkstream)
                 {
                     SongFinishedEvent?.Invoke(this, new RoutedEventArgs());
                 }
@@ -263,6 +266,8 @@ namespace Thingy.MusicPlayerCore
         /// <inheritdoc />
         public void Load(string fileName)
         {
+            _networkstream = ExtensionProvider.IsNetworkStream(fileName);
+
             Log.Info("Loading file: {0}", fileName);
 
             if (_decodeChannel != 0)
@@ -288,7 +293,7 @@ namespace Thingy.MusicPlayerCore
             var sourceflags = BassFlags.Decode | BassFlags.Loop | BassFlags.Float | BassFlags.Prescan;
             var mixerflags = BassFlags.MixerDownMix | BassFlags.MixerPositionEx | BassFlags.AutoFree;
 
-            if (ExtensionProvider.IsNetworkStream(fileName))
+            if (_networkstream)
             {
                 int r;
                 lock (Lock)
@@ -297,8 +302,8 @@ namespace Thingy.MusicPlayerCore
                     // increment the request counter for this request
                     r = ++_req;
                 }
-                var netFlags = BassFlags.StreamDownloadBlocks | BassFlags.StreamStatus | BassFlags.AutoFree;
-                _decodeChannel = Bass.CreateStream(fileName, 0, netFlags, null, new IntPtr(r));
+                var netFlags = BassFlags.StreamDownloadBlocks | sourceflags;
+                _decodeChannel = Bass.CreateStream(fileName, 0, netFlags, _streamDloadProc, new IntPtr(r));
                 lock (Lock)
                 {
                     if (r != _req)
@@ -307,8 +312,6 @@ namespace Thingy.MusicPlayerCore
                         return;
                     }
                 }
-                Bass.ChannelSetSync(_decodeChannel, SyncFlags.MetadataReceived, 0, MetaSync); // Shoutcast
-                Bass.ChannelSetSync(_decodeChannel, SyncFlags.OggChange, 0, MetaSync); // Icecast/OGG
             }
             else
             {
@@ -338,65 +341,69 @@ namespace Thingy.MusicPlayerCore
             _currentTags = TagFactory.CreateTagInfoFromFile(fileName);
             NotifyChanged(nameof(CurrentTags));
 
-            Log.Info("Getting track length...");
-            var len = Bass.ChannelGetLength(_decodeChannel, PositionFlags.Bytes);
-            _length = Bass.ChannelBytes2Seconds(_decodeChannel, len);
-            NotifyChanged(nameof(Length));
+            if (!_networkstream)
+            {
+                Log.Info("Getting track length...");
+                var len = Bass.ChannelGetLength(_decodeChannel, PositionFlags.Bytes);
+                _length = Bass.ChannelBytes2Seconds(_decodeChannel, len);
+                NotifyChanged(nameof(Length));
 
-            Log.Info("Getting Chapters...");
-            _chapters.Clear();
-            _chapters.AddRange(ChapterFactory.GetChapters(fileName, _length));
-            NotifyChanged(nameof(Chapters));
+                Log.Info("Getting Chapters...");
+                _chapters.Clear();
+                _chapters.AddRange(ChapterFactory.GetChapters(fileName, _length));
+                NotifyChanged(nameof(Chapters));
+            }
 
             Volume = _LastVolume;
             Bass.ChannelSetAttribute(_mixerChannel, ChannelAttribute.Volume, Volume);
             Log.Info("Loaded file {0}", fileName);
         }
 
-        private void MetaSync(int Handle, int Channel, int Data, IntPtr User)
+        private void StreamDownloadProcedure(IntPtr Buffer, int Length, IntPtr User)
         {
-            string TitleAndArtist;
-
-            var meta = Bass.ChannelGetTags(Channel, TagType.META);
-
-            if (meta != IntPtr.Zero)
+            var ptr = Bass.ChannelGetTags(_decodeChannel, TagType.META);
+            if (ptr != IntPtr.Zero)
             {
-                // got Shoutcast metadata
-                var data = Marshal.PtrToStringAnsi(meta);
-
-                var i = data.IndexOf("StreamTitle='"); // locate the title
-
-                if (i == -1)
-                    return;
-
-                var j = data.IndexOf("';", i); // locate the end of it
-
-                if (j != -1)
-                    TitleAndArtist = $"Title: {data.Substring(i, j - i + 1)}";
+                var array = Extensions.ExtractMultiStringUtf8(ptr);
+                if (array != null)
+                    ProcessTags(array);
             }
             else
             {
-                meta = Bass.ChannelGetTags(Channel, TagType.OGG);
-
-                if (meta == IntPtr.Zero)
-                    return;
-
-                // got Icecast/OGG tags
-                foreach (var tag in Extensions.ExtractMultiStringUtf8(meta))
+                ptr = Bass.ChannelGetTags(_decodeChannel, TagType.OGG);
+                if (ptr != null)
                 {
-                    string artist = null, title = null;
-
-                    if (tag.StartsWith("artist="))
-                        artist = $"Artist: {tag.Substring(7)}";
-
-                    if (tag.StartsWith("title="))
-                        title = $"Title: {tag.Substring(6)}";
-
-                    if (title != null)
-                        TitleAndArtist = artist != null ? $"{title} - {artist}" : title;
+                    var array = Extensions.ExtractMultiStringUtf8(ptr); //Marshal.PtrToStringAnsi(ptr);
+                    if (array != null)
+                        ProcessTags(array, true);
                 }
             }
         }
+
+        private string ProcessTags(string[] array, bool icecast = false)
+        {
+            string ret = "";
+            if (icecast)
+            {
+                foreach (var item in array)
+                {
+                    if (item.StartsWith("ARTIST")) ret += item.Replace("ARTIST=", "");
+                    else if (item.StartsWith("TITLE")) ret += item.Replace("TITLE=", " - ");
+                    else continue;
+                }
+            }
+            else
+            {
+                var contents = array[0].Split(';');
+                foreach (var item in contents)
+                {
+                    if (item.StartsWith("StreamTitle='")) ret += item.Replace("StreamTitle='", "").Replace("'", "");
+                    else continue;
+                }
+            }
+            return ret;
+        }
+
 
         /// <inheritdoc />
         public void Dispose()
