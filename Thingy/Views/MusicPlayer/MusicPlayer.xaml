@@ -13,7 +13,7 @@
     <Grid>
         <TabControl
             x:Name="MainTabs"
-            TabStripPlacement="Bottom">
+            TabStripPlacement="Top">
             <TabItem
                 Header="Player"
                 Style="{StaticResource CompactTabItem}">
@@ -52,9 +52,9 @@
                         HorizontalAlignment="Right"
                         Orientation="Horizontal">
                         <TextBlock
+                            Margin="5,0"
                             FontFamily="{StaticResource Ubuntu}"
-                            Text="Output Device:" 
-                            Margin="5,0"/>
+                            Text="Output Device:" />
 
                         <ComboBox
                             x:Name="DeviceSelector"
@@ -172,44 +172,119 @@
                         BorderThickness="0,0,0,1.1">
                         <MenuItem
                             Header="Manage">
+                            <MenuItem.Icon>
+                                <Image
+                                    Width="24"
+                                    Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-playlist-96.png" />
+                            </MenuItem.Icon>
                             <MenuItem
                                 Command="{Binding Playlist.OpenListCommand}"
-                                Header="Load Playlist..." />
+                                Header="Load Playlist...">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-playlist-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                             <MenuItem
                                 Command="{Binding Playlist.ApendListCommand}"
-                                Header="Apend Playlist.." />
+                                Header="Apend Playlist..">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-playlist-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                             <Separator />
                             <MenuItem
                                 Command="{Binding Playlist.AddFilesCommand}"
-                                Header="Add Files..." />
+                                Header="Add Files...">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-audio-file-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                             <MenuItem
                                 Command="{Binding Playlist.AddFolderCommand}"
-                                Header="Add Folder..." />
+                                Header="Add Folder...">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-music-folder.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                             <MenuItem
                                 Command="{Binding Playlist.AddUrlCommand}"
-                                Header="Add URL..." />
+                                Header="Add URL...">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-add-link-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                         </MenuItem>
                         <MenuItem
                             Header="Delete">
+                            <MenuItem.Icon>
+                                <Image
+                                    Width="24"
+                                    Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-empty-trash-96.png" />
+                            </MenuItem.Icon>
                             <MenuItem
                                 Command="{Binding Playlist.DeleteSelectedCommand}"
                                 CommandParameter="{Binding ElementName=PlaylistView, Path=SelectedItems}"
-                                Header="Remove Selected items..." />
+                                Header="Remove Selected items...">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-clear-symbol.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                             <MenuItem
                                 Command="{Binding Playlist.ClearListCommand}"
-                                Header="Clear List" />
+                                Header="Clear List">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-empty-trash-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                         </MenuItem>
                         <MenuItem
                             Header="Ordering">
+                            <MenuItem.Icon>
+                                <Image
+                                    Width="24"
+                                    Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-ascending-sorting-96.png" />
+                            </MenuItem.Icon>
                             <MenuItem
                                 Command="{Binding Playlist.SortAscendingCommand}"
-                                Header="Order by FileName Ascending" />
+                                Header="Order by FileName Ascending">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-ascending-sorting-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                             <MenuItem
                                 Command="{Binding Playlist.SortDescendingCommand}"
-                                Header="Order by FileName Descending" />
+                                Header="Order by FileName Descending">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-descending-sorting-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                             <MenuItem
                                 Command="{Binding Playlist.SortSuffleCommand}"
-                                Header="Suffle" />
+                                Header="Suffle">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-shuffle-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                         </MenuItem>
                     </Menu>
                     <ListBox

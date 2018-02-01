@@ -237,5 +237,20 @@
     <Resource Include="Fonts\Exo2-Regular.otf" />
     <Resource Include="Fonts\Ubuntu-R.ttf" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-playlist-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-audio-file-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-add-link-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-empty-trash-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-shuffle-96.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
