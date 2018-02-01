@@ -5,6 +5,7 @@
     xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:infrastructure="clr-namespace:Thingy.Infrastructure"
+    xmlns:interactivity="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:musicplayer="clr-namespace:Thingy.MusicPlayerCore.Controls;assembly=Thingy.MusicPlayerCore"
     d:DesignHeight="300"
@@ -297,6 +298,13 @@
                                     Text="{Binding Converter={musicplayer:PlaylistTagConverter}}" />
                             </DataTemplate>
                         </ListBox.ItemTemplate>
+                        <interactivity:Interaction.Triggers>
+                            <interactivity:EventTrigger EventName="MouseDoubleClick">
+                                <interactivity:InvokeCommandAction 
+                                    Command="{Binding PlayListDoubleClickCommand}"
+                                    CommandParameter="{Binding ElementName=PlaylistView, Path=SelectedItem}"/>
+                            </interactivity:EventTrigger>
+                        </interactivity:Interaction.Triggers>
                     </ListBox>
                 </Grid>
             </TabItem>
