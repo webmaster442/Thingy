@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Threading;
 using Thingy.MusicPlayerCore.DataObjects;
+using Thingy.MusicPlayerCore.Formats;
 
 namespace Thingy.MusicPlayerCore
 {
@@ -21,6 +23,9 @@ namespace Thingy.MusicPlayerCore
         private List<Chapter> _chapters;
         private double _length;
 
+        private static readonly object Lock = new object();
+        private int _req;
+
         private DispatcherTimer _updateTimer;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -28,11 +33,20 @@ namespace Thingy.MusicPlayerCore
 
         public AudioEngineLog Log { get; }
 
+        /// <inheritdoc />
         public string NativeLibPath { get; private set; }
 
+        /// <inheritdoc />
         public bool Is64BitProcess
         {
             get { return IntPtr.Size == 8; }
+        }
+
+        /// <inheritdoc />
+        public IExtensionProvider ExtensionProvider
+        {
+            get;
+            private set;
         }
 
         public AudioEngine()
@@ -52,6 +66,7 @@ namespace Thingy.MusicPlayerCore
             Log.Info("Setting output to Default Device...");
             PlayBackDeviceIndex = -1;
             _chapters = new List<Chapter>();
+            ExtensionProvider = new ExtensionProvider();
         }
 
         private void Reset()
@@ -273,7 +288,33 @@ namespace Thingy.MusicPlayerCore
             var sourceflags = BassFlags.Decode | BassFlags.Loop | BassFlags.Float | BassFlags.Prescan;
             var mixerflags = BassFlags.MixerDownMix | BassFlags.MixerPositionEx | BassFlags.AutoFree;
 
-            _decodeChannel = Bass.CreateStream(fileName, 0, 0, sourceflags);
+            if (ExtensionProvider.IsNetworkStream(fileName))
+            {
+                int r;
+                lock (Lock)
+                {
+                    // make sure only 1 thread at a time can do the following
+                    // increment the request counter for this request
+                    r = ++_req;
+                }
+                var netFlags = BassFlags.StreamDownloadBlocks | BassFlags.StreamStatus | BassFlags.AutoFree;
+                _decodeChannel = Bass.CreateStream(fileName, 0, netFlags, null, new IntPtr(r));
+                lock (Lock)
+                {
+                    if (r != _req)
+                    {
+                        if (_decodeChannel != 0) Bass.StreamFree(_decodeChannel);
+                        return;
+                    }
+                }
+                Bass.ChannelSetSync(_decodeChannel, SyncFlags.MetadataReceived, 0, MetaSync); // Shoutcast
+                Bass.ChannelSetSync(_decodeChannel, SyncFlags.OggChange, 0, MetaSync); // Icecast/OGG
+            }
+            else
+            {
+                _decodeChannel = Bass.CreateStream(fileName, 0, 0, sourceflags);
+            }
+
             if (_decodeChannel == 0)
             {
                 Log.Error("Decode chanel creation failed: {0}", Bass.LastError);
@@ -312,9 +353,49 @@ namespace Thingy.MusicPlayerCore
             Log.Info("Loaded file {0}", fileName);
         }
 
-        private int WasapiProcessFunction(IntPtr Buffer, int Length, IntPtr User)
+        private void MetaSync(int Handle, int Channel, int Data, IntPtr User)
         {
-            return Bass.ChannelGetData(_mixerChannel, Buffer, Length);
+            string TitleAndArtist;
+
+            var meta = Bass.ChannelGetTags(Channel, TagType.META);
+
+            if (meta != IntPtr.Zero)
+            {
+                // got Shoutcast metadata
+                var data = Marshal.PtrToStringAnsi(meta);
+
+                var i = data.IndexOf("StreamTitle='"); // locate the title
+
+                if (i == -1)
+                    return;
+
+                var j = data.IndexOf("';", i); // locate the end of it
+
+                if (j != -1)
+                    TitleAndArtist = $"Title: {data.Substring(i, j - i + 1)}";
+            }
+            else
+            {
+                meta = Bass.ChannelGetTags(Channel, TagType.OGG);
+
+                if (meta == IntPtr.Zero)
+                    return;
+
+                // got Icecast/OGG tags
+                foreach (var tag in Extensions.ExtractMultiStringUtf8(meta))
+                {
+                    string artist = null, title = null;
+
+                    if (tag.StartsWith("artist="))
+                        artist = $"Artist: {tag.Substring(7)}";
+
+                    if (tag.StartsWith("title="))
+                        title = $"Title: {tag.Substring(6)}";
+
+                    if (title != null)
+                        TitleAndArtist = artist != null ? $"{title} - {artist}" : title;
+                }
+            }
         }
 
         /// <inheritdoc />

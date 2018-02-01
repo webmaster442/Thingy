@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using Thingy.MusicPlayerCore.DataObjects;
+using Thingy.MusicPlayerCore.Formats;
 
 namespace Thingy.MusicPlayerCore
 {
@@ -77,5 +78,9 @@ namespace Thingy.MusicPlayerCore
         /// Set to true, when you want to change position in song
         /// </summary>
         bool Seeking { get; set; }
+        /// <summary>
+        /// Extension provider
+        /// </summary>
+        IExtensionProvider ExtensionProvider { get; }
     }
 }

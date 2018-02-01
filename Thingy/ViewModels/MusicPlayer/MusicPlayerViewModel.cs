@@ -12,7 +12,6 @@ namespace Thingy.ViewModels.MusicPlayer
     {
         private IAudioEngine _audioEngine;
         private PlayListViewModel _playlist;
-        private IExtensionProvider _extensions;
 
         public DelegateCommand OpenFileCommand { get; private set; }
         public DelegateCommand PlayCommand { get; private set; }
@@ -75,7 +74,6 @@ namespace Thingy.ViewModels.MusicPlayer
         {
             AudioEngine = engine;
             Playlist = new PlayListViewModel(app);
-            _extensions = new ExtensionProvider();
             OpenFileCommand = Command.ToCommand(OpenFile);
             PlayCommand = Command.ToCommand(Play);
             PauseCommand = Command.ToCommand(Pause);
@@ -161,7 +159,7 @@ namespace Thingy.ViewModels.MusicPlayer
         private async void OpenFile()
         {
             var ofd = new System.Windows.Forms.OpenFileDialog();
-            ofd.Filter = _extensions.AllFormatsAndPlaylistsFilterString;
+            ofd.Filter = AudioEngine.ExtensionProvider.AllFormatsAndPlaylistsFilterString;
             ofd.Multiselect = true;
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -169,7 +167,7 @@ namespace Thingy.ViewModels.MusicPlayer
                 {
                     foreach (var file in ofd.FileNames)
                     {
-                        var format = _extensions.GetFormatKind(file);
+                        var format = AudioEngine.ExtensionProvider.GetFormatKind(file);
                         if (format == FormatKind.Playlist)
                             await Playlist.DoOpenList(file, true);
                         else if (format == FormatKind.Stream)
@@ -179,7 +177,7 @@ namespace Thingy.ViewModels.MusicPlayer
                 }
                 else
                 {
-                    var format = _extensions.GetFormatKind(ofd.FileName);
+                    var format = AudioEngine.ExtensionProvider.GetFormatKind(ofd.FileName);
                     if (format == FormatKind.Playlist)
                     {
                         await Playlist.DoOpenList(ofd.FileName, true);
