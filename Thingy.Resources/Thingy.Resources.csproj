@@ -155,8 +155,6 @@
     <Resource Include="Icons\icons8-edit-property-96.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icons\icons8-swiss-army-knife-256.png" />
-    <Resource Include="Icons\icons8-swiss-army-knife-540.png" />
     <Resource Include="Icons\icons8-swiss-army-knife-96.png" />
   </ItemGroup>
   <ItemGroup>
@@ -251,6 +249,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\icons8-shuffle-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BigIcons\audio-wave.png" />
+    <Content Include="BigIcons\cd.png" />
+    <Resource Include="BigIcons\icons8-audio-wave-540.png" />
+    <Resource Include="BigIcons\icons8-cd-540.png" />
+    <Resource Include="BigIcons\icons8-musical-notes-540.png" />
+    <Resource Include="BigIcons\icons8-radio-540.png" />
+    <Resource Include="BigIcons\icons8-swiss-army-knife-256.png" />
+    <Resource Include="BigIcons\icons8-swiss-army-knife-540.png" />
+    <Content Include="BigIcons\musical-notes.png" />
+    <Content Include="BigIcons\radio.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

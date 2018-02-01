@@ -24,6 +24,7 @@ namespace Thingy.MusicPlayerCore
         private double _length;
         private DownloadProcedure _streamDloadProc;
         private bool _networkstream;
+        private string _netadress;
 
         private static readonly object Lock = new object();
         private int _req;
@@ -312,6 +313,7 @@ namespace Thingy.MusicPlayerCore
                         return;
                     }
                 }
+                _netadress = fileName;
             }
             else
             {
@@ -380,16 +382,23 @@ namespace Thingy.MusicPlayerCore
             }
         }
 
-        private string ProcessTags(string[] array, bool icecast = false)
+        private void ProcessTags(string[] array, bool icecast = false)
         {
-            string ret = "";
+            string artist = null;
+            string title = null;
             if (icecast)
             {
                 foreach (var item in array)
                 {
-                    if (item.StartsWith("ARTIST")) ret += item.Replace("ARTIST=", "");
-                    else if (item.StartsWith("TITLE")) ret += item.Replace("TITLE=", " - ");
+                    if (item.StartsWith("ARTIST")) artist = item.Replace("ARTIST=", "");
+                    else if (item.StartsWith("TITLE")) title = item.Replace("TITLE=", " - ");
                     else continue;
+                }
+                var newtags = TagFactory.CreateTagInfoForNetStream(_netadress, title, artist);
+                if (newtags != _currentTags)
+                {
+                    _currentTags = newtags;
+                    NotifyChanged(nameof(CurrentTags));
                 }
             }
             else
@@ -397,11 +406,16 @@ namespace Thingy.MusicPlayerCore
                 var contents = array[0].Split(';');
                 foreach (var item in contents)
                 {
-                    if (item.StartsWith("StreamTitle='")) ret += item.Replace("StreamTitle='", "").Replace("'", "");
+                    if (item.StartsWith("StreamTitle='")) title = item.Replace("StreamTitle='", "").Replace("'", "");
                     else continue;
                 }
+                var newtags = TagFactory.CreateTagInfoForNetStream(_netadress, title, artist);
+                if (newtags != _currentTags)
+                {
+                    _currentTags = newtags;
+                    NotifyChanged(nameof(CurrentTags));
+                }
             }
-            return ret;
         }
 
 

@@ -17,7 +17,7 @@ namespace Thingy.Views
 
         private string RaeadText()
         {
-            return Thingy.Resources.ResourceLocator.Get("html.AboutPage.html");
+            return Thingy.Resources.ResourceLocator.GetResourceFile("html.AboutPage.html");
         }
 
         private void AboutView_LinkClicked(object sender, RoutedEvenArgs<HtmlLinkClickedEventArgs> args)

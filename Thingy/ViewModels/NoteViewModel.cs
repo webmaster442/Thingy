@@ -42,7 +42,7 @@ namespace Thingy.ViewModels
             ImportFileCommand = Command.ToCommand(ImportNote);
             SaveToFileCommand = Command.ToCommand(SaveToFile, CanDeleteorSaveFile);
 
-            _Template = Resources.ResourceLocator.Get("html.MarkdownTemplate.html");
+            _Template = Resources.ResourceLocator.GetResourceFile("html.MarkdownTemplate.html");
 
             Notes = new ObservableCollection<Note>(_db.Notes.GetNotes());
         }

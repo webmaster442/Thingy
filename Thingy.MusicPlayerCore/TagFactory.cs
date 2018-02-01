@@ -38,6 +38,18 @@ namespace Thingy.MusicPlayerCore
             }
         }
 
+        public static TagInformation CreateTagInfoForNetStream(string filename, string title, string artist = null)
+        {
+            return new TagInformation
+            {
+                FileName = filename,
+                Artist = artist,
+                Title = title,
+                Year = DateTime.Now.Year.ToString(),
+                Album = "Internet stream"
+            };
+        }
+
         private static BitmapImage GetCover(TagLib.File tags)
         {
             if (tags.Tag.Pictures.Length > 0)
