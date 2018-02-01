@@ -186,6 +186,9 @@
     <Compile Include="Modules\ToDoListModule.cs" />
     <Compile Include="Modules\VirtualFoldersModule.cs" />
     <Compile Include="Views\Interfaces\IMusicPlayer.cs" />
+    <Compile Include="Views\MusicPlayer\AddURLDialog.xaml.cs">
+      <DependentUpon>AddURLDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MusicPlayer\MusicPlayer.xaml.cs">
       <DependentUpon>MusicPlayer.xaml</DependentUpon>
     </Compile>
@@ -358,6 +361,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ModalDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MusicPlayer\AddURLDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

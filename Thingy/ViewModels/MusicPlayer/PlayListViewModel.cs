@@ -144,9 +144,14 @@ namespace Thingy.ViewModels.MusicPlayer
             }
         }
 
-        private void AddUrl()
+        private async void AddUrl()
         {
-            throw new NotImplementedException();
+            var dialog = new Views.MusicPlayer.AddURLDialog();
+            bool result = await _app.ShowDialog(dialog, "Add URL...");
+            if (result)
+            {
+                List.Add(dialog.Url);
+            }
         }
 
         private void ClearList()
