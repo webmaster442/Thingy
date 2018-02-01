@@ -9,6 +9,8 @@ namespace Thingy.Modules
 {
     public class MusicPlayerModule : ModuleBase
     {
+        private IAudioEngine _audioEngine;
+
         public override string ModuleName
         {
             get { return "Music Player"; }
@@ -27,13 +29,24 @@ namespace Thingy.Modules
         public override UserControl RunModule()
         {
             var view = new Views.MusicPlayer.MusicPlayer();
-            view.DataContext = new ViewModels.MusicPlayer.MusicPlayerViewModel(view, App.Instance, App.IoCContainer.ResolveSingleton<IAudioEngine>());
+            view.DataContext = new ViewModels.MusicPlayer.MusicPlayerViewModel(view, App.Instance, _audioEngine);
             return view;
         }
 
         public override bool IsSingleInstance
         {
             get { return true; }
+        }
+
+        public override bool CanLoad
+        {
+            get
+            {
+                if (_audioEngine == null)
+                    _audioEngine = App.IoCContainer.ResolveSingleton<IAudioEngine>();
+
+                return _audioEngine.OutputDevices.Count > 0;
+            }
         }
     }
 }

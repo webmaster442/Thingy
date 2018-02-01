@@ -23,10 +23,6 @@ namespace Thingy.Views.Statusbar
         {
             InitializeComponent();
 
-            MMDeviceEnumerator devEnum = new MMDeviceEnumerator();
-            defaultDevice =  devEnum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);
-            defaultDevice.AudioEndpointVolume.OnVolumeNotification += AudioEndpointVolume_OnVolumeNotification;
-
             _availableMemory = PerformanceInfo.GetTotalMemoryInMiB();
             _cpuCounter = new PerformanceCounter
             {
@@ -43,10 +39,27 @@ namespace Thingy.Views.Statusbar
             _timer.Tick += _timer_Tick;
             _timer_Tick(null, null);
 
-            external = true;
-            BtnMute.IsChecked = defaultDevice.AudioEndpointVolume.Mute;
-            VolumeSlider.Value = defaultDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100.0f;
-            external = false;
+            SetupAudio();
+        }
+
+        private void SetupAudio()
+        {
+            try
+            {
+                MMDeviceEnumerator devEnum = new MMDeviceEnumerator();
+                defaultDevice = devEnum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);
+                defaultDevice.AudioEndpointVolume.OnVolumeNotification += AudioEndpointVolume_OnVolumeNotification;
+                external = true;
+                BtnMute.IsChecked = defaultDevice.AudioEndpointVolume.Mute;
+                VolumeSlider.Value = defaultDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100.0f;
+                external = false;
+            }
+            catch (Exception e)
+            {
+                App.Log.Error(e);
+                VolumeSlider.IsEnabled = false;
+                BtnMute.IsEnabled = false;
+            }
         }
 
         private void AudioEndpointVolume_OnVolumeNotification(AudioVolumeNotificationData data)

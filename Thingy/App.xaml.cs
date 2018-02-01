@@ -81,14 +81,16 @@ namespace Thingy
                 return new DataBase(dbfile);
             });
             Log.Info("Database initialized");
-            IoCContainer.RegisterSingleton<IModuleLoader>(() =>
-            {
-                return new ModuleLoader(Log);
-            });
             IoCContainer.RegisterSingleton<IAudioEngine>(() =>
             {
                 return new AudioEngine();
             });
+            Log.Info("Audio Engine loaded");
+            IoCContainer.RegisterSingleton<IModuleLoader>(() =>
+            {
+                return new ModuleLoader(Log);
+            });
+            Log.Info("Module loader initialized");
 
             var accent = Thingy.Properties.Settings.Default.SelectedAccent;
             ThemeManager.ChangeAppStyle(Application.Current,
