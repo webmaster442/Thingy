@@ -325,8 +325,18 @@ namespace Thingy.MusicPlayerCore
                 {
                     var cd = new CDTrackInfo(fileName);
                     _decodeChannel = BassCd.CreateStream(cd.Drive, cd.Track, sourceflags);
+                    Log.Info("Geting track metadata...");
+                    _currentTags = TagFactory.CreateTagInfoForCD(cd.Drive, cd.Track);
+                    _currentTags.Cover = new BitmapImage(ResourceLocator.GetIcon(IconCategories.Big, "icons8-cd-540.png"));
+                    NotifyChanged(nameof(CurrentTags));
                 }
-                else _decodeChannel = Bass.CreateStream(fileName, 0, 0, sourceflags);
+                else
+                {
+                    _decodeChannel = Bass.CreateStream(fileName, 0, 0, sourceflags);
+                    Log.Info("Geting track metadata...");
+                    _currentTags = TagFactory.CreateTagInfoFromFile(fileName);
+                    NotifyChanged(nameof(CurrentTags));
+                }
             }
 
             if (_decodeChannel == 0)
@@ -347,10 +357,6 @@ namespace Thingy.MusicPlayerCore
                 Log.Error("Failed to route decoded stream to mixer: {0}", Bass.LastError);
                 return;
             }
-
-            Log.Info("Geting track metadata...");
-            _currentTags = TagFactory.CreateTagInfoFromFile(fileName);
-            NotifyChanged(nameof(CurrentTags));
 
             if (!_networkstream)
             {

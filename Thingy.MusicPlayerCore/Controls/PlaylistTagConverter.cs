@@ -4,26 +4,12 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
 using Thingy.MusicPlayerCore.DataObjects;
+using AppLib.Common.Extensions;
 
 namespace Thingy.MusicPlayerCore.Controls
 {
     public class PlaylistTagConverter : MarkupExtension, IValueConverter
     {
-        /// <summary>
-        /// Get a value from a dictionary. If value is not present, then the fallback value is returned
-        /// </summary>
-        /// <typeparam name="Tkey">key type</typeparam>
-        /// <typeparam name="TValue">value type</typeparam>
-        /// <param name="dictionary">dictionary to add to or update</param>
-        /// <param name="key">key parameter</param>
-        /// <param name="fallback">fallback value</param>
-        /// <returns></returns>
-        public static TValue GetValueOrFallback<Tkey, TValue>(Dictionary<Tkey, TValue> dictionary, Tkey key, TValue fallback)
-        {
-            if (dictionary.ContainsKey(key)) return dictionary[key];
-            else return fallback;
-        }
-
         /// <summary>
         /// Converts a full path to a file name
         /// </summary>
@@ -47,8 +33,8 @@ namespace Thingy.MusicPlayerCore.Controls
                     var cd = new CDTrackInfo(fullpath);
                     if (CDInfoProvider.CdData.Count > 0)
                     {
-                        var title = GetValueOrFallback(CDInfoProvider.CdData, $"TITLE{cd.Track + 1}", "Unknown song");
-                        var artist = GetValueOrFallback(CDInfoProvider.CdData, $"PERFORMER{cd.Track + 1}", "Unknown artist");
+                        var title = CollectionExtensions.GetValueOrFallback(CDInfoProvider.CdData, $"TITLE{cd.Track + 1}", "Unknown song");
+                        var artist = CollectionExtensions.GetValueOrFallback(CDInfoProvider.CdData, $"PERFORMER{cd.Track + 1}", "Unknown artist");
                         return $"{artist} - {title}";
                     }
                     else return $"CD track {cd.Track+1}, on Drive: {cd.Drive}";

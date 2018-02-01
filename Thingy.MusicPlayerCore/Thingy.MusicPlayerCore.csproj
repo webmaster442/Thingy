@@ -394,6 +394,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\applib\AppLib.Common\AppLib.Common.csproj">
+      <Project>{516087b5-6ac5-44a5-8df1-fe42d7a7a0e6}</Project>
+      <Name>AppLib.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Thingy.Resources\Thingy.Resources.csproj">
       <Project>{63a3ee73-078f-4dec-8578-5af6f158d383}</Project>
       <Name>Thingy.Resources</Name>

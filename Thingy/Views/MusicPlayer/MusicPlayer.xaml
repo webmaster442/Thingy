@@ -322,7 +322,7 @@
                             <interactivity:EventTrigger EventName="MouseDoubleClick">
                                 <interactivity:InvokeCommandAction 
                                     Command="{Binding PlayListDoubleClickCommand}"
-                                    CommandParameter="{Binding ElementName=PlaylistView, Path=SelectedItem}"/>
+                                    CommandParameter="{Binding ElementName=PlaylistView, Path=SelectedIndex}"/>
                             </interactivity:EventTrigger>
                         </interactivity:Interaction.Triggers>
                     </ListBox>

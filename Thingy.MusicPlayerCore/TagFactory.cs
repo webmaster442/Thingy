@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppLib.Common.Extensions;
+using System;
 using System.Windows.Media.Imaging;
 using Thingy.MusicPlayerCore.DataObjects;
 using Thingy.Resources;
@@ -48,6 +49,22 @@ namespace Thingy.MusicPlayerCore
                 Title = title,
                 Year = DateTime.Now.Year.ToString(),
                 Album = "Internet stream",
+            };
+        }
+
+        public static TagInformation CreateTagInfoForCD(int drive, int track)
+        {
+            var title = CollectionExtensions.GetValueOrFallback(CDInfoProvider.CdData, $"TITLE{track + 1}", "Unknown song");
+            var artist = CollectionExtensions.GetValueOrFallback(CDInfoProvider.CdData, $"PERFORMER{track + 1}", "Unknown artist");
+            var album = CollectionExtensions.GetValueOrFallback(CDInfoProvider.CdData, $"PERFORMER{0}", "Unknown");
+            album += " - " + CollectionExtensions.GetValueOrFallback(CDInfoProvider.CdData, $"TITLE{0}", "");
+            return new TagInformation
+            {
+                FileName = $"CD track {track + 1}, on Drive: {drive}",
+                Title = title,
+                Artist = artist,
+                Year = "unknown",
+                Album = album
             };
         }
 

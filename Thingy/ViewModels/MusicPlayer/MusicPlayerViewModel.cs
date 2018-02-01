@@ -25,7 +25,7 @@ namespace Thingy.ViewModels.MusicPlayer
         public DelegateCommand DragStartedCommand { get; private set; }
         public DelegateCommand<double> DragCompletedCommand { get; private set; }
         public DelegateCommand<int> SelectedDeviceChangedCommand { get; private set; }
-        public DelegateCommand<string> PlayListDoubleClickCommand { get; private set; }
+        public DelegateCommand<int> PlayListDoubleClickCommand { get; private set; }
 
         public IAudioEngine AudioEngine
         {
@@ -84,14 +84,17 @@ namespace Thingy.ViewModels.MusicPlayer
             PrevousTrackCommand = Command.ToCommand(PrevousTrack);
             NextTrackCommand = Command.ToCommand(NextTrack);
             SelectedDeviceChangedCommand = Command.ToCommand<int>(SelectedDeviceChanged);
-            PlayListDoubleClickCommand = Command.ToCommand<string>(PlayListDoubleClick);
+            PlayListDoubleClickCommand = Command.ToCommand<int>(PlayListDoubleClick);
         }
 
-        private void PlayListDoubleClick(string obj)
+        private void PlayListDoubleClick(int index)
         {
-            _audioEngine.Load(obj);
+            if (index < 0) return;
+            string file = Playlist.List[index];
+            _audioEngine.Load(file);
             _audioEngine.Play();
             View.SwithToTab(MusicPlayerTabs.Player);
+            Playlist.CurrentIndex = index;
         }
 
         private void SelectedDeviceChanged(int obj)
