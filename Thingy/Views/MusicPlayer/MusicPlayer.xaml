@@ -198,6 +198,16 @@
                             </MenuItem>
                             <Separator />
                             <MenuItem
+                                Command="{Binding Playlist.SaveListCommand}"
+                                Header="Save Playlist..">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-playlist-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator/>
+                            <MenuItem
                                 Command="{Binding Playlist.AddFilesCommand}"
                                 Header="Add Files...">
                                 <MenuItem.Icon>
@@ -222,6 +232,16 @@
                                     <Image
                                         Width="24"
                                         Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-add-link-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator/>
+                            <MenuItem
+                                Command="{Binding Playlist.LoadCDCommand}"
+                                Header="Load CD...">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-cd.png" />
                                 </MenuItem.Icon>
                             </MenuItem>
                         </MenuItem>

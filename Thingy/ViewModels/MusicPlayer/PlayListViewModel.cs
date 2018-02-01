@@ -22,6 +22,8 @@ namespace Thingy.ViewModels.MusicPlayer
         public DelegateCommand AddFilesCommand { get; private set; }
         public DelegateCommand AddUrlCommand { get; private set; }
         public DelegateCommand AddFolderCommand { get; private set; }
+        public DelegateCommand SaveListCommand { get; private set; }
+        public DelegateCommand LoadCDCommand { get; private set; }
 
         public DelegateCommand ClearListCommand { get; private set; }
         public DelegateCommand<string[]> DeleteSelectedCommand { get; private set; }
@@ -61,6 +63,8 @@ namespace Thingy.ViewModels.MusicPlayer
             AddFilesCommand = Command.ToCommand(AddFiles);
             AddFolderCommand = Command.ToCommand(AddFolder);
             AddUrlCommand = Command.ToCommand(AddUrl);
+            SaveListCommand = Command.ToCommand(SaveList);
+            LoadCDCommand = Command.ToCommand(LoadCD);
 
             ClearListCommand = Command.ToCommand(ClearList);
             DeleteSelectedCommand = Command.ToCommand<string[]>(DeleteSelected);
@@ -103,7 +107,14 @@ namespace Thingy.ViewModels.MusicPlayer
             ofd.Filter = _extensions.PlalistsFilterString;
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                await DoOpenList(ofd.FileName, true);
+                try
+                {
+                    await DoOpenList(ofd.FileName, true);
+                }
+                catch (Exception ex)
+                {
+                    await _app.ShowMessageBox("Error", ex.Message, MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
+                }
             }
         }
 
@@ -113,7 +124,37 @@ namespace Thingy.ViewModels.MusicPlayer
             ofd.Filter = _extensions.PlalistsFilterString;
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                await DoOpenList(ofd.FileName, false);
+                try
+                {
+                    await DoOpenList(ofd.FileName, false);
+                }
+                catch (Exception ex)
+                {
+                    await _app.ShowMessageBox("Error", ex.Message, MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
+                }
+            }
+        }
+
+        private async void SaveList()
+        {
+            var sfd = new System.Windows.Forms.SaveFileDialog();
+            sfd.Filter = "M3U list|*.m3u";
+            if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                try
+                {
+                    using (var target = File.CreateText(sfd.FileName))
+                    {
+                        foreach (var file in List)
+                        {
+                            target.WriteLine(file);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                     await _app.ShowMessageBox("Error", ex.Message, MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
+                }
             }
         }
 
@@ -151,6 +192,19 @@ namespace Thingy.ViewModels.MusicPlayer
             if (result)
             {
                 List.Add(dialog.Url);
+            }
+        }
+
+        private async void LoadCD()
+        {
+            var dialog = new Views.MusicPlayer.LoadCdDialog();
+            bool result = await _app.ShowDialog(dialog, "Load CD...");
+            if (result)
+            {
+                if (!string.IsNullOrEmpty(dialog.SelectedDrive))
+                {
+                    List.AddRange(CDInforProvider.GetCdTracks(dialog.SelectedDrive));
+                }
             }
         }
 
