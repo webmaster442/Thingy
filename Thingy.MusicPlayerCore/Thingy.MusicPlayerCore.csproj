@@ -61,6 +61,7 @@
     <Compile Include="Controls\TrackInfo.xaml.cs">
       <DependentUpon>TrackInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataObjects\CDTrackInfo.cs" />
     <Compile Include="DataObjects\Chapter.cs" />
     <Compile Include="DataObjects\TagInformation.cs" />
     <Compile Include="Formats\IExtensionProvider.cs" />

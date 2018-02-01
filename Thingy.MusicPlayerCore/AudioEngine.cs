@@ -1,4 +1,5 @@
 ﻿using ManagedBass;
+using ManagedBass.Cd;
 using ManagedBass.Mix;
 using System;
 using System.Collections.Generic;
@@ -118,10 +119,11 @@ namespace Thingy.MusicPlayerCore
             Bass.Load(NativeLibPath);
             Log.Info("Loading bassmix.dll...");
             BassMix.Load(NativeLibPath);
+            Log.Info("Loading basscd.dll...");
+            BassCd.Load(NativeLibPath);
             LoadPlugins("bass_aac.dll", "bass_ac3.dll",
-                        "bassalac.dll", "basscd.dll",
-                        "bassflac.dll", "basswma.dll",
-                        "basswv.dll");
+                        "bassalac.dll", "bassflac.dll", 
+                        "basswma.dll", "basswv.dll");
         }
 
         private void LoadPlugins(params string[] plugins)
@@ -319,7 +321,12 @@ namespace Thingy.MusicPlayerCore
             }
             else
             {
-                _decodeChannel = Bass.CreateStream(fileName, 0, 0, sourceflags);
+                if (ExtensionProvider.IsCdStream(fileName))
+                {
+                    var cd = new CDTrackInfo(fileName);
+                    _decodeChannel = BassCd.CreateStream(cd.Drive, cd.Track, sourceflags);
+                }
+                else _decodeChannel = Bass.CreateStream(fileName, 0, 0, sourceflags);
             }
 
             if (_decodeChannel == 0)

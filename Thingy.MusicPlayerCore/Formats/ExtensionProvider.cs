@@ -87,5 +87,11 @@ namespace Thingy.MusicPlayerCore.Formats
             else
                 return FormatKind.Unknown;
         }
+
+        public bool IsCdStream(string file)
+        {
+            var lowercase = file.ToLower();
+            return lowercase.StartsWith("cd://");
+        }
     }
 }

@@ -17,5 +17,6 @@ namespace Thingy.MusicPlayerCore.Formats
         IEnumerable<string> AllSupportedFormats { get; }
         FormatKind GetFormatKind(string file);
         bool IsNetworkStream(string file);
+        bool IsCdStream(string file);
     }
 }
