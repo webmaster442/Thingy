@@ -32,11 +32,11 @@ namespace Thingy.Infrastructure
 
         public void Parse(string args)
         {
-            var parser = new ParametersParser(args, false);
+            var parser = new ParameterParser(args, true);
 
             foreach (var action in _switchActions)
             {
-                if (parser.HasKeyAndNoValue(action.Key))
+                if (parser.StandaloneSwitches.Contains(action.Key))
                 {
                     action.Value.Invoke();
                 }
