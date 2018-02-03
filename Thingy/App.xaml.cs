@@ -1,4 +1,6 @@
-﻿using AppLib.WPF;
+﻿using AppLib.Common;
+using AppLib.MVVM.MessageHandler;
+using AppLib.WPF;
 using MahApps.Metro;
 using MahApps.Metro.Controls.Dialogs;
 using MahApps.Metro.SimpleChildWindow;
@@ -80,10 +82,6 @@ namespace Thingy
 
             this.TabManager = new TabManager(Instance, IoCContainer.ResolveSingleton<IModuleLoader>());
 
-            App.Current.Dispatcher.Invoke(() =>
-            {
-                MainClass.CommandLineParser.Parse(Environment.CommandLine);
-            });
             base.OnStartup(e);
         }
 
@@ -157,25 +155,37 @@ namespace Thingy
             foreach (var file in files)
             {
                 var module = loader.GetModuleForFile(file);
+                if (module == null) continue;
+
                 if (module.IsSingleInstance)
                 {
                     int tabIndex = TabManager.GetTabIndexByTitle(module.ModuleName);
                     if (tabIndex == -1)
                     {
-                        await TabManager.StartModule(module);
-#warning send message here
-
+                        var id =  await TabManager.StartModule(module);
+                        await Task.Delay(25);
+                        Messager.Instance.SendMessage(id, new HandleFileMessage
+                        {
+                            File = file
+                        });
                     }
                     else
                     {
                         TabManager.FocusTabByIndex(tabIndex);
-#warning send message here
+                        Messager.Instance.SendMessage(module.RunModule().GetType(), new HandleFileMessage
+                        {
+                            File = file
+                        });
                     }
                 }
                 else
                 {
-                    await TabManager.StartModule(module);
-#warning send message here
+                    var id = await TabManager.StartModule(module);
+                    await Task.Delay(25);
+                    Messager.Instance.SendMessage(id, new HandleFileMessage
+                    {
+                        File = file
+                    });
                 }
             }
         }

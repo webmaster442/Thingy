@@ -1,4 +1,5 @@
-﻿using AppLib.MVVM;
+﻿using AppLib.Common.Extensions;
+using AppLib.MVVM;
 using System;
 using System.Linq;
 using System.Windows;
@@ -157,6 +158,12 @@ namespace Thingy.ViewModels.MusicPlayer
                 _audioEngine.Load(Playlist.CurrrentFile);
                 _audioEngine.Play();
             }
+        }
+
+        public void HandleFiles(params string[] files)
+        {
+            Playlist.List.AddRange(files);
+            View.SwithToTab(MusicPlayerTabs.Playlist);
         }
 
         private async void OpenFile()

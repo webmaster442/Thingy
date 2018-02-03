@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Thingy.Infrastructure;
 using Thingy.MusicPlayerCore;
+using Thingy.MusicPlayerCore.Formats;
 
 namespace Thingy.Modules
 {
@@ -46,6 +48,15 @@ namespace Thingy.Modules
                     _audioEngine = App.IoCContainer.ResolveSingleton<IAudioEngine>();
 
                 return _audioEngine.OutputDevices.Count > 0;
+            }
+        }
+
+        public override IEnumerable<string> SupportedExtensions
+        {
+            get
+            {
+                IExtensionProvider provider = new ExtensionProvider();
+                return provider.AllSupportedFormats;
             }
         }
     }

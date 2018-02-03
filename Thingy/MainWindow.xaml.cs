@@ -1,4 +1,5 @@
-﻿using Dragablz;
+﻿using AppLib.Common;
+using Dragablz;
 using MahApps.Metro.Controls;
 using System;
 using System.Windows.Controls;
@@ -38,7 +39,7 @@ namespace Thingy
             App.Log.Info($"Closing Tab: {headerModel.Header.ToString()}");
             var viewInTab = headerModel.Content as UserControl;
 
-            var moduleId = viewInTab.Tag as int?;
+            var moduleId = viewInTab.Tag as UId;
 
             if (viewInTab.DataContext is IDisposable viewModel)
             {
@@ -52,9 +53,9 @@ namespace Thingy
                 view.Dispose();
             }
             viewInTab = null;
-            if (moduleId.HasValue)
+            if (moduleId != null)
             {
-                App.Instance.TabManager.ModuleClosed(moduleId.Value);
+                App.Instance.TabManager.ModuleClosed(moduleId);
             }
             GC.WaitForPendingFinalizers();
             GC.Collect();
@@ -104,6 +105,7 @@ namespace Thingy
         private void ModernWindow_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             TabablzControl.AddItemCommand.Execute(this, TabControl);
+            MainClass.CommandLineParser.Parse(Environment.CommandLine);
         }
 
         private void ModernWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)

@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls.Dialogs;
+﻿using AppLib.Common;
+using MahApps.Metro.Controls.Dialogs;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace Thingy
         void CreateNewTabContent(string Title, UserControl control);
         int GetTabIndexByTitle(string Title);
         void FocusTabByIndex(int index);
-        Task StartModule(IModule module);
-        void ModuleClosed(int ModuleId);
+        Task<UId> StartModule(IModule module);
+        void ModuleClosed(UId ModuleId);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppLib.Common;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
@@ -9,7 +10,7 @@ namespace Thingy
 {
     public class TabManager : ITabManager
     {
-        private Dictionary<int, IModule> _runningModules;
+        private Dictionary<UId, IModule> _runningModules;
         private IModuleLoader _moduleLoader;
         private IApplication _application;
         private Random _random;
@@ -23,16 +24,8 @@ namespace Thingy
         {
             _application = application;
             _moduleLoader = moduleLoader;
-            _runningModules = new Dictionary<int, IModule>();
+            _runningModules = new Dictionary<UId, IModule>();
             _random = new Random();
-        }
-
-        private int GenerateModuleId()
-        {
-            int id = 0;
-            do { id = _random.Next(int.MinValue, int.MaxValue); }
-            while (_runningModules.ContainsKey(id));
-            return id;
         }
 
         public void CreateNewTabContent(string Title, UserControl control)
@@ -55,15 +48,16 @@ namespace Thingy
             MainWindow.SetCurrentTabContent(Title, control, false);
         }
 
-        public async Task StartModule(IModule module)
+        public async Task<UId> StartModule(IModule module)
         {
-            if (module == null) return;
+            if (module == null) return null;
             var control = module.RunModule();
             if (control != null)
             {
                 if (module.OpenAsWindow)
                 {
                     await _application.ShowDialog(control, module.ModuleName);
+                    return null;
                 }
                 else
                 {
@@ -76,27 +70,34 @@ namespace Thingy
                                                               "This module can only run in one instance. Switching to running module",
                                                               MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
                             FocusTabByIndex(index);
+                            return null;
                         }
                         else
                         {
-                            var mId = GenerateModuleId();
+                            var mId = new UId();
                             _runningModules.Add(mId, module);
                             control.Tag = mId;
                             SetCurrentTabContent(module.ModuleName, control);
+                            return mId;
                         }
                     }
                     else
                     {
-                        var mId = GenerateModuleId();
+                        var mId = new UId();
                         _runningModules.Add(mId, module);
                         control.Tag = mId;
                         SetCurrentTabContent(module.ModuleName, control);
+                        return mId;
                     }
                 }
             }
+            else
+            {
+                return null;
+            }
         }
 
-        public void ModuleClosed(int ModuleId)
+        public void ModuleClosed(UId ModuleId)
         {
             _runningModules.Remove(ModuleId);
         }

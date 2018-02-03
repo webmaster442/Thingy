@@ -30,7 +30,7 @@ namespace Thingy.Infrastructure
 
         public void Parse(string args)
         {
-            var parser = new ParameterParser(args, true);
+            var parser = new ParameterParser(args, true, true);
 
             foreach (var action in _switchActions)
             {
