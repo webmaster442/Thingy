@@ -1,9 +1,9 @@
 ﻿using AppLib.Common.Extensions;
 using AppLib.MVVM;
 using System;
-using System.Linq;
 using System.Windows;
 using Thingy.MusicPlayerCore;
+using Thingy.MusicPlayerCore.DataObjects;
 using Thingy.MusicPlayerCore.Formats;
 using Thingy.Views.Interfaces;
 
@@ -27,6 +27,8 @@ namespace Thingy.ViewModels.MusicPlayer
         public DelegateCommand<double> DragCompletedCommand { get; private set; }
         public DelegateCommand<int> SelectedDeviceChangedCommand { get; private set; }
         public DelegateCommand<int> PlayListDoubleClickCommand { get; private set; }
+
+        public DelegateCommand<Chapter> JumpToChapterCommand { get; private set; }
 
         public IAudioEngine AudioEngine
         {
@@ -86,6 +88,7 @@ namespace Thingy.ViewModels.MusicPlayer
             NextTrackCommand = Command.ToCommand(NextTrack);
             SelectedDeviceChangedCommand = Command.ToCommand<int>(SelectedDeviceChanged);
             PlayListDoubleClickCommand = Command.ToCommand<int>(PlayListDoubleClick);
+            JumpToChapterCommand = Command.ToCommand<Chapter>(JumpToChapter);
         }
 
         private void PlayListDoubleClick(int index)
@@ -137,6 +140,13 @@ namespace Thingy.ViewModels.MusicPlayer
             _audioEngine.Seeking = true;
             double position = _audioEngine.Position;
             _audioEngine.Position = position + 5;
+            _audioEngine.Seeking = false;
+        }
+
+        private void JumpToChapter(Chapter obj)
+        {
+            _audioEngine.Seeking = true;
+            _audioEngine.Position = obj.Position;
             _audioEngine.Seeking = false;
         }
 

@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:infrastructure="clr-namespace:Thingy.Infrastructure"
     xmlns:interactivity="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:musicplayer="clr-namespace:Thingy.MusicPlayerCore.Controls;assembly=Thingy.MusicPlayerCore"
     d:DesignHeight="300"
@@ -121,6 +122,7 @@
                         <Slider
                             x:Name="VolumeSlider"
                             Width="150"
+                            Margin="10,0"
                             VerticalAlignment="Center"
                             Maximum="1"
                             Minimum="0"
@@ -131,6 +133,21 @@
                                     ContentStringFormat="Volume: {0:P1}" />
                             </Slider.ToolTip>
                         </Slider>
+                        <ComboBox
+                            x:Name="ChapterSwitcher"
+                            MaxWidth="150"
+                            Margin="10,0"
+                            VerticalAlignment="Center"
+                            ItemsSource="{Binding AudioEngine.Chapters}"
+                            SelectionChanged="ChapterSwitcher_SelectionChanged"
+                            Text="Chapters...">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                        Text="{Binding Title}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                     </StackPanel>
                     <Slider
                         x:Name="SeekBar"
@@ -206,7 +223,7 @@
                                         Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-playlist-96.png" />
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <Separator/>
+                            <Separator />
                             <MenuItem
                                 Command="{Binding Playlist.AddFilesCommand}"
                                 Header="Add Files...">
@@ -234,7 +251,7 @@
                                         Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-add-link-96.png" />
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <Separator/>
+                            <Separator />
                             <MenuItem
                                 Command="{Binding Playlist.LoadCDCommand}"
                                 Header="Load CD...">
@@ -320,9 +337,7 @@
                         </ListBox.ItemTemplate>
                         <interactivity:Interaction.Triggers>
                             <interactivity:EventTrigger EventName="MouseDoubleClick">
-                                <interactivity:InvokeCommandAction 
-                                    Command="{Binding PlayListDoubleClickCommand}"
-                                    CommandParameter="{Binding ElementName=PlaylistView, Path=SelectedIndex}"/>
+                                <interactivity:InvokeCommandAction Command="{Binding PlayListDoubleClickCommand}" CommandParameter="{Binding ElementName=PlaylistView, Path=SelectedIndex}" />
                             </interactivity:EventTrigger>
                         </interactivity:Interaction.Triggers>
                     </ListBox>

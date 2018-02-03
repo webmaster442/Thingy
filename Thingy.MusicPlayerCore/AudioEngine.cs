@@ -1,12 +1,13 @@
-﻿using ManagedBass;
+﻿using AppLib.Common.Extensions;
+using ManagedBass;
 using ManagedBass.Cd;
 using ManagedBass.Mix;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
@@ -23,7 +24,6 @@ namespace Thingy.MusicPlayerCore
         private int _mixerChannel;
         private float _LastVolume;
         private TagInformation _currentTags;
-        private List<Chapter> _chapters;
         private double _length;
         private DownloadProcedure _streamDloadProc;
         private bool _networkstream;
@@ -71,7 +71,7 @@ namespace Thingy.MusicPlayerCore
             _updateTimer.Tick += TimerTick;
             Log.Info("Setting output to Default Device...");
             PlayBackDeviceIndex = -1;
-            _chapters = new List<Chapter>();
+            Chapters = new ObservableCollection<Chapter>();
             ExtensionProvider = new ExtensionProvider();
             _streamDloadProc = StreamDownloadProcedure;
         }
@@ -80,7 +80,7 @@ namespace Thingy.MusicPlayerCore
         {
             Position = 0;
             _currentTags = null;
-            _chapters?.Clear();
+            Chapters?.Clear();
             _length = 0;
             NotifyChanged(nameof(Position));
             NotifyChanged(nameof(CurrentTags));
@@ -261,9 +261,10 @@ namespace Thingy.MusicPlayerCore
             get { return _length; }
         }
 
-        public IList<Chapter> Chapters
+        public ObservableCollection<Chapter> Chapters
         {
-            get { return _chapters; }
+            get;
+            private set;
         }
 
         public bool Seeking { get; set; }
@@ -366,9 +367,8 @@ namespace Thingy.MusicPlayerCore
                 NotifyChanged(nameof(Length));
 
                 Log.Info("Getting Chapters...");
-                _chapters.Clear();
-                _chapters.AddRange(ChapterFactory.GetChapters(fileName, _length));
-                NotifyChanged(nameof(Chapters));
+                Chapters.Clear();
+                Chapters.AddRange(ChapterFactory.GetChapters(fileName, _length));
             }
 
             Volume = _LastVolume;

@@ -87,5 +87,11 @@ namespace Thingy.Views.MusicPlayer
             if (message == null) return;
             ViewModel?.HandleFiles(message.File);
         }
+
+        private void ChapterSwitcher_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var chapter = ChapterSwitcher.SelectedItem;
+            ViewModel?.JumpToChapterCommand.Execute(chapter);
+        }
     }
 }
