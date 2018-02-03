@@ -82,7 +82,7 @@
                             HueShift="60" />
                     </Setter.Value>
                 </Setter>
-                <Setter Property="Control.LayoutTransform">
+                <Setter Property="Control.RenderTransform">
                     <Setter.Value>
                         <ScaleTransform
                             ScaleX="1.05"
