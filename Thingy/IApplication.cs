@@ -25,5 +25,6 @@ namespace Thingy
         int GetTabIndexByTitle(string Title);
         void FocusTabByIndex(int index);
         Task StartModule(IModule module);
+        void ModuleClosed(int ModuleId);
     }
 }

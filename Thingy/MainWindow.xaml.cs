@@ -37,6 +37,9 @@ namespace Thingy
             var headerModel = args.DragablzItem?.DataContext as HeaderedItemViewModel;
             App.Log.Info($"Closing Tab: {headerModel.Header.ToString()}");
             var viewInTab = headerModel.Content as UserControl;
+
+            var moduleId = viewInTab.Tag as int?;
+
             if (viewInTab.DataContext is IDisposable viewModel)
             {
                 App.Log.Info($"Dispose called for: {viewInTab.DataContext.GetType().FullName}");
@@ -49,6 +52,10 @@ namespace Thingy
                 view.Dispose();
             }
             viewInTab = null;
+            if (moduleId.HasValue)
+            {
+                App.Instance.TabManager.ModuleClosed(moduleId.Value);
+            }
             GC.WaitForPendingFinalizers();
             GC.Collect();
         }
@@ -58,7 +65,7 @@ namespace Thingy
             MenuFlyout.IsOpen = false; //hide menu
             if (newtab)
             {
-                var model = new Dragablz.HeaderedItemViewModel
+                var model = new HeaderedItemViewModel
                 {
                     Header = title,
                     Content = control
