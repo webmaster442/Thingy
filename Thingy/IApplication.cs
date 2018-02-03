@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using Thingy.Infrastructure;
 
 namespace Thingy
 {
@@ -12,11 +13,17 @@ namespace Thingy
         Task ShowMessageBox(CustomDialog messageBoxContent);
         Task HideMessageBox(CustomDialog messageBoxContent);
         void ShowStatusBarMenu(UserControl control, string title, bool AutoClose = true, int AutoCloseTimeMs = 5000);
-        void SetCurrentTabContent(string Title, UserControl control);
-        void ShowTabContent(string Title, UserControl control);
-        int FindTabByTitle(string Title);
-        void FocusTabByIndex(int index);
+        ITabManager TabManager { get; }
         void Close();
         void Restart();
+    }
+
+    public interface ITabManager
+    {
+        void SetCurrentTabContent(string Title, UserControl control);
+        void CreateNewTabContent(string Title, UserControl control);
+        int GetTabIndexByTitle(string Title);
+        void FocusTabByIndex(int index);
+        Task StartModule(IModule module);
     }
 }

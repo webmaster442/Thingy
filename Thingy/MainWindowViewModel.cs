@@ -30,7 +30,7 @@ namespace Thingy
 
         private void OpenAbout()
         {
-            _app.ShowTabContent("About", new Views.About());
+            _app.TabManager.CreateNewTabContent("About", new Views.About());
         }
 
         private void OpenMenu()
@@ -49,13 +49,13 @@ namespace Thingy
 
         private bool CanOpenSetting()
         {
-            int index = _app.FindTabByTitle("Settings");
+            int index = _app.TabManager.GetTabIndexByTitle("Settings");
             return index == -1;
         }
 
         private void Setting()
         {
-            _app.ShowTabContent("Settings", new Views.Settings());
+            _app.TabManager.CreateNewTabContent("Settings", new Views.Settings());
         }
 
         private void Exit()

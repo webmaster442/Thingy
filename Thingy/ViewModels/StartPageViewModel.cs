@@ -38,33 +38,7 @@ namespace Thingy.ViewModels
         private async void TileClick(string obj)
         {
             var module = _moduleLoader.GetModuleByName(obj);
-            if (module == null) return;
-            var control = module.RunModule();
-            if (control != null)
-            {
-                if (module.OpenAsWindow)
-                {
-                    await _application.ShowDialog(control, module.ModuleName);
-                }
-                else
-                {
-                    if (module.IsSingleInstance)
-                    {
-                        var index = _application.FindTabByTitle(module.ModuleName);
-                        if (index != -1)
-                        {
-                            await _application.ShowMessageBox("Single instance module", 
-                                                              "This module can only run in one instance. Switching to running module", 
-                                                              MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
-                            _application.FocusTabByIndex(index);
-                        }
-                        else
-                            _application.SetCurrentTabContent(obj, control);
-                    }
-                    else
-                        _application.SetCurrentTabContent(obj, control);
-                }
-            }
+            await _application.TabManager.StartModule(module);
         }
 
         public ObservableCollection<IModule> Modules

@@ -138,6 +138,7 @@
     <Compile Include="Modules\NoteModule.cs" />
     <Compile Include="Modules\ProgramsModule.cs" />
     <Compile Include="Infrastructure\Tray\TrayIcon.cs" />
+    <Compile Include="TabManager.cs" />
     <Compile Include="ViewModels\Calculator\CalculatorViewModel.cs" />
     <Compile Include="ViewModels\Calculator\DisplayChangerModel.cs" />
     <Compile Include="ViewModels\CurrencyConverterViewModel.cs" />

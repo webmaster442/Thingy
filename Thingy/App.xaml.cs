@@ -27,6 +27,12 @@ namespace Thingy
             get { return App.Current as IApplication; }
         }
 
+        public ITabManager TabManager
+        {
+            get;
+            private set;
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             Log = new AppLib.Common.Log.Logger();
@@ -71,6 +77,8 @@ namespace Thingy
 
             var dload = BingPhotoOfDay.WasSuccesfull;
 
+            this.TabManager = new TabManager(Instance, IoCContainer.ResolveSingleton<IModuleLoader>());
+
             App.Current.Dispatcher.Invoke(() =>
             {
                 MainClass.CommandLineParser.Parse(Environment.CommandLine);
@@ -92,26 +100,6 @@ namespace Thingy
         {
             Thingy.Properties.Settings.Default.Save();
             Current.Shutdown();
-        }
-
-        public int FindTabByTitle(string Title)
-        {
-            return (Current.MainWindow as MainWindow).FindTabByTitle(Title);
-        }
-
-        public void FocusTabByIndex(int index)
-        {
-            (Current.MainWindow as MainWindow).FocusTabByIndex(index);
-        }
-
-        public void ShowTabContent(string Title, UserControl control)
-        {
-            (Current.MainWindow as MainWindow).SetCurrentTabContent(Title, control, true);
-        }
-
-        public void SetCurrentTabContent(string Title, UserControl control)
-        {
-            (Current.MainWindow as MainWindow).SetCurrentTabContent(Title, control, false);
         }
 
         public async Task<bool> ShowDialog(UserControl control, string Title, INotifyPropertyChanged model = null)
