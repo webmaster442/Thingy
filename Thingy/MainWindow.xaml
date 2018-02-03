@@ -5,25 +5,29 @@
     xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
-    xmlns:statusbar="clr-namespace:Thingy.Views.Statusbar"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:Thingy.Properties"
+    xmlns:statusbar="clr-namespace:Thingy.Views.Statusbar"
     x:Name="Window"
     Title="Thingy"
     Width="{Binding Source={x:Static properties:Settings.Default}, Path=WindowWidth, Mode=TwoWay}"
     Height="{Binding Source={x:Static properties:Settings.Default}, Path=WindowHeight, Mode=TwoWay}"
+    AllowDrop="True"
     Closing="ModernWindow_Closing"
+    Drop="Window_Drop"
+    DragEnter="Window_DragEnter"
     Icon="pack://application:,,,/Thingy.Resources;component/Icons/icons8-swiss-army-knife-96.png"
     Loaded="ModernWindow_Loaded"
     mc:Ignorable="d">
     <mah:MetroWindow.Resources>
-        <Style TargetType="dragablz:TabablzControl">
-            <Setter Property="HeaderMemberPath" Value="Header"/>
-            <Setter Property="ItemContainerStyle" Value="{StaticResource TrapezoidDragableTabItemStyle}"/>
-            <Setter Property="NewItemFactory" Value="{Binding ItemFactory}"/>
-            <Setter Property="ShowDefaultAddButton" Value="True"/>
-            <Setter Property="ShowDefaultCloseButton" Value="True"/>
+        <Style
+            TargetType="dragablz:TabablzControl">
+            <Setter Property="HeaderMemberPath" Value="Header" />
+            <Setter Property="ItemContainerStyle" Value="{StaticResource TrapezoidDragableTabItemStyle}" />
+            <Setter Property="NewItemFactory" Value="{Binding ItemFactory}" />
+            <Setter Property="ShowDefaultAddButton" Value="True" />
+            <Setter Property="ShowDefaultCloseButton" Value="True" />
         </Style>
     </mah:MetroWindow.Resources>
     <mah:MetroWindow.RightWindowCommands>
@@ -92,11 +96,10 @@
             </mah:Flyout>
             <mah:Flyout
                 x:Name="StatusFlyOut"
-                Theme="Inverse"
-                Position="Bottom"
                 ClosingFinished="StatusFlyOut_ClosingFinished"
-                IsAutoCloseEnabled="True">
-            </mah:Flyout>
+                IsAutoCloseEnabled="True"
+                Position="Bottom"
+                Theme="Inverse" />
         </mah:FlyoutsControl>
     </mah:MetroWindow.Flyouts>
     <Grid>
@@ -110,10 +113,9 @@
             <dragablz:TabablzControl.HeaderPrefixContent>
                 <StackPanel
                     Orientation="Horizontal">
-                    <applib:DateTimeTextBlock 
+                    <applib:DateTimeTextBlock
                         FontSize="16"
-                        FontWeight="Bold">
-                    </applib:DateTimeTextBlock>
+                        FontWeight="Bold" />
                 </StackPanel>
             </dragablz:TabablzControl.HeaderPrefixContent>
             <dragablz:TabablzControl.InterTabController>

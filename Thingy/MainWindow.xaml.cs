@@ -2,6 +2,7 @@
 using Dragablz;
 using MahApps.Metro.Controls;
 using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Thingy.Properties;
@@ -131,6 +132,23 @@ namespace Thingy
         {
             if (e.SystemKey == Key.LeftAlt) ShowMenu();
             base.OnKeyDown(e);
+        }
+
+        private void Window_Drop(object sender, System.Windows.DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                App.Instance.HandleFiles(files);
+            }
+        }
+
+        private void Window_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effects = DragDropEffects.Copy;
+            else
+                e.Effects = DragDropEffects.None;
         }
     }
 }
