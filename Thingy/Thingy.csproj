@@ -39,7 +39,7 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Thingy.App</StartupObject>
+    <StartupObject>Thingy.MainClass</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonMark, Version=0.1.0.0, Culture=neutral, PublicKeyToken=001ef8810438905d, processorArchitecture=MSIL">
@@ -128,6 +128,7 @@
     <Compile Include="Infrastructure\IModuleLoader.cs" />
     <Compile Include="Infrastructure\JumpListFactory.cs" />
     <Compile Include="Infrastructure\ModuleLoader.cs" />
+    <Compile Include="MainClass.cs" />
     <Compile Include="Modules\CalculatorModule.cs" />
     <Compile Include="Modules\CurrencyConverterModule.cs" />
     <Compile Include="Modules\GreekAlphabetModule.cs" />

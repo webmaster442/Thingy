@@ -7,13 +7,11 @@ namespace Thingy.Infrastructure
     public class CommandLineParser
     {
         private IApplication _app;
-        private IModuleLoader _modules;
         private Dictionary<string, Action> _switchActions;
 
-        public CommandLineParser(IApplication app, IModuleLoader moduleLoader)
+        public CommandLineParser(IApplication app)
         {
             _app = app;
-            _modules = moduleLoader;
             _switchActions = new Dictionary<string, Action>();
             InitActions();
         }

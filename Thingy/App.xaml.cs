@@ -21,44 +21,17 @@ namespace Thingy
         public static AppLib.Common.IOC.IContainer IoCContainer { get; private set; }
         public static AppLib.Common.Log.ILogger Log { get; private set; }
         public static string[] Accents { get; private set; }
-        public static CommandLineParser CommandLineParser { get; private set; }
+
 
         public static IApplication Instance
         {
             get { return App.Current as IApplication; }
         }
 
-        [STAThread]
-        public static void Main()
-        {
-            const string appName = "Thingy";
-            var singleInstance = new AppLib.Common.SingleInstanceApp(appName);
-            singleInstance.CommandLineArgumentsRecieved += CommandLineArgumentsRecieved;
-            if (singleInstance.IsFirstInstance)
-            {
-                var application = new App();
-                application.InitializeComponent();
-                application.ShutdownMode = ShutdownMode.OnMainWindowClose;
-                application.Run();
-                singleInstance.Close();
-            }
-            else singleInstance.SubmitParameters();
-
-        }
-
-        private static void CommandLineArgumentsRecieved(string obj)
-        {
-            App.Current.Dispatcher.Invoke(() =>
-            {
-                CommandLineParser.Parse(obj);
-            });
-        }
-
         protected override void OnStartup(StartupEventArgs e)
         {
             Log = new AppLib.Common.Log.Logger();
             Log.Info("Application startup");
-
 
             var trayIcon = new Infrastructure.Tray.TrayIcon();
 
@@ -99,11 +72,10 @@ namespace Thingy
 
             var dload = BingPhotoOfDay.WasSuccesfull;
 
-            CommandLineParser = new CommandLineParser(App.Instance, IoCContainer.ResolveSingleton<IModuleLoader>());
-
-            JumpListFactory.CreateJumplist();
-
-            CommandLineArgumentsRecieved(Environment.CommandLine);
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                MainClass.CommandLineParser.Parse(Environment.CommandLine);
+            });
             base.OnStartup(e);
         }
 
