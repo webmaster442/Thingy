@@ -22,7 +22,6 @@ namespace Thingy
         public static AppLib.Common.Log.ILogger Log { get; private set; }
         public static string[] Accents { get; private set; }
 
-
         public static IApplication Instance
         {
             get { return App.Current as IApplication; }
@@ -92,27 +91,27 @@ namespace Thingy
         public void Close()
         {
             Thingy.Properties.Settings.Default.Save();
-            App.Current.Shutdown();
+            Current.Shutdown();
         }
 
         public int FindTabByTitle(string Title)
         {
-            return (App.Current.MainWindow as MainWindow).FindTabByTitle(Title);
+            return (Current.MainWindow as MainWindow).FindTabByTitle(Title);
         }
 
         public void FocusTabByIndex(int index)
         {
-            (App.Current.MainWindow as MainWindow).FocusTabByIndex(index);
+            (Current.MainWindow as MainWindow).FocusTabByIndex(index);
         }
 
         public void ShowTabContent(string Title, UserControl control)
         {
-            (App.Current.MainWindow as MainWindow).SetCurrentTabContent(Title, control, true);
+            (Current.MainWindow as MainWindow).SetCurrentTabContent(Title, control, true);
         }
 
         public void SetCurrentTabContent(string Title, UserControl control)
         {
-            (App.Current.MainWindow as MainWindow).SetCurrentTabContent(Title, control, false);
+            (Current.MainWindow as MainWindow).SetCurrentTabContent(Title, control, false);
         }
 
         public async Task<bool> ShowDialog(UserControl control, string Title, INotifyPropertyChanged model = null)
@@ -123,32 +122,32 @@ namespace Thingy
             modalDialog.DailogContent = control;
             modalDialog.Title = Title;
 
-            var result = await (App.Current.MainWindow as MainWindow).ShowChildWindowAsync<bool>(modalDialog);
+            var result = await (Current.MainWindow as MainWindow).ShowChildWindowAsync<bool>(modalDialog);
 
             return result;
         }
 
         public Task<MessageDialogResult> ShowMessageBox(string title, string content, MessageDialogStyle style)
         {
-            var mainwindow = (App.Current.MainWindow as MainWindow);
+            var mainwindow = (Current.MainWindow as MainWindow);
             return mainwindow.ShowMessageAsync(title, content, style);
         }
 
         public Task ShowMessageBox(CustomDialog messageBoxContent)
         {
-            var mainwindow = (App.Current.MainWindow as MainWindow);
+            var mainwindow = (Current.MainWindow as MainWindow);
             return mainwindow.ShowMetroDialogAsync(messageBoxContent);
         }
 
         public Task HideMessageBox(CustomDialog messageBoxContent)
         {
-            var mainwindow = (App.Current.MainWindow as MainWindow);
+            var mainwindow = (Current.MainWindow as MainWindow);
             return mainwindow.HideMetroDialogAsync(messageBoxContent);
         }
 
         public void ShowStatusBarMenu(UserControl control, string title, bool AutoClose = true, int AutoCloseTimeMs = 5000)
         {
-            var mainwindow = (App.Current.MainWindow as MainWindow);
+            var mainwindow = (Current.MainWindow as MainWindow);
             mainwindow.StatusFlyOut.Content = control;
             mainwindow.StatusFlyOut.AutoCloseInterval = AutoCloseTimeMs;
             mainwindow.StatusFlyOut.IsAutoCloseEnabled = AutoClose;
@@ -159,8 +158,8 @@ namespace Thingy
         public void Restart()
         {
             Thingy.Properties.Settings.Default.Save();
-            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-            Application.Current.Shutdown();
+            System.Diagnostics.Process.Start(ResourceAssembly.Location);
+            Current.Shutdown();
         }
         #endregion
     }
