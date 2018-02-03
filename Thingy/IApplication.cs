@@ -1,4 +1,5 @@
 ﻿using MahApps.Metro.Controls.Dialogs;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -16,6 +17,7 @@ namespace Thingy
         ITabManager TabManager { get; }
         void Close();
         void Restart();
+        void HandleFiles(IList<string> files);
     }
 
     public interface ITabManager

@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Collections.Generic;
+using System.Windows.Controls;
 using System.Windows.Media;
 using Thingy.Implementation;
 
@@ -41,6 +42,11 @@ namespace Thingy.Infrastructure
         public virtual bool IsSingleInstance
         {
             get { return false; }
+        }
+
+        public virtual IEnumerable<string> SupportedExtensions
+        {
+            get { return null; }
         }
     }
 }

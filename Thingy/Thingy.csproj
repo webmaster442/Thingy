@@ -127,6 +127,7 @@
     <Compile Include="Infrastructure\DBFileIconConverter.cs" />
     <Compile Include="Infrastructure\IModuleLoader.cs" />
     <Compile Include="Infrastructure\JumpListFactory.cs" />
+    <Compile Include="Infrastructure\Messages.cs" />
     <Compile Include="Infrastructure\ModuleLoader.cs" />
     <Compile Include="MainClass.cs" />
     <Compile Include="Modules\CalculatorModule.cs" />

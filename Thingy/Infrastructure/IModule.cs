@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Collections.Generic;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace Thingy.Infrastructure
@@ -14,5 +15,6 @@ namespace Thingy.Infrastructure
         string Category { get; }
         bool OpenAsWindow { get; }
         bool IsSingleInstance { get; }
+        IEnumerable<string> SupportedExtensions { get; }
     }
 }

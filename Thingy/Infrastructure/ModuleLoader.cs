@@ -111,5 +111,23 @@ namespace Thingy.Infrastructure
 
             return moduleToRun;
         }
+
+        public IModule GetModuleForFile(string file)
+        {
+            var extension = System.IO.Path.GetExtension(file);
+
+            var moduleToRun = (from module in _modules
+                               where module.SupportedExtensions != null &&
+                               module.SupportedExtensions.Contains(extension)
+                               select module).FirstOrDefault();
+
+            if (moduleToRun == null)
+            {
+                _log.Error("couldn't find module for extension: " + extension);
+                return null;
+            }
+
+            return moduleToRun;
+        }
     }
 }

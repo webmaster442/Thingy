@@ -8,5 +8,6 @@ namespace Thingy.Infrastructure
         IEnumerable<IModule> GetModulesForCategory(string category = null);
         IEnumerable<IModule> GetModulesByName(string searchname);
         IDictionary<string, int> CategoryModuleCount { get; }
+        IModule GetModuleForFile(string file);
     }
 }

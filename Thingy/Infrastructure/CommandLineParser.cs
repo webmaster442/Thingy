@@ -39,6 +39,8 @@ namespace Thingy.Infrastructure
                     action.Value.Invoke();
                 }
             }
+
+            _app.HandleFiles(parser.Files);
         }
     }
 }

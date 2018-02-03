@@ -3,6 +3,7 @@ using MahApps.Metro;
 using MahApps.Metro.Controls.Dialogs;
 using MahApps.Metro.SimpleChildWindow;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -148,6 +149,35 @@ namespace Thingy
             Thingy.Properties.Settings.Default.Save();
             System.Diagnostics.Process.Start(ResourceAssembly.Location);
             Current.Shutdown();
+        }
+
+        public async void HandleFiles(IList<string> files)
+        {
+            var loader = IoCContainer.ResolveSingleton<IModuleLoader>();
+            foreach (var file in files)
+            {
+                var module = loader.GetModuleForFile(file);
+                if (module.IsSingleInstance)
+                {
+                    int tabIndex = TabManager.GetTabIndexByTitle(module.ModuleName);
+                    if (tabIndex == -1)
+                    {
+                        await TabManager.StartModule(module);
+#warning send message here
+
+                    }
+                    else
+                    {
+                        TabManager.FocusTabByIndex(tabIndex);
+#warning send message here
+                    }
+                }
+                else
+                {
+                    await TabManager.StartModule(module);
+#warning send message here
+                }
+            }
         }
         #endregion
     }
