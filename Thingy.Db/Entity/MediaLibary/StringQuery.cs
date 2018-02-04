@@ -33,7 +33,7 @@ namespace Thingy.Db.Entity.MediaLibary
             get { return !string.IsNullOrEmpty(Value); }
         }
 
-        private bool IsMatch(string other)
+        public bool IsMatch(string other)
         {
             if (other == null && Value == null) return true;
             if (other == null || Value == null) return false;

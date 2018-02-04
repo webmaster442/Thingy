@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Thingy.Db.Entity.MediaLibary
 {
-    public class Query
+    public class SongQuery
     {
 		public StringQuery Artist { get; set; }
         public StringQuery Title { get; set; }
@@ -15,7 +15,7 @@ namespace Thingy.Db.Entity.MediaLibary
 		public IntQuery Year { get; set; }
 		public bool? Liked { get; set; }
 
-		public Query()
+		public SongQuery()
         {
             Artist = new StringQuery();
             Title = new StringQuery();
