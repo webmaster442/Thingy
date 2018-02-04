@@ -83,6 +83,8 @@ namespace Thingy.Views.Statusbar
             RAMProgress.Value = ram;
             RAMText.Text = string.Format("{0:0.00}%", ram);
             RAMAmount.Text = string.Format("{0} MB", PerformanceInfo.GetPhysicalAvailableMemoryInMiB());
+
+            BatteryInfo.UpdateBatteryInfo();
         }
 
         private void Slider_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
