@@ -22,8 +22,8 @@
         </Grid.RowDefinitions>
         <ListBox
             x:Name="NotesList"
-            Grid.Column="0"
             Grid.Row="0"
+            Grid.Column="0"
             ItemTemplate="{StaticResource Note}"
             ItemsSource="{Binding Notes}">
             <interactivity:Interaction.Triggers>
@@ -33,19 +33,16 @@
             </interactivity:Interaction.Triggers>
         </ListBox>
         <TabControl
-            Grid.Column="1"
             Grid.Row="0"
+            Grid.Column="1"
             TabStripPlacement="Bottom">
-            <TabItem
-                Header="Edit">
+            <TabItem Header="Edit">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <StackPanel
-                        Grid.Row="0"
-                        Orientation="Horizontal">
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
                         <Label
                             Margin="10,0"
                             Content="{Binding SelectedNote}"
@@ -54,9 +51,7 @@
                             Command="{Binding SaveNoteCommand}"
                             Content="Save Note"
                             Style="{StaticResource BigButton}" />
-                        <TextBlock
-                            Margin="3"
-                            Text="Font size:" />
+                        <TextBlock Margin="3" Text="Font size:" />
                         <applib:EditableSlider
                             x:Name="FontSizeSelector"
                             Height="20"
@@ -73,13 +68,12 @@
                         AcceptsTab="True"
                         FontFamily="{StaticResource UbuntuMono}"
                         FontSize="{Binding ElementName=FontSizeSelector, Path=Value, Converter={applib:FontPt2PxConverter}}"
+                        IsEnabled="{Binding CanEdit}"
                         Text="{Binding MarkDownText, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
             </TabItem>
-            <TabItem
-                Header="Preview">
-                <htmlrenderer:HtmlPanel
-                    Text="{Binding RenderedText}" />
+            <TabItem Header="Preview">
+                <htmlrenderer:HtmlPanel Text="{Binding RenderedText}" />
             </TabItem>
         </TabControl>
         <StackPanel

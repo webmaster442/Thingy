@@ -16,6 +16,7 @@ namespace Thingy.ViewModels
         private IApplication _app;
         private IDataBase _db;
         private bool _changed;
+        private bool _canedit;
 
         private string _MarkDownText;
         private string _RenderedText;
@@ -56,6 +57,12 @@ namespace Thingy.ViewModels
         {
             get { return _SelectedNote; }
             set { SetValue(ref _SelectedNote, value); }
+        }
+
+        public bool CanEdit
+        {
+            get { return _canedit; }
+            set { SetValue(ref _canedit, value); }
         }
 
         private void SaveToFile()
@@ -118,7 +125,8 @@ namespace Thingy.ViewModels
 
         private bool CanDeleteorSaveFile()
         {
-            return !string.IsNullOrEmpty(SelectedNote);
+            CanEdit = !string.IsNullOrEmpty(SelectedNote);
+            return CanEdit;
         }
 
         private void UpdateNote()
