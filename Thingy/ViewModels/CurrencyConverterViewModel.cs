@@ -3,6 +3,7 @@ using AppLib.MVVM;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -84,8 +85,8 @@ namespace Thingy.ViewModels
                     var parsed = new CurrencyRate
                     {
                         CurrencyCode = rate.Attribute("curr").Value,
-                        Unit = Convert.ToDecimal(rate.Attribute("unit").Value),
-                        ValueInForint = Convert.ToDecimal(rate.Value),
+                        Unit = Convert.ToDecimal(rate.Attribute("unit").Value, new CultureInfo("hu-HU")),
+                        ValueInForint = Convert.ToDecimal(rate.Value, new CultureInfo("hu-HU")),
                     };
                     result.Add(parsed);
                 }

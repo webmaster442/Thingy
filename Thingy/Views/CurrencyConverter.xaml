@@ -9,15 +9,12 @@
     d:DesignWidth="900"
     mc:Ignorable="d">
     <i:Interaction.Triggers>
-        <i:EventTrigger
-            EventName="Loaded">
-            <i:InvokeCommandAction
-                Command="{Binding UpdateCommand}" />
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding UpdateCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <UserControl.Resources>
-        <Style
-            TargetType="ComboBox">
+        <Style TargetType="ComboBox">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="Margin" Value="2" />
             <Setter Property="Width" Value="100" />
@@ -29,14 +26,9 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TabControl
-            Grid.Row="0"
-            TabStripPlacement="Top">
-            <TabItem
-                Header="Converter">
-                <Grid
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+        <TabControl Grid.Row="0" TabStripPlacement="Top">
+            <TabItem Header="Converter">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -44,12 +36,9 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition
-                            Width="Auto" />
-                        <ColumnDefinition
-                            Width="200" />
-                        <ColumnDefinition
-                            Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock
                         Grid.Row="0"
@@ -97,10 +86,10 @@
                         Text="{Binding Output}" />
                 </Grid>
             </TabItem>
-            <TabItem
-                Header="Rates">
+            <TabItem Header="Rates">
                 <DataGrid
                     AutoGenerateColumns="False"
+                    IsReadOnly="True"
                     ItemsSource="{Binding CurrencyRates}"
                     SelectionMode="Single"
                     SelectionUnit="FullRow">
@@ -122,14 +111,9 @@
                 </DataGrid>
             </TabItem>
         </TabControl>
-        <StackPanel
-            Grid.Row="1"
-            Orientation="Horizontal">
-            <TextBlock
-                Margin="10,0"
-                Text="Last update: " />
-            <TextBlock
-                Text="{Binding LastUpdate}" />
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBlock Margin="10,0" Text="Last update: " />
+            <TextBlock Text="{Binding LastUpdate}" />
             <Button
                 Margin="5"
                 Command="{Binding UpdateCommand}"
