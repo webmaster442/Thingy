@@ -50,14 +50,22 @@
     <Compile Include="..\Build-tools\CommonVersion.cs">
       <Link>CommonVersion.cs</Link>
     </Compile>
+    <Compile Include="CollectionNames.cs" />
     <Compile Include="DataBase.cs" />
     <Compile Include="Entity\Alarm.cs" />
     <Compile Include="Entity\FolderLink.cs" />
     <Compile Include="Entity\LauncherProgram.cs" />
     <Compile Include="Entity\Note.cs" />
+    <Compile Include="Implementation\Alarms.cs" />
+    <Compile Include="Implementation\Notes.cs" />
+    <Compile Include="Implementation\Programs.cs" />
     <Compile Include="Entity\ToDoItem.cs" />
     <Compile Include="Entity\VirtualFolder.cs" />
     <Compile Include="IDataBase.cs" />
+    <Compile Include="Implementation\FavoriteFolders.cs" />
+    <Compile Include="Implementation\ImplementationBase.cs" />
+    <Compile Include="Implementation\ToDo.cs" />
+    <Compile Include="Implementation\VirtualFolders.cs" />
     <Compile Include="Interfaces\IAlarms.cs" />
     <Compile Include="Interfaces\IFavoriteFolders.cs" />
     <Compile Include="Interfaces\INotes.cs" />
