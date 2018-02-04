@@ -31,5 +31,28 @@ namespace Thingy.Db.Entity.MediaLibary
         {
             get { return Value != null; }
         }
+
+
+        public bool IsMatch(int? other)
+        {
+            if (other == null && Value == null) return true;
+            if (other == null || Value == null) return false;
+
+            switch (Operator)
+            {
+                case IntOperator.Equals:
+                    return Value.Value == other.Value;
+                case IntOperator.Greater:
+                    return Value.Value > other.Value;
+                case IntOperator.GreaterOrEqual:
+                    return Value.Value >= other.Value;
+                case IntOperator.Less:
+                    return Value.Value < other.Value;
+                case IntOperator.LessOrEqual:
+                    return Value.Value <= other.Value;
+                default:
+                    return false;
+            }
+        }
     }
 }

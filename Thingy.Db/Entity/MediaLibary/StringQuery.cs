@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AppLib.Common.Extensions;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Thingy.Db.Entity.MediaLibary
 {
@@ -28,6 +31,26 @@ namespace Thingy.Db.Entity.MediaLibary
         public bool HasValue
         {
             get { return !string.IsNullOrEmpty(Value); }
+        }
+
+        private bool IsMatch(string other)
+        {
+            if (other == null && Value == null) return true;
+            if (other == null || Value == null) return false;
+
+            switch (Operator)
+            {
+                case StringOperator.Contains:
+                    return other.Contains(Value);
+                case StringOperator.ContainsIgnoreCase:
+                    return other.Contains(Value, StringComparison.InvariantCultureIgnoreCase);
+                case StringOperator.Exactmatch:
+                    return other == Value;
+                case StringOperator.ExactmatchIgnoreCase:
+                    return String.Compare(other, Value, true) == 0;
+                default:
+                    return false;
+            }
         }
     }
 }
