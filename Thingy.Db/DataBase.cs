@@ -23,6 +23,8 @@ namespace Thingy.Db
 
         public IAlarms Alarms { get; private set; }
 
+        public IStoredFiles StoredFiles { get; private set; }
+
         public DataBase(string file)
         {
             _filestream = File.Open(file, System.IO.FileMode.OpenOrCreate);
@@ -34,10 +36,15 @@ namespace Thingy.Db
             Programs = new Implementation.Programs(_db.GetCollection<LauncherProgram>(CollectionNames.Programs));
             Notes = new Implementation.Notes(_db.GetCollection<Note>(CollectionNames.Notes));
             Alarms = new Implementation.Alarms(_db.GetCollection<Alarm>(CollectionNames.Alarms));
+            StoredFiles = new Implementation.StoredFiles(_db);
         }
 
         public void Dispose()
         {
+            if (StoredFiles != null)
+            {
+                StoredFiles = null;
+            }
             if (_db != null)
             {
                 _db.Dispose();

@@ -50,7 +50,7 @@
     <Compile Include="..\Build-tools\CommonVersion.cs">
       <Link>CommonVersion.cs</Link>
     </Compile>
-    <Compile Include="CollectionNames.cs" />
+    <Compile Include="Constatnts.cs" />
     <Compile Include="DataBase.cs" />
     <Compile Include="Entity\Alarm.cs" />
     <Compile Include="Entity\FolderLink.cs" />
@@ -68,6 +68,7 @@
     <Compile Include="IDataBase.cs" />
     <Compile Include="Implementation\FavoriteFolders.cs" />
     <Compile Include="Implementation\ImplementationBase.cs" />
+    <Compile Include="Implementation\StoredFiles.cs" />
     <Compile Include="Implementation\ToDo.cs" />
     <Compile Include="Implementation\VirtualFolders.cs" />
     <Compile Include="Interfaces\IAlarms.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Interfaces\IMediaLibary.cs" />
     <Compile Include="Interfaces\INotes.cs" />
     <Compile Include="Interfaces\IPrograms.cs" />
+    <Compile Include="Interfaces\IStoredFiles.cs" />
     <Compile Include="Interfaces\ITodo.cs" />
     <Compile Include="Interfaces\IVirtualFolders.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

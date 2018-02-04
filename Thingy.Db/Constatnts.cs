@@ -9,4 +9,10 @@
         public const string Notes = "NotesCollection";
         public const string Alarms = "AlarmsCollection";
     }
+
+    public enum Folders
+    {
+        AlbumCovers,
+        AlbumsCache,
+    }
 }
