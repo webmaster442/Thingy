@@ -80,7 +80,7 @@ namespace Thingy.Implementation
         private string DecodeRuntime(object runtime)
         {
             uint time = Convert.ToUInt32(runtime);
-            if (time > 71582788)
+            if (time >= 71582700)
                 return "∞";
             else
                 return TimeSpan.FromMinutes(time).ToString();
