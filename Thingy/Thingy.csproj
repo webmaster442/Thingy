@@ -123,6 +123,7 @@
     <Compile Include="IApplication.cs" />
     <Compile Include="IMainWindow.cs" />
     <Compile Include="Infrastructure\AudioDeviceIndexToListIndexConverter.cs" />
+    <Compile Include="Infrastructure\Capabilities.cs" />
     <Compile Include="Infrastructure\CommandLineParser.cs" />
     <Compile Include="Infrastructure\DBFileIconConverter.cs" />
     <Compile Include="Infrastructure\IModuleLoader.cs" />

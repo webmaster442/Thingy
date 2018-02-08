@@ -105,6 +105,19 @@
                             </MenuItem>
                         </MenuItem>
                         <MenuItem
+                            Header="Module">
+                            <MenuItem
+                                Command="{Binding ModuleImportCommand}"
+                                Header="Import XML Data..." />
+                            <MenuItem
+                                Command="{Binding ModuleAppendCommand}"
+                                Header="Apend XML Data..." />
+                            <Separator />
+                            <MenuItem
+                                Command="{Binding ModuleExportCommand}"
+                                Header="Export XML Data..." />
+                        </MenuItem>
+                        <MenuItem
                             Background="Transparent"
                             Command="{Binding AboutCommand}"
                             Header="About...">
@@ -131,6 +144,7 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+
         <dragablz:TabablzControl
             x:Name="TabControl"
             Margin="3">
@@ -146,7 +160,32 @@
                 <dragablz:InterTabController />
             </dragablz:TabablzControl.InterTabController>
         </dragablz:TabablzControl>
+
         <statusbar:StatusbarView
             Grid.Row="1" />
+
+        <Grid
+            x:Name="BusyOverlay"
+            Visibility="Collapsed"
+            Grid.RowSpan="2"
+            Background="#AC000000">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <mah:ProgressRing
+                x:Name="BusyProgressRing"
+                Grid.Row="0"
+                VerticalAlignment="Bottom"
+                IsActive="False" />
+            <TextBlock
+                Grid.Row="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                FontFamily="{StaticResource Exo2}"
+                FontSize="32"
+                Foreground="White"
+                Text="Processing ..." />
+        </Grid>
     </Grid>
 </mah:MetroWindow>

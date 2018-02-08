@@ -14,6 +14,10 @@ namespace Thingy
         public DelegateCommand OpenMenuCommand { get; private set; }
         public DelegateCommand AboutCommand { get; private set; }
 
+        public DelegateCommand ModuleImportCommand { get; private set; }
+        public DelegateCommand ModuleAppendCommand { get; private set; }
+        public DelegateCommand ModuleExportCommand { get; private set; }
+
         private ILogger _log;
         private IApplication _app;
 
@@ -26,6 +30,86 @@ namespace Thingy
             LogCommand = Command.ToCommand(Log);
             OpenMenuCommand = Command.ToCommand(OpenMenu);
             AboutCommand = Command.ToCommand(OpenAbout);
+            ModuleImportCommand = Command.ToCommand(ModuleImport, CanImportExport);
+            ModuleExportCommand = Command.ToCommand(ModuleExport, CanImportExport);
+            ModuleAppendCommand = Command.ToCommand(ModuleAppend, CanImportExport);
+        }
+
+        private bool CanImportExport()
+        {
+            return View?.CurrentTabContent?.DataContext is ICanImportExportXMLData;
+        }
+
+        private async void ModuleExport()
+        {
+            var sfd = new System.Windows.Forms.SaveFileDialog();
+            sfd.Filter = "XML|*.xml";
+            if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                try
+                {
+                    var module = View?.CurrentTabContent?.DataContext as ICanImportExportXMLData;
+                    if (module != null)
+                    {
+                        using (var file = System.IO.File.OpenWrite(sfd.FileName))
+                        {
+                            await module.Export(file);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await _app.ShowMessageBox("Error", ex.Message, MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
+                }
+            }
+        }
+
+        private async void ModuleImport()
+        {
+            var ofd = new System.Windows.Forms.OpenFileDialog();
+            ofd.Filter = "XML|*.xml";
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                try
+                {
+                    var module = View?.CurrentTabContent?.DataContext as ICanImportExportXMLData;
+                    if (module != null)
+                    {
+                        using (var file = System.IO.File.OpenWrite(ofd.FileName))
+                        {
+                            await module.Import(file, false);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await _app.ShowMessageBox("Error", ex.Message, MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
+                }
+            }
+        }
+
+        private async void ModuleAppend()
+        {
+            var ofd = new System.Windows.Forms.OpenFileDialog();
+            ofd.Filter = "XML|*.xml";
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                try
+                {
+                    var module = View?.CurrentTabContent?.DataContext as ICanImportExportXMLData;
+                    if (module != null)
+                    {
+                        using (var file = System.IO.File.OpenWrite(ofd.FileName))
+                        {
+                            await module.Import(file, true);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await _app.ShowMessageBox("Error", ex.Message, MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
+                }
+            }
         }
 
         private void OpenAbout()

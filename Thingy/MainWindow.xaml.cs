@@ -23,6 +23,15 @@ namespace Thingy
             TabControl.ClosingItemCallback = TabClosing;
         }
 
+        public UserControl CurrentTabContent
+        {
+            get
+            {
+                var selected = TabControl.SelectedItem as HeaderedItemViewModel;
+                return selected.Content as UserControl;
+            }
+        }
+
         public void ShowHideMenu()
         {
             MenuFlyout.IsOpen = !MenuFlyout.IsOpen;
