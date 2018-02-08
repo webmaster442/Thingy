@@ -15,8 +15,8 @@
     Height="{Binding Source={x:Static properties:Settings.Default}, Path=WindowHeight, Mode=TwoWay}"
     AllowDrop="True"
     Closing="ModernWindow_Closing"
-    Drop="Window_Drop"
     DragEnter="Window_DragEnter"
+    Drop="Window_Drop"
     Icon="pack://application:,,,/Thingy.Resources;component/Icons/icons8-swiss-army-knife-96.png"
     Loaded="ModernWindow_Loaded"
     mc:Ignorable="d">
@@ -60,38 +60,62 @@
                 Theme="Inverse">
                 <StackPanel
                     Orientation="Horizontal">
-                    <applib:ImageButton
-                        Margin="5,0"
-                        Command="{Binding SettingCommand}"
-                        Content="Settings..."
-                        Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-services-96.png"
-                        ImageHeight="32"
-                        ImageWidth="32"
-                        Style="{StaticResource Flat}" />
-                    <applib:ImageButton
-                        Margin="5,0"
-                        Command="{Binding AboutCommand}"
-                        Content="About..."
-                        Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-about-96.png"
-                        ImageHeight="32"
-                        ImageWidth="32"
-                        Style="{StaticResource Flat}" />
-                    <applib:ImageButton
-                        Margin="5,0"
-                        Command="{Binding LogCommand}"
-                        Content="View Program Log"
-                        Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-edit-property-96.png"
-                        ImageHeight="32"
-                        ImageWidth="32"
-                        Style="{StaticResource Flat}" />
-                    <applib:ImageButton
-                        Margin="5,0"
-                        Command="{Binding ExitCommand}"
-                        Content="Exit Program"
-                        Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-exit-sign-96.png"
-                        ImageHeight="32"
-                        ImageWidth="32"
-                        Style="{StaticResource Flat}" />
+                    <Menu
+                        VerticalAlignment="Center"
+                        Background="Transparent">
+                        <MenuItem
+                            Background="Transparent"
+                            Header="Application">
+                            <MenuItem.Icon>
+                                <Image
+                                    Width="32"
+                                    Height="32"
+                                    Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-swiss-army-knife-96.png" />
+                            </MenuItem.Icon>
+                            <MenuItem
+                                Command="{Binding SettingCommand}"
+                                Header="Settings...">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="32"
+                                        Height="32"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-services-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem
+                                Command="{Binding LogCommand}"
+                                Header="View Log...">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="32"
+                                        Height="32"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-edit-property-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem
+                                Command="{Binding ExitCommand}"
+                                Header="Exit">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="32"
+                                        Height="32"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-exit-sign-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </MenuItem>
+                        <MenuItem
+                            Background="Transparent"
+                            Command="{Binding AboutCommand}"
+                            Header="About...">
+                            <MenuItem.Icon>
+                                <Image
+                                    Width="32"
+                                    Height="32"
+                                    Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-about-96.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </Menu>
                 </StackPanel>
             </mah:Flyout>
             <mah:Flyout

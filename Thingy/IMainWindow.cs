@@ -4,6 +4,6 @@ namespace Thingy
 {
     public interface IMainWindow: IView
     {
-        void ShowMenu();
+        void ShowHideMenu();
     }
 }

@@ -23,9 +23,9 @@ namespace Thingy
             TabControl.ClosingItemCallback = TabClosing;
         }
 
-        public void ShowMenu()
+        public void ShowHideMenu()
         {
-            MenuFlyout.IsOpen = true;
+            MenuFlyout.IsOpen = !MenuFlyout.IsOpen;
         }
 
         private string GetAssemblyVersion()
@@ -130,7 +130,7 @@ namespace Thingy
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            if (e.SystemKey == Key.LeftAlt) ShowMenu();
+            if (e.SystemKey == Key.LeftAlt) ShowHideMenu();
             base.OnKeyDown(e);
         }
 

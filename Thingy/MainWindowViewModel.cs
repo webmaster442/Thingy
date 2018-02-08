@@ -35,7 +35,7 @@ namespace Thingy
 
         private void OpenMenu()
         {
-            View.ShowMenu();
+            View.ShowHideMenu();
         }
 
         private void Log()
