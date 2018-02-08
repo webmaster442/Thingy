@@ -2,6 +2,7 @@
 using AppLib.MVVM;
 using Dragablz;
 using System;
+using System.Threading.Tasks;
 using Thingy.Infrastructure;
 
 namespace Thingy
@@ -53,12 +54,42 @@ namespace Thingy
                     {
                         using (var file = System.IO.File.OpenWrite(sfd.FileName))
                         {
+                            View.SetBusyOverlayVisibility(true);
                             await module.Export(file);
+                            View.SetBusyOverlayVisibility(false);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
+                    View.SetBusyOverlayVisibility(false);
+                    await _app.ShowMessageBox("Error", ex.Message, MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
+                }
+            }
+        }
+
+        private async Task DoImport(bool append)
+        {
+            var ofd = new System.Windows.Forms.OpenFileDialog();
+            ofd.Filter = "XML|*.xml";
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                try
+                {
+                    var module = View?.CurrentTabContent?.DataContext as ICanImportExportXMLData;
+                    if (module != null)
+                    {
+                        using (var file = System.IO.File.OpenWrite(ofd.FileName))
+                        {
+                            View.SetBusyOverlayVisibility(true);
+                            await module.Import(file, append);
+                            View.SetBusyOverlayVisibility(false);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    View.SetBusyOverlayVisibility(false);
                     await _app.ShowMessageBox("Error", ex.Message, MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
                 }
             }
@@ -66,50 +97,12 @@ namespace Thingy
 
         private async void ModuleImport()
         {
-            var ofd = new System.Windows.Forms.OpenFileDialog();
-            ofd.Filter = "XML|*.xml";
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                try
-                {
-                    var module = View?.CurrentTabContent?.DataContext as ICanImportExportXMLData;
-                    if (module != null)
-                    {
-                        using (var file = System.IO.File.OpenWrite(ofd.FileName))
-                        {
-                            await module.Import(file, false);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    await _app.ShowMessageBox("Error", ex.Message, MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
-                }
-            }
+            await DoImport(false);
         }
 
         private async void ModuleAppend()
         {
-            var ofd = new System.Windows.Forms.OpenFileDialog();
-            ofd.Filter = "XML|*.xml";
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                try
-                {
-                    var module = View?.CurrentTabContent?.DataContext as ICanImportExportXMLData;
-                    if (module != null)
-                    {
-                        using (var file = System.IO.File.OpenWrite(ofd.FileName))
-                        {
-                            await module.Import(file, true);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    await _app.ShowMessageBox("Error", ex.Message, MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
-                }
-            }
+            await DoImport(true);
         }
 
         private void OpenAbout()

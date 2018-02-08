@@ -20,6 +20,13 @@
     Icon="pack://application:,,,/Thingy.Resources;component/Icons/icons8-swiss-army-knife-96.png"
     Loaded="ModernWindow_Loaded"
     mc:Ignorable="d">
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo
+            x:Name="TaskbarItemInfo"
+            Description="Thingy"
+            ProgressState="None"
+            ProgressValue="0" />
+    </Window.TaskbarItemInfo>
     <mah:MetroWindow.Resources>
         <Style
             TargetType="dragablz:TabablzControl">
@@ -166,9 +173,9 @@
 
         <Grid
             x:Name="BusyOverlay"
-            Visibility="Collapsed"
             Grid.RowSpan="2"
-            Background="#AC000000">
+            Background="#AC000000"
+            Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />

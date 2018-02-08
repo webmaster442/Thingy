@@ -7,5 +7,6 @@ namespace Thingy
     {
         void ShowHideMenu();
         UserControl CurrentTabContent { get; }
+        void SetBusyOverlayVisibility(bool isVisible);
     }
 }

@@ -5,6 +5,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Shell;
 using Thingy.Properties;
 
 namespace Thingy
@@ -158,6 +159,13 @@ namespace Thingy
                 e.Effects = DragDropEffects.Copy;
             else
                 e.Effects = DragDropEffects.None;
+        }
+
+        public void SetBusyOverlayVisibility(bool isVisible)
+        {
+            TaskbarItemInfo.ProgressState = isVisible ? TaskbarItemProgressState.Indeterminate : TaskbarItemProgressState.None;
+            BusyOverlay.Visibility = isVisible ? Visibility.Visible : Visibility.Collapsed;
+            BusyProgressRing.IsActive = isVisible;
         }
     }
 }
