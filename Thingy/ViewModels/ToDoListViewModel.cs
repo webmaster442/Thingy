@@ -1,18 +1,22 @@
-﻿using AppLib.MVVM;
+﻿using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using AppLib.MVVM;
 using Thingy.Controls;
 using Thingy.Db;
 using Thingy.Db.Entity;
+using Thingy.Infrastructure;
 
 namespace Thingy.ViewModels
 {
-    public class ToDoListViewModel: ViewModel
+    public class ToDoListViewModel : ViewModel, ICanImportExportXMLData
     {
         private IDataBase _db;
         private IApplication _application;
 
-        public TrulyObservableCollection<ToDoItem> Pending { get;  set; }
+        public TrulyObservableCollection<ToDoItem> Pending { get; set; }
 
-        public TrulyObservableCollection<ToDoItem> Completed { get;  set; }
+        public TrulyObservableCollection<ToDoItem> Completed { get; set; }
 
         public DelegateCommand AddNewItemCommand { get; private set; }
 
@@ -64,7 +68,7 @@ namespace Thingy.ViewModels
             {
                 Pending.Add(item);
                 _db.Todo.SaveToDoItem(item);
-                
+
             }
         }
 
@@ -73,6 +77,36 @@ namespace Thingy.ViewModels
             _db.Todo.DeleteCompletedToDoItems();
             Pending.UpdateCollection(_db.Todo.GetUncompletedTasks());
             Completed.UpdateCollection(_db.Todo.GetCompletededTasks());
+        }
+
+        public Task Import(Stream xmlData, bool append)
+        {
+            return Task.Run(() =>
+            {
+                var import = EntitySerializer.Deserialize<ToDoItem[]>(xmlData);
+                if (append)
+                    _db.Todo.SaveToDoItems(import);
+                else
+                {
+                    _db.Todo.DeleteAll();
+                    _db.Todo.SaveToDoItems(import);
+                }
+                App.Current.Dispatcher.Invoke(() =>
+                {
+                    Pending.Clear();
+                    Pending.AddRange(_db.Todo.GetUncompletedTasks());
+                    Completed.Clear();
+                    Completed.AddRange(_db.Todo.GetCompletededTasks());
+                });
+            });
+        }
+
+        public Task Export(Stream xmlData)
+        {
+            return Task.Run(() =>
+            {
+                EntitySerializer.Serialize(xmlData, _db.Todo.GetAllTasks().ToArray());
+            });
         }
     }
 }

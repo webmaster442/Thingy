@@ -5,14 +5,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using Thingy.Db;
 using Thingy.Db.Entity;
+using Thingy.Infrastructure;
 
 namespace Thingy.ViewModels
 {
-    public class VirtualFoldersViewModel : ViewModel
+    public class VirtualFoldersViewModel : ViewModel, ICanImportExportXMLData
     {
         private IDataBase _db;
         private IApplication _app;
@@ -208,6 +211,30 @@ namespace Thingy.ViewModels
                 dialog.Show();
                 dialog.StartZip(CurrentFolder, saveFileDialog.FileName);
             }
+        }
+
+        public Task Import(Stream xmlData, bool append)
+        {
+            return Task.Run(() =>
+            {
+                var import = EntitySerializer.Deserialize<VirtualFolder[]>(xmlData);
+                if (append)
+                    _db.VirtualFolders.SaveVirtualFolders(import);
+                else
+                {
+                    _db.VirtualFolders.DeleteAll();
+                    _db.VirtualFolders.SaveVirtualFolders(import);
+                }
+                App.Current.Dispatcher.Invoke(() => Folders.UpdateWith(_db.VirtualFolders.GetVirtualFolders()));
+            });
+        }
+
+        public Task Export(Stream xmlData)
+        {
+            return Task.Run(() =>
+            {
+                EntitySerializer.Serialize(xmlData, Folders.ToArray());
+            });
         }
     }
 }

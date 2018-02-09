@@ -35,5 +35,15 @@ namespace Thingy.Db.Implementation
         {
             EntityCollection.Delete(f => f.Name == folderName);
         }
+
+        public void SaveVirtualFolders(IEnumerable<VirtualFolder> folders)
+        {
+            EntityCollection.InsertBulk(folders);
+        }
+
+        public void DeleteAll()
+        {
+            EntityCollection.Delete(item => true);
+        }
     }
 }

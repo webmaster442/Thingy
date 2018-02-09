@@ -55,5 +55,20 @@ namespace Thingy.Db.Implementation
                 EntityCollection.Delete(item => item.IsCompleted == true);
             }
         }
+
+        public IEnumerable<ToDoItem> GetAllTasks()
+        {
+            return EntityCollection.FindAll();
+        }
+
+        public void SaveToDoItems(IEnumerable<ToDoItem> itemtoSave)
+        {
+            EntityCollection.InsertBulk(itemtoSave);
+        }
+
+        public void DeleteAll()
+        {
+            EntityCollection.Delete(item => true);
+        }
     }
 }
