@@ -113,16 +113,43 @@
                         </MenuItem>
                         <MenuItem
                             Header="Module">
+                            <MenuItem.Icon>
+                                <Image
+                                    Width="32"
+                                    Height="32"
+                                    Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-module-96.png" />
+                            </MenuItem.Icon>
                             <MenuItem
                                 Command="{Binding ModuleImportCommand}"
-                                Header="Import XML Data..." />
+                                Header="Import XML Data...">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="32"
+                                        Height="32"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-import-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                             <MenuItem
                                 Command="{Binding ModuleAppendCommand}"
-                                Header="Apend XML Data..." />
+                                Header="Apend XML Data...">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="32"
+                                        Height="32"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-import-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                             <Separator />
                             <MenuItem
                                 Command="{Binding ModuleExportCommand}"
-                                Header="Export XML Data..." />
+                                Header="Export XML Data...">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="32"
+                                        Height="32"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-export-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                         </MenuItem>
                         <MenuItem
                             Background="Transparent"

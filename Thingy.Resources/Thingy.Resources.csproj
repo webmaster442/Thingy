@@ -258,5 +258,10 @@
     <Resource Include="BigIcons\icons8-swiss-army-knife-256.png" />
     <Resource Include="BigIcons\icons8-swiss-army-knife-540.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-export-96.png" />
+    <Resource Include="Icons\icons8-import-96.png" />
+    <Resource Include="Icons\icons8-module-96.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
