@@ -3,14 +3,17 @@ using AppLib.MVVM;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using Thingy.Db;
 using Thingy.Db.Entity;
+using Thingy.Infrastructure;
 
 namespace Thingy.ViewModels
 {
-    public class ProgramsViewModel: ViewModel
+    public class ProgramsViewModel: ViewModel, ICanImportExportXMLData
     {
         private IDataBase _db;
         private IApplication _application;
@@ -104,6 +107,30 @@ namespace Thingy.ViewModels
                 _db.Programs.SaveLauncherProgram(model);
                 ApplyFiltering();
             }
+        }
+
+        public Task Import(Stream xmlData, bool append)
+        {
+            return Task.Run(() =>
+            {
+                var import = EntitySerializer.Deserialize<LauncherProgram[]>(xmlData);
+                if (append)
+                    _db.Programs.SaveLauncherPrograms(import);
+                else
+                {
+                    _db.Programs.DeleteAll();
+                    _db.Programs.SaveLauncherPrograms(import);
+                }
+                App.Current.Dispatcher.Invoke(() => Programs.UpdateWith(_db.Programs.GetPrograms()));
+            });
+        }
+
+        public Task Export(Stream xmlData)
+        {
+            return Task.Run(() =>
+            {
+                EntitySerializer.Serialize(xmlData, Programs.ToArray());
+            });
         }
     }
 }

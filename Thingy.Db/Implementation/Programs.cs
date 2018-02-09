@@ -35,5 +35,15 @@ namespace Thingy.Db.Implementation
                 EntityCollection.Insert(newdata);
             }
         }
+
+        public void SaveLauncherPrograms(IEnumerable<LauncherProgram> programs)
+        {
+            EntityCollection.InsertBulk(programs);
+        }
+
+        public void DeleteAll()
+        {
+            EntityCollection.Delete(program => program.Name != null);
+        }
     }
 }
