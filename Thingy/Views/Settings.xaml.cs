@@ -21,7 +21,7 @@ namespace Thingy.Views
             if (AccentSelector.SelectedIndex > -1)
             {
                 var accent = App.Accents[AccentSelector.SelectedIndex];
-                ThemeManager.ChangeAppStyle(Application.Current,
+                ThemeManager.ChangeAppStyle(System.Windows.Application.Current,
                                   ThemeManager.GetAccent(accent),
                                   ThemeManager.GetAppTheme("BaseLight"));
                 Properties.Settings.Default.SelectedAccent = accent;

@@ -79,7 +79,7 @@ namespace Thingy
                     var module = View?.CurrentTabContent?.DataContext as ICanImportExportXMLData;
                     if (module != null)
                     {
-                        using (var file = System.IO.File.OpenWrite(ofd.FileName))
+                        using (var file = System.IO.File.OpenRead(ofd.FileName))
                         {
                             View.SetBusyOverlayVisibility(true);
                             await module.Import(file, append);

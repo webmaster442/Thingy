@@ -16,7 +16,7 @@ namespace Thingy.Infrastructure
 
         private MainWindow MainWindow
         {
-            get { return Application.Current.MainWindow as MainWindow; }
+            get { return System.Windows.Application.Current.MainWindow as MainWindow; }
         }
 
         public TabManager(IApplication application, IModuleLoader moduleLoader)

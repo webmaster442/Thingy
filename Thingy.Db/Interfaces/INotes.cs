@@ -7,6 +7,8 @@ namespace Thingy.Db
     {
         IEnumerable<Note> GetNotes();
         void SaveNote(Note note);
+        void SaveNotes(IEnumerable<Note> notes);
         void DeleteNote(string noteName);
+        void DeleteAll();
     }
 }

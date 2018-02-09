@@ -5,13 +5,16 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Xml.Serialization;
 using Thingy.Db;
 using Thingy.Db.Entity;
+using Thingy.Infrastructure;
 
 namespace Thingy.ViewModels
 {
-    public class NoteViewModel : ViewModel
+    public class NoteViewModel : ViewModel, ICanImportExportXMLData
     {
         private IApplication _app;
         private IDataBase _db;
@@ -161,6 +164,30 @@ namespace Thingy.ViewModels
             output.Append(str);
             output.Append("</body></html>");
             return output.ToString();
+        }
+
+        public Task Import(Stream xmlData, bool append)
+        {
+            return Task.Run(() =>
+            {
+                var import = EntitySerializer.Deserialize<Note[]>(xmlData);
+                if (append)
+                    _db.Notes.SaveNotes(import);
+                else
+                {
+                    _db.Notes.DeleteAll();
+                    _db.Notes.SaveNotes(import);
+                }
+                App.Current.Dispatcher.Invoke(() => Notes.UpdateWith(_db.Notes.GetNotes()));
+            });
+        }
+
+        public Task Export(Stream xmlData)
+        {
+            return Task.Run(() =>
+            {
+                EntitySerializer.Serialize(xmlData, Notes.ToArray());
+            });
         }
 
         public string MarkDownText

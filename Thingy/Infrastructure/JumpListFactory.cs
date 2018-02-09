@@ -38,7 +38,7 @@ namespace Thingy.Infrastructure
             appmenu.JumpItems.AddRange(Tasks);
             appmenu.ShowFrequentCategory = false;
             appmenu.ShowRecentCategory = false;
-            JumpList.SetJumpList(Application.Current, appmenu);
+            JumpList.SetJumpList(System.Windows.Application.Current, appmenu);
         }
     }
 }

@@ -74,7 +74,7 @@ namespace Thingy
             Log.Info("Module loader initialized");
 
             var accent = Thingy.Properties.Settings.Default.SelectedAccent;
-            ThemeManager.ChangeAppStyle(Application.Current,
+            ThemeManager.ChangeAppStyle(Current,
                               ThemeManager.GetAccent(accent),
                               ThemeManager.GetAppTheme("BaseLight"));
 

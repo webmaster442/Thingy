@@ -34,5 +34,15 @@ namespace Thingy.Db.Implementation
         {
             EntityCollection.Delete(n => n.Name == noteName);
         }
+
+        public void SaveNotes(IEnumerable<Note> notes)
+        {
+            EntityCollection.InsertBulk(notes);
+        }
+
+        public void DeleteAll()
+        {
+            EntityCollection.Delete(x => x.Name != null);
+        }
     }
 }
