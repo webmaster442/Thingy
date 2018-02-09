@@ -24,5 +24,15 @@ namespace Thingy.Db.Implementation
         {
             EntityCollection.Delete(folder => folder.Name == foldername);
         }
+
+        public void SaveFavoriteFolders(IEnumerable<FolderLink> favorites)
+        {
+            EntityCollection.InsertBulk(favorites);
+        }
+
+        public void DeleteAll()
+        {
+            EntityCollection.Delete(folder => folder.Name != null);
+        }
     }
 }

@@ -2,16 +2,19 @@
 using AppLib.MVVM;
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using Thingy.Db;
 using Thingy.Db.Entity;
 using Thingy.Implementation;
 using Thingy.Implementation.Models;
+using Thingy.Infrastructure;
 
 namespace Thingy.ViewModels
 {
-    public class PlacesViewModel : ViewModel
+    public class PlacesViewModel : ViewModel, ICanImportExportXMLData
     {
 
         private IDataBase _db;
@@ -92,6 +95,30 @@ namespace Thingy.ViewModels
                 _db.FavoriteFolders.DeleteFavoriteFolder(obj);
                 ApplyFiltering();
             }
+        }
+
+        public Task Import(Stream xmlData, bool append)
+        {
+            return Task.Run(() =>
+            {
+                var import = EntitySerializer.Deserialize<FolderLink[]>(xmlData);
+                if (append)
+                    _db.FavoriteFolders.SaveFavoriteFolders(import);
+                else
+                {
+                    _db.FavoriteFolders.DeleteAll();
+                    _db.FavoriteFolders.SaveFavoriteFolders(import);
+                }
+                App.Current.Dispatcher.Invoke(() => Folders.UpdateWith(_db.FavoriteFolders.GetFavoriteFolders()));
+            });
+        }
+
+        public Task Export(Stream xmlData)
+        {
+            return Task.Run(() =>
+            {
+                EntitySerializer.Serialize(xmlData, Folders.ToArray());
+            });
         }
     }
 }
