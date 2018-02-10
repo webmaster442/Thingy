@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Thingy.Infrastructure;
 
 namespace Thingy.Modules
@@ -16,13 +13,19 @@ namespace Thingy.Modules
             get { return "FFMpegGui"; }
         }
 
-        public override ImageSource Icon => throw new NotImplementedException();
+        public override ImageSource Icon
+        {
+            get { return new BitmapImage(new Uri("pack://application:,,,/Thingy.Resources;component/Icons/icons8-ffmpeg-96.png")); }
+        }
 
-        public override string Category => throw new NotImplementedException();
+        public override string Category
+        {
+            get { return ModuleCategories.Utilities; }
+        }
 
         public override UserControl RunModule()
         {
-            throw new NotImplementedException();
+            return new Views.FFMpegGui();
         }
     }
 }
