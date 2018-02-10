@@ -7,6 +7,9 @@ namespace Thingy.FFMpegGui
     {
         public List<BaseControl> Controls { get; }
 
+        public abstract string Name { get; }
+        public abstract string Description { get; }
+
         public Preset()
         {
             Controls = new List<BaseControl>();

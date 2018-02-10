@@ -51,7 +51,16 @@
     <Compile Include="Controls\BaseControl.cs" />
     <Compile Include="Controls\SliderControl.cs" />
     <Compile Include="Preset.cs" />
+    <Compile Include="PresetRenderer.xaml.cs">
+      <DependentUpon>PresetRenderer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="PresetRenderer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
