@@ -263,5 +263,8 @@
     <Resource Include="Icons\icons8-import-96.png" />
     <Resource Include="Icons\icons8-module-96.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-ffmpeg-96.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
