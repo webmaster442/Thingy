@@ -25,7 +25,10 @@ namespace Thingy.Modules
 
         public override UserControl RunModule()
         {
-            return new Views.FFMpegGui();
+            return new Views.FFMpegGui
+            {
+                DataContext = new ViewModels.FFMpegGuiViewModel()
+            };
         }
     }
 }

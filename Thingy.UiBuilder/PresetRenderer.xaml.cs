@@ -20,6 +20,22 @@ namespace Thingy.FFMpegGui
     /// </summary>
     public partial class PresetRenderer : UserControl
     {
+        public static readonly DependencyProperty PresetProperty =
+            DependencyProperty.Register("Preset", typeof(Preset), typeof(PresetRenderer), new PropertyMetadata(null, PresetChanged));
+
+        public Preset Preset
+        {
+            get { return (Preset)GetValue(PresetProperty); }
+            set { SetValue(PresetProperty, value); }
+        }
+
+        private static void PresetChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            PresetRenderer caller = d as PresetRenderer;
+            var presetToRender = e.NewValue as Preset;
+            caller.Render(presetToRender);
+        }
+
         public PresetRenderer()
         {
             InitializeComponent();
@@ -39,19 +55,26 @@ namespace Thingy.FFMpegGui
             return text;
         }
 
-        public void Render(Preset preset)
+        private void Render(Preset preset)
         {
-            if (preset == null) return;
             ContainerPanel.Children.Clear();
+            if (preset == null) return;
 
-            ContainerPanel.Children.Add(RenderText(preset.Name));
-            ContainerPanel.Children.Add(RenderText(preset.Description));
+            ContainerPanel.Children.Add(RenderText(preset.Name, "Name"));
+            ContainerPanel.Children.Add(RenderText(preset.Description, "Description"));
 
             foreach (var control in preset.Controls)
             {
                 if (!string.IsNullOrEmpty(control.Description))
                 {
-                    ContainerPanel.Children.Add(RenderText(control.Description));
+                    GroupBox group = new GroupBox();
+                    group.Header = control.Description;
+                    group.Content = control.Visual;
+                    ContainerPanel.Children.Add(group);
+
+                }
+                else
+                {
                     ContainerPanel.Children.Add(control.Visual);
                 }
             }

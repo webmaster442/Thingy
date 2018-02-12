@@ -8,6 +8,23 @@
     d:DesignHeight="300"
     d:DesignWidth="300"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style
+            x:Key="Name"
+            TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource Exo2}" />
+            <Setter Property="FontSize" Value="32" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style
+            x:Key="Description"
+            TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource Ubuntu}" />
+            <Setter Property="FontStyle" Value="Italic" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+    </UserControl.Resources>
     <ScrollViewer
         VerticalScrollBarVisibility="Auto">
         <StackPanel

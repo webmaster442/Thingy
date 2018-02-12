@@ -145,6 +145,7 @@
     <Compile Include="ViewModels\Calculator\CalculatorViewModel.cs" />
     <Compile Include="ViewModels\Calculator\DisplayChangerModel.cs" />
     <Compile Include="ViewModels\CurrencyConverterViewModel.cs" />
+    <Compile Include="ViewModels\FFMpegGuiViewModel.cs" />
     <Compile Include="ViewModels\MusicPlayer\MusicPlayerViewModel.cs" />
     <Compile Include="ViewModels\MusicPlayer\PlayListViewModel.cs" />
     <Compile Include="ViewModels\NoteViewModel.cs" />

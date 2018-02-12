@@ -54,10 +54,14 @@
                         Grid.Column="0"
                         Text="Preset" />
                     <ListBox
+                        x:Name="PresetList"
                         Grid.Row="1"
-                        Grid.Column="0" />
+                        Grid.Column="0"
+                        ItemsSource="{Binding Presets}">
+                    </ListBox>
                     <ffmpeg:PresetRenderer
                         Grid.Row="0"
+                        Preset="{Binding ElementName=PresetList, Path=SelectedItem}"
                         Grid.RowSpan="2"
                         Grid.Column="1" />
                 </Grid>
