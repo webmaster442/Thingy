@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Thingy.FFMpegGui
 {
@@ -41,6 +29,11 @@ namespace Thingy.FFMpegGui
             InitializeComponent();
         }
 
+        private Style GetStyle(string name)
+        {
+            return FindResource(name) as Style;
+        }
+
         private TextBlock RenderText(string s, string style = null)
         {
             TextBlock text = new TextBlock();
@@ -67,14 +60,18 @@ namespace Thingy.FFMpegGui
             {
                 if (!string.IsNullOrEmpty(control.Description))
                 {
-                    GroupBox group = new GroupBox();
-                    group.Header = control.Description;
-                    group.Content = control.Visual;
+                    GroupBox group = new GroupBox
+                    {
+                        Header = control.Description,
+                        Content = control.Visual,
+                        Style = GetStyle("Child")
+                    };
                     ContainerPanel.Children.Add(group);
 
                 }
                 else
                 {
+                    control.Visual.Style = GetStyle("Child");
                     ContainerPanel.Children.Add(control.Visual);
                 }
             }

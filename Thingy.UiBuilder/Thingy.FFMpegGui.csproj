@@ -50,6 +50,9 @@
     </Compile>
     <Compile Include="Controls\BaseControl.cs" />
     <Compile Include="Controls\OptionList.cs" />
+    <Compile Include="FileRenamer.xaml.cs">
+      <DependentUpon>FileRenamer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PresetList.cs" />
     <Compile Include="Controls\SliderControl.cs" />
     <Compile Include="Preset.cs" />
@@ -60,6 +63,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="FileRenamer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PresetRenderer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

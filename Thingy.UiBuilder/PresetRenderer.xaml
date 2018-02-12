@@ -12,17 +12,20 @@
         <Style
             x:Key="Name"
             TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="{StaticResource Exo2}" />
+            <Setter Property="Margin" Value="0,0,0,10"/>
             <Setter Property="FontSize" Value="32" />
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
         <Style
             x:Key="Description"
             TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="{StaticResource Ubuntu}" />
+            <Setter Property="Margin" Value="0,0,0,5"/>
             <Setter Property="FontStyle" Value="Italic" />
             <Setter Property="TextWrapping" Value="Wrap" />
             <Setter Property="FontSize" Value="14" />
+        </Style>
+        <Style x:Key="Child">
+            <Setter Property="Control.Margin" Value="10,0,0,5"/>
         </Style>
     </UserControl.Resources>
     <ScrollViewer

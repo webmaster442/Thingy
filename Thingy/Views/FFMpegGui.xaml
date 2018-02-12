@@ -10,68 +10,63 @@
     d:DesignHeight="300"
     d:DesignWidth="900"
     mc:Ignorable="d">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <TabControl
-            Grid.Row="0">
-            <TabItem
-                Header="Input Files">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <StackPanel
-                        Grid.Row="0"
-                        Orientation="Horizontal">
-                        <Button
-                            Content="Add files..." />
-                        <Button
-                            Content="Remove Selected..." />
-                        <Button
-                            Content="Clear list..." />
-                    </StackPanel>
-                    <ListBox
-                        Grid.Row="1" />
-                </Grid>
-            </TabItem>
-            <TabItem
-                Header="Presets">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <TextBlock
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Text="Preset" />
-                    <ListBox
-                        x:Name="PresetList"
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        ItemsSource="{Binding Presets}">
-                    </ListBox>
-                    <ffmpeg:PresetRenderer
-                        Grid.Row="0"
-                        Preset="{Binding ElementName=PresetList, Path=SelectedItem}"
-                        Grid.RowSpan="2"
-                        Grid.Column="1" />
-                </Grid>
-            </TabItem>
-        </TabControl>
-        <StackPanel
-            Grid.Row="1"
-            Orientation="Horizontal">
-            <Button
-                Content="Start" />
-        </StackPanel>
-    </Grid>
+    <TabControl>
+        <TabItem
+            Header="Input Files">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel
+                    Grid.Row="0"
+                    Orientation="Horizontal">
+                    <Button
+                        Margin="5,2"
+                        Command="{Binding AddFilesCommand}"
+                        Content="Add files..." />
+                    <Button
+                        Margin="0,0,5,2"
+                        Command="{Binding RemoveSelectedCommand}"
+                        CommandParameter="{Binding ElementName=FileList, Path=SelectedItem}"
+                        Content="Remove Selected..." />
+                    <Button
+                        Margin="2"
+                        Command="{Binding ClearListCommand}"
+                        Content="Clear list..." />
+                </StackPanel>
+                <ListBox
+                    x:Name="FileList"
+                    Grid.Row="1"
+                    ItemsSource="{Binding Files}" />
+            </Grid>
+        </TabItem>
+        <TabItem
+            Header="Presets">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Text="Preset" />
+                <ListBox
+                    x:Name="PresetList"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    ItemsSource="{Binding Presets}" />
+                <ffmpeg:PresetRenderer
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Grid.Column="1"
+                    Preset="{Binding ElementName=PresetList, Path=SelectedItem}" />
+            </Grid>
+        </TabItem>
+    </TabControl>
 </UserControl>
