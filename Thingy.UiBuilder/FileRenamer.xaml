@@ -3,13 +3,14 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:Thingy.FFMpegGui"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="300"
     d:DesignWidth="900"
+    x:Name="Control"
     mc:Ignorable="d">
     <UserControl.DataContext>
-        <local:FileRenamer/>
+        <local:FileRenamerViewModel/>
     </UserControl.DataContext>
     <UserControl.Resources>
         <Style
@@ -25,10 +26,30 @@
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Margin" Value="2" />
         </Style>
+        <Style
+            x:Key="PatternSelector"
+            TargetType="ComboBox">
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <StackPanel
+                            Orientation="Horizontal">
+                            <TextBlock
+                                Text="{Binding Key}" />
+                            <TextBlock
+                                Text=" - " />
+                            <TextBlock
+                                Text="{Binding Value}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="65" />
+            <RowDefinition Height="24"/>
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
@@ -41,7 +62,7 @@
         <GroupBox
             Grid.Row="0"
             Grid.Column="0"
-            Header="File name">
+            Header="File name" Grid.RowSpan="2">
             <Grid
                 VerticalAlignment="Bottom">
                 <Grid.RowDefinitions>
@@ -53,12 +74,14 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBox
-                    Text="{Binding FilenamePattern}"
                     Grid.Row="0"
-                    Grid.ColumnSpan="2" />
+                    Grid.ColumnSpan="2"
+                    Text="{Binding FilenamePattern, UpdateSourceTrigger=PropertyChanged}" />
                 <ComboBox
                     Grid.Row="1"
-                    Grid.Column="0" />
+                    Grid.Column="0"
+                    ItemsSource="{Binding PatternParts}"
+                    SelectedIndex="0" />
                 <Button
                     Grid.Row="1"
                     Grid.Column="1"
@@ -68,7 +91,7 @@
         <GroupBox
             Grid.Row="0"
             Grid.Column="1"
-            Header="Extension">
+            Header="Extension" Grid.RowSpan="2">
             <Grid
                 VerticalAlignment="Bottom">
                 <Grid.RowDefinitions>
@@ -80,12 +103,14 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBox
-                    Text="{Binding ExtensionPattern}"
                     Grid.Row="0"
-                    Grid.ColumnSpan="2" />
+                    Grid.ColumnSpan="2"
+                    Text="{Binding ExtensionPattern, UpdateSourceTrigger=PropertyChanged}" />
                 <ComboBox
                     Grid.Row="1"
-                    Grid.Column="0" />
+                    Grid.Column="0"
+                    ItemsSource="{Binding PatternParts}"
+                    SelectedIndex="0" />
                 <Button
                     Grid.Row="1"
                     Grid.Column="1"
@@ -95,7 +120,7 @@
         <GroupBox
             Grid.Row="0"
             Grid.Column="2"
-            Header="Search and Replace">
+            Header="Search and Replace" Grid.RowSpan="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -112,28 +137,32 @@
                     Text="Search:" />
                 <TextBox
                     Grid.Row="0"
-                    Grid.Column="1" />
+                    Grid.Column="1"
+                    Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBlock
                     Grid.Row="1"
                     Grid.Column="0"
                     Text="Replace:" />
                 <TextBox
                     Grid.Row="1"
-                    Grid.Column="1" />
+                    Grid.Column="1"
+                    Text="{Binding ReplaceText, UpdateSourceTrigger=PropertyChanged}" />
                 <StackPanel
                     Grid.Row="2"
                     Grid.ColumnSpan="2"
                     Orientation="Horizontal">
                     <CheckBox
-                        Content="RegExp" />
-                    <ComboBox />
+                        IsChecked="{Binding IsRegex}"
+                        Content="RegExp"
+                        VerticalAlignment="Center"
+                        Margin="5,0"/>
                 </StackPanel>
             </Grid>
         </GroupBox>
         <GroupBox
             Grid.Row="0"
             Grid.Column="3"
-            Header="Counter">
+            Header="Counter" Grid.RowSpan="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -158,27 +187,48 @@
                     Text="Digits" />
                 <TextBox
                     Grid.Row="0"
-                    Grid.Column="1" />
+                    Grid.Column="1"
+                    Text="{Binding CounterStart}" />
                 <TextBox
                     Grid.Row="1"
-                    Grid.Column="1" />
+                    Grid.Column="1"
+                    Text="{Binding CounterIncrement}" />
                 <TextBox
                     Grid.Row="2"
-                    Grid.Column="1" />
+                    Grid.Column="1"
+                    Text="{Binding CounterDigits}" />
             </Grid>
         </GroupBox>
         <TextBlock
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.Column="2"
             HorizontalAlignment="Right"
-            Text="Total Files: " />
+            Text="Total Files: " Margin="0,2,1,2" />
         <TextBlock
-            HorizontalAlignment="Left"
-            Grid.Row="1"
-            Grid.Column="3"
-            Text="0" />
-        <ListBox
             Grid.Row="2"
-            Grid.ColumnSpan="4" />
+            Grid.Column="3"
+            HorizontalAlignment="Left"
+            Text="{Binding ElementName=FileList, Path=Items.Count}" Margin="2,2,0,2" />
+        <DataGrid
+            x:Name="FileList"
+            Grid.Row="3"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            CanUserReorderColumns="True"
+            CanUserSortColumns="True"
+            CanUserResizeColumns="True"
+            Grid.ColumnSpan="4">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Width="*"
+                    Header="Input File"
+                    Binding="{Binding Item1}"/>
+                <DataGridTextColumn
+                    Width="*"
+                    Header="Output file"
+                    Binding="{Binding Item2}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>
