@@ -9,9 +9,6 @@
     d:DesignWidth="900"
     x:Name="Control"
     mc:Ignorable="d">
-    <UserControl.DataContext>
-        <local:FileRenamerViewModel/>
-    </UserControl.DataContext>
     <UserControl.Resources>
         <Style
             TargetType="TextBox">
@@ -48,8 +45,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="65" />
-            <RowDefinition Height="24"/>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
@@ -62,7 +58,7 @@
         <GroupBox
             Grid.Row="0"
             Grid.Column="0"
-            Header="File name" Grid.RowSpan="2">
+            Header="File name">
             <Grid
                 VerticalAlignment="Bottom">
                 <Grid.RowDefinitions>
@@ -76,11 +72,11 @@
                 <TextBox
                     Grid.Row="0"
                     Grid.ColumnSpan="2"
-                    Text="{Binding FilenamePattern, UpdateSourceTrigger=PropertyChanged}" />
+                    Text="{Binding ElementName=Control, Path=FilenamePattern, UpdateSourceTrigger=PropertyChanged}" />
                 <ComboBox
                     Grid.Row="1"
                     Grid.Column="0"
-                    ItemsSource="{Binding PatternParts}"
+                    ItemsSource="{Binding ElementName=Control, Path=PatternParts}"
                     SelectedIndex="0" />
                 <Button
                     Grid.Row="1"
@@ -91,7 +87,7 @@
         <GroupBox
             Grid.Row="0"
             Grid.Column="1"
-            Header="Extension" Grid.RowSpan="2">
+            Header="Extension">
             <Grid
                 VerticalAlignment="Bottom">
                 <Grid.RowDefinitions>
@@ -105,11 +101,11 @@
                 <TextBox
                     Grid.Row="0"
                     Grid.ColumnSpan="2"
-                    Text="{Binding ExtensionPattern, UpdateSourceTrigger=PropertyChanged}" />
+                    Text="{Binding ElementName=Control, Path=ExtensionPattern, UpdateSourceTrigger=PropertyChanged}" />
                 <ComboBox
                     Grid.Row="1"
                     Grid.Column="0"
-                    ItemsSource="{Binding PatternParts}"
+                    ItemsSource="{Binding ElementName=Control, Path=PatternParts}"
                     SelectedIndex="0" />
                 <Button
                     Grid.Row="1"
@@ -120,7 +116,7 @@
         <GroupBox
             Grid.Row="0"
             Grid.Column="2"
-            Header="Search and Replace" Grid.RowSpan="2">
+            Header="Search and Replace">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -138,7 +134,7 @@
                 <TextBox
                     Grid.Row="0"
                     Grid.Column="1"
-                    Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                    Text="{Binding ElementName=Control, Path=SearchText, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBlock
                     Grid.Row="1"
                     Grid.Column="0"
@@ -146,13 +142,13 @@
                 <TextBox
                     Grid.Row="1"
                     Grid.Column="1"
-                    Text="{Binding ReplaceText, UpdateSourceTrigger=PropertyChanged}" />
+                    Text="{Binding ElementName=Control, Path=ReplaceText, UpdateSourceTrigger=PropertyChanged}" />
                 <StackPanel
                     Grid.Row="2"
                     Grid.ColumnSpan="2"
                     Orientation="Horizontal">
                     <CheckBox
-                        IsChecked="{Binding IsRegex}"
+                        IsChecked="{Binding ElementName=Control, Path=IsRegex}"
                         Content="RegExp"
                         VerticalAlignment="Center"
                         Margin="5,0"/>
@@ -162,7 +158,7 @@
         <GroupBox
             Grid.Row="0"
             Grid.Column="3"
-            Header="Counter" Grid.RowSpan="2">
+            Header="Counter">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -188,27 +184,27 @@
                 <TextBox
                     Grid.Row="0"
                     Grid.Column="1"
-                    Text="{Binding CounterStart}" />
+                    Text="{Binding ElementName=Control, Path=CounterStart}" />
                 <TextBox
                     Grid.Row="1"
                     Grid.Column="1"
-                    Text="{Binding CounterIncrement}" />
+                    Text="{Binding ElementName=Control, Path=CounterIncrement}" />
                 <TextBox
                     Grid.Row="2"
                     Grid.Column="1"
-                    Text="{Binding CounterDigits}" />
+                    Text="{Binding ElementName=Control, Path=CounterDigits}" />
             </Grid>
         </GroupBox>
         <TextBlock
-            Grid.Row="2"
+            Grid.Row="1"
             Grid.Column="2"
             HorizontalAlignment="Right"
-            Text="Total Files: " Margin="0,2,1,2" />
+            Text="Total Files: " />
         <TextBlock
-            Grid.Row="2"
+            Grid.Row="1"
             Grid.Column="3"
             HorizontalAlignment="Left"
-            Text="{Binding ElementName=FileList, Path=Items.Count}" Margin="2,2,0,2" />
+            Text="{Binding ElementName=FileList, Path=Items.Count}" />
         <DataGrid
             x:Name="FileList"
             Grid.Row="3"
@@ -217,7 +213,8 @@
             CanUserDeleteRows="False"
             CanUserReorderColumns="True"
             CanUserSortColumns="True"
-            CanUserResizeColumns="True"
+            CanUserResizeColumns="true"
+            ItemsSource="{Binding ElementName=Control, Path=RenameTable}"
             Grid.ColumnSpan="4">
             <DataGrid.Columns>
                 <DataGridTextColumn

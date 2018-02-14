@@ -68,5 +68,8 @@
                     Preset="{Binding ElementName=PresetList, Path=SelectedItem}" />
             </Grid>
         </TabItem>
+        <TabItem Header="File names">
+            <ffmpeg:FileRenamer/>
+        </TabItem>
     </TabControl>
 </UserControl>
