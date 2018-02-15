@@ -154,11 +154,12 @@ namespace Thingy.FFMpegGui
         {
             FileRenamer fr = d as FileRenamer;
             var current = e.NewValue as ObservableCollection<string>;
+            var old = e.OldValue as ObservableCollection<string>;
 
-            if (fr.InputFiles != null)
-                fr.InputFiles.CollectionChanged -= fr.InputCollectionChanged;
+            if (old != null)
+                old.CollectionChanged -= fr.InputCollectionChanged;
             else
-                fr.InputFiles.CollectionChanged += fr.InputCollectionChanged;
+                current.CollectionChanged += fr.InputCollectionChanged;
         }
 
         private void InputCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
