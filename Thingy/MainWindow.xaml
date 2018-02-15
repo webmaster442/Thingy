@@ -22,7 +22,7 @@
     mc:Ignorable="d">
     <Window.TaskbarItemInfo>
         <TaskbarItemInfo
-            x:Name="TaskbarItemInfo"
+            x:Name="TaskbarInfo"
             Description="Thingy"
             ProgressState="None"
             ProgressValue="0" />

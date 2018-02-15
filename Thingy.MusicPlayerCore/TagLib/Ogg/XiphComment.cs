@@ -56,7 +56,7 @@ namespace TagLib.Ogg
 		///    Contains the field identifier to use for <see
 		///    cref="Comment" />.
 		/// </summary>
-		private string comment_field = "DESCRIPTION";
+		///private string comment_field = "DESCRIPTION";
 
 		/// <summary>
 		///    Picture instances parsed from the fields.

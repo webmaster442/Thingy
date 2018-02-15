@@ -24,7 +24,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <ContentControl
-            x:Name="Content"
+            x:Name="Presenter"
             Grid.Row="0"
             MinWidth="350"
             HorizontalAlignment="Stretch"

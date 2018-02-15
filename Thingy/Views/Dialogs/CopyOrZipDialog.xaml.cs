@@ -20,6 +20,7 @@ namespace Thingy.Views.Dialogs
         {
             InitializeComponent();
             _progress = new Progress<double>(DisplayProgress);
+            _log = log;
         }
 
         private void DisplayProgress(double obj)
