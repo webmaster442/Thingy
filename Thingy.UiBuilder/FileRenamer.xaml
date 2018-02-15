@@ -74,11 +74,13 @@
                     Grid.ColumnSpan="2"
                     Text="{Binding ElementName=Control, Path=FilenamePattern, UpdateSourceTrigger=PropertyChanged}" />
                 <ComboBox
+                    x:Name="FileNamePatterns"
                     Grid.Row="1"
                     Grid.Column="0"
-                    ItemsSource="{Binding ElementName=Control, Path=PatternParts}"
                     SelectedIndex="0" />
                 <Button
+                    x:Name="InsertFilenamePattern"
+                    Click="InsertFilenamePattern_Click"
                     Grid.Row="1"
                     Grid.Column="1"
                     Content="Insert" />
@@ -103,11 +105,13 @@
                     Grid.ColumnSpan="2"
                     Text="{Binding ElementName=Control, Path=ExtensionPattern, UpdateSourceTrigger=PropertyChanged}" />
                 <ComboBox
+                    x:Name="ExtensionPatterns"
                     Grid.Row="1"
                     Grid.Column="0"
-                    ItemsSource="{Binding ElementName=Control, Path=PatternParts}"
                     SelectedIndex="0" />
                 <Button
+                    x:Name="InsertExtensionPattern"
+                    Click="InsertExtensionPattern_Click"
                     Grid.Row="1"
                     Grid.Column="1"
                     Content="Insert" />

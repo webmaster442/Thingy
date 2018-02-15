@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -16,8 +17,12 @@ namespace Thingy.FFMpegGui
         public FileRenamer()
         {
             InitializeComponent();
-            InputFiles = new ObservableCollection<string>();
+            FilenamePattern = "";
+            ExtensionPattern = "";
+            SearchText = "";
+            ReplaceText = "";
             RenameTable = new ObservableCollection<Tuple<string, string>>();
+            InputFiles = new ObservableCollection<string>();
             PatternParts = new Dictionary<string, string>
             {
                 { "[Y]", "Year" },
@@ -30,6 +35,8 @@ namespace Thingy.FFMpegGui
                 { "[E]", "Extension" },
                 { "[N]", "File name" },
             };
+            FileNamePatterns.ItemsSource = PatternParts;
+            ExtensionPatterns.ItemsSource = PatternParts;
         }
 
         public Dictionary<string, string> PatternParts
@@ -63,7 +70,7 @@ namespace Thingy.FFMpegGui
         }
 
         public static readonly DependencyProperty InputFilesProperty =
-            DependencyProperty.Register("InputFiles", typeof(ObservableCollection<string>), typeof(FileRenamer), new PropertyMetadata(null, DPChanged));
+            DependencyProperty.Register("InputFiles", typeof(ObservableCollection<string>), typeof(FileRenamer), new PropertyMetadata(null, InputChanged));
 
         public string FilenamePattern
         {
@@ -139,11 +146,30 @@ namespace Thingy.FFMpegGui
 
         private static void DPChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            FileRenamer fr = d as FileRenamer;
+            fr.ProcessTags();
+        }
+
+        private static void InputChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            FileRenamer fr = d as FileRenamer;
+            var current = e.NewValue as ObservableCollection<string>;
+
+            if (fr.InputFiles != null)
+                fr.InputFiles.CollectionChanged -= fr.InputCollectionChanged;
+            else
+                fr.InputFiles.CollectionChanged += fr.InputCollectionChanged;
+        }
+
+        private void InputCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            ProcessTags();
         }
 
         private void ProcessTags()
         {
+            if (InputFiles == null || InputFiles.Count == 0) return;
+
             RenameTable.Clear();
 
             int counter = CounterStart;
@@ -157,38 +183,61 @@ namespace Thingy.FFMpegGui
                 { "[s]", DateTime.Now.Second.ToString() },
             };
 
-            var targetName = FilenamePattern;
-            var targetExtension = ExtensionPattern;
-
-            foreach (var entry in timeTable)
-            {
-                targetName = targetName.Replace(entry.Key, entry.Value);
-                targetExtension = targetExtension.Replace(entry.Key, entry.Value);
-            }
-
             foreach (var file in InputFiles)
             {
-                var fileShortName = Path.GetFileName(file);
+                var targetName = FilenamePattern;
+                var targetExtension = ExtensionPattern;
+
+                foreach (var entry in timeTable)
+                {
+                    targetName = targetName.Replace(entry.Key, entry.Value);
+                    targetExtension = targetExtension.Replace(entry.Key, entry.Value);
+                }
+
+                var fileShortName = Path.GetFileNameWithoutExtension(file);
                 var fileExtension = Path.GetExtension(file);
                 var counterstring = counter.ToString().PadLeft(CounterDigits, '0');
                 counter += CounterIncrement;
 
                 targetName = targetName.Replace("[c]", counterstring);
                 targetExtension = targetExtension.Replace("[c]", counterstring);
+
                 targetName = targetName.Replace("[E]", fileExtension);
                 targetExtension = targetExtension.Replace("[E]", fileExtension);
-                targetName = targetName.Replace("[N]", fileExtension);
-                targetExtension = targetExtension.Replace("[N]", fileExtension);
 
-                var completedname = Path.Combine(OutputFolder, $"{targetName}.{targetExtension}");
+                targetName = targetName.Replace("[N]", fileShortName);
+                targetExtension = targetExtension.Replace("[N]", fileShortName);
 
-                if (IsRegex)
-                    completedname = Regex.Replace(completedname, SearchText, ReplaceText);
-                else
-                    completedname = completedname.Replace(SearchText, ReplaceText);
+                if (!string.IsNullOrEmpty(targetExtension))
+                {
+                    targetExtension = "." + targetExtension;
+                }
+                var completedname = Path.Combine(OutputFolder, $"{targetName}{targetExtension}");
+
+                if (!string.IsNullOrEmpty(SearchText))
+                {
+                    if (IsRegex)
+                        completedname = Regex.Replace(completedname, SearchText, ReplaceText);
+                    else
+                        completedname = completedname.Replace(SearchText, ReplaceText);
+                }
 
                 RenameTable.Add(Tuple.Create(file, completedname));
             }
+        }
+
+        private void InsertFilenamePattern_Click(object sender, RoutedEventArgs e)
+        {
+            if (FileNamePatterns.SelectedItem == null) return;
+            var item = (KeyValuePair<string, string>)FileNamePatterns.SelectedItem;
+            FilenamePattern += item.Key;
+        }
+
+        private void InsertExtensionPattern_Click(object sender, RoutedEventArgs e)
+        {
+            if (ExtensionPatterns.SelectedItem == null) return;
+            var item = (KeyValuePair<string, string>)ExtensionPatterns.SelectedItem;
+            ExtensionPattern += item.Key;
         }
     }
 }

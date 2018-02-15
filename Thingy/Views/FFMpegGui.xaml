@@ -34,6 +34,16 @@
                         Margin="2"
                         Command="{Binding ClearListCommand}"
                         Content="Clear list..." />
+
+                    <TextBlock
+                        Margin="5,0"
+                        Text="Output Folder:" />
+
+                    <applib:FileSelector
+                        x:Name="FolderSelector"
+                        Width="290"
+                        Filter="folder" />
+
                 </StackPanel>
                 <ListBox
                     x:Name="FileList"
@@ -60,7 +70,15 @@
                     x:Name="PresetList"
                     Grid.Row="1"
                     Grid.Column="0"
-                    ItemsSource="{Binding Presets}" />
+                    ItemsSource="{Binding Presets}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                FontWeight="Bold"
+                                Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
                 <ffmpeg:PresetRenderer
                     Grid.Row="0"
                     Grid.RowSpan="2"
@@ -68,8 +86,33 @@
                     Preset="{Binding ElementName=PresetList, Path=SelectedItem}" />
             </Grid>
         </TabItem>
-        <TabItem Header="File names">
-            <ffmpeg:FileRenamer/>
+        <TabItem
+            Header="File names">
+            <ffmpeg:FileRenamer
+                InputFiles="{Binding Files, Mode=OneWay}"
+                OutputFolder="{Binding ElementName=FolderSelector, Path=SelectedFile}" />
+        </TabItem>
+        <TabItem
+            Header="Generated Bach">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel
+                    Orientation="Horizontal">
+                    <Button
+                        Margin="5,2"
+                        Content="Save to file" />
+                    <Button
+                        Content="Execute" />
+                </StackPanel>
+                <TextBox
+                    Grid.Row="1"
+                    AcceptsReturn="True"
+                    AcceptsTab="True"
+                    IsReadOnly="True" />
+            </Grid>
         </TabItem>
     </TabControl>
 </UserControl>

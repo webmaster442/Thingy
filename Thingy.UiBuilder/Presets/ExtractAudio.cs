@@ -16,7 +16,14 @@ namespace Thingy.FFMpegGui.Presets
 
         public override string CommandLine
         {
-            get { return ""; }
+            get
+            {
+                var format = this["formatoptions.SelectedIndex"];
+                if (format == "0")
+                    return $"ffmpeg.exe -i \"{InputFile}\" -vn -acodec copy \"{OutputFile}\"";
+                else
+                    return $"ffmpeg.exe -i {InputFile} -vn -f wav {OutputFile}";
+            }
         }
 
         public ExtractAudio(): base()
