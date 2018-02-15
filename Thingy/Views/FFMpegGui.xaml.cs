@@ -24,5 +24,13 @@ namespace Thingy.Views
         {
             InitializeComponent();
         }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (MainTab.SelectedIndex == MainTab.Items.Count -1)
+            {
+                (DataContext as ViewModels.FFMpegGuiViewModel).GenerateBachCommand.Execute(null);
+            }
+        }
     }
 }

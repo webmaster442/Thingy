@@ -10,7 +10,9 @@
     d:DesignHeight="300"
     d:DesignWidth="900"
     mc:Ignorable="d">
-    <TabControl>
+    <TabControl
+        x:Name="MainTab"
+        SelectionChanged="TabControl_SelectionChanged">
         <TabItem
             Header="Input Files">
             <Grid>
@@ -70,6 +72,7 @@
                     x:Name="PresetList"
                     Grid.Row="1"
                     Grid.Column="0"
+                    SelectedItem="{Binding SelectedPreset}"
                     ItemsSource="{Binding Presets}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -83,14 +86,15 @@
                     Grid.Row="0"
                     Grid.RowSpan="2"
                     Grid.Column="1"
-                    Preset="{Binding ElementName=PresetList, Path=SelectedItem}" />
+                    Preset="{Binding SelectedPreset, Mode=OneWay}" />
             </Grid>
         </TabItem>
         <TabItem
             Header="File names">
             <ffmpeg:FileRenamer
                 InputFiles="{Binding Files, Mode=OneWay}"
-                OutputFolder="{Binding ElementName=FolderSelector, Path=SelectedFile}" />
+                OutputFolder="{Binding ElementName=FolderSelector, Path=SelectedFile}"
+                RenameTable="{Binding FileTable}"/>
         </TabItem>
         <TabItem
             Header="Generated Bach">
@@ -102,13 +106,20 @@
                 <StackPanel
                     Orientation="Horizontal">
                     <Button
+                        Command="{Binding SaveBachCommand}"
                         Margin="5,2"
                         Content="Save to file" />
                     <Button
+                        Command="{Binding ExecuteBachCommand}"
                         Content="Execute" />
                 </StackPanel>
                 <TextBox
+                    FontSize="14"
+                    Text="{Binding GeneratedBach}"
                     Grid.Row="1"
+                    FontFamily="{StaticResource UbuntuMono}"
+                    HorizontalScrollBarVisibility="Auto"
+                    VerticalScrollBarVisibility="Auto"
                     AcceptsReturn="True"
                     AcceptsTab="True"
                     IsReadOnly="True" />

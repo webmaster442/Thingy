@@ -27,7 +27,7 @@ namespace Thingy.Modules
         {
             return new Views.FFMpegGui
             {
-                DataContext = new ViewModels.FFMpegGuiViewModel()
+                DataContext = new ViewModels.FFMpegGuiViewModel(App.Instance)
             };
         }
     }

@@ -22,7 +22,7 @@ namespace Thingy.FFMpegGui.Presets
                 if (format == "0")
                     return $"ffmpeg.exe -i \"{InputFile}\" -vn -acodec copy \"{OutputFile}\"";
                 else
-                    return $"ffmpeg.exe -i {InputFile} -vn -f wav {OutputFile}";
+                    return $"ffmpeg.exe -i \"{InputFile}\" -vn -f wav \"{OutputFile}\"";
             }
         }
 
