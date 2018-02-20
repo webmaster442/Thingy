@@ -14,39 +14,59 @@
         x:Name="MainTab"
         SelectionChanged="TabControl_SelectionChanged">
         <TabItem
-            Header="Input Files">
+            Header="Input">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <StackPanel
-                    Grid.Row="0"
-                    Orientation="Horizontal">
-                    <Button
-                        Margin="5,2"
-                        Command="{Binding AddFilesCommand}"
-                        Content="Add files..." />
-                    <Button
-                        Margin="0,0,5,2"
-                        Command="{Binding RemoveSelectedCommand}"
-                        CommandParameter="{Binding ElementName=FileList, Path=SelectedItem}"
-                        Content="Remove Selected..." />
-                    <Button
-                        Margin="2"
-                        Command="{Binding ClearListCommand}"
-                        Content="Clear list..." />
+                <Grid
+                    Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <StackPanel
+                        Grid.Row="0"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Margin="5,0"
+                            Text="Output Folder:" />
 
-                    <TextBlock
-                        Margin="5,0"
-                        Text="Output Folder:" />
+                        <applib:FileSelector
+                            x:Name="FolderSelector"
+                            Width="290"
+                            Filter="folder" />
 
-                    <applib:FileSelector
-                        x:Name="FolderSelector"
-                        Width="290"
-                        Filter="folder" />
+                        <TextBlock
+                            Margin="5,0"
+                            Text="FFMpeg folder:" />
 
-                </StackPanel>
+                        <applib:FileSelector
+                            x:Name="FFMpegSelector"
+                            Width="290"
+                            Filter="folder"
+                            SelectedFile="{Binding FFMPegFolder, Mode=TwoWay}"/>
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Row="1"
+                        Orientation="Horizontal">
+                        <Button
+                            Margin="5,2"
+                            Command="{Binding AddFilesCommand}"
+                            Content="Add files..." />
+                        <Button
+                            Margin="0,0,5,2"
+                            Command="{Binding RemoveSelectedCommand}"
+                            CommandParameter="{Binding ElementName=FileList, Path=SelectedItem}"
+                            Content="Remove Selected..." />
+                        <Button
+                            Margin="2"
+                            Command="{Binding ClearListCommand}"
+                            Content="Clear list..." />
+                    </StackPanel>
+                </Grid>
+
                 <ListBox
                     x:Name="FileList"
                     Grid.Row="1"
@@ -72,8 +92,8 @@
                     x:Name="PresetList"
                     Grid.Row="1"
                     Grid.Column="0"
-                    SelectedItem="{Binding SelectedPreset}"
-                    ItemsSource="{Binding Presets}">
+                    ItemsSource="{Binding Presets}"
+                    SelectedItem="{Binding SelectedPreset}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock
@@ -94,7 +114,7 @@
             <ffmpeg:FileRenamer
                 InputFiles="{Binding Files, Mode=OneWay}"
                 OutputFolder="{Binding ElementName=FolderSelector, Path=SelectedFile}"
-                RenameTable="{Binding FileTable}"/>
+                RenameTable="{Binding FileTable}" />
         </TabItem>
         <TabItem
             Header="Generated Bach">
@@ -106,23 +126,23 @@
                 <StackPanel
                     Orientation="Horizontal">
                     <Button
-                        Command="{Binding SaveBachCommand}"
                         Margin="5,2"
+                        Command="{Binding SaveBachCommand}"
                         Content="Save to file" />
                     <Button
                         Command="{Binding ExecuteBachCommand}"
                         Content="Execute" />
                 </StackPanel>
                 <TextBox
-                    FontSize="14"
-                    Text="{Binding GeneratedBach}"
                     Grid.Row="1"
-                    FontFamily="{StaticResource UbuntuMono}"
-                    HorizontalScrollBarVisibility="Auto"
-                    VerticalScrollBarVisibility="Auto"
                     AcceptsReturn="True"
                     AcceptsTab="True"
-                    IsReadOnly="True" />
+                    FontFamily="{StaticResource UbuntuMono}"
+                    FontSize="14"
+                    HorizontalScrollBarVisibility="Auto"
+                    IsReadOnly="True"
+                    Text="{Binding GeneratedBach}"
+                    VerticalScrollBarVisibility="Auto" />
             </Grid>
         </TabItem>
     </TabControl>

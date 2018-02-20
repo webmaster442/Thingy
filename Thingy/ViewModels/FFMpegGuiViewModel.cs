@@ -10,6 +10,7 @@ namespace Thingy.ViewModels
     public class FFMpegGuiViewModel : ViewModel
     {
         private string _generated;
+        private string _ffmpegPath;
         private Preset _preset;
         private IApplication _app;
 
@@ -41,6 +42,12 @@ namespace Thingy.ViewModels
         {
             get { return _generated; }
             set { SetValue(ref _generated, value); }
+        }
+
+        public string FFMPegFolder
+        {
+            get { return _ffmpegPath; }
+            set { _ffmpegPath = value; }
         }
 
         public DelegateCommand AddFilesCommand { get; private set; }
@@ -93,21 +100,25 @@ namespace Thingy.ViewModels
         private void GenerateBach()
         {
             StringBuilder sb = new StringBuilder();
+            sb.AppendLine("@echo off");
+            sb.AppendLine("title FFMpeg job");
+            sb.AppendFormat("pushd \"{0}\"\r\n", FFMPegFolder);
             foreach (var entry in FileTable)
             {
                 SelectedPreset.InputFile = entry.Item1;
                 SelectedPreset.OutputFile = entry.Item2;
                 sb.AppendLine(SelectedPreset.CommandLine);
             }
+            sb.AppendLine("popd");
             GeneratedBach = sb.ToString();
         }
 
         private void WriteToFile(string filename)
         {
-                using (var fs = System.IO.File.CreateText(filename))
-                {
-                    fs.Write(GeneratedBach);
-                }
+            using (var fs = System.IO.File.CreateText(filename))
+            {
+                fs.Write(GeneratedBach);
+            }
         }
 
         private async void ExecuteBach()
