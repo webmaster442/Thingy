@@ -142,6 +142,7 @@
     <Compile Include="Modules\ProgramsModule.cs" />
     <Compile Include="Infrastructure\Tray\TrayIcon.cs" />
     <Compile Include="Infrastructure\TabManager.cs" />
+    <Compile Include="Modules\RunProgramModule.cs" />
     <Compile Include="ViewModels\Calculator\CalculatorViewModel.cs" />
     <Compile Include="ViewModels\Calculator\DisplayChangerModel.cs" />
     <Compile Include="ViewModels\CurrencyConverterViewModel.cs" />
@@ -203,6 +204,9 @@
     </Compile>
     <Compile Include="Views\MusicPlayer\MusicPlayer.xaml.cs">
       <DependentUpon>MusicPlayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RunProgram.xaml.cs">
+      <DependentUpon>RunProgram.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Statusbar\MonitorSwitcher.xaml.cs">
       <DependentUpon>MonitorSwitcher.xaml</DependentUpon>
@@ -389,6 +393,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MusicPlayer\MusicPlayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RunProgram.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

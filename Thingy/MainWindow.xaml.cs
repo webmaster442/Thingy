@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Shell;
+using Thingy.Infrastructure;
 using Thingy.Properties;
 
 namespace Thingy
@@ -44,7 +45,7 @@ namespace Thingy
             return executing.GetName().Version.ToString();
         }
 
-        private void TabClosing(ItemActionCallbackArgs<TabablzControl> args)
+        private async void TabClosing(ItemActionCallbackArgs<TabablzControl> args)
         {
             var headerModel = args.DragablzItem?.DataContext as HeaderedItemViewModel;
             App.Log.Info($"Closing Tab: {headerModel.Header.ToString()}");
@@ -58,6 +59,12 @@ namespace Thingy
                 viewModel.Dispose();
             }
             viewInTab.DataContext = null;
+
+            if (viewInTab is IHaveCloseTask taskView)
+            {
+                await taskView.ClosingTask();
+            }
+
             if (viewInTab is IDisposable view)
             {
                 App.Log.Info($"Dispose called for: {viewInTab.GetType().FullName}");

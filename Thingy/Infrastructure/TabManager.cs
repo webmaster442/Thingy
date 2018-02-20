@@ -55,7 +55,11 @@ namespace Thingy.Infrastructure
             {
                 if (module.OpenAsWindow)
                 {
-                    await _application.ShowDialog(control, module.ModuleName);
+                    bool result = await _application.ShowDialog(control, module.ModuleName);
+                    if (result && control is IHaveCloseTask closetask)
+                    {
+                        await closetask.ClosingTask();
+                    }
                     return null;
                 }
                 else

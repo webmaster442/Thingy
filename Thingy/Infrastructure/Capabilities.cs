@@ -8,4 +8,9 @@ namespace Thingy.Infrastructure
         Task Import(Stream xmlData, bool append);
         Task Export(Stream xmlData);
     }
+
+    public interface IHaveCloseTask
+    {
+        Task ClosingTask();
+    }
 }
