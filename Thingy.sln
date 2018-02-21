@@ -43,7 +43,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.Cmd", "Thingy.Cmd\Th
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.MusicPlayerCore", "Thingy.MusicPlayerCore\Thingy.MusicPlayerCore.csproj", "{A87FD57D-B36F-4747-8AFA-989E5181705F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.FFMpegGui", "Thingy.UiBuilder\Thingy.FFMpegGui.csproj", "{BB8022F7-DDCC-4FC0-BF98-3163B3A7F9DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.FFMpegGui", "Thingy.FFMpegGui\Thingy.FFMpegGui.csproj", "{BB8022F7-DDCC-4FC0-BF98-3163B3A7F9DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
