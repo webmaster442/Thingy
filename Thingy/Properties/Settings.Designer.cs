@@ -73,18 +73,6 @@ namespace Thingy.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("14")]
-        public double PythonTerminalFontSize {
-            get {
-                return ((double)(this["PythonTerminalFontSize"]));
-            }
-            set {
-                this["PythonTerminalFontSize"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Orange")]
         public string SelectedAccent {
             get {
@@ -128,6 +116,18 @@ namespace Thingy.Properties {
             }
             set {
                 this["ActivatorModifier2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FFMpegPath {
+            get {
+                return ((string)(this["FFMpegPath"]));
+            }
+            set {
+                this["FFMpegPath"] = value;
             }
         }
     }

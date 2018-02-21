@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:Thingy.Properties"
     xmlns:winforms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
-    d:DesignHeight="300"
+    d:DesignHeight="900"
     d:DesignWidth="900"
     Loaded="UserControl_Loaded"
     mc:Ignorable="d">
@@ -50,10 +50,8 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition
-                            Width="Auto" />
-                        <ColumnDefinition
-                            Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock
                         Grid.Row="0"
@@ -90,13 +88,10 @@
                 IsExpanded="true">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition
-                            Width="Auto" />
-                        <ColumnDefinition
-                            Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
@@ -106,10 +101,6 @@
                         Text="Command lines:" />
                     <TextBlock
                         Grid.Row="1"
-                        Grid.Column="0"
-                        Text="Python:" />
-                    <TextBlock
-                        Grid.Row="2"
                         Grid.Column="0"
                         Text="Notes:" />
                     <applib:EditableSlider
@@ -131,17 +122,31 @@
                         DisplayFormat="0"
                         Maximum="32"
                         Minimum="8"
-                        Value="{Binding Source={x:Static properties:Settings.Default}, Path=PythonTerminalFontSize, Mode=TwoWay}" />
-                    <applib:EditableSlider
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        Height="20"
-                        Margin="3"
-                        DefaultValue="14"
-                        DisplayFormat="0"
-                        Maximum="32"
-                        Minimum="8"
                         Value="{Binding Source={x:Static properties:Settings.Default}, Path=NoteFontSize, Mode=TwoWay}" />
+                </Grid>
+            </Expander>
+            <Expander
+                IsExpanded="True"
+                Header="Module settings">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Text="FFMpeg Path: "/>
+                    <applib:FileSelector
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Filter="folder"
+                        Width="350"
+                        HorizontalAlignment="Left"
+                        SelectedFile="{Binding Source={x:Static properties:Settings.Default}, Path=FFMpegPath, Mode=TwoWay}" />
                 </Grid>
             </Expander>
         </StackPanel>

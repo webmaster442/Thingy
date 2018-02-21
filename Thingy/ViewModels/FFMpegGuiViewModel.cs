@@ -47,7 +47,11 @@ namespace Thingy.ViewModels
         public string FFMPegFolder
         {
             get { return _ffmpegPath; }
-            set { _ffmpegPath = value; }
+            set
+            {
+                _ffmpegPath = value;
+                Properties.Settings.Default.FFMpegPath = value;
+            }
         }
 
         public DelegateCommand AddFilesCommand { get; private set; }
@@ -62,6 +66,7 @@ namespace Thingy.ViewModels
             Presets = new PresetList();
             _app = app;
             Files = new ObservableCollection<string>();
+            FFMPegFolder = Properties.Settings.Default.FFMpegPath;
             FileTable = new ObservableCollection<Tuple<string, string>>();
             AddFilesCommand = Command.ToCommand(AddFiles);
             RemoveSelectedCommand = Command.ToCommand<string>(RemoveSelected, CanRemove);

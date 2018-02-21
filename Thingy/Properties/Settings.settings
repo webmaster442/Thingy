@@ -14,9 +14,6 @@
     <Setting Name="WindowHeight" Type="System.Double" Scope="User">
       <Value Profile="(Default)">520</Value>
     </Setting>
-    <Setting Name="PythonTerminalFontSize" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">14</Value>
-    </Setting>
     <Setting Name="SelectedAccent" Type="System.String" Scope="User">
       <Value Profile="(Default)">Orange</Value>
     </Setting>
@@ -27,6 +24,9 @@
       <Value Profile="(Default)">Alt</Value>
     </Setting>
     <Setting Name="ActivatorModifier2" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FFMpegPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>
