@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using AppLib.Common.Log;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,9 +13,12 @@ namespace Thingy.Views
     /// </summary>
     public partial class RunProgram : UserControl, IHaveCloseTask
     {
-        public RunProgram()
+        private ILogger _log;
+
+        public RunProgram(ILogger log)
         {
             InitializeComponent();
+            _log = log;
         }
 
         public Task ClosingTask()
@@ -33,7 +38,15 @@ namespace Thingy.Views
                         p.StartInfo.UseShellExecute = true;
                         p.StartInfo.Verb = "runas";
                     }
-                    p.Start();
+
+                    try
+                    {
+                        p.Start();
+                    }
+                    catch (Win32Exception ex)
+                    {
+                        _log.Error(ex);
+                    }
                 });
             });
         }

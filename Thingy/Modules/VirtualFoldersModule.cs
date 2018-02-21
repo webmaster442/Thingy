@@ -26,7 +26,7 @@ namespace Thingy.Modules
             {
                 DataContext = new ViewModels.VirtualFoldersViewModel(App.Instance,
                                                                      App.IoCContainer.ResolveSingleton<IDataBase>(),
-                                                                     App.IoCContainer.ResolveSingleton<ILogger>())
+                                                                     App.Log)
             };
         }
 
