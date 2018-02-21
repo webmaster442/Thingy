@@ -26,6 +26,7 @@
         <Style
             x:Key="PatternSelector"
             TargetType="ComboBox">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate>

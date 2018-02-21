@@ -17,8 +17,8 @@ namespace Thingy.FFMpegGui
         public FileRenamer()
         {
             InitializeComponent();
-            FilenamePattern = "";
-            ExtensionPattern = "";
+            FilenamePattern = "[N]";
+            ExtensionPattern = "[E]";
             SearchText = "";
             ReplaceText = "";
             RenameTable = new ObservableCollection<Tuple<string, string>>();
@@ -164,7 +164,11 @@ namespace Thingy.FFMpegGui
 
         private void InputCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            ProcessTags();
+            if (ExtensionPattern != null &&
+                FilenamePattern != null)
+            {
+                ProcessTags();
+            }
         }
 
         private void ProcessTags()

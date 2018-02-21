@@ -26,6 +26,11 @@ namespace Thingy.FFMpegGui
             set;
         }
 
+        public abstract string SudgestedExtension
+        {
+            get;
+        }
+
         protected string this[string query]
         {
             get

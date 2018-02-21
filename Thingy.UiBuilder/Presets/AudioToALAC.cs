@@ -16,5 +16,10 @@
         {
             get { return $"ffmpeg.exe -i \"{InputFile}\" -vn -acodec alac \"{OutputFile}\""; }
         }
+
+        public override string SudgestedExtension
+        {
+            get { return "m4a"; }
+        }
     }
 }

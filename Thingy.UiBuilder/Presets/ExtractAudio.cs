@@ -26,6 +26,18 @@ namespace Thingy.FFMpegGui.Presets
             }
         }
 
+        public override string SudgestedExtension
+        {
+            get
+            {
+                var format = this["formatoptions.SelectedIndex"];
+                if (format == "0")
+                    return "???";
+                else
+                    return "wav";
+            }
+        }
+
         public ExtractAudio(): base()
         {
             OptionList formatoptions = new OptionList("formatoptions");

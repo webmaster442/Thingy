@@ -112,6 +112,7 @@
         <TabItem
             Header="File names">
             <ffmpeg:FileRenamer
+                x:Name="Renamer"
                 InputFiles="{Binding Files, Mode=OneWay}"
                 OutputFolder="{Binding ElementName=FolderSelector, Path=SelectedFile}"
                 RenameTable="{Binding FileTable}" />
