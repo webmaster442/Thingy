@@ -60,6 +60,8 @@
       <DependentUpon>PresetRenderer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Presets\AudioToALAC.cs" />
+    <Compile Include="Presets\AudioToFLAC.cs" />
+    <Compile Include="Presets\AudioToMp3.cs" />
     <Compile Include="Presets\ExtractAudio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

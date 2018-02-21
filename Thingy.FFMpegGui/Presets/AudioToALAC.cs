@@ -14,7 +14,7 @@
 
         public override string CommandLine
         {
-            get { return $"ffmpeg.exe -i \"{InputFile}\" -vn -acodec alac \"{OutputFile}\""; }
+            get { return $"ffmpeg.exe -i \"{InputFile}\" -vn -codec:a alac \"{OutputFile}\""; }
         }
 
         public override string SudgestedExtension

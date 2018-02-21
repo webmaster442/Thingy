@@ -108,11 +108,14 @@ namespace Thingy.ViewModels
             sb.AppendLine("@echo off");
             sb.AppendLine("title FFMpeg job");
             sb.AppendFormat("pushd \"{0}\"\r\n", FFMPegFolder);
-            foreach (var entry in FileTable)
+            if (SelectedPreset != null)
             {
-                SelectedPreset.InputFile = entry.Item1;
-                SelectedPreset.OutputFile = entry.Item2;
-                sb.AppendLine(SelectedPreset.CommandLine);
+                foreach (var entry in FileTable)
+                {
+                    SelectedPreset.InputFile = entry.Item1;
+                    SelectedPreset.OutputFile = entry.Item2;
+                    sb.AppendLine(SelectedPreset.CommandLine);
+                }
             }
             sb.AppendLine("popd");
             GeneratedBach = sb.ToString();
