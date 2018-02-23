@@ -56,7 +56,7 @@
     </Compile>
     <Compile Include="PresetList.cs" />
     <Compile Include="Controls\SliderControl.cs" />
-    <Compile Include="Preset.cs" />
+    <Compile Include="BasePreset.cs" />
     <Compile Include="PresetRenderer.xaml.cs">
       <DependentUpon>PresetRenderer.xaml</DependentUpon>
     </Compile>

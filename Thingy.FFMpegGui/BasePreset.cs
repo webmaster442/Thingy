@@ -4,7 +4,7 @@ using Thingy.FFMpegGui.Controls;
 
 namespace Thingy.FFMpegGui
 {
-    public abstract class Preset
+    public abstract class BasePreset
     {
         public List<BaseControl> Controls { get; }
 
@@ -54,7 +54,7 @@ namespace Thingy.FFMpegGui
             }
         }
 
-        public Preset()
+        public BasePreset()
         {
             Controls = new List<BaseControl>();
         }

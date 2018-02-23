@@ -2,7 +2,7 @@
 
 namespace Thingy.FFMpegGui
 {
-    public abstract class BaseAudioPreset : Preset
+    public abstract class BaseAudioPreset : BasePreset
     {
         public override string CommandLine
         {

@@ -9,18 +9,18 @@ namespace Thingy.FFMpegGui
     public partial class PresetRenderer : UserControl
     {
         public static readonly DependencyProperty PresetProperty =
-            DependencyProperty.Register("Preset", typeof(Preset), typeof(PresetRenderer), new PropertyMetadata(null, PresetChanged));
+            DependencyProperty.Register("Preset", typeof(BasePreset), typeof(PresetRenderer), new PropertyMetadata(null, PresetChanged));
 
-        public Preset Preset
+        public BasePreset Preset
         {
-            get { return (Preset)GetValue(PresetProperty); }
+            get { return (BasePreset)GetValue(PresetProperty); }
             set { SetValue(PresetProperty, value); }
         }
 
         private static void PresetChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             PresetRenderer caller = d as PresetRenderer;
-            var presetToRender = e.NewValue as Preset;
+            var presetToRender = e.NewValue as BasePreset;
             caller.Render(presetToRender);
         }
 
@@ -48,7 +48,7 @@ namespace Thingy.FFMpegGui
             return text;
         }
 
-        private void Render(Preset preset)
+        private void Render(BasePreset preset)
         {
             ContainerPanel.Children.Clear();
             if (preset == null) return;
