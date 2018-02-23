@@ -2,7 +2,7 @@
 
 namespace Thingy.FFMpegGui.Presets
 {
-    public class ExtractAudio : Preset
+    public class ExtractAudio : BaseAudioPreset
     {
         public override string Name
         {
@@ -14,18 +14,6 @@ namespace Thingy.FFMpegGui.Presets
             get { return "Extract Audio from video stream"; }
         }
 
-        public override string CommandLine
-        {
-            get
-            {
-                var format = this["formatoptions.SelectedIndex"];
-                if (format == "0")
-                    return $"ffmpeg.exe -i \"{InputFile}\" -vn -acodec copy \"{OutputFile}\"";
-                else
-                    return $"ffmpeg.exe -i \"{InputFile}\" -vn -f wav \"{OutputFile}\"";
-            }
-        }
-
         public override string SudgestedExtension
         {
             get
@@ -35,6 +23,18 @@ namespace Thingy.FFMpegGui.Presets
                     return "???";
                 else
                     return "wav";
+            }
+        }
+
+        public override string AudioCommandLine
+        {
+            get
+            {
+                var format = this["formatoptions.SelectedIndex"];
+                if (format == "0")
+                    return "-acodec copy";
+                else
+                    return "-f wav";
             }
         }
 

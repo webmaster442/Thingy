@@ -2,7 +2,7 @@
 
 namespace Thingy.FFMpegGui.Presets
 {
-    public class AudioToMp3 : Preset
+    public class AudioToMp3 : BaseAudioPreset
     {
         public override string Name
         {
@@ -11,21 +11,21 @@ namespace Thingy.FFMpegGui.Presets
 
         public override string Description
         {
-            get { return "Convert a file to mp3"; }
-        }
-
-        public override string CommandLine
-        {
-            get
-            {
-                var bitrate = this["bitrate.Value"];
-                return $"ffmpeg.exe -i \"{InputFile}\" -vn -codec:a libmp3lame -b:a {bitrate}k \"{OutputFile}\"";
-            }
+            get { return "Convert a file to mp3. Mp3 bitrate must be be 44.1kHz or 48kHz"; }
         }
 
         public override string SudgestedExtension
         {
             get { return "mp3"; }
+        }
+
+        public override string AudioCommandLine
+        {
+            get
+            {
+                var bitrate = this["bitrate.Value"];
+                return $"-codec:a libmp3lame -b:a {bitrate}k";
+            }
         }
 
         public AudioToMp3() : base()

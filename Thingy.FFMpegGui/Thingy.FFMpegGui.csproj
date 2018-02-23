@@ -48,6 +48,7 @@
     <Compile Include="..\Build-tools\CommonVersion.cs">
       <Link>Properties\CommonVersion.cs</Link>
     </Compile>
+    <Compile Include="BaseAudioPreset.cs" />
     <Compile Include="Controls\BaseControl.cs" />
     <Compile Include="Controls\OptionList.cs" />
     <Compile Include="FileRenamer.xaml.cs">
@@ -62,6 +63,7 @@
     <Compile Include="Presets\AudioToALAC.cs" />
     <Compile Include="Presets\AudioToFLAC.cs" />
     <Compile Include="Presets\AudioToMp3.cs" />
+    <Compile Include="Presets\AudioToWavPack.cs" />
     <Compile Include="Presets\ExtractAudio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
