@@ -49,6 +49,7 @@
       <Link>Properties\CommonVersion.cs</Link>
     </Compile>
     <Compile Include="BaseAudioPreset.cs" />
+    <Compile Include="BaseVideoPreset.cs" />
     <Compile Include="Controls\BaseControl.cs" />
     <Compile Include="Controls\OptionList.cs" />
     <Compile Include="FileRenamer.xaml.cs">

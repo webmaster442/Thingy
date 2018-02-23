@@ -11,7 +11,7 @@ namespace Thingy.ViewModels
     {
         private string _generated;
         private string _ffmpegPath;
-        private Preset _preset;
+        private BasePreset _preset;
         private IApplication _app;
 
         public PresetList Presets
@@ -32,7 +32,7 @@ namespace Thingy.ViewModels
             private set;
         }
 
-        public Preset SelectedPreset
+        public BasePreset SelectedPreset
         {
             get { return _preset; }
             set { SetValue(ref _preset, value); }

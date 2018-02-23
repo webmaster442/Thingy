@@ -39,6 +39,7 @@ namespace Thingy.FFMpegGui.Presets
             slider.Minimum = 1;
             slider.Maximum = 3;
             slider.Value = 2;
+            slider.IntegersOnly = true;
             Controls.Add(slider);
         }
     }

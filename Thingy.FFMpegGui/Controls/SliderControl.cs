@@ -58,6 +58,12 @@ namespace Thingy.FFMpegGui.Controls
             set { _slider.Value = value; }
         }
 
+        public bool IntegersOnly
+        {
+            get;
+            set;
+        }
+
         public override FrameworkElement Visual
         {
             get
@@ -67,6 +73,11 @@ namespace Thingy.FFMpegGui.Controls
                     _slider.Ticks.Clear();
                     foreach (var item in FixedStops) _slider.Ticks.Add(item);
                     _slider.IsSnapToTickEnabled = true;
+                }
+                else if (IntegersOnly)
+                {
+                    _slider.IsSnapToTickEnabled = true;
+                    _slider.TickFrequency = 1;
                 }
 
                 return _grid;
