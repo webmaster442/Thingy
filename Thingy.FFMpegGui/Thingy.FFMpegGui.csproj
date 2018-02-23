@@ -52,6 +52,7 @@
     <Compile Include="BaseVideoPreset.cs" />
     <Compile Include="Controls\BaseControl.cs" />
     <Compile Include="Controls\OptionList.cs" />
+    <Compile Include="Controls\TextBox.cs" />
     <Compile Include="FileRenamer.xaml.cs">
       <DependentUpon>FileRenamer.xaml</DependentUpon>
     </Compile>
