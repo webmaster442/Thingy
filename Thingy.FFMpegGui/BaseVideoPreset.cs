@@ -10,28 +10,30 @@ namespace Thingy.FFMpegGui
         {
             get
             {
-                var videoBitrate = this["videoBitrate.Value"];
                 var resolution = this["resolutions.Value"];
                 var framerate = this["framerate.Value"];
 
                 var advanced = $"{resolution} {framerate}".Trim();
 
+                var command = "ffmpeg.exe";
+
+                if (!string.IsNullOrEmpty(ParamsBeforeInputFile))
+                    command = $"ffmpeg.exe {ParamsBeforeInputFile} -i";
+
                 if (!string.IsNullOrEmpty(advanced))
-                    return $"ffmpeg.exe -i \"{InputFile}\" -vn -b:v {videoBitrate} {advanced} {VideoCommandLine} \"{OutputFile}\"";
+                    return $"{command} \"{InputFile}\" {advanced} {VideoCommandLine} \"{OutputFile}\"";
                 else
-                    return $"ffmpeg.exe -i \"{InputFile}\" -vn -b:v {videoBitrate} {VideoCommandLine} \"{OutputFile}\"";
+                    return $"{command} \"{InputFile}\" {VideoCommandLine} \"{OutputFile}\"";
             }
         }
 
-        public BaseVideoPreset(): base()
+        public virtual string ParamsBeforeInputFile
         {
-            SliderControl videoBitrate = new SliderControl("videobitrate")
-            {
-                Description = "Video Bitrate in kBps",
-                Minimum = 100,
-                Maximum = 20000,
-                Value = 1500
-            };
+            get;
+        }
+
+        public BaseVideoPreset() : base()
+        {
 
             OptionList resolutons = new OptionList("resolutions");
             resolutons.Description = "Video Resolution";
@@ -61,7 +63,6 @@ namespace Thingy.FFMpegGui
             framerate.Values.Add("60 fps", "-framerate 60");
             framerate.SelectedIndex = 0;
 
-            Controls.Add(videoBitrate);
             Controls.Add(resolutons);
             Controls.Add(framerate);
         }

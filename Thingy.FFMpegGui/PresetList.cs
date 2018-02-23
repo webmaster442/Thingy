@@ -13,7 +13,8 @@ namespace Thingy.FFMpegGui
                               Assembly.GetAssembly(typeof(BasePreset)).GetTypes()
                               where 
                               (type.BaseType == typeof(BasePreset) ||
-                              type.BaseType == typeof(BaseAudioPreset)) &&
+                              type.BaseType == typeof(BaseAudioPreset) ||
+                              type.BaseType == typeof(BaseVideoPreset)) &&
                               !type.IsAbstract && type.IsClass
                               select type;
 

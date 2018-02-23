@@ -4,7 +4,12 @@
     {
         public override string VideoCommandLine
         {
-            get { return "-hwaccel cuvid -c:v h264_nvenc -preset slow -qp 25 -c:a copy"; }
+            get { return "-c:v h264_nvenc -preset slow -qp 25 -c:a copy"; }
+        }
+
+        public override string ParamsBeforeInputFile
+        {
+            get { return "-hwaccel cuvid"; }
         }
 
         public override string Name
