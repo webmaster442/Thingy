@@ -67,6 +67,7 @@
     <Compile Include="Presets\AudioToMp3.cs" />
     <Compile Include="Presets\AudioToWavPack.cs" />
     <Compile Include="Presets\ExtractAudio.cs" />
+    <Compile Include="Presets\H264VideoNvidia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
