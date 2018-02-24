@@ -152,8 +152,8 @@
     <Compile Include="ViewModels\FFMpegGuiViewModel.cs" />
     <Compile Include="ViewModels\MusicPlayer\MusicPlayerViewModel.cs" />
     <Compile Include="ViewModels\MusicPlayer\PlayListViewModel.cs" />
+    <Compile Include="ViewModels\Notes\DatabaseOpenSaveViewModel.cs" />
     <Compile Include="ViewModels\Notes\NoteEditorViewModel.cs" />
-    <Compile Include="ViewModels\Notes\OLD_NoteViewModel.cs" />
     <Compile Include="ViewModels\ProgramsViewModel.cs" />
     <Compile Include="Views\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
@@ -209,6 +209,9 @@
     <Compile Include="Views\MusicPlayer\MusicPlayer.xaml.cs">
       <DependentUpon>MusicPlayer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Notes\DatabaseOpenSave.xaml.cs">
+      <DependentUpon>DatabaseOpenSave.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Notes\INoteEditor.cs" />
     <Compile Include="Views\Notes\NoteEditor.xaml.cs">
       <DependentUpon>NoteEditor.xaml</DependentUpon>
@@ -236,7 +239,7 @@
     <Compile Include="Views\Dialogs\NewAlarm.xaml.cs">
       <DependentUpon>NewAlarm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Dialogs\NewNote.xaml.cs">
+    <Compile Include="Views\Notes\NewNote.xaml.cs">
       <DependentUpon>NewNote.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\GreekAlphabet.xaml.cs">
@@ -255,9 +258,6 @@
     </Compile>
     <Compile Include="Views\Dialogs\NewVirtualFolder.xaml.cs">
       <DependentUpon>NewVirtualFolder.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Notes\OLDNote.xaml.cs">
-      <DependentUpon>OLDNote.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Places.xaml.cs">
       <DependentUpon>Places.xaml</DependentUpon>
@@ -404,6 +404,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Notes\DatabaseOpenSave.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Notes\NoteEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -440,7 +444,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Dialogs\NewNote.xaml">
+    <Page Include="Views\Notes\NewNote.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -457,10 +461,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\GreekAlphabet.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Notes\OLDNote.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

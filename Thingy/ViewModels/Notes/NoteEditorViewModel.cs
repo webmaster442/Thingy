@@ -1,13 +1,17 @@
 ﻿using AppLib.MVVM;
 using MahApps.Metro.Controls.Dialogs;
 using System;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Thingy.Db;
+using Thingy.Db.Entity;
+using Thingy.Infrastructure;
 using Thingy.Views.Notes;
 
 namespace Thingy.ViewModels.Notes
 {
-    public class NoteEditorViewModel: ViewModel<INoteEditor>
+    public class NoteEditorViewModel: ViewModel<INoteEditor>, ICanImportExportXMLData
     {
         private string _fileOpen;
         private IApplication _app;
@@ -21,6 +25,8 @@ namespace Thingy.ViewModels.Notes
 
         public NoteEditorViewModel(INoteEditor view, IApplication app, IDataBase db): base(view)
         {
+            _app = app;
+            _db = db;
             NewFileCommand = Command.ToCommand<bool>(NewFile);
             OpenFileCommand = Command.ToCommand<bool>(OpenFile);
             SaveFileCommand = Command.ToCommand(SaveFile);
@@ -81,6 +87,29 @@ namespace Thingy.ViewModels.Notes
         private void Print()
         {
             View.Print(_fileOpen ?? "untitled");
+        }
+
+        public Task Import(Stream xmlData, bool append)
+        {
+            return Task.Run(() =>
+            {
+                var import = EntitySerializer.Deserialize<Note[]>(xmlData);
+                if (append)
+                    _db.Notes.SaveNotes(import);
+                else
+                {
+                    _db.Notes.DeleteAll();
+                    _db.Notes.SaveNotes(import);
+                }
+            });
+        }
+
+        public Task Export(Stream xmlData)
+        {
+            return Task.Run(() =>
+            {
+                EntitySerializer.Serialize(xmlData, _db.Notes.GetNotes().ToArray());
+            });
         }
     }
 }
