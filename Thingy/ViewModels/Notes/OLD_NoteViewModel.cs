@@ -14,7 +14,7 @@ using Thingy.Infrastructure;
 
 namespace Thingy.ViewModels
 {
-    public class NoteViewModel : ViewModel, ICanImportExportXMLData
+    public class OLDNoteViewModel : ViewModel, ICanImportExportXMLData
     {
         private IApplication _app;
         private IDataBase _db;
@@ -35,7 +35,7 @@ namespace Thingy.ViewModels
 
         public ObservableCollection<Note> Notes { get; private set; }
 
-        public NoteViewModel(IApplication app, IDataBase db)
+        public OLDNoteViewModel(IApplication app, IDataBase db)
         {
             _app = app;
             _db = db;

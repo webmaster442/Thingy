@@ -26,9 +26,9 @@ namespace Thingy.Modules
 
         public override UserControl RunModule()
         {
-            return new Views.Note
+            return new Views.Notes.NoteEditor
             {
-                DataContext = new ViewModels.NoteViewModel(App.Instance, App.IoCContainer.ResolveSingleton<IDataBase>())
+                DataContext = new ViewModels.Notes.NoteEditorViewModel()
             };
         }
     }

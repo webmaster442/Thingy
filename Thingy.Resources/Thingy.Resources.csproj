@@ -284,5 +284,8 @@
     <Resource Include="SmallIcons\editor\icons8-scissors-48.png" />
     <Resource Include="SmallIcons\editor\icons8-undo-48.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SmallIcons\editor\icons8-print-48.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

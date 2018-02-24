@@ -152,7 +152,8 @@
     <Compile Include="ViewModels\FFMpegGuiViewModel.cs" />
     <Compile Include="ViewModels\MusicPlayer\MusicPlayerViewModel.cs" />
     <Compile Include="ViewModels\MusicPlayer\PlayListViewModel.cs" />
-    <Compile Include="ViewModels\NoteViewModel.cs" />
+    <Compile Include="ViewModels\Notes\NoteEditorViewModel.cs" />
+    <Compile Include="ViewModels\Notes\OLD_NoteViewModel.cs" />
     <Compile Include="ViewModels\ProgramsViewModel.cs" />
     <Compile Include="Views\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
@@ -208,6 +209,9 @@
     <Compile Include="Views\MusicPlayer\MusicPlayer.xaml.cs">
       <DependentUpon>MusicPlayer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Notes\NoteEditor.xaml.cs">
+      <DependentUpon>NoteEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RunProgram.xaml.cs">
       <DependentUpon>RunProgram.xaml</DependentUpon>
     </Compile>
@@ -251,8 +255,8 @@
     <Compile Include="Views\Dialogs\NewVirtualFolder.xaml.cs">
       <DependentUpon>NewVirtualFolder.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Note.xaml.cs">
-      <DependentUpon>Note.xaml</DependentUpon>
+    <Compile Include="Views\Notes\OLDNote.xaml.cs">
+      <DependentUpon>OLDNote.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Places.xaml.cs">
       <DependentUpon>Places.xaml</DependentUpon>
@@ -399,6 +403,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Notes\NoteEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\RunProgram.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -451,7 +459,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Note.xaml">
+    <Page Include="Views\Notes\OLDNote.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
