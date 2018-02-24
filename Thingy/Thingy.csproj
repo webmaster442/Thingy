@@ -209,6 +209,7 @@
     <Compile Include="Views\MusicPlayer\MusicPlayer.xaml.cs">
       <DependentUpon>MusicPlayer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Notes\INoteEditor.cs" />
     <Compile Include="Views\Notes\NoteEditor.xaml.cs">
       <DependentUpon>NoteEditor.xaml</DependentUpon>
     </Compile>

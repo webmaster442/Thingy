@@ -6,6 +6,7 @@
     xmlns:avalon="http://icsharpcode.net/sharpdevelop/avalonedit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:Thingy.Properties"
     d:DesignHeight="500"
     d:DesignWidth="900"
     mc:Ignorable="d">
@@ -17,6 +18,20 @@
             <Setter Property="Height" Value="24" />
         </Style>
     </UserControl.Resources>
+    <UserControl.InputBindings>
+        <KeyBinding
+            Key="N"
+            Command="{Binding NewFileCommand}"
+            Modifiers="Ctrl" />
+        <KeyBinding
+            Key="O"
+            Command="{Binding OpenFileCommand}"
+            Modifiers="Ctrl" />
+        <KeyBinding
+            Key="S"
+            Command="{Binding SaveFileCommand}"
+            Modifiers="Ctrl" />
+    </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -30,7 +45,8 @@
             <MenuItem
                 Header="File">
                 <MenuItem
-                    Command="New"
+                    Command="{Binding NewFileCommand}"
+                    CommandParameter="{Binding ElementName=TextEditor, Path=IsModified}"
                     Header="_New">
                     <MenuItem.Icon>
                         <Image
@@ -39,8 +55,10 @@
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem
-                    Command="Open"
-                    Header="_Open">
+                    Command="{Binding OpenFileCommand}"
+                    CommandParameter="{Binding ElementName=TextEditor, Path=IsModified}"
+                    Header="_Open"
+                    InputGestureText="CTRL+O">
                     <MenuItem.Icon>
                         <Image
                             Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-open-48.png"
@@ -48,8 +66,9 @@
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem
-                    Command="Save"
-                    Header="_Save">
+                    Command="{Binding SaveFileCommand}"
+                    Header="_Save"
+                    InputGestureText="CTRL+S">
                     <MenuItem.Icon>
                         <Image
                             Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-save-48.png"
@@ -57,7 +76,7 @@
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem
-                    Command="SaveAs"
+                    Command="{Binding SaveAsCommand}"
                     Header="Save _As...">
                     <MenuItem.Icon>
                         <Image
@@ -67,7 +86,7 @@
                 </MenuItem>
                 <Separator />
                 <MenuItem
-                    Command="Print"
+                    Command="{Binding PrintCommand}"
                     Header="_Print">
                     <MenuItem.Icon>
                         <Image
@@ -147,12 +166,42 @@
                     Command="Delete"
                     Header="_Delete" />
             </MenuItem>
+            <MenuItem
+                Header="View">
+                <MenuItem
+                    x:Name="ViewWordWrap"
+                    Header="Word wrap"
+                    IsCheckable="True"
+                    IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=NoteWordWrap, Mode=TwoWay}" />
+                <Separator />
+                <MenuItem
+                    x:Name="ViewLineEndings"
+                    Checked="ConfigureEditorOptions"
+                    Header="Show line endings"
+                    IsCheckable="True"
+                    IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=NoteShowLineEndings, Mode=TwoWay}"
+                    Unchecked="ConfigureEditorOptions" />
+                <MenuItem
+                    x:Name="ViewWhitespace"
+                    Checked="ConfigureEditorOptions"
+                    Header="Show Whitespaces"
+                    IsCheckable="True"
+                    IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=NoteShowWhiteSpace, Mode=TwoWay}"
+                    Unchecked="ConfigureEditorOptions" />
+                <MenuItem
+                    x:Name="ViewLineNumbers"
+                    Header="Show line numbers"
+                    IsCheckable="True"
+                    IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=NoteShowLineNumbers, Mode=TwoWay}" />
+            </MenuItem>
         </Menu>
         <avalon:TextEditor
             x:Name="TextEditor"
             Grid.Row="1"
             FontFamily="{StaticResource UbuntuMono}"
-            FontSize="{Binding ElementName=FontSize, Path=Value}" />
+            FontSize="{Binding ElementName=FontSize, Path=Value}"
+            ShowLineNumbers="{Binding ElementName=ViewLineNumbers, Path=IsChecked}"
+            WordWrap="{Binding ElementName=ViewWordWrap, Path=IsChecked}" />
         <StackPanel
             Grid.Row="2"
             Orientation="Horizontal">
@@ -166,7 +215,7 @@
                 DefaultValue="14"
                 Maximum="48"
                 Minimum="10"
-                Value="14" />
+                Value="{Binding Source={x:Static properties:Settings.Default}, Path=NoteFontSize, Mode=TwoWay}" />
             <TextBlock
                 Text="Document size:" />
             <TextBlock
