@@ -8,30 +8,35 @@
     d:DesignWidth="300"
     mc:Ignorable="d">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <StackPanel
-            Grid.Column="0">
+            Orientation="Horizontal"
+            Grid.Row="0">
             <Button
+                Margin="3"
                 Content="New NoteFile"
                 Command="{Binding NewNoteCommand}"/>
             <Button
+                Margin="3"
                 Content="Delete Selected Note"
                 Command="{Binding DeleteCommand}"
                 CommandParameter="{Binding ElementName=NotesList, Path=SelectedItem}"/>
             <Button
+                Margin="3"
                 Content="Import note from file..." 
                 Command="{Binding ImportCommand}"/>
             <Button
+                Margin="3"
                 Content="Save selected to file..."
                 Command="{Binding ExportCommand}"
                 CommandParameter="{Binding ElementName=NotesList, Path=SelectedItem}"/>
         </StackPanel>
         <ListBox
             x:Name="NotesList"
-            Grid.Column="1"
+            Grid.Row="1"
             ItemTemplate="{StaticResource Note}"
             ItemsSource="{Binding Notes}" />
     </Grid>

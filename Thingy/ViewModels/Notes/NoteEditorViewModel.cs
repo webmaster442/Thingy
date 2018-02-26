@@ -22,6 +22,8 @@ namespace Thingy.ViewModels.Notes
         public DelegateCommand SaveFileCommand { get; }
         public DelegateCommand SaveAsCommand { get; }
         public DelegateCommand PrintCommand { get; }
+        public DelegateCommand OpenNoteDBCommand { get; }
+        public DelegateCommand SaveNoteDBCommand { get; }
 
         public NoteEditorViewModel(INoteEditor view, IApplication app, IDataBase db): base(view)
         {
@@ -32,6 +34,8 @@ namespace Thingy.ViewModels.Notes
             SaveFileCommand = Command.ToCommand(SaveFile);
             SaveAsCommand = Command.ToCommand(SaveAs);
             PrintCommand = Command.ToCommand(Print);
+            OpenNoteDBCommand = Command.ToCommand(OpenNoteDB);
+            SaveNoteDBCommand = Command.ToCommand(SaveNoteDB);
         }
 
         private async Task SaveModified(bool modified)
@@ -110,6 +114,24 @@ namespace Thingy.ViewModels.Notes
             {
                 EntitySerializer.Serialize(xmlData, _db.Notes.GetNotes().ToArray());
             });
+        }
+
+        private async void OpenNoteDB()
+        {
+            var model = new DatabaseOpenSaveViewModel(_app, _db);
+            if (await _app.ShowDialog(new DatabaseOpenSave(), "Open Note from DB", model))
+            {
+
+            }
+        }
+
+        private async void SaveNoteDB()
+        {
+            var model = new DatabaseOpenSaveViewModel(_app, _db);
+            if (await _app.ShowDialog(new DatabaseOpenSave(), "Open Note from DB", model))
+            {
+
+            }
         }
     }
 }
