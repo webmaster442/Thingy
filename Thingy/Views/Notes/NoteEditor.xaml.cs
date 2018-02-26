@@ -1,6 +1,8 @@
 ﻿using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Document;
+using ICSharpCode.AvalonEdit.Folding;
 using ICSharpCode.AvalonEdit.Highlighting;
+using ICSharpCode.AvalonEdit.Indentation;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +15,9 @@ namespace Thingy.Views.Notes
     /// </summary>
     public partial class NoteEditor : UserControl, INoteEditor
     {
+        FoldingManager foldingManager;
+        object foldingStrategy;
+
         public NoteEditor()
         {
             InitializeComponent();
@@ -81,6 +86,55 @@ namespace Thingy.Views.Notes
                 p.Inlines.Add(new LineBreak());
             }
             return p;
+        }
+
+        void HighlightingComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (TextEditor.SyntaxHighlighting.Name)
+            {
+                case "XML":
+                    foldingStrategy = new XmlFoldingStrategy();
+                    TextEditor.TextArea.IndentationStrategy = new DefaultIndentationStrategy();
+                    break;
+                case "C#":
+                case "C++":
+                case "PHP":
+                case "Java":
+                    TextEditor.TextArea.IndentationStrategy = new ICSharpCode.AvalonEdit.Indentation.CSharp.CSharpIndentationStrategy(TextEditor.Options);
+                    foldingStrategy = new BraceFoldingStrategy();
+                    break;
+                default:
+                    TextEditor.TextArea.IndentationStrategy = new DefaultIndentationStrategy();
+                    foldingStrategy = null;
+                    break;
+            }
+
+            if (foldingStrategy != null)
+            {
+                if (foldingManager == null)
+                    foldingManager = FoldingManager.Install(TextEditor.TextArea);
+                UpdateFoldings();
+            }
+            else
+            {
+                if (foldingManager != null)
+                {
+                    FoldingManager.Uninstall(foldingManager);
+                    foldingManager = null;
+                }
+            }
+        }
+
+        void UpdateFoldings()
+        {
+            if (foldingStrategy is BraceFoldingStrategy)
+            {
+                ((BraceFoldingStrategy)foldingStrategy).UpdateFoldings(foldingManager, TextEditor.Document);
+            }
+            if (foldingStrategy is XmlFoldingStrategy)
+            {
+                ((XmlFoldingStrategy)foldingStrategy).UpdateFoldings(foldingManager, TextEditor.Document);
+            }
         }
     }
 }

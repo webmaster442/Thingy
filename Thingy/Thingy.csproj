@@ -209,6 +209,7 @@
     <Compile Include="Views\MusicPlayer\MusicPlayer.xaml.cs">
       <DependentUpon>MusicPlayer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Notes\BraceFoldingStrategy.cs" />
     <Compile Include="Views\Notes\DatabaseOpenSave.xaml.cs">
       <DependentUpon>DatabaseOpenSave.xaml</DependentUpon>
     </Compile>

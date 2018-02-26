@@ -38,163 +38,177 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Menu
+        <Border
             Grid.Row="0"
             BorderBrush="#FFBFBFBF"
             BorderThickness="0,0,0,1.1">
-            <MenuItem
-                Header="File">
-                <MenuItem
-                    Command="{Binding NewFileCommand}"
-                    CommandParameter="{Binding ElementName=TextEditor, Path=IsModified}"
-                    Header="_New">
-                    <MenuItem.Icon>
-                        <Image
-                            Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-file-48.png"
-                            Style="{StaticResource Menu}" />
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem
-                    Command="{Binding OpenFileCommand}"
-                    CommandParameter="{Binding ElementName=TextEditor, Path=IsModified}"
-                    Header="_Open"
-                    InputGestureText="CTRL+O">
-                    <MenuItem.Icon>
-                        <Image
-                            Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-open-48.png"
-                            Style="{StaticResource Menu}" />
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem
-                    Command="{Binding SaveFileCommand}"
-                    Header="_Save"
-                    InputGestureText="CTRL+S">
-                    <MenuItem.Icon>
-                        <Image
-                            Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-save-48.png"
-                            Style="{StaticResource Menu}" />
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem
-                    Command="{Binding SaveAsCommand}"
-                    Header="Save _As...">
-                    <MenuItem.Icon>
-                        <Image
-                            Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-save-as-48.png"
-                            Style="{StaticResource Menu}" />
-                    </MenuItem.Icon>
-                </MenuItem>
-                <Separator />
-                <MenuItem
-                    Command="{Binding PrintCommand}"
-                    Header="_Print">
-                    <MenuItem.Icon>
-                        <Image
-                            Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-print-48.png"
-                            Style="{StaticResource Menu}" />
-                    </MenuItem.Icon>
-                </MenuItem>
-            </MenuItem>
-            <MenuItem
-                Header="Database">
-                <MenuItem
-                    Header="Open from database...">
-                    <MenuItem.Icon>
-                        <Image
-                            Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-database-48.png"
-                            Style="{StaticResource Menu}" />
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem
-                    Header="Save to database...">
-                    <MenuItem.Icon>
-                        <Image
-                            Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-add-database-48.png"
-                            Style="{StaticResource Menu}" />
-                    </MenuItem.Icon>
-                </MenuItem>
-            </MenuItem>
-            <MenuItem
-                Header="Edit">
-                <MenuItem
-                    Command="Undo"
-                    Header="_Undo">
-                    <MenuItem.Icon>
-                        <Image
-                            Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-undo-48.png"
-                            Style="{StaticResource Menu}" />
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem
-                    Command="Redo"
-                    Header="_Redo">
-                    <MenuItem.Icon>
-                        <Image
-                            Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-right-2-48.png"
-                            Style="{StaticResource Menu}" />
-                    </MenuItem.Icon>
-                </MenuItem>
-                <Separator />
-                <MenuItem
-                    Command="Cut"
-                    Header="Cu_t">
-                    <MenuItem.Icon>
-                        <Image
-                            Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-scissors-48.png"
-                            Style="{StaticResource Menu}" />
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem
-                    Command="Copy"
-                    Header="_Copy">
-                    <MenuItem.Icon>
-                        <Image
-                            Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-copy-48.png"
-                            Style="{StaticResource Menu}" />
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem
-                    Command="Paste"
-                    Header="_Paste">
-                    <MenuItem.Icon>
-                        <Image
-                            Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-paste-48.png"
-                            Style="{StaticResource Menu}" />
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem
-                    Command="Delete"
-                    Header="_Delete" />
-            </MenuItem>
-            <MenuItem
-                Header="View">
-                <MenuItem
-                    x:Name="ViewWordWrap"
-                    Header="Word wrap"
-                    IsCheckable="True"
-                    IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=NoteWordWrap, Mode=TwoWay}" />
-                <Separator />
-                <MenuItem
-                    x:Name="ViewLineEndings"
-                    Checked="ConfigureEditorOptions"
-                    Header="Show line endings"
-                    IsCheckable="True"
-                    IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=NoteShowLineEndings, Mode=TwoWay}"
-                    Unchecked="ConfigureEditorOptions" />
-                <MenuItem
-                    x:Name="ViewWhitespace"
-                    Checked="ConfigureEditorOptions"
-                    Header="Show Whitespaces"
-                    IsCheckable="True"
-                    IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=NoteShowWhiteSpace, Mode=TwoWay}"
-                    Unchecked="ConfigureEditorOptions" />
-                <MenuItem
-                    x:Name="ViewLineNumbers"
-                    Header="Show line numbers"
-                    IsCheckable="True"
-                    IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=NoteShowLineNumbers, Mode=TwoWay}" />
-            </MenuItem>
-        </Menu>
+            <StackPanel
+                Orientation="Horizontal">
+                <Menu>
+                    <MenuItem
+                        Header="File">
+                        <MenuItem
+                            Command="{Binding NewFileCommand}"
+                            CommandParameter="{Binding ElementName=TextEditor, Path=IsModified}"
+                            Header="_New">
+                            <MenuItem.Icon>
+                                <Image
+                                    Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-file-48.png"
+                                    Style="{StaticResource Menu}" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem
+                            Command="{Binding OpenFileCommand}"
+                            CommandParameter="{Binding ElementName=TextEditor, Path=IsModified}"
+                            Header="_Open"
+                            InputGestureText="CTRL+O">
+                            <MenuItem.Icon>
+                                <Image
+                                    Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-open-48.png"
+                                    Style="{StaticResource Menu}" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem
+                            Command="{Binding SaveFileCommand}"
+                            Header="_Save"
+                            InputGestureText="CTRL+S">
+                            <MenuItem.Icon>
+                                <Image
+                                    Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-save-48.png"
+                                    Style="{StaticResource Menu}" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem
+                            Command="{Binding SaveAsCommand}"
+                            Header="Save _As...">
+                            <MenuItem.Icon>
+                                <Image
+                                    Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-save-as-48.png"
+                                    Style="{StaticResource Menu}" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator />
+                        <MenuItem
+                            Command="{Binding PrintCommand}"
+                            Header="_Print">
+                            <MenuItem.Icon>
+                                <Image
+                                    Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-print-48.png"
+                                    Style="{StaticResource Menu}" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                    <MenuItem
+                        Header="Database">
+                        <MenuItem
+                            Header="Open from database...">
+                            <MenuItem.Icon>
+                                <Image
+                                    Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-database-48.png"
+                                    Style="{StaticResource Menu}" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem
+                            Header="Save to database...">
+                            <MenuItem.Icon>
+                                <Image
+                                    Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-add-database-48.png"
+                                    Style="{StaticResource Menu}" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                    <MenuItem
+                        Header="Edit">
+                        <MenuItem
+                            Command="Undo"
+                            Header="_Undo">
+                            <MenuItem.Icon>
+                                <Image
+                                    Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-undo-48.png"
+                                    Style="{StaticResource Menu}" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem
+                            Command="Redo"
+                            Header="_Redo">
+                            <MenuItem.Icon>
+                                <Image
+                                    Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-right-2-48.png"
+                                    Style="{StaticResource Menu}" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator />
+                        <MenuItem
+                            Command="Cut"
+                            Header="Cu_t">
+                            <MenuItem.Icon>
+                                <Image
+                                    Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-scissors-48.png"
+                                    Style="{StaticResource Menu}" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem
+                            Command="Copy"
+                            Header="_Copy">
+                            <MenuItem.Icon>
+                                <Image
+                                    Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-copy-48.png"
+                                    Style="{StaticResource Menu}" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem
+                            Command="Paste"
+                            Header="_Paste">
+                            <MenuItem.Icon>
+                                <Image
+                                    Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/editor/icons8-paste-48.png"
+                                    Style="{StaticResource Menu}" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem
+                            Command="Delete"
+                            Header="_Delete" />
+                    </MenuItem>
+                    <MenuItem
+                        Header="View">
+                        <MenuItem
+                            x:Name="ViewWordWrap"
+                            Header="Word wrap"
+                            IsCheckable="True"
+                            IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=NoteWordWrap, Mode=TwoWay}" />
+                        <Separator />
+                        <MenuItem
+                            x:Name="ViewLineEndings"
+                            Checked="ConfigureEditorOptions"
+                            Header="Show line endings"
+                            IsCheckable="True"
+                            IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=NoteShowLineEndings, Mode=TwoWay}"
+                            Unchecked="ConfigureEditorOptions" />
+                        <MenuItem
+                            x:Name="ViewWhitespace"
+                            Checked="ConfigureEditorOptions"
+                            Header="Show Whitespaces"
+                            IsCheckable="True"
+                            IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=NoteShowWhiteSpace, Mode=TwoWay}"
+                            Unchecked="ConfigureEditorOptions" />
+                        <MenuItem
+                            x:Name="ViewLineNumbers"
+                            Header="Show line numbers"
+                            IsCheckable="True"
+                            IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=NoteShowLineNumbers, Mode=TwoWay}" />
+                    </MenuItem>
+                </Menu>
+                <TextBlock
+                    Margin="5,0"
+                    Text="Highlighting: "/>
+                <ComboBox
+                    MinWidth="100"
+                    Name="highlightingComboBox"
+                    SelectedItem="{Binding SyntaxHighlighting, ElementName=TextEditor}"
+                    ItemsSource="{Binding Source={x:Static avalon:HighlightingManager.Instance}, Path=HighlightingDefinitions}"
+                    SelectionChanged="HighlightingComboBox_SelectionChanged"/>
+            </StackPanel>
+        </Border>
         <avalon:TextEditor
             x:Name="TextEditor"
             Grid.Row="1"
