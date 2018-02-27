@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Thingy.Views
+namespace Thingy.Views.Notes
 {
     /// <summary>
-    /// Interaction logic for Note.xaml
+    /// Interaction logic for DatabaseOpenSave.xaml
     /// </summary>
-    public partial class Note : UserControl
+    public partial class DatabaseOpenSave : UserControl
     {
-        public Note()
+        public DatabaseOpenSave()
         {
             InitializeComponent();
         }

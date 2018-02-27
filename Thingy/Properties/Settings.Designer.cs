@@ -130,5 +130,53 @@ namespace Thingy.Properties {
                 this["FFMpegPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool NoteWordWrap {
+            get {
+                return ((bool)(this["NoteWordWrap"]));
+            }
+            set {
+                this["NoteWordWrap"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool NoteShowLineEndings {
+            get {
+                return ((bool)(this["NoteShowLineEndings"]));
+            }
+            set {
+                this["NoteShowLineEndings"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool NoteShowWhiteSpace {
+            get {
+                return ((bool)(this["NoteShowWhiteSpace"]));
+            }
+            set {
+                this["NoteShowWhiteSpace"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool NoteShowLineNumbers {
+            get {
+                return ((bool)(this["NoteShowLineNumbers"]));
+            }
+            set {
+                this["NoteShowLineNumbers"] = value;
+            }
+        }
     }
 }
