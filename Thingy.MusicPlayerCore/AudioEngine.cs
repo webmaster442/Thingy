@@ -105,9 +105,9 @@ namespace Thingy.MusicPlayerCore
         {
             var enginedir = AppDomain.CurrentDomain.BaseDirectory;
             if (Is64BitProcess)
-                NativeLibPath = Path.Combine(enginedir, @"NativeLibs\x64");
+                NativeLibPath = Path.Combine(enginedir, @"Native\x64");
             else
-                NativeLibPath = Path.Combine(enginedir, @"NativeLibs\x86");
+                throw new Exception("x64 operating system expected!");
 
             Log.Info("Native Libary location: {0}", NativeLibPath);
         }
