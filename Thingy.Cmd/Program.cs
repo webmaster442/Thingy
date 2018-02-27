@@ -18,6 +18,10 @@ namespace Thingy.Cmd
                         Console.Title = "IronPython";
                         Modules.PythonConsoleHost.PythonShell(trimmedArgs);
                         break;
+                    case "brainfuck":
+                        Console.Title = "Brainfuck";
+                        Modules.BrainFuck.RunBrainFuck(trimmedArgs);
+                        break;
                     default:
                         Console.WriteLine("Unknown module: {0}", args[0]);
                         break;

@@ -74,6 +74,7 @@
     <Compile Include="..\Build-tools\CommonVersion.cs">
       <Link>Properties\CommonVersion.cs</Link>
     </Compile>
+    <Compile Include="Modules\BrainFuck.cs" />
     <Compile Include="Modules\Logo.cs" />
     <Compile Include="Modules\PythonConsoleHost.cs" />
     <Compile Include="Program.cs" />
