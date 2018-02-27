@@ -217,6 +217,9 @@
     <Compile Include="Views\Notes\NoteEditor.xaml.cs">
       <DependentUpon>NoteEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Notes\Preivew.xaml.cs">
+      <DependentUpon>Preivew.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RunProgram.xaml.cs">
       <DependentUpon>RunProgram.xaml</DependentUpon>
     </Compile>
@@ -410,6 +413,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Notes\NoteEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Notes\Preivew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

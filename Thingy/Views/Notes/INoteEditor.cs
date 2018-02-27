@@ -9,5 +9,6 @@ namespace Thingy.Views.Notes
         void LoadFile(string file);
         void SaveFile(string file);
         void Print(string filename);
+        string GetHTMLString();
     }
 }

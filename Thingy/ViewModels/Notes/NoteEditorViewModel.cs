@@ -1,8 +1,9 @@
 ﻿using AppLib.MVVM;
+using CommonMark;
 using MahApps.Metro.Controls.Dialogs;
-using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Thingy.Db;
 using Thingy.Db.Entity;
@@ -16,6 +17,7 @@ namespace Thingy.ViewModels.Notes
         private string _fileOpen;
         private IApplication _app;
         private IDataBase _db;
+        private string _Template;
 
         public DelegateCommand<bool> NewFileCommand { get; }
         public DelegateCommand<bool> OpenFileCommand { get; }
@@ -24,6 +26,7 @@ namespace Thingy.ViewModels.Notes
         public DelegateCommand PrintCommand { get; }
         public DelegateCommand<bool> OpenNoteDBCommand { get; }
         public DelegateCommand SaveNoteDBCommand { get; }
+        public DelegateCommand<string> RenderCommand { get; }
 
         public NoteEditorViewModel(INoteEditor view, IApplication app, IDataBase db): base(view)
         {
@@ -36,6 +39,8 @@ namespace Thingy.ViewModels.Notes
             PrintCommand = Command.ToCommand(Print);
             OpenNoteDBCommand = Command.ToCommand<bool>(OpenNoteDB);
             SaveNoteDBCommand = Command.ToCommand(SaveNoteDB);
+            RenderCommand = Command.ToCommand<string>(Render);
+            _Template = Resources.ResourceLocator.GetResourceFile("html.MarkdownTemplate.html");
         }
 
         private async Task SaveModified(bool modified)
@@ -133,6 +138,47 @@ namespace Thingy.ViewModels.Notes
             {
                 model.SaveToNote(View.EditorText);
             }
+        }
+
+        private string Combine(string str)
+        {
+            var output = new StringBuilder();
+            output.Append(_Template);
+            output.Append(str);
+            output.Append("</body></html>");
+            return output.ToString();
+        }
+
+        private string RenderMD(string s)
+        {
+            try
+            {
+                return Combine(CommonMarkConverter.Convert(s));
+            }
+            catch (CommonMarkException ex)
+            {
+                return Combine($"<pre>Render error:\r\n{ex.Message}</pre>");
+            }
+        }
+
+        private async void Render(string obj)
+        {
+            string content = "";
+            switch (obj.ToLower())
+            {
+                case "html":
+                    content = View.GetHTMLString();
+                    break;
+                case "md":
+                    content = RenderMD(View.EditorText);
+                    break;
+                default:
+                    return;
+            }
+
+            var control = new Views.Notes.Preivew();
+            control.SetContent(content);
+            await _app.ShowDialog(control, "Preview");
         }
     }
 }

@@ -142,5 +142,11 @@ namespace Thingy.Views.Notes
                 ((XmlFoldingStrategy)foldingStrategy).UpdateFoldings(foldingManager, TextEditor.Document);
             }
         }
+
+        public string GetHTMLString()
+        {
+            IHighlighter highlighter = new DocumentHighlighter(TextEditor.Document, TextEditor.SyntaxHighlighting);
+            return HtmlClipboard.CreateHtmlFragment(TextEditor.Document, highlighter, null, new HtmlOptions());
+        }
     }
 }
