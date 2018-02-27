@@ -18,6 +18,12 @@ namespace Thingy.Views.Notes
         FoldingManager foldingManager;
         object foldingStrategy;
 
+        public string EditorText
+        {
+            get { return TextEditor.Text; }
+            set { TextEditor.Text = value; }
+        }
+
         public NoteEditor()
         {
             InitializeComponent();

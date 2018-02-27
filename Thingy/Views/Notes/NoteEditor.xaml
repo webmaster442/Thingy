@@ -101,6 +101,8 @@
                     <MenuItem
                         Header="Database">
                         <MenuItem
+                            Command="{Binding OpenNoteDBCommand}"
+                            CommandParameter="{Binding ElementName=TextEditor, Path=IsModified}"
                             Header="Open from database...">
                             <MenuItem.Icon>
                                 <Image
@@ -109,6 +111,7 @@
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem
+                            Command="{Binding SaveNoteDBCommand}"
                             Header="Save to database...">
                             <MenuItem.Icon>
                                 <Image

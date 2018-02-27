@@ -22,7 +22,7 @@ namespace Thingy.ViewModels.Notes
         public DelegateCommand SaveFileCommand { get; }
         public DelegateCommand SaveAsCommand { get; }
         public DelegateCommand PrintCommand { get; }
-        public DelegateCommand OpenNoteDBCommand { get; }
+        public DelegateCommand<bool> OpenNoteDBCommand { get; }
         public DelegateCommand SaveNoteDBCommand { get; }
 
         public NoteEditorViewModel(INoteEditor view, IApplication app, IDataBase db): base(view)
@@ -34,7 +34,7 @@ namespace Thingy.ViewModels.Notes
             SaveFileCommand = Command.ToCommand(SaveFile);
             SaveAsCommand = Command.ToCommand(SaveAs);
             PrintCommand = Command.ToCommand(Print);
-            OpenNoteDBCommand = Command.ToCommand(OpenNoteDB);
+            OpenNoteDBCommand = Command.ToCommand<bool>(OpenNoteDB);
             SaveNoteDBCommand = Command.ToCommand(SaveNoteDB);
         }
 
@@ -45,7 +45,7 @@ namespace Thingy.ViewModels.Notes
                 var result = await _app.ShowMessageBox("Notes", $"Save changes to {_fileOpen ?? "untitled"}?", MessageDialogStyle.AffirmativeAndNegative);
                 if (result == MessageDialogResult.Affirmative)
                 {
-
+                    SaveFile();
                 }
             }
             _fileOpen = null;
@@ -116,12 +116,13 @@ namespace Thingy.ViewModels.Notes
             });
         }
 
-        private async void OpenNoteDB()
+        private async void OpenNoteDB(bool modified)
         {
+            await SaveModified(modified);
             var model = new DatabaseOpenSaveViewModel(_app, _db);
             if (await _app.ShowDialog(new DatabaseOpenSave(), "Open Note from DB", model))
             {
-
+                View.EditorText = model.OpenNote();
             }
         }
 
@@ -130,7 +131,7 @@ namespace Thingy.ViewModels.Notes
             var model = new DatabaseOpenSaveViewModel(_app, _db);
             if (await _app.ShowDialog(new DatabaseOpenSave(), "Open Note from DB", model))
             {
-
+                model.SaveToNote(View.EditorText);
             }
         }
     }

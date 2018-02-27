@@ -37,6 +37,7 @@
         <ListBox
             x:Name="NotesList"
             Grid.Row="1"
+            SelectedItem="{Binding SeletedNote}"
             ItemTemplate="{StaticResource Note}"
             ItemsSource="{Binding Notes}" />
     </Grid>

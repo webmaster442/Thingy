@@ -14,6 +14,8 @@ namespace Thingy.ViewModels.Notes
 
         public ObservableCollection<Note> Notes { get; private set; }
 
+        public Note SeletedNote { get; set; }
+
         public DelegateCommand NewNoteCommand { get; }
         public DelegateCommand<Note> DeleteCommand { get; }
         public DelegateCommand<Note> ExportCommand { get; }
@@ -84,6 +86,24 @@ namespace Thingy.ViewModels.Notes
                 _db.Notes.SaveNote(model);
                 Notes.UpdateWith(_db.Notes.GetNotes());
             }
+        }
+
+        public void SaveToNote(string content)
+        {
+            if (SeletedNote != null)
+            {
+                SeletedNote.Content = content;
+                _db.Notes.SaveNote(SeletedNote);
+            }
+        }
+
+        public string OpenNote()
+        {
+            if (SeletedNote != null)
+            {
+                return SeletedNote.Content;
+            }
+            return null;
         }
     }
 }
