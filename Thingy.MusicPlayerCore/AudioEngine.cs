@@ -33,6 +33,7 @@ namespace Thingy.MusicPlayerCore
         private int _req;
 
         private DispatcherTimer _updateTimer;
+        private double _progressPercent;
 
         public event PropertyChangedEventHandler PropertyChanged;
         public event RoutedEventHandler SongFinishedEvent;
@@ -96,7 +97,9 @@ namespace Thingy.MusicPlayerCore
                 {
                     SongFinishedEvent?.Invoke(this, new RoutedEventArgs());
                 }
+                _progressPercent = (Position / Length) * 100;
                 NotifyChanged(nameof(Position));
+                NotifyChanged(nameof(ProgessPercent));
             }
         }
 
@@ -268,6 +271,11 @@ namespace Thingy.MusicPlayerCore
         }
 
         public bool Seeking { get; set; }
+
+        public double ProgessPercent
+        {
+            get { return _progressPercent; }
+        }
 
         /// <inheritdoc />
         public void Load(string fileName)

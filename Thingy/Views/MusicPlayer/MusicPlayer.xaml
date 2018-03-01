@@ -9,8 +9,8 @@
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:musicplayer="clr-namespace:Thingy.MusicPlayerCore.Controls;assembly=Thingy.MusicPlayerCore"
-    d:DesignHeight="300"
-    d:DesignWidth="300"
+    d:DesignHeight="500"
+    d:DesignWidth="900"
     mc:Ignorable="d">
     <Grid>
         <TabControl
@@ -76,6 +76,17 @@
                         Grid.Row="1"
                         Grid.ColumnSpan="2"
                         Orientation="Horizontal">
+                        <applib:CircularProgressBar
+                            Width="48"
+                            Height="48"
+                            Margin="5,5"
+                            Background="Transparent"
+                            BorderBrush="{StaticResource AccentBaseColorBrush}"
+                            FontSize="10"
+                            Foreground="Black"
+                            Maximum="100"
+                            Minimum="0"
+                            Value="{Binding AudioEngine.ProgessPercent, Mode=OneWay}" />
                         <applib:ImageButton
                             Command="{Binding OpenFileCommand}"
                             Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-eject-96.png"

@@ -52,6 +52,10 @@ namespace Thingy.MusicPlayerCore
         /// </summary>
         float Volume { get; set; }
         /// <summary>
+        /// Returns the progress as percent value
+        /// </summary>
+        double ProgessPercent { get; }
+        /// <summary>
         /// Play
         /// </summary>
         void Play();
