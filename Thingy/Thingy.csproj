@@ -121,6 +121,9 @@
     <Compile Include="Controls\CalculatorPrefixes.xaml.cs">
       <DependentUpon>CalculatorPrefixes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FontPreview.xaml.cs">
+      <DependentUpon>FontPreview.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NumberSystemTextBox.cs" />
     <Compile Include="Controls\TrulyObservableCollection.cs" />
     <Compile Include="Controls\UniformGridColunConverter.cs" />
@@ -199,6 +202,9 @@
     <Compile Include="Modules\VirtualFoldersModule.cs" />
     <Compile Include="Views\FFMpegGui.xaml.cs">
       <DependentUpon>FFMpegGui.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FontViewer.xaml.cs">
+      <DependentUpon>FontViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Interfaces\IMusicPlayer.cs" />
     <Compile Include="Views\MusicPlayer\AddURLDialog.xaml.cs">
@@ -305,6 +311,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\FontPreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DataTemplates\CalculatorTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -394,6 +404,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FFMpegGui.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FontViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
