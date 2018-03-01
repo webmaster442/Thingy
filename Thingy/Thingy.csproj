@@ -133,6 +133,7 @@
     <Compile Include="Infrastructure\Capabilities.cs" />
     <Compile Include="Infrastructure\CommandLineParser.cs" />
     <Compile Include="Infrastructure\DBFileIconConverter.cs" />
+    <Compile Include="Infrastructure\FontFamilyConverter.cs" />
     <Compile Include="Infrastructure\IModuleLoader.cs" />
     <Compile Include="Infrastructure\JumpListFactory.cs" />
     <Compile Include="Infrastructure\Messages.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Modules\CalculatorModule.cs" />
     <Compile Include="Modules\CurrencyConverterModule.cs" />
     <Compile Include="Modules\FFMpegGuiModule.cs" />
+    <Compile Include="Modules\FontsModule.cs" />
     <Compile Include="Modules\GreekAlphabetModule.cs" />
     <Compile Include="Modules\IronPythonModule.cs" />
     <Compile Include="Infrastructure\ModuleCategories.cs" />
@@ -154,6 +156,7 @@
     <Compile Include="ViewModels\Calculator\DisplayChangerModel.cs" />
     <Compile Include="ViewModels\CurrencyConverterViewModel.cs" />
     <Compile Include="ViewModels\FFMpegGuiViewModel.cs" />
+    <Compile Include="ViewModels\FontViewerViewModel.cs" />
     <Compile Include="ViewModels\MusicPlayer\MusicPlayerViewModel.cs" />
     <Compile Include="ViewModels\MusicPlayer\PlayListViewModel.cs" />
     <Compile Include="ViewModels\Notes\DatabaseOpenSaveViewModel.cs" />

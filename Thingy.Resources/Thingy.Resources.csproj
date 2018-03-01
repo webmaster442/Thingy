@@ -287,5 +287,8 @@
   <ItemGroup>
     <Resource Include="SmallIcons\editor\icons8-print-48.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-choose-font-96.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
