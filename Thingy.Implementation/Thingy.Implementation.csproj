@@ -106,6 +106,7 @@
     <Compile Include="CoreAudio\SessionCollection.cs" />
     <Compile Include="CoreAudio\SimpleAudioVolume.cs" />
     <Compile Include="ExeIconExtractor.cs" />
+    <Compile Include="FontInstaller.cs" />
     <Compile Include="Models\CurrencyRate.cs" />
     <Compile Include="PerformanceInfo.cs" />
     <Compile Include="TileColorProvider.cs" />
@@ -137,6 +138,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FontInstaller.vbs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
