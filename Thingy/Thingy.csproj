@@ -213,6 +213,9 @@
       <DependentUpon>FontViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Interfaces\IMusicPlayer.cs" />
+    <Compile Include="Views\MediaLibary\MediaLibary.xaml.cs">
+      <DependentUpon>MediaLibary.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MusicPlayer\AddURLDialog.xaml.cs">
       <DependentUpon>AddURLDialog.xaml</DependentUpon>
     </Compile>
@@ -417,6 +420,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FontViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MediaLibary\MediaLibary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
