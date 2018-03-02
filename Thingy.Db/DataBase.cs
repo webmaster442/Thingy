@@ -27,7 +27,14 @@ namespace Thingy.Db
 
         public DataBase(string file)
         {
+            bool needsInit = false;
             _filestream = File.Open(file, System.IO.FileMode.OpenOrCreate);
+
+            if (_filestream.Length == 0)
+            {
+                needsInit = true;
+            }
+
             _db = new LiteDatabase(_filestream);
 
             Todo = new Implementation.ToDo(_db.GetCollection<ToDoItem>(CollectionNames.Todo));
@@ -37,6 +44,11 @@ namespace Thingy.Db
             Notes = new Implementation.Notes(_db.GetCollection<Note>(CollectionNames.Notes));
             Alarms = new Implementation.Alarms(_db.GetCollection<Alarm>(CollectionNames.Alarms));
             StoredFiles = new Implementation.StoredFiles(_db);
+
+            if (needsInit)
+            {
+                DataBaseInitializer.Init(this);
+            }
         }
 
         public void Dispose()

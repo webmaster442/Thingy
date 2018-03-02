@@ -5,7 +5,7 @@ using Thingy.Db.Entity.MediaLibary;
 namespace Thingy.Db.Implementation
 {
     [Serializable]
-    public class MediaLibaryCache
+    internal class MediaLibaryCache
     {
         public HashSet<string> Albums { get; }
         public HashSet<string> Artists { get; }
@@ -28,12 +28,34 @@ namespace Thingy.Db.Implementation
             Geneires.Add(s.Genre);
         }
 
+        public void SongsAdded(IEnumerable<Song> songs)
+        {
+            foreach (var s in songs)
+            {
+                Albums.Add(s.Album);
+                Artists.Add(s.Artist);
+                Years.Add(s.Year);
+                Geneires.Add(s.Genre);
+            }
+        }
+
         public void SongDelete(Song s)
         {
             Albums.Remove(s.Album);
             Artists.Remove(s.Artist);
             Years.Remove(s.Year);
             Geneires.Remove(s.Genre);
+        }
+
+        public void SongsDelete(IEnumerable<Song> songs)
+        {
+            foreach (var s in songs)
+            {
+                Albums.Remove(s.Album);
+                Artists.Remove(s.Artist);
+                Years.Remove(s.Year);
+                Geneires.Remove(s.Genre);
+            }
         }
 
         public void Rebuild(IEnumerable<Song> songs)
@@ -51,5 +73,6 @@ namespace Thingy.Db.Implementation
                 Geneires.Add(s.Genre);
             }
         }
+
     }
 }

@@ -1,6 +1,8 @@
 ﻿using LiteDB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Serialization;
 using Thingy.Db.Entity.MediaLibary;
 
 namespace Thingy.Db.Implementation
@@ -11,9 +13,27 @@ namespace Thingy.Db.Implementation
         private LiteCollection<RadioStation> _radioStations;
         private MediaLibaryCache _cache;
 
-        public MediaLibary(LiteCollection<Song> collection, IStoredFiles files) : base(collection)
+        public MediaLibary(LiteCollection<Song> collection, LiteCollection<RadioStation> radios, IStoredFiles files) : base(collection)
         {
             _files = files;
+            _radioStations = radios;
+            RestoreCache();
+        }
+
+        private void RestoreCache()
+        {
+            try
+            {
+                using (var cacheFile = _files.OpenRead(Folders.AlbumsCache, "cache.xml"))
+                {
+                    var xs = new XmlSerializer(typeof(MediaLibaryCache));
+                    _cache = xs.Deserialize(cacheFile) as MediaLibaryCache;
+                }
+            }
+            catch (Exception)
+            {
+                _cache = new MediaLibaryCache();
+            }
         }
 
         public void AddRadioStation(RadioStation station)

@@ -52,6 +52,7 @@
     </Compile>
     <Compile Include="Constatnts.cs" />
     <Compile Include="DataBase.cs" />
+    <Compile Include="DataBaseInitializer.cs" />
     <Compile Include="Entity\Alarm.cs" />
     <Compile Include="Entity\EntitySerializer.cs" />
     <Compile Include="Entity\FolderLink.cs" />
