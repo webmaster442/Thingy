@@ -39,25 +39,6 @@ namespace Thingy.Db.Implementation
             }
         }
 
-        public void SongDelete(Song s)
-        {
-            Albums.Remove(s.Album);
-            Artists.Remove(s.Artist);
-            Years.Remove(s.Year);
-            Geneires.Remove(s.Genre);
-        }
-
-        public void SongsDelete(IEnumerable<Song> songs)
-        {
-            foreach (var s in songs)
-            {
-                Albums.Remove(s.Album);
-                Artists.Remove(s.Artist);
-                Years.Remove(s.Year);
-                Geneires.Remove(s.Genre);
-            }
-        }
-
         public void Rebuild(IEnumerable<Song> songs)
         {
             Albums.Clear();

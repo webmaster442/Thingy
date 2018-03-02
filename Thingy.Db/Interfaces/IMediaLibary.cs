@@ -6,6 +6,8 @@ namespace Thingy.Db
     public interface IMediaLibary
     {
         IEnumerable<Song> DoQuery(SongQuery input);
+        void AddSong(Song s);
+        void AddSongs(IEnumerable<Song> songs);
         IEnumerable<string> GetAlbums();
         IEnumerable<string> GetArtists();
         IEnumerable<int> GetYears();

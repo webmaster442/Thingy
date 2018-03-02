@@ -122,5 +122,17 @@ namespace Thingy.Db.Implementation
         {
             return _cache.Years;
         }
+
+        public void AddSong(Song s)
+        {
+            EntityCollection.Insert(s);
+            _cache.SongAdded(s);
+        }
+
+        public void AddSongs(IEnumerable<Song> songs)
+        {
+            EntityCollection.InsertBulk(songs);
+            _cache.SongsAdded(songs);
+        }
     }
 }
