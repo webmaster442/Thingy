@@ -1,7 +1,6 @@
-﻿using System;
+﻿using AppLib.WPF;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using Thingy.Infrastructure;
 
 namespace Thingy.Modules
@@ -15,8 +14,9 @@ namespace Thingy.Modules
 
         public override ImageSource Icon
         {
-            get { return new BitmapImage(new Uri("pack://application:,,,/Thingy.Resources;component/Icons/icons8-run-command-96.png")); }
+            get { return BitmapHelper.FrozenBitmap("pack://application:,,,/Thingy.Resources;component/Icons/icons8-run-command-96.png"); }
         }
+
         public override string Category
         {
             get { return ModuleCategories.Utilities; }

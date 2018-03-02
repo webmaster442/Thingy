@@ -12,7 +12,10 @@ namespace Thingy.Views
         public StartPage()
         {
             InitializeComponent();
-            ItemList.Background = BingPhotoOfDay.PhotoOfDayImageBrush;
+            var brush = BingPhotoOfDay.PhotoOfDayImageBrush;
+            brush.TileMode = System.Windows.Media.TileMode.None;
+            ItemList.Background = brush;
+
         }
     }
 }
