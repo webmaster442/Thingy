@@ -217,6 +217,9 @@
     <Compile Include="Views\Notes\DatabaseOpenSave.xaml.cs">
       <DependentUpon>DatabaseOpenSave.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Notes\FindReplaceDialog.xaml.cs">
+      <DependentUpon>FindReplaceDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Notes\INoteEditor.cs" />
     <Compile Include="Views\Notes\NoteEditor.xaml.cs">
       <DependentUpon>NoteEditor.xaml</DependentUpon>
@@ -413,6 +416,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Notes\DatabaseOpenSave.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Notes\FindReplaceDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

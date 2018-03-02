@@ -1,6 +1,8 @@
 ﻿using AppLib.MVVM;
 using CommonMark;
+using ICSharpCode.AvalonEdit;
 using MahApps.Metro.Controls.Dialogs;
+using System;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -27,6 +29,8 @@ namespace Thingy.ViewModels.Notes
         public DelegateCommand<bool> OpenNoteDBCommand { get; }
         public DelegateCommand SaveNoteDBCommand { get; }
         public DelegateCommand<string> RenderCommand { get; }
+        public DelegateCommand<TextEditor> FindCommand { get; }
+        public DelegateCommand<TextEditor> ReplaceCommand { get; }
 
         public NoteEditorViewModel(INoteEditor view, IApplication app, IDataBase db): base(view)
         {
@@ -40,7 +44,24 @@ namespace Thingy.ViewModels.Notes
             OpenNoteDBCommand = Command.ToCommand<bool>(OpenNoteDB);
             SaveNoteDBCommand = Command.ToCommand(SaveNoteDB);
             RenderCommand = Command.ToCommand<string>(Render);
+            FindCommand = Command.ToCommand<TextEditor>(Find);
+            ReplaceCommand = Command.ToCommand<TextEditor>(Replace);
+            
             _Template = Resources.ResourceLocator.GetResourceFile("html.MarkdownTemplate.html");
+        }
+
+        private async void Replace(TextEditor obj)
+        {
+            var dialog = new FindReplaceDialog(obj);
+            dialog.ConfigureFor(FindReplaceDialog.DialogType.Replace);
+            await _app.ShowDialog(dialog, "Find & Replace");
+        }
+
+        private async void Find(TextEditor obj)
+        {
+            var dialog = new FindReplaceDialog(obj);
+            dialog.ConfigureFor(FindReplaceDialog.DialogType.Find);
+            await _app.ShowDialog(dialog, "Find & Replace");
         }
 
         private async Task SaveModified(bool modified)

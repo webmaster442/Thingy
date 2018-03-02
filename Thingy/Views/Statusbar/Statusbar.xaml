@@ -24,6 +24,8 @@
                 <ProgressBar
                     x:Name="CPUProgress"
                     Width="150"
+                    VerticalAlignment="Center"
+                    Height="22"
                     Margin="2"
                     Maximum="100"
                     Minimum="0" />
@@ -44,6 +46,8 @@
                     x:Name="RAMProgress"
                     Grid.Column="3"
                     Width="150"
+                    VerticalAlignment="Center"
+                    Height="22"
                     Margin="2"
                     Maximum="100"
                     Minimum="0" />

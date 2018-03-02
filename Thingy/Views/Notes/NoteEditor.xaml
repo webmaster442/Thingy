@@ -31,6 +31,14 @@
             Key="S"
             Command="{Binding SaveFileCommand}"
             Modifiers="Ctrl" />
+        <KeyBinding
+            Key="F"
+            Command="{Binding FindCommand}"
+            Modifiers="Ctrl" />
+        <KeyBinding
+            Key="H"
+            Command="{Binding ReplaceCommand}"
+            Modifiers="Ctrl" />
     </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -140,6 +148,17 @@
                                     Style="{StaticResource Menu}" />
                             </MenuItem.Icon>
                         </MenuItem>
+                        <Separator />
+                        <MenuItem
+                            Command="{Binding FindCommand}"
+                            CommandParameter="{Binding ElementName=TextEditor}"
+                            Header="Find..."
+                            InputGestureText="CTRL+F" />
+                        <MenuItem
+                            Command="{Binding ReplaceCommand}"
+                            CommandParameter="{Binding ElementName=TextEditor}"
+                            Header="Replace..."
+                            InputGestureText="CTRL+H" />
                         <Separator />
                         <MenuItem
                             Command="Cut"
