@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace Thingy.Db.Entity.MediaLibary
 {
+    [Serializable]
     public class Song: BindableBase, IEquatable<Song>
     {
         private string _filename;

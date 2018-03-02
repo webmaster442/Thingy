@@ -1,5 +1,6 @@
 ﻿using AppLib.Common.Extensions;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
@@ -17,7 +18,7 @@ namespace Thingy.Db.Entity.MediaLibary
         Exactmatch = 3
     }
 
-    public class StringQuery
+    public class StringQuery : IEquatable<StringQuery>
     {
         public StringOperator Operator { get; set; }
         public string Value { get; set; }
@@ -26,6 +27,12 @@ namespace Thingy.Db.Entity.MediaLibary
         {
             Operator = StringOperator.ContainsIgnoreCase;
             Value = null;
+        }
+
+        public StringQuery(string value, StringOperator op)
+        {
+            Value = value;
+            Operator = op;
         }
 
         public bool HasValue
@@ -51,6 +58,38 @@ namespace Thingy.Db.Entity.MediaLibary
                 default:
                     return false;
             }
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as StringQuery);
+        }
+
+        public bool Equals(StringQuery other)
+        {
+            return other != null &&
+                   Operator == other.Operator &&
+                   Value == other.Value &&
+                   HasValue == other.HasValue;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -1404276345;
+            hashCode = hashCode * -1521134295 + Operator.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Value);
+            hashCode = hashCode * -1521134295 + HasValue.GetHashCode();
+            return hashCode;
+        }
+
+        public static bool operator ==(StringQuery query1, StringQuery query2)
+        {
+            return EqualityComparer<StringQuery>.Default.Equals(query1, query2);
+        }
+
+        public static bool operator !=(StringQuery query1, StringQuery query2)
+        {
+            return !(query1 == query2);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using LiteDB;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Thingy.Db.Entity.MediaLibary;
@@ -9,10 +8,22 @@ namespace Thingy.Db.Implementation
     internal class MediaLibary : ImplementationBase<Song>, IMediaLibary
     {
         private IStoredFiles _files;
+        private LiteCollection<RadioStation> _radioStations;
+        private MediaLibaryCache _cache;
 
         public MediaLibary(LiteCollection<Song> collection, IStoredFiles files) : base(collection)
         {
             _files = files;
+        }
+
+        public void AddRadioStation(RadioStation station)
+        {
+            _radioStations.Insert(station);
+        }
+
+        public IEnumerable<RadioStation> GetRadioStations()
+        {
+            return _radioStations.FindAll();
         }
 
         public IEnumerable<Song> DoQuery(SongQuery input)
@@ -74,22 +85,22 @@ namespace Thingy.Db.Implementation
 
         public IEnumerable<string> GetAlbums()
         {
-            throw new NotImplementedException();
+            return _cache.Albums;
         }
 
         public IEnumerable<string> GetArtists()
         {
-            throw new NotImplementedException();
+            return _cache.Artists;
         }
 
         public IEnumerable<string> GetGeneires()
         {
-            throw new NotImplementedException();
+            return _cache.Geneires;
         }
 
         public IEnumerable<int> GetYears()
         {
-            throw new NotImplementedException();
+            return _cache.Years;
         }
     }
 }
