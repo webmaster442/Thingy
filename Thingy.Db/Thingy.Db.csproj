@@ -56,12 +56,15 @@
     <Compile Include="Entity\EntitySerializer.cs" />
     <Compile Include="Entity\FolderLink.cs" />
     <Compile Include="Entity\LauncherProgram.cs" />
+    <Compile Include="Entity\MediaLibary\RadioStation.cs" />
     <Compile Include="Entity\Note.cs" />
     <Compile Include="Entity\MediaLibary\IntQuery.cs" />
     <Compile Include="Entity\MediaLibary\StringQuery.cs" />
     <Compile Include="Entity\MediaLibary\Song.cs" />
+    <Compile Include="Factories\QueryFactory.cs" />
     <Compile Include="Implementation\Alarms.cs" />
     <Compile Include="Implementation\MediaLibary.cs" />
+    <Compile Include="Implementation\MediaLibaryCache.cs" />
     <Compile Include="Implementation\Notes.cs" />
     <Compile Include="Implementation\Programs.cs" />
     <Compile Include="Entity\ToDoItem.cs" />

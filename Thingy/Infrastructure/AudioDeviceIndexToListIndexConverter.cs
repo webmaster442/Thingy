@@ -36,7 +36,6 @@ namespace Thingy.Infrastructure
         {
             _devices = App.IoCContainer.ResolveSingleton<IAudioEngine>().OutputDevices;
             return this;
-
         }
     }
 }
