@@ -290,5 +290,16 @@
   <ItemGroup>
     <Resource Include="Icons\icons8-choose-font-96.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SmallIcons\icons8-calendar-7-48.png" />
+    <Resource Include="SmallIcons\icons8-dj-48.png" />
+    <Resource Include="SmallIcons\icons8-music-record-48.png" />
+    <Resource Include="SmallIcons\icons8-musical-notes-48.png" />
+    <Resource Include="SmallIcons\icons8-questionnaire-48.png" />
+    <Resource Include="SmallIcons\icons8-radio-station-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-loudspeaker-96.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

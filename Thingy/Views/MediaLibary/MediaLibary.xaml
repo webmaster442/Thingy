@@ -4,6 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:Thingy.ViewModels.MediaLibary"
+    d:DataContext="{d:DesignInstance Type={x:Type viewmodels:MediaLibaryViewModel},
+                                     IsDesignTimeCreatable=false}"
     d:DesignHeight="500"
     d:DesignWidth="900"
     mc:Ignorable="d">
@@ -18,15 +21,44 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        
         <Menu
             Grid.Row="0"
             Grid.ColumnSpan="3">
             <MenuItem
                 Header="menu" />
         </Menu>
-        <ListBox
+
+        <TreeView
             Grid.Row="1"
-            Grid.Column="0" />
+            Grid.Column="0"
+            ItemsSource="{Binding Tree}">
+            <TreeView.ItemTemplate>
+                <DataTemplate
+                    DataType="{x:Type viewmodels:NavigationItem}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image
+                            Width="24"
+                            Height="24"
+                            Source="{Binding Icon}"
+                            Margin="5,0"/>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            FontWeight="Bold"
+                            Text="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </TreeView.ItemTemplate>
+            <TreeView.Resources>
+                <HierarchicalDataTemplate
+                    DataType="{x:Type viewmodels:NavigationItem}"
+                    ItemsSource="{Binding SubItems}">
+                    <TextBlock
+                        Text="{Binding}" />
+                </HierarchicalDataTemplate>
+            </TreeView.Resources>
+        </TreeView>
+
         <DataGrid
             Grid.Row="1"
             Grid.Column="2" />
