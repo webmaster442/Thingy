@@ -118,7 +118,7 @@ namespace Thingy.Db.Implementation
             return _cache.Geneires;
         }
 
-        public IEnumerable<int> GetYears()
+        public IEnumerable<string> GetYears()
         {
             return _cache.Years;
         }
@@ -133,6 +133,22 @@ namespace Thingy.Db.Implementation
         {
             EntityCollection.InsertBulk(songs);
             _cache.SongsAdded(songs);
+        }
+
+        public void SaveCache()
+        {
+            try
+            {
+                using (var cacheFile = _files.OpenWrite(Folders.AlbumsCache, "cache.xml"))
+                {
+                    var xs = new XmlSerializer(typeof(MediaLibaryCache));
+                    xs.Serialize(cacheFile, _cache);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }

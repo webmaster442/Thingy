@@ -76,6 +76,7 @@
     <Compile Include="PlaylistLoaders.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Formats\ExtensionProvider.cs" />
+    <Compile Include="DBFactory.cs" />
     <Compile Include="TagFactory.cs" />
     <Compile Include="TagLib\Aac\AudioHeader.cs" />
     <Compile Include="TagLib\Aac\BitStream.cs" />
@@ -364,6 +365,14 @@
     <ProjectReference Include="..\applib\AppLib.Common\AppLib.Common.csproj">
       <Project>{516087b5-6ac5-44a5-8df1-fe42d7a7a0e6}</Project>
       <Name>AppLib.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\applib\AppLib.WPF\AppLib.WPF.csproj">
+      <Project>{FAF19388-A6C0-46F9-A588-A46DB392ACE4}</Project>
+      <Name>AppLib.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Thingy.Db\Thingy.Db.csproj">
+      <Project>{2d7e8d87-74ac-402a-8e11-bdacc7b3839b}</Project>
+      <Name>Thingy.Db</Name>
     </ProjectReference>
     <ProjectReference Include="..\Thingy.Resources\Thingy.Resources.csproj">
       <Project>{63a3ee73-078f-4dec-8578-5af6f158d383}</Project>

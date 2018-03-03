@@ -1,4 +1,5 @@
 ﻿using AppLib.MVVM;
+using LiteDB;
 using System;
 using System.Collections.Generic;
 
@@ -18,66 +19,77 @@ namespace Thingy.Db.Entity.MediaLibary
         private int _disc;
         private double _length;
 
+        [BsonId]
         public string Filename
         {
             get => _filename;
             set => SetValue(ref _filename, value);
         }
 
+        [BsonField]
         public string Artist
         {
             get => _artist;
             set => SetValue(ref _artist, value);
         }
 
+        [BsonField]
         public string Title
         {
             get => _title;
             set => SetValue(ref _title, value);
         }
 
+        [BsonField]
         public string Album
         {
             get => _album;
             set => SetValue(ref _album, value);
         }
 
+        [BsonField]
         public int Year
         {
             get => _year;
             set => SetValue(ref _year, value);
         }
 
+        [BsonField]
         public string Genre
         {
             get => _genre;
             set => SetValue(ref _genre, value);
         }
 
+        [BsonField]
         public bool Liked
         {
             get => _liked;
             set => SetValue(ref _liked, value);
         }
 
+        [BsonField]
         public int Track
         {
             get => _track;
             set => SetValue(ref _track, value);
         }
 
+        [BsonField]
         public int Disc
         {
             get => _disc;
             set => SetValue(ref _disc, value);
         }
 
+        [BsonField]
         public double Length
         {
             get => _length;
             set => SetValue(ref _length, value);
         }
 
+        [BsonField]
         public override bool Equals(object obj)
         {
             return Equals(obj as Song);

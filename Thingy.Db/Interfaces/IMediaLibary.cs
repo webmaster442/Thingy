@@ -8,9 +8,10 @@ namespace Thingy.Db
         IEnumerable<Song> DoQuery(SongQuery input);
         void AddSong(Song s);
         void AddSongs(IEnumerable<Song> songs);
+        void SaveCache();
         IEnumerable<string> GetAlbums();
         IEnumerable<string> GetArtists();
-        IEnumerable<int> GetYears();
+        IEnumerable<string> GetYears();
         IEnumerable<string> GetGeneires();
         IEnumerable<RadioStation> GetRadioStations();
         void AddRadioStation(RadioStation station);

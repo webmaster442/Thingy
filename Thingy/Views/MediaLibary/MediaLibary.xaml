@@ -21,12 +21,32 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
+
         <Menu
             Grid.Row="0"
-            Grid.ColumnSpan="3">
+            Grid.ColumnSpan="3"
+            BorderBrush="#FFBFBFBF"
+            BorderThickness="0,0,0,1.1">
             <MenuItem
-                Header="menu" />
+                Header="Import">
+                <MenuItem
+                    Command="{Binding AddFilesCommand}"
+                    Header="Add Files...">
+                    <MenuItem.Icon>
+                        <Image
+                            Width="24"
+                            Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-audio-file-96.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    Header="Add Folder...">
+                    <MenuItem.Icon>
+                        <Image
+                            Width="24"
+                            Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-music-folder.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
         </Menu>
 
         <TreeView
@@ -34,29 +54,29 @@
             Grid.Column="0"
             ItemsSource="{Binding Tree}">
             <TreeView.ItemTemplate>
-                <DataTemplate
+                <HierarchicalDataTemplate
+                    ItemsSource="{Binding SubItems}"
                     DataType="{x:Type viewmodels:NavigationItem}">
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel
+                        Orientation="Horizontal">
                         <Image
                             Width="24"
                             Height="24"
-                            Source="{Binding Icon}"
-                            Margin="5,0"/>
+                            Margin="5,0"
+                            Source="{Binding Icon}" />
                         <TextBlock
                             VerticalAlignment="Center"
                             FontWeight="Bold"
                             Text="{Binding Name}" />
                     </StackPanel>
-                </DataTemplate>
-            </TreeView.ItemTemplate>
-            <TreeView.Resources>
-                <HierarchicalDataTemplate
-                    DataType="{x:Type viewmodels:NavigationItem}"
-                    ItemsSource="{Binding SubItems}">
-                    <TextBlock
-                        Text="{Binding}" />
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                Text="{Binding}" />
+                        </DataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
                 </HierarchicalDataTemplate>
-            </TreeView.Resources>
+            </TreeView.ItemTemplate>
         </TreeView>
 
         <DataGrid

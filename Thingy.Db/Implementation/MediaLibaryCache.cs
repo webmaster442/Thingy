@@ -5,18 +5,18 @@ using Thingy.Db.Entity.MediaLibary;
 namespace Thingy.Db.Implementation
 {
     [Serializable]
-    internal class MediaLibaryCache
+    public class MediaLibaryCache
     {
         public HashSet<string> Albums { get; }
         public HashSet<string> Artists { get; }
-        public HashSet<int> Years { get; }
+        public HashSet<string> Years { get; }
         public HashSet<string> Geneires { get; }
 
         public MediaLibaryCache()
         {
             Albums = new HashSet<string>();
             Artists = new HashSet<string>();
-            Years = new HashSet<int>();
+            Years = new HashSet<string>();
             Geneires = new HashSet<string>();
         }
 
@@ -24,7 +24,7 @@ namespace Thingy.Db.Implementation
         {
             Albums.Add(s.Album);
             Artists.Add(s.Artist);
-            Years.Add(s.Year);
+            Years.Add(s.Year.ToString());
             Geneires.Add(s.Genre);
         }
 
@@ -34,7 +34,7 @@ namespace Thingy.Db.Implementation
             {
                 Albums.Add(s.Album);
                 Artists.Add(s.Artist);
-                Years.Add(s.Year);
+                Years.Add(s.Year.ToString());
                 Geneires.Add(s.Genre);
             }
         }
@@ -50,7 +50,7 @@ namespace Thingy.Db.Implementation
             {
                 Albums.Add(s.Album);
                 Artists.Add(s.Artist);
-                Years.Add(s.Year);
+                Years.Add(s.Year.ToString());
                 Geneires.Add(s.Genre);
             }
         }
