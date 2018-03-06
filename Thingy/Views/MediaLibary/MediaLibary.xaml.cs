@@ -24,5 +24,16 @@ namespace Thingy.Views.MediaLibary
         {
             InitializeComponent();
         }
+
+        private void TreeView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var selected = DataTree.SelectedItem as string;
+            var tag = (e.OriginalSource as TextBlock)?.Tag;
+            if (selected != null && tag != null)
+            {
+                (DataContext as ViewModels.MediaLibary.MediaLibaryViewModel)?.CategoryQueryCommand.Execute(new string[] { selected, tag.ToString() });
+            }
+
+        }
     }
 }

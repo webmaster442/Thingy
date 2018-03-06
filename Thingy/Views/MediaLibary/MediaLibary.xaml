@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="clr-namespace:Thingy.ViewModels.MediaLibary"
     d:DataContext="{d:DesignInstance Type={x:Type viewmodels:MediaLibaryViewModel},
@@ -19,7 +20,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Menu
@@ -52,11 +52,13 @@
         <TreeView
             Grid.Row="1"
             Grid.Column="0"
-            ItemsSource="{Binding Tree}">
+            x:Name="DataTree"
+            ItemsSource="{Binding Tree}"
+            MouseDoubleClick="TreeView_MouseDoubleClick">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate
-                    ItemsSource="{Binding SubItems}"
-                    DataType="{x:Type viewmodels:NavigationItem}">
+                    DataType="{x:Type viewmodels:NavigationItem}"
+                    ItemsSource="{Binding SubItems}">
                     <StackPanel
                         Orientation="Horizontal">
                         <Image
@@ -72,6 +74,7 @@
                     <HierarchicalDataTemplate.ItemTemplate>
                         <DataTemplate>
                             <TextBlock
+                                Tag="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeViewItem}, AncestorLevel=2}, Path=DataContext.Name}"
                                 Text="{Binding}" />
                         </DataTemplate>
                     </HierarchicalDataTemplate.ItemTemplate>
@@ -81,14 +84,8 @@
 
         <DataGrid
             Grid.Row="1"
-            Grid.Column="2" />
-
-        <StackPanel
-            Grid.Row="2"
-            Grid.ColumnSpan="3"
-            Orientation="Horizontal">
-            <TextBlock
-                Text="Bottom" />
-        </StackPanel>
+            Grid.Column="2"
+            ItemsSource="{Binding QueryResults}">
+        </DataGrid>
     </Grid>
 </UserControl>

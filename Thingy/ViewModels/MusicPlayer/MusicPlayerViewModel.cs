@@ -234,6 +234,7 @@ namespace Thingy.ViewModels.MusicPlayer
             if (AudioEngine != null)
             {
                 AudioEngine.Stop();
+                AudioEngine.SongFinishedEvent -= SongFinished;
             }
         }
     }

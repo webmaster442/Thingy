@@ -4,9 +4,12 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Thingy.Db;
+using Thingy.Db.Entity.MediaLibary;
+using Thingy.Db.Factories;
 using Thingy.MusicPlayerCore;
 using Thingy.MusicPlayerCore.Formats;
 using Thingy.Resources;
+using AppLib.Common.Extensions;
 
 namespace Thingy.ViewModels.MediaLibary
 {
@@ -18,6 +21,9 @@ namespace Thingy.ViewModels.MediaLibary
 
         public ObservableCollection<NavigationItem> Tree { get; }
         public DelegateCommand AddFilesCommand { get; }
+        public DelegateCommand<string[]> CategoryQueryCommand { get; }
+        public ObservableCollection<Song> QueryResults { get; }
+
 
         public MediaLibaryViewModel(IApplication app, IDataBase db)
         {
@@ -25,8 +31,38 @@ namespace Thingy.ViewModels.MediaLibary
             _db = db;
             _extensions = new ExtensionProvider();
             Tree = new ObservableCollection<NavigationItem>();
+            QueryResults = new ObservableCollection<Song>();
             AddFilesCommand = Command.ToCommand(AddFiles);
+            CategoryQueryCommand = Command.ToCommand<string[]>(CategoryQuery);
             BuildTree();
+        }
+
+        private void CategoryQuery(string[] obj)
+        {
+            if (obj == null || obj.Length < 2) return;
+
+            var category = obj[1];
+
+            SongQuery q = null;
+            
+            switch (category)
+            {
+                case "Albums":
+                    q = QueryFactory.AlbumQuery(obj[0]);
+                    break;
+                case "Artists":
+                    q = QueryFactory.ArtistQuery(obj[0]);
+                    break;
+                case "Years":
+                    q = QueryFactory.YearQuery(Convert.ToInt32(obj[0]));
+                    break;
+                case "Genres":
+                    q = QueryFactory.GenreQuery(obj[0]);
+                    break;
+            }
+
+            var results = _db.MediaLibary.DoQuery(q);
+            QueryResults.UpdateWith(results);
         }
 
         private async void AddFiles()
