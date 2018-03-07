@@ -27,7 +27,7 @@ namespace Thingy.MusicPlayerCore
                     Artist = artist,
                     Filename = file,
                     Genre = tags.Tag.Genres[0],
-                    Length = tags.Length,
+                    Length = tags.Properties.Duration.TotalSeconds,
                     Disc = Convert.ToInt32(tags.Tag.Disc),
                     Track = Convert.ToInt32(tags.Tag.Track)
                 };

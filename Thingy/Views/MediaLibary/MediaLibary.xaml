@@ -2,8 +2,8 @@
     x:Class="Thingy.Views.MediaLibary.MediaLibary"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="clr-namespace:Thingy.ViewModels.MediaLibary"
     d:DataContext="{d:DesignInstance Type={x:Type viewmodels:MediaLibaryViewModel},
@@ -47,12 +47,24 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
+            <MenuItem
+                Header="Columns"
+                ItemsSource="{Binding ElementName=DataGrid, Path=Columns}">
+                <MenuItem.ItemTemplate>
+                    <DataTemplate>
+                        <MenuItem
+                            Header="{Binding Header}"
+                            IsCheckable="True"
+                            IsChecked="{Binding Visibility, Converter={applib:VisibilityToBoolConverter}}" />
+                    </DataTemplate>
+                </MenuItem.ItemTemplate>
+            </MenuItem>
         </Menu>
 
         <TreeView
+            x:Name="DataTree"
             Grid.Row="1"
             Grid.Column="0"
-            x:Name="DataTree"
             ItemsSource="{Binding Tree}"
             MouseDoubleClick="TreeView_MouseDoubleClick">
             <TreeView.ItemTemplate>
@@ -83,9 +95,57 @@
         </TreeView>
 
         <DataGrid
+            x:Name="DataGrid"
             Grid.Row="1"
             Grid.Column="2"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            CanUserReorderColumns="True"
+            CanUserSortColumns="True"
             ItemsSource="{Binding QueryResults}">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Binding="{Binding Disc}"
+                    Header="Disc"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Binding="{Binding Track}"
+                    Header="Track"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Binding="{Binding Artist}"
+                    Header="Artist"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Binding="{Binding Title}"
+                    Header="Title"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Binding="{Binding Album}"
+                    Header="Album"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Binding="{Binding Year}"
+                    Header="Year"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Binding="{Binding Genre}"
+                    Header="Genre"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Binding="{Binding Length, Converter={applib:SecondsToTimeStringConverter}}"
+                    Header="Length"
+                    IsReadOnly="True" />
+                <DataGridCheckBoxColumn
+                    Binding="{Binding Liked}"
+                    Header="Like?" />
+                <DataGridTextColumn
+                    Binding="{Binding Filename}"
+                    Header="File"
+                    IsReadOnly="True"
+                    Visibility="Collapsed" />
+            </DataGrid.Columns>
         </DataGrid>
     </Grid>
 </UserControl>
