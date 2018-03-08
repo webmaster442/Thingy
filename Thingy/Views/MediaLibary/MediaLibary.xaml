@@ -59,6 +59,9 @@
                     </DataTemplate>
                 </MenuItem.ItemTemplate>
             </MenuItem>
+            <MenuItem
+                Command="{Binding CreateQueryCommand}"
+                Header="Create Query" />
         </Menu>
 
         <TreeView

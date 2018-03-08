@@ -1,0 +1,155 @@
+﻿<UserControl
+    x:Class="Thingy.Views.MediaLibary.QueryEditor"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:System="clr-namespace:System;assembly=mscorlib"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:db="clr-namespace:Thingy.Db.Entity.MediaLibary;assembly=Thingy.Db"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="200"
+    d:DesignWidth="400"
+    d:DataContext="{d:DesignInstance db:SongQuery, IsDesignTimeCreatable=False}"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style
+            TargetType="TextBox">
+            <Setter Property="Margin" Value="2" />
+        </Style>
+        <Style
+            TargetType="ComboBox">
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="Width" Value="100" />
+        </Style>
+        <ObjectDataProvider
+            x:Key="StringOperatorProvider"
+            MethodName="GetValues"
+            ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type
+                    TypeName="db:StringOperator" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider
+            x:Key="IntOperatorProvider"
+            MethodName="GetValues"
+            ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type
+                    TypeName="db:IntOperator" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </UserControl.Resources>
+    <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label
+                Content="Query Name" />
+            <TextBox
+                Grid.Row="0"
+                Grid.Column="1"
+                Text="{Binding Path=Name, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, ValidatesOnExceptions=True}" />
+
+            <CheckBox
+                x:Name="ArtistCB"
+                Grid.Row="1"
+                Grid.Column="0"
+                Content="Artist" />
+            <TextBox
+                Grid.Row="1"
+                Grid.Column="1"
+                IsEnabled="{Binding ElementName=ArtistCB, Path=IsChecked}"
+                Text="{Binding Path=Artist.Value, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, ValidatesOnExceptions=True}" />
+            <ComboBox
+                Grid.Row="1"
+                Grid.Column="2"
+                IsEnabled="{Binding ElementName=ArtistCB, Path=IsChecked}"
+                ItemsSource="{Binding Source={StaticResource StringOperatorProvider}}"
+                SelectedItem="{Binding Path=Artist.Operator, Mode=TwoWay}" />
+
+            <CheckBox
+                x:Name="TitleCB"
+                Grid.Row="2"
+                Content="Title" />
+            <TextBox
+                Grid.Row="2"
+                Grid.Column="1"
+                IsEnabled="{Binding ElementName=TitleCB, Path=IsChecked}"
+                Text="{Binding Path=Title.Value, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, ValidatesOnExceptions=True}" />
+            <ComboBox
+                Grid.Row="2"
+                Grid.Column="2"
+                IsEnabled="{Binding ElementName=TitleCB, Path=IsChecked}"
+                ItemsSource="{Binding Source={StaticResource StringOperatorProvider}}"
+                SelectedItem="{Binding Path=Title.Operator, Mode=TwoWay}" />
+
+            <CheckBox
+                x:Name="AlbumCB"
+                Grid.Row="3"
+                Content="Album" />
+            <TextBox
+                Grid.Row="3"
+                Grid.Column="1"
+                IsEnabled="{Binding ElementName=AlbumCB, Path=IsChecked}"
+                Text="{Binding Path=Album.Value, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, ValidatesOnExceptions=True}" />
+            <ComboBox
+                Grid.Row="3"
+                Grid.Column="2"
+                IsEnabled="{Binding ElementName=AlbumCB, Path=IsChecked}"
+                SelectedItem="{Binding Path=Album.Operator, Mode=TwoWay}" />
+
+            <CheckBox
+                x:Name="YearCB"
+                Grid.Row="4"
+                Content="Year" />
+            <TextBox
+                Grid.Row="4"
+                Grid.Column="1"
+                IsEnabled="{Binding ElementName=YearCB, Path=IsChecked}"
+                Text="{Binding Path=Year.Value, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, ValidatesOnExceptions=True}" />
+            <ComboBox
+                Grid.Row="4"
+                Grid.Column="2"
+                IsEnabled="{Binding ElementName=YearCB, Path=IsChecked}"
+                ItemsSource="{Binding Source={StaticResource IntOperatorProvider}}"
+                SelectedItem="{Binding Path=Year.Operator, Mode=TwoWay}" />
+
+            <CheckBox
+                x:Name="GenreCB"
+                Grid.Row="5"
+                Content="Genre" />
+            <TextBox
+                Grid.Row="5"
+                Grid.Column="1"
+                IsEnabled="{Binding ElementName=GenreCB, Path=IsChecked}"
+                Text="{Binding Path=Genre.Value, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, ValidatesOnExceptions=True}" />
+            <ComboBox
+                Grid.Row="5"
+                Grid.Column="2"
+                IsEnabled="{Binding ElementName=GenreCB, Path=IsChecked}"
+                ItemsSource="{Binding Source={StaticResource StringOperatorProvider}}"
+                SelectedItem="{Binding Path=Genre.Operator, Mode=TwoWay}" />
+
+            <Label
+                Grid.Row="6"
+                Content="Is Liked?" />
+            <CheckBox
+                Grid.Row="6"
+                Grid.Column="1"
+                IsChecked="{Binding Path=Liked, Mode=TwoWay}" />
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,4 +1,5 @@
 ﻿using AppLib.Common.Extensions;
+using AppLib.MVVM;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,10 +19,22 @@ namespace Thingy.Db.Entity.MediaLibary
         Exactmatch = 3
     }
 
-    public class StringQuery : IEquatable<StringQuery>
+    public class StringQuery : BindableBase, IEquatable<StringQuery>
     {
-        public StringOperator Operator { get; set; }
-        public string Value { get; set; }
+        private string _value;
+        private StringOperator _operator;
+
+        public StringOperator Operator
+        {
+            get { return _operator; }
+            set { SetValue(ref _operator, value); }
+        }
+
+        public string Value
+        {
+            get { return _value; }
+            set { SetValue(ref _value, value); }
+        }
 
         public StringQuery()
         {
@@ -38,6 +51,11 @@ namespace Thingy.Db.Entity.MediaLibary
         public bool HasValue
         {
             get { return !string.IsNullOrEmpty(Value); }
+            set
+            {
+                Value = null;
+                OnPropertyChanged();
+            }
         }
 
         public bool IsMatch(string other)

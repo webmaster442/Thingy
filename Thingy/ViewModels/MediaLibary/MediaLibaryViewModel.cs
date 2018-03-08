@@ -22,6 +22,7 @@ namespace Thingy.ViewModels.MediaLibary
         public ObservableCollection<NavigationItem> Tree { get; }
         public DelegateCommand AddFilesCommand { get; }
         public DelegateCommand<string[]> CategoryQueryCommand { get; }
+        public DelegateCommand CreateQueryCommand { get; }
         public ObservableCollection<Song> QueryResults { get; }
 
 
@@ -32,9 +33,21 @@ namespace Thingy.ViewModels.MediaLibary
             _extensions = new ExtensionProvider();
             Tree = new ObservableCollection<NavigationItem>();
             QueryResults = new ObservableCollection<Song>();
+            CreateQueryCommand = Command.ToCommand(CreateQuery);
             AddFilesCommand = Command.ToCommand(AddFiles);
             CategoryQueryCommand = Command.ToCommand<string[]>(CategoryQuery);
             BuildTree();
+        }
+
+        private async void CreateQuery()
+        {
+            var editor = new Views.MediaLibary.QueryEditor();
+            var modell = new Db.Entity.MediaLibary.SongQuery();
+            if (await _app.ShowDialog(editor, "Query Editor", modell))
+            {
+                var results = _db.MediaLibary.DoQuery(modell);
+                QueryResults.UpdateWith(results);
+            }
         }
 
         private void CategoryQuery(string[] obj)
