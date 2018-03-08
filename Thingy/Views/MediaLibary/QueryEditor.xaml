@@ -6,9 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:db="clr-namespace:Thingy.Db.Entity.MediaLibary;assembly=Thingy.Db"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignInstance db:SongQuery,
+                                     IsDesignTimeCreatable=False}"
     d:DesignHeight="200"
     d:DesignWidth="400"
-    d:DataContext="{d:DesignInstance db:SongQuery, IsDesignTimeCreatable=False}"
     mc:Ignorable="d">
     <UserControl.Resources>
         <Style
@@ -67,7 +68,8 @@
                 x:Name="ArtistCB"
                 Grid.Row="1"
                 Grid.Column="0"
-                Content="Artist" />
+                Content="Artist"
+                IsChecked="{Binding Artist.HasValue}" />
             <TextBox
                 Grid.Row="1"
                 Grid.Column="1"
@@ -83,7 +85,8 @@
             <CheckBox
                 x:Name="TitleCB"
                 Grid.Row="2"
-                Content="Title" />
+                Content="Title"
+                IsChecked="{Binding Title.HasValue}" />
             <TextBox
                 Grid.Row="2"
                 Grid.Column="1"
@@ -99,7 +102,8 @@
             <CheckBox
                 x:Name="AlbumCB"
                 Grid.Row="3"
-                Content="Album" />
+                Content="Album"
+                IsChecked="{Binding Album.HasValue}" />
             <TextBox
                 Grid.Row="3"
                 Grid.Column="1"
@@ -109,12 +113,14 @@
                 Grid.Row="3"
                 Grid.Column="2"
                 IsEnabled="{Binding ElementName=AlbumCB, Path=IsChecked}"
+                ItemsSource="{Binding Source={StaticResource StringOperatorProvider}}"
                 SelectedItem="{Binding Path=Album.Operator, Mode=TwoWay}" />
 
             <CheckBox
                 x:Name="YearCB"
                 Grid.Row="4"
-                Content="Year" />
+                Content="Year"
+                IsChecked="{Binding Year.HasValue}" />
             <TextBox
                 Grid.Row="4"
                 Grid.Column="1"
@@ -130,7 +136,8 @@
             <CheckBox
                 x:Name="GenreCB"
                 Grid.Row="5"
-                Content="Genre" />
+                Content="Genre"
+                IsChecked="{Binding Genre.HasValue}" />
             <TextBox
                 Grid.Row="5"
                 Grid.Column="1"
