@@ -48,6 +48,12 @@ namespace Thingy.ViewModels.MediaLibary
                 var results = _db.MediaLibary.DoQuery(modell);
                 if (results != null)
                     QueryResults.UpdateWith(results);
+
+                if (!string.IsNullOrEmpty(modell.Name))
+                {
+                    _db.MediaLibary.SaveQuery(modell);
+                    BuildTree();
+                }
             }
         }
 
@@ -72,6 +78,9 @@ namespace Thingy.ViewModels.MediaLibary
                     break;
                 case "Genres":
                     q = QueryFactory.GenreQuery(obj[0]);
+                    break;
+                case "Queries":
+                    q = _db.MediaLibary.GetQuery(obj[0]);
                     break;
             }
 
@@ -120,6 +129,12 @@ namespace Thingy.ViewModels.MediaLibary
                 Name = "Genres",
                 Icon = BitmapHelper.FrozenBitmap(ResourceLocator.GetIcon(IconCategories.Small, "icons8-musical-notes-48.png")),
                 SubItems = new ObservableCollection<string>(_db.MediaLibary.GetGeneires())
+            });
+            Tree.Add(new NavigationItem
+            {
+                Name = "Queries",
+                Icon = BitmapHelper.FrozenBitmap(ResourceLocator.GetIcon(IconCategories.Small, "icons8-questionnaire-48.png")),
+                SubItems = new ObservableCollection<string>(_db.MediaLibary.GetQueryNames())
             });
         }
     }

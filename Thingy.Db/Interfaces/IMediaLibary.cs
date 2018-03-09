@@ -15,5 +15,8 @@ namespace Thingy.Db
         IEnumerable<string> GetGeneires();
         IEnumerable<RadioStation> GetRadioStations();
         void AddRadioStation(RadioStation station);
+        IEnumerable<string> GetQueryNames();
+        SongQuery GetQuery(string name);
+        void SaveQuery(SongQuery q);
     }
 }

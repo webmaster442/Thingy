@@ -11,12 +11,17 @@ namespace Thingy.Db.Implementation
     {
         private IStoredFiles _files;
         private LiteCollection<RadioStation> _radioStations;
+        private LiteCollection<SongQuery> _querydb;
         private MediaLibaryCache _cache;
 
-        public MediaLibary(LiteCollection<Song> collection, LiteCollection<RadioStation> radios, IStoredFiles files) : base(collection)
+        public MediaLibary(LiteCollection<Song> collection, 
+                           LiteCollection<RadioStation> radios, 
+                           LiteCollection<SongQuery> query,
+                           IStoredFiles files) : base(collection)
         {
             _files = files;
             _radioStations = radios;
+            _querydb = query;
             RestoreCache();
         }
 
@@ -149,6 +154,21 @@ namespace Thingy.Db.Implementation
             {
 
             }
+        }
+
+        public IEnumerable<string> GetQueryNames()
+        {
+            return _querydb.FindAll().Select(q => q.Name);
+        }
+
+        public SongQuery GetQuery(string name)
+        {
+            return _querydb.Find(q => q.Name == name).FirstOrDefault();
+        }
+
+        public void SaveQuery(SongQuery q)
+        {
+            _querydb.Insert(q);
         }
     }
 }

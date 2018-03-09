@@ -55,6 +55,7 @@ namespace Thingy.Db
 
             MediaLibary = new Implementation.MediaLibary(_db.GetCollection<Song>(CollectionNames.Songs), 
                                                          _db.GetCollection<RadioStation>(CollectionNames.Radios),
+                                                         _db.GetCollection<SongQuery>(CollectionNames.Queries),
                                                          StoredFiles);
 
             if (needsInit)
