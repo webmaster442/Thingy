@@ -23,6 +23,7 @@ namespace Thingy.Db.Entity.MediaLibary
     {
         private IntOperator _operator;
         private int? _value;
+        private bool _HasValue;
 
         public IntOperator Operator
         {
@@ -33,7 +34,11 @@ namespace Thingy.Db.Entity.MediaLibary
         public int? Value
         {
             get { return _value; }
-            set { SetValue(ref _value, value); }
+            set
+            {
+                SetValue(ref _value, value);
+                HasValue = value != null;
+            }
         }
 
         public IntQuery()
@@ -50,11 +55,11 @@ namespace Thingy.Db.Entity.MediaLibary
 
         public bool HasValue
         {
-            get { return Value != null; }
+            get { return _HasValue; }
             set
             {
-                Value = null;
-                OnPropertyChanged();
+                if (value == false && Value != null) Value = null;
+                SetValue(ref _HasValue, value);
             }
         }
 

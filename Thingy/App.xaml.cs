@@ -101,9 +101,11 @@ namespace Thingy
             Current.Shutdown();
         }
 
-        public async Task<bool> ShowDialog(UserControl control, string Title, INotifyPropertyChanged model = null)
+        public async Task<bool> ShowDialog(UserControl control, string Title, INotifyPropertyChanged model = null, bool ShowOverlay = true)
         {
             ModalDialog modalDialog = new ModalDialog();
+            if (ShowOverlay == false)
+                modalDialog.OverlayBrush = null;
             if (model != null)
                 control.DataContext = model;
             modalDialog.DailogContent = control;

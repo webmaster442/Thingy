@@ -43,10 +43,11 @@ namespace Thingy.ViewModels.MediaLibary
         {
             var editor = new Views.MediaLibary.QueryEditor();
             var modell = new Db.Entity.MediaLibary.SongQuery();
-            if (await _app.ShowDialog(editor, "Query Editor", modell))
+            if (await _app.ShowDialog(editor, "Query Editor", modell, false))
             {
                 var results = _db.MediaLibary.DoQuery(modell);
-                QueryResults.UpdateWith(results);
+                if (results != null)
+                    QueryResults.UpdateWith(results);
             }
         }
 

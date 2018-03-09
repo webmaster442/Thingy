@@ -23,6 +23,7 @@ namespace Thingy.Db.Entity.MediaLibary
     {
         private string _value;
         private StringOperator _operator;
+        private bool _HasValue;
 
         public StringOperator Operator
         {
@@ -33,7 +34,11 @@ namespace Thingy.Db.Entity.MediaLibary
         public string Value
         {
             get { return _value; }
-            set { SetValue(ref _value, value); }
+            set
+            {
+                SetValue(ref _value, value);
+                HasValue = !string.IsNullOrEmpty(value);
+            }
         }
 
         public StringQuery()
@@ -50,11 +55,11 @@ namespace Thingy.Db.Entity.MediaLibary
 
         public bool HasValue
         {
-            get { return !string.IsNullOrEmpty(Value); }
+            get { return _HasValue; }
             set
             {
-                Value = null;
-                OnPropertyChanged();
+                if (value == false && !string.IsNullOrEmpty(Value)) Value = null;
+                SetValue(ref _HasValue, value);
             }
         }
 
