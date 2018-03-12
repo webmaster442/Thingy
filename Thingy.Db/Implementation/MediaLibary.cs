@@ -51,6 +51,11 @@ namespace Thingy.Db.Implementation
             return _radioStations.FindAll();
         }
 
+        public IEnumerable<Song> DoQuery()
+        {
+            return EntityCollection.FindAll();
+        }
+
         public IEnumerable<Song> DoQuery(SongQuery input)
         {
             IEnumerable<Song> matches = null;
@@ -140,6 +145,15 @@ namespace Thingy.Db.Implementation
             _cache.SongsAdded(songs);
         }
 
+        public void DeleteSongs(IEnumerable<Song> songs)
+        {
+            foreach (var song in songs)
+            {
+                EntityCollection.Delete(s => s == song);
+            }
+            _cache.Rebuild(EntityCollection.FindAll());
+        }
+
         public void SaveCache()
         {
             try
@@ -169,6 +183,23 @@ namespace Thingy.Db.Implementation
         public void SaveQuery(SongQuery q)
         {
             _querydb.Insert(q);
+        }
+
+        public void DeleteAll()
+        {
+            _querydb.Delete(x => x.Name != null);
+            EntityCollection.Delete(s => s.Filename != null);
+            _radioStations.Delete(r => r.Url != null);
+        }
+
+        public IEnumerable<SongQuery> GetAllQuery()
+        {
+            return _querydb.FindAll();
+        }
+
+        public void SaveQuery(IEnumerable<SongQuery> q)
+        {
+            _querydb.InsertBulk(q);
         }
     }
 }

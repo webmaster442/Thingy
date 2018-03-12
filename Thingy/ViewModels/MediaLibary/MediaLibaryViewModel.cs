@@ -1,19 +1,25 @@
-﻿using AppLib.MVVM;
+﻿using AppLib.Common.Extensions;
+using AppLib.MVVM;
 using AppLib.WPF;
+using MahApps.Metro.Controls.Dialogs;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Thingy.Db;
+using Thingy.Db.Entity;
 using Thingy.Db.Entity.MediaLibary;
 using Thingy.Db.Factories;
+using Thingy.Infrastructure;
 using Thingy.MusicPlayerCore;
 using Thingy.MusicPlayerCore.Formats;
 using Thingy.Resources;
-using AppLib.Common.Extensions;
 
 namespace Thingy.ViewModels.MediaLibary
 {
-    public class MediaLibaryViewModel: ViewModel
+    public class MediaLibaryViewModel: ViewModel, ICanImportExportXMLData
     {
         private IApplication _app;
         private IDataBase _db;
@@ -22,6 +28,7 @@ namespace Thingy.ViewModels.MediaLibary
         public ObservableCollection<NavigationItem> Tree { get; }
         public DelegateCommand AddFilesCommand { get; }
         public DelegateCommand<string[]> CategoryQueryCommand { get; }
+        public DelegateCommand<string[]> DeleteQueryCommand { get; }
         public DelegateCommand CreateQueryCommand { get; }
         public ObservableCollection<Song> QueryResults { get; }
 
@@ -36,6 +43,7 @@ namespace Thingy.ViewModels.MediaLibary
             CreateQueryCommand = Command.ToCommand(CreateQuery);
             AddFilesCommand = Command.ToCommand(AddFiles);
             CategoryQueryCommand = Command.ToCommand<string[]>(CategoryQuery);
+            DeleteQueryCommand = Command.ToCommand<string[]>(DeleteQuery);
             BuildTree();
         }
 
@@ -57,14 +65,14 @@ namespace Thingy.ViewModels.MediaLibary
             }
         }
 
-        private void CategoryQuery(string[] obj)
+        private IEnumerable<Song> ExecuteQuery(string[] obj)
         {
-            if (obj == null || obj.Length < 2) return;
+            if (obj == null || obj.Length < 2) return null;
 
             var category = obj[1];
 
             SongQuery q = null;
-            
+
             switch (category)
             {
                 case "Albums":
@@ -84,8 +92,28 @@ namespace Thingy.ViewModels.MediaLibary
                     break;
             }
 
-            var results = _db.MediaLibary.DoQuery(q);
-            QueryResults.UpdateWith(results);
+            return _db.MediaLibary.DoQuery(q);
+        }
+
+        private void CategoryQuery(string[] obj)
+        {
+            var results = ExecuteQuery(obj);
+            if (results!=null)
+                QueryResults.UpdateWith(results);
+        }
+
+        private async void DeleteQuery(string[] obj)
+        {
+            var results = ExecuteQuery(obj);
+            if (results != null)
+            {
+                var q = await _app.ShowMessageBox("Media Libary", "Remove songs from database?", MessageDialogStyle.AffirmativeAndNegative);
+                if (q == MessageDialogResult.Affirmative)
+                {
+                    _db.MediaLibary.DeleteSongs(results);
+                    BuildTree();
+                }
+            }
         }
 
         private async void AddFiles()
@@ -135,6 +163,35 @@ namespace Thingy.ViewModels.MediaLibary
                 Name = "Queries",
                 Icon = BitmapHelper.FrozenBitmap(ResourceLocator.GetIcon(IconCategories.Small, "icons8-questionnaire-48.png")),
                 SubItems = new ObservableCollection<string>(_db.MediaLibary.GetQueryNames())
+            });
+        }
+
+        public Task Import(Stream xmlData, bool append)
+        {
+            return Task.Run(() =>
+            {
+                var import = EntitySerializer.Deserialize<Tuple<IEnumerable<Song>, IEnumerable<SongQuery>>>(xmlData);
+                if (append)
+                {
+                    _db.MediaLibary.AddSongs(import.Item1);
+                    _db.MediaLibary.SaveQuery(import.Item2);
+                }
+                else
+                {
+                    _db.MediaLibary.DeleteAll();
+                    _db.MediaLibary.AddSongs(import.Item1);
+                    _db.MediaLibary.SaveQuery(import.Item2);
+                }
+            });
+        }
+
+        public Task Export(Stream xmlData)
+        {
+            var export = Tuple.Create(_db.MediaLibary.DoQuery(), _db.MediaLibary.GetAllQuery());
+
+            return Task.Run(() =>
+            {
+                EntitySerializer.Serialize(xmlData, export);
             });
         }
     }

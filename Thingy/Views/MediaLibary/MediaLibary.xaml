@@ -95,6 +95,13 @@
                     </HierarchicalDataTemplate.ItemTemplate>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
+            <TreeView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem
+                        Click="Delete_Click"
+                        Header="Delete Query Results" />
+                </ContextMenu>
+            </TreeView.ContextMenu>
         </TreeView>
 
         <DataGrid
