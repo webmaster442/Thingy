@@ -3,6 +3,7 @@ using AppLib.MVVM;
 using AppLib.WPF;
 using MahApps.Metro.Controls.Dialogs;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -30,6 +31,8 @@ namespace Thingy.ViewModels.MediaLibary
         public DelegateCommand<string[]> CategoryQueryCommand { get; }
         public DelegateCommand<string[]> DeleteQueryCommand { get; }
         public DelegateCommand CreateQueryCommand { get; }
+        public DelegateCommand<IList> SendToPlayerCommand { get; }
+
         public ObservableCollection<Song> QueryResults { get; }
 
 
@@ -44,7 +47,19 @@ namespace Thingy.ViewModels.MediaLibary
             AddFilesCommand = Command.ToCommand(AddFiles);
             CategoryQueryCommand = Command.ToCommand<string[]>(CategoryQuery);
             DeleteQueryCommand = Command.ToCommand<string[]>(DeleteQuery);
+            SendToPlayerCommand = Command.ToCommand<IList>(SendToPlayer, CanSendToPlayer);
             BuildTree();
+        }
+
+        private bool CanSendToPlayer(IList songs)
+        {
+            return (songs != null && songs.Count > 0);
+        }
+
+        private void SendToPlayer(IList songs)
+        {
+            var files = songs.Cast<Song>().Select(s => s.Filename).ToList();
+            _app.HandleFiles(files);
         }
 
         private async void CreateQuery()

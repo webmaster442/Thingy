@@ -166,7 +166,7 @@ namespace Thingy
                     {
                         var id =  await TabManager.StartModule(module);
                         await Task.Delay(25);
-                        Messager.Instance.SendMessage(id, new HandleFileMessage
+                        Messager.Instance.SendMessage(id, new Infrastructure.Messages.HandleFileMessage
                         {
                             File = file
                         });
@@ -174,7 +174,7 @@ namespace Thingy
                     else
                     {
                         TabManager.FocusTabByIndex(tabIndex);
-                        Messager.Instance.SendMessage(module.RunModule().GetType(), new HandleFileMessage
+                        Messager.Instance.SendMessage(module.RunModule().GetType(), new Infrastructure.Messages.HandleFileMessage
                         {
                             File = file
                         });
@@ -184,7 +184,7 @@ namespace Thingy
                 {
                     var id = await TabManager.StartModule(module);
                     await Task.Delay(25);
-                    Messager.Instance.SendMessage(id, new HandleFileMessage
+                    Messager.Instance.SendMessage(id, new Infrastructure.Messages.HandleFileMessage
                     {
                         File = file
                     });

@@ -4,8 +4,8 @@ using System.Windows.Input;
 using Thingy.ViewModels.MusicPlayer;
 using Thingy.Views.Interfaces;
 using AppLib.MVVM.MessageHandler;
-using Thingy.Infrastructure;
 using AppLib.Common;
+using Thingy.Infrastructure.Messages;
 
 namespace Thingy.Views.MusicPlayer
 {

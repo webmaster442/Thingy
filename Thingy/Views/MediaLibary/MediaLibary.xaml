@@ -62,6 +62,11 @@
             <MenuItem
                 Command="{Binding CreateQueryCommand}"
                 Header="Create Query" />
+
+            <MenuItem
+                Command="{Binding SendToPlayerCommand}"
+                CommandParameter="{Binding ElementName=DataGrid, Path=SelectedItems}"
+                Header="Send Selection to Music Player" />
         </Menu>
 
         <TreeView
@@ -113,6 +118,7 @@
             CanUserDeleteRows="False"
             CanUserReorderColumns="True"
             CanUserSortColumns="True"
+            SelectionUnit="FullRow"
             ItemsSource="{Binding QueryResults}">
             <DataGrid.Columns>
                 <DataGridTextColumn
