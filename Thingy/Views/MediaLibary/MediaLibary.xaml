@@ -95,19 +95,27 @@
                         <DataTemplate>
                             <TextBlock
                                 Tag="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeViewItem}, AncestorLevel=2}, Path=DataContext.Name}"
-                                Text="{Binding}" />
+                                Text="{Binding}">
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem
+                                            Click="Delete_Click"
+                                            Header="Delete Query Results" />
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
                         </DataTemplate>
                     </HierarchicalDataTemplate.ItemTemplate>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
-            <TreeView.ContextMenu>
-                <ContextMenu>
-                    <MenuItem
-                        Click="Delete_Click"
-                        Header="Delete Query Results" />
-                </ContextMenu>
-            </TreeView.ContextMenu>
         </TreeView>
+
+        <GridSplitter
+            Grid.Row="1"
+            Grid.Column="1"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            Background="LightBlue"/>
 
         <DataGrid
             x:Name="DataGrid"

@@ -27,7 +27,10 @@ namespace Thingy.Views.MediaLibary
         private void Delete_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             var selected = DataTree.SelectedItem as string;
-            var tag = (e.OriginalSource as TextBlock)?.Tag;
+            var menuitem = (e.OriginalSource as MenuItem);
+
+            var tag = ((menuitem.Parent as ContextMenu).PlacementTarget as TextBlock).Tag;
+
             if (selected != null && tag != null)
             {
                 (DataContext as ViewModels.MediaLibary.MediaLibaryViewModel)?.DeleteQueryCommand.Execute(new string[] { selected, tag.ToString() });
