@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppLib.MVVM;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -18,10 +19,27 @@ namespace Thingy.Db.Entity.MediaLibary
         GreaterOrEqual = 4
     }
 
-    public class IntQuery : IEquatable<IntQuery>
+    public class IntQuery : BindableBase, IEquatable<IntQuery>
     {
-        public IntOperator Operator { get; set; }
-        public int? Value { get; set; }
+        private IntOperator _operator;
+        private int? _value;
+        private bool _HasValue;
+
+        public IntOperator Operator
+        {
+            get { return _operator; }
+            set { SetValue(ref _operator, value); }
+        }
+
+        public int? Value
+        {
+            get { return _value; }
+            set
+            {
+                SetValue(ref _value, value);
+                HasValue = value != null;
+            }
+        }
 
         public IntQuery()
         {
@@ -37,7 +55,12 @@ namespace Thingy.Db.Entity.MediaLibary
 
         public bool HasValue
         {
-            get { return Value != null; }
+            get { return _HasValue; }
+            set
+            {
+                if (value == false && Value != null) Value = null;
+                SetValue(ref _HasValue, value);
+            }
         }
 
 

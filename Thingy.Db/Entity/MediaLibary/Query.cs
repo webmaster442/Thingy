@@ -1,14 +1,22 @@
-﻿using LiteDB;
+﻿using AppLib.MVVM;
+using LiteDB;
 using System;
 using System.Collections.Generic;
 
 namespace Thingy.Db.Entity.MediaLibary
 {
     [Serializable]
-    public class SongQuery : IEquatable<SongQuery>
+    public class SongQuery: BindableBase, IEquatable<SongQuery>
     {
+        private string _name;
+        private bool? _liked;
+
         [BsonId]
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return _name; }
+            set { SetValue(ref _name, value); }
+        }
 
         [BsonField]
 		public StringQuery Artist { get; set; }
@@ -21,7 +29,11 @@ namespace Thingy.Db.Entity.MediaLibary
         [BsonField]
         public IntQuery Year { get; set; }
         [BsonField]
-        public bool? Liked { get; set; }
+        public bool? Liked
+        {
+            get { return _liked; }
+            set { SetValue(ref _liked, value); }
+        }
 
 		public SongQuery()
         {
@@ -30,6 +42,8 @@ namespace Thingy.Db.Entity.MediaLibary
             Album = new StringQuery();
             Genre = new StringQuery();
             Year = new IntQuery();
+            Liked = null;
+            Name = null;
         }
 
         public override bool Equals(object obj)

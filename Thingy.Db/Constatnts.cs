@@ -8,6 +8,9 @@
         public const string Programs = "ProgramsCollection";
         public const string Notes = "NotesCollection";
         public const string Alarms = "AlarmsCollection";
+        public const string Songs = "SongsCollection";
+        public const string Radios = "RadiosCollection";
+        public const string Queries = "QueryCollection";
     }
 
     public enum Folders

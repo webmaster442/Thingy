@@ -11,12 +11,17 @@ namespace Thingy.Db.Implementation
     {
         private IStoredFiles _files;
         private LiteCollection<RadioStation> _radioStations;
+        private LiteCollection<SongQuery> _querydb;
         private MediaLibaryCache _cache;
 
-        public MediaLibary(LiteCollection<Song> collection, LiteCollection<RadioStation> radios, IStoredFiles files) : base(collection)
+        public MediaLibary(LiteCollection<Song> collection, 
+                           LiteCollection<RadioStation> radios, 
+                           LiteCollection<SongQuery> query,
+                           IStoredFiles files) : base(collection)
         {
             _files = files;
             _radioStations = radios;
+            _querydb = query;
             RestoreCache();
         }
 
@@ -44,6 +49,11 @@ namespace Thingy.Db.Implementation
         public IEnumerable<RadioStation> GetRadioStations()
         {
             return _radioStations.FindAll();
+        }
+
+        public IEnumerable<Song> DoQuery()
+        {
+            return EntityCollection.FindAll();
         }
 
         public IEnumerable<Song> DoQuery(SongQuery input)
@@ -118,9 +128,78 @@ namespace Thingy.Db.Implementation
             return _cache.Geneires;
         }
 
-        public IEnumerable<int> GetYears()
+        public IEnumerable<string> GetYears()
         {
             return _cache.Years;
+        }
+
+        public void AddSong(Song s)
+        {
+            EntityCollection.Insert(s);
+            _cache.SongAdded(s);
+        }
+
+        public void AddSongs(IEnumerable<Song> songs)
+        {
+            EntityCollection.InsertBulk(songs);
+            _cache.SongsAdded(songs);
+        }
+
+        public void DeleteSongs(IEnumerable<Song> songs)
+        {
+            foreach (var song in songs)
+            {
+                EntityCollection.Delete(s => s == song);
+            }
+            _cache.Rebuild(EntityCollection.FindAll());
+        }
+
+        public void SaveCache()
+        {
+            try
+            {
+                using (var cacheFile = _files.OpenWrite(Folders.AlbumsCache, "cache.xml"))
+                {
+                    var xs = new XmlSerializer(typeof(MediaLibaryCache));
+                    xs.Serialize(cacheFile, _cache);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        public IEnumerable<string> GetQueryNames()
+        {
+            return _querydb.FindAll().Select(q => q.Name);
+        }
+
+        public SongQuery GetQuery(string name)
+        {
+            return _querydb.Find(q => q.Name == name).FirstOrDefault();
+        }
+
+        public void SaveQuery(SongQuery q)
+        {
+            _querydb.Insert(q);
+        }
+
+        public void DeleteAll()
+        {
+            _querydb.Delete(x => x.Name != null);
+            EntityCollection.Delete(s => s.Filename != null);
+            _radioStations.Delete(r => r.Url != null);
+        }
+
+        public IEnumerable<SongQuery> GetAllQuery()
+        {
+            return _querydb.FindAll();
+        }
+
+        public void SaveQuery(IEnumerable<SongQuery> q)
+        {
+            _querydb.InsertBulk(q);
         }
     }
 }

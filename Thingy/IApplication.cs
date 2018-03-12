@@ -10,7 +10,7 @@ namespace Thingy
 {
     public interface IApplication
     {
-        Task<bool> ShowDialog(UserControl control, string Title, INotifyPropertyChanged model = null);
+        Task<bool> ShowDialog(UserControl control, string Title, INotifyPropertyChanged model = null, bool ShowOverlay = true);
         Task<MessageDialogResult> ShowMessageBox(string title, string content, MessageDialogStyle style);
         Task ShowMessageBox(CustomDialog messageBoxContent);
         Task HideMessageBox(CustomDialog messageBoxContent);

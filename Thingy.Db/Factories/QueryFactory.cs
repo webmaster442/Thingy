@@ -2,9 +2,9 @@
 
 namespace Thingy.Db.Factories
 {
-    public class QueryFactory
+    public static class QueryFactory
     {
-        public SongQuery ArtistQuery(string artist)
+        public static SongQuery ArtistQuery(string artist)
         {
             return new SongQuery
             {
@@ -12,7 +12,7 @@ namespace Thingy.Db.Factories
             };
         }
 
-        public SongQuery AlbumQuery(string album)
+        public static SongQuery AlbumQuery(string album)
         {
             return new SongQuery
             {
@@ -20,7 +20,7 @@ namespace Thingy.Db.Factories
             };
         }
 
-        public SongQuery YearQuery(int year)
+        public static SongQuery YearQuery(int year)
         {
             return new SongQuery
             {
@@ -28,7 +28,7 @@ namespace Thingy.Db.Factories
             };
         }
 
-        public SongQuery GenreQuery(string genre)
+        public static SongQuery GenreQuery(string genre)
         {
             return new SongQuery
             {

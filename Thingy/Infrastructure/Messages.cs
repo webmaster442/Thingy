@@ -1,4 +1,4 @@
-﻿namespace Thingy.Infrastructure
+﻿namespace Thingy.Infrastructure.Messages
 {
     public class HandleFileMessage
     {

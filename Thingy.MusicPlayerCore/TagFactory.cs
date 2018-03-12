@@ -1,4 +1,5 @@
 ﻿using AppLib.Common.Extensions;
+using AppLib.WPF;
 using System;
 using System.Windows.Media.Imaging;
 using Thingy.MusicPlayerCore.DataObjects;
@@ -81,10 +82,11 @@ namespace Thingy.MusicPlayerCore
                     ret.DecodePixelWidth = 300;
                     ret.CacheOption = BitmapCacheOption.OnLoad;
                     ret.EndInit();
+                    ret.Freeze();
                     return ret;
                 }
             }
-            return new BitmapImage(ResourceLocator.GetIcon(IconCategories.Big, "icons8-audio-wave-540.png"));
+            return BitmapHelper.FrozenBitmap(ResourceLocator.GetIcon(IconCategories.Big, "icons8-audio-wave-540.png"));
         }
     }
 }
