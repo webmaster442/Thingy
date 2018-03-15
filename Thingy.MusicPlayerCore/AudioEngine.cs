@@ -6,8 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
@@ -72,9 +74,9 @@ namespace Thingy.MusicPlayerCore
             _updateTimer.Tick += TimerTick;
             Log.Info("Setting output to Default Device...");
             PlayBackDeviceIndex = -1;
+            _streamDloadProc = new DownloadProcedure(StreamDownloadProcedure);
             Chapters = new ObservableCollection<Chapter>();
             ExtensionProvider = new ExtensionProvider();
-            _streamDloadProc = StreamDownloadProcedure;
         }
 
         private void Reset()
@@ -284,19 +286,13 @@ namespace Thingy.MusicPlayerCore
 
             Log.Info("Loading file: {0}", fileName);
 
-            if (_decodeChannel != 0)
+            if (_decodeChannel != 0 || _mixerChannel != 0)
             {
                 Stop();
-                Bass.StreamFree(_decodeChannel);
-                _decodeChannel = 0;
-            }
-            if (_mixerChannel != 0)
-            {
-                Bass.StreamFree(_mixerChannel);
-                _mixerChannel = 0;
             }
 
-            Reset();
+            try { Bass.StreamFree(_decodeChannel); }
+            catch (Exception ex) { Debug.WriteLine(ex); }
 
             if (string.IsNullOrEmpty(fileName))
             {
@@ -335,16 +331,13 @@ namespace Thingy.MusicPlayerCore
                     var cd = new CDTrackInfo(fileName);
                     _decodeChannel = BassCd.CreateStream(cd.Drive, cd.Track, sourceflags);
                     Log.Info("Geting track metadata...");
-                    _currentTags = TagFactory.CreateTagInfoForCD(cd.Drive, cd.Track);
-                    _currentTags.Cover = new BitmapImage(ResourceLocator.GetIcon(IconCategories.Big, "icons8-cd-540.png"));
-                    NotifyChanged(nameof(CurrentTags));
+                    UpdateCDTags(cd.Drive, cd.Track);
                 }
                 else
                 {
                     _decodeChannel = Bass.CreateStream(fileName, 0, 0, sourceflags);
                     Log.Info("Geting track metadata...");
-                    _currentTags = TagFactory.CreateTagInfoFromFile(fileName);
-                    NotifyChanged(nameof(CurrentTags));
+                    UpdateFileTags(fileName);
                 }
             }
 
@@ -384,6 +377,18 @@ namespace Thingy.MusicPlayerCore
             Log.Info("Loaded file {0}", fileName);
         }
 
+        private async void UpdateFileTags(string fileName)
+        {
+            _currentTags = await TagFactory.CreateTagInfoFromFile(fileName);
+            NotifyChanged(nameof(CurrentTags));
+        }
+
+        private async void UpdateCDTags(int drive, int track)
+        {
+            _currentTags = await TagFactory.CreateTagInfoForCD(drive, track);
+            NotifyChanged(nameof(CurrentTags));
+        }
+
         private void StreamDownloadProcedure(IntPtr Buffer, int Length, IntPtr User)
         {
             var ptr = Bass.ChannelGetTags(_decodeChannel, TagType.META);
@@ -405,6 +410,17 @@ namespace Thingy.MusicPlayerCore
             }
         }
 
+        private async Task UpdateTags(TagInformation tags)
+        {
+            _currentTags = tags;
+            var bytes = await iTunesCoverDownloader.GetCoverFor($"{tags.Title}");
+            if (bytes != null)
+                _currentTags.Cover = iTunesCoverDownloader.CreateBitmap(bytes); 
+            else
+                _currentTags.Cover = new BitmapImage(ResourceLocator.GetIcon(IconCategories.Big, "icons8-radio-540.png"));
+            NotifyChanged(nameof(CurrentTags));
+        }
+
         private void ProcessTags(string[] array, bool icecast = false)
         {
             string artist = null;
@@ -418,13 +434,11 @@ namespace Thingy.MusicPlayerCore
                     else continue;
                 }
                 var newtags = TagFactory.CreateTagInfoForNetStream(_netadress, title, artist);
-                if (newtags != _currentTags)
+                if (newtags != _currentTags && !string.IsNullOrEmpty(artist))
                 {
-                    Application.Current.Dispatcher.Invoke(() =>
+                    Application.Current.Dispatcher.Invoke(async() =>
                     {
-                        _currentTags = newtags;
-                        _currentTags.Cover = new BitmapImage(ResourceLocator.GetIcon(IconCategories.Big, "icons8-radio-540.png"));
-                        NotifyChanged(nameof(CurrentTags));
+                        await UpdateTags(newtags);
                     });
                 }
             }
@@ -437,13 +451,11 @@ namespace Thingy.MusicPlayerCore
                     else continue;
                 }
                 var newtags = TagFactory.CreateTagInfoForNetStream(_netadress, title, artist);
-                if (newtags != _currentTags)
+                if (newtags != _currentTags && !string.IsNullOrEmpty(title))
                 {
-                    Application.Current.Dispatcher.Invoke(() =>
+                    Application.Current.Dispatcher.Invoke(async() =>
                     {
-                        _currentTags = newtags;
-                        _currentTags.Cover = new BitmapImage(ResourceLocator.GetIcon(IconCategories.Big, "icons8-radio-540.png"));
-                        NotifyChanged(nameof(CurrentTags));
+                        await UpdateTags(newtags);
                     });
                 }
             }
@@ -486,7 +498,8 @@ namespace Thingy.MusicPlayerCore
         public void Stop()
         {
             _updateTimer.Stop();
-            Bass.ChannelStop(_mixerChannel);
+            Bass.ChannelPause(_mixerChannel);
+            Bass.StreamFree(_mixerChannel);
             Reset();
         }
     }

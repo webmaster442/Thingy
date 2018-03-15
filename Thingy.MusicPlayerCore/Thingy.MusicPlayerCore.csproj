@@ -43,6 +43,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -69,6 +70,7 @@
     <Compile Include="DataObjects\TagInformation.cs" />
     <Compile Include="Formats\IExtensionProvider.cs" />
     <Compile Include="IAudioEngine.cs" />
+    <Compile Include="iTunesCoverDownloader.cs" />
     <Compile Include="Mp4Chapters\AsciiEncoding.cs" />
     <Compile Include="Mp4Chapters\BoxInfo.cs" />
     <Compile Include="Mp4Chapters\ChapterExtractor.cs" />

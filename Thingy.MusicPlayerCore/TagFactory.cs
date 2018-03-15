@@ -1,7 +1,9 @@
 ﻿using AppLib.Common.Extensions;
 using AppLib.WPF;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using TagLib;
 using Thingy.MusicPlayerCore.DataObjects;
 using Thingy.Resources;
 
@@ -9,7 +11,7 @@ namespace Thingy.MusicPlayerCore
 {
     public static class TagFactory
     {
-        public static TagInformation CreateTagInfoFromFile(string fileName)
+        public static async Task<TagInformation> CreateTagInfoFromFile(string fileName)
         {
             try
             {
@@ -26,7 +28,7 @@ namespace Thingy.MusicPlayerCore
                 {
                     Artist = artist,
                     Album = album,
-                    Cover = GetCover(tags),
+                    Cover = await GetCover(tags, artist, title),
                     Title = title,
                     Year = year,
                     FileName = System.IO.Path.GetFileName(fileName)
@@ -43,7 +45,7 @@ namespace Thingy.MusicPlayerCore
 
         public static TagInformation CreateTagInfoForNetStream(string filename, string title, string artist = null)
         {
-            return new TagInformation
+            var ret = new TagInformation
             {
                 FileName = filename,
                 Artist = artist,
@@ -51,15 +53,17 @@ namespace Thingy.MusicPlayerCore
                 Year = DateTime.Now.Year.ToString(),
                 Album = "Internet stream",
             };
+            return ret;
         }
 
-        public static TagInformation CreateTagInfoForCD(int drive, int track)
+        public async static Task<TagInformation> CreateTagInfoForCD(int drive, int track)
         {
             var title = CollectionExtensions.GetValueOrFallback(CDInfoProvider.CdData, $"TITLE{track + 1}", "Unknown song");
             var artist = CollectionExtensions.GetValueOrFallback(CDInfoProvider.CdData, $"PERFORMER{track + 1}", "Unknown artist");
             var album = CollectionExtensions.GetValueOrFallback(CDInfoProvider.CdData, $"PERFORMER{0}", "Unknown");
             album += " - " + CollectionExtensions.GetValueOrFallback(CDInfoProvider.CdData, $"TITLE{0}", "");
-            return new TagInformation
+
+            var ret = new TagInformation
             {
                 FileName = $"CD track {track + 1}, on Drive: {drive}",
                 Title = title,
@@ -67,9 +71,20 @@ namespace Thingy.MusicPlayerCore
                 Year = "unknown",
                 Album = album
             };
+
+            if (title != "Unknown song")
+            {
+                var bytes = await iTunesCoverDownloader.GetCoverFor($"{artist} - {title}");
+                if (bytes != null) ret.Cover = iTunesCoverDownloader.CreateBitmap(bytes);
+            }
+            else
+                ret.Cover = new BitmapImage(ResourceLocator.GetIcon(IconCategories.Big, "icons8-cd-540.png"));
+
+            return ret;
+
         }
 
-        private static BitmapImage GetCover(TagLib.File tags)
+        private async static Task<BitmapImage> GetCover(TagLib.File tags, string artist, string title)
         {
             if (tags.Tag.Pictures.Length > 0)
             {
@@ -86,7 +101,12 @@ namespace Thingy.MusicPlayerCore
                     return ret;
                 }
             }
-            return BitmapHelper.FrozenBitmap(ResourceLocator.GetIcon(IconCategories.Big, "icons8-audio-wave-540.png"));
+            else
+            {
+                var bytes = await iTunesCoverDownloader.GetCoverFor($"{artist} - {title}");
+                if (bytes != null) return iTunesCoverDownloader.CreateBitmap(bytes);
+                else return BitmapHelper.FrozenBitmap(ResourceLocator.GetIcon(IconCategories.Big, "icons8-audio-wave-540.png"));
+            }
         }
     }
 }
