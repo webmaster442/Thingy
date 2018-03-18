@@ -84,6 +84,7 @@ namespace Thingy.ViewModels.MusicPlayer
                     result = await PlaylistLoaders.LoadPls(file);
                     break;
                 case ".m3u":
+                case ".m3u8":
                     result = await PlaylistLoaders.LoadM3u(file);
                     break;
                 case ".wpl":

@@ -89,6 +89,7 @@
   <ItemGroup>
     <None Include="Database Diagram.cd" />
     <Compile Include="Entity\MediaLibary\Query.cs" />
+    <None Include="initialData\radioStations.csv" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

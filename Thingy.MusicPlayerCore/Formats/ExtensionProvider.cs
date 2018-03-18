@@ -22,7 +22,7 @@ namespace Thingy.MusicPlayerCore.Formats
             };
             _PlaylistExtensions = new string[]
             {
-                ".pls",".m3u",".wpl",".asx"
+                ".pls",".m3u",".m3u8",".wpl",".asx"
             };
         }
 
@@ -34,9 +34,8 @@ namespace Thingy.MusicPlayerCore.Formats
             foreach (var item in input)
             {
                 summed.AppendFormat("*{0};", item);
-                individual.AppendFormat("*{0}|{0};", item);
+                individual.AppendFormat("|*{0}|*{0};", item);
             }
-            summed.Append("|");
             summed.Append(individual);
             return summed.ToString();
         }
