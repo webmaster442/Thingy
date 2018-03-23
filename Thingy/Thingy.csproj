@@ -1,14 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B02377D2-EBB9-407A-851C-E7E9E2B4914D}</ProjectGuid>
+    <ProjectGuid>{83DEFF85-7B78-4521-95CE-7A312E22A406}</ProjectGuid>
     <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Thingy</RootNamespace>
     <AssemblyName>Thingy</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -24,7 +25,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,53 +34,32 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>Thingy.MainClass</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonMark, Version=0.1.0.0, Culture=neutral, PublicKeyToken=001ef8810438905d, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommonMark.NET.0.15.1\lib\net45\CommonMark.dll</HintPath>
-    </Reference>
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\ControlzEx.dll</HintPath>
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Dragablz, Version=0.0.3.203, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dragablz.0.0.3.203\lib\net45\Dragablz.dll</HintPath>
-    </Reference>
-    <Reference Include="HtmlRenderer, Version=1.5.0.6, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlRenderer.Core.1.5.0.6\lib\net45\HtmlRenderer.dll</HintPath>
-    </Reference>
-    <Reference Include="HtmlRenderer.WPF, Version=1.5.0.6, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlRenderer.WPF.1.5.0.6\lib\net45\HtmlRenderer.WPF.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
-      <HintPath>..\packages\AvalonEdit.5.0.4\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MahApps.Metro, Version=1.6.1.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.6.1\lib\net45\MahApps.Metro.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MahApps.Metro.SimpleChildWindow, Version=1.5.0.16, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.SimpleChildWindow.1.5.0\lib\net45\MahApps.Metro.SimpleChildWindow.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Speech" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml" />
@@ -97,314 +76,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="App.xaml">
+    <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="..\Build-tools\CommonVersion.cs">
-      <Link>Properties\CommonVersion.cs</Link>
-    </Compile>
-    <Compile Include="Connected Services\MnbServiceReference\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\BinaryEditor.xaml.cs">
-      <DependentUpon>BinaryEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\CalculatorConstants.xaml.cs">
-      <DependentUpon>CalculatorConstants.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\CalculatorKeyboard.xaml.cs">
-      <DependentUpon>CalculatorKeyboard.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\CalculatorMemoryView.xaml.cs">
-      <DependentUpon>CalculatorMemoryView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\CalculatorPrefixes.xaml.cs">
-      <DependentUpon>CalculatorPrefixes.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\FontPreview.xaml.cs">
-      <DependentUpon>FontPreview.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\NumberSystemTextBox.cs" />
-    <Compile Include="Controls\TrulyObservableCollection.cs" />
-    <Compile Include="Controls\UniformGridColunConverter.cs" />
-    <Compile Include="IApplication.cs" />
-    <Compile Include="IMainWindow.cs" />
-    <Compile Include="Infrastructure\AudioDeviceIndexToListIndexConverter.cs" />
-    <Compile Include="Infrastructure\Capabilities.cs" />
-    <Compile Include="Infrastructure\CommandLineParser.cs" />
-    <Compile Include="Infrastructure\DBFileIconConverter.cs" />
-    <Compile Include="Infrastructure\FontFamilyConverter.cs" />
-    <Compile Include="Infrastructure\IModuleLoader.cs" />
-    <Compile Include="Infrastructure\JumpListFactory.cs" />
-    <Compile Include="Infrastructure\Messages.cs" />
-    <Compile Include="Infrastructure\ModuleLoader.cs" />
-    <Compile Include="MainClass.cs" />
-    <Compile Include="Modules\CalculatorModule.cs" />
-    <Compile Include="Modules\CurrencyConverterModule.cs" />
-    <Compile Include="Modules\FFMpegGuiModule.cs" />
-    <Compile Include="Modules\FontsModule.cs" />
-    <Compile Include="Modules\GreekAlphabetModule.cs" />
-    <Compile Include="Modules\IronPythonModule.cs" />
-    <Compile Include="Infrastructure\ModuleCategories.cs" />
-    <Compile Include="Modules\MediaLibaryModule.cs" />
-    <Compile Include="Modules\MusicPlayerModule.cs" />
-    <Compile Include="Modules\NoteModule.cs" />
-    <Compile Include="Modules\ProgramsModule.cs" />
-    <Compile Include="Infrastructure\Tray\TrayIcon.cs" />
-    <Compile Include="Infrastructure\TabManager.cs" />
-    <Compile Include="Modules\RunProgramModule.cs" />
-    <Compile Include="ViewModels\Calculator\CalculatorViewModel.cs" />
-    <Compile Include="ViewModels\Calculator\DisplayChangerModel.cs" />
-    <Compile Include="ViewModels\CurrencyConverterViewModel.cs" />
-    <Compile Include="ViewModels\FFMpegGuiViewModel.cs" />
-    <Compile Include="ViewModels\FontViewerViewModel.cs" />
-    <Compile Include="ViewModels\MediaLibary\MediaLibaryViewModel.cs" />
-    <Compile Include="ViewModels\MediaLibary\NavigationItem.cs" />
-    <Compile Include="ViewModels\MusicPlayer\MusicPlayerViewModel.cs" />
-    <Compile Include="ViewModels\MusicPlayer\PlayListViewModel.cs" />
-    <Compile Include="ViewModels\Notes\DatabaseOpenSaveViewModel.cs" />
-    <Compile Include="ViewModels\Notes\NoteEditorViewModel.cs" />
-    <Compile Include="ViewModels\ProgramsViewModel.cs" />
-    <Compile Include="Views\About.xaml.cs">
-      <DependentUpon>About.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Alarms.xaml.cs">
-      <DependentUpon>Alarms.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Calculator.xaml.cs">
-      <DependentUpon>Calculator.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\CalculatorDialogs\BinaryKeyboard.xaml.cs">
-      <DependentUpon>BinaryKeyboard.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\CalculatorDialogs\MultiLineResultMessageBox.xaml.cs">
-      <DependentUpon>MultiLineResultMessageBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\CalculatorDialogs\NumberSystemDisplayMessageBox.xaml.cs">
-      <DependentUpon>NumberSystemDisplayMessageBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\CalculatorDialogs\NumberSystemInput.xaml.cs">
-      <DependentUpon>NumberSystemInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\CalculatorDialogs\NumberToTextMessageBox.xaml.cs">
-      <DependentUpon>NumberToTextMessageBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\CalculatorDialogs\UnitConversionMessageBox.xaml.cs">
-      <DependentUpon>UnitConversionMessageBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Dialogs\CopyOrZipDialog.xaml.cs">
-      <DependentUpon>CopyOrZipDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainWindowViewModel.cs" />
-    <Compile Include="ModalDialog.xaml.cs">
-      <DependentUpon>ModalDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\CommandLineModule.cs" />
-    <Compile Include="Infrastructure\IModule.cs" />
-    <Compile Include="Infrastructure\ModuleBase.cs" />
-    <Compile Include="Modules\PlacesModule.cs" />
-    <Compile Include="Modules\PowerShellModule.cs" />
-    <Compile Include="Modules\ToDoListModule.cs" />
-    <Compile Include="Modules\VirtualFoldersModule.cs" />
-    <Compile Include="Views\FFMpegGui.xaml.cs">
-      <DependentUpon>FFMpegGui.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FontViewer.xaml.cs">
-      <DependentUpon>FontViewer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Interfaces\IMusicPlayer.cs" />
-    <Compile Include="Views\MediaLibary\MediaLibary.xaml.cs">
-      <DependentUpon>MediaLibary.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MediaLibary\QueryEditor.xaml.cs">
-      <DependentUpon>QueryEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MusicPlayer\AddURLDialog.xaml.cs">
-      <DependentUpon>AddURLDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MusicPlayer\LoadCdDialog.xaml.cs">
-      <DependentUpon>LoadCdDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MusicPlayer\MusicPlayer.xaml.cs">
-      <DependentUpon>MusicPlayer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Notes\BraceFoldingStrategy.cs" />
-    <Compile Include="Views\Notes\DatabaseOpenSave.xaml.cs">
-      <DependentUpon>DatabaseOpenSave.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Notes\FindReplaceDialog.xaml.cs">
-      <DependentUpon>FindReplaceDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Notes\INoteEditor.cs" />
-    <Compile Include="Views\Notes\NoteEditor.xaml.cs">
-      <DependentUpon>NoteEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Notes\Preivew.xaml.cs">
-      <DependentUpon>Preivew.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\RunProgram.xaml.cs">
-      <DependentUpon>RunProgram.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Statusbar\MonitorSwitcher.xaml.cs">
-      <DependentUpon>MonitorSwitcher.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Statusbar\Statusbar.xaml.cs">
-      <DependentUpon>Statusbar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\CommandLineViewModel.cs" />
-    <Compile Include="ViewModels\PlacesViewModel.cs" />
-    <Compile Include="ViewModels\StartPageViewModel.cs" />
-    <Compile Include="ViewModels\ToDoListViewModel.cs" />
-    <Compile Include="ViewModels\VirtualFoldersViewModel.cs" />
-    <Compile Include="Views\CommandLine.xaml.cs">
-      <DependentUpon>CommandLine.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\CurrencyConverter.xaml.cs">
-      <DependentUpon>CurrencyConverter.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Dialogs\NewAlarm.xaml.cs">
-      <DependentUpon>NewAlarm.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Notes\NewNote.xaml.cs">
-      <DependentUpon>NewNote.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\GreekAlphabet.xaml.cs">
-      <DependentUpon>GreekAlphabet.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Interfaces\ICalculatorView.cs" />
-    <Compile Include="Views\Interfaces\ICommandLineView.cs" />
-    <Compile Include="Views\Dialogs\NewFolderLink.xaml.cs">
-      <DependentUpon>NewFolderLink.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Dialogs\NewProgram.xaml.cs">
-      <DependentUpon>NewProgram.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Dialogs\NewToDoItem.xaml.cs">
-      <DependentUpon>NewToDoItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Dialogs\NewVirtualFolder.xaml.cs">
-      <DependentUpon>NewVirtualFolder.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Places.xaml.cs">
-      <DependentUpon>Places.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Programs.xaml.cs">
-      <DependentUpon>Programs.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings.xaml.cs">
-      <DependentUpon>Settings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\StartPage.xaml.cs">
-      <DependentUpon>StartPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Statusbar\WindowsPower.xaml.cs">
-      <DependentUpon>WindowsPower.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ToDoList.xaml.cs">
-      <DependentUpon>ToDoList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\VirtualFolders.xaml.cs">
-      <DependentUpon>VirtualFolders.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Controls\BinaryEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\CalculatorConstants.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\CalculatorKeyboard.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\CalculatorMemoryView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\CalculatorPrefixes.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\FontPreview.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataTemplates\CalculatorTemplates.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataTemplates\EntityTemplates.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataTemplates\StartPageTemplates.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Styles\BorderlessTextBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Styles\CompactTabItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Styles\FullSizeMessageBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Styles\ProgressSlider.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Styles\ValidationErrorTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\About.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Alarms.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Calculator.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\CalculatorDialogs\BinaryKeyboard.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\CalculatorDialogs\MultiLineResultMessageBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\CalculatorDialogs\NumberSystemDisplayMessageBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\CalculatorDialogs\NumberSystemInput.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\CalculatorDialogs\NumberToTextMessageBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
-    <Page Include="Views\CalculatorDialogs\UnitConversionMessageBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Dialogs\CopyOrZipDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    </ApplicationDefinition>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -413,138 +88,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Implementation\IModuleLoader.cs" />
+    <Compile Include="Implementation\Log.cs" />
+    <Compile Include="Implementation\ModuleLoader.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ModalDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\FFMpegGui.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\FontViewer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MediaLibary\MediaLibary.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MediaLibary\QueryEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MusicPlayer\AddURLDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MusicPlayer\LoadCdDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MusicPlayer\MusicPlayer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Notes\DatabaseOpenSave.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Notes\FindReplaceDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Notes\NoteEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Notes\Preivew.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\RunProgram.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Statusbar\MonitorSwitcher.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Statusbar\Statusbar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Styles\BasicStyles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\CommandLine.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\CurrencyConverter.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Dialogs\NewAlarm.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Dialogs\NewFolderLink.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Notes\NewNote.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Dialogs\NewProgram.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Dialogs\NewToDoItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Dialogs\NewVirtualFolder.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\GreekAlphabet.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Places.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Programs.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Settings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\StartPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Statusbar\WindowsPower.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ToDoList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\VirtualFolders.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -564,147 +114,28 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\MnbServiceReference\arfolyamok.wsdl" />
-    <None Include="Connected Services\MnbServiceReference\arfolyamok.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\MnbServiceReference\arfolyamok1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\MnbServiceReference\MNBArfolyamServiceSoapImpl.wsdl" />
-    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetCurrenciesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetCurrenciesResponseBody.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetCurrencyUnitsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetCurrencyUnitsResponseBody.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetCurrentExchangeRatesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetCurrentExchangeRatesResponseBody.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetDateIntervalResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetDateIntervalResponseBody.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetExchangeRatesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetExchangeRatesResponseBody.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetInfoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\MnbServiceReference\Thingy.MnbServiceReference.GetInfoResponseBody.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Infrastructure\Tray\icons8-advertisement-page.png" />
-    <None Include="Infrastructure\Tray\icons8-exit-sign.png" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\applib\AppLib.Common\AppLib.Common.csproj">
-      <Project>{516087b5-6ac5-44a5-8df1-fe42d7a7a0e6}</Project>
-      <Name>AppLib.Common</Name>
+    <ProjectReference Include="..\Thingy.API\Thingy.API.csproj">
+      <Project>{bf3b99f7-722c-40c2-a0fe-7c3f8f1b6b01}</Project>
+      <Name>Thingy.API</Name>
     </ProjectReference>
-    <ProjectReference Include="..\applib\AppLib.Math\AppLib.Maths.csproj">
-      <Project>{0169ff46-6f3d-4ce8-bad2-05f024eb24e2}</Project>
-      <Name>AppLib.Maths</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\applib\AppLib.MVVM\AppLib.MVVM.csproj">
-      <Project>{848616A9-3D2F-42B1-B474-BE506E8019E4}</Project>
-      <Name>AppLib.MVVM</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\applib\AppLib.WPF\AppLib.WPF.csproj">
-      <Project>{faf19388-a6c0-46f9-a588-a46db392ace4}</Project>
-      <Name>AppLib.WPF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Thingy.CalculatorCore\Thingy.CalculatorCore.csproj">
-      <Project>{D0F12E16-59C0-4D6F-880D-621255FA708B}</Project>
-      <Name>Thingy.CalculatorCore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Thingy.Cmd\Thingy.Cmd.csproj">
-      <Project>{740b535e-9799-4749-8a18-917debceeaa4}</Project>
-      <Name>Thingy.Cmd</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Thingy.Db\Thingy.Db.csproj">
-      <Project>{2D7E8D87-74AC-402A-8E11-BDACC7B3839B}</Project>
-      <Name>Thingy.Db</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Thingy.Implementation\Thingy.Implementation.csproj">
-      <Project>{5B8ED112-5CC6-4783-98BD-D6C5583D6A58}</Project>
-      <Name>Thingy.Implementation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Thingy.MusicPlayerCore\Thingy.MusicPlayerCore.csproj">
-      <Project>{a87fd57d-b36f-4747-8afa-989e5181705f}</Project>
-      <Name>Thingy.MusicPlayerCore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Thingy.Resources\Thingy.Resources.csproj">
-      <Project>{63a3ee73-078f-4dec-8578-5af6f158d383}</Project>
-      <Name>Thingy.Resources</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Thingy.FFMpegGui\Thingy.FFMpegGui.csproj">
-      <Project>{bb8022f7-ddcc-4fc0-bf98-3163b3a7f9df}</Project>
-      <Name>Thingy.FFMpegGui</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Modules\GitCMD.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\MnbServiceReference\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\MnbServiceReference\arfolyamok.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\MnbServiceReference\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\MnbServiceReference\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\MnbServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>if "$(ConfigurationName)" EQU "Debug" goto exit
-
-:delete
-del *.pdb
-del *.xml
-
-:exit</PostBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PreBuildEvent>pushd $(SolutionDir)\Build-tools
-AppLib.VersionIncrementer.exe /increment commonBuildInfo.xml null CommonVersion.cs
-popd</PreBuildEvent>
-  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
 </Project>
