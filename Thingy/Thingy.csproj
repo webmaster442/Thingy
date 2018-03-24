@@ -103,9 +103,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Implementation\FileToIconConverter.cs" />
     <Compile Include="Implementation\IModuleLoader.cs" />
     <Compile Include="Implementation\Log.cs" />
     <Compile Include="Implementation\ModuleLoader.cs" />
+    <Compile Include="InternalCode\ExeIconExtractor.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

@@ -2,11 +2,11 @@
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
-using Thingy.Implementation;
+using Thingy.InternalCode;
 
-namespace Thingy.Infrastructure
+namespace Thingy.Implementation
 {
-    public class FileToIconConverter: MarkupExtension, IValueConverter
+    public class FileToIconConverter : MarkupExtension, IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

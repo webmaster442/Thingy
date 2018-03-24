@@ -4,9 +4,9 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Thingy.Implementation
+namespace Thingy.InternalCode
 {
-    public static class ExeIconExtractor
+    internal static class ExeIconExtractor
     {
         public static ImageSource GetIcon(string path, bool smallIcon = false, bool isDirectory = false)
         {
