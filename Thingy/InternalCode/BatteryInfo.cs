@@ -5,9 +5,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
-namespace Thingy.Implementation
+namespace Thingy.InternalCode
 {
-    public class BatteryInfo: Image
+    internal class BatteryInfo: Image
     {
         public void UpdateBatteryInfo()
         {

@@ -2,12 +2,12 @@
 using System.Diagnostics;
 using System.Windows.Controls;
 
-namespace Thingy.Views.Statusbar
+namespace Thingy.Controls
 {
     /// <summary>
     /// Interaction logic for MonitorSwitcher.xaml
     /// </summary>
-    public partial class MonitorSwitcher : UserControl
+    internal partial class MonitorSwitcher : UserControl
     {
         public MonitorSwitcher()
         {

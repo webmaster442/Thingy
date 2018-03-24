@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Thingy.Implementation
+namespace Thingy.InternalCode
 {
-    public static class PerformanceInfo
+    internal static class PerformanceInfo
     {
         [DllImport("psapi.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]

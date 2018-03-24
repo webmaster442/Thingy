@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="Thingy.Views.Statusbar.StatusbarView"
+    x:Class="Thingy.Controls.StatusbarView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"

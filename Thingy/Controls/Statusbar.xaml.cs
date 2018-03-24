@@ -4,8 +4,9 @@ using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using Thingy.Implementation;
+using Thingy.InternalCode;
 
-namespace Thingy.Views.Statusbar
+namespace Thingy.Controls
 {
     /// <summary>
     /// Interaction logic for Statusbar.xaml

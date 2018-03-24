@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Thingy.Views.Statusbar
+namespace Thingy.Controls
 {
     /// <summary>
     /// Interaction logic for WindowsPower.xaml
