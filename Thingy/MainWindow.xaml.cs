@@ -6,6 +6,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Shell;
+using Thingy.API;
+using Thingy.API.Capabilities;
 using Thingy.Infrastructure;
 using Thingy.Properties;
 
@@ -16,11 +18,18 @@ namespace Thingy
     /// </summary>
     public partial class MainWindow : MetroWindow, IMainWindow
     {
+        private IApplication _app;
 
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel(this, App.Instance, App.Log);
+
+        }
+
+        public MainWindow(IApplication app): this()
+        {
+            _app = app;
+            DataContext = new MainWindowViewModel(this, app);
             Title = $"{Title} - {GetAssemblyVersion()}";
             TabControl.ClosingItemCallback = TabClosing;
         }
@@ -48,14 +57,14 @@ namespace Thingy
         private async void TabClosing(ItemActionCallbackArgs<TabablzControl> args)
         {
             var headerModel = args.DragablzItem?.DataContext as HeaderedItemViewModel;
-            App.Log.Info($"Closing Tab: {headerModel.Header.ToString()}");
+            _app.Log.Info($"Closing Tab: {headerModel.Header.ToString()}");
             var viewInTab = headerModel.Content as UserControl;
 
-            var moduleId = viewInTab.Tag as UId;
+            var moduleId = Guid.Parse(viewInTab.Tag.ToString());
 
             if (viewInTab.DataContext is IDisposable viewModel)
             {
-                App.Log.Info($"Dispose called for: {viewInTab.DataContext.GetType().FullName}");
+                _app.Log.Info($"Dispose called for: {viewInTab.DataContext.GetType().FullName}");
                 viewModel.Dispose();
             }
             viewInTab.DataContext = null;
@@ -67,13 +76,13 @@ namespace Thingy
 
             if (viewInTab is IDisposable view)
             {
-                App.Log.Info($"Dispose called for: {viewInTab.GetType().FullName}");
+                _app.Log.Info($"Dispose called for: {viewInTab.GetType().FullName}");
                 view.Dispose();
             }
             viewInTab = null;
             if (moduleId != null)
             {
-                App.Instance.TabManager.ModuleClosed(moduleId);
+                _app.TabManager.ModuleClosed(moduleId);
             }
             GC.WaitForPendingFinalizers();
             GC.Collect();
@@ -123,7 +132,7 @@ namespace Thingy
         private void ModernWindow_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             TabablzControl.AddItemCommand.Execute(this, TabControl);
-            MainClass.CommandLineParser.Parse(Environment.CommandLine);
+            Program.CommandLineParser.Parse(Environment.CommandLine);
         }
 
         private void ModernWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -133,12 +142,12 @@ namespace Thingy
 
         private void StatusFlyOut_ClosingFinished(object sender, System.Windows.RoutedEventArgs e)
         {
-            App.Log.Info("Closing Status flyout");
+            _app.Log.Info("Closing Status flyout");
             if (StatusFlyOut.Content != null)
             {
                 if (StatusFlyOut.Content is IDisposable disposable)
                 {
-                    App.Log.Info($"Dispodsing type: {StatusFlyOut.Content.GetType().FullName}");
+                    _app.Log.Info($"Dispodsing type: {StatusFlyOut.Content.GetType().FullName}");
                     disposable.Dispose();
                 }
                 StatusFlyOut.Content = null;
@@ -156,7 +165,7 @@ namespace Thingy
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                App.Instance.HandleFiles(files);
+                _app.HandleFiles(files);
             }
         }
 

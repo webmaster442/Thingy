@@ -2,11 +2,12 @@
 using AppLib.MVVM;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Thingy.Infrastructure;
+using Thingy.API;
+using Thingy.Implementation;
 
-namespace Thingy.ViewModels
+namespace Thingy.Controls
 {
-    public class StartPageViewModel: ViewModel
+    internal class StartPageViewModel: ViewModel
     {
         private IModuleLoader _moduleLoader;
         private IApplication _application;

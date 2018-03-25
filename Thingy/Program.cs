@@ -43,6 +43,7 @@ namespace Thingy
                 JumpListFactory.CreateJumplist();
                 application.InitializeComponent();
                 application.ShutdownMode = ShutdownMode.OnMainWindowClose;
+                application.MainWindow = new MainWindow(application);
                 application.Run();
                 singleInstance.Close();
                 _settings.Save();
