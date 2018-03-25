@@ -11,7 +11,7 @@ namespace Thingy.Controls
     /// <summary>
     /// Interaction logic for Statusbar.xaml
     /// </summary>
-    public partial class StatusbarView : UserControl
+    internal partial class StatusbarView : UserControl
     {
         private static PerformanceCounter _cpuCounter;
         private static long _availableMemory;
@@ -57,7 +57,8 @@ namespace Thingy.Controls
             }
             catch (Exception e)
             {
-                App.Log.Error(e);
+#warning Enable logging
+                //App.Log.Error(e);
                 VolumeSlider.IsEnabled = false;
                 BtnMute.IsEnabled = false;
             }
@@ -103,12 +104,13 @@ namespace Thingy.Controls
 
         private void DisplaySwitch_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            App.Instance.ShowStatusBarMenu(new MonitorSwitcher(), "Display swithcer");
+#warning Missing Implementation
+            //App.Instance.ShowStatusBarMenu(new MonitorSwitcher(), "Display swithcer");
         }
 
         private void Power_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            App.Instance.ShowStatusBarMenu(new WindowsPower(), "Power options");
+            //App.Instance.ShowStatusBarMenu(new WindowsPower(), "Power options");
         }
     }
 }

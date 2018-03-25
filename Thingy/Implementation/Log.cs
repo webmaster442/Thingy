@@ -30,7 +30,9 @@ namespace Thingy.Implementation
 
         public void Error(Exception ex)
         {
+            Divider();
             Write("exception", "\r\nmessage: {0}\r\nsource: {1}\r\nstacktrace: {2}", ex.Message, ex.Source, ex.StackTrace);
+            Divider();
         }
 
         public void Error(string msg, params object[] additional)
@@ -62,6 +64,20 @@ namespace Thingy.Implementation
             {
                 Error(ex);
             }
+        }
+
+        public void Divider()
+        {
+            var line = "--------------------------------------------------------------------------------------";
+            _buffer.AppendLine(line);
+            Debug.Write(line);
+        }
+
+        public void BigDivider()
+        {
+            var line = "\r\n===================================================================================\r\n";
+            _buffer.AppendLine(line);
+            Debug.Write(line);
         }
     }
 }

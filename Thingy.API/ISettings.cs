@@ -37,5 +37,9 @@ namespace Thingy.API
         /// </summary>
         /// <param name="key">Setting to remove</param>
         void Remove(string key);
+        /// <summary>
+        /// Save settings to file
+        /// </summary>
+        void Save();
     }
 }

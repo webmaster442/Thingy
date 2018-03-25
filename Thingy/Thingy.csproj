@@ -125,14 +125,18 @@
     <Compile Include="Controls\WindowsPower.xaml.cs">
       <DependentUpon>WindowsPower.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Implementation\CommandLineParser.cs" />
     <Compile Include="Implementation\FileToIconConverter.cs" />
     <Compile Include="Implementation\IModuleLoader.cs" />
+    <Compile Include="Implementation\JumpListFactory.cs" />
     <Compile Include="Implementation\Log.cs" />
     <Compile Include="Implementation\ModuleLoader.cs" />
+    <Compile Include="Implementation\Settings.cs" />
     <Compile Include="InternalCode\BatteryInfo.cs" />
     <Compile Include="InternalCode\CloudDrivesLocator.cs" />
     <Compile Include="InternalCode\ExeIconExtractor.cs" />
     <Compile Include="InternalCode\PerformanceInfo.cs" />
+    <Compile Include="MainClass.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -163,6 +167,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Paths.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

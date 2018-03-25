@@ -1,6 +1,7 @@
 ﻿using AppLib.Common.Console;
 using System;
 using System.Collections.Generic;
+using Thingy.API;
 
 namespace Thingy.Infrastructure
 {

@@ -34,5 +34,13 @@ namespace Thingy.API
         /// Write log to file
         /// </summary>
         void WriteToFile();
+        /// <summary>
+        /// Wtites a divider
+        /// </summary>
+        void Divider();
+        /// <summary>
+        /// Writes a big divider
+        /// </summary>
+        void BigDivider();
     }
 }
