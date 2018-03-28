@@ -4,6 +4,7 @@ using Thingy.Infrastructure;
 using AppLib.MVVM.IoC;
 using Thingy.Implementation;
 using Thingy.API;
+using Thingy.Db;
 
 namespace Thingy
 {
@@ -14,14 +15,22 @@ namespace Thingy
 
         private static ILog _log;
         private static ISettings _settings;
+        private static IDataBase _db;
+        private static IModuleLoader _moduleLoader;
 
         private static void SetupIoCContainer()
         {
             Resolver = new IoCContainer();
+
             _log = new Log(Paths.Resolve(Paths.LogPath));
             _settings = new Settings(_log);
+            _db = new DataBase(Paths.Resolve(Paths.DBPath));
+            _moduleLoader = new ModuleLoader(_log);
+
             Resolver.Register<ILog>(() => _log);
             Resolver.Register<ISettings>(() => _settings);
+            Resolver.Register<IDataBase>(() => _db);
+            Resolver.Register<IModuleLoader>(() => _moduleLoader);
         }
 
         [STAThread]
@@ -46,7 +55,9 @@ namespace Thingy
                 application.MainWindow = new MainWindow(application);
                 application.Run();
                 singleInstance.Close();
+
                 _settings.Save();
+                _log.Info("Application shutdown");
             }
             else singleInstance.SubmitParameters();
         }

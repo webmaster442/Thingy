@@ -65,11 +65,11 @@
     <Compile Include="Internals\TileColorProvider.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="ITabManager.cs" />
+    <Compile Include="Messages\HandleFileMessage.cs" />
     <Compile Include="Messages\IMessager.cs" />
     <Compile Include="Messages\MessageBase.cs" />
     <Compile Include="ModuleBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ITypeResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

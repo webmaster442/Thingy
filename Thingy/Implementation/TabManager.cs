@@ -1,30 +1,29 @@
-﻿using AppLib.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using Thingy.API;
+using Thingy.API.Capabilities;
 
-namespace Thingy.Infrastructure
+namespace Thingy.Implementation
 {
-    public class TabManager : ITabManager
+    internal class TabManager : ITabManager
     {
-        private Dictionary<UId, IModule> _runningModules;
+        private Dictionary<Guid, IModule> _runningModules;
         private IModuleLoader _moduleLoader;
         private IApplication _application;
-        private Random _random;
 
         private MainWindow MainWindow
         {
-            get { return System.Windows.Application.Current.MainWindow as MainWindow; }
+            get { return Application.Current.MainWindow as MainWindow; }
         }
 
         public TabManager(IApplication application, IModuleLoader moduleLoader)
         {
             _application = application;
             _moduleLoader = moduleLoader;
-            _runningModules = new Dictionary<UId, IModule>();
-            _random = new Random();
+            _runningModules = new Dictionary<Guid, IModule>();
         }
 
         public void CreateNewTabContent(string Title, UserControl control)
@@ -47,20 +46,20 @@ namespace Thingy.Infrastructure
             MainWindow.SetCurrentTabContent(Title, control, false);
         }
 
-        public async Task<UId> StartModule(IModule module)
+        public async Task<Guid> StartModule(IModule module)
         {
-            if (module == null) return null;
+            if (module == null) return Guid.Empty;
             var control = module.RunModule();
             if (control != null)
             {
                 if (module.OpenAsWindow)
                 {
-                    bool result = await _application.ShowDialog(control, module.ModuleName);
+                    bool result = await _application.ShowDialog(module.ModuleName, control, DialogButtons.None);
                     if (result && control is IHaveCloseTask closetask)
                     {
                         await closetask.ClosingTask();
                     }
-                    return null;
+                    return Guid.Empty;
                 }
                 else
                 {
@@ -71,13 +70,13 @@ namespace Thingy.Infrastructure
                         {
                             await _application.ShowMessageBox("Single instance module",
                                                               "This module can only run in one instance. Switching to running module",
-                                                              MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
+                                                              DialogButtons.Ok);
                             FocusTabByIndex(index);
-                            return null;
+                            return Guid.Empty;
                         }
                         else
                         {
-                            var mId = new UId();
+                            var mId = Guid.NewGuid();
                             _runningModules.Add(mId, module);
                             control.Tag = mId;
                             SetCurrentTabContent(module.ModuleName, control);
@@ -86,7 +85,7 @@ namespace Thingy.Infrastructure
                     }
                     else
                     {
-                        var mId = new UId();
+                        var mId = Guid.NewGuid();
                         _runningModules.Add(mId, module);
                         control.Tag = mId;
                         SetCurrentTabContent(module.ModuleName, control);
@@ -96,11 +95,11 @@ namespace Thingy.Infrastructure
             }
             else
             {
-                return null;
+                return Guid.Empty;
             }
         }
 
-        public void ModuleClosed(UId ModuleId)
+        public void ModuleClosed(Guid ModuleId)
         {
             _runningModules.Remove(ModuleId);
         }

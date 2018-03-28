@@ -1,5 +1,5 @@
 ﻿<simpleChildWindow:ChildWindow
-    x:Class="Thingy.ModalDialog"
+    x:Class="Thingy.Controls.ModalDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -51,12 +51,12 @@
             VerticalAlignment="Center"
             Orientation="Horizontal">
             <Button
-                x:Name="Ok"
+                x:Name="OkButton"
                 Click="Ok_Click"
                 Content="OK"
                 Style="{StaticResource BigButton}" />
             <Button
-                x:Name="Cancel"
+                x:Name="CancelButton"
                 Click="Cancel_Click"
                 Content="Cancel"
                 Style="{StaticResource BigButton}" />

@@ -1,4 +1,6 @@
-﻿using MahApps.Metro.Controls.Dialogs;
+﻿using MahApps.Metro;
+using MahApps.Metro.Controls.Dialogs;
+using MahApps.Metro.SimpleChildWindow;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,6 +9,8 @@ using System.Windows;
 using System.Windows.Controls;
 using Thingy.API;
 using Thingy.API.Messages;
+using Thingy.Controls;
+using Thingy.Implementation;
 
 namespace Thingy
 {
@@ -15,18 +19,27 @@ namespace Thingy
     /// </summary>
     public partial class App : Application, IApplication
     {
-        public ISettings Settings => throw new NotImplementedException();
+        public ISettings Settings
+        {
+            get { return Program.Resolver.Resolve<ISettings>(); }
+        }
 
         public ILog Log
         {
             get { return Program.Resolver.Resolve<ILog>(); }
         }
 
-        public ITypeResolver Resolver => throw new NotImplementedException();
+        public IMessager Messager
+        {
+            get;
+            private set;
+        }
 
-        public IMessager Messager => throw new NotImplementedException();
-
-        public ITabManager TabManager => throw new NotImplementedException();
+        public ITabManager TabManager
+        {
+            get;
+            private set;
+        }
 
         public void Close()
         {
@@ -35,12 +48,45 @@ namespace Thingy
 
         public Task CloseMessageBox(CustomDialog messageBoxContent)
         {
-            throw new NotImplementedException();
+            var mainwindow = (Current.MainWindow as MainWindow);
+            return mainwindow.ShowMetroDialogAsync(messageBoxContent);
         }
 
-        public void HandleFiles(IList<string> files)
+        public async void HandleFiles(IList<string> files)
         {
-            throw new NotImplementedException();
+            var loader = Resolve<IModuleLoader>();
+            foreach (var file in files)
+            {
+                var module = loader.GetModuleForFile(file);
+                if (module == null) continue;
+
+                if (module.IsSingleInstance)
+                {
+                    int tabIndex = TabManager.GetTabIndexByTitle(module.ModuleName);
+                    if (tabIndex == -1)
+                    {
+                        var id = await TabManager.StartModule(module);
+                        await Task.Delay(25);
+                        Messager.SendMessage(id, new HandleFileMessage(Guids.Application, file));
+                    }
+                    else
+                    {
+                        TabManager.FocusTabByIndex(tabIndex);
+                        Messager.SendMessage(module.RunModule().GetType(), new HandleFileMessage(Guids.Application, file));
+                    }
+                }
+                else
+                {
+                    var id = await TabManager.StartModule(module);
+                    await Task.Delay(25);
+                    Messager.SendMessage(id, new HandleFileMessage(Guids.Application, file));
+                }
+            }
+        }
+
+        public T Resolve<T>()
+        {
+            return Program.Resolver.Resolve<T>();
         }
 
         public void Restart()
@@ -49,29 +95,87 @@ namespace Thingy
             Current.Shutdown();
         }
 
-        public Task<bool> ShowDialog(string title, UserControl content, DialogButtons buttons, bool hasShadow = true, INotifyPropertyChanged modell = null)
+        public async Task<bool> ShowDialog(string title, UserControl content, DialogButtons buttons, bool hasShadow = true, INotifyPropertyChanged modell = null)
         {
-            throw new NotImplementedException();
+            ModalDialog modalDialog = new ModalDialog();
+
+            if (hasShadow == false)
+                modalDialog.OverlayBrush = null;
+
+            if (modell != null)
+                content.DataContext = modell;
+
+            modalDialog.DailogContent = content;
+            modalDialog.Title = title;
+            modalDialog.DialogButtons = buttons;
+
+            var result = await (Current.MainWindow as MainWindow).ShowChildWindowAsync<bool>(modalDialog);
+
+            return result;
         }
 
-        public Task<bool> ShowMessageBox(string title, string content, DialogButtons buttons)
+        public async Task<bool> ShowMessageBox(string title, string content, DialogButtons buttons)
         {
-            throw new NotImplementedException();
+            var mainwindow = (Current.MainWindow as MainWindow);
+            var settings = new MetroDialogSettings();
+
+            MessageDialogResult result;
+
+            switch (buttons)
+            {
+                case DialogButtons.Ok:
+                case DialogButtons.None:
+                    {
+                        settings.AffirmativeButtonText = "Ok";
+                        result = await mainwindow.ShowMessageAsync(title, content, MessageDialogStyle.Affirmative, settings);
+                    }
+                    break;
+                case DialogButtons.YesNo:
+                    {
+                        settings.AffirmativeButtonText = "Yes";
+                        settings.NegativeButtonText = "No";
+                        result = await mainwindow.ShowMessageAsync(title, content, MessageDialogStyle.AffirmativeAndNegative, settings);
+                    }
+                    break;
+                default:
+                case DialogButtons.OkCancel:
+                    result = await mainwindow.ShowMessageAsync(title, content, MessageDialogStyle.AffirmativeAndNegative);
+                    break;
+            }
+
+            switch (result)
+            {
+                case MessageDialogResult.Affirmative:
+                    return true;
+                default:
+                    return false;
+            }
         }
 
         public Task ShowMessageBox(CustomDialog messageBoxContent)
         {
-            throw new NotImplementedException();
+            var mainwindow = (Current.MainWindow as MainWindow);
+            return mainwindow.HideMetroDialogAsync(messageBoxContent);
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            Log.Info("Application startup");
             Dispatcher.UnhandledException += Dispatcher_UnhandledException;
+
+            var accent = Settings.Get("Accent", "Orange");
+
+            Messager = new Messager();
+            TabManager = new TabManager(this, Resolve<IModuleLoader>());
+
+            ThemeManager.ChangeAppStyle(Current,
+                              ThemeManager.GetAccent(accent),
+                              ThemeManager.GetAppTheme("BaseLight"));
+
         }
 
         private void Dispatcher_UnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
+            Log.Divider();
             Log.Error("Fatal unhandled exception");
             Log.Error(e.Exception);
             Log.WriteToFile();

@@ -119,7 +119,7 @@ namespace Thingy
                 {
                     var start = new Controls.StartPage
                     {
-                        DataContext = new Controls.StartPageViewModel(_app, _app.Resolver.Resove<IModuleLoader>())
+                        DataContext = new Controls.StartPageViewModel(_app, _app.Resolve<IModuleLoader>())
                     };
 
                     return new HeaderedItemViewModel

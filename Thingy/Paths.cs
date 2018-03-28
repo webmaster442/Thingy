@@ -6,6 +6,7 @@ namespace Thingy
     {
         public const string ConfigPath = @"%userprofile%\thingy.json";
         public const string LogPath = @"%appdir%\thingy.log";
+        public const string DBPath = @"%userprofile%\thingy.litedb";
 
         public static string Resolve(string path)
         {

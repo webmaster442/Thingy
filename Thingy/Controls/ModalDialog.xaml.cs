@@ -1,11 +1,9 @@
 ﻿using MahApps.Metro.SimpleChildWindow;
-using System;
-using System.Collections;
 using System.ComponentModel;
-using System.Text;
 using System.Windows;
+using Thingy.API;
 
-namespace Thingy
+namespace Thingy.Controls
 {
     /// <summary>
     /// Interaction logic for ModalDialog.xaml
@@ -16,6 +14,7 @@ namespace Thingy
             DependencyProperty.Register("DailogContent", typeof(object), typeof(ModalDialog));
 
         private INotifyDataErrorInfo ValidatableContent;
+        private DialogButtons _dialogbuttons;
 
         public object DailogContent
         {
@@ -36,9 +35,44 @@ namespace Thingy
                 {
                     if (ValidatableContent != null)
                         ValidatableContent.ErrorsChanged -= ErrorHandler;
-                    Ok.IsEnabled = true;
+                    OkButton.IsEnabled = true;
                     ErrorLabel.Visibility = Visibility.Collapsed;
                 }
+            }
+        }
+
+        public DialogButtons DialogButtons
+        {
+            get { return _dialogbuttons; }
+            set
+            {
+                _dialogbuttons = value;
+                ConfigureButtons();
+            }
+        }
+
+        private void ConfigureButtons()
+        {
+            switch (DialogButtons)
+            {
+                case DialogButtons.None:
+                    OkButton.Visibility = Visibility.Collapsed;
+                    CancelButton.Visibility = Visibility.Collapsed;
+                    break;
+                case DialogButtons.Ok:
+                    OkButton.Visibility = Visibility.Visible;
+                    CancelButton.Visibility = Visibility.Collapsed;
+                    break;
+                case DialogButtons.OkCancel:
+                    OkButton.Visibility = Visibility.Visible;
+                    CancelButton.Visibility = Visibility.Visible;
+                    break;
+                case DialogButtons.YesNo:
+                    OkButton.Content = "Yes";
+                    CancelButton.Content = "No";
+                    OkButton.Visibility = Visibility.Visible;
+                    CancelButton.Visibility = Visibility.Visible;
+                    break;
             }
         }
 
@@ -54,7 +88,7 @@ namespace Thingy
 
         private void ErrorHandler(object sender, DataErrorsChangedEventArgs e)
         {
-            Ok.IsEnabled = !ValidatableContent.HasErrors;
+            OkButton.IsEnabled = !ValidatableContent.HasErrors;
         }
 
         public ModalDialog()

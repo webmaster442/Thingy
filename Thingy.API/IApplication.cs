@@ -22,10 +22,6 @@ namespace Thingy.API
         /// </summary>
         ILog Log { get; }
         /// <summary>
-        /// Type resolver
-        /// </summary>
-        ITypeResolver Resolver { get; }
-        /// <summary>
         /// Message handler
         /// </summary>
         IMessager Messager { get; }
@@ -76,5 +72,11 @@ namespace Thingy.API
         /// </summary>
         /// <param name="files">files</param>
         void HandleFiles(IList<string> files);
+        /// <summary>
+        /// Resolve a type from the IoC container
+        /// </summary>
+        /// <typeparam name="T">Type to resolve</typeparam>
+        /// <returns>Resolved type or exception</returns>
+        T Resolve<T>();
     }
  }

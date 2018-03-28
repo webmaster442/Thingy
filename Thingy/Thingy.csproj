@@ -88,6 +88,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\ModalDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\MonitorSwitcher.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -124,6 +128,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\ModalDialog.xaml.cs">
+      <DependentUpon>ModalDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MonitorSwitcher.xaml.cs">
       <DependentUpon>MonitorSwitcher.xaml</DependentUpon>
     </Compile>
@@ -137,14 +144,17 @@
     <Compile Include="Controls\WindowsPower.xaml.cs">
       <DependentUpon>WindowsPower.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Guids.cs" />
     <Compile Include="IMainWindow.cs" />
     <Compile Include="Implementation\CommandLineParser.cs" />
     <Compile Include="Implementation\FileToIconConverter.cs" />
     <Compile Include="Implementation\IModuleLoader.cs" />
     <Compile Include="Implementation\JumpListFactory.cs" />
     <Compile Include="Implementation\Log.cs" />
+    <Compile Include="Implementation\Messager.cs" />
     <Compile Include="Implementation\ModuleLoader.cs" />
     <Compile Include="Implementation\Settings.cs" />
+    <Compile Include="Implementation\TabManager.cs" />
     <Compile Include="InternalCode\BatteryInfo.cs" />
     <Compile Include="InternalCode\CloudDrivesLocator.cs" />
     <Compile Include="InternalCode\ExeIconExtractor.cs" />
