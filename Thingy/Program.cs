@@ -53,7 +53,7 @@ namespace Thingy
                 application.InitializeComponent();
                 application.ShutdownMode = ShutdownMode.OnMainWindowClose;
                 application.MainWindow = new MainWindow(application);
-                application.Run();
+                application.Run(application.MainWindow);
                 singleInstance.Close();
 
                 _settings.Save();

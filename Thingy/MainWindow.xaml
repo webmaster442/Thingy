@@ -185,7 +185,6 @@
                     <applib:DateTimeTextBlock
                         FontSize="16"
                         FontWeight="Bold" />
-                        FontWeight="Bold" />
                 </StackPanel>
             </dragablz:TabablzControl.HeaderPrefixContent>
             <dragablz:TabablzControl.InterTabController>

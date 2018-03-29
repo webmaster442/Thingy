@@ -2,9 +2,9 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Thingy.Properties;
+using Thingy.API;
 
-namespace Thingy.Infrastructure.Tray
+namespace Thingy.Implementation.Tray
 {
     public sealed class TrayIcon : IDisposable
     {
@@ -12,9 +12,11 @@ namespace Thingy.Infrastructure.Tray
         private ContextMenuStrip _TrayMenu;
         private ToolStripItem[] _MenuItems;
         private KeyboardHook _keyboardHook;
+        private IApplication _app;
 
-        public TrayIcon()
+        public TrayIcon(IApplication app)
         {
+            _app = app;
             _TrayMenu = new ContextMenuStrip();
             CreateAndSetupMenu();
             _TrayMenu.Items.AddRange(_MenuItems);
@@ -57,12 +59,12 @@ namespace Thingy.Infrastructure.Tray
         private bool ReadActivatorModifiers(out ModifierKeys modifier)
         {
             ModifierKeys @out = ModifierKeys.None;
-            if (Enum.TryParse(Settings.Default.ActivatorModifier1, out @out))
+            if (Enum.TryParse(_app.Settings.Get(SettingsKeys.ActivatorModifierKey1, "Alt"), out @out))
             {
-                if (!string.IsNullOrEmpty(Settings.Default.ActivatorModifier2))
+                if (!string.IsNullOrEmpty(_app.Settings.Get(SettingsKeys.ActivatorModifierKey2, "")))
                 {
                     ModifierKeys out2 = ModifierKeys.None;
-                    if (Enum.TryParse(Settings.Default.ActivatorModifier2, out out2))
+                    if (Enum.TryParse(_app.Settings.Get(SettingsKeys.ActivatorModifierKey2, ""), out out2))
                     {
                         modifier = @out | out2;
                         return true;
@@ -88,7 +90,7 @@ namespace Thingy.Infrastructure.Tray
 
         private bool ReadActivatorKey(out Keys activator)
         {
-            return Enum.TryParse(Settings.Default.ActivatorKey, out activator);
+            return Enum.TryParse(_app.Settings.Get(SettingsKeys.ActivatorKey, "F12"), out activator);
         }
 
         private Icon GetMainIcon()

@@ -59,5 +59,52 @@ namespace Thingy.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid/unrecognized activator key combinaton. Please change it in settings..
+        /// </summary>
+        internal static string ActivatorKeyInvalidSetting {
+            get {
+                return ResourceManager.GetString("ActivatorKeyInvalidSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to register activator key combination. An application with the same settings already exists.\nPlease choose a different combination in the settings..
+        /// </summary>
+        internal static string ActivatorKeyRegisterError {
+            get {
+                return ResourceManager.GetString("ActivatorKeyRegisterError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Activator key registration failed.
+        /// </summary>
+        internal static string ActivatorKeyResiterErrorTitle {
+            get {
+                return ResourceManager.GetString("ActivatorKeyResiterErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_advertisement_page {
+            get {
+                object obj = ResourceManager.GetObject("icons8_advertisement_page", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_exit_sign {
+            get {
+                object obj = ResourceManager.GetObject("icons8_exit_sign", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

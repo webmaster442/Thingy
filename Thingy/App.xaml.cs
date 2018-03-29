@@ -19,6 +19,8 @@ namespace Thingy
     /// </summary>
     public partial class App : Application, IApplication
     {
+        #region Interface Implementations
+
         public ISettings Settings
         {
             get { return Program.Resolver.Resolve<ISettings>(); }
@@ -158,14 +160,18 @@ namespace Thingy
             return mainwindow.HideMetroDialogAsync(messageBoxContent);
         }
 
+        #endregion
+
         protected override void OnStartup(StartupEventArgs e)
         {
             Dispatcher.UnhandledException += Dispatcher_UnhandledException;
 
-            var accent = Settings.Get("Accent", "Orange");
+            var accent = Settings.Get(SettingsKeys.ProgramAccent, "Orange");
 
             Messager = new Messager();
             TabManager = new TabManager(this, Resolve<IModuleLoader>());
+
+            var trayIcon = new Implementation.Tray.TrayIcon(this);
 
             ThemeManager.ChangeAppStyle(Current,
                               ThemeManager.GetAccent(accent),
