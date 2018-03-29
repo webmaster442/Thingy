@@ -89,6 +89,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="..\Build-tools\CommonVersion.cs">
+      <Link>Properties\CommonVersion.cs</Link>
+    </Compile>
     <Compile Include="Constants\SettingsKeys.cs" />
     <Page Include="Controls\ModalDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -260,6 +263,20 @@
     <Resource Include="Implementation\Tray\icons8-exit-sign.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if "$(ConfigurationName)" EQU "Debug" goto exit
+
+:delete
+del *.pdb
+del *.xml
+
+:exit</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>pushd $(SolutionDir)\Build-tools
+AppLib.VersionIncrementer.exe /increment commonBuildInfo.xml null CommonVersion.cs
+popd</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
