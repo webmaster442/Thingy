@@ -30,6 +30,7 @@ namespace Thingy
             ModuleImportCommand = Command.ToCommand(ModuleImport, CanImportExport);
             ModuleExportCommand = Command.ToCommand(ModuleExport, CanImportExport);
             ModuleAppendCommand = Command.ToCommand(ModuleAppend, CanImportExport);
+            AboutCommand = Command.ToCommand(OpenAbout);
         }
 
         private bool CanImportExport()
@@ -130,6 +131,11 @@ namespace Thingy
                     };
                 };
             }
+        }
+
+        private void OpenAbout()
+        {
+            _app.TabManager.CreateNewTabContent("About", new InternalModules.About());
         }
     }
 }

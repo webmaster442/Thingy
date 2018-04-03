@@ -1,4 +1,4 @@
-﻿namespace Thingy.Infrastructure
+﻿namespace Thingy.API
 {
     public static class ModuleCategories
     {

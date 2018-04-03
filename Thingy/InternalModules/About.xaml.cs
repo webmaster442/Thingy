@@ -2,12 +2,12 @@
 using TheArtOfDev.HtmlRenderer.Core.Entities;
 using TheArtOfDev.HtmlRenderer.WPF;
 
-namespace Thingy.Views
+namespace Thingy.InternalModules
 {
     /// <summary>
     /// Interaction logic for About.xaml
     /// </summary>
-    public partial class About : UserControl
+    internal partial class About : UserControl
     {
         public About()
         {

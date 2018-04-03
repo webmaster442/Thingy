@@ -72,6 +72,7 @@
     <Compile Include="Messages\IMessager.cs" />
     <Compile Include="Messages\MessageBase.cs" />
     <Compile Include="ModuleBase.cs" />
+    <Compile Include="ModuleCategories.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
