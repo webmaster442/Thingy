@@ -1,13 +1,12 @@
-﻿using System.IO;
+﻿using AppLib.MVVM;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using AppLib.MVVM;
 using Thingy.API;
 using Thingy.API.Capabilities;
-using Thingy.Controls;
+using Thingy.CoreModules;
 using Thingy.Db;
 using Thingy.Db.Entity;
-using Thingy.Infrastructure;
 
 namespace Thingy.ViewModels
 {
@@ -63,9 +62,9 @@ namespace Thingy.ViewModels
 
         private async void AddNewItem()
         {
-            var dialog = new Views.Dialogs.NewToDoItem();
+            var dialog = new CoreModules.Dialogs.NewToDoItem();
             var item = new ToDoItem();
-            var result = await _application.ShowDialog(dialog, "New To Do Item", item);
+            var result = await _application.ShowDialog("New To Do Item", dialog, DialogButtons.OkCancel, true, item);
             if (result)
             {
                 Pending.Add(item);
@@ -93,7 +92,7 @@ namespace Thingy.ViewModels
                     _db.Todo.DeleteAll();
                     _db.Todo.SaveToDoItems(import);
                 }
-                App.Current.Dispatcher.Invoke(() =>
+                _application.CurrentDispatcher.Invoke(() =>
                 {
                     Pending.Clear();
                     Pending.AddRange(_db.Todo.GetUncompletedTasks());

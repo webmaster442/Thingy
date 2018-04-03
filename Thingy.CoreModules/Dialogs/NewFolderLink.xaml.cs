@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Thingy.Views.Dialogs
+namespace Thingy.CoreModules.Dialogs
 {
     /// <summary>
     /// Interaction logic for NewFolderLink.xaml

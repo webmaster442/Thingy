@@ -1,26 +1,26 @@
-﻿using AppLib.Common.Log;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using Thingy.API;
 
-namespace Thingy.Views.Dialogs
+namespace Thingy.CoreModules.Dialogs
 {
     public partial class CopyorZipDialog : Window
     {
         private CancellationTokenSource _cancellationTokenSource;
         private bool _taskrunning;
         private Progress<double> _progress;
-        private ILogger _log;
+        private IApplication _app;
 
-        public CopyorZipDialog(ILogger log)
+        public CopyorZipDialog(IApplication app)
         {
             InitializeComponent();
             _progress = new Progress<double>(DisplayProgress);
-            _log = log;
+            _app = app;
         }
 
         private void DisplayProgress(double obj)
@@ -80,12 +80,12 @@ namespace Thingy.Views.Dialogs
             }
             catch (OperationCanceledException ocex)
             {
-                _log.Error(ocex);
+                _app.Log.Error(ocex);
                 return true;
             }
             catch (Exception ex)
             {
-                _log.Error(ex);
+                _app.Log.Error(ex);
                 return false;
             }
 
@@ -141,12 +141,12 @@ namespace Thingy.Views.Dialogs
             }
             catch (OperationCanceledException ocex)
             {
-                _log.Error(ocex);
+                _app.Log.Error(ocex);
                 return true;
             }
             catch (Exception ex)
             {
-                _log.Error(ex);
+                _app.Log.Error(ex);
                 return false;
             }
 
@@ -215,7 +215,7 @@ namespace Thingy.Views.Dialogs
             }
             catch (Exception ex)
             {
-                _log.Error(ex);
+                _app.Log.Error(ex);
                 _taskrunning = false;
                 Close();
             }
@@ -243,7 +243,7 @@ namespace Thingy.Views.Dialogs
             }
             catch (Exception ex)
             {
-                _log.Error(ex);
+                _app.Log.Error(ex);
                 _taskrunning = false;
                 Close();
             }

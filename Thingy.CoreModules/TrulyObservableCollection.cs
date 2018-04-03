@@ -5,7 +5,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 
-namespace Thingy.Controls
+namespace Thingy.CoreModules
 {
     public sealed class TrulyObservableCollection<T> : ObservableCollection<T>, INotifyPropertyChanged
          where T : INotifyPropertyChanged
