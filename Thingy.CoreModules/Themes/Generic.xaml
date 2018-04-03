@@ -1,0 +1,26 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <!--  App Styles  -->
+        <ResourceDictionary
+                    Source="pack://application:,,,/Thingy.XAML;component/BasicStyles.xaml" />
+        <ResourceDictionary
+                    Source="pack://application:,,,/Thingy.XAML;component/CompactTabItem.xaml" />
+        <ResourceDictionary
+                    Source="pack://application:,,,/Thingy.XAML;component/BorderlessTextBox.xaml" />
+        <ResourceDictionary
+                    Source="pack://application:,,,/Thingy.XAML;component/FullSizeMessageBox.xaml" />
+        <ResourceDictionary
+                    Source="pack://application:,,,/Thingy.XAML;component/ValidationErrorTemplate.xaml" />
+        <ResourceDictionary
+                    Source="pack://application:,,,/Thingy.XAML;component/ProgressSlider.xaml" />
+        <!--  data templates  -->
+        <ResourceDictionary
+                    Source="pack://application:,,,/Thingy.XAML;component/DataTemplates/EntityTemplates.xaml" />
+        <ResourceDictionary
+                    Source="pack://application:,,,/Thingy.XAML;component/DataTemplates/CalculatorTemplates.xaml" />
+        <ResourceDictionary
+                    Source="pack://application:,,,/Thingy.XAML;component/DataTemplates/StartPageTemplates.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

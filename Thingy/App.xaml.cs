@@ -160,6 +160,16 @@ namespace Thingy
             return mainwindow.HideMetroDialogAsync(messageBoxContent);
         }
 
+        public void ShowStatusBarMenu(UserControl control, string title, bool AutoClose = true, int AutoCloseTimeMs = 5000)
+        {
+            var mainwindow = (Current.MainWindow as MainWindow);
+            mainwindow.StatusFlyOut.Content = control;
+            mainwindow.StatusFlyOut.AutoCloseInterval = AutoCloseTimeMs;
+            mainwindow.StatusFlyOut.IsAutoCloseEnabled = AutoClose;
+            mainwindow.StatusFlyOut.Header = title;
+            mainwindow.StatusFlyOut.IsOpen = true;
+        }
+
         #endregion
 
         protected override void OnStartup(StartupEventArgs e)

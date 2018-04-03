@@ -23,12 +23,12 @@ namespace Thingy
         public MainWindow()
         {
             InitializeComponent();
-
         }
 
         public MainWindow(IApplication app): this()
         {
             _app = app;
+            StatusBar.Application = _app;
             DataContext = new MainWindowViewModel(this, app);
             Title = $"{Title} - {GetAssemblyVersion()}";
             TabControl.ClosingItemCallback = TabClosing;

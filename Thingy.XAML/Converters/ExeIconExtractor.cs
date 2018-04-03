@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Thingy.InternalCode
+namespace Thingy.XAML.Converters
 {
     internal static class ExeIconExtractor
     {

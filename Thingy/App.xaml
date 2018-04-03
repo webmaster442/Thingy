@@ -26,24 +26,24 @@
                     Source="pack://application:,,,/Dragablz;component/Themes/Generic.xaml" />
                 <!--  App Styles  -->
                 <ResourceDictionary
-                    Source="Styles/BasicStyles.xaml" />
+                    Source="pack://application:,,,/Thingy.XAML;component/BasicStyles.xaml" />
                 <ResourceDictionary
-                    Source="Styles/CompactTabItem.xaml" />
+                    Source="pack://application:,,,/Thingy.XAML;component/CompactTabItem.xaml" />
                 <ResourceDictionary
-                    Source="Styles/BorderlessTextBox.xaml" />
+                    Source="pack://application:,,,/Thingy.XAML;component/BorderlessTextBox.xaml" />
                 <ResourceDictionary
-                    Source="Styles/FullSizeMessageBox.xaml" />
+                    Source="pack://application:,,,/Thingy.XAML;component/FullSizeMessageBox.xaml" />
                 <ResourceDictionary
-                    Source="Styles/ValidationErrorTemplate.xaml" />
+                    Source="pack://application:,,,/Thingy.XAML;component/ValidationErrorTemplate.xaml" />
                 <ResourceDictionary
-                    Source="Styles/ProgressSlider.xaml" />
+                    Source="pack://application:,,,/Thingy.XAML;component/ProgressSlider.xaml" />
                 <!--  data templates  -->
                 <ResourceDictionary
-                    Source="DataTemplates/EntityTemplates.xaml" />
+                    Source="pack://application:,,,/Thingy.XAML;component/DataTemplates/EntityTemplates.xaml" />
                 <ResourceDictionary
-                    Source="DataTemplates/CalculatorTemplates.xaml" />
+                    Source="pack://application:,,,/Thingy.XAML;component/DataTemplates/CalculatorTemplates.xaml" />
                 <ResourceDictionary
-                    Source="DataTemplates/StartPageTemplates.xaml" />
+                    Source="pack://application:,,,/Thingy.XAML;component/DataTemplates/StartPageTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

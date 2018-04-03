@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:implementation="clr-namespace:Thingy.Implementation"
+    xmlns:conv="clr-namespace:Thingy.XAML.Converters"
     xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls">
     <DataTemplate x:Key="ToDoItem">
         <CheckBox
@@ -185,7 +185,7 @@
                 ToolTip="{Binding Name}"
                 Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.RunCommand}"
                 CommandParameter="{Binding Name}"
-                Image="{Binding Path, Converter={implementation:FileToIconConverter}}"
+                Image="{Binding Path, Converter={conv:FileToIconConverter}}"
                 ImageHeight="48"
                 ImageWidth="48"
                 Style="{StaticResource Flat}">

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{30E19E54-F36B-462F-884A-B5F84BAF1D7E}</ProjectGuid>
+    <ProjectGuid>{A8FBD1D1-EB45-42D5-85B8-D07C2A992E69}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Thingy.CoreModules</RootNamespace>
-    <AssemblyName>Thingy.CoreModules.module</AssemblyName>
+    <RootNamespace>Thingy.XAML</RootNamespace>
+    <AssemblyName>Thingy.XAML</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,17 +33,17 @@
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\ControlzEx.dll</HintPath>
     </Reference>
+    <Reference Include="Dragablz, Version=0.0.3.203, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dragablz.0.0.3.203\lib\net45\Dragablz.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro, Version=1.6.1.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.6.1\lib\net45\MahApps.Metro.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -58,109 +58,67 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ICommandLineView.cs" />
+    <Compile Include="..\Build-tools\CommonVersion.cs">
+      <Link>Properties\CommonVersion.cs</Link>
+    </Compile>
+    <Compile Include="Converters\ExeIconExtractor.cs" />
+    <Compile Include="Converters\FileToIconConverter.cs" />
+    <Compile Include="Converters\FontFamilyConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\CommandLineViewModel.cs" />
-    <Compile Include="ViewModels\FontViewerViewModel.cs" />
-    <Compile Include="ViewModels\PlacesViewModel.cs" />
-    <Compile Include="ViewModels\ProgramsViewModel.cs" />
-    <Compile Include="ViewModels\ToDoListViewModel.cs" />
-    <Compile Include="ViewModels\VirtualFoldersViewModel.cs" />
-    <Compile Include="Views\CommandLine.xaml.cs">
-      <DependentUpon>CommandLine.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FontViewer.xaml.cs">
-      <DependentUpon>FontViewer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\GreekAlphabet.xaml.cs">
-      <DependentUpon>GreekAlphabet.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Places.xaml.cs">
-      <DependentUpon>Places.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Programs.xaml.cs">
-      <DependentUpon>Programs.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\RunProgram.xaml.cs">
-      <DependentUpon>RunProgram.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ToDoList.xaml.cs">
-      <DependentUpon>ToDoList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\VirtualFolders.xaml.cs">
-      <DependentUpon>VirtualFolders.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\applib\AppLib.MVVM\AppLib.MVVM.csproj">
-      <Project>{848616a9-3d2f-42b1-b474-be506e8019e4}</Project>
-      <Name>AppLib.MVVM</Name>
-    </ProjectReference>
+    <Page Include="BasicStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="BorderlessTextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CompactTabItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataTemplates\CalculatorTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataTemplates\EntityTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataTemplates\StartPageTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FullSizeMessageBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ProgressSlider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ValidationErrorTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\applib\AppLib.WPF\AppLib.WPF.csproj">
       <Project>{faf19388-a6c0-46f9-a588-a46db392ace4}</Project>
       <Name>AppLib.WPF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Thingy.API\Thingy.API.csproj">
-      <Project>{bf3b99f7-722c-40c2-a0fe-7c3f8f1b6b01}</Project>
-      <Name>Thingy.API</Name>
     </ProjectReference>
     <ProjectReference Include="..\Thingy.Db\Thingy.Db.csproj">
       <Project>{2d7e8d87-74ac-402a-8e11-bdacc7b3839b}</Project>
       <Name>Thingy.Db</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Thingy.ExternalLibs\Thingy.ExternalLibs.csproj">
-      <Project>{a65caeaf-839b-44e2-bea5-6555f965143a}</Project>
-      <Name>Thingy.ExternalLibs</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Thingy.Resources\Thingy.Resources.csproj">
       <Project>{63a3ee73-078f-4dec-8578-5af6f158d383}</Project>
       <Name>Thingy.Resources</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Thingy.XAML\Thingy.XAML.csproj">
-      <Project>{a8fbd1d1-eb45-42d5-85b8-d07c2a992e69}</Project>
-      <Name>Thingy.XAML</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Themes\Generic.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\CommandLine.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\FontViewer.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\GreekAlphabet.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Places.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Programs.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\RunProgram.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\ToDoList.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\VirtualFolders.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

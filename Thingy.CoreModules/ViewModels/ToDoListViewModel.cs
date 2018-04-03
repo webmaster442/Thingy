@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AppLib.MVVM;
+using Thingy.API;
+using Thingy.API.Capabilities;
 using Thingy.Controls;
 using Thingy.Db;
 using Thingy.Db.Entity;

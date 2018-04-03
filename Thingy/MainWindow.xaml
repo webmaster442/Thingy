@@ -193,6 +193,7 @@
         </dragablz:TabablzControl>
 
         <controls:StatusbarView
+            x:Name="StatusBar"
             Grid.Row="1" />
 
         <Grid

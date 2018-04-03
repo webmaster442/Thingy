@@ -2,9 +2,8 @@
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
-using Thingy.InternalCode;
 
-namespace Thingy.Implementation
+namespace Thingy.XAML.Converters
 {
     public class FileToIconConverter : MarkupExtension, IValueConverter
     {

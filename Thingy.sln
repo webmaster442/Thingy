@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{0F95
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.CoreModules", "Thingy.CoreModules\Thingy.CoreModules.csproj", "{30E19E54-F36B-462F-884A-B5F84BAF1D7E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.XAML", "Thingy.XAML\Thingy.XAML.csproj", "{A8FBD1D1-EB45-42D5-85B8-D07C2A992E69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{30E19E54-F36B-462F-884A-B5F84BAF1D7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30E19E54-F36B-462F-884A-B5F84BAF1D7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30E19E54-F36B-462F-884A-B5F84BAF1D7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8FBD1D1-EB45-42D5-85B8-D07C2A992E69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8FBD1D1-EB45-42D5-85B8-D07C2A992E69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8FBD1D1-EB45-42D5-85B8-D07C2A992E69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8FBD1D1-EB45-42D5-85B8-D07C2A992E69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

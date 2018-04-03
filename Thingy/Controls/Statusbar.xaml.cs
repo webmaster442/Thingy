@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using Thingy.API;
 using Thingy.Implementation;
 using Thingy.InternalCode;
 
@@ -19,6 +20,7 @@ namespace Thingy.Controls
         private bool external;
 
         private DispatcherTimer _timer;
+        public IApplication Application { get; set; }
 
         public StatusbarView()
         {
@@ -57,8 +59,7 @@ namespace Thingy.Controls
             }
             catch (Exception e)
             {
-#warning Enable logging
-                //App.Log.Error(e);
+                Application.Log.Error(e);
                 VolumeSlider.IsEnabled = false;
                 BtnMute.IsEnabled = false;
             }
@@ -104,13 +105,12 @@ namespace Thingy.Controls
 
         private void DisplaySwitch_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-#warning Missing Implementation
-            //App.Instance.ShowStatusBarMenu(new MonitorSwitcher(), "Display swithcer");
+            Application.ShowStatusBarMenu(new MonitorSwitcher(), "Display swithcer");
         }
 
         private void Power_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            //App.Instance.ShowStatusBarMenu(new WindowsPower(), "Power options");
+            Application.ShowStatusBarMenu(new WindowsPower(), "Power options");
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Windows.Data;
 using System.Windows.Markup;
 using System.Windows.Media;
 
-namespace Thingy.Infrastructure
+namespace Thingy.XAML.Converters
 {
     public class FontFamilyConverter : MarkupExtension, IValueConverter
     {
