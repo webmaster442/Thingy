@@ -85,10 +85,10 @@ namespace Thingy.ViewModels
 
         private async void Edit(string obj)
         {
-            var dialog = new Views.Dialogs.NewProgram();
+            var dialog = new CoreModules.Dialogs.NewProgram();
             var program = _db.Programs.GetPrograms().Where(p => p.Name == obj).FirstOrDefault();
             var oldname = string.Copy(program.Name);
-            var result = await _application.ShowDialog(dialog, "New Program", program);
+            var result = await _application.ShowDialog("New Program", dialog, DialogButtons.OkCancel, true, program);
 
             if (result)
             {
@@ -100,9 +100,9 @@ namespace Thingy.ViewModels
 
         private async void Add()
         {
-            var dialog = new Views.Dialogs.NewProgram();
+            var dialog = new CoreModules.Dialogs.NewProgram();
             var model = new LauncherProgram();
-            var result = await _application.ShowDialog(dialog, "New Program", model);
+            var result = await _application.ShowDialog("New Program", dialog, DialogButtons.OkCancel, true, model);
             if (result)
             {
                 _db.Programs.SaveLauncherProgram(model);

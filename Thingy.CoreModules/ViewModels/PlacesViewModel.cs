@@ -78,9 +78,9 @@ namespace Thingy.ViewModels
 
         private async void NewFolderLink()
         {
-            var dialog = new Views.Dialogs.NewFolderLink();
+            var dialog = new CoreModules.Dialogs.NewFolderLink();
             var item = new FolderLink();
-            var result = await _app.ShowDialog(dialog, "New Folder Link", item);
+            var result = await _app.ShowDialog("New Folder Link", dialog, DialogButtons.OkCancel, true, item);
             if (result)
             {
                 _db.FavoriteFolders.SaveFavoriteFolder(item);
@@ -110,7 +110,7 @@ namespace Thingy.ViewModels
                     _db.FavoriteFolders.DeleteAll();
                     _db.FavoriteFolders.SaveFavoriteFolders(import);
                 }
-                App.Current.Dispatcher.Invoke(() => Folders.UpdateWith(_db.FavoriteFolders.GetFavoriteFolders()));
+                _app.CurrentDispatcher.Invoke(() => Folders.UpdateWith(_db.FavoriteFolders.GetFavoriteFolders()));
             });
         }
 

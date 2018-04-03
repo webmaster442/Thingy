@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:interactivity="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:properties="clr-namespace:Thingy.Properties"
     d:DesignHeight="300"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -41,8 +40,7 @@
                 DefaultValue="14"
                 DisplayFormat="0"
                 Maximum="32"
-                Minimum="8"
-                Value="{Binding Source={x:Static properties:Settings.Default}, Path=TerminalFontSize, Mode=TwoWay}" />
+                Minimum="8" />
         </StackPanel>
         <TextBox
             x:Name="Console"

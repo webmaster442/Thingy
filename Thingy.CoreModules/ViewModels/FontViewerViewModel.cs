@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using Thingy.API;
+using Thingy.CoreModules;
 
 namespace Thingy.ViewModels
 {

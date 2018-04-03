@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Thingy.Implementation
+namespace Thingy.CoreModules
 {
     public static class FontInstaller
     {

@@ -12,6 +12,7 @@ using Thingy.API;
 using Thingy.API.Capabilities;
 using Thingy.Db;
 using Thingy.Db.Entity;
+
 namespace Thingy.ViewModels
 {
     public class VirtualFoldersViewModel : ViewModel, ICanImportExportXMLData
@@ -105,7 +106,7 @@ namespace Thingy.ViewModels
         private async void NewFolder()
         {
             var modell = new VirtualFolder();
-            var result = await _app.ShowDialog(new Views.Dialogs.NewVirtualFolder(), "New Virtual Folder", modell);
+            var result = await _app.ShowDialog("New Virtual Folder", new CoreModules.Dialogs.NewVirtualFolder(), DialogButtons.OkCancel, true, modell);
             if (result)
             {
                 _db.VirtualFolders.SaveVirtualFolder(modell);
@@ -191,7 +192,7 @@ namespace Thingy.ViewModels
             };
             if (folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                var dialog = new Views.Dialogs.CopyorZipDialog(_log);
+                var dialog = new CoreModules.Dialogs.CopyorZipDialog(_app);
                 dialog.Show();
                 dialog.StartCopy(CurrentFolder, folderBrowserDialog.SelectedPath);
 
@@ -204,7 +205,7 @@ namespace Thingy.ViewModels
             saveFileDialog.Filter = "Zip files|*.zip";
             if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                var dialog = new Views.Dialogs.CopyorZipDialog(_log);
+                var dialog = new CoreModules.Dialogs.CopyorZipDialog(_app);
                 dialog.Show();
                 dialog.StartZip(CurrentFolder, saveFileDialog.FileName);
             }

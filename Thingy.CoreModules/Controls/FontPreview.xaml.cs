@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Thingy.Controls
+namespace Thingy.CoreModules.Controls
 {
     /// <summary>
     /// Interaction logic for FontPreview.xaml

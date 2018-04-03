@@ -3,9 +3,9 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"
-    xmlns:controls="clr-namespace:Thingy.Controls"
+    xmlns:controls="clr-namespace:Thingy.CoreModules.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:infrastructure="clr-namespace:Thingy.Infrastructure"
+    xmlns:xaml="clr-namespace:Thingy.XAML.Converters;assembly=Thingy.XAML"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="500"
     d:DesignWidth="900"
@@ -98,7 +98,7 @@
                             <DataTemplate>
                                 <TextBlock
                                     Margin="0,5"
-                                    FontFamily="{Binding Converter={infrastructure:FontFamilyConverter}}"
+                                    FontFamily="{Binding Converter={xaml:FontFamilyConverter}}"
                                     FontSize="16"
                                     Text="{Binding Converter={applib:FileInfoConverter}, ConverterParameter=name}" />
                             </DataTemplate>
@@ -115,7 +115,7 @@
                         Grid.Row="1"
                         Grid.RowSpan="2"
                         Grid.Column="2"
-                        PreviewFontFamily="{Binding ElementName=LbPreview, Path=SelectedItem, Converter={infrastructure:FontFamilyConverter}}" />
+                        PreviewFontFamily="{Binding ElementName=LbPreview, Path=SelectedItem, Converter={xaml:FontFamilyConverter}}" />
                 </Grid>
             </TabItem>
 
