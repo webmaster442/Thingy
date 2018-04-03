@@ -60,7 +60,12 @@ namespace Thingy
             _app.Log.Info($"Closing Tab: {headerModel.Header.ToString()}");
             var viewInTab = headerModel.Content as UserControl;
 
-            var moduleId = Guid.Parse(viewInTab.Tag.ToString());
+            Guid moduleId = Guid.Empty;
+
+            if (viewInTab.Tag != null)
+            {
+                moduleId = Guid.Parse(viewInTab?.Tag.ToString());
+            }
 
             if (viewInTab.DataContext is IDisposable viewModel)
             {
@@ -80,10 +85,12 @@ namespace Thingy
                 view.Dispose();
             }
             viewInTab = null;
-            if (moduleId != null)
+
+            if (moduleId != Guid.Empty)
             {
                 _app.TabManager.ModuleClosed(moduleId);
             }
+
             GC.WaitForPendingFinalizers();
             GC.Collect();
         }
