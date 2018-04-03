@@ -27,7 +27,9 @@ namespace Thingy.Implementation
 
         private void LoadModules()
         {
+            _log.Info("Searching for loadable modules...");
             var files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, ".module.dll");
+            _log.Info("Found {0} loadable modules", files.Length);
             var imodule = typeof(IModule);
             foreach (var file in files)
             {
@@ -143,7 +145,8 @@ namespace Thingy.Implementation
 
             if (moduleToRun == null)
             {
-                _log.Error("couldn't find module for extension: {0}", extension);
+                if (!string.IsNullOrEmpty(extension))
+                    _log.Error("couldn't find module for extension: {0}", extension);
                 return null;
             }
 

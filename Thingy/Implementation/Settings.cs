@@ -39,6 +39,7 @@ namespace Thingy.Implementation
             else
             {
                 _log.Warning("Setting not found. Returning default value for: {0} - {1}", key, defaultValue);
+                Set(key, defaultValue);
                 return defaultValue;
             }
         }

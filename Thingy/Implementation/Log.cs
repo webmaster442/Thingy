@@ -20,7 +20,7 @@ namespace Thingy.Implementation
         private void Write(string category, string msg, params object[] additional)
         {
             string line = $"{DateTime.Now} {category}: {string.Format(msg, additional)}\r\n";
-            _buffer.AppendLine(line);
+            _buffer.Append(line);
             Debug.Write(line);
             if (_buffer.Length > 2048)
             {
@@ -57,13 +57,19 @@ namespace Thingy.Implementation
                 using (var file = File.CreateText(_logfile))
                 {
                     file.Write(_buffer.ToString());
-                    _buffer.Clear();
+                    CheckBufferClean();
                 }
             }
             catch (Exception ex)
             {
                 Error(ex);
             }
+        }
+
+        private void CheckBufferClean()
+        {
+            if (_buffer.Length > 2048 * 3)
+                _buffer.Clear();
         }
 
         public void Divider()

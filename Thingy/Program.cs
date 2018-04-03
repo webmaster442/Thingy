@@ -58,6 +58,7 @@ namespace Thingy
 
                 _settings.Save();
                 _log.Info("Application shutdown");
+                _log.WriteToFile();
             }
             else singleInstance.SubmitParameters();
         }
