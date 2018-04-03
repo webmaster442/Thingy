@@ -6,11 +6,12 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Thingy.API;
+using Thingy.API.Capabilities;
+using Thingy.CoreModules;
+using Thingy.CoreModules.Models;
 using Thingy.Db;
 using Thingy.Db.Entity;
-using Thingy.Implementation;
-using Thingy.Implementation.Models;
-using Thingy.Infrastructure;
 
 namespace Thingy.ViewModels
 {

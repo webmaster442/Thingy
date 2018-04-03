@@ -1,10 +1,10 @@
-﻿using AppLib.Common.Log;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using Thingy.Infrastructure;
+using Thingy.API;
+using Thingy.API.Capabilities;
 
 namespace Thingy.CoreModules.Views
 {
@@ -13,12 +13,12 @@ namespace Thingy.CoreModules.Views
     /// </summary>
     public partial class RunProgram : UserControl, IHaveCloseTask
     {
-        private ILogger _log;
+        private IApplication _app;
 
-        public RunProgram(ILogger log)
+        public RunProgram(IApplication app)
         {
             InitializeComponent();
-            _log = log;
+            _app = app;
         }
 
         public Task ClosingTask()
@@ -41,11 +41,12 @@ namespace Thingy.CoreModules.Views
 
                     try
                     {
+                        _app.Log.Info("Starting program: {0} Arguments: {1}", p.StartInfo.FileName, p.StartInfo.Arguments);
                         p.Start();
                     }
                     catch (Win32Exception ex)
                     {
-                        _log.Error(ex);
+                        _app.Log.Error(ex);
                     }
                 });
             });

@@ -7,9 +7,10 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Thingy.API;
+using Thingy.API.Capabilities;
 using Thingy.Db;
 using Thingy.Db.Entity;
-using Thingy.Infrastructure;
 
 namespace Thingy.ViewModels
 {
@@ -121,7 +122,7 @@ namespace Thingy.ViewModels
                     _db.Programs.DeleteAll();
                     _db.Programs.SaveLauncherPrograms(import);
                 }
-                App.Current.Dispatcher.Invoke(() => Programs.UpdateWith(_db.Programs.GetPrograms()));
+                _application.CurrentDispatcher.Invoke(() => Programs.UpdateWith(_db.Programs.GetPrograms()));
             });
         }
 

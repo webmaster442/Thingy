@@ -3,7 +3,7 @@ using AppLib.MVVM;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using Thingy.Implementation;
+using Thingy.API;
 
 namespace Thingy.ViewModels
 {
@@ -49,8 +49,8 @@ namespace Thingy.ViewModels
 
         private async void Install()
         {
-            var q = await _app.ShowMessageBox("Question", "Install Fonts?", MahApps.Metro.Controls.Dialogs.MessageDialogStyle.AffirmativeAndNegative);
-            if (q == MahApps.Metro.Controls.Dialogs.MessageDialogResult.Affirmative)
+            var q = await _app.ShowMessageBox("Question", "Install Fonts?", DialogButtons.YesNo);
+            if (q)
             {
                 await FontInstaller.InstallFontsTask(FontsToInstall);
             }
@@ -58,8 +58,8 @@ namespace Thingy.ViewModels
 
         private async void ClearList()
         {
-            var q = await _app.ShowMessageBox("Question", "Clear List?", MahApps.Metro.Controls.Dialogs.MessageDialogStyle.AffirmativeAndNegative);
-            if (q == MahApps.Metro.Controls.Dialogs.MessageDialogResult.Affirmative)
+            var q = await _app.ShowMessageBox("Question", "Clear List?", DialogButtons.YesNo);
+            if (q)
             {
                 FontsToInstall.Clear();
             }

@@ -1,7 +1,7 @@
 ﻿using AppLib.MVVM;
 using CmdHost;
 using System.Windows;
-using Thingy.Views;
+using Thingy.CoreModules;
 
 namespace Thingy.ViewModels
 {

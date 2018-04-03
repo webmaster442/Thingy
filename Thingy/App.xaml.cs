@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 using Thingy.API;
 using Thingy.API.Messages;
 using Thingy.Controls;
@@ -41,6 +42,11 @@ namespace Thingy
         {
             get;
             private set;
+        }
+
+        public Dispatcher CurrentDispatcher
+        {
+            get { return Current.Dispatcher; }
         }
 
         public void Close()

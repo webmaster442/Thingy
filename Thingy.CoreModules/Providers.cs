@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Media.Imaging;
-using Thingy.Implementation.Models;
+using Thingy.CoreModules.Models;
 
-namespace Thingy.Implementation
+namespace Thingy.CoreModules
 {
     public static class Providers
     {

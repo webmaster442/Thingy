@@ -2,7 +2,7 @@
 using System;
 using System.IO;
 
-namespace Thingy.InternalCode
+namespace Thingy.CoreModules
 {
     internal static class CloudDriveLocation
     {

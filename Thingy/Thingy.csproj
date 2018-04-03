@@ -163,7 +163,6 @@
     <Compile Include="Implementation\TabManager.cs" />
     <Compile Include="Implementation\Tray\TrayIcon.cs" />
     <Compile Include="InternalCode\BatteryInfo.cs" />
-    <Compile Include="InternalCode\CloudDrivesLocator.cs" />
     <Compile Include="InternalCode\PerformanceInfo.cs" />
     <Compile Include="InternalModules\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>

@@ -1,5 +1,4 @@
 ﻿using AppLib.Common.Extensions;
-using AppLib.Common.Log;
 using AppLib.MVVM;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,17 +8,16 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Thingy.API;
+using Thingy.API.Capabilities;
 using Thingy.Db;
 using Thingy.Db.Entity;
-using Thingy.Infrastructure;
-
 namespace Thingy.ViewModels
 {
     public class VirtualFoldersViewModel : ViewModel, ICanImportExportXMLData
     {
         private IDataBase _db;
         private IApplication _app;
-        private ILogger _log;
         private bool _changed;
         private string _selectedfolder;
 
@@ -38,11 +36,10 @@ namespace Thingy.ViewModels
         public DelegateCommand CopyContentsCommand { get; private set; }
         public DelegateCommand CreateZipCommand { get; private set; }
 
-        public VirtualFoldersViewModel(IApplication app, IDataBase db, ILogger log)
+        public VirtualFoldersViewModel(IApplication app, IDataBase db)
         {
             _app = app;
             _db = db;
-            _log = log;
             Folders = new ObservableCollection<VirtualFolder>();
             CurrentFolder = new ObservableCollection<string>();
             CurrentFolder.CollectionChanged += CurrentFolder_CollectionChanged;
@@ -225,7 +222,7 @@ namespace Thingy.ViewModels
                     _db.VirtualFolders.DeleteAll();
                     _db.VirtualFolders.SaveVirtualFolders(import);
                 }
-                App.Current.Dispatcher.Invoke(() => Folders.UpdateWith(_db.VirtualFolders.GetVirtualFolders()));
+                _app.CurrentDispatcher.Invoke(() => Folders.UpdateWith(_db.VirtualFolders.GetVirtualFolders()));
             });
         }
 

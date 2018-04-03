@@ -1,9 +1,9 @@
 ﻿using MahApps.Metro.Controls.Dialogs;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Threading;
 using Thingy.API.Messages;
 
 namespace Thingy.API
@@ -86,6 +86,10 @@ namespace Thingy.API
         /// <param name="AutoClose">Automaticaly close or not. Default = true</param>
         /// <param name="AutoCloseTimeMs">Auto close interval. Default = 5000</param>
         void ShowStatusBarMenu(UserControl control, string title, bool AutoClose = true, int AutoCloseTimeMs = 5000);
+        /// <summary>
+        /// Get the Associated Application Dispatcher
+        /// </summary>
+        Dispatcher CurrentDispatcher { get; }
 
     }
  }
