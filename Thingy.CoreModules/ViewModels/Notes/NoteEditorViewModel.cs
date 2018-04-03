@@ -2,17 +2,17 @@
 using CommonMark;
 using ICSharpCode.AvalonEdit;
 using MahApps.Metro.Controls.Dialogs;
-using System;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Thingy.API;
+using Thingy.API.Capabilities;
+using Thingy.CoreModules.Views.Notes;
 using Thingy.Db;
 using Thingy.Db.Entity;
-using Thingy.Infrastructure;
-using Thingy.Views.Notes;
 
-namespace Thingy.ViewModels.Notes
+namespace Thingy.CoreModules.ViewModels.Notes
 {
     public class NoteEditorViewModel: ViewModel<INoteEditor>, ICanImportExportXMLData
     {
@@ -54,22 +54,22 @@ namespace Thingy.ViewModels.Notes
         {
             var dialog = new FindReplaceDialog(obj);
             dialog.ConfigureFor(FindReplaceDialog.DialogType.Replace);
-            await _app.ShowDialog(dialog, "Find & Replace");
+            await _app.ShowDialog("Find & Replace", dialog, DialogButtons.None, false);
         }
 
         private async void Find(TextEditor obj)
         {
             var dialog = new FindReplaceDialog(obj);
             dialog.ConfigureFor(FindReplaceDialog.DialogType.Find);
-            await _app.ShowDialog(dialog, "Find & Replace");
+            await _app.ShowDialog("Find & Replace", dialog, DialogButtons.None, false);
         }
 
         private async Task SaveModified(bool modified)
         {
             if (modified)
             {
-                var result = await _app.ShowMessageBox("Notes", $"Save changes to {_fileOpen ?? "untitled"}?", MessageDialogStyle.AffirmativeAndNegative);
-                if (result == MessageDialogResult.Affirmative)
+                var result = await _app.ShowMessageBox("Notes", $"Save changes to {_fileOpen ?? "untitled"}?", DialogButtons.YesNo);
+                if (result)
                 {
                     SaveFile();
                 }
@@ -146,7 +146,7 @@ namespace Thingy.ViewModels.Notes
         {
             await SaveModified(modified);
             var model = new DatabaseOpenSaveViewModel(_app, _db);
-            if (await _app.ShowDialog(new DatabaseOpenSave(), "Open Note from DB", model))
+            if (await _app.ShowDialog("Open Note from DB", new DatabaseOpenSave(), DialogButtons.OkCancel, true, model))
             {
                 View.EditorText = model.OpenNote();
             }
@@ -155,7 +155,7 @@ namespace Thingy.ViewModels.Notes
         private async void SaveNoteDB()
         {
             var model = new DatabaseOpenSaveViewModel(_app, _db);
-            if (await _app.ShowDialog(new DatabaseOpenSave(), "Open Note from DB", model))
+            if (await _app.ShowDialog("Open Note from DB", new DatabaseOpenSave(), DialogButtons.OkCancel, true, model))
             {
                 model.SaveToNote(View.EditorText);
             }
@@ -199,7 +199,7 @@ namespace Thingy.ViewModels.Notes
 
             var control = new Views.Notes.Preivew();
             control.SetContent(content);
-            await _app.ShowDialog(control, "Preview");
+            await _app.ShowDialog("Preview", control, DialogButtons.Ok, false);
         }
     }
 }

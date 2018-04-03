@@ -2,10 +2,11 @@
 using AppLib.MVVM;
 using System.Collections.ObjectModel;
 using System.IO;
+using Thingy.API;
 using Thingy.Db;
 using Thingy.Db.Entity;
 
-namespace Thingy.ViewModels.Notes
+namespace Thingy.CoreModules.ViewModels.Notes
 {
     public class DatabaseOpenSaveViewModel : ViewModel
     {
@@ -80,7 +81,7 @@ namespace Thingy.ViewModels.Notes
         private async void NewNote()
         {
             var model = new Note();
-            var result = await _app.ShowDialog(new Views.Notes.NewNote(), "New Note", model);
+            var result = await _app.ShowDialog("New Note", new Views.Notes.NewNote(), DialogButtons.OkCancel, true, model);
             if (result)
             {
                 _db.Notes.SaveNote(model);

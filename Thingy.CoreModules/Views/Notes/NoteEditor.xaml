@@ -1,12 +1,11 @@
 ﻿<UserControl
-    x:Class="Thingy.Views.Notes.NoteEditor"
+    x:Class="Thingy.CoreModules.Views.Notes.NoteEditor"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"
     xmlns:avalon="http://icsharpcode.net/sharpdevelop/avalonedit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:properties="clr-namespace:Thingy.Properties"
     d:DesignHeight="500"
     d:DesignWidth="900"
     mc:Ignorable="d">
@@ -196,28 +195,25 @@
                         <MenuItem
                             x:Name="ViewWordWrap"
                             Header="Word wrap"
-                            IsCheckable="True"
-                            IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=NoteWordWrap, Mode=TwoWay}" />
+                            IsCheckable="True" />
                         <Separator />
                         <MenuItem
                             x:Name="ViewLineEndings"
                             Checked="ConfigureEditorOptions"
                             Header="Show line endings"
                             IsCheckable="True"
-                            IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=NoteShowLineEndings, Mode=TwoWay}"
                             Unchecked="ConfigureEditorOptions" />
                         <MenuItem
                             x:Name="ViewWhitespace"
                             Checked="ConfigureEditorOptions"
                             Header="Show Whitespaces"
                             IsCheckable="True"
-                            IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=NoteShowWhiteSpace, Mode=TwoWay}"
+                            IsChecked="True"
                             Unchecked="ConfigureEditorOptions" />
                         <MenuItem
                             x:Name="ViewLineNumbers"
                             Header="Show line numbers"
-                            IsCheckable="True"
-                            IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=NoteShowLineNumbers, Mode=TwoWay}" />
+                            IsCheckable="True" />
                     </MenuItem>
                     <MenuItem
                         Header="Preview">
@@ -262,7 +258,7 @@
                 DefaultValue="14"
                 Maximum="48"
                 Minimum="10"
-                Value="{Binding Source={x:Static properties:Settings.Default}, Path=NoteFontSize, Mode=TwoWay}" />
+                Value="14"/>
             <TextBlock
                 Text="Document size:" />
             <TextBlock

@@ -1,6 +1,6 @@
 ﻿using AppLib.MVVM;
 
-namespace Thingy.Views.Notes
+namespace Thingy.CoreModules.Views.Notes
 {
     public interface INoteEditor: IView
     {

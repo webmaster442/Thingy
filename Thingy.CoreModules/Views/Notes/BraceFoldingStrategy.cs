@@ -2,7 +2,7 @@
 using ICSharpCode.AvalonEdit.Folding;
 using System.Collections.Generic;
 
-namespace Thingy.Views.Notes
+namespace Thingy.CoreModules.Views.Notes
 {
     /// <summary>
     /// Allows producing foldings from a document based on braces.

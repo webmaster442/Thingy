@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
-namespace Thingy.Views.Notes
+namespace Thingy.CoreModules.Views.Notes
 {
     /// <summary>
     /// Interaction logic for NoteEditor.xaml

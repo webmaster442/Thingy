@@ -30,8 +30,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommonMark, Version=0.1.0.0, Culture=neutral, PublicKeyToken=001ef8810438905d, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonMark.NET.0.15.1\lib\net45\CommonMark.dll</HintPath>
+    </Reference>
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\ControlzEx.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlRenderer, Version=1.5.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlRenderer.Core.1.5.0.5\lib\net45\HtmlRenderer.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlRenderer.WPF, Version=1.5.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlRenderer.WPF.1.5.0.6\lib\net45\HtmlRenderer.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <HintPath>..\packages\AvalonEdit.5.0.4\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro, Version=1.6.1.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.6.1\lib\net45\MahApps.Metro.dll</HintPath>
@@ -44,6 +56,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -90,6 +103,7 @@
     <Compile Include="ModuleDefinitons\FontsModule.cs" />
     <Compile Include="ModuleDefinitons\GitCMD.cs" />
     <Compile Include="ModuleDefinitons\GreekAlphabetModule.cs" />
+    <Compile Include="ModuleDefinitons\NoteModule.cs" />
     <Compile Include="ModuleDefinitons\PlacesModule.cs" />
     <Compile Include="ModuleDefinitons\PowerShellModule.cs" />
     <Compile Include="ModuleDefinitons\ProgramsModule.cs" />
@@ -101,6 +115,8 @@
     <Compile Include="TrulyObservableCollection.cs" />
     <Compile Include="ViewModels\CommandLineViewModel.cs" />
     <Compile Include="ViewModels\FontViewerViewModel.cs" />
+    <Compile Include="ViewModels\Notes\DatabaseOpenSaveViewModel.cs" />
+    <Compile Include="ViewModels\Notes\NoteEditorViewModel.cs" />
     <Compile Include="ViewModels\PlacesViewModel.cs" />
     <Compile Include="ViewModels\ProgramsViewModel.cs" />
     <Compile Include="ViewModels\ToDoListViewModel.cs" />
@@ -113,6 +129,23 @@
     </Compile>
     <Compile Include="Views\GreekAlphabet.xaml.cs">
       <DependentUpon>GreekAlphabet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Notes\BraceFoldingStrategy.cs" />
+    <Compile Include="Views\Notes\DatabaseOpenSave.xaml.cs">
+      <DependentUpon>DatabaseOpenSave.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Notes\FindReplaceDialog.xaml.cs">
+      <DependentUpon>FindReplaceDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Notes\INoteEditor.cs" />
+    <Compile Include="Views\Notes\NewNote.xaml.cs">
+      <DependentUpon>NewNote.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Notes\NoteEditor.xaml.cs">
+      <DependentUpon>NoteEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Notes\Preivew.xaml.cs">
+      <DependentUpon>Preivew.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Places.xaml.cs">
       <DependentUpon>Places.xaml</DependentUpon>
@@ -202,6 +235,26 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\GreekAlphabet.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Notes\DatabaseOpenSave.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Notes\FindReplaceDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Notes\NewNote.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Notes\NoteEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Notes\Preivew.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
