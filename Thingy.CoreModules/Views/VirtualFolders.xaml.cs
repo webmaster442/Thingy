@@ -1,7 +1,7 @@
 ﻿using AppLib.MVVM;
 using System.Windows;
 using System.Windows.Controls;
-using Thingy.ViewModels;
+using Thingy.CoreModules.ViewModels;
 
 namespace Thingy.CoreModules.Views
 {

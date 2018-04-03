@@ -12,7 +12,7 @@ using Thingy.API.Capabilities;
 using Thingy.Db;
 using Thingy.Db.Entity;
 
-namespace Thingy.ViewModels
+namespace Thingy.CoreModules.ViewModels
 {
     public class ProgramsViewModel: ViewModel, ICanImportExportXMLData
     {

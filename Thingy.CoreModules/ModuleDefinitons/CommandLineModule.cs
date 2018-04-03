@@ -26,7 +26,7 @@ namespace Thingy.Modules
         public override UserControl RunModule()
         {
             var view = new CommandLine();
-            view.DataContext = new ViewModels.CommandLineViewModel(view);
+            view.DataContext = new CoreModules.ViewModels.CommandLineViewModel(view);
             return view;
         }
     }

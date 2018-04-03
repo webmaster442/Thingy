@@ -6,7 +6,7 @@ using System.IO;
 using Thingy.API;
 using Thingy.CoreModules;
 
-namespace Thingy.ViewModels
+namespace Thingy.CoreModules.ViewModels
 {
     public class FontViewerViewModel: ViewModel
     {

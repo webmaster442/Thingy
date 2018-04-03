@@ -22,7 +22,7 @@ namespace Thingy.Modules
         {
             return new CoreModules.Views.VirtualFolders
             {
-                DataContext = new ViewModels.VirtualFoldersViewModel(App, App.Resolve<IDataBase>())
+                DataContext = new CoreModules.ViewModels.VirtualFoldersViewModel(App, App.Resolve<IDataBase>())
             };
         }
 

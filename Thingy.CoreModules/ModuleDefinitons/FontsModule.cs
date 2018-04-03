@@ -28,7 +28,7 @@ namespace Thingy.Modules
         {
             return new FontViewer
             {
-                DataContext = new ViewModels.FontViewerViewModel(App)
+                DataContext = new CoreModules.ViewModels.FontViewerViewModel(App)
             };
         }
     }

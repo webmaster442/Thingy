@@ -8,7 +8,7 @@ using Thingy.CoreModules;
 using Thingy.Db;
 using Thingy.Db.Entity;
 
-namespace Thingy.ViewModels
+namespace Thingy.CoreModules.ViewModels
 {
     public class ToDoListViewModel : ViewModel, ICanImportExportXMLData
     {

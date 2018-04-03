@@ -24,7 +24,7 @@ namespace Thingy.Modules
         {
             var toDoList = new CoreModules.Views.ToDoList
             {
-                DataContext = new ViewModels.ToDoListViewModel(App, App.Resolve<IDataBase>())
+                DataContext = new CoreModules.ViewModels.ToDoListViewModel(App, App.Resolve<IDataBase>())
             };
             return toDoList;
         }

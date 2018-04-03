@@ -22,7 +22,7 @@ namespace Thingy.Modules
         {
             return new CoreModules.Views.Places
             {
-                DataContext = new ViewModels.PlacesViewModel(App, App.Resolve<IDataBase>())
+                DataContext = new CoreModules.ViewModels.PlacesViewModel(App, App.Resolve<IDataBase>())
             };
         }
 

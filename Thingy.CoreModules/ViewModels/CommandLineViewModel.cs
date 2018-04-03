@@ -3,7 +3,7 @@ using CmdHost;
 using System.Windows;
 using Thingy.CoreModules;
 
-namespace Thingy.ViewModels
+namespace Thingy.CoreModules.ViewModels
 {
     public class CommandLineViewModel : ViewModel<ICommandLineView>
     {
