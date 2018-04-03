@@ -104,9 +104,11 @@
     </Compile>
     <Compile Include="FontInstaller.cs" />
     <Compile Include="ICommandLineView.cs" />
+    <Compile Include="Models\CurrencyRate.cs" />
     <Compile Include="Models\Drive.cs" />
     <Compile Include="Models\SystemFolderLink.cs" />
     <Compile Include="ModuleDefinitons\CommandLineModule.cs" />
+    <Compile Include="ModuleDefinitons\CurrencyConverterModule.cs" />
     <Compile Include="ModuleDefinitons\FontsModule.cs" />
     <Compile Include="ModuleDefinitons\GitCMD.cs" />
     <Compile Include="ModuleDefinitons\GreekAlphabetModule.cs" />
@@ -121,6 +123,7 @@
     <Compile Include="Providers.cs" />
     <Compile Include="TrulyObservableCollection.cs" />
     <Compile Include="ViewModels\CommandLineViewModel.cs" />
+    <Compile Include="ViewModels\CurrencyConverterViewModel.cs" />
     <Compile Include="ViewModels\FontViewerViewModel.cs" />
     <Compile Include="ViewModels\Notes\DatabaseOpenSaveViewModel.cs" />
     <Compile Include="ViewModels\Notes\NoteEditorViewModel.cs" />
@@ -130,6 +133,9 @@
     <Compile Include="ViewModels\VirtualFoldersViewModel.cs" />
     <Compile Include="Views\CommandLine.xaml.cs">
       <DependentUpon>CommandLine.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CurrencyConverter.xaml.cs">
+      <DependentUpon>CurrencyConverter.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FontViewer.xaml.cs">
       <DependentUpon>FontViewer.xaml</DependentUpon>
@@ -234,6 +240,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CommandLine.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CurrencyConverter.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

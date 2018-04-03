@@ -5,13 +5,16 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
+using System.ServiceModel.Description;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Linq;
-using Thingy.Implementation.Models;
-using Thingy.MnbServiceReference;
+using Thingy.CoreModules.MnbServiceReference;
+using Thingy.CoreModules.Models;
 
-namespace Thingy.ViewModels
+namespace Thingy.CoreModules.ViewModels
 {
     public class CurrencyConverterViewModel : ViewModel
     {
@@ -74,7 +77,7 @@ namespace Thingy.ViewModels
 
         private async Task<IList<CurrencyRate>> UpdateRates()
         {
-            using (MNBArfolyamServiceSoapClient client = new MNBArfolyamServiceSoapClient())
+            using (MNBArfolyamServiceSoapClient client = new MNBArfolyamServiceSoapClient(new BasicHttpBinding(), new EndpointAddress("http://www.mnb.hu/arfolyamok.asmx")))
             {
                 var respone = await client.GetCurrentExchangeRatesAsync(new GetCurrentExchangeRatesRequestBody());
                 var current = respone.GetCurrentExchangeRatesResponse1.GetCurrentExchangeRatesResult;
