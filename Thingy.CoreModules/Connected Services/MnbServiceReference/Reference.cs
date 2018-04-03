@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Thingy.MnbServiceReference {
+namespace Thingy.CoreModules.MnbServiceReference {
     using System.Runtime.Serialization;
     using System;
     
@@ -528,53 +528,53 @@ namespace Thingy.MnbServiceReference {
         // CODEGEN: Generating message contract since the operation GetCurrencies is neither RPC nor document wrapped.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrencies", ReplyAction="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrenciesResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(string), Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrenciesStringFault", Name="string", Namespace="http://schemas.microsoft.com/2003/10/Serialization/")]
-        Thingy.MnbServiceReference.GetCurrenciesResponse GetCurrencies(Thingy.MnbServiceReference.GetCurrenciesRequest request);
+        Thingy.CoreModules.MnbServiceReference.GetCurrenciesResponse GetCurrencies(Thingy.CoreModules.MnbServiceReference.GetCurrenciesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrencies", ReplyAction="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrenciesResponse")]
-        System.Threading.Tasks.Task<Thingy.MnbServiceReference.GetCurrenciesResponse> GetCurrenciesAsync(Thingy.MnbServiceReference.GetCurrenciesRequest request);
+        System.Threading.Tasks.Task<Thingy.CoreModules.MnbServiceReference.GetCurrenciesResponse> GetCurrenciesAsync(Thingy.CoreModules.MnbServiceReference.GetCurrenciesRequest request);
         
         // CODEGEN: Generating message contract since the operation GetCurrencyUnits is neither RPC nor document wrapped.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrencyUnits", ReplyAction="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrencyUnitsResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(string), Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrencyUnitsStringFault", Name="string", Namespace="http://schemas.microsoft.com/2003/10/Serialization/")]
-        Thingy.MnbServiceReference.GetCurrencyUnitsResponse GetCurrencyUnits(Thingy.MnbServiceReference.GetCurrencyUnitsRequest request);
+        Thingy.CoreModules.MnbServiceReference.GetCurrencyUnitsResponse GetCurrencyUnits(Thingy.CoreModules.MnbServiceReference.GetCurrencyUnitsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrencyUnits", ReplyAction="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrencyUnitsResponse")]
-        System.Threading.Tasks.Task<Thingy.MnbServiceReference.GetCurrencyUnitsResponse> GetCurrencyUnitsAsync(Thingy.MnbServiceReference.GetCurrencyUnitsRequest request);
+        System.Threading.Tasks.Task<Thingy.CoreModules.MnbServiceReference.GetCurrencyUnitsResponse> GetCurrencyUnitsAsync(Thingy.CoreModules.MnbServiceReference.GetCurrencyUnitsRequest request);
         
         // CODEGEN: Generating message contract since the operation GetCurrentExchangeRates is neither RPC nor document wrapped.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrentExchangeRates", ReplyAction="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrentExchangeRatesRespo" +
             "nse")]
         [System.ServiceModel.FaultContractAttribute(typeof(string), Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrentExchangeRatesStrin" +
             "gFault", Name="string", Namespace="http://schemas.microsoft.com/2003/10/Serialization/")]
-        Thingy.MnbServiceReference.GetCurrentExchangeRatesResponse GetCurrentExchangeRates(Thingy.MnbServiceReference.GetCurrentExchangeRatesRequest request);
+        Thingy.CoreModules.MnbServiceReference.GetCurrentExchangeRatesResponse GetCurrentExchangeRates(Thingy.CoreModules.MnbServiceReference.GetCurrentExchangeRatesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrentExchangeRates", ReplyAction="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrentExchangeRatesRespo" +
             "nse")]
-        System.Threading.Tasks.Task<Thingy.MnbServiceReference.GetCurrentExchangeRatesResponse> GetCurrentExchangeRatesAsync(Thingy.MnbServiceReference.GetCurrentExchangeRatesRequest request);
+        System.Threading.Tasks.Task<Thingy.CoreModules.MnbServiceReference.GetCurrentExchangeRatesResponse> GetCurrentExchangeRatesAsync(Thingy.CoreModules.MnbServiceReference.GetCurrentExchangeRatesRequest request);
         
         // CODEGEN: Generating message contract since the operation GetDateInterval is neither RPC nor document wrapped.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetDateInterval", ReplyAction="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetDateIntervalResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(string), Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetDateIntervalStringFault", Name="string", Namespace="http://schemas.microsoft.com/2003/10/Serialization/")]
-        Thingy.MnbServiceReference.GetDateIntervalResponse GetDateInterval(Thingy.MnbServiceReference.GetDateIntervalRequest request);
+        Thingy.CoreModules.MnbServiceReference.GetDateIntervalResponse GetDateInterval(Thingy.CoreModules.MnbServiceReference.GetDateIntervalRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetDateInterval", ReplyAction="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetDateIntervalResponse")]
-        System.Threading.Tasks.Task<Thingy.MnbServiceReference.GetDateIntervalResponse> GetDateIntervalAsync(Thingy.MnbServiceReference.GetDateIntervalRequest request);
+        System.Threading.Tasks.Task<Thingy.CoreModules.MnbServiceReference.GetDateIntervalResponse> GetDateIntervalAsync(Thingy.CoreModules.MnbServiceReference.GetDateIntervalRequest request);
         
         // CODEGEN: Generating message contract since the operation GetExchangeRates is neither RPC nor document wrapped.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetExchangeRates", ReplyAction="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetExchangeRatesResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(string), Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetExchangeRatesStringFault", Name="string", Namespace="http://schemas.microsoft.com/2003/10/Serialization/")]
-        Thingy.MnbServiceReference.GetExchangeRatesResponse GetExchangeRates(Thingy.MnbServiceReference.GetExchangeRatesRequest request);
+        Thingy.CoreModules.MnbServiceReference.GetExchangeRatesResponse GetExchangeRates(Thingy.CoreModules.MnbServiceReference.GetExchangeRatesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetExchangeRates", ReplyAction="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetExchangeRatesResponse")]
-        System.Threading.Tasks.Task<Thingy.MnbServiceReference.GetExchangeRatesResponse> GetExchangeRatesAsync(Thingy.MnbServiceReference.GetExchangeRatesRequest request);
+        System.Threading.Tasks.Task<Thingy.CoreModules.MnbServiceReference.GetExchangeRatesResponse> GetExchangeRatesAsync(Thingy.CoreModules.MnbServiceReference.GetExchangeRatesRequest request);
         
         // CODEGEN: Generating message contract since the operation GetInfo is neither RPC nor document wrapped.
         [System.ServiceModel.OperationContractAttribute(Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetInfo", ReplyAction="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetInfoResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(string), Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetInfoStringFault", Name="string", Namespace="http://schemas.microsoft.com/2003/10/Serialization/")]
-        Thingy.MnbServiceReference.GetInfoResponse GetInfo(Thingy.MnbServiceReference.GetInfoRequest request);
+        Thingy.CoreModules.MnbServiceReference.GetInfoResponse GetInfo(Thingy.CoreModules.MnbServiceReference.GetInfoRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetInfo", ReplyAction="http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetInfoResponse")]
-        System.Threading.Tasks.Task<Thingy.MnbServiceReference.GetInfoResponse> GetInfoAsync(Thingy.MnbServiceReference.GetInfoRequest request);
+        System.Threading.Tasks.Task<Thingy.CoreModules.MnbServiceReference.GetInfoResponse> GetInfoAsync(Thingy.CoreModules.MnbServiceReference.GetInfoRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -584,12 +584,12 @@ namespace Thingy.MnbServiceReference {
     public partial class GetCurrenciesRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.mnb.hu/webservices/", Order=0)]
-        public Thingy.MnbServiceReference.GetCurrenciesRequestBody GetCurrencies;
+        public Thingy.CoreModules.MnbServiceReference.GetCurrenciesRequestBody GetCurrencies;
         
         public GetCurrenciesRequest() {
         }
         
-        public GetCurrenciesRequest(Thingy.MnbServiceReference.GetCurrenciesRequestBody GetCurrencies) {
+        public GetCurrenciesRequest(Thingy.CoreModules.MnbServiceReference.GetCurrenciesRequestBody GetCurrencies) {
             this.GetCurrencies = GetCurrencies;
         }
     }
@@ -601,12 +601,12 @@ namespace Thingy.MnbServiceReference {
     public partial class GetCurrenciesResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetCurrenciesResponse", Namespace="http://www.mnb.hu/webservices/", Order=0)]
-        public Thingy.MnbServiceReference.GetCurrenciesResponseBody GetCurrenciesResponse1;
+        public Thingy.CoreModules.MnbServiceReference.GetCurrenciesResponseBody GetCurrenciesResponse1;
         
         public GetCurrenciesResponse() {
         }
         
-        public GetCurrenciesResponse(Thingy.MnbServiceReference.GetCurrenciesResponseBody GetCurrenciesResponse1) {
+        public GetCurrenciesResponse(Thingy.CoreModules.MnbServiceReference.GetCurrenciesResponseBody GetCurrenciesResponse1) {
             this.GetCurrenciesResponse1 = GetCurrenciesResponse1;
         }
     }
@@ -618,12 +618,12 @@ namespace Thingy.MnbServiceReference {
     public partial class GetCurrencyUnitsRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.mnb.hu/webservices/", Order=0)]
-        public Thingy.MnbServiceReference.GetCurrencyUnitsRequestBody GetCurrencyUnits;
+        public Thingy.CoreModules.MnbServiceReference.GetCurrencyUnitsRequestBody GetCurrencyUnits;
         
         public GetCurrencyUnitsRequest() {
         }
         
-        public GetCurrencyUnitsRequest(Thingy.MnbServiceReference.GetCurrencyUnitsRequestBody GetCurrencyUnits) {
+        public GetCurrencyUnitsRequest(Thingy.CoreModules.MnbServiceReference.GetCurrencyUnitsRequestBody GetCurrencyUnits) {
             this.GetCurrencyUnits = GetCurrencyUnits;
         }
     }
@@ -635,12 +635,12 @@ namespace Thingy.MnbServiceReference {
     public partial class GetCurrencyUnitsResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetCurrencyUnitsResponse", Namespace="http://www.mnb.hu/webservices/", Order=0)]
-        public Thingy.MnbServiceReference.GetCurrencyUnitsResponseBody GetCurrencyUnitsResponse1;
+        public Thingy.CoreModules.MnbServiceReference.GetCurrencyUnitsResponseBody GetCurrencyUnitsResponse1;
         
         public GetCurrencyUnitsResponse() {
         }
         
-        public GetCurrencyUnitsResponse(Thingy.MnbServiceReference.GetCurrencyUnitsResponseBody GetCurrencyUnitsResponse1) {
+        public GetCurrencyUnitsResponse(Thingy.CoreModules.MnbServiceReference.GetCurrencyUnitsResponseBody GetCurrencyUnitsResponse1) {
             this.GetCurrencyUnitsResponse1 = GetCurrencyUnitsResponse1;
         }
     }
@@ -652,12 +652,12 @@ namespace Thingy.MnbServiceReference {
     public partial class GetCurrentExchangeRatesRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.mnb.hu/webservices/", Order=0)]
-        public Thingy.MnbServiceReference.GetCurrentExchangeRatesRequestBody GetCurrentExchangeRates;
+        public Thingy.CoreModules.MnbServiceReference.GetCurrentExchangeRatesRequestBody GetCurrentExchangeRates;
         
         public GetCurrentExchangeRatesRequest() {
         }
         
-        public GetCurrentExchangeRatesRequest(Thingy.MnbServiceReference.GetCurrentExchangeRatesRequestBody GetCurrentExchangeRates) {
+        public GetCurrentExchangeRatesRequest(Thingy.CoreModules.MnbServiceReference.GetCurrentExchangeRatesRequestBody GetCurrentExchangeRates) {
             this.GetCurrentExchangeRates = GetCurrentExchangeRates;
         }
     }
@@ -669,12 +669,12 @@ namespace Thingy.MnbServiceReference {
     public partial class GetCurrentExchangeRatesResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetCurrentExchangeRatesResponse", Namespace="http://www.mnb.hu/webservices/", Order=0)]
-        public Thingy.MnbServiceReference.GetCurrentExchangeRatesResponseBody GetCurrentExchangeRatesResponse1;
+        public Thingy.CoreModules.MnbServiceReference.GetCurrentExchangeRatesResponseBody GetCurrentExchangeRatesResponse1;
         
         public GetCurrentExchangeRatesResponse() {
         }
         
-        public GetCurrentExchangeRatesResponse(Thingy.MnbServiceReference.GetCurrentExchangeRatesResponseBody GetCurrentExchangeRatesResponse1) {
+        public GetCurrentExchangeRatesResponse(Thingy.CoreModules.MnbServiceReference.GetCurrentExchangeRatesResponseBody GetCurrentExchangeRatesResponse1) {
             this.GetCurrentExchangeRatesResponse1 = GetCurrentExchangeRatesResponse1;
         }
     }
@@ -686,12 +686,12 @@ namespace Thingy.MnbServiceReference {
     public partial class GetDateIntervalRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.mnb.hu/webservices/", Order=0)]
-        public Thingy.MnbServiceReference.GetDateIntervalRequestBody GetDateInterval;
+        public Thingy.CoreModules.MnbServiceReference.GetDateIntervalRequestBody GetDateInterval;
         
         public GetDateIntervalRequest() {
         }
         
-        public GetDateIntervalRequest(Thingy.MnbServiceReference.GetDateIntervalRequestBody GetDateInterval) {
+        public GetDateIntervalRequest(Thingy.CoreModules.MnbServiceReference.GetDateIntervalRequestBody GetDateInterval) {
             this.GetDateInterval = GetDateInterval;
         }
     }
@@ -703,12 +703,12 @@ namespace Thingy.MnbServiceReference {
     public partial class GetDateIntervalResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetDateIntervalResponse", Namespace="http://www.mnb.hu/webservices/", Order=0)]
-        public Thingy.MnbServiceReference.GetDateIntervalResponseBody GetDateIntervalResponse1;
+        public Thingy.CoreModules.MnbServiceReference.GetDateIntervalResponseBody GetDateIntervalResponse1;
         
         public GetDateIntervalResponse() {
         }
         
-        public GetDateIntervalResponse(Thingy.MnbServiceReference.GetDateIntervalResponseBody GetDateIntervalResponse1) {
+        public GetDateIntervalResponse(Thingy.CoreModules.MnbServiceReference.GetDateIntervalResponseBody GetDateIntervalResponse1) {
             this.GetDateIntervalResponse1 = GetDateIntervalResponse1;
         }
     }
@@ -720,12 +720,12 @@ namespace Thingy.MnbServiceReference {
     public partial class GetExchangeRatesRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.mnb.hu/webservices/", Order=0)]
-        public Thingy.MnbServiceReference.GetExchangeRatesRequestBody GetExchangeRates;
+        public Thingy.CoreModules.MnbServiceReference.GetExchangeRatesRequestBody GetExchangeRates;
         
         public GetExchangeRatesRequest() {
         }
         
-        public GetExchangeRatesRequest(Thingy.MnbServiceReference.GetExchangeRatesRequestBody GetExchangeRates) {
+        public GetExchangeRatesRequest(Thingy.CoreModules.MnbServiceReference.GetExchangeRatesRequestBody GetExchangeRates) {
             this.GetExchangeRates = GetExchangeRates;
         }
     }
@@ -737,12 +737,12 @@ namespace Thingy.MnbServiceReference {
     public partial class GetExchangeRatesResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetExchangeRatesResponse", Namespace="http://www.mnb.hu/webservices/", Order=0)]
-        public Thingy.MnbServiceReference.GetExchangeRatesResponseBody GetExchangeRatesResponse1;
+        public Thingy.CoreModules.MnbServiceReference.GetExchangeRatesResponseBody GetExchangeRatesResponse1;
         
         public GetExchangeRatesResponse() {
         }
         
-        public GetExchangeRatesResponse(Thingy.MnbServiceReference.GetExchangeRatesResponseBody GetExchangeRatesResponse1) {
+        public GetExchangeRatesResponse(Thingy.CoreModules.MnbServiceReference.GetExchangeRatesResponseBody GetExchangeRatesResponse1) {
             this.GetExchangeRatesResponse1 = GetExchangeRatesResponse1;
         }
     }
@@ -754,12 +754,12 @@ namespace Thingy.MnbServiceReference {
     public partial class GetInfoRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.mnb.hu/webservices/", Order=0)]
-        public Thingy.MnbServiceReference.GetInfoRequestBody GetInfo;
+        public Thingy.CoreModules.MnbServiceReference.GetInfoRequestBody GetInfo;
         
         public GetInfoRequest() {
         }
         
-        public GetInfoRequest(Thingy.MnbServiceReference.GetInfoRequestBody GetInfo) {
+        public GetInfoRequest(Thingy.CoreModules.MnbServiceReference.GetInfoRequestBody GetInfo) {
             this.GetInfo = GetInfo;
         }
     }
@@ -771,23 +771,23 @@ namespace Thingy.MnbServiceReference {
     public partial class GetInfoResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetInfoResponse", Namespace="http://www.mnb.hu/webservices/", Order=0)]
-        public Thingy.MnbServiceReference.GetInfoResponseBody GetInfoResponse1;
+        public Thingy.CoreModules.MnbServiceReference.GetInfoResponseBody GetInfoResponse1;
         
         public GetInfoResponse() {
         }
         
-        public GetInfoResponse(Thingy.MnbServiceReference.GetInfoResponseBody GetInfoResponse1) {
+        public GetInfoResponse(Thingy.CoreModules.MnbServiceReference.GetInfoResponseBody GetInfoResponse1) {
             this.GetInfoResponse1 = GetInfoResponse1;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface MNBArfolyamServiceSoapChannel : Thingy.MnbServiceReference.MNBArfolyamServiceSoap, System.ServiceModel.IClientChannel {
+    public interface MNBArfolyamServiceSoapChannel : Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class MNBArfolyamServiceSoapClient : System.ServiceModel.ClientBase<Thingy.MnbServiceReference.MNBArfolyamServiceSoap>, Thingy.MnbServiceReference.MNBArfolyamServiceSoap {
+    public partial class MNBArfolyamServiceSoapClient : System.ServiceModel.ClientBase<Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap>, Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap {
         
         public MNBArfolyamServiceSoapClient() {
         }
@@ -809,141 +809,141 @@ namespace Thingy.MnbServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Thingy.MnbServiceReference.GetCurrenciesResponse Thingy.MnbServiceReference.MNBArfolyamServiceSoap.GetCurrencies(Thingy.MnbServiceReference.GetCurrenciesRequest request) {
+        Thingy.CoreModules.MnbServiceReference.GetCurrenciesResponse Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap.GetCurrencies(Thingy.CoreModules.MnbServiceReference.GetCurrenciesRequest request) {
             return base.Channel.GetCurrencies(request);
         }
         
-        public Thingy.MnbServiceReference.GetCurrenciesResponseBody GetCurrencies(Thingy.MnbServiceReference.GetCurrenciesRequestBody GetCurrencies1) {
-            Thingy.MnbServiceReference.GetCurrenciesRequest inValue = new Thingy.MnbServiceReference.GetCurrenciesRequest();
+        public Thingy.CoreModules.MnbServiceReference.GetCurrenciesResponseBody GetCurrencies(Thingy.CoreModules.MnbServiceReference.GetCurrenciesRequestBody GetCurrencies1) {
+            Thingy.CoreModules.MnbServiceReference.GetCurrenciesRequest inValue = new Thingy.CoreModules.MnbServiceReference.GetCurrenciesRequest();
             inValue.GetCurrencies = GetCurrencies1;
-            Thingy.MnbServiceReference.GetCurrenciesResponse retVal = ((Thingy.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetCurrencies(inValue);
+            Thingy.CoreModules.MnbServiceReference.GetCurrenciesResponse retVal = ((Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetCurrencies(inValue);
             return retVal.GetCurrenciesResponse1;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Thingy.MnbServiceReference.GetCurrenciesResponse> Thingy.MnbServiceReference.MNBArfolyamServiceSoap.GetCurrenciesAsync(Thingy.MnbServiceReference.GetCurrenciesRequest request) {
+        System.Threading.Tasks.Task<Thingy.CoreModules.MnbServiceReference.GetCurrenciesResponse> Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap.GetCurrenciesAsync(Thingy.CoreModules.MnbServiceReference.GetCurrenciesRequest request) {
             return base.Channel.GetCurrenciesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Thingy.MnbServiceReference.GetCurrenciesResponse> GetCurrenciesAsync(Thingy.MnbServiceReference.GetCurrenciesRequestBody GetCurrencies) {
-            Thingy.MnbServiceReference.GetCurrenciesRequest inValue = new Thingy.MnbServiceReference.GetCurrenciesRequest();
+        public System.Threading.Tasks.Task<Thingy.CoreModules.MnbServiceReference.GetCurrenciesResponse> GetCurrenciesAsync(Thingy.CoreModules.MnbServiceReference.GetCurrenciesRequestBody GetCurrencies) {
+            Thingy.CoreModules.MnbServiceReference.GetCurrenciesRequest inValue = new Thingy.CoreModules.MnbServiceReference.GetCurrenciesRequest();
             inValue.GetCurrencies = GetCurrencies;
-            return ((Thingy.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetCurrenciesAsync(inValue);
+            return ((Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetCurrenciesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Thingy.MnbServiceReference.GetCurrencyUnitsResponse Thingy.MnbServiceReference.MNBArfolyamServiceSoap.GetCurrencyUnits(Thingy.MnbServiceReference.GetCurrencyUnitsRequest request) {
+        Thingy.CoreModules.MnbServiceReference.GetCurrencyUnitsResponse Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap.GetCurrencyUnits(Thingy.CoreModules.MnbServiceReference.GetCurrencyUnitsRequest request) {
             return base.Channel.GetCurrencyUnits(request);
         }
         
-        public Thingy.MnbServiceReference.GetCurrencyUnitsResponseBody GetCurrencyUnits(Thingy.MnbServiceReference.GetCurrencyUnitsRequestBody GetCurrencyUnits1) {
-            Thingy.MnbServiceReference.GetCurrencyUnitsRequest inValue = new Thingy.MnbServiceReference.GetCurrencyUnitsRequest();
+        public Thingy.CoreModules.MnbServiceReference.GetCurrencyUnitsResponseBody GetCurrencyUnits(Thingy.CoreModules.MnbServiceReference.GetCurrencyUnitsRequestBody GetCurrencyUnits1) {
+            Thingy.CoreModules.MnbServiceReference.GetCurrencyUnitsRequest inValue = new Thingy.CoreModules.MnbServiceReference.GetCurrencyUnitsRequest();
             inValue.GetCurrencyUnits = GetCurrencyUnits1;
-            Thingy.MnbServiceReference.GetCurrencyUnitsResponse retVal = ((Thingy.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetCurrencyUnits(inValue);
+            Thingy.CoreModules.MnbServiceReference.GetCurrencyUnitsResponse retVal = ((Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetCurrencyUnits(inValue);
             return retVal.GetCurrencyUnitsResponse1;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Thingy.MnbServiceReference.GetCurrencyUnitsResponse> Thingy.MnbServiceReference.MNBArfolyamServiceSoap.GetCurrencyUnitsAsync(Thingy.MnbServiceReference.GetCurrencyUnitsRequest request) {
+        System.Threading.Tasks.Task<Thingy.CoreModules.MnbServiceReference.GetCurrencyUnitsResponse> Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap.GetCurrencyUnitsAsync(Thingy.CoreModules.MnbServiceReference.GetCurrencyUnitsRequest request) {
             return base.Channel.GetCurrencyUnitsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Thingy.MnbServiceReference.GetCurrencyUnitsResponse> GetCurrencyUnitsAsync(Thingy.MnbServiceReference.GetCurrencyUnitsRequestBody GetCurrencyUnits) {
-            Thingy.MnbServiceReference.GetCurrencyUnitsRequest inValue = new Thingy.MnbServiceReference.GetCurrencyUnitsRequest();
+        public System.Threading.Tasks.Task<Thingy.CoreModules.MnbServiceReference.GetCurrencyUnitsResponse> GetCurrencyUnitsAsync(Thingy.CoreModules.MnbServiceReference.GetCurrencyUnitsRequestBody GetCurrencyUnits) {
+            Thingy.CoreModules.MnbServiceReference.GetCurrencyUnitsRequest inValue = new Thingy.CoreModules.MnbServiceReference.GetCurrencyUnitsRequest();
             inValue.GetCurrencyUnits = GetCurrencyUnits;
-            return ((Thingy.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetCurrencyUnitsAsync(inValue);
+            return ((Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetCurrencyUnitsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Thingy.MnbServiceReference.GetCurrentExchangeRatesResponse Thingy.MnbServiceReference.MNBArfolyamServiceSoap.GetCurrentExchangeRates(Thingy.MnbServiceReference.GetCurrentExchangeRatesRequest request) {
+        Thingy.CoreModules.MnbServiceReference.GetCurrentExchangeRatesResponse Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap.GetCurrentExchangeRates(Thingy.CoreModules.MnbServiceReference.GetCurrentExchangeRatesRequest request) {
             return base.Channel.GetCurrentExchangeRates(request);
         }
         
-        public Thingy.MnbServiceReference.GetCurrentExchangeRatesResponseBody GetCurrentExchangeRates(Thingy.MnbServiceReference.GetCurrentExchangeRatesRequestBody GetCurrentExchangeRates1) {
-            Thingy.MnbServiceReference.GetCurrentExchangeRatesRequest inValue = new Thingy.MnbServiceReference.GetCurrentExchangeRatesRequest();
+        public Thingy.CoreModules.MnbServiceReference.GetCurrentExchangeRatesResponseBody GetCurrentExchangeRates(Thingy.CoreModules.MnbServiceReference.GetCurrentExchangeRatesRequestBody GetCurrentExchangeRates1) {
+            Thingy.CoreModules.MnbServiceReference.GetCurrentExchangeRatesRequest inValue = new Thingy.CoreModules.MnbServiceReference.GetCurrentExchangeRatesRequest();
             inValue.GetCurrentExchangeRates = GetCurrentExchangeRates1;
-            Thingy.MnbServiceReference.GetCurrentExchangeRatesResponse retVal = ((Thingy.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetCurrentExchangeRates(inValue);
+            Thingy.CoreModules.MnbServiceReference.GetCurrentExchangeRatesResponse retVal = ((Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetCurrentExchangeRates(inValue);
             return retVal.GetCurrentExchangeRatesResponse1;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Thingy.MnbServiceReference.GetCurrentExchangeRatesResponse> Thingy.MnbServiceReference.MNBArfolyamServiceSoap.GetCurrentExchangeRatesAsync(Thingy.MnbServiceReference.GetCurrentExchangeRatesRequest request) {
+        System.Threading.Tasks.Task<Thingy.CoreModules.MnbServiceReference.GetCurrentExchangeRatesResponse> Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap.GetCurrentExchangeRatesAsync(Thingy.CoreModules.MnbServiceReference.GetCurrentExchangeRatesRequest request) {
             return base.Channel.GetCurrentExchangeRatesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Thingy.MnbServiceReference.GetCurrentExchangeRatesResponse> GetCurrentExchangeRatesAsync(Thingy.MnbServiceReference.GetCurrentExchangeRatesRequestBody GetCurrentExchangeRates) {
-            Thingy.MnbServiceReference.GetCurrentExchangeRatesRequest inValue = new Thingy.MnbServiceReference.GetCurrentExchangeRatesRequest();
+        public System.Threading.Tasks.Task<Thingy.CoreModules.MnbServiceReference.GetCurrentExchangeRatesResponse> GetCurrentExchangeRatesAsync(Thingy.CoreModules.MnbServiceReference.GetCurrentExchangeRatesRequestBody GetCurrentExchangeRates) {
+            Thingy.CoreModules.MnbServiceReference.GetCurrentExchangeRatesRequest inValue = new Thingy.CoreModules.MnbServiceReference.GetCurrentExchangeRatesRequest();
             inValue.GetCurrentExchangeRates = GetCurrentExchangeRates;
-            return ((Thingy.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetCurrentExchangeRatesAsync(inValue);
+            return ((Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetCurrentExchangeRatesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Thingy.MnbServiceReference.GetDateIntervalResponse Thingy.MnbServiceReference.MNBArfolyamServiceSoap.GetDateInterval(Thingy.MnbServiceReference.GetDateIntervalRequest request) {
+        Thingy.CoreModules.MnbServiceReference.GetDateIntervalResponse Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap.GetDateInterval(Thingy.CoreModules.MnbServiceReference.GetDateIntervalRequest request) {
             return base.Channel.GetDateInterval(request);
         }
         
-        public Thingy.MnbServiceReference.GetDateIntervalResponseBody GetDateInterval(Thingy.MnbServiceReference.GetDateIntervalRequestBody GetDateInterval1) {
-            Thingy.MnbServiceReference.GetDateIntervalRequest inValue = new Thingy.MnbServiceReference.GetDateIntervalRequest();
+        public Thingy.CoreModules.MnbServiceReference.GetDateIntervalResponseBody GetDateInterval(Thingy.CoreModules.MnbServiceReference.GetDateIntervalRequestBody GetDateInterval1) {
+            Thingy.CoreModules.MnbServiceReference.GetDateIntervalRequest inValue = new Thingy.CoreModules.MnbServiceReference.GetDateIntervalRequest();
             inValue.GetDateInterval = GetDateInterval1;
-            Thingy.MnbServiceReference.GetDateIntervalResponse retVal = ((Thingy.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetDateInterval(inValue);
+            Thingy.CoreModules.MnbServiceReference.GetDateIntervalResponse retVal = ((Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetDateInterval(inValue);
             return retVal.GetDateIntervalResponse1;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Thingy.MnbServiceReference.GetDateIntervalResponse> Thingy.MnbServiceReference.MNBArfolyamServiceSoap.GetDateIntervalAsync(Thingy.MnbServiceReference.GetDateIntervalRequest request) {
+        System.Threading.Tasks.Task<Thingy.CoreModules.MnbServiceReference.GetDateIntervalResponse> Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap.GetDateIntervalAsync(Thingy.CoreModules.MnbServiceReference.GetDateIntervalRequest request) {
             return base.Channel.GetDateIntervalAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Thingy.MnbServiceReference.GetDateIntervalResponse> GetDateIntervalAsync(Thingy.MnbServiceReference.GetDateIntervalRequestBody GetDateInterval) {
-            Thingy.MnbServiceReference.GetDateIntervalRequest inValue = new Thingy.MnbServiceReference.GetDateIntervalRequest();
+        public System.Threading.Tasks.Task<Thingy.CoreModules.MnbServiceReference.GetDateIntervalResponse> GetDateIntervalAsync(Thingy.CoreModules.MnbServiceReference.GetDateIntervalRequestBody GetDateInterval) {
+            Thingy.CoreModules.MnbServiceReference.GetDateIntervalRequest inValue = new Thingy.CoreModules.MnbServiceReference.GetDateIntervalRequest();
             inValue.GetDateInterval = GetDateInterval;
-            return ((Thingy.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetDateIntervalAsync(inValue);
+            return ((Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetDateIntervalAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Thingy.MnbServiceReference.GetExchangeRatesResponse Thingy.MnbServiceReference.MNBArfolyamServiceSoap.GetExchangeRates(Thingy.MnbServiceReference.GetExchangeRatesRequest request) {
+        Thingy.CoreModules.MnbServiceReference.GetExchangeRatesResponse Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap.GetExchangeRates(Thingy.CoreModules.MnbServiceReference.GetExchangeRatesRequest request) {
             return base.Channel.GetExchangeRates(request);
         }
         
-        public Thingy.MnbServiceReference.GetExchangeRatesResponseBody GetExchangeRates(Thingy.MnbServiceReference.GetExchangeRatesRequestBody GetExchangeRates1) {
-            Thingy.MnbServiceReference.GetExchangeRatesRequest inValue = new Thingy.MnbServiceReference.GetExchangeRatesRequest();
+        public Thingy.CoreModules.MnbServiceReference.GetExchangeRatesResponseBody GetExchangeRates(Thingy.CoreModules.MnbServiceReference.GetExchangeRatesRequestBody GetExchangeRates1) {
+            Thingy.CoreModules.MnbServiceReference.GetExchangeRatesRequest inValue = new Thingy.CoreModules.MnbServiceReference.GetExchangeRatesRequest();
             inValue.GetExchangeRates = GetExchangeRates1;
-            Thingy.MnbServiceReference.GetExchangeRatesResponse retVal = ((Thingy.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetExchangeRates(inValue);
+            Thingy.CoreModules.MnbServiceReference.GetExchangeRatesResponse retVal = ((Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetExchangeRates(inValue);
             return retVal.GetExchangeRatesResponse1;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Thingy.MnbServiceReference.GetExchangeRatesResponse> Thingy.MnbServiceReference.MNBArfolyamServiceSoap.GetExchangeRatesAsync(Thingy.MnbServiceReference.GetExchangeRatesRequest request) {
+        System.Threading.Tasks.Task<Thingy.CoreModules.MnbServiceReference.GetExchangeRatesResponse> Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap.GetExchangeRatesAsync(Thingy.CoreModules.MnbServiceReference.GetExchangeRatesRequest request) {
             return base.Channel.GetExchangeRatesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Thingy.MnbServiceReference.GetExchangeRatesResponse> GetExchangeRatesAsync(Thingy.MnbServiceReference.GetExchangeRatesRequestBody GetExchangeRates) {
-            Thingy.MnbServiceReference.GetExchangeRatesRequest inValue = new Thingy.MnbServiceReference.GetExchangeRatesRequest();
+        public System.Threading.Tasks.Task<Thingy.CoreModules.MnbServiceReference.GetExchangeRatesResponse> GetExchangeRatesAsync(Thingy.CoreModules.MnbServiceReference.GetExchangeRatesRequestBody GetExchangeRates) {
+            Thingy.CoreModules.MnbServiceReference.GetExchangeRatesRequest inValue = new Thingy.CoreModules.MnbServiceReference.GetExchangeRatesRequest();
             inValue.GetExchangeRates = GetExchangeRates;
-            return ((Thingy.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetExchangeRatesAsync(inValue);
+            return ((Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetExchangeRatesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Thingy.MnbServiceReference.GetInfoResponse Thingy.MnbServiceReference.MNBArfolyamServiceSoap.GetInfo(Thingy.MnbServiceReference.GetInfoRequest request) {
+        Thingy.CoreModules.MnbServiceReference.GetInfoResponse Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap.GetInfo(Thingy.CoreModules.MnbServiceReference.GetInfoRequest request) {
             return base.Channel.GetInfo(request);
         }
         
-        public Thingy.MnbServiceReference.GetInfoResponseBody GetInfo(Thingy.MnbServiceReference.GetInfoRequestBody GetInfo1) {
-            Thingy.MnbServiceReference.GetInfoRequest inValue = new Thingy.MnbServiceReference.GetInfoRequest();
+        public Thingy.CoreModules.MnbServiceReference.GetInfoResponseBody GetInfo(Thingy.CoreModules.MnbServiceReference.GetInfoRequestBody GetInfo1) {
+            Thingy.CoreModules.MnbServiceReference.GetInfoRequest inValue = new Thingy.CoreModules.MnbServiceReference.GetInfoRequest();
             inValue.GetInfo = GetInfo1;
-            Thingy.MnbServiceReference.GetInfoResponse retVal = ((Thingy.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetInfo(inValue);
+            Thingy.CoreModules.MnbServiceReference.GetInfoResponse retVal = ((Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetInfo(inValue);
             return retVal.GetInfoResponse1;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Thingy.MnbServiceReference.GetInfoResponse> Thingy.MnbServiceReference.MNBArfolyamServiceSoap.GetInfoAsync(Thingy.MnbServiceReference.GetInfoRequest request) {
+        System.Threading.Tasks.Task<Thingy.CoreModules.MnbServiceReference.GetInfoResponse> Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap.GetInfoAsync(Thingy.CoreModules.MnbServiceReference.GetInfoRequest request) {
             return base.Channel.GetInfoAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Thingy.MnbServiceReference.GetInfoResponse> GetInfoAsync(Thingy.MnbServiceReference.GetInfoRequestBody GetInfo) {
-            Thingy.MnbServiceReference.GetInfoRequest inValue = new Thingy.MnbServiceReference.GetInfoRequest();
+        public System.Threading.Tasks.Task<Thingy.CoreModules.MnbServiceReference.GetInfoResponse> GetInfoAsync(Thingy.CoreModules.MnbServiceReference.GetInfoRequestBody GetInfo) {
+            Thingy.CoreModules.MnbServiceReference.GetInfoRequest inValue = new Thingy.CoreModules.MnbServiceReference.GetInfoRequest();
             inValue.GetInfo = GetInfo;
-            return ((Thingy.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetInfoAsync(inValue);
+            return ((Thingy.CoreModules.MnbServiceReference.MNBArfolyamServiceSoap)(this)).GetInfoAsync(inValue);
         }
     }
 }
