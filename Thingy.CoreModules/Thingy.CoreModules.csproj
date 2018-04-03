@@ -83,6 +83,16 @@
     <Compile Include="ICommandLineView.cs" />
     <Compile Include="Models\Drive.cs" />
     <Compile Include="Models\SystemFolderLink.cs" />
+    <Compile Include="ModuleDefinitons\CommandLineModule.cs" />
+    <Compile Include="ModuleDefinitons\FontsModule.cs" />
+    <Compile Include="ModuleDefinitons\GitCMD.cs" />
+    <Compile Include="ModuleDefinitons\GreekAlphabetModule.cs" />
+    <Compile Include="ModuleDefinitons\PlacesModule.cs" />
+    <Compile Include="ModuleDefinitons\PowerShellModule.cs" />
+    <Compile Include="ModuleDefinitons\ProgramsModule.cs" />
+    <Compile Include="ModuleDefinitons\RunProgramModule.cs" />
+    <Compile Include="ModuleDefinitons\ToDoListModule.cs" />
+    <Compile Include="ModuleDefinitons\VirtualFoldersModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers.cs" />
     <Compile Include="TrulyObservableCollection.cs" />
@@ -222,8 +232,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ModuleDefinitons\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

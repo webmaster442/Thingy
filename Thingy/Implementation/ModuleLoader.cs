@@ -12,11 +12,11 @@ namespace Thingy.Implementation
     {
         private List<IModule> _modules;
         private Dictionary<string, int> _moudleCounter;
-        private ILog _log;
+        private IApplication _app;
 
-        public ModuleLoader(ILog log)
+        public ModuleLoader(IApplication app)
         {
-            _log = log;
+            _app = app ;
             _modules = new List<IModule>();
             _moudleCounter = new Dictionary<string, int>
             {
@@ -27,15 +27,15 @@ namespace Thingy.Implementation
 
         private void LoadModules()
         {
-            _log.Info("Searching for loadable modules...");
-            var files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, ".module.dll");
-            _log.Info("Found {0} loadable modules", files.Length);
+            _app.Log.Info("Searching for loadable modules...");
+            var files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*.module.dll");
+            _app.Log.Info("Found {0} loadable modules", files.Length);
             var imodule = typeof(IModule);
             foreach (var file in files)
             {
                 try
                 {
-                    _log.Info("Atempting to load: {0}", file);
+                    _app.Log.Info("Atempting to load: {0}", file);
                     var assembly = Assembly.LoadFile(file);
 
                     var modules = from module in assembly.GetTypes()
@@ -50,26 +50,28 @@ namespace Thingy.Implementation
                         try
                         {
                             var instance = (IModule)Activator.CreateInstance(module);
+                            instance.App = _app; //injection
+
                             if (instance.CanLoad)
                             {
                                 SetCount(instance.Category);
                                 _modules.Add(instance);
-                                _log.Info($"Module load was succesfull: {module.Name}");
+                                _app.Log.Info($"Module load was succesfull: {module.Name}");
                             }
                             else
                             {
-                                _log.Info($"Module load was succesfull, but it was not cached: {module.Name}");
+                                _app.Log.Info($"Module load was succesfull, but it was not cached: {module.Name}");
                             }
                         }
                         catch (Exception ex)
                         {
-                            _log.Error(ex);
+                            _app.Log.Error(ex);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    _log.Error(ex);
+                    _app.Log.Error(ex);
                 }
             }
         }
@@ -125,11 +127,11 @@ namespace Thingy.Implementation
 
             if (moduleToRun == null)
             {
-                _log.Error("couldn't find module: {0}", name);
+                _app.Log.Error("couldn't find module: {0}", name);
                 return null;
             }
 
-            _log.Info("Found Module: {0}", name);
+            _app.Log.Info("Found Module: {0}", name);
 
             return moduleToRun;
         }
@@ -146,7 +148,7 @@ namespace Thingy.Implementation
             if (moduleToRun == null)
             {
                 if (!string.IsNullOrEmpty(extension))
-                    _log.Error("couldn't find module for extension: {0}", extension);
+                    _app.Log.Error("couldn't find module for extension: {0}", extension);
                 return null;
             }
 

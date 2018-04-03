@@ -1,7 +1,7 @@
 ﻿using AppLib.WPF;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Thingy.Infrastructure;
+using Thingy.API;
 
 namespace Thingy.Modules
 {
@@ -24,7 +24,7 @@ namespace Thingy.Modules
 
         public override UserControl RunModule()
         {
-            return new Views.GreekAlphabet();
+            return new CoreModules.Views.GreekAlphabet();
         }
     }
 }

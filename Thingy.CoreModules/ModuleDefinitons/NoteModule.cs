@@ -1,8 +1,8 @@
 ﻿using AppLib.WPF;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Thingy.API;
 using Thingy.Db;
-using Thingy.Infrastructure;
 
 namespace Thingy.Modules
 {

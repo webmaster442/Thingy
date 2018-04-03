@@ -28,12 +28,10 @@ namespace Thingy
 
             _settings = new Settings(_log);
             _db = new DataBase(Paths.Resolve(Paths.DBPath));
-            _moduleLoader = new ModuleLoader(_log);
 
             Resolver.Register<ILog>(() => _log);
             Resolver.Register<ISettings>(() => _settings);
             Resolver.Register<IDataBase>(() => _db);
-            Resolver.Register<IModuleLoader>(() => _moduleLoader);
         }
 
         [STAThread]
@@ -46,7 +44,9 @@ namespace Thingy
             if (singleInstance.IsFirstInstance)
             {
                 var application = new App();
+                _moduleLoader = new ModuleLoader(application);
                 Resolver.Register<IApplication>(() => application);
+                Resolver.Register<IModuleLoader>(() => _moduleLoader);
                 CommandLineParser = new CommandLineParser(application);
                 JumpListFactory.CreateJumplist();
                 application.InitializeComponent();

@@ -6,6 +6,7 @@ namespace Thingy.API
 {
     public interface IModule
     {
+        IApplication App { get; set; }
         string ModuleName { get; }
         ImageSource Icon { get; }
         UserControl RunModule();

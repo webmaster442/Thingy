@@ -48,5 +48,7 @@ namespace Thingy.API
         {
             get { return null; }
         }
+
+        public IApplication App { get; set; }
     }
 }

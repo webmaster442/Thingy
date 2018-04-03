@@ -1,8 +1,8 @@
 ﻿using AppLib.WPF;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Thingy.API;
 using Thingy.Db;
-using Thingy.Infrastructure;
 
 namespace Thingy.Modules
 {
@@ -20,9 +20,9 @@ namespace Thingy.Modules
 
         public override UserControl RunModule()
         {
-            return new Views.Programs
+            return new CoreModules.Views.Programs
             {
-                DataContext = new ViewModels.ProgramsViewModel(App.Instance, App.IoCContainer.ResolveSingleton<IDataBase>())
+                DataContext = new ViewModels.ProgramsViewModel(App, App.Resolve<IDataBase>())
             };
         }
 

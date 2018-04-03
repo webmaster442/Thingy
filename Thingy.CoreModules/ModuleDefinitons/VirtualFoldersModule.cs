@@ -1,8 +1,8 @@
 ﻿using AppLib.WPF;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Thingy.API;
 using Thingy.Db;
-using Thingy.Infrastructure;
 
 namespace Thingy.Modules
 {
@@ -20,11 +20,9 @@ namespace Thingy.Modules
 
         public override UserControl RunModule()
         {
-            return new Views.VirtualFolders
+            return new CoreModules.Views.VirtualFolders
             {
-                DataContext = new ViewModels.VirtualFoldersViewModel(App.Instance,
-                                                                     App.IoCContainer.ResolveSingleton<IDataBase>(),
-                                                                     App.Log)
+                DataContext = new ViewModels.VirtualFoldersViewModel(App, App.Resolve<IDataBase>())
             };
         }
 

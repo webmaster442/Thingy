@@ -3,8 +3,8 @@ using System;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Thingy.API;
 using Thingy.Db;
-using Thingy.Infrastructure;
 
 namespace Thingy.Modules
 {
@@ -22,9 +22,9 @@ namespace Thingy.Modules
 
         public override UserControl RunModule()
         {
-            var toDoList = new Views.ToDoList
+            var toDoList = new CoreModules.Views.ToDoList
             {
-                DataContext = new ViewModels.ToDoListViewModel(App.Instance, App.IoCContainer.ResolveSingleton<IDataBase>())
+                DataContext = new ViewModels.ToDoListViewModel(App, App.Resolve<IDataBase>())
             };
             return toDoList;
         }

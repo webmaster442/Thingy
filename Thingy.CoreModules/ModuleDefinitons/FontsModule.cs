@@ -2,7 +2,8 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Thingy.Infrastructure;
+using Thingy.API;
+using Thingy.CoreModules.Views;
 
 namespace Thingy.Modules
 {
@@ -25,9 +26,9 @@ namespace Thingy.Modules
 
         public override UserControl RunModule()
         {
-            return new Views.FontViewer
+            return new FontViewer
             {
-                DataContext = new ViewModels.FontViewerViewModel(App.Instance)
+                DataContext = new ViewModels.FontViewerViewModel(App)
             };
         }
     }
