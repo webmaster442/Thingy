@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using Thingy.ViewModels;
 
-namespace Thingy.Views
+namespace Thingy.CoreModules.Views
 {
     /// <summary>
     /// Interaction logic for CommandLine.xaml

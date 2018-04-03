@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Thingy.Views
+namespace Thingy.CoreModules.Views
 {
     /// <summary>
     /// Interaction logic for Programs.xaml

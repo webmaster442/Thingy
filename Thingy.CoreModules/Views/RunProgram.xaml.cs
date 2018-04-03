@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Thingy.Infrastructure;
 
-namespace Thingy.Views
+namespace Thingy.CoreModules.Views
 {
     /// <summary>
     /// Interaction logic for RunProgramModule.xaml

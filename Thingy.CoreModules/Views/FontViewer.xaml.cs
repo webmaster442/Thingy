@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Thingy.Views
+namespace Thingy.CoreModules.Views
 {
     /// <summary>
     /// Interaction logic for FontViewer.xaml
