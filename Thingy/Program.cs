@@ -23,6 +23,9 @@ namespace Thingy
             Resolver = new IoCContainer();
 
             _log = new Log(Paths.Resolve(Paths.LogPath));
+            _log.BigDivider();
+            _log.Info("Application startup");
+
             _settings = new Settings(_log);
             _db = new DataBase(Paths.Resolve(Paths.DBPath));
             _moduleLoader = new ModuleLoader(_log);
@@ -37,10 +40,6 @@ namespace Thingy
         public static void Main()
         {
             SetupIoCContainer();
-
-            _log.BigDivider();
-            _log.Info("Application startup");
-
             const string appName = "Thingy";
             var singleInstance = new AppLib.Common.SingleInstanceApp(appName);
             singleInstance.CommandLineArgumentsRecieved += CommandLineArgumentsRecieved;

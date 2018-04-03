@@ -29,6 +29,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.Db", "Thingy.Db\Thin
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{259159E1-FA55-4090-B5E7-FBA0F450EAC2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{0F95BE5A-A7C1-4CF6-8D09-8491163E7ED2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.CoreModules", "Thingy.CoreModules\Thingy.CoreModules.csproj", "{30E19E54-F36B-462F-884A-B5F84BAF1D7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +79,10 @@ Global
 		{2D7E8D87-74AC-402A-8E11-BDACC7B3839B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D7E8D87-74AC-402A-8E11-BDACC7B3839B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D7E8D87-74AC-402A-8E11-BDACC7B3839B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30E19E54-F36B-462F-884A-B5F84BAF1D7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30E19E54-F36B-462F-884A-B5F84BAF1D7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30E19E54-F36B-462F-884A-B5F84BAF1D7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30E19E54-F36B-462F-884A-B5F84BAF1D7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +95,7 @@ Global
 		{848616A9-3D2F-42B1-B474-BE506E8019E4} = {8C1E4C07-0B06-4EFA-A24D-560619F3782A}
 		{FAF19388-A6C0-46F9-A588-A46DB392ACE4} = {8C1E4C07-0B06-4EFA-A24D-560619F3782A}
 		{2D7E8D87-74AC-402A-8E11-BDACC7B3839B} = {259159E1-FA55-4090-B5E7-FBA0F450EAC2}
+		{30E19E54-F36B-462F-884A-B5F84BAF1D7E} = {0F95BE5A-A7C1-4CF6-8D09-8491163E7ED2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E3667F8E-DFD2-486A-AA38-7A1EFCC1CD63}

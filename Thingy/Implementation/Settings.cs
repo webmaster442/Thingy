@@ -24,6 +24,7 @@ namespace Thingy.Implementation
 
         public T Get<T>(string key, T defaultValue)
         {
+            _log.Info("Reading setting: {0}...", key);
             if (_config.ContainsKey(key))
             {
                 try

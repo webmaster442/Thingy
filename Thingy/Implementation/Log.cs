@@ -85,5 +85,10 @@ namespace Thingy.Implementation
             _buffer.AppendLine(line);
             Debug.Write(line);
         }
+
+        public override string ToString()
+        {
+            return _buffer.ToString();
+        }
     }
 }

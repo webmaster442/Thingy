@@ -26,11 +26,23 @@ namespace Thingy
         {
             _app = app;
             ExitCommand = Command.ToCommand(Exit);
+            AboutCommand = Command.ToCommand(OpenAbout);
+            LogCommand = Command.ToCommand(OpenLog, CanOpenLog);
             OpenMenuCommand = Command.ToCommand(OpenMenu);
             ModuleImportCommand = Command.ToCommand(ModuleImport, CanImportExport);
             ModuleExportCommand = Command.ToCommand(ModuleExport, CanImportExport);
             ModuleAppendCommand = Command.ToCommand(ModuleAppend, CanImportExport);
-            AboutCommand = Command.ToCommand(OpenAbout);
+        }
+
+        private bool CanOpenLog()
+        {
+            int index = _app.TabManager.GetTabIndexByTitle("Log");
+            return index == -1;
+        }
+
+        private void OpenLog()
+        {
+            _app.TabManager.CreateNewTabContent("Log", new InternalModules.LogViewer(_app));
         }
 
         private bool CanImportExport()
