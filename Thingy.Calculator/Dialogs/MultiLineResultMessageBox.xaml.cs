@@ -1,7 +1,8 @@
 ﻿using MahApps.Metro.Controls.Dialogs;
 using System.Windows;
+using Thingy.API;
 
-namespace Thingy.Views.CalculatorDialogs
+namespace Thingy.Calculator.Dialogs
 {
     /// <summary>
     /// Interaction logic for MultiLineResultDialog.xaml

@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Thingy.CalculatorCore.Constants;
 
-namespace Thingy.Controls
+namespace Thingy.Calculator.Controls
 {
     /// <summary>
     /// Interaction logic for CalculatorConstants.xaml

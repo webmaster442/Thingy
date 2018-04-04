@@ -4,9 +4,10 @@ using System;
 using System.Numerics;
 using System.Speech.Synthesis;
 using System.Windows;
+using Thingy.API;
 using Thingy.CalculatorCore;
 
-namespace Thingy.Views.CalculatorDialogs
+namespace Thingy.Calculator.Dialogs
 {
     /// <summary>
     /// Interaction logic for NumberToTextWindow.xaml

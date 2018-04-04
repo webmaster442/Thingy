@@ -1,10 +1,10 @@
 ﻿using AppLib.Maths;
 using AppLib.MVVM;
-using MahApps.Metro.Controls.Dialogs;
 using System;
+using Thingy.API;
 using Thingy.CalculatorCore;
 
-namespace Thingy.ViewModels.Calculator
+namespace Thingy.Calculator.ViewModels
 {
     public class DisplayChangerViewModel : ViewModel
     {
@@ -57,7 +57,7 @@ namespace Thingy.ViewModels.Calculator
 
         private void ConvertUnit(object obj)
         {
-            var content = new Views.CalculatorDialogs.UnitConversionMessageBox(_app);
+            var content = new Dialogs.UnitConversionMessageBox(_app);
             content.InputNumber = ConvertBeforeProcess(obj);
             _app.ShowMessageBox(content);
         }
@@ -103,7 +103,7 @@ namespace Thingy.ViewModels.Calculator
                 prefix = "kiB";
             }
             var content = string.Format("{0} {1}", value, prefix);
-            await _app.ShowMessageBox("Result as File size", content, MessageDialogStyle.Affirmative);
+            await _app.ShowMessageBox("Result as File size", content, DialogButtons.Ok);
 
         }
 
@@ -111,33 +111,33 @@ namespace Thingy.ViewModels.Calculator
         {
             double x = ConvertBeforeProcess(obj) * 100;
             var message = string.Format("{0}%", x);
-            await _app.ShowMessageBox("Result as percent", message, MessageDialogStyle.Affirmative);
+            await _app.ShowMessageBox("Result as percent", message, DialogButtons.Ok);
         }
 
         private async void ConvertFractions(object obj)
         {
             var dbl = ConvertBeforeProcess(obj);
             Fraction f = dbl;
-            await _app.ShowMessageBox("Result as fraction", f.ToString(), MessageDialogStyle.Affirmative);
+            await _app.ShowMessageBox("Result as fraction", f.ToString(), DialogButtons.Ok);
         }
 
         private async void ConvertPrefixes(object obj)
         {
             var dbl = ConvertBeforeProcess(obj);
             string prefixed = PrefixSource.DivideToPrefix(dbl);
-            await _app.ShowMessageBox("Result with prefixes", prefixed, MessageDialogStyle.Affirmative);
+            await _app.ShowMessageBox("Result with prefixes", prefixed, DialogButtons.Ok);
         }
 
         private async void ConvertText(object obj)
         {
-            var content = new Views.CalculatorDialogs.NumberToTexMessageBox(_app);
+            var content = new Dialogs.NumberToTexMessageBox(_app);
             content.SetDisplay(obj);
             await _app.ShowMessageBox(content);
         }
 
         private async void ConvertNumberSystem(object obj)
         {
-            var content = new Views.CalculatorDialogs.NumberSystemDisplayMessageBox(_app);
+            var content = new Dialogs.NumberSystemDisplayMessageBox(_app);
             content.SetDisplay(obj);
             await _app.ShowMessageBox(content);
         }

@@ -1,5 +1,5 @@
 ﻿<mahdialogs:CustomDialog
-    x:Class="Thingy.Views.CalculatorDialogs.NumberSystemDisplayMessageBox"
+    x:Class="Thingy.Calculator.Dialogs.NumberSystemDisplayMessageBox"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Thingy.Controls"

@@ -92,6 +92,12 @@ namespace Thingy
             }
         }
 
+        public Task HideMessageBox(CustomDialog messageBoxContent)
+        {
+            var mainwindow = (Current.MainWindow as MainWindow);
+            return mainwindow.HideMetroDialogAsync(messageBoxContent);
+        }
+
         public T Resolve<T>()
         {
             return Program.Resolver.Resolve<T>();

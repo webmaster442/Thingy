@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Thingy.Controls
+namespace Thingy.Calculator.Controls
 {
     /// <summary>
     /// Interaction logic for Prefixes.xaml

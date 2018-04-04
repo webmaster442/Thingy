@@ -56,6 +56,12 @@ namespace Thingy.API
         /// <returns>Awaitable task</returns>
         Task CloseMessageBox(CustomDialog messageBoxContent);
         /// <summary>
+        /// Hide a message box
+        /// </summary>
+        /// <param name="messageBoxContent">Message box content</param>
+        /// <returns>Awaitable task</returns>
+        Task HideMessageBox(CustomDialog messageBoxContent);
+        /// <summary>
         /// Tab manager
         /// </summary>
         ITabManager TabManager { get; }

@@ -4,10 +4,11 @@ using System.Collections.ObjectModel;
 using Thingy.CalculatorCore;
 using System.Linq;
 using AppLib.Common.Extensions;
+using Thingy.API;
 
-namespace Thingy.ViewModels.Calculator
+namespace Thingy.Calculator.ViewModels
 {
-    public sealed class CalculatorViewModel : ViewModel<Views.ICalculatorView>, IDisposable
+    public sealed class CalculatorViewModel : ViewModel<ICalculatorView>, IDisposable
     {
         private string _formula;
         private string _result;
@@ -77,7 +78,7 @@ namespace Thingy.ViewModels.Calculator
             set { SetValue(ref _calculating, value); }
         }
 
-        public CalculatorViewModel(Views.ICalculatorView view, IApplication app): base(view)
+        public CalculatorViewModel(ICalculatorView view, IApplication app): base(view)
         {
             _app = app;
             Engine = new CalculatorEngine();
@@ -108,8 +109,8 @@ namespace Thingy.ViewModels.Calculator
 
         private async void AdvancedBinaryInput()
         {
-            var dialog = new Views.CalculatorDialogs.BinaryKeyboard();
-            bool result = await _app.ShowDialog(dialog, "Advanced Binary input");
+            var dialog = new Dialogs.BinaryKeyboard();
+            bool result = await _app.ShowDialog("Advanced Binary input", dialog, DialogButtons.OkCancel, false);
             if (result)
             {
                 Formula += dialog.Result;
@@ -141,7 +142,7 @@ namespace Thingy.ViewModels.Calculator
                     Engine.SetVariable(GenerateName(), result.RawObject);
                     break;
                 default:
-                    await _app.ShowMessageBox("Error", "Can't add variable, because operation didn't had a result", MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
+                    await _app.ShowMessageBox("Error", "Can't add variable, because operation didn't had a result", DialogButtons.Ok);
                     break;
             }
             Variables.UpdateWith(Engine.GetMemory());
@@ -166,14 +167,14 @@ namespace Thingy.ViewModels.Calculator
 
         private async void NumSysInput(string obj)
         {
-            var dialog = new Views.CalculatorDialogs.NumberSystemInput();
+            var dialog = new Dialogs.NumberSystemInput();
 
             if (obj == "ROMAN")
                 dialog.Init(42);
             else
                 dialog.Init(Convert.ToInt32(obj));
 
-            bool result = await _app.ShowDialog(dialog, "Input number in specified system", null);
+            bool result = await _app.ShowDialog("Input number in specified system", dialog, DialogButtons.OkCancel, false);
 
             if (result)
             {
@@ -290,7 +291,7 @@ namespace Thingy.ViewModels.Calculator
             }
             if (result.LineBuffer.Length > 2)
             {
-                var multiline = new Views.CalculatorDialogs.MultiLineResultMessageBox(_app)
+                var multiline = new Dialogs.MultiLineResultMessageBox(_app)
                 {
                     Text = result.LineBuffer
                 };

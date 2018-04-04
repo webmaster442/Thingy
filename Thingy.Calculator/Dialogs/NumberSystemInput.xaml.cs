@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Thingy.Views.CalculatorDialogs
+namespace Thingy.Calculator.Dialogs
 {
     /// <summary>
     /// Interaction logic for NumberSystemInput.xaml

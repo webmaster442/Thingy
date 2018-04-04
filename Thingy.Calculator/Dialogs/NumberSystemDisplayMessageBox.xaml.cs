@@ -1,7 +1,7 @@
 ﻿using MahApps.Metro.Controls.Dialogs;
-using Thingy;
+using Thingy.API;
 
-namespace Thingy.Views.CalculatorDialogs
+namespace Thingy.Calculator.Dialogs
 {
     /// <summary>
     /// Interaction logic for NumberSystemDisplayDialog.xaml

@@ -3,7 +3,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Thingy.Controls
+namespace Thingy.XAML.Converters
 {
     public class UniformGridColunConverter : ConverterBase<UniformGridColunConverter>, IValueConverter
     {

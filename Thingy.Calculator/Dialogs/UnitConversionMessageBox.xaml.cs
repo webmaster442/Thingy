@@ -2,9 +2,10 @@
 using System;
 using System.Globalization;
 using System.Windows.Controls;
+using Thingy.API;
 using Thingy.CalculatorCore.UnitConversion;
 
-namespace Thingy.Views.CalculatorDialogs
+namespace Thingy.Calculator.Dialogs
 {
     /// <summary>
     /// Interaction logic for UnitConversionMessageBox.xaml

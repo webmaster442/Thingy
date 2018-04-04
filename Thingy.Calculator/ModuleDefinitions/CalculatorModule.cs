@@ -1,9 +1,9 @@
 ﻿using AppLib.WPF;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Thingy.Infrastructure;
+using Thingy.API;
 
-namespace Thingy.Modules
+namespace Thingy.Calculator.ModuleDefinitions
 {
     public class CalculatorModule : ModuleBase
     {
@@ -25,7 +25,7 @@ namespace Thingy.Modules
         public override UserControl RunModule()
         {
             var view = new Views.Calculator();
-            view.DataContext = new ViewModels.Calculator.CalculatorViewModel(view, App.Instance);
+            view.DataContext = new ViewModels.CalculatorViewModel(view, App);
             return view;
         }
     }
