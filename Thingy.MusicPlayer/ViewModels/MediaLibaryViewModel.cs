@@ -1,7 +1,6 @@
 ﻿using AppLib.Common.Extensions;
 using AppLib.MVVM;
 using AppLib.WPF;
-using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,16 +8,18 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Thingy.MediaLibary.Models;
+using Thingy.API;
+using Thingy.API.Capabilities;
 using Thingy.Db;
 using Thingy.Db.Entity;
 using Thingy.Db.Entity.MediaLibary;
 using Thingy.Db.Factories;
-using Thingy.Infrastructure;
 using Thingy.MusicPlayerCore;
 using Thingy.MusicPlayerCore.Formats;
 using Thingy.Resources;
 
-namespace Thingy.ViewModels.MediaLibary
+namespace Thingy.MediaLibary.ViewModels
 {
     public class MediaLibaryViewModel: ViewModel, ICanImportExportXMLData
     {
@@ -66,7 +67,7 @@ namespace Thingy.ViewModels.MediaLibary
         {
             var editor = new Views.MediaLibary.QueryEditor();
             var modell = new Db.Entity.MediaLibary.SongQuery();
-            if (await _app.ShowDialog(editor, "Query Editor", modell, false))
+            if (await _app.ShowDialog("Query Editor", editor, DialogButtons.OkCancel, false, modell))
             {
                 var results = _db.MediaLibary.DoQuery(modell);
                 if (results != null)
@@ -122,8 +123,8 @@ namespace Thingy.ViewModels.MediaLibary
             var results = ExecuteQuery(obj);
             if (results != null)
             {
-                var q = await _app.ShowMessageBox("Media Libary", "Remove songs from database?", MessageDialogStyle.AffirmativeAndNegative);
-                if (q == MessageDialogResult.Affirmative)
+                var q = await _app.ShowMessageBox("Media Libary", "Remove songs from database?", DialogButtons.YesNo);
+                if (q)
                 {
                     _db.MediaLibary.DeleteSongs(results);
                     BuildTree();

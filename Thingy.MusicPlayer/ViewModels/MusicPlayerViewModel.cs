@@ -2,12 +2,12 @@
 using AppLib.MVVM;
 using System;
 using System.Windows;
+using Thingy.API;
 using Thingy.MusicPlayerCore;
 using Thingy.MusicPlayerCore.DataObjects;
 using Thingy.MusicPlayerCore.Formats;
-using Thingy.Views.Interfaces;
 
-namespace Thingy.ViewModels.MusicPlayer
+namespace Thingy.MusicPlayer.ViewModels
 {
     public class MusicPlayerViewModel: ViewModel<IMusicPlayer>, IDisposable
     {

@@ -6,10 +6,11 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Thingy.API;
 using Thingy.MusicPlayerCore;
 using Thingy.MusicPlayerCore.Formats;
 
-namespace Thingy.ViewModels.MusicPlayer
+namespace Thingy.MusicPlayer.ViewModels
 {
     public class PlayListViewModel : ViewModel
     {
@@ -114,7 +115,7 @@ namespace Thingy.ViewModels.MusicPlayer
                 }
                 catch (Exception ex)
                 {
-                    await _app.ShowMessageBox("Error", ex.Message, MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
+                    await _app.ShowMessageBox("Error", ex.Message, DialogButtons.Ok);
                 }
             }
         }
@@ -131,7 +132,7 @@ namespace Thingy.ViewModels.MusicPlayer
                 }
                 catch (Exception ex)
                 {
-                    await _app.ShowMessageBox("Error", ex.Message, MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
+                    await _app.ShowMessageBox("Error", ex.Message, DialogButtons.Ok);
                 }
             }
         }
@@ -154,7 +155,7 @@ namespace Thingy.ViewModels.MusicPlayer
                 }
                 catch (Exception ex)
                 {
-                     await _app.ShowMessageBox("Error", ex.Message, MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
+                     await _app.ShowMessageBox("Error", ex.Message, DialogButtons.Ok);
                 }
             }
         }
@@ -189,7 +190,7 @@ namespace Thingy.ViewModels.MusicPlayer
         private async void AddUrl()
         {
             var dialog = new Views.MusicPlayer.AddURLDialog();
-            bool result = await _app.ShowDialog(dialog, "Add URL...");
+            bool result = await _app.ShowDialog("Add URL...", dialog, DialogButtons.OkCancel);
             if (result)
             {
                 List.Add(dialog.Url);
@@ -199,7 +200,7 @@ namespace Thingy.ViewModels.MusicPlayer
         private async void LoadCD()
         {
             var dialog = new Views.MusicPlayer.LoadCdDialog();
-            bool result = await _app.ShowDialog(dialog, "Load CD...");
+            bool result = await _app.ShowDialog("Load CD...", dialog, DialogButtons.OkCancel);
             if (result)
             {
                 if (!string.IsNullOrEmpty(dialog.SelectedDrive))

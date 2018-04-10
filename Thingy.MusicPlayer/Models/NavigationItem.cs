@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Media;
 
-namespace Thingy.ViewModels.MediaLibary
+namespace Thingy.MediaLibary.Models
 {
     public class NavigationItem
     {

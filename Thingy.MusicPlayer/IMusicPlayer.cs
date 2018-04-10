@@ -1,7 +1,7 @@
 ﻿using AppLib.MVVM;
-using Thingy.ViewModels.MusicPlayer;
+using Thingy.MusicPlayer.ViewModels;
 
-namespace Thingy.Views.Interfaces
+namespace Thingy.MusicPlayer
 {
     public enum MusicPlayerTabs
     {

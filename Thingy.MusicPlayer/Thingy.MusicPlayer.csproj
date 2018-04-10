@@ -30,14 +30,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Build-tools\CommonVersion.cs">
@@ -49,7 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\MediaLibaryViewModel.cs" />
     <Compile Include="ViewModels\MusicPlayerViewModel.cs" />
-    <Compile Include="ViewModels\NavigationItem.cs" />
+    <Compile Include="Models\NavigationItem.cs" />
     <Compile Include="ViewModels\PlayListViewModel.cs" />
     <Compile Include="Views\AddURLDialog.xaml.cs">
       <DependentUpon>AddURLDialog.xaml</DependentUpon>
@@ -88,6 +93,40 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\applib\AppLib.Common\AppLib.Common.csproj">
+      <Project>{516087b5-6ac5-44a5-8df1-fe42d7a7a0e6}</Project>
+      <Name>AppLib.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\applib\AppLib.MVVM\AppLib.MVVM.csproj">
+      <Project>{848616a9-3d2f-42b1-b474-be506e8019e4}</Project>
+      <Name>AppLib.MVVM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\applib\AppLib.WPF\AppLib.WPF.csproj">
+      <Project>{faf19388-a6c0-46f9-a588-a46db392ace4}</Project>
+      <Name>AppLib.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cores\Thingy.MusicPlayerCore\Thingy.MusicPlayerCore.csproj">
+      <Project>{a87fd57d-b36f-4747-8afa-989e5181705f}</Project>
+      <Name>Thingy.MusicPlayerCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Thingy.API\Thingy.API.csproj">
+      <Project>{BF3B99F7-722C-40C2-A0FE-7C3F8F1B6B01}</Project>
+      <Name>Thingy.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Thingy.Db\Thingy.Db.csproj">
+      <Project>{2d7e8d87-74ac-402a-8e11-bdacc7b3839b}</Project>
+      <Name>Thingy.Db</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Thingy.Resources\Thingy.Resources.csproj">
+      <Project>{63a3ee73-078f-4dec-8578-5af6f158d383}</Project>
+      <Name>Thingy.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Thingy.XAML\Thingy.XAML.csproj">
+      <Project>{a8fbd1d1-eb45-42d5-85b8-d07c2a992e69}</Project>
+      <Name>Thingy.XAML</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
