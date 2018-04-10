@@ -28,6 +28,7 @@ namespace Thingy
 
             _settings = new Settings(_log);
             _db = new DataBase(Paths.Resolve(Paths.DBPath));
+            API.SettingsBinding.Settings = _settings;
 
             Resolver.Register<ILog>(() => _log);
             Resolver.Register<ISettings>(() => _settings);

@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:interactivity="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:api="clr-namespace:Thingy.API;assembly=Thingy.API"
     d:DesignHeight="300"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -37,6 +38,7 @@
                 x:Name="FontSizeSelector"
                 Height="20"
                 Margin="3"
+                Value="{api:SettingsBinding [ConsoleFontSize\,14]}"
                 DefaultValue="14"
                 DisplayFormat="0"
                 Maximum="32"

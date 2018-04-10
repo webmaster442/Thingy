@@ -1,20 +1,29 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using Thingy.API;
 
 namespace Thingy.Implementation
 {
-    public class Settings : ISettings
+    public sealed class Settings : ISettings
     {
         private Dictionary<string, string> _config;
         private readonly ILog _log;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public Settings(ILog log)
         {
             _log = log;
             Load();
+        }
+
+        private void FirePropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
         public bool Exists(string key)
@@ -111,6 +120,7 @@ namespace Thingy.Implementation
                 {
                     _log.Info("Modifiying existing {0} key value from {1} to {1}", key, _config[key], value);
                     _config[key] = JsonConvert.SerializeObject(value);
+                    FirePropertyChanged(key);
                 }
                 catch (Exception ex)
                 {
@@ -123,12 +133,29 @@ namespace Thingy.Implementation
                 {
                     _log.Info("Creating setting: {0} with value: {1}", key, value);
                     _config.Add(key, JsonConvert.SerializeObject(value));
+                    FirePropertyChanged(key);
                 }
                 catch (Exception ex)
                 {
                     _log.Error(ex);
                 }
             }
+        }
+
+        public IEnumerator<KeyValuePair<string, string>> GetEnumerator()
+        {
+            return _config.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return _config.GetEnumerator();
+        }
+
+        public object this[string key, object defaultValue]
+        {
+            get => Get(key, defaultValue);
+            set => Set(key, value);
         }
     }
 }

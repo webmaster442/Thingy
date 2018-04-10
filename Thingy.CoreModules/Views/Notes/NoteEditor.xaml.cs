@@ -58,9 +58,12 @@ namespace Thingy.CoreModules.Views.Notes
 
         private void ConfigureEditorOptions(object sender, RoutedEventArgs e)
         {
-            TextEditor.Options.ShowEndOfLine = ViewLineEndings.IsChecked;
-            TextEditor.Options.ShowTabs = ViewWhitespace.IsChecked;
-            TextEditor.Options.ShowSpaces = ViewWhitespace.IsChecked;
+            if (TextEditor != null)
+            {
+                TextEditor.Options.ShowEndOfLine = ViewLineEndings.IsChecked;
+                TextEditor.Options.ShowTabs = ViewWhitespace.IsChecked;
+                TextEditor.Options.ShowSpaces = ViewWhitespace.IsChecked;
+            }
         }
 
         private static FlowDocument CreateFlowDocumentForEditor(TextEditor editor)

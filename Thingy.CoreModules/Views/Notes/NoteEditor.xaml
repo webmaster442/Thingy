@@ -6,6 +6,7 @@
     xmlns:avalon="http://icsharpcode.net/sharpdevelop/avalonedit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:api="clr-namespace:Thingy.API;assembly=Thingy.API"
     d:DesignHeight="500"
     d:DesignWidth="900"
     mc:Ignorable="d">
@@ -195,6 +196,7 @@
                         <MenuItem
                             x:Name="ViewWordWrap"
                             Header="Word wrap"
+                            IsChecked="{api:SettingsBinding [NoteWordWrap\,False]}"
                             IsCheckable="True" />
                         <Separator />
                         <MenuItem
@@ -202,17 +204,19 @@
                             Checked="ConfigureEditorOptions"
                             Header="Show line endings"
                             IsCheckable="True"
+                            IsChecked="{api:SettingsBinding [NoteShowLineEnding\,False]}"
                             Unchecked="ConfigureEditorOptions" />
                         <MenuItem
                             x:Name="ViewWhitespace"
                             Checked="ConfigureEditorOptions"
                             Header="Show Whitespaces"
                             IsCheckable="True"
-                            IsChecked="True"
+                            IsChecked="{api:SettingsBinding [NoteShowWhiteSpace\,False]}"
                             Unchecked="ConfigureEditorOptions" />
                         <MenuItem
                             x:Name="ViewLineNumbers"
                             Header="Show line numbers"
+                            IsChecked="{api:SettingsBinding [NoteShowLineNumbers\,True]}"
                             IsCheckable="True" />
                     </MenuItem>
                     <MenuItem
@@ -258,7 +262,7 @@
                 DefaultValue="14"
                 Maximum="48"
                 Minimum="10"
-                Value="14"/>
+                Value="{api:SettingsBinding [NotesFontSize\,14]}"/>
             <TextBlock
                 Text="Document size:" />
             <TextBlock

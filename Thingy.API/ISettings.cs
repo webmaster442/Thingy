@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Thingy.API
 {
     /// <summary>
     /// Flexible Setting strorage
     /// </summary>
-    public interface ISettings
+    public interface ISettings : INotifyPropertyChanged,
+                                 IEnumerable<KeyValuePair<string, string>>
     {
         /// <summary>
         /// Set a Setting
@@ -41,5 +39,16 @@ namespace Thingy.API
         /// Save settings to file
         /// </summary>
         void Save();
+        /// <summary>
+        /// Property indexer for WPF
+        /// </summary>
+        /// <param name="key">setting name</param>
+        /// <param name="defaultValue">default value, if reading is not possible</param>
+        /// <returns></returns>
+        object this[string key, object defaultValue]
+        {
+            get;
+            set;
+        }
     }
 }
