@@ -50,7 +50,9 @@ namespace Thingy.Implementation
                         try
                         {
                             var instance = (IModule)Activator.CreateInstance(module);
+
                             instance.App = _app; //injection
+                            instance.AppAttached();
 
                             if (instance.CanLoad)
                             {

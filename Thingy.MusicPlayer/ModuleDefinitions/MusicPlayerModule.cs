@@ -10,7 +10,7 @@ namespace Thingy.Modules
 {
     public class MusicPlayerModule : ModuleBase
     {
-        private IAudioEngine _audioEngine;
+        private static IAudioEngine _audioEngine;
 
         public override string ModuleName
         {
@@ -44,7 +44,7 @@ namespace Thingy.Modules
             get
             {
                 if (_audioEngine == null)
-                    _audioEngine = App.Resolve<IAudioEngine>();
+                    _audioEngine = new AudioEngine();
 
                 return _audioEngine.OutputDevices.Count > 0;
             }

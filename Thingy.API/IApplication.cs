@@ -1,4 +1,5 @@
 ﻿using MahApps.Metro.Controls.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -84,6 +85,18 @@ namespace Thingy.API
         /// <typeparam name="T">Type to resolve</typeparam>
         /// <returns>Resolved type or exception</returns>
         T Resolve<T>();
+        /// <summary>
+        /// Returns true, if type can be resolved
+        /// </summary>
+        /// <typeparam name="T">Type to resovle</typeparam>
+        /// <returns>true, if type can be resolved</returns>
+        bool CanResolve<T>();
+        /// <summary>
+        /// Register a type to the IOC container
+        /// </summary>
+        /// <typeparam name="T">Type to register</typeparam>
+        /// <param name="getter">Type creator delegate</param>
+        void Register<T>(Func<T> getter);
         /// <summary>
         /// Show a status bar menu
         /// </summary>

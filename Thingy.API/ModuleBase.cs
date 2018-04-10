@@ -13,6 +13,10 @@ namespace Thingy.API
 
         public abstract UserControl RunModule();
 
+        public virtual void AppAttached()
+        {
+        }
+
         public virtual Color TileColor
         {
             get

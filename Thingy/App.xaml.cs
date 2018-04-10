@@ -98,6 +98,16 @@ namespace Thingy
             return mainwindow.HideMetroDialogAsync(messageBoxContent);
         }
 
+        public void Register<T>(Func<T> getter)
+        {
+            Program.Resolver.Register(getter);
+        }
+
+        public bool CanResolve<T>()
+        {
+            return Program.Resolver.CanResolve<T>();
+        }
+
         public T Resolve<T>()
         {
             return Program.Resolver.Resolve<T>();

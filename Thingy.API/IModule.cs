@@ -17,5 +17,6 @@ namespace Thingy.API
         bool OpenAsWindow { get; }
         bool IsSingleInstance { get; }
         IEnumerable<string> SupportedExtensions { get; }
+        void AppAttached();
     }
 }
