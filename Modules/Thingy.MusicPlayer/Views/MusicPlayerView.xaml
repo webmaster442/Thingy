@@ -60,7 +60,6 @@
                         <ComboBox
                             x:Name="DeviceSelector"
                             ItemsSource="{Binding AudioEngine.OutputDevices}"
-                            SelectedIndex="{Binding AudioEngine.DefaultDeviceIndex, Converter={xaml:AudioDeviceIndexToListIndexConverter}, ConverterParameter={Binding AudioEngine.OutputDevices}, Mode=OneWay}"
                             SelectionChanged="DeviceSelector_SelectionChanged">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
@@ -68,6 +67,12 @@
                                         Text="{Binding Key}" />
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
+                            <ComboBox.SelectedIndex>
+                                <MultiBinding Converter="{xaml:AudioDeviceIndexToListIndexConverter}" Mode="OneWay">
+                                    <Binding Path="AudioEngine.OutputDevices"/>
+                                    <Binding Path="AudioEngine.DefaultDeviceIndex"/>
+                                </MultiBinding>
+                            </ComboBox.SelectedIndex>
                         </ComboBox>
 
                     </StackPanel>
