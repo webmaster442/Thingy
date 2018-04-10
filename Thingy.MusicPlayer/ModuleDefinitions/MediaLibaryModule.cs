@@ -1,10 +1,10 @@
 ﻿using AppLib.WPF;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Thingy.API;
 using Thingy.Db;
-using Thingy.Infrastructure;
 
-namespace Thingy.Modules
+namespace Thingy.MusicPlayer.ModuleDefinitions
 {
     public class MediaLibaryModule : ModuleBase
     {
@@ -25,9 +25,9 @@ namespace Thingy.Modules
 
         public override UserControl RunModule()
         {
-            return new Views.MediaLibary.MediaLibary
+            return new Views.MediaLibary
             {
-                DataContext = new ViewModels.MediaLibary.MediaLibaryViewModel(App.Instance, App.IoCContainer.ResolveSingleton<IDataBase>())
+                DataContext = new ViewModels.MediaLibaryViewModel(App, App.Resolve<IDataBase>())
             };
         }
     }

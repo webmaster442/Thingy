@@ -189,7 +189,7 @@ namespace Thingy.MusicPlayer.ViewModels
 
         private async void AddUrl()
         {
-            var dialog = new Views.MusicPlayer.AddURLDialog();
+            var dialog = new Views.AddURLDialog();
             bool result = await _app.ShowDialog("Add URL...", dialog, DialogButtons.OkCancel);
             if (result)
             {
@@ -199,7 +199,7 @@ namespace Thingy.MusicPlayer.ViewModels
 
         private async void LoadCD()
         {
-            var dialog = new Views.MusicPlayer.LoadCdDialog();
+            var dialog = new Views.LoadCdDialog();
             bool result = await _app.ShowDialog("Load CD...", dialog, DialogButtons.OkCancel);
             if (result)
             {

@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Thingy.MusicPlayerCore;
 
-namespace Thingy.Views.MusicPlayer
+namespace Thingy.MusicPlayer.Views
 {
     /// <summary>
     /// Interaction logic for LoadCdDialog.xaml

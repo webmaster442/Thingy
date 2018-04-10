@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Thingy.Views.MediaLibary
+namespace Thingy.MediaLibary.Views
 {
     /// <summary>
     /// Interaction logic for QueryEditor.xaml

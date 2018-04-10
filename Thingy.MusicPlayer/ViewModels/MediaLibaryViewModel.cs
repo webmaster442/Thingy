@@ -19,7 +19,7 @@ using Thingy.MusicPlayerCore;
 using Thingy.MusicPlayerCore.Formats;
 using Thingy.Resources;
 
-namespace Thingy.MediaLibary.ViewModels
+namespace Thingy.MusicPlayer.ViewModels
 {
     public class MediaLibaryViewModel: ViewModel, ICanImportExportXMLData
     {
@@ -65,7 +65,7 @@ namespace Thingy.MediaLibary.ViewModels
 
         private async void CreateQuery()
         {
-            var editor = new Views.MediaLibary.QueryEditor();
+            var editor = new MediaLibary.Views.QueryEditor();
             var modell = new Db.Entity.MediaLibary.SongQuery();
             if (await _app.ShowDialog("Query Editor", editor, DialogButtons.OkCancel, false, modell))
             {

@@ -1,12 +1,11 @@
 ﻿<UserControl
-    x:Class="Thingy.Views.MusicPlayer.MusicPlayer"
+    x:Class="Thingy.MusicPlayer.Views.MusicPlayerView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:infrastructure="clr-namespace:Thingy.Infrastructure"
+    xmlns:xaml="clr-namespace:Thingy.XAML.Converters;assembly=Thingy.XAML"
     xmlns:interactivity="http://schemas.microsoft.com/expression/2010/interactivity"
-    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:musicplayer="clr-namespace:Thingy.MusicPlayerCore.Controls;assembly=Thingy.MusicPlayerCore"
     d:DesignHeight="500"
@@ -61,7 +60,7 @@
                         <ComboBox
                             x:Name="DeviceSelector"
                             ItemsSource="{Binding AudioEngine.OutputDevices}"
-                            SelectedIndex="{Binding AudioEngine.DefaultDeviceIndex, Converter={infrastructure:AudioDeviceIndexToListIndexConverter}, Mode=OneWay}"
+                            SelectedIndex="{Binding AudioEngine.DefaultDeviceIndex, Converter={xaml:AudioDeviceIndexToListIndexConverter}, ConverterParameter={Binding AudioEngine.OutputDevices}, Mode=OneWay}"
                             SelectionChanged="DeviceSelector_SelectionChanged">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>

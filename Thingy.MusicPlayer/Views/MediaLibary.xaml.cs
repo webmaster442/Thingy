@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Thingy.Views.MediaLibary
+namespace Thingy.MusicPlayer.Views
 {
     /// <summary>
     /// Interaction logic for MediaLibary.xaml
@@ -19,7 +19,7 @@ namespace Thingy.Views.MediaLibary
             var tag = (e.OriginalSource as TextBlock)?.Tag;
             if (selected != null && tag != null)
             {
-                (DataContext as ViewModels.MediaLibary.MediaLibaryViewModel)?.CategoryQueryCommand.Execute(new string[] { selected, tag.ToString() });
+                (DataContext as ViewModels.MediaLibaryViewModel)?.CategoryQueryCommand.Execute(new string[] { selected, tag.ToString() });
             }
 
         }
@@ -33,7 +33,7 @@ namespace Thingy.Views.MediaLibary
 
             if (selected != null && tag != null)
             {
-                (DataContext as ViewModels.MediaLibary.MediaLibaryViewModel)?.DeleteQueryCommand.Execute(new string[] { selected, tag.ToString() });
+                (DataContext as ViewModels.MediaLibaryViewModel)?.DeleteQueryCommand.Execute(new string[] { selected, tag.ToString() });
             }
         }
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Thingy.Infrastructure;
+using Thingy.API;
 using Thingy.MusicPlayerCore;
 using Thingy.MusicPlayerCore.Formats;
 
@@ -29,8 +29,8 @@ namespace Thingy.Modules
 
         public override UserControl RunModule()
         {
-            var view = new Views.MusicPlayer.MusicPlayer();
-            view.DataContext = new ViewModels.MusicPlayer.MusicPlayerViewModel(view, App.Instance, _audioEngine);
+            var view = new MusicPlayer.Views.MusicPlayerView();
+            view.DataContext = new MusicPlayer.ViewModels.MusicPlayerViewModel(view, App, _audioEngine);
             return view;
         }
 
@@ -44,7 +44,7 @@ namespace Thingy.Modules
             get
             {
                 if (_audioEngine == null)
-                    _audioEngine = App.IoCContainer.ResolveSingleton<IAudioEngine>();
+                    _audioEngine = App.Resolve<IAudioEngine>();
 
                 return _audioEngine.OutputDevices.Count > 0;
             }

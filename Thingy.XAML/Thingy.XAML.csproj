@@ -61,6 +61,7 @@
     <Compile Include="..\Build-tools\CommonVersion.cs">
       <Link>Properties\CommonVersion.cs</Link>
     </Compile>
+    <Compile Include="Converters\AudioDeviceIndexToListIndexConverter.cs" />
     <Compile Include="Converters\ExeIconExtractor.cs" />
     <Compile Include="Converters\FileToIconConverter.cs" />
     <Compile Include="Converters\FontFamilyConverter.cs" />

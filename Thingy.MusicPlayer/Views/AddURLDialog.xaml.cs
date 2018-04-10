@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Thingy.Views.MusicPlayer
+namespace Thingy.MusicPlayer.Views
 {
     /// <summary>
     /// Interaction logic for AddURLDialog.xaml

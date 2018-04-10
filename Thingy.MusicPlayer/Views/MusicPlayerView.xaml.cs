@@ -1,18 +1,18 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Thingy.ViewModels.MusicPlayer;
-using Thingy.Views.Interfaces;
 using AppLib.MVVM.MessageHandler;
 using AppLib.Common;
-using Thingy.Infrastructure.Messages;
+using Thingy.API.Messages;
+using Thingy.MusicPlayer.ViewModels;
+using System;
 
-namespace Thingy.Views.MusicPlayer
+namespace Thingy.MusicPlayer.Views
 {
     /// <summary>
     /// Interaction logic for MusicPlayer.xaml
     /// </summary>
-    public partial class MusicPlayer : UserControl, IMusicPlayer, IMessageClient<HandleFileMessage>
+    public partial class MusicPlayerView : UserControl, IMusicPlayer, IMessageClient<HandleFileMessage>
     {
         private double? _dragedto;
 
@@ -21,17 +21,12 @@ namespace Thingy.Views.MusicPlayer
             get { return DataContext as MusicPlayerViewModel; }
         }
 
-        public UId MessageReciverID
+        public Guid MessageReciverID
         {
-            get
-            {
-                var id = Tag as UId;
-                if (id != null) return id;
-                return new UId();
-            }
+            get { return Guid.NewGuid(); }
         }
 
-        public MusicPlayer()
+        public MusicPlayerView()
         {
             InitializeComponent();
             Messager.Instance.SubScribe(this);
@@ -85,7 +80,7 @@ namespace Thingy.Views.MusicPlayer
         public void HandleMessage(HandleFileMessage message)
         {
             if (message == null) return;
-            ViewModel?.HandleFiles(message.File);
+            ViewModel?.HandleFiles(message.Files.ToArray());
         }
 
         private void ChapterSwitcher_SelectionChanged(object sender, SelectionChangedEventArgs e)
