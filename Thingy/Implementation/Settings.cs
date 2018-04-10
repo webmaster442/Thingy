@@ -144,11 +144,13 @@ namespace Thingy.Implementation
 
         public IEnumerator<KeyValuePair<string, string>> GetEnumerator()
         {
+            _log.Info("Enumerating settings...");
             return _config.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
+            _log.Info("Enumerating settings...");
             return _config.GetEnumerator();
         }
 

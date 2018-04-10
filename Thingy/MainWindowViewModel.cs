@@ -29,9 +29,21 @@ namespace Thingy
             AboutCommand = Command.ToCommand(OpenAbout);
             LogCommand = Command.ToCommand(OpenLog, CanOpenLog);
             OpenMenuCommand = Command.ToCommand(OpenMenu);
+            SettingCommand = Command.ToCommand(OpenSetting, CanOpenSetting);
             ModuleImportCommand = Command.ToCommand(ModuleImport, CanImportExport);
             ModuleExportCommand = Command.ToCommand(ModuleExport, CanImportExport);
             ModuleAppendCommand = Command.ToCommand(ModuleAppend, CanImportExport);
+        }
+
+        private bool CanOpenSetting()
+        {
+            int index = _app.TabManager.GetTabIndexByTitle("Settings");
+            return index == -1;
+        }
+
+        private void OpenSetting()
+        {
+            _app.TabManager.CreateNewTabContent("Settings", new InternalModules.Settings(_app));
         }
 
         private bool CanOpenLog()

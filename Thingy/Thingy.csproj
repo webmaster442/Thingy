@@ -127,6 +127,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="InternalModules\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -169,6 +173,9 @@
     </Compile>
     <Compile Include="InternalModules\LogViewer.xaml.cs">
       <DependentUpon>LogViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InternalModules\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="MainWindow.xaml.cs">
