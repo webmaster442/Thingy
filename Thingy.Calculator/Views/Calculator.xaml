@@ -34,6 +34,7 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
+                FontSize="14"
                 FontFamily="{StaticResource UbuntuMono}"
                 IsEnabled="{Binding Calculating, Converter={applib:NegateConverter}}"
                 Style="{StaticResource BorderlessTextBox}"

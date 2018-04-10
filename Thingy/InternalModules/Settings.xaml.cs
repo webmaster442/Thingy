@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using Thingy.API;
+using System.Linq;
 
 namespace Thingy.InternalModules
 {
@@ -29,6 +30,21 @@ namespace Thingy.InternalModules
         {
             StoredSettings = new ObservableCollection<KeyValuePair<string, string>>(_app.Settings);
             SettingsGrid.ItemsSource = StoredSettings;
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            var diff = from vm in StoredSettings
+                       from setting in _app.Settings
+                       where
+                       vm.Key == setting.Key &&
+                       vm.Value != setting.Value
+                       select vm;
+
+            foreach (var d in diff)
+            {
+                _app.Settings[d.Key, null] = d.Value;
+            }
         }
     }
 }

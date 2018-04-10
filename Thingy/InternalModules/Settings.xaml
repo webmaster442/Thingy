@@ -18,6 +18,8 @@
             Grid.Row="0"
             Orientation="Horizontal">
             <Button
+                x:Name="Save"
+                Click="Save_Click"
                 Margin="5"
                 Content="Save" />
         </StackPanel>
