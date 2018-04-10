@@ -31,11 +31,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{0F95BE5A-A7C1-4CF6-8D09-8491163E7ED2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.CoreModules", "Thingy.CoreModules\Thingy.CoreModules.csproj", "{30E19E54-F36B-462F-884A-B5F84BAF1D7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.CoreModules", "Modules\Thingy.CoreModules\Thingy.CoreModules.csproj", "{30E19E54-F36B-462F-884A-B5F84BAF1D7E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.XAML", "Thingy.XAML\Thingy.XAML.csproj", "{A8FBD1D1-EB45-42D5-85B8-D07C2A992E69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.Calculator", "Thingy.Calculator\Thingy.Calculator.csproj", "{972CE055-4941-4959-9D9F-C43F5D1125CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.Calculator", "Modules\Thingy.Calculator\Thingy.Calculator.csproj", "{972CE055-4941-4959-9D9F-C43F5D1125CC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cores", "Cores", "{8DD48674-DAFC-4411-BC97-E0E0E6B34F53}"
 EndProject
@@ -43,7 +43,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.CalculatorCore", "Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.MusicPlayerCore", "Cores\Thingy.MusicPlayerCore\Thingy.MusicPlayerCore.csproj", "{A87FD57D-B36F-4747-8AFA-989E5181705F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.MusicPlayer", "Thingy.MusicPlayer\Thingy.MusicPlayer.csproj", "{253234E3-85E1-4479-813C-96360A670D86}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.MusicPlayer", "Modules\Thingy.MusicPlayer\Thingy.MusicPlayer.csproj", "{253234E3-85E1-4479-813C-96360A670D86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
