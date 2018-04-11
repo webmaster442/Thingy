@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("d0f12e16-59c0-4d6f-880d-621255fa708b")]
-[assembly: InternalsVisibleTo("Thingy.CalculatorCore.Tests")]
+[assembly: InternalsVisibleTo("CalculatorCore.Tests")]
 
 // Version information for an assembly consists of the following four values:
 //
