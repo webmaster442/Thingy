@@ -52,6 +52,9 @@
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -107,6 +110,7 @@
     <Compile Include="Models\CurrencyRate.cs" />
     <Compile Include="Models\Drive.cs" />
     <Compile Include="Models\SystemFolderLink.cs" />
+    <Compile Include="Models\XKCDResponse.cs" />
     <Compile Include="ModuleDefinitons\CommandLineModule.cs" />
     <Compile Include="ModuleDefinitons\CurrencyConverterModule.cs" />
     <Compile Include="ModuleDefinitons\FontsModule.cs" />
@@ -119,6 +123,7 @@
     <Compile Include="ModuleDefinitons\RunProgramModule.cs" />
     <Compile Include="ModuleDefinitons\ToDoListModule.cs" />
     <Compile Include="ModuleDefinitons\VirtualFoldersModule.cs" />
+    <Compile Include="ModuleDefinitons\XKCDReaderModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers.cs" />
     <Compile Include="TrulyObservableCollection.cs" />
@@ -131,6 +136,7 @@
     <Compile Include="ViewModels\ProgramsViewModel.cs" />
     <Compile Include="ViewModels\ToDoListViewModel.cs" />
     <Compile Include="ViewModels\VirtualFoldersViewModel.cs" />
+    <Compile Include="ViewModels\XKCDReaderViewModel.cs" />
     <Compile Include="Views\CommandLine.xaml.cs">
       <DependentUpon>CommandLine.xaml</DependentUpon>
     </Compile>
@@ -174,6 +180,9 @@
     </Compile>
     <Compile Include="Views\VirtualFolders.xaml.cs">
       <DependentUpon>VirtualFolders.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XKCDReader.xaml.cs">
+      <DependentUpon>XKCDReader.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -294,6 +303,10 @@
     <Page Include="Views\VirtualFolders.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\XKCDReader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
