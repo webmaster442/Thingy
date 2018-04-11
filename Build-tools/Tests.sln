@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2015
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.CalculatorCore", "..\Cores\Thingy.CalculatorCore\Thingy.CalculatorCore.csproj", "{D0F12E16-59C0-4D6F-880D-621255FA708B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppLib.Common", "..\applib\AppLib.Common\AppLib.Common.csproj", "{516087B5-6AC5-44A5-8DF1-FE42D7A7A0E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppLib.Maths", "..\applib\AppLib.Math\AppLib.Maths.csproj", "{0169FF46-6F3D-4CE8-BAD2-05F024EB24E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppLib.MVVM", "..\applib\AppLib.MVVM\AppLib.MVVM.csproj", "{848616A9-3D2F-42B1-B474-BE506E8019E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applib", "Applib", "{07E07AFE-D2B1-46A0-A863-62BD080D1E8C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Systems to test", "Systems to test", "{C7A0C107-88E6-4BA3-9274-AAC4D909AC7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppLib.WPF", "..\applib\AppLib.WPF\AppLib.WPF.csproj", "{FAF19388-A6C0-46F9-A588-A46DB392ACE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorCore.Tests", "Tests\CalculatorCore.Tests\CalculatorCore.Tests.csproj", "{7AE977DC-E1DF-42BF-BD75-23EC6ADE0198}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0F12E16-59C0-4D6F-880D-621255FA708B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0F12E16-59C0-4D6F-880D-621255FA708B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0F12E16-59C0-4D6F-880D-621255FA708B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0F12E16-59C0-4D6F-880D-621255FA708B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{516087B5-6AC5-44A5-8DF1-FE42D7A7A0E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{516087B5-6AC5-44A5-8DF1-FE42D7A7A0E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{516087B5-6AC5-44A5-8DF1-FE42D7A7A0E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{516087B5-6AC5-44A5-8DF1-FE42D7A7A0E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0169FF46-6F3D-4CE8-BAD2-05F024EB24E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0169FF46-6F3D-4CE8-BAD2-05F024EB24E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0169FF46-6F3D-4CE8-BAD2-05F024EB24E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0169FF46-6F3D-4CE8-BAD2-05F024EB24E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{848616A9-3D2F-42B1-B474-BE506E8019E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{848616A9-3D2F-42B1-B474-BE506E8019E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{848616A9-3D2F-42B1-B474-BE506E8019E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{848616A9-3D2F-42B1-B474-BE506E8019E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAF19388-A6C0-46F9-A588-A46DB392ACE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAF19388-A6C0-46F9-A588-A46DB392ACE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAF19388-A6C0-46F9-A588-A46DB392ACE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAF19388-A6C0-46F9-A588-A46DB392ACE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AE977DC-E1DF-42BF-BD75-23EC6ADE0198}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AE977DC-E1DF-42BF-BD75-23EC6ADE0198}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AE977DC-E1DF-42BF-BD75-23EC6ADE0198}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AE977DC-E1DF-42BF-BD75-23EC6ADE0198}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D0F12E16-59C0-4D6F-880D-621255FA708B} = {C7A0C107-88E6-4BA3-9274-AAC4D909AC7B}
+		{516087B5-6AC5-44A5-8DF1-FE42D7A7A0E6} = {07E07AFE-D2B1-46A0-A863-62BD080D1E8C}
+		{0169FF46-6F3D-4CE8-BAD2-05F024EB24E2} = {07E07AFE-D2B1-46A0-A863-62BD080D1E8C}
+		{848616A9-3D2F-42B1-B474-BE506E8019E4} = {07E07AFE-D2B1-46A0-A863-62BD080D1E8C}
+		{FAF19388-A6C0-46F9-A588-A46DB392ACE4} = {07E07AFE-D2B1-46A0-A863-62BD080D1E8C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8B822AB8-CA68-4B77-A9D6-514CF482C44A}
+	EndGlobalSection
+EndGlobal

@@ -7,12 +7,9 @@
     xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:properties="clr-namespace:Thingy.Properties"
-    xmlns:statusbar="clr-namespace:Thingy.Views.Statusbar"
+    xmlns:controls="clr-namespace:Thingy.Controls"
     x:Name="Window"
     Title="Thingy"
-    Width="{Binding Source={x:Static properties:Settings.Default}, Path=WindowWidth, Mode=TwoWay}"
-    Height="{Binding Source={x:Static properties:Settings.Default}, Path=WindowHeight, Mode=TwoWay}"
     AllowDrop="True"
     Closing="ModernWindow_Closing"
     DragEnter="Window_DragEnter"
@@ -195,7 +192,8 @@
             </dragablz:TabablzControl.InterTabController>
         </dragablz:TabablzControl>
 
-        <statusbar:StatusbarView
+        <controls:StatusbarView
+            x:Name="StatusBar"
             Grid.Row="1" />
 
         <Grid

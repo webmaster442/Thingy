@@ -1,0 +1,269 @@
+﻿<UserControl
+    x:Class="Thingy.CoreModules.Views.GreekAlphabet"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="350"
+    d:DesignWidth="900"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style
+            TargetType="TextBlock">
+            <Setter Property="FontSize" Value="46" />
+            <Setter Property="FontFamily" Value="Arial" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+        <Style
+            x:Key="small"
+            BasedOn="{StaticResource {x:Type TextBlock}}"
+            TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="25" />
+            <RowDefinition />
+            <RowDefinition Height="25" />
+            <RowDefinition />
+            <RowDefinition Height="25" />
+            <RowDefinition />
+            <RowDefinition Height="25" />
+        </Grid.RowDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            Text="Α α" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="1"
+            Text="Β β" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="2"
+            Text="Γ γ" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="3"
+            Text="Δ δ" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="4"
+            Text="Ε ε" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="5"
+            Text="Ζ ζ" />
+
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="0"
+            Text="Η η" />
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="1"
+            Text="Θ θ" />
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="2"
+            Text="Ι ι" />
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="3"
+            Text="Κ κ" />
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="4"
+            Text="Λ λ" />
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="5"
+            Text="Μ μ" />
+
+        <TextBlock
+            Grid.Row="4"
+            Grid.Column="0"
+            Text="Ν ν" />
+        <TextBlock
+            Grid.Row="4"
+            Grid.Column="1"
+            Text="Ξ ξ" />
+        <TextBlock
+            Grid.Row="4"
+            Grid.Column="2"
+            Text="Ο ο" />
+        <TextBlock
+            Grid.Row="4"
+            Grid.Column="3"
+            Text="Π π" />
+        <TextBlock
+            Grid.Row="4"
+            Grid.Column="4"
+            Text="Ρ ρ" />
+        <TextBlock
+            Grid.Row="4"
+            Grid.Column="5"
+            Text="Σ σ/ς" />
+
+        <TextBlock
+            Grid.Row="6"
+            Grid.Column="0"
+            Text="Τ τ" />
+        <TextBlock
+            Grid.Row="6"
+            Grid.Column="1"
+            Text="Υ υ" />
+        <TextBlock
+            Grid.Row="6"
+            Grid.Column="2"
+            Text="Φ φ" />
+        <TextBlock
+            Grid.Row="6"
+            Grid.Column="3"
+            Text="Χ χ" />
+        <TextBlock
+            Grid.Row="6"
+            Grid.Column="4"
+            Text="Ψ ψ" />
+        <TextBlock
+            Grid.Row="6"
+            Grid.Column="5"
+            Text="Ω ω" />
+
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            Style="{StaticResource small}"
+            Text="alpha" />
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="1"
+            Style="{StaticResource small}"
+            Text="beta" />
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="2"
+            Style="{StaticResource small}"
+            Text="gamma" />
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="3"
+            Style="{StaticResource small}"
+            Text="delta" />
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="4"
+            Style="{StaticResource small}"
+            Text="epsilon" />
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="5"
+            Style="{StaticResource small}"
+            Text="zeta" />
+
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="0"
+            Style="{StaticResource small}"
+            Text="eta" />
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="1"
+            Style="{StaticResource small}"
+            Text="theta" />
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="2"
+            Style="{StaticResource small}"
+            Text="iota" />
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="3"
+            Style="{StaticResource small}"
+            Text="kappa" />
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="4"
+            Style="{StaticResource small}"
+            Text="lambda" />
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="5"
+            Style="{StaticResource small}"
+            Text="mu" />
+
+        <TextBlock
+            Grid.Row="5"
+            Grid.Column="0"
+            Style="{StaticResource small}"
+            Text="nu" />
+        <TextBlock
+            Grid.Row="5"
+            Grid.Column="1"
+            Style="{StaticResource small}"
+            Text="xi" />
+        <TextBlock
+            Grid.Row="5"
+            Grid.Column="2"
+            Style="{StaticResource small}"
+            Text="omicron" />
+        <TextBlock
+            Grid.Row="5"
+            Grid.Column="3"
+            Style="{StaticResource small}"
+            Text="pi" />
+        <TextBlock
+            Grid.Row="5"
+            Grid.Column="4"
+            Style="{StaticResource small}"
+            Text="rho" />
+        <TextBlock
+            Grid.Row="5"
+            Grid.Column="5"
+            Style="{StaticResource small}"
+            Text="sigma" />
+
+        <TextBlock
+            Grid.Row="7"
+            Grid.Column="0"
+            Style="{StaticResource small}"
+            Text="tau" />
+        <TextBlock
+            Grid.Row="7"
+            Grid.Column="1"
+            Style="{StaticResource small}"
+            Text="upsilon" />
+        <TextBlock
+            Grid.Row="7"
+            Grid.Column="2"
+            Style="{StaticResource small}"
+            Text="phi" />
+        <TextBlock
+            Grid.Row="7"
+            Grid.Column="3"
+            Style="{StaticResource small}"
+            Text="chi" />
+        <TextBlock
+            Grid.Row="7"
+            Grid.Column="4"
+            Style="{StaticResource small}"
+            Text="psi" />
+        <TextBlock
+            Grid.Row="7"
+            Grid.Column="5"
+            Style="{StaticResource small}"
+            Text="omega" />
+    </Grid>
+
+</UserControl>

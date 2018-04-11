@@ -1,0 +1,363 @@
+﻿<UserControl
+    x:Class="Thingy.MusicPlayer.Views.MusicPlayerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:xaml="clr-namespace:Thingy.XAML.Converters;assembly=Thingy.XAML"
+    xmlns:interactivity="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:musicplayer="clr-namespace:Thingy.MusicPlayerCore.Controls;assembly=Thingy.MusicPlayerCore"
+    d:DesignHeight="500"
+    d:DesignWidth="900"
+    mc:Ignorable="d">
+    <Grid>
+        <TabControl
+            x:Name="MainTabs"
+            TabStripPlacement="Top">
+            <TabItem
+                Header="Player"
+                Style="{StaticResource CompactTabItem}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            FontFamily="{StaticResource Exo2}"
+                            FontSize="18"
+                            Text="{Binding AudioEngine.Position, Converter={applib:SecondsToTimeStringConverter}}" />
+                        <TextBlock
+                            FontFamily="{StaticResource Exo2}"
+                            FontSize="18"
+                            Text="/" />
+                        <TextBlock
+                            FontFamily="{StaticResource Exo2}"
+                            FontSize="18"
+                            Text="{Binding AudioEngine.Length, Converter={applib:SecondsToTimeStringConverter}}" />
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Margin="5,0"
+                            FontFamily="{StaticResource Ubuntu}"
+                            Text="Output Device:" />
+
+                        <ComboBox
+                            x:Name="DeviceSelector"
+                            ItemsSource="{Binding AudioEngine.OutputDevices}"
+                            SelectionChanged="DeviceSelector_SelectionChanged">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                        Text="{Binding Key}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                            <ComboBox.SelectedIndex>
+                                <MultiBinding Converter="{xaml:AudioDeviceIndexToListIndexConverter}" Mode="OneWay">
+                                    <Binding Path="AudioEngine.OutputDevices"/>
+                                    <Binding Path="AudioEngine.DefaultDeviceIndex"/>
+                                </MultiBinding>
+                            </ComboBox.SelectedIndex>
+                        </ComboBox>
+
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        Orientation="Horizontal">
+                        <applib:CircularProgressBar
+                            Width="48"
+                            Height="48"
+                            Margin="5,5"
+                            Background="Transparent"
+                            BorderBrush="{StaticResource AccentBaseColorBrush}"
+                            FontSize="10"
+                            Foreground="Black"
+                            Maximum="100"
+                            Minimum="0"
+                            Value="{Binding AudioEngine.ProgessPercent, Mode=OneWay}" />
+                        <applib:ImageButton
+                            Command="{Binding OpenFileCommand}"
+                            Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-eject-96.png"
+                            ImageHeight="48"
+                            ImageWidth="48"
+                            Style="{StaticResource Flat}" />
+                        <applib:ImageButton
+                            Command="{Binding PlayCommand}"
+                            Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-play-96.png"
+                            ImageHeight="48"
+                            ImageWidth="48"
+                            Style="{StaticResource Flat}" />
+                        <applib:ImageButton
+                            Command="{Binding SeekBackCommand}"
+                            Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-rewind-96.png"
+                            ImageHeight="48"
+                            ImageWidth="48"
+                            Style="{StaticResource Flat}"
+                            ToolTip="Seek 5 sec. backward" />
+                        <applib:ImageButton
+                            Command="{Binding SeekFwdCommand}"
+                            Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-fast-forward-96.png"
+                            ImageHeight="48"
+                            ImageWidth="48"
+                            Style="{StaticResource Flat}"
+                            ToolTip="Seek 5 sec. forward" />
+                        <applib:ImageButton
+                            Command="{Binding PrevousTrackCommand}"
+                            Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-skip-to-start-96.png"
+                            ImageHeight="48"
+                            ImageWidth="48"
+                            Style="{StaticResource Flat}"
+                            ToolTip="Previous track" />
+                        <applib:ImageButton
+                            Command="{Binding NextTrackCommand}"
+                            Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-end-96.png"
+                            ImageHeight="48"
+                            ImageWidth="48"
+                            Style="{StaticResource Flat}"
+                            ToolTip="Next track" />
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            Text="Vol.:" />
+                        <Slider
+                            x:Name="VolumeSlider"
+                            Width="150"
+                            Margin="10,0"
+                            VerticalAlignment="Center"
+                            Maximum="1"
+                            Minimum="0"
+                            Value="{Binding AudioEngine.Volume}">
+                            <Slider.ToolTip>
+                                <ToolTip
+                                    Content="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget.Value}"
+                                    ContentStringFormat="Volume: {0:P1}" />
+                            </Slider.ToolTip>
+                        </Slider>
+                        <ComboBox
+                            x:Name="ChapterSwitcher"
+                            MaxWidth="150"
+                            Margin="10,0"
+                            VerticalAlignment="Center"
+                            ItemsSource="{Binding AudioEngine.Chapters}"
+                            SelectionChanged="ChapterSwitcher_SelectionChanged"
+                            Text="Chapters...">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                        Text="{Binding Title}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                    <Slider
+                        x:Name="SeekBar"
+                        Grid.Row="2"
+                        Grid.ColumnSpan="99"
+                        Margin="5,0"
+                        IsMoveToPointEnabled="True"
+                        Maximum="{Binding AudioEngine.Length}"
+                        Minimum="0"
+                        MouseMove="SeekBar_MouseMove"
+                        MouseUp="SeekBar_MouseUp"
+                        Style="{StaticResource FlatSlider}"
+                        Thumb.DragCompleted="SeekBar_DragCompleted"
+                        Thumb.DragStarted="SeekBar_DragStarted"
+                        Value="{Binding AudioEngine.Position, Mode=OneWay}">
+                        <Slider.ToolTip>
+                            <ToolTip
+                                Content="{Binding ElementName=SeekBar, Path=Value, Converter={applib:SecondsToTimeStringConverter}}" />
+                        </Slider.ToolTip>
+                    </Slider>
+                    <musicplayer:TrackInfo
+                        Grid.Row="3"
+                        Grid.ColumnSpan="99"
+                        FontFamily="{StaticResource Exo2}"
+                        FontSize="20"
+                        Tags="{Binding AudioEngine.CurrentTags}" />
+                </Grid>
+            </TabItem>
+            <TabItem
+                Header="Playlist"
+                Style="{StaticResource CompactTabItem}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Menu
+                        Grid.Row="0"
+                        BorderBrush="#FFBFBFBF"
+                        BorderThickness="0,0,0,1.1">
+                        <MenuItem
+                            Header="Manage">
+                            <MenuItem.Icon>
+                                <Image
+                                    Width="24"
+                                    Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-playlist-96.png" />
+                            </MenuItem.Icon>
+                            <MenuItem
+                                Command="{Binding Playlist.OpenListCommand}"
+                                Header="Load Playlist...">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-playlist-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem
+                                Command="{Binding Playlist.ApendListCommand}"
+                                Header="Apend Playlist..">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-playlist-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem
+                                Command="{Binding Playlist.SaveListCommand}"
+                                Header="Save Playlist..">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-playlist-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem
+                                Command="{Binding Playlist.AddFilesCommand}"
+                                Header="Add Files...">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-audio-file-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem
+                                Command="{Binding Playlist.AddFolderCommand}"
+                                Header="Add Folder...">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-music-folder.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem
+                                Command="{Binding Playlist.AddUrlCommand}"
+                                Header="Add URL...">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-add-link-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem
+                                Command="{Binding Playlist.LoadCDCommand}"
+                                Header="Load CD...">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-cd.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </MenuItem>
+                        <MenuItem
+                            Header="Delete">
+                            <MenuItem.Icon>
+                                <Image
+                                    Width="24"
+                                    Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-empty-trash-96.png" />
+                            </MenuItem.Icon>
+                            <MenuItem
+                                Command="{Binding Playlist.DeleteSelectedCommand}"
+                                CommandParameter="{Binding ElementName=PlaylistView, Path=SelectedItems}"
+                                Header="Remove Selected items...">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-clear-symbol.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem
+                                Command="{Binding Playlist.ClearListCommand}"
+                                Header="Clear List">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-empty-trash-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </MenuItem>
+                        <MenuItem
+                            Header="Ordering">
+                            <MenuItem.Icon>
+                                <Image
+                                    Width="24"
+                                    Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-ascending-sorting-96.png" />
+                            </MenuItem.Icon>
+                            <MenuItem
+                                Command="{Binding Playlist.SortAscendingCommand}"
+                                Header="Order by FileName Ascending">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-ascending-sorting-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem
+                                Command="{Binding Playlist.SortDescendingCommand}"
+                                Header="Order by FileName Descending">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-descending-sorting-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem
+                                Command="{Binding Playlist.SortSuffleCommand}"
+                                Header="Suffle">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="24"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-shuffle-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </MenuItem>
+                    </Menu>
+                    <ListBox
+                        x:Name="PlaylistView"
+                        Grid.Row="1"
+                        ItemsSource="{Binding Playlist.List}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    Text="{Binding Converter={musicplayer:PlaylistTagConverter}}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <interactivity:Interaction.Triggers>
+                            <interactivity:EventTrigger EventName="MouseDoubleClick">
+                                <interactivity:InvokeCommandAction Command="{Binding PlayListDoubleClickCommand}" CommandParameter="{Binding ElementName=PlaylistView, Path=SelectedIndex}" />
+                            </interactivity:EventTrigger>
+                        </interactivity:Interaction.Triggers>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

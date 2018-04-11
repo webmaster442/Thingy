@@ -1,7 +1,4 @@
-﻿using AppLib.Common;
-using AppLib.MVVM.MessageHandler;
-using AppLib.WPF;
-using MahApps.Metro;
+﻿using MahApps.Metro;
 using MahApps.Metro.Controls.Dialogs;
 using MahApps.Metro.SimpleChildWindow;
 using System;
@@ -10,9 +7,11 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using Thingy.Db;
-using Thingy.Infrastructure;
-using Thingy.MusicPlayerCore;
+using System.Windows.Threading;
+using Thingy.API;
+using Thingy.API.Messages;
+using Thingy.Controls;
+using Thingy.Implementation;
 
 namespace Thingy
 {
@@ -21,13 +20,22 @@ namespace Thingy
     /// </summary>
     public partial class App : Application, IApplication
     {
-        public static AppLib.Common.IOC.IContainer IoCContainer { get; private set; }
-        public static AppLib.Common.Log.ILogger Log { get; private set; }
-        public static string[] Accents { get; private set; }
+        #region Interface Implementations
 
-        public static IApplication Instance
+        public ISettings Settings
         {
-            get { return App.Current as IApplication; }
+            get { return Program.Resolver.Resolve<ISettings>(); }
+        }
+
+        public ILog Log
+        {
+            get { return Program.Resolver.Resolve<ILog>(); }
+        }
+
+        public IMessager Messager
+        {
+            get;
+            private set;
         }
 
         public ITabManager TabManager
@@ -36,99 +44,139 @@ namespace Thingy
             private set;
         }
 
-        protected override void OnStartup(StartupEventArgs e)
+        public Dispatcher CurrentDispatcher
         {
-            Log = new AppLib.Common.Log.Logger();
-            Log.Info("Application startup");
-
-            var trayIcon = new Infrastructure.Tray.TrayIcon();
-
-            DispatcherUnhandledException += App_DispatcherUnhandledException;
-            Accents = new string[]
-            {
-                "Red", "Green", "Blue",
-                "Purple", "Orange", "Lime",
-                "Emerald", "Teal", "Cyan",
-                "Cobalt", "Indigo", "Violet",
-                "Pink", "Magenta", "Crimson",
-                "Amber", "Yellow", "Brown",
-                "Olive", "Steel", "Mauve",
-                "Taupe", "Sienna"
-            };
-            IoCContainer = new AppLib.Common.IOC.Container();
-            IoCContainer.RegisterSingleton<IDataBase>(() =>
-            {
-                var dbfile = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ThingyDataBase.litedb");
-                return new DataBase(dbfile);
-            });
-            Log.Info("Database initialized");
-            IoCContainer.RegisterSingleton<IAudioEngine>(() =>
-            {
-                return new AudioEngine();
-            });
-            Log.Info("Audio Engine loaded");
-            IoCContainer.RegisterSingleton<IModuleLoader>(() =>
-            {
-                return new ModuleLoader(Log);
-            });
-            Log.Info("Module loader initialized");
-
-            var accent = Thingy.Properties.Settings.Default.SelectedAccent;
-            ThemeManager.ChangeAppStyle(Current,
-                              ThemeManager.GetAccent(accent),
-                              ThemeManager.GetAppTheme("BaseLight"));
-
-            var dload = BingPhotoOfDay.WasSuccesfull;
-
-            this.TabManager = new TabManager(Instance, IoCContainer.ResolveSingleton<IModuleLoader>());
-
-            base.OnStartup(e);
+            get { return Current.Dispatcher; }
         }
 
-        private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
-        {
-            Log.Error(e.Exception);
-            var desktop = Environment.GetFolderPath(System.Environment.SpecialFolder.DesktopDirectory);
-            var log = System.IO.Path.Combine(desktop, "Thingy crash log.xml");
-            Log.SaveToFile(log);
-            AppLib.WPF.Dialogs.Dialogs.ShowErrorDialog(e.Exception);
-        }
-
-        #region IApplication implementation
         public void Close()
         {
-            Thingy.Properties.Settings.Default.Save();
             Current.Shutdown();
         }
 
-        public async Task<bool> ShowDialog(UserControl control, string Title, INotifyPropertyChanged model = null, bool ShowOverlay = true)
+        public Task CloseMessageBox(CustomDialog messageBoxContent)
+        {
+            var mainwindow = (Current.MainWindow as MainWindow);
+            return mainwindow.ShowMetroDialogAsync(messageBoxContent);
+        }
+
+        public async void HandleFiles(IList<string> files)
+        {
+            var loader = Resolve<IModuleLoader>();
+            foreach (var file in files)
+            {
+                var module = loader.GetModuleForFile(file);
+                if (module == null) continue;
+
+                if (module.IsSingleInstance)
+                {
+                    int tabIndex = TabManager.GetTabIndexByTitle(module.ModuleName);
+                    if (tabIndex == -1)
+                    {
+                        var id = await TabManager.StartModule(module);
+                        await Task.Delay(25);
+                        Messager.SendMessage(id, new HandleFileMessage(Guids.Application, file));
+                    }
+                    else
+                    {
+                        TabManager.FocusTabByIndex(tabIndex);
+                        Messager.SendMessage(module.RunModule().GetType(), new HandleFileMessage(Guids.Application, file));
+                    }
+                }
+                else
+                {
+                    var id = await TabManager.StartModule(module);
+                    await Task.Delay(25);
+                    Messager.SendMessage(id, new HandleFileMessage(Guids.Application, file));
+                }
+            }
+        }
+
+        public Task HideMessageBox(CustomDialog messageBoxContent)
+        {
+            var mainwindow = (Current.MainWindow as MainWindow);
+            return mainwindow.HideMetroDialogAsync(messageBoxContent);
+        }
+
+        public void Register<T>(Func<T> getter)
+        {
+            Program.Resolver.Register(getter);
+        }
+
+        public bool CanResolve<T>()
+        {
+            return Program.Resolver.CanResolve<T>();
+        }
+
+        public T Resolve<T>()
+        {
+            return Program.Resolver.Resolve<T>();
+        }
+
+        public void Restart()
+        {
+            System.Diagnostics.Process.Start(ResourceAssembly.Location);
+            Current.Shutdown();
+        }
+
+        public async Task<bool> ShowDialog(string title, UserControl content, DialogButtons buttons, bool hasShadow = true, INotifyPropertyChanged modell = null)
         {
             ModalDialog modalDialog = new ModalDialog();
-            if (ShowOverlay == false)
+
+            if (hasShadow == false)
                 modalDialog.OverlayBrush = null;
-            if (model != null)
-                control.DataContext = model;
-            modalDialog.DailogContent = control;
-            modalDialog.Title = Title;
+
+            if (modell != null)
+                content.DataContext = modell;
+
+            modalDialog.DailogContent = content;
+            modalDialog.Title = title;
+            modalDialog.DialogButtons = buttons;
 
             var result = await (Current.MainWindow as MainWindow).ShowChildWindowAsync<bool>(modalDialog);
 
             return result;
         }
 
-        public Task<MessageDialogResult> ShowMessageBox(string title, string content, MessageDialogStyle style)
+        public async Task<bool> ShowMessageBox(string title, string content, DialogButtons buttons)
         {
             var mainwindow = (Current.MainWindow as MainWindow);
-            return mainwindow.ShowMessageAsync(title, content, style);
+            var settings = new MetroDialogSettings();
+
+            MessageDialogResult result;
+
+            switch (buttons)
+            {
+                case DialogButtons.Ok:
+                case DialogButtons.None:
+                    {
+                        settings.AffirmativeButtonText = "Ok";
+                        result = await mainwindow.ShowMessageAsync(title, content, MessageDialogStyle.Affirmative, settings);
+                    }
+                    break;
+                case DialogButtons.YesNo:
+                    {
+                        settings.AffirmativeButtonText = "Yes";
+                        settings.NegativeButtonText = "No";
+                        result = await mainwindow.ShowMessageAsync(title, content, MessageDialogStyle.AffirmativeAndNegative, settings);
+                    }
+                    break;
+                default:
+                case DialogButtons.OkCancel:
+                    result = await mainwindow.ShowMessageAsync(title, content, MessageDialogStyle.AffirmativeAndNegative);
+                    break;
+            }
+
+            switch (result)
+            {
+                case MessageDialogResult.Affirmative:
+                    return true;
+                default:
+                    return false;
+            }
         }
 
         public Task ShowMessageBox(CustomDialog messageBoxContent)
-        {
-            var mainwindow = (Current.MainWindow as MainWindow);
-            return mainwindow.ShowMetroDialogAsync(messageBoxContent);
-        }
-
-        public Task HideMessageBox(CustomDialog messageBoxContent)
         {
             var mainwindow = (Current.MainWindow as MainWindow);
             return mainwindow.HideMetroDialogAsync(messageBoxContent);
@@ -144,53 +192,32 @@ namespace Thingy
             mainwindow.StatusFlyOut.IsOpen = true;
         }
 
-        public void Restart()
-        {
-            Thingy.Properties.Settings.Default.Save();
-            System.Diagnostics.Process.Start(ResourceAssembly.Location);
-            Current.Shutdown();
-        }
-
-        public async void HandleFiles(IList<string> files)
-        {
-            var loader = IoCContainer.ResolveSingleton<IModuleLoader>();
-            foreach (var file in files)
-            {
-                var module = loader.GetModuleForFile(file);
-                if (module == null) continue;
-
-                if (module.IsSingleInstance)
-                {
-                    int tabIndex = TabManager.GetTabIndexByTitle(module.ModuleName);
-                    if (tabIndex == -1)
-                    {
-                        var id =  await TabManager.StartModule(module);
-                        await Task.Delay(25);
-                        Messager.Instance.SendMessage(id, new Infrastructure.Messages.HandleFileMessage
-                        {
-                            File = file
-                        });
-                    }
-                    else
-                    {
-                        TabManager.FocusTabByIndex(tabIndex);
-                        Messager.Instance.SendMessage(module.RunModule().GetType(), new Infrastructure.Messages.HandleFileMessage
-                        {
-                            File = file
-                        });
-                    }
-                }
-                else
-                {
-                    var id = await TabManager.StartModule(module);
-                    await Task.Delay(25);
-                    Messager.Instance.SendMessage(id, new Infrastructure.Messages.HandleFileMessage
-                    {
-                        File = file
-                    });
-                }
-            }
-        }
         #endregion
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            Dispatcher.UnhandledException += Dispatcher_UnhandledException;
+
+            var accent = Settings.Get(SettingsKeys.ProgramAccent, "Orange");
+
+            Messager = new Messager();
+            TabManager = new TabManager(this, Resolve<IModuleLoader>());
+
+            var trayIcon = new Implementation.Tray.TrayIcon(this);
+
+            ThemeManager.ChangeAppStyle(Current,
+                              ThemeManager.GetAccent(accent),
+                              ThemeManager.GetAppTheme("BaseLight"));
+
+        }
+
+        private void Dispatcher_UnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            Log.Divider();
+            Log.Error("Fatal unhandled exception");
+            Log.Error(e.Exception);
+            Log.WriteToFile();
+            AppLib.WPF.Dialogs.Dialogs.ShowErrorDialog(e.Exception);
+        }
     }
 }

@@ -1,0 +1,241 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conv="clr-namespace:Thingy.XAML.Converters"
+    xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls">
+    <DataTemplate x:Key="ToDoItem">
+        <CheckBox
+            Grid.Column="0"
+            IsChecked="{Binding IsCompleted}"
+            IsEnabled="{Binding IsCompleted, Converter={applib:NegateConverter}}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.ColumnSpan="4"
+                    FontSize="16"
+                    Text="{Binding Content}"
+                    TextWrapping="Wrap" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Text="Due: " />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Text="{Binding DueDate}" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Text="Completed: " />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="3"
+                    Text="{Binding CompletedDate}" />
+            </Grid>
+        </CheckBox>
+    </DataTemplate>
+
+    <DataTemplate x:Key="Drive">
+        <Button
+            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.OpenLocationCommand}"
+            CommandParameter="{Binding Path}"
+            Style="{StaticResource Flat}">
+            <Grid
+                Width="180"
+                Height="64">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Image
+                    Grid.RowSpan="2"
+                    Grid.Column="0"
+                    Width="48"
+                    Height="48"
+                    Source="{Binding Icon}" />
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="3,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    Text="{Binding LabelText}"
+                    TextWrapping="Wrap" />
+                <ProgressBar
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Height="20"
+                    Margin="3"
+                    VerticalAlignment="Top"
+                    Maximum="{Binding DiskSize}"
+                    Minimum="0"
+                    Value="{Binding UsedSpace}" />
+            </Grid>
+        </Button>
+    </DataTemplate>
+
+    <DataTemplate x:Key="FolderLink">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <applib:ImageButton
+                Grid.Column="0"
+                Width="180"
+                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.OpenLocationCommand}"
+                CommandParameter="{Binding Path}"
+                Content="{Binding Name}"
+                Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-folder.png"
+                ImageHeight="48"
+                ImageWidth="48"
+                Style="{StaticResource Flat}"/>
+            <Button
+                Grid.Column="1"
+                Height="20"
+                Margin="2,0"
+                VerticalAlignment="Top"
+                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.DeleteSelectedLinkCommand}"
+                CommandParameter="{Binding Name}"
+                Style="{StaticResource Flat}"
+                ToolTip="Delete">
+                <Image
+                    Width="16"
+                    Height="16"
+                    Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-clear-symbol.png" />
+            </Button>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="SystemFolderLink">
+        <applib:ImageButton
+            Width="180"
+            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.OpenLocationCommand}"
+            CommandParameter="{Binding Path}"
+            Content="{Binding Name}"
+            Image="{Binding Icon}"
+            ImageHeight="48"
+            ImageWidth="48"
+            Style="{StaticResource Flat}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="VirtualFolder">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Image
+                Grid.Column="0"
+                Width="48"
+                Height="48"
+                Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-folder.png" />
+            <TextBlock
+                Grid.Column="1"
+                Text="{Binding Name}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="VirtualFolderContent">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Image
+                Grid.Column="0"
+                Width="48"
+                Height="48"
+                Source="{Binding Converter={applib:FileIconConverter}}" />
+            <TextBlock
+                Grid.Column="1"
+                Text="{Binding Converter={applib:FileInfoConverter}, ConverterParameter=name}" />
+            <TextBlock
+                Grid.Column="2"
+                Text="{Binding Converter={applib:FileInfoConverter}, ConverterParameter=size}" />
+
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="Program">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <applib:ImageButton
+                Grid.Column="0"
+                Width="180"
+                Content="{Binding Name}"
+                ToolTip="{Binding Name}"
+                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.RunCommand}"
+                CommandParameter="{Binding Name}"
+                Image="{Binding Path, Converter={conv:FileToIconConverter}}"
+                ImageHeight="48"
+                ImageWidth="48"
+                Style="{StaticResource Flat}">
+            </applib:ImageButton>
+            <StackPanel
+                Grid.Column="1"
+                VerticalAlignment="Top">
+                <Button
+                    Height="20"
+                    Margin="2,0"
+                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.DeleteCommand}"
+                    CommandParameter="{Binding Name}"
+                    Style="{StaticResource Flat}"
+                    ToolTip="Delete">
+                    <Image
+                        Width="16"
+                        Height="16"
+                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-clear-symbol.png" />
+                </Button>
+                <Button
+                    Height="20"
+                    Margin="2,0"
+                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.EditCommand}"
+                    CommandParameter="{Binding Name}"
+                    Style="{StaticResource Flat}"
+                    ToolTip="Edit">
+                    <Image
+                        Width="16"
+                        Height="16"
+                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-edit-row-96.png" />
+                </Button>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="Note">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Image
+                Grid.Column="0"
+                Width="48"
+                Height="48"
+                Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-note-96.png" />
+            <TextBlock
+                Grid.Column="1"
+                Text="{Binding Name}" />
+        </Grid>
+    </DataTemplate>
+
+</ResourceDictionary>

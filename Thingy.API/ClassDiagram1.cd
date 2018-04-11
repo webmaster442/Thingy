@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Thingy.API.Messages.MessageBase">
+    <Position X="4.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Messages\MessageBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Thingy.API.ILog">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAABAAAAAAAAAEAAAAAEAAAAA=</HashCode>
+      <FileName>ILog.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Thingy.API.IApplication">
+    <Position X="2.25" Y="4.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAEAAAgAAAAAiAAAAAAACAA=</HashCode>
+      <FileName>IApplication.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Thingy.API.ISettings">
+    <Position X="2.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABABAAAAABAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>ISettings.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Thingy.API.ITypeResolver">
+    <Position X="4" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ITypeResolver.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Thingy.API.Messages.IMessager">
+    <Position X="5.75" Y="2.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Messages\IMessager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Thingy.API.DialogButtons">
+    <Position X="0.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAABAAEAQAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

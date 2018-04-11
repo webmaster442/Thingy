@@ -1,9 +1,10 @@
-﻿using AppLib.Common.Log;
-using AppLib.MVVM;
+﻿using AppLib.MVVM;
 using Dragablz;
 using System;
 using System.Threading.Tasks;
-using Thingy.Infrastructure;
+using Thingy.API;
+using Thingy.API.Capabilities;
+using Thingy.Implementation;
 
 namespace Thingy
 {
@@ -19,21 +20,41 @@ namespace Thingy
         public DelegateCommand ModuleAppendCommand { get; private set; }
         public DelegateCommand ModuleExportCommand { get; private set; }
 
-        private ILogger _log;
-        private IApplication _app;
+        private readonly IApplication _app;
 
-        public MainWindowViewModel(IMainWindow view, IApplication app, ILogger log): base(view)
+        public MainWindowViewModel(IMainWindow view, IApplication app): base(view)
         {
             _app = app;
-            _log = log;
-            SettingCommand = Command.ToCommand(Setting, CanOpenSetting);
             ExitCommand = Command.ToCommand(Exit);
-            LogCommand = Command.ToCommand(Log);
-            OpenMenuCommand = Command.ToCommand(OpenMenu);
             AboutCommand = Command.ToCommand(OpenAbout);
+            LogCommand = Command.ToCommand(OpenLog, CanOpenLog);
+            OpenMenuCommand = Command.ToCommand(OpenMenu);
+            SettingCommand = Command.ToCommand(OpenSetting, CanOpenSetting);
             ModuleImportCommand = Command.ToCommand(ModuleImport, CanImportExport);
             ModuleExportCommand = Command.ToCommand(ModuleExport, CanImportExport);
             ModuleAppendCommand = Command.ToCommand(ModuleAppend, CanImportExport);
+        }
+
+        private bool CanOpenSetting()
+        {
+            int index = _app.TabManager.GetTabIndexByTitle("Settings");
+            return index == -1;
+        }
+
+        private void OpenSetting()
+        {
+            _app.TabManager.CreateNewTabContent("Settings", new InternalModules.Settings(_app));
+        }
+
+        private bool CanOpenLog()
+        {
+            int index = _app.TabManager.GetTabIndexByTitle("Log");
+            return index == -1;
+        }
+
+        private void OpenLog()
+        {
+            _app.TabManager.CreateNewTabContent("Log", new InternalModules.LogViewer(_app));
         }
 
         private bool CanImportExport()
@@ -63,7 +84,7 @@ namespace Thingy
                 catch (Exception ex)
                 {
                     View.SetBusyOverlayVisibility(false);
-                    await _app.ShowMessageBox("Error", ex.Message, MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
+                    await _app.ShowMessageBox("Error", ex.Message, DialogButtons.Ok);
                 }
             }
         }
@@ -90,7 +111,7 @@ namespace Thingy
                 catch (Exception ex)
                 {
                     View.SetBusyOverlayVisibility(false);
-                    await _app.ShowMessageBox("Error", ex.Message, MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
+                    await _app.ShowMessageBox("Error", ex.Message, DialogButtons.Ok);
                 }
             }
         }
@@ -105,34 +126,9 @@ namespace Thingy
             await DoImport(true);
         }
 
-        private void OpenAbout()
-        {
-            _app.TabManager.CreateNewTabContent("About", new Views.About());
-        }
-
         private void OpenMenu()
         {
             View.ShowHideMenu();
-        }
-
-        private void Log()
-        {
-            var logviewer = new AppLib.WPF.Dialogs.LogViewer
-            {
-                Log = _log
-            };
-            _app.ShowDialog(logviewer, "Application Log");
-        }
-
-        private bool CanOpenSetting()
-        {
-            int index = _app.TabManager.GetTabIndexByTitle("Settings");
-            return index == -1;
-        }
-
-        private void Setting()
-        {
-            _app.TabManager.CreateNewTabContent("Settings", new Views.Settings());
         }
 
         private void Exit()
@@ -146,9 +142,9 @@ namespace Thingy
             {
                 return () =>
                 {
-                    var start = new Views.StartPage
+                    var start = new Controls.StartPage
                     {
-                        DataContext = new ViewModels.StartPageViewModel(App.Instance, App.IoCContainer.ResolveSingleton<IModuleLoader>())
+                        DataContext = new Controls.StartPageViewModel(_app, _app.Resolve<IModuleLoader>())
                     };
 
                     return new HeaderedItemViewModel
@@ -159,6 +155,11 @@ namespace Thingy
                     };
                 };
             }
+        }
+
+        private void OpenAbout()
+        {
+            _app.TabManager.CreateNewTabContent("About", new InternalModules.About());
         }
     }
 }

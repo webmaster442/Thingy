@@ -1,0 +1,183 @@
+﻿<UserControl
+    x:Class="Thingy.Calculator.Controls.CalculatorPrefixes"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="control"
+    d:DesignHeight="500"
+    d:DesignWidth="900"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Button
+            Grid.Row="3"
+            Grid.Column="0"
+            Command="{Binding ElementName=control, Path=ClickCommand}"
+            CommandParameter=":y"
+            Content="yocto"
+            Style="{StaticResource CalculatorButton}" />
+        <Button
+            Grid.Row="3"
+            Grid.Column="1"
+            Command="{Binding ElementName=control, Path=ClickCommand}"
+            CommandParameter=":z"
+            Content="zepto"
+            Style="{StaticResource CalculatorButton}" />
+        <Button
+            Grid.Row="3"
+            Grid.Column="2"
+            Command="{Binding ElementName=control, Path=ClickCommand}"
+            CommandParameter=":a"
+            Content="atto"
+            Style="{StaticResource CalculatorButton}" />
+        <Button
+            Grid.Row="3"
+            Grid.Column="3"
+            Command="{Binding ElementName=control, Path=ClickCommand}"
+            CommandParameter=":f"
+            Content="femto"
+            Style="{StaticResource CalculatorButton}" />
+        <Button
+            Grid.Row="3"
+            Grid.Column="4"
+            Command="{Binding ElementName=control, Path=ClickCommand}"
+            CommandParameter=":p"
+            Content="pico"
+            Style="{StaticResource CalculatorButton}" />
+        <Button
+            Grid.Row="2"
+            Grid.Column="0"
+            Command="{Binding ElementName=control, Path=ClickCommand}"
+            CommandParameter=":n"
+            Content="nano"
+            Style="{StaticResource CalculatorButton}" />
+        <Button
+            Grid.Row="2"
+            Grid.Column="1"
+            Command="{Binding ElementName=control, Path=ClickCommand}"
+            CommandParameter=":u"
+            Content="micro"
+            Style="{StaticResource CalculatorButton}" />
+        <Button
+            Grid.Row="2"
+            Grid.Column="2"
+            Command="{Binding ElementName=control, Path=ClickCommand}"
+            CommandParameter=":m"
+            Content="mili"
+            Style="{StaticResource CalculatorButton}" />
+        <Button
+            Grid.Row="2"
+            Grid.Column="3"
+            Command="{Binding ElementName=control, Path=ClickCommand}"
+            CommandParameter=":c"
+            Content="centi"
+            Style="{StaticResource CalculatorButton}" />
+        <Button
+            Grid.Row="2"
+            Grid.Column="4"
+            Command="{Binding ElementName=control, Path=ClickCommand}"
+            CommandParameter=":d"
+            Content="deci"
+            Style="{StaticResource CalculatorButton}" />
+        <Button
+            Grid.Row="1"
+            Grid.Column="0"
+            Command="{Binding ElementName=control, Path=ClickCommand}"
+            CommandParameter=":da"
+            Content="deca"
+            Style="{StaticResource CalculatorButton}" />
+        <Button
+            Grid.Row="1"
+            Grid.Column="1"
+            Command="{Binding ElementName=control, Path=ClickCommand}"
+            CommandParameter=":h"
+            Content="hecto"
+            Style="{StaticResource CalculatorButton}" />
+        <Button
+            Grid.Row="1"
+            Grid.Column="2"
+            Command="{Binding ElementName=control, Path=ClickCommand}"
+            CommandParameter=":k"
+            Content="kilo"
+            Style="{StaticResource CalculatorButton}" />
+        <Button
+            Grid.Row="1"
+            Grid.Column="3"
+            Command="{Binding ElementName=control, Path=ClickCommand}"
+            CommandParameter=":M"
+            Content="Mega"
+            Style="{StaticResource CalculatorButton}" />
+        <Button
+            Grid.Row="1"
+            Grid.Column="4"
+            Command="{Binding ElementName=control, Path=ClickCommand}"
+            CommandParameter=":G"
+            Content="Giga"
+            Style="{StaticResource CalculatorButton}" />
+        <Button
+            Grid.Row="0"
+            Grid.Column="0"
+            Command="{Binding ElementName=control, Path=ClickCommand}"
+            CommandParameter=":T"
+            Content="Tera"
+            Style="{StaticResource CalculatorButton}" />
+        <Button
+            Grid.Row="0"
+            Grid.Column="1"
+            Command="{Binding ElementName=control, Path=ClickCommand}"
+            CommandParameter=":P"
+            Content="Peta"
+            Style="{StaticResource CalculatorButton}" />
+        <Button
+            Grid.Row="0"
+            Grid.Column="2"
+            Command="{Binding ElementName=control, Path=ClickCommand}"
+            CommandParameter=":E"
+            Content="Exa"
+            Style="{StaticResource CalculatorButton}" />
+        <Button
+            Grid.Row="0"
+            Grid.Column="3"
+            Command="{Binding ElementName=control, Path=ClickCommand}"
+            CommandParameter=":Z"
+            Content="Zetta"
+            Style="{StaticResource CalculatorButton}" />
+        <Button
+            Grid.Row="0"
+            Grid.Column="4"
+            Command="{Binding ElementName=control, Path=ClickCommand}"
+            CommandParameter=":Y"
+            Content="Yotta"
+            Style="{StaticResource CalculatorButton}" />
+        <Button
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Grid.Column="5"
+            Command="{Binding ElementName=control, Path=ClickCommand}"
+            CommandParameter="e"
+            Content="10ᴺ"
+            Style="{StaticResource CalculatorButton}" />
+        <Button
+            Grid.Row="2"
+            Grid.RowSpan="2"
+            Grid.Column="5"
+            Command="{Binding ElementName=control, Path=ClickCommand}"
+            CommandParameter="**"
+            Content="Nᴷ"
+            Style="{StaticResource CalculatorButton}" />
+    </Grid>
+</UserControl>

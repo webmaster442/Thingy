@@ -1,0 +1,64 @@
+﻿<UserControl
+    x:Class="Thingy.Controls.StartPage"
+    x:ClassModifier="internal"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:interactivity="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="300"
+    d:DesignWidth="900"
+    mc:Ignorable="d">
+    <Grid
+        x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel
+            Grid.Row="0"
+            Orientation="Horizontal">
+            <Label
+                Content="New Module ..."
+                Style="{StaticResource Title}" />
+
+            <TextBox
+                Margin="30,0,0,0"
+                VerticalAlignment="Center"
+                mah:TextBoxHelper.ClearTextButton="True"
+                mah:TextBoxHelper.Watermark="Type here to seach"
+                Text="{Binding SearchName, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock
+                Margin="10,0"
+                Text="Category:" />
+            <ComboBox
+                x:Name="Categories"
+                MinWidth="150"
+                VerticalAlignment="Center"
+                ItemTemplate="{StaticResource Categoiries}"
+                ItemsSource="{Binding Categories}"
+                SelectedIndex="{Binding CategoryIndex}">
+                <interactivity:Interaction.Triggers>
+                    <interactivity:EventTrigger EventName="SelectionChanged">
+                        <interactivity:InvokeCommandAction Command="{Binding FilterCategoryCommand}" CommandParameter="{Binding ElementName=Categories, Path=SelectedItem}" />
+                    </interactivity:EventTrigger>
+                </interactivity:Interaction.Triggers>
+            </ComboBox>
+        </StackPanel>
+        <ScrollViewer
+            x:Name="ItemList"
+            Grid.Row="1"
+            VerticalScrollBarVisibility="Auto">
+            <ItemsControl
+                ItemTemplate="{StaticResource StartPageTemplate}"
+                ItemsSource="{Binding Modules}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

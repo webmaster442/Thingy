@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Build-tools\CommonVersion.cs">
-      <Link>CommonVersion.cs</Link>
+      <Link>Properties\CommonVersion.cs</Link>
     </Compile>
     <Compile Include="Constatnts.cs" />
     <Compile Include="DataBase.cs" />
