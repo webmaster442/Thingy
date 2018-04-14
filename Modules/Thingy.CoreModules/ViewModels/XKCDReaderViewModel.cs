@@ -17,6 +17,7 @@ namespace Thingy.CoreModules.ViewModels
     {
         private IApplication _app;
         private int _lastIndex;
+        private bool _progressVisible;
 
         public DelegateCommand NextComicCommand { get; set; }
         public DelegateCommand PreviousComicCommand { get; set; }
@@ -63,6 +64,20 @@ namespace Thingy.CoreModules.ViewModels
             set { SetValue(ref _currentComicId, value); }
         }
 
+        public bool ProgressVisible
+        {
+            get { return _progressVisible; }
+            set { SetValue(ref _progressVisible, value); }
+        }
+
+        private bool _contentVisible;
+
+        public bool ContentVisible
+        {
+            get { return _contentVisible; }
+            set { SetValue(ref _contentVisible, value); }
+        }
+
 
         public ObservableCollection<int> PreviousComics { get; set; }
 
@@ -78,6 +93,8 @@ namespace Thingy.CoreModules.ViewModels
 
         private async Task LoadDataFromJson(string path = "info.0.json")
         {
+            ProgressVisible = true;
+            ContentVisible = false;
             WebClient client = new WebClient();
 
             IWebProxy defaultProxy = WebRequest.DefaultWebProxy;
@@ -109,10 +126,16 @@ namespace Thingy.CoreModules.ViewModels
                     _lastIndex = response.num;
                     PreviousComics.UpdateWith(Enumerable.Range(1, response.num));
                 }
+
+                ProgressVisible = false;
+                ContentVisible = true;
             }
             catch (Exception ex)
             {
                 await _app.ShowMessageBox("Error", ex.Message, DialogButtons.Ok);
+                ProgressVisible = false;
+                ContentVisible = false;
+                return;
             }
         }
 

@@ -19,7 +19,7 @@ namespace Thingy.CoreModules.ModuleDefinitons
 
         public override Color TileColor
         {
-            get { return Colors.White; }
+            get { return Color.FromRgb(230, 230, 230); }
         }
 
         public override string Category
