@@ -1,19 +1,21 @@
 ﻿using AppLib.WPF;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Thingy.API;
 
-namespace Thingy.Modules
+namespace Thingy.GitBash.ModuleDefinitions
 {
-    public class GitCMD : ModuleBase
+    public class GitBashModule : ModuleBase
     {
-        private string _gitPath;
-
         public override string ModuleName
         {
-            get { return "GIT CMD"; }
+            get { return "Git Bash"; }
         }
 
         public override ImageSource Icon
@@ -21,10 +23,15 @@ namespace Thingy.Modules
             get { return BitmapHelper.FrozenBitmap("pack://application:,,,/Thingy.Resources;component/Icons/icons8-git.png"); }
         }
 
+        public override string Category
+        {
+            get { return ModuleCategories.CommandLine; }
+        }
+
         public override UserControl RunModule()
         {
-            var view = new CoreModules.Views.CommandLine();
-            view.DataContext = new CoreModules.ViewModels.CommandLineViewModel(view, _gitPath);
+            var view = new Views.GitBashView();
+            view.DataContext = new ViewModels.GitBashViewModel(App, view);
             return view;
         }
 
@@ -33,15 +40,9 @@ namespace Thingy.Modules
             get
             {
                 var pf = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-                _gitPath = Path.Combine(pf, @"Git\git-cmd.exe");
+                var _gitPath = Path.Combine(pf, @"Git\git-bash.exe");
                 return File.Exists(_gitPath);
             }
         }
-
-        public override string Category
-        {
-            get { return ModuleCategories.CommandLine; }
-        }
-
     }
 }

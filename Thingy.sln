@@ -45,6 +45,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.MusicPlayerCore", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.MusicPlayer", "Modules\Thingy.MusicPlayer\Thingy.MusicPlayer.csproj", "{253234E3-85E1-4479-813C-96360A670D86}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.GitBash", "Modules\Thingy.GitBash\Thingy.GitBash.csproj", "{F2F28913-F5A7-47AC-A7EC-51248F3E5290}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,6 +117,10 @@ Global
 		{253234E3-85E1-4479-813C-96360A670D86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{253234E3-85E1-4479-813C-96360A670D86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{253234E3-85E1-4479-813C-96360A670D86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2F28913-F5A7-47AC-A7EC-51248F3E5290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2F28913-F5A7-47AC-A7EC-51248F3E5290}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2F28913-F5A7-47AC-A7EC-51248F3E5290}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2F28913-F5A7-47AC-A7EC-51248F3E5290}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -132,6 +138,7 @@ Global
 		{D0F12E16-59C0-4D6F-880D-621255FA708B} = {8DD48674-DAFC-4411-BC97-E0E0E6B34F53}
 		{A87FD57D-B36F-4747-8AFA-989E5181705F} = {8DD48674-DAFC-4411-BC97-E0E0E6B34F53}
 		{253234E3-85E1-4479-813C-96360A670D86} = {0F95BE5A-A7C1-4CF6-8D09-8491163E7ED2}
+		{F2F28913-F5A7-47AC-A7EC-51248F3E5290} = {0F95BE5A-A7C1-4CF6-8D09-8491163E7ED2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E3667F8E-DFD2-486A-AA38-7A1EFCC1CD63}

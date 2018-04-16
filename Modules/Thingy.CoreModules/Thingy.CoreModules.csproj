@@ -114,7 +114,6 @@
     <Compile Include="ModuleDefinitons\CommandLineModule.cs" />
     <Compile Include="ModuleDefinitons\CurrencyConverterModule.cs" />
     <Compile Include="ModuleDefinitons\FontsModule.cs" />
-    <Compile Include="ModuleDefinitons\GitCMD.cs" />
     <Compile Include="ModuleDefinitons\GreekAlphabetModule.cs" />
     <Compile Include="ModuleDefinitons\NoteModule.cs" />
     <Compile Include="ModuleDefinitons\PlacesModule.cs" />
