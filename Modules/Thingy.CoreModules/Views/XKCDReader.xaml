@@ -40,6 +40,11 @@
             <Button
                 Width="100"
                 Margin="5"
+                Command="{Binding FirstComicCommand}"
+                Content="First" />
+            <Button
+                Width="100"
+                Margin="5"
                 Command="{Binding PreviousComicCommand}"
                 Content="Previous" />
             <Button
@@ -47,6 +52,11 @@
                 Margin="5"
                 Command="{Binding NextComicCommand}"
                 Content="Next" />
+            <Button
+                Width="100"
+                Margin="5"
+                Command="{Binding LastComicCommand}"
+                Content="Last" />
         </StackPanel>
 
         <mah:ProgressRing

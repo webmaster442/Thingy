@@ -23,6 +23,8 @@ namespace Thingy.CoreModules.ViewModels
         public DelegateCommand PreviousComicCommand { get; set; }
         public DelegateCommand<int> LoadSpecificComicCommand { get; set; }
         public DelegateCommand LoadLatestComicCommand { get; set; }
+        public DelegateCommand FirstComicCommand { get; set; }
+        public DelegateCommand LastComicCommand { get; set; }
 
         private string _alt;
 
@@ -89,6 +91,8 @@ namespace Thingy.CoreModules.ViewModels
             NextComicCommand = Command.ToCommand(NextComic, CanDoNext);
             PreviousComicCommand = Command.ToCommand(PreviousComic, CanDoPrevious);
             LoadSpecificComicCommand = Command.ToCommand<int>(LoadSpecificComic);
+            FirstComicCommand = Command.ToCommand(FirstComic);
+            LastComicCommand = Command.ToCommand(LastComic);
         }
 
         private async Task LoadDataFromJson(string path = "info.0.json")
@@ -157,6 +161,16 @@ namespace Thingy.CoreModules.ViewModels
         private bool CanDoNext()
         {
             return CurrentComicId < _lastIndex;
+        }
+
+        private async void LastComic()
+        {
+            await LoadDataFromJson($"{_lastIndex}/info.0.json");
+        }
+
+        private async void FirstComic()
+        {
+            await LoadDataFromJson($"1/info.0.json");
         }
 
         private async void NextComic()
