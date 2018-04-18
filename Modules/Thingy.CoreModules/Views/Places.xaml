@@ -10,7 +10,7 @@
     mc:Ignorable="d">
     <TabControl>
         <TabItem
-            Header="User favoirites">
+            Header="User favorites">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
