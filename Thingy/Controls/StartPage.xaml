@@ -27,7 +27,7 @@
                 Margin="30,0,0,0"
                 VerticalAlignment="Center"
                 mah:TextBoxHelper.ClearTextButton="True"
-                mah:TextBoxHelper.Watermark="Type here to seach"
+                mah:TextBoxHelper.Watermark="Type here to search"
                 Text="{Binding SearchName, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock
                 Margin="10,0"

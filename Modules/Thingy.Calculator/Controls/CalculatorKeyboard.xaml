@@ -54,7 +54,7 @@
                 x:Name="FilterText"
                 Grid.Column="2"
                 mah:TextBoxHelper.ClearTextButton="True"
-                mah:TextBoxHelper.Watermark="Type here to search fucntions"
+                mah:TextBoxHelper.Watermark="Type here to search functions"
                 TextChanged="FilterText_TextChanged" />
         </Grid>
         <ScrollViewer

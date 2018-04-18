@@ -64,7 +64,7 @@
 
             <TabItem
                 Style="{StaticResource CompactTabItem}"
-                Header="Directroy preview">
+                Header="Directory preview">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="32" />
