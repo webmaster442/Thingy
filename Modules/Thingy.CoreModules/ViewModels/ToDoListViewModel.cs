@@ -73,11 +73,15 @@ namespace Thingy.CoreModules.ViewModels
             }
         }
 
-        private void DeleteCompletedItems()
+        private async void DeleteCompletedItems()
         {
-            _db.Todo.DeleteCompletedToDoItems();
-            Pending.UpdateCollection(_db.Todo.GetUncompletedTasks());
-            Completed.UpdateCollection(_db.Todo.GetCompletededTasks());
+            var result = await _application.ShowMessageBox("Question", "Delete Completed Items?\nOperation can't be undone.", DialogButtons.YesNo);
+            if (result)
+            {
+                _db.Todo.DeleteCompletedToDoItems();
+                Pending.UpdateCollection(_db.Todo.GetUncompletedTasks());
+                Completed.UpdateCollection(_db.Todo.GetCompletededTasks());
+            }
         }
 
         public Task Import(Stream xmlData, bool append)

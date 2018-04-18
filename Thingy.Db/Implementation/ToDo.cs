@@ -49,11 +49,7 @@ namespace Thingy.Db.Implementation
 
         public void DeleteCompletedToDoItems()
         {
-            var q = MessageBox.Show("Delete Completed Items?\nOperation can't be undone.", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (q == MessageBoxResult.Yes)
-            {
-                EntityCollection.Delete(item => item.IsCompleted == true);
-            }
+            EntityCollection.Delete(item => item.IsCompleted == true);
         }
 
         public IEnumerable<ToDoItem> GetAllTasks()
