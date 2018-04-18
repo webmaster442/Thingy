@@ -2,6 +2,7 @@
 using Dragablz;
 using MahApps.Metro.Controls;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -62,8 +63,10 @@ namespace Thingy
 
         internal void CloseCurrentTab()
         {
-            //close programatically ?
             _app.Log.Info("Current Tab was closed from code");
+            var tabs = TabControl.GetOrderedHeaders().ToList();
+            var curenttab = tabs[TabControl.SelectedIndex]; 
+            TabablzControl.CloseItemCommand.Execute(curenttab, TabControl);
         }
 
         private async void TabClosing(ItemActionCallbackArgs<TabablzControl> args)
