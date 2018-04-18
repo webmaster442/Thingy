@@ -179,7 +179,7 @@ namespace Thingy
         public Task ShowMessageBox(CustomDialog messageBoxContent)
         {
             var mainwindow = (Current.MainWindow as MainWindow);
-            return mainwindow.HideMetroDialogAsync(messageBoxContent);
+            return mainwindow.ShowMetroDialogAsync(messageBoxContent);
         }
 
         public void ShowStatusBarMenu(UserControl control, string title, bool AutoClose = true, int AutoCloseTimeMs = 5000)
