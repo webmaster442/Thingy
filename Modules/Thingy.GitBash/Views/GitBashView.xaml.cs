@@ -12,9 +12,15 @@ namespace Thingy.GitBash.Views
             InitializeComponent();
         }
 
-        public void Dispose()
+        public bool IsAlive
         {
-            GitControl.Dispose();
+            get { return GitControl.IsAlive; }
+        }
+
+        public void Close()
+        {
+            MainGrid.Children.Remove(GitControl);
+            GitControl = null;
         }
 
         public void SendText(string text)

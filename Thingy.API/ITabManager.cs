@@ -7,6 +7,10 @@ namespace Thingy.API
     public interface ITabManager
     {
         /// <summary>
+        /// Get tab count
+        /// </summary>
+        int Count { get; }
+        /// <summary>
         /// Set the current tab content
         /// </summary>
         /// <param name="Title">Tab title</param>
@@ -30,11 +34,19 @@ namespace Thingy.API
         /// <param name="index">Tab index to focus to</param>
         void FocusTabByIndex(int index);
         /// <summary>
+        /// Close Currently opened tab
+        /// </summary>
+        void CloseCurrentTab();
+        /// <summary>
         /// Start a module
         /// </summary>
         /// <param name="module">Module to start</param>
         /// <returns>Awaitable module GUID</returns>
         Task<Guid> StartModule(IModule module);
+        /// <summary>
+        /// Module closed callback
+        /// </summary>
+        /// <param name="ModuleId">Module id</param>
         void ModuleClosed(Guid ModuleId);
     }
 }

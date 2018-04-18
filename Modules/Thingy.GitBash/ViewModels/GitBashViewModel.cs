@@ -1,5 +1,7 @@
 ﻿using AppLib.MVVM;
+using System;
 using System.IO;
+using System.Windows.Threading;
 using Thingy.API;
 
 namespace Thingy.GitBash.ViewModels
@@ -7,10 +9,12 @@ namespace Thingy.GitBash.ViewModels
     public class GitBashViewModel : ViewModel<IGitBashView>
     {
         private IApplication _app;
-
+        
         public DelegateCommand<string> ExecuteCommand { get; }
         public DelegateCommand ChangeFolderCommand { get; }
         public ComplexCommand ComplexCommand { get; }
+
+        private DispatcherTimer _aliveTimer;
 
         public GitBashViewModel(IApplication app, IGitBashView view) : base(view)
         {
@@ -18,6 +22,20 @@ namespace Thingy.GitBash.ViewModels
             ExecuteCommand = Command.ToCommand<string>(Execute);
             ChangeFolderCommand = Command.ToCommand(ChangeFolder);
             ComplexCommand = new ComplexCommand(_app, view);
+            _aliveTimer = new DispatcherTimer();
+            _aliveTimer.Interval = TimeSpan.FromMilliseconds(150);
+            _aliveTimer.Tick += _aliveTimer_Tick;
+            _aliveTimer.IsEnabled = true;
+        }
+
+        private void _aliveTimer_Tick(object sender, EventArgs e)
+        {
+            if (!View.IsAlive)
+            {
+                _aliveTimer.Stop();
+                View.Close();
+                _app.TabManager.CloseCurrentTab();
+            }
         }
 
         private void ChangeFolder()
@@ -47,11 +65,13 @@ namespace Thingy.GitBash.ViewModels
                                                            DialogButtons.YesNo);
                     if (result)
                     {
+                        _app.Log.Info("Sending git command: {0}", cmd);
                         View.SendText(cmd);
                     }
                 }
                 else
                 {
+                    _app.Log.Info("Sending git command: {0}", obj);
                     View.SendText(obj);
                 }
             }

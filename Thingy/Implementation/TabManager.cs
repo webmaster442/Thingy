@@ -19,6 +19,11 @@ namespace Thingy.Implementation
             get { return Application.Current.MainWindow as MainWindow; }
         }
 
+        public int Count
+        {
+            get { return MainWindow.TabCount; }
+        }
+
         public TabManager(IApplication application, IModuleLoader moduleLoader)
         {
             _application = application;
@@ -44,6 +49,11 @@ namespace Thingy.Implementation
         public void SetCurrentTabContent(string Title, UserControl control)
         {
             MainWindow.SetCurrentTabContent(Title, control, false);
+        }
+
+        public void CloseCurrentTab()
+        {
+            MainWindow.CloseCurrentTab();
         }
 
         public async Task<Guid> StartModule(IModule module)

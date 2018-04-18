@@ -43,15 +43,10 @@ namespace Thingy.GitBash.Native
         {
             Win32.DestroyWindow(hwnd.Handle);
             if (_process != null)
+            {
                 _process.Close();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            Win32.DestroyWindow(_handler);
-            if (_process != null)
-                _process.Close();
-            base.Dispose(disposing);
+                _process = null;
+            }
         }
 
         private void SetParent(IntPtr parentHwnd, IntPtr childHwnd)
@@ -122,7 +117,14 @@ namespace Thingy.GitBash.Native
         {
             get
             {
-                return (_process != null) && Process.GetProcesses().Where(p => p.Id == _process.Id).Any();
+                try
+                {
+                    return (_process != null) && Process.GetProcesses().Where(p => p.Id == _process.Id).Any();
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
             }
         }
     }

@@ -55,7 +55,6 @@ namespace Thingy
                 application.MainWindow = new MainWindow(application);
                 application.Run(application.MainWindow);
                 singleInstance.Close();
-
                 _settings.Save();
                 _log.Info("Application shutdown");
                 _log.WriteToFile();

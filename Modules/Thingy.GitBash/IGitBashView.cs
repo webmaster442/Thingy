@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace Thingy.GitBash
 {
-    public interface IGitBashView: IView, IDisposable
+    public interface IGitBashView: IView
     {
         void SendText(string text);
+        bool IsAlive { get; }
+        void Close();
     }
 }

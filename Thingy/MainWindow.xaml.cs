@@ -5,6 +5,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Shell;
 using Thingy.API;
 using Thingy.API.Capabilities;
@@ -43,6 +44,11 @@ namespace Thingy
             }
         }
 
+        public int TabCount
+        {
+            get { return TabControl.Items.Count; }
+        }
+
         public void ShowHideMenu()
         {
             MenuFlyout.IsOpen = !MenuFlyout.IsOpen;
@@ -52,6 +58,12 @@ namespace Thingy
         {
             var executing = System.Reflection.Assembly.GetExecutingAssembly();
             return executing.GetName().Version.ToString();
+        }
+
+        internal void CloseCurrentTab()
+        {
+            //close programatically ?
+            _app.Log.Info("Current Tab was closed from code");
         }
 
         private async void TabClosing(ItemActionCallbackArgs<TabablzControl> args)
@@ -139,6 +151,7 @@ namespace Thingy
         private void ModernWindow_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             TabablzControl.AddItemCommand.Execute(this, TabControl);
+            FocusTabByIndex(0);
             Program.CommandLineParser.Parse(Environment.CommandLine);
         }
 

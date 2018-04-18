@@ -10,10 +10,9 @@ namespace Thingy.GitBash.Controls
     /// <summary>
     /// Interaction logic for GitBashControl.xaml
     /// </summary>
-    public partial class GitBashControl : UserControl, IDisposable
+    public partial class GitBashControl : UserControl
     {
         private GitHost _gitHost;
-        private DispatcherTimer _timer;
 
         public GitBashControl()
         {
@@ -28,8 +27,6 @@ namespace Thingy.GitBash.Controls
             {
                 MessageBox.Show($"Git is not installed or not found at the default install path.\nSearch Path was: {GitLocator.GitPath}",
                                  "Git not found", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                Application.Current.Shutdown();
             }
 
             if (_gitHost == null)
@@ -38,31 +35,16 @@ namespace Thingy.GitBash.Controls
                 RootGrid.Children.Clear();
                 RootGrid.Children.Add(_gitHost);
             }
-
-            _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromMilliseconds(150);
-            _timer.Tick += _timer_Tick;
-            _timer.IsEnabled = true;
         }
 
-        private void _timer_Tick(object sender, EventArgs e)
+        public bool IsAlive
         {
-            if (_gitHost == null || _gitHost.IsAlive == false)
-            {
-                _timer.Stop();
-            }
+            get { return _gitHost != null && _gitHost.IsAlive; }
         }
 
         public void SendText(string s)
         {
             _gitHost.SendText(s);
-        }
-
-        public void Dispose()
-        {
-            _timer.Stop();
-            _timer.IsEnabled = false;
-            _gitHost.Dispose();
         }
     }
 }

@@ -24,7 +24,6 @@ namespace Thingy.GitBash.ViewModels
         private IApplication _app;
         private IGitBashView _view;
 
-        public event EventHandler CanExecuteChanged;
 
         public ComplexCommand(IApplication app, IGitBashView view)
         {
@@ -32,9 +31,14 @@ namespace Thingy.GitBash.ViewModels
             _view = view;
         }
 
+        public event EventHandler CanExecuteChanged
+        {
+            add { }
+            remove { }
+        }
+
         public bool CanExecute(object parameter)
         {
-            CanExecuteChanged?.Invoke(this, new EventArgs());
             return true;
         }
 
