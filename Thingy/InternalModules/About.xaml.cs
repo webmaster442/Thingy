@@ -19,14 +19,5 @@ namespace Thingy.InternalModules
         {
             return Thingy.Resources.ResourceLocator.GetResourceFile("html.AboutPage.html");
         }
-
-        private void AboutView_LinkClicked(object sender, RoutedEvenArgs<HtmlLinkClickedEventArgs> args)
-        {
-            System.Diagnostics.Process p = new System.Diagnostics.Process();
-            p.StartInfo.UseShellExecute = true;
-            p.StartInfo.FileName = args.Data.Link;
-            p.Start();
-            args.Handled = true;
-        }
     }
 }

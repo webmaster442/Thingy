@@ -10,6 +10,5 @@
     d:DesignWidth="300"
     mc:Ignorable="d">
     <htmlrenderer:HtmlPanel
-        x:Name="AboutView"
-        LinkClicked="AboutView_LinkClicked"/>
+        x:Name="AboutView"/>
 </UserControl>
