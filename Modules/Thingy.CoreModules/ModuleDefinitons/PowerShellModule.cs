@@ -5,7 +5,7 @@ using Thingy.API;
 
 namespace Thingy.Modules
 {
-    class PowerShellModule : ModuleBase
+    public class PowerShellModule : ModuleBase
     {
         public override string ModuleName
         {
