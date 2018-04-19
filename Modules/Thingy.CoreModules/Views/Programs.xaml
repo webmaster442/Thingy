@@ -8,38 +8,57 @@
     d:DesignHeight="300"
     d:DesignWidth="300"
     mc:Ignorable="d">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <ScrollViewer
-            Grid.Row="0">
-            <ItemsControl
-                ItemTemplate="{StaticResource Program}"
-                ItemsSource="{Binding Programs}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-        </ScrollViewer>
-        <StackPanel
-            Grid.Row="1"
-            Orientation="Horizontal">
-            <Button
-                Command="{Binding AddCommand}"
-                Content="Add new..."
-                Style="{StaticResource BigButton}" />
-            <TextBox
-                x:Name="FilterString"
-                Width="150"
-                Margin="10,0"
-                VerticalAlignment="Center"
-                mah:TextBoxHelper.ClearTextButton="True"
-                mah:TextBoxHelper.Watermark="Type here to search"
-                Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" />
-        </StackPanel>
-    </Grid>
+    <TabControl>
+        <TabItem
+            Header="User programs">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <ScrollViewer
+                    Grid.Row="0">
+                    <ItemsControl
+                        ItemTemplate="{StaticResource Program}"
+                        ItemsSource="{Binding Programs}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ScrollViewer>
+                <StackPanel
+                    Grid.Row="1"
+                    Orientation="Horizontal">
+                    <Button
+                        Command="{Binding AddCommand}"
+                        Content="Add new..."
+                        Style="{StaticResource BigButton}" />
+                    <TextBox
+                        x:Name="FilterString"
+                        Width="150"
+                        Margin="10,0"
+                        VerticalAlignment="Center"
+                        mah:TextBoxHelper.ClearTextButton="True"
+                        mah:TextBoxHelper.Watermark="Type here to search"
+                        Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+            </Grid>
+        </TabItem>
+        <TabItem
+            Header="Start menu">
+            <ScrollViewer>
+                <ItemsControl
+                    ItemTemplate="{StaticResource SystemProgram}"
+                    ItemsSource="{Binding StartMenu}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
+        </TabItem>
+    </TabControl>
 </UserControl>

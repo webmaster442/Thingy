@@ -1,9 +1,10 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:conv="clr-namespace:Thingy.XAML.Converters"
-    xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls">
-    <DataTemplate x:Key="ToDoItem">
+    xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"
+    xmlns:conv="clr-namespace:Thingy.XAML.Converters">
+    <DataTemplate
+        x:Key="ToDoItem">
         <CheckBox
             Grid.Column="0"
             IsChecked="{Binding IsCompleted}"
@@ -45,7 +46,8 @@
         </CheckBox>
     </DataTemplate>
 
-    <DataTemplate x:Key="Drive">
+    <DataTemplate
+        x:Key="Drive">
         <Button
             Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.OpenLocationCommand}"
             CommandParameter="{Binding Path}"
@@ -88,7 +90,8 @@
         </Button>
     </DataTemplate>
 
-    <DataTemplate x:Key="FolderLink">
+    <DataTemplate
+        x:Key="FolderLink">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -103,7 +106,7 @@
                 Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-folder.png"
                 ImageHeight="48"
                 ImageWidth="48"
-                Style="{StaticResource Flat}"/>
+                Style="{StaticResource Flat}" />
             <Button
                 Grid.Column="1"
                 Height="20"
@@ -121,7 +124,8 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="SystemFolderLink">
+    <DataTemplate
+        x:Key="SystemFolderLink">
         <applib:ImageButton
             Width="180"
             Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.OpenLocationCommand}"
@@ -133,7 +137,8 @@
             Style="{StaticResource Flat}" />
     </DataTemplate>
 
-    <DataTemplate x:Key="VirtualFolder">
+    <DataTemplate
+        x:Key="VirtualFolder">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -150,7 +155,8 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="VirtualFolderContent">
+    <DataTemplate
+        x:Key="VirtualFolderContent">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -172,8 +178,26 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="Program">
-        <Grid>
+    <DataTemplate
+        x:Key="SystemProgram">
+        <applib:ImageButton
+            Grid.Column="0"
+            Width="180"
+            Margin="5"
+            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.RunSystemCommand}"
+            CommandParameter="{Binding Path}"
+            Content="{Binding Name}"
+            Image="{Binding Icon}"
+            ImageHeight="48"
+            ImageWidth="48"
+            Style="{StaticResource Flat}"
+            ToolTip="{Binding Path}" />
+    </DataTemplate>
+
+    <DataTemplate
+        x:Key="Program">
+        <Grid
+            Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -181,15 +205,14 @@
             <applib:ImageButton
                 Grid.Column="0"
                 Width="180"
-                Content="{Binding Name}"
-                ToolTip="{Binding Name}"
                 Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.RunCommand}"
                 CommandParameter="{Binding Name}"
+                Content="{Binding Name}"
                 Image="{Binding Path, Converter={conv:FileToIconConverter}}"
                 ImageHeight="48"
                 ImageWidth="48"
-                Style="{StaticResource Flat}">
-            </applib:ImageButton>
+                Style="{StaticResource Flat}"
+                ToolTip="{Binding Name}" />
             <StackPanel
                 Grid.Column="1"
                 VerticalAlignment="Top">
@@ -221,7 +244,8 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="Note">
+    <DataTemplate
+        x:Key="Note">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />

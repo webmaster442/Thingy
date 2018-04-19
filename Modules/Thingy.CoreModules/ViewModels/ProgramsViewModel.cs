@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Thingy.API;
 using Thingy.API.Capabilities;
+using Thingy.CoreModules.Models;
 using Thingy.Db;
 using Thingy.Db.Entity;
 
@@ -24,8 +25,10 @@ namespace Thingy.CoreModules.ViewModels
         public DelegateCommand<string> EditCommand { get; private set; }
         public DelegateCommand<string> DeleteCommand { get; private set; }
         public DelegateCommand<string> RunCommand { get; private set; }
+        public DelegateCommand<string> RunSystemCommand { get; private set; }
 
         public ObservableCollection<LauncherProgram> Programs { get; private set; }
+        public ObservableCollection<SystemProgram> StartMenu { get; private set; }
 
         public string Filter
         {
@@ -60,7 +63,14 @@ namespace Thingy.CoreModules.ViewModels
             EditCommand = Command.ToCommand<string>(Edit);
             DeleteCommand = Command.ToCommand<string>(Delete);
             RunCommand = Command.ToCommand<string>(Run);
+            RunSystemCommand = Command.ToCommand<string>(RunSystem);
             Programs.AddRange(_db.Programs.GetPrograms());
+            StartMenu = new ObservableCollection<SystemProgram>(ProgramProviders.GetStartMenu());
+        }
+
+        private void RunSystem(string obj)
+        {
+            Process.Start(obj);
         }
 
         private void Run(string obj)

@@ -110,6 +110,7 @@
     <Compile Include="Models\CurrencyRate.cs" />
     <Compile Include="Models\Drive.cs" />
     <Compile Include="Models\SystemFolderLink.cs" />
+    <Compile Include="Models\SystemProgram.cs" />
     <Compile Include="Models\XKCDResponse.cs" />
     <Compile Include="ModuleDefinitons\CommandLineModule.cs" />
     <Compile Include="ModuleDefinitons\CurrencyConverterModule.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="ModuleDefinitons\ToDoListModule.cs" />
     <Compile Include="ModuleDefinitons\VirtualFoldersModule.cs" />
     <Compile Include="ModuleDefinitons\XKCDReaderModule.cs" />
+    <Compile Include="ProgramProviders.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers.cs" />
     <Compile Include="TrulyObservableCollection.cs" />

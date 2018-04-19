@@ -6,7 +6,7 @@ using System.Windows.Media.Imaging;
 
 namespace Thingy.XAML.Converters
 {
-    internal static class ExeIconExtractor
+    public static class ExeIconExtractor
     {
         public static ImageSource GetIcon(string path, bool smallIcon = false, bool isDirectory = false)
         {
