@@ -8,6 +8,7 @@ namespace Thingy.CoreModules.ViewModels
     public class CommandLineViewModel : ViewModel<ICommandLineView>
     {
         private readonly TerminalController controller;
+        private readonly string _initscript;
 
         public DelegateCommand LoadedCommand { get; private set; }
         public DelegateCommand ClosingCommand { get; private set; }
@@ -18,9 +19,10 @@ namespace Thingy.CoreModules.ViewModels
         public DelegateCommand PasteCommand { get; private set; }
         public DelegateCommand SetFolderCommand { get; private set; }
 
-        public CommandLineViewModel(ICommandLineView view, string shell = "cmd.exe") : base(view)
+        public CommandLineViewModel(ICommandLineView view, string shell = "cmd.exe", string basecommand = null) : base(view)
         {
             controller = new TerminalController(view);
+            _initscript = basecommand;
             controller.SetShell(shell);
             LoadedCommand = Command.ToCommand(Loaded);
             ClosingCommand = Command.ToCommand(Closing);
@@ -53,6 +55,10 @@ namespace Thingy.CoreModules.ViewModels
         private void Loaded()
         {
             controller.Init();
+            if (!string.IsNullOrEmpty(_initscript))
+            {
+                controller.InvokeCmd("Running init script...\r\n", _initscript);
+            }
         }
 
         private void Clear()

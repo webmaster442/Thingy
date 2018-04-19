@@ -71,6 +71,9 @@
     <Compile Include="..\Build-tools\CommonVersion.cs">
       <Link>Properties\CommonVersion.cs</Link>
     </Compile>
+    <None Include="init.cmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Compile Include="Modules\BrainFuck.cs" />
     <Compile Include="Modules\Logo.cs" />
     <Compile Include="Modules\PythonConsoleHost.cs" />

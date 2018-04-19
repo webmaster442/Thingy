@@ -121,6 +121,7 @@
     <Compile Include="ModuleDefinitons\PowerShellModule.cs" />
     <Compile Include="ModuleDefinitons\ProgramsModule.cs" />
     <Compile Include="ModuleDefinitons\RunProgramModule.cs" />
+    <Compile Include="ModuleDefinitons\ThingyCommandLine.cs" />
     <Compile Include="ModuleDefinitons\ToDoListModule.cs" />
     <Compile Include="ModuleDefinitons\VirtualFoldersModule.cs" />
     <Compile Include="ModuleDefinitons\XKCDReaderModule.cs" />
