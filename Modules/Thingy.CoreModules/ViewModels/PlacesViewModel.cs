@@ -23,6 +23,7 @@ namespace Thingy.CoreModules.ViewModels
         private string _filter;
 
         public ObservableCollection<SystemFolderLink> SystemPlaces { get; private set; }
+        public ObservableCollection<SystemFolderLink> EnvVars { get; private set; }
         public ObservableCollection<Drive> Drives { get; private set; }
         public ObservableCollection<FolderLink> Folders { get; private set; }
 
@@ -36,6 +37,7 @@ namespace Thingy.CoreModules.ViewModels
             _db = db;
             SystemPlaces = new ObservableCollection<SystemFolderLink>(Providers.ProvideSystemPlaces());
             Drives = new ObservableCollection<Drive>(Providers.ProvideDriveData());
+            EnvVars = new ObservableCollection<SystemFolderLink>(Providers.ProvideEnvironmentVariables());
             Folders = new ObservableCollection<FolderLink>();
             NewFolderLinkCommand = Command.ToCommand(NewFolderLink);
             OpenLocationCommand = Command.ToCommand<string>(OpenLocation);

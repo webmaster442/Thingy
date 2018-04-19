@@ -77,6 +77,24 @@
                 </StackPanel>
             </ScrollViewer>
         </TabItem>
+        <TabItem Header="Evironment variables">
+            <ScrollViewer>
+                <StackPanel>
+                    <Label
+                        Content="Folders in Evironment Variables"
+                        Style="{StaticResource Title}" />
+                    <ItemsControl
+                        ItemTemplate="{StaticResource SystemFolderLink}"
+                        ItemsSource="{Binding EnvVars}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
+        </TabItem>
     </TabControl>
 
 </UserControl>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Media.Imaging;
@@ -93,6 +94,26 @@ namespace Thingy.CoreModules
                     Path = CloudDriveLocation.OneDrive,
                     Icon = new BitmapImage(new Uri("pack://application:,,,/Thingy.Resources;component/Icons/icons8-onedrive.png"))
                 };
+            }
+        }
+
+        public static IEnumerable<SystemFolderLink> ProvideEnvironmentVariables()
+        {
+            foreach (DictionaryEntry variable in Environment.GetEnvironmentVariables())
+            {
+                string key = Convert.ToString(variable.Key);
+                string value = Convert.ToString(variable.Value);
+
+                if (Directory.Exists(value))
+                {
+                    yield return new SystemFolderLink
+                    {
+                        Name = $"%{key}%",
+                        Path = value,
+                        Icon = new BitmapImage(new Uri("pack://application:,,,/Thingy.Resources;component/Icons/icons8-folder.png"))
+                    };
+                }
+
             }
         }
     }
