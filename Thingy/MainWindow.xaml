@@ -78,6 +78,17 @@
                                     Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-swiss-army-knife-96.png" />
                             </MenuItem.Icon>
                             <MenuItem
+                                Command="{Binding UpdateCommand}"
+                                Header="Check for updates..">
+                                <MenuItem.Icon>
+                                    <Image
+                                        Width="32"
+                                        Height="32"
+                                        Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-downloading-updates-96.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator/>
+                            <MenuItem
                                 Command="{Binding SettingCommand}"
                                 Header="Settings...">
                                 <MenuItem.Icon>

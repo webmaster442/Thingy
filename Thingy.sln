@@ -6,10 +6,23 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.API", "Thingy.API\Thingy.API.csproj", "{BF3B99F7-722C-40C2-A0FE-7C3F8F1B6B01}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy", "Thingy\Thingy.csproj", "{83DEFF85-7B78-4521-95CE-7A312E22A406}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F2F28913-F5A7-47AC-A7EC-51248F3E5290} = {F2F28913-F5A7-47AC-A7EC-51248F3E5290}
+		{30E19E54-F36B-462F-884A-B5F84BAF1D7E} = {30E19E54-F36B-462F-884A-B5F84BAF1D7E}
+		{972CE055-4941-4959-9D9F-C43F5D1125CC} = {972CE055-4941-4959-9D9F-C43F5D1125CC}
+		{740B535E-9799-4749-8A18-917DEBCEEAA4} = {740B535E-9799-4749-8A18-917DEBCEEAA4}
+		{253234E3-85E1-4479-813C-96360A670D86} = {253234E3-85E1-4479-813C-96360A670D86}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.ExternalLibs", "Thingy.ExternalLibs\Thingy.ExternalLibs.csproj", "{A65CAEAF-839B-44E2-BEA5-6555F965143A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{C5B27D0E-90B5-4F9A-A234-A5B1D24140F3}"
+	ProjectSection(SolutionItems) = preProject
+		Build-tools\commonBuildInfo.xml = Build-tools\commonBuildInfo.xml
+		Build-tools\CommonVersion.cs = Build-tools\CommonVersion.cs
+		Build-tools\release_notes.html = Build-tools\release_notes.html
+		Build-tools\Releases.xml = Build-tools\Releases.xml
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppLib.Common", "applib\AppLib.Common\AppLib.Common.csproj", "{516087B5-6AC5-44A5-8DF1-FE42D7A7A0E6}"
 EndProject
