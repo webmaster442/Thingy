@@ -182,7 +182,7 @@ namespace Thingy.MusicPlayerCore
                     var device = Bass.GetDeviceInfo(i);
                     if (device.IsEnabled)
                     {
-                        devices.Add(device.Name, i);
+                        devices.AddOrUpdate(device.Name, i);
                         if (device.IsDefault)
                         {
                             if (DefaultDeviceIndex == -1)
