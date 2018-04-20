@@ -1,19 +1,19 @@
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
-    <channel>
-        <title>Thingy</title>
-        <description>Most recent updates to Thingy</description>
-        <language>en</language>
-        <!--<item>
-            <title>Version 1.5.5880</title>
-            <sparkle:releaseNotesLink>
-                https://your_domain/your_path/release_notes.html
-            </sparkle:releaseNotesLink>
-            <pubDate>Fri, 06 Feb 2016 22:49:00 +0100</pubDate>
-            <enclosure url="https://your_domain/your_path/setup.exe"
-                       sparkle:dsaSignature="MEQCICh10SofkNHa5iJgVWDi2O8RBYyN+nxkFEL7u/tBuWboAiB6VOV/WQMRJE+kRoICZXAhq5b24WkgqcDs0z7gyBkGVw=="
-                       sparkle:version="1.5.5880"
-                       length="0"
-                       type="application/octet-stream" />
-        </item>-->
-    </channel>
+  <channel>
+    <title>Thingy</title>
+    <description>Most recent updates to Thingy</description>
+    <language>en</language>
+    <item>
+      <title>Version 2018.4.20.1379</title>
+      <sparkle:releaseNotesLink>
+        https://raw.githubusercontent.com/webmaster442/Thingy/master/Build-tools/release_notes.html
+      </sparkle:releaseNotesLink>
+      <pubDate>Fri, 20 Apr 2018 21:16:00 +0100</pubDate>
+      <enclosure url="https://github.com/webmaster442/Thingy/releases/download/2018-04-20/Thingy.msi"
+                 sparkle:installerArguments="/passive"
+                 sparkle:version="2018.4.20.1379"
+                 length="7348224"
+                 type="application/octet-stream" />
+    </item>
+  </channel>
 </rss>
