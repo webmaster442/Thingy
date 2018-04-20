@@ -75,19 +75,19 @@ namespace Thingy
                     {
                         var id = await TabManager.StartModule(module);
                         await Task.Delay(25);
-                        Messager.SendMessage(id, new HandleFileMessage(Guids.Application, file));
+                        Messager.SendMessage(id, new HandleFileMessage(AppConstants.ApplicationGuid, file));
                     }
                     else
                     {
                         TabManager.FocusTabByIndex(tabIndex);
-                        Messager.SendMessage(module.RunModule().GetType(), new HandleFileMessage(Guids.Application, file));
+                        Messager.SendMessage(module.RunModule().GetType(), new HandleFileMessage(AppConstants.ApplicationGuid, file));
                     }
                 }
                 else
                 {
                     var id = await TabManager.StartModule(module);
                     await Task.Delay(25);
-                    Messager.SendMessage(id, new HandleFileMessage(Guids.Application, file));
+                    Messager.SendMessage(id, new HandleFileMessage(AppConstants.ApplicationGuid, file));
                 }
             }
         }

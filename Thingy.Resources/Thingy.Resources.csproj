@@ -304,5 +304,8 @@
   <ItemGroup>
     <Resource Include="Icons\xkcd.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-downloading-updates-96.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

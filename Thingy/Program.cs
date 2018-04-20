@@ -5,6 +5,7 @@ using AppLib.MVVM.IoC;
 using Thingy.Implementation;
 using Thingy.API;
 using Thingy.Db;
+using Thingy.InternalCode;
 
 namespace Thingy
 {
@@ -12,6 +13,7 @@ namespace Thingy
     {
         public static CommandLineParser CommandLineParser { get; private set; }
         public static IoCContainer Resolver { get; private set; }
+        public static IntPtr WinSparklePtr;
 
         private static ILog _log;
         private static ISettings _settings;
@@ -35,29 +37,48 @@ namespace Thingy
             Resolver.Register<IDataBase>(() => _db);
         }
 
+        private static void SetupAutoUpdater()
+        {
+            WinSparkle.SetDllDirectory(Paths.Resolve(Paths.NativeDllPath));
+            WinSparkle.win_sparkle_set_appcast_url(AppConstants.AutoUpdateURL);
+            WinSparkle.win_sparkle_init();
+        }
+
+        private static App SetupApplication()
+        {
+            var application = new App();
+            _moduleLoader = new ModuleLoader(application);
+            Resolver.Register<IApplication>(() => application);
+            Resolver.Register<IModuleLoader>(() => _moduleLoader);
+            CommandLineParser = new CommandLineParser(application);
+            JumpListFactory.CreateJumplist();
+            application.InitializeComponent();
+            application.ShutdownMode = ShutdownMode.OnMainWindowClose;
+            application.MainWindow = new MainWindow(application);
+            return application;
+        }
+
+        private static void AppShutDown(AppLib.Common.SingleInstanceApp singleInstance)
+        {
+            singleInstance.Close();
+            _settings.Save();
+            _log.Info("Application shutdown");
+            _log.WriteToFile();
+            WinSparkle.win_sparkle_cleanup();
+        }
+
         [STAThread]
         public static void Main()
         {
+            SetupAutoUpdater();
             SetupIoCContainer();
-            const string appName = "Thingy";
-            var singleInstance = new AppLib.Common.SingleInstanceApp(appName);
+            var singleInstance = new AppLib.Common.SingleInstanceApp(AppConstants.AppName);
             singleInstance.CommandLineArgumentsRecieved += CommandLineArgumentsRecieved;
             if (singleInstance.IsFirstInstance)
             {
-                var application = new App();
-                _moduleLoader = new ModuleLoader(application);
-                Resolver.Register<IApplication>(() => application);
-                Resolver.Register<IModuleLoader>(() => _moduleLoader);
-                CommandLineParser = new CommandLineParser(application);
-                JumpListFactory.CreateJumplist();
-                application.InitializeComponent();
-                application.ShutdownMode = ShutdownMode.OnMainWindowClose;
-                application.MainWindow = new MainWindow(application);
+                App application = SetupApplication();
                 application.Run(application.MainWindow);
-                singleInstance.Close();
-                _settings.Save();
-                _log.Info("Application shutdown");
-                _log.WriteToFile();
+                AppShutDown(singleInstance);
             }
             else singleInstance.SubmitParameters();
         }

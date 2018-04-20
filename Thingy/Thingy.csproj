@@ -159,7 +159,7 @@
     <Compile Include="Controls\WindowsPower.xaml.cs">
       <DependentUpon>WindowsPower.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Constants\Guids.cs" />
+    <Compile Include="Constants\AppConstants.cs" />
     <Compile Include="IMainWindow.cs" />
     <Compile Include="Implementation\CommandLineParser.cs" />
     <Compile Include="Implementation\IModuleLoader.cs" />
@@ -172,6 +172,7 @@
     <Compile Include="Implementation\Tray\TrayIcon.cs" />
     <Compile Include="InternalCode\BatteryInfo.cs" />
     <Compile Include="InternalCode\PerformanceInfo.cs" />
+    <Compile Include="InternalCode\WinSparkle.cs" />
     <Compile Include="InternalModules\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
@@ -257,6 +258,11 @@
   <ItemGroup>
     <Resource Include="Implementation\Tray\icons8-advertisement-page.png" />
     <Resource Include="Implementation\Tray\icons8-exit-sign.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Native\x64\WinSparkle.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

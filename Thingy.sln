@@ -10,6 +10,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.ExternalLibs", "Thingy.ExternalLibs\Thingy.ExternalLibs.csproj", "{A65CAEAF-839B-44E2-BEA5-6555F965143A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{C5B27D0E-90B5-4F9A-A234-A5B1D24140F3}"
+	ProjectSection(SolutionItems) = preProject
+		Build-tools\commonBuildInfo.xml = Build-tools\commonBuildInfo.xml
+		Build-tools\CommonVersion.cs = Build-tools\CommonVersion.cs
+		Build-tools\release_notes.html = Build-tools\release_notes.html
+		Build-tools\Releases.xml = Build-tools\Releases.xml
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppLib.Common", "applib\AppLib.Common\AppLib.Common.csproj", "{516087B5-6AC5-44A5-8DF1-FE42D7A7A0E6}"
 EndProject

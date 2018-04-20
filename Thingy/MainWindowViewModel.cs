@@ -15,6 +15,7 @@ namespace Thingy
         public DelegateCommand LogCommand { get; private set; }
         public DelegateCommand OpenMenuCommand { get; private set; }
         public DelegateCommand AboutCommand { get; private set; }
+        public DelegateCommand UpdateCommand { get; private set; }
 
         public DelegateCommand ModuleImportCommand { get; private set; }
         public DelegateCommand ModuleAppendCommand { get; private set; }
@@ -30,9 +31,15 @@ namespace Thingy
             LogCommand = Command.ToCommand(OpenLog, CanOpenLog);
             OpenMenuCommand = Command.ToCommand(OpenMenu);
             SettingCommand = Command.ToCommand(OpenSetting, CanOpenSetting);
+            UpdateCommand = Command.ToCommand(Update);
             ModuleImportCommand = Command.ToCommand(ModuleImport, CanImportExport);
             ModuleExportCommand = Command.ToCommand(ModuleExport, CanImportExport);
             ModuleAppendCommand = Command.ToCommand(ModuleAppend, CanImportExport);
+        }
+
+        private void Update()
+        {
+            InternalCode.WinSparkle.win_sparkle_check_update_with_ui();
         }
 
         private bool CanOpenSetting()
