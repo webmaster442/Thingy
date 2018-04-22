@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -50,9 +51,40 @@
     <Compile Include="..\..\Build-tools\CommonVersion.cs">
       <Link>Properties\CommonVersion.cs</Link>
     </Compile>
+    <Compile Include="ModuleDefinitions\MpvModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\MpvView.xaml.cs">
+      <DependentUpon>MpvView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\applib\AppLib.MVVM\AppLib.MVVM.csproj">
+      <Project>{848616a9-3d2f-42b1-b474-be506e8019e4}</Project>
+      <Name>AppLib.MVVM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\applib\AppLib.WPF\AppLib.WPF.csproj">
+      <Project>{FAF19388-A6C0-46F9-A588-A46DB392ACE4}</Project>
+      <Name>AppLib.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Thingy.API\Thingy.API.csproj">
+      <Project>{bf3b99f7-722c-40c2-a0fe-7c3f8f1b6b01}</Project>
+      <Name>Thingy.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Thingy.Resources\Thingy.Resources.csproj">
+      <Project>{63a3ee73-078f-4dec-8578-5af6f158d383}</Project>
+      <Name>Thingy.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\MpvView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
