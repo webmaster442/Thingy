@@ -27,7 +27,7 @@ namespace Thingy.CoreModules.Views
             dialog.Filter = "Programs|*.exe;*.bat;*.cmd;*.ps1";
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                TbProgramName.Text = $"\"{dialog.FileName}\"";
+                TbProgramName.Text = dialog.FileName;
             }
         }
 
@@ -36,32 +36,34 @@ namespace Thingy.CoreModules.Views
             get { return false; }
         }
 
-        public Action ClosingTask()
+        public Action ClosingTask
         {
-            return () =>
+            get { return CloseJob; }
+        }
+
+        private void CloseJob()
+        {
+            if (string.IsNullOrEmpty(TbProgramName.Text)) return;
+
+            Process p = new Process();
+            p.StartInfo.FileName = $"\"{TbProgramName.Text}\"";
+            p.StartInfo.Arguments = TbArguments.Text;
+
+            if (CbAdministrator.IsChecked == true)
             {
-                if (string.IsNullOrEmpty(TbProgramName.Text)) return;
+                p.StartInfo.UseShellExecute = true;
+                p.StartInfo.Verb = "runas";
+            }
 
-                Process p = new Process();
-                p.StartInfo.FileName = TbProgramName.Text;
-                p.StartInfo.Arguments = TbArguments.Text;
-
-                if (CbAdministrator.IsChecked == true)
-                {
-                    p.StartInfo.UseShellExecute = true;
-                    p.StartInfo.Verb = "runas";
-                }
-
-                try
-                {
-                    _app.Log.Info("Starting program: {0} Arguments: {1}", p.StartInfo.FileName, p.StartInfo.Arguments);
-                    p.Start();
-                }
-                catch (Win32Exception ex)
-                {
-                    _app.Log.Error(ex);
-                }
-            };
+            try
+            {
+                _app.Log.Info("Starting program: {0} Arguments: {1}", p.StartInfo.FileName, p.StartInfo.Arguments);
+                p.Start();
+            }
+            catch (Win32Exception ex)
+            {
+                _app.Log.Error(ex);
+            }
         }
     }
 }

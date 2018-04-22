@@ -93,9 +93,9 @@ namespace Thingy
             if (viewInTab is IHaveCloseTask taskView)
             {
                 if (taskView.CanExecuteAsync)
-                    await Task.Run(taskView.ClosingTask());
+                    await Task.Run(taskView.ClosingTask);
                 else
-                    taskView.ClosingTask();
+                    taskView.ClosingTask.Invoke();
             }
 
             if (viewInTab is IDisposable view)

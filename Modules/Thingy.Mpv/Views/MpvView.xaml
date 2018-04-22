@@ -29,7 +29,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBox
-                    x:Name="TbProgramName"
+                    x:Name="TbFileName"
                     Grid.Column="0"
                     Margin="5,0"
                     VerticalAlignment="Center"

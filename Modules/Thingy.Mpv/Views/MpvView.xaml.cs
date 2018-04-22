@@ -1,25 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Thingy.API;
+using Thingy.API.Capabilities;
 
 namespace Thingy.Mpv.Views
 {
     /// <summary>
     /// Interaction logic for MpvView.xaml
     /// </summary>
-    public partial class MpvView : UserControl
+    public partial class MpvView : UserControl, IHaveCloseTask
     {
         private IApplication _app;
 
@@ -35,8 +27,46 @@ namespace Thingy.Mpv.Views
             dialog.Filter = "Files|*.*";
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                TbProgramName.Text = $"\"{dialog.FileName}\"";
+                TbFileName.Text = dialog.FileName;
             }
+        }
+
+        private void CloseJob()
+        {
+            if (string.IsNullOrEmpty(TbFileName.Text)) return;
+
+            Process p = new Process();
+            p.StartInfo.WorkingDirectory = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Apps\x64");
+            p.StartInfo.FileName = "mpv.exe";
+            p.StartInfo.Arguments = GetStartParameters();
+
+            try
+            {
+                _app.Log.Info("Starting mpv with parameters: {0}", p.StartInfo.Arguments);
+                p.Start();
+            }
+            catch (Win32Exception ex)
+            {
+                _app.Log.Error(ex);
+            }
+        }
+
+        private string GetStartParameters()
+        {
+            if (string.IsNullOrEmpty(TbArguments.Text))
+                return $"\"{TbFileName.Text}\"";
+            else
+                return $"{TbArguments} \"{TbFileName.Text}\"";
+        }
+
+        public Action ClosingTask
+        {
+            get { return CloseJob; }
+        }
+
+        public bool CanExecuteAsync
+        {
+            get { return false; }
         }
     }
 }

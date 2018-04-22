@@ -68,9 +68,9 @@ namespace Thingy.Implementation
                     if (result && control is IHaveCloseTask closetask)
                     {
                         if (closetask.CanExecuteAsync)
-                            await Task.Run(closetask.ClosingTask());
+                            await Task.Run(closetask.ClosingTask);
                         else
-                            closetask.ClosingTask();
+                            closetask.ClosingTask.Invoke();
                     }
                     return Guid.Empty;
                 }

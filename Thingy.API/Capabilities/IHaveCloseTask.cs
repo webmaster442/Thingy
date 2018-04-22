@@ -4,7 +4,7 @@ namespace Thingy.API.Capabilities
 {
     public interface IHaveCloseTask
     {
-        Action ClosingTask();
+        Action ClosingTask { get; }
         bool CanExecuteAsync { get; }
     }
 }

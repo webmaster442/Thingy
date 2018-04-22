@@ -1,4 +1,5 @@
 ﻿using AppLib.WPF;
+using System;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Thingy.API;
@@ -31,7 +32,8 @@ namespace Thingy.Mpv.ModuleDefinitions
         {
             get
             {
-                return true;
+                var mpv = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Apps\x64\mpv.exe");
+                return System.IO.File.Exists(mpv);
             }
         }
 
