@@ -52,11 +52,15 @@
       <Link>Properties\CommonVersion.cs</Link>
     </Compile>
     <Compile Include="ModuleDefinitions\MpvModule.cs" />
+    <Compile Include="ModuleDefinitions\YoutubeDlModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\MpvView.xaml.cs">
       <DependentUpon>MpvView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\YoutubeDlView.xaml.cs">
+      <DependentUpon>YoutubeDlView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -77,11 +81,13 @@
       <Name>Thingy.Resources</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="Views\MpvView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\YoutubeDlView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
