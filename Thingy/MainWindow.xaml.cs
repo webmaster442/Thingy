@@ -3,6 +3,7 @@ using Dragablz;
 using MahApps.Metro.Controls;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -91,7 +92,10 @@ namespace Thingy
 
             if (viewInTab is IHaveCloseTask taskView)
             {
-                await taskView.ClosingTask();
+                if (taskView.CanExecuteAsync)
+                    await Task.Run(taskView.ClosingTask());
+                else
+                    taskView.ClosingTask();
             }
 
             if (viewInTab is IDisposable view)

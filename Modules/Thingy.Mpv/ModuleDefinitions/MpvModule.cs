@@ -24,7 +24,7 @@ namespace Thingy.Mpv.ModuleDefinitions
 
         public override UserControl RunModule()
         {
-            return new Views.MpvView();
+            return new Views.MpvView(App);
         }
 
         public override bool CanLoad

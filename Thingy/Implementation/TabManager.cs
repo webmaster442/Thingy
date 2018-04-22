@@ -67,7 +67,10 @@ namespace Thingy.Implementation
                     bool result = await _application.ShowDialog(module.ModuleName, control, module.OpenParameters.DialogButtons);
                     if (result && control is IHaveCloseTask closetask)
                     {
-                        await closetask.ClosingTask();
+                        if (closetask.CanExecuteAsync)
+                            await Task.Run(closetask.ClosingTask());
+                        else
+                            closetask.ClosingTask();
                     }
                     return Guid.Empty;
                 }

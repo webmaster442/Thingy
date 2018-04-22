@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
 
 namespace Thingy.API.Capabilities
 {
     public interface IHaveCloseTask
     {
-        Task ClosingTask();
+        Action ClosingTask();
+        bool CanExecuteAsync { get; }
     }
 }
