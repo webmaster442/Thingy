@@ -4,6 +4,11 @@ using System.Windows.Media;
 
 namespace Thingy.API
 {
+    public class OpenParameters
+    {
+        public DialogButtons DialogButtons { get; set; }
+    }
+
     public interface IModule
     {
         IApplication App { get; set; }
@@ -14,7 +19,7 @@ namespace Thingy.API
         SolidColorBrush ColorBrush { get; }
         bool CanLoad { get; }
         string Category { get; }
-        bool OpenAsWindow { get; }
+        OpenParameters OpenParameters { get; }
         bool IsSingleInstance { get; }
         IEnumerable<string> SupportedExtensions { get; }
         void AppAttached();

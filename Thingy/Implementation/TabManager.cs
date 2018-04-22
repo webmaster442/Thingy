@@ -62,9 +62,9 @@ namespace Thingy.Implementation
             var control = module.RunModule();
             if (control != null)
             {
-                if (module.OpenAsWindow)
+                if (module.OpenParameters != null)
                 {
-                    bool result = await _application.ShowDialog(module.ModuleName, control, DialogButtons.None);
+                    bool result = await _application.ShowDialog(module.ModuleName, control, module.OpenParameters.DialogButtons);
                     if (result && control is IHaveCloseTask closetask)
                     {
                         await closetask.ClosingTask();

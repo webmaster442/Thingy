@@ -27,9 +27,15 @@ namespace Thingy.Modules
             return new CoreModules.Views.RunProgram(App);
         }
 
-        public override bool OpenAsWindow
+        public override OpenParameters OpenParameters
         {
-            get { return true; }
+            get
+            {
+                return new OpenParameters
+                {
+                    DialogButtons = DialogButtons.OkCancel
+                };
+            }
         }
     }
 }
