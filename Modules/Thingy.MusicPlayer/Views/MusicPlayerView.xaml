@@ -4,10 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:xaml="clr-namespace:Thingy.XAML.Converters;assembly=Thingy.XAML"
     xmlns:interactivity="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:musicplayer="clr-namespace:Thingy.MusicPlayerCore.Controls;assembly=Thingy.MusicPlayerCore"
+    xmlns:xaml="clr-namespace:Thingy.XAML.Converters;assembly=Thingy.XAML"
     d:DesignHeight="500"
     d:DesignWidth="900"
     mc:Ignorable="d">
@@ -69,8 +69,8 @@
                             </ComboBox.ItemTemplate>
                             <ComboBox.SelectedIndex>
                                 <MultiBinding Converter="{xaml:AudioDeviceIndexToListIndexConverter}" Mode="OneWay">
-                                    <Binding Path="AudioEngine.OutputDevices"/>
-                                    <Binding Path="AudioEngine.DefaultDeviceIndex"/>
+                                    <Binding Path="AudioEngine.OutputDevices" />
+                                    <Binding Path="AudioEngine.DefaultDeviceIndex" />
                                 </MultiBinding>
                             </ComboBox.SelectedIndex>
                         </ComboBox>
@@ -96,13 +96,22 @@
                             Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-eject-96.png"
                             ImageHeight="48"
                             ImageWidth="48"
-                            Style="{StaticResource Flat}" />
+                            Style="{StaticResource Flat}"
+                            ToolTip="Open files" />
                         <applib:ImageButton
                             Command="{Binding PlayCommand}"
                             Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-play-96.png"
                             ImageHeight="48"
                             ImageWidth="48"
-                            Style="{StaticResource Flat}" />
+                            Style="{StaticResource Flat}"
+                            ToolTip="Play" />
+                        <applib:ImageButton
+                            Command="{Binding PauseCommand}"
+                            Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-pause-96.png"
+                            ImageHeight="48"
+                            ImageWidth="48"
+                            Style="{StaticResource Flat}"
+                            ToolTip="Pause" />
                         <applib:ImageButton
                             Command="{Binding SeekBackCommand}"
                             Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-rewind-96.png"
