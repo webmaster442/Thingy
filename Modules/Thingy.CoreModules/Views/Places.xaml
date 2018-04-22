@@ -10,7 +10,7 @@
     mc:Ignorable="d">
     <TabControl>
         <TabItem
-            Header="User favorites">
+            Header="User favourites">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -77,11 +77,11 @@
                 </StackPanel>
             </ScrollViewer>
         </TabItem>
-        <TabItem Header="Evironment variables">
+        <TabItem Header="Environment variables">
             <ScrollViewer>
                 <StackPanel>
                     <Label
-                        Content="Folders in Evironment Variables"
+                        Content="Folders in Environment variables"
                         Style="{StaticResource Title}" />
                     <ItemsControl
                         ItemTemplate="{StaticResource SystemFolderLink}"
