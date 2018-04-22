@@ -29,6 +29,7 @@ namespace Thingy.MusicPlayer.ViewModels
 
         public ObservableCollection<NavigationItem> Tree { get; }
         public DelegateCommand AddFilesCommand { get; }
+        public DelegateCommand AddDirectoryCommand { get; }
         public DelegateCommand<string[]> CategoryQueryCommand { get; }
         public DelegateCommand<string[]> DeleteQueryCommand { get; }
         public DelegateCommand CreateQueryCommand { get; }
@@ -46,6 +47,7 @@ namespace Thingy.MusicPlayer.ViewModels
             QueryResults = new ObservableCollection<Song>();
             CreateQueryCommand = Command.ToCommand(CreateQuery);
             AddFilesCommand = Command.ToCommand(AddFiles);
+            AddDirectoryCommand = Command.ToCommand(AddDirectory);
             CategoryQueryCommand = Command.ToCommand<string[]>(CategoryQuery);
             DeleteQueryCommand = Command.ToCommand<string[]>(DeleteQuery);
             SendToPlayerCommand = Command.ToCommand<IList>(SendToPlayer, CanSendToPlayer);
@@ -140,6 +142,25 @@ namespace Thingy.MusicPlayer.ViewModels
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 var items = await DBFactory.CreateSongs(ofd.FileNames);
+                _db.MediaLibary.AddSongs(items);
+                BuildTree();
+                _db.MediaLibary.SaveCache();
+            }
+        }
+
+        private async void AddDirectory()
+        {
+            var fbd = new System.Windows.Forms.FolderBrowserDialog();
+            fbd.Description = "Select folder to add";
+            if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                List<string> Files = new List<string>(30);
+                foreach (var filter in _extensions.AllSupportedFormats)
+                {
+                    Files.AddRange(Directory.GetFiles(fbd.SelectedPath, filter));
+                }
+                Files.Sort();
+                var items = await DBFactory.CreateSongs(Files.ToArray());
                 _db.MediaLibary.AddSongs(items);
                 BuildTree();
                 _db.MediaLibary.SaveCache();
