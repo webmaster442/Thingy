@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -55,7 +56,7 @@ namespace Setup.Internals
                     if (filterextensions.Contains(file.Extension))
                         entities.Add(new WixSharp.File(currentDirectory.FullName + @"\" + file.Name));
 
-                    Console.WriteLine("Added file: {0}", currentDirectory.FullName + @"\" + file.Name);
+                    Debug.WriteLine("Added file: {0}", currentDirectory.FullName + @"\" + file.Name);
                 }
                 foreach (var directory in subDirectories)
                 {
@@ -67,7 +68,7 @@ namespace Setup.Internals
                 foreach (var file in files)
                 {
                     entities.Add(new WixSharp.File(currentDirectory.FullName + @"\" + file.Name));
-                    Console.WriteLine("Added file: {0}", currentDirectory.FullName + @"\" + file.Name);
+                    Debug.WriteLine("Added file: {0}", currentDirectory.FullName + @"\" + file.Name);
                 }
                 foreach (var directory in subDirectories)
                 {
