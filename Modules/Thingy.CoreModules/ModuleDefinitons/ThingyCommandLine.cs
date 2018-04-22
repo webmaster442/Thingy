@@ -1,9 +1,5 @@
 ﻿using AppLib.WPF;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Thingy.API;
@@ -29,10 +25,11 @@ namespace Thingy.CoreModules.ModuleDefinitons
 
         public override UserControl RunModule()
         {
-            var ipy = new System.Diagnostics.Process();
-            ipy.StartInfo.FileName = "cmd.exe";
-            ipy.StartInfo.Arguments = "/k init.cmd";
-            ipy.Start();
+            var cmd = new System.Diagnostics.Process();
+            cmd.StartInfo.WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            cmd.StartInfo.FileName = "cmd.exe";
+            cmd.StartInfo.Arguments = "/k init.cmd";
+            cmd.Start();
             return null;
         }
     }

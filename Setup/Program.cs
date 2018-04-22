@@ -1,4 +1,5 @@
-﻿using Setup.Internals;
+﻿using System;
+using Setup.Internals;
 using WixSharp;
 using WixSharp.Forms;
 
@@ -6,7 +7,7 @@ namespace Setup
 {
     class Program
     {
-        static void Main()
+        public static void Main()
         {
             var project = new ManagedProject("Thingy")
             {
@@ -20,7 +21,15 @@ namespace Setup
                 Dirs = new Dir[]
                 {
                     new Dir(Constants.InstallDir,
-                           InstallerHelper.GetFiles(InstallerHelper.ThingyReleaseDirectory,".dll", ".exe", ".config", ".vbs"))
+                           InstallerHelper.GetFiles(InstallerHelper.ThingyReleaseDirectory,".dll", ".exe", ".config", ".vbs", ".cmd")),
+                    new Dir(@"%ProgramMenu%\Webmaster44\Thingy",
+                            new ExeFileShortcut("Uninstall Thingy", "[System64Folder]msiexec.exe", "/x [ProductCode]")
+                            {
+                                WorkingDirectory = "%Temp%"
+                            },
+                            new ExeFileShortcut("Thingy", @"[AppDataFolder]Webmaster442\Thingy\Thingy.exe", "")),
+                    new Dir(@"%Desktop%",
+                            new ExeFileShortcut("Thingy", @"[AppDataFolder]Webmaster442\Thingy\Thingy.exe", ""))
                 }
             };
             project.BackgroundImage = Constants.Banner;

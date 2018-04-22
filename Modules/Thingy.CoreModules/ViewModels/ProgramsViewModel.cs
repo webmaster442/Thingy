@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
 using Thingy.API;
 using Thingy.API.Capabilities;
 using Thingy.CoreModules.Models;
@@ -83,10 +82,10 @@ namespace Thingy.CoreModules.ViewModels
             run.Start();
         }
 
-        private void Delete(string obj)
+        private async void Delete(string obj)
         {
-            var q = MessageBox.Show("Delete program?", "Link delete", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (q == MessageBoxResult.Yes)
+            var q = await _application.ShowMessageBox("Link delete", "Delete program?", DialogButtons.YesNo);
+            if (q)
             {
                 _db.Programs.DeleteLauncherProgram(obj);
                 ApplyFiltering();

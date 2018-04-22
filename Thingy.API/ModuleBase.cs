@@ -38,11 +38,6 @@ namespace Thingy.API
 
         public abstract string Category { get; }
 
-        public virtual bool OpenAsWindow
-        {
-            get { return false; }
-        }
-
         public virtual bool IsSingleInstance
         {
             get { return false; }
@@ -54,5 +49,10 @@ namespace Thingy.API
         }
 
         public IApplication App { get; set; }
+
+        public virtual OpenParameters OpenParameters
+        {
+            get { return null; }
+        }
     }
 }

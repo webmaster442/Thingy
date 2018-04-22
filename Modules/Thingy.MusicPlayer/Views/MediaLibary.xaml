@@ -40,7 +40,8 @@
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem
-                    Header="Add Folder...">
+                    Header="Add Folder..."
+                    Command="{Binding AddDirectoryCommand}">
                     <MenuItem.Icon>
                         <Image
                             Width="24"
