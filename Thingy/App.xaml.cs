@@ -138,6 +138,22 @@ namespace Thingy
             return result;
         }
 
+        public bool ShowRealDialog(string title, UserControl content, DialogButtons buttons, INotifyPropertyChanged modell = null)
+        {
+            ModalDialogReal modalDialog = new ModalDialogReal();
+
+            if (modell != null)
+                content.DataContext = modell;
+
+            modalDialog.DailogContent = content;
+            modalDialog.Title = title;
+            modalDialog.DialogButtons = buttons;
+
+            var result = modalDialog.ShowDialog();
+
+            return result.Value;
+        }
+
         public async Task<bool> ShowMessageBox(string title, string content, DialogButtons buttons)
         {
             var mainwindow = (Current.MainWindow as MainWindow);

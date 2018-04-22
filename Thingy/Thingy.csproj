@@ -107,6 +107,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\ModalDialogReal.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\MonitorSwitcher.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -143,8 +147,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\IModalDialog.cs" />
     <Compile Include="Controls\ModalDialog.xaml.cs">
       <DependentUpon>ModalDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ModalDialogReal.xaml.cs">
+      <DependentUpon>ModalDialogReal.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\MonitorSwitcher.xaml.cs">
       <DependentUpon>MonitorSwitcher.xaml</DependentUpon>

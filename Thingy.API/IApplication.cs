@@ -37,6 +37,15 @@ namespace Thingy.API
         /// <returns>Dialog button result</returns>
         Task<bool> ShowDialog(string title, UserControl content, DialogButtons buttons, bool hasShadow = true, INotifyPropertyChanged modell = null);
         /// <summary>
+        /// Show a real WPF Dialog
+        /// </summary>
+        /// <param name="title">Dialog title</param>
+        /// <param name="content">Dialog content</param>
+        /// <param name="buttons">Dialog buttons</param>
+        /// <param name="modell">ViewModel, optional</param>
+        /// <returns>Dialog button result</returns>
+        bool ShowRealDialog(string title, UserControl content, DialogButtons buttons, INotifyPropertyChanged modell = null);
+        /// <summary>
         /// Show a message box
         /// </summary>
         /// <param name="title">Dialog title</param>

@@ -1,4 +1,4 @@
-﻿using MahApps.Metro.SimpleChildWindow;
+﻿using MahApps.Metro.Controls;
 using System.ComponentModel;
 using System.Windows;
 using Thingy.API;
@@ -8,10 +8,10 @@ namespace Thingy.Controls
     /// <summary>
     /// Interaction logic for ModalDialog.xaml
     /// </summary>
-    public partial class ModalDialog : ChildWindow, IModalDialog
+    public partial class ModalDialogReal : MetroWindow, IModalDialog
     {
         public static readonly DependencyProperty DialogContentProperty =
-            DependencyProperty.Register("DailogContent", typeof(object), typeof(ModalDialog));
+            DependencyProperty.Register("DailogContent", typeof(object), typeof(ModalDialogReal));
 
         private INotifyDataErrorInfo ValidatableContent;
         private DialogButtons _dialogbuttons;
@@ -91,19 +91,19 @@ namespace Thingy.Controls
             OkButton.IsEnabled = !ValidatableContent.HasErrors;
         }
 
-        public ModalDialog()
+        public ModalDialogReal()
         {
             InitializeComponent();
         }
 
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
-            Close(true);
+            DialogResult = true;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            Close(false);
+            DialogResult = false;
         }
     }
 }

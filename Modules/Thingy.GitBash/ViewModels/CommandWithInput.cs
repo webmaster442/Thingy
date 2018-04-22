@@ -42,7 +42,7 @@ namespace Thingy.GitBash.ViewModels
             return true;
         }
 
-        public async void Execute(object parameter)
+        public void Execute(object parameter)
         {
             var dialog = new StringInputDialog();
 
@@ -52,7 +52,7 @@ namespace Thingy.GitBash.ViewModels
                 case InputCommands.Clone:
                     {
                         dialog.Description = "Enter repository url that you wish to clone";
-                        var result = await _app.ShowDialog("Clone Repository", dialog, DialogButtons.OkCancel, false);
+                        var result = _app.ShowRealDialog("Clone Repository", dialog, DialogButtons.OkCancel);
                         if (result)
                         {
                             _view.SendText($"git clone {dialog.Input}");
@@ -62,7 +62,7 @@ namespace Thingy.GitBash.ViewModels
                 case InputCommands.AddAndCommit:
                     {
                         dialog.Description = "Enter Commit message";
-                        var result = await _app.ShowDialog("Add files & commit", dialog, DialogButtons.OkCancel, false);
+                        var result = _app.ShowRealDialog("Add files & commit", dialog, DialogButtons.OkCancel);
                         if (result)
                         {
                             _view.SendText($"git add .");
@@ -83,7 +83,7 @@ namespace Thingy.GitBash.ViewModels
                 case InputCommands.ChangeBranch:
                     {
                         dialog.Description = "Enter branch name to be checked out";
-                        var result = await _app.ShowDialog("Change branch", dialog, DialogButtons.OkCancel, false);
+                        var result = _app.ShowRealDialog("Change branch", dialog, DialogButtons.OkCancel);
                         if (result)
                         {
                             _view.SendText($"git checkout {dialog.Input}");
@@ -93,7 +93,7 @@ namespace Thingy.GitBash.ViewModels
                 case InputCommands.MergeBranch:
                     {
                         dialog.Description = "Enter source branch to be merged to current branch";
-                        var result = await _app.ShowDialog("Merge branch", dialog, DialogButtons.OkCancel, false);
+                        var result = _app.ShowRealDialog("Merge branch", dialog, DialogButtons.OkCancel);
                         if (result)
                         {
                             _view.SendText($"git merge {dialog.Input}");
@@ -103,7 +103,7 @@ namespace Thingy.GitBash.ViewModels
                 case InputCommands.CreateBranch:
                     {
                         dialog.Description = "Enter new branch name";
-                        var result = await _app.ShowDialog("Create branch", dialog, DialogButtons.OkCancel, false);
+                        var result = _app.ShowRealDialog("Create branch", dialog, DialogButtons.OkCancel);
                         if (result)
                         {
                             _view.SendText($"git branch --set-upstream {dialog.Input}");
@@ -114,7 +114,7 @@ namespace Thingy.GitBash.ViewModels
                 case InputCommands.DeleteBranch:
                     {
                         dialog.Description = "Enter branch name, that you wish to delete.\nWARNING: This can't be undone";
-                        var result = await _app.ShowDialog("Delete branch", dialog, DialogButtons.OkCancel, false);
+                        var result = _app.ShowRealDialog("Delete branch", dialog, DialogButtons.OkCancel);
                         if (result)
                         {
                             _view.SendText($"git branch -d {dialog.Input}");
@@ -124,7 +124,7 @@ namespace Thingy.GitBash.ViewModels
                 case InputCommands.CreateTag:
                     {
                         dialog.Description = "Enter new tag";
-                        var result = await _app.ShowDialog("Create tag", dialog, DialogButtons.OkCancel, false);
+                        var result = _app.ShowRealDialog("Create tag", dialog, DialogButtons.OkCancel);
                         if (result)
                         {
                             _view.SendText($"git tag {dialog.Input}");
