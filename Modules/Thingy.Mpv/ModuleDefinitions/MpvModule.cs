@@ -33,7 +33,10 @@ namespace Thingy.Mpv.ModuleDefinitions
             get
             {
                 var mpv = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Apps\x64\mpv.exe");
-                return System.IO.File.Exists(mpv);
+                bool canLoad = System.IO.File.Exists(mpv);
+                if (!canLoad)
+                    App.Log.Warning("Mpv Module not shown, because file not exists: {0}", mpv);
+                return canLoad;
             }
         }
 
