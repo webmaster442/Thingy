@@ -7,7 +7,7 @@
 #define MyAppURL "https://github.com/webmaster442/thingy"
 #define MyAppExeName "Thingy.exe"
 
-;#include "files.iss"
+#include "files.iss"
 #include "code.iss"
 
 [Setup]
@@ -18,7 +18,7 @@ AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-DefaultDirName={localappdata}\{#MyAppName}
+DefaultDirName={userappdata}\{#MyAppPublisher}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
 LicenseFile=gpl-3.0.rtf
