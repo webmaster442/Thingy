@@ -78,7 +78,10 @@
     <Compile Include="SettingsExtension.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
+    <None Include="Diagrams\Capabilities.cd" />
+    <None Include="Diagrams\Messages.cd" />
+    <None Include="Diagrams\App interface.cd" />
+    <None Include="Diagrams\Plugin structure.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

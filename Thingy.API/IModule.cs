@@ -4,6 +4,9 @@ using System.Windows.Media;
 
 namespace Thingy.API
 {
+    /// <summary>
+    /// Used when module is opened as dialog
+    /// </summary>
     public class OpenParameters
     {
         public DialogButtons DialogButtons { get; set; }
@@ -11,17 +14,59 @@ namespace Thingy.API
 
     public interface IModule
     {
+        /// <summary>
+        /// Application interface, to acces various services
+        /// </summary>
         IApplication App { get; set; }
+        /// <summary>
+        /// Module name
+        /// </summary>
         string ModuleName { get; }
+        /// <summary>
+        /// Module icon
+        /// </summary>
         ImageSource Icon { get; }
+        /// <summary>
+        /// Main Entry point of module
+        /// </summary>
+        /// <returns></returns>
         UserControl RunModule();
+        /// <summary>
+        /// Launcher button background
+        /// </summary>
         Color TileColor { get; }
+        /// <summary>
+        /// Launcher button background brush
+        /// By default this is used. The abstract plugin implementation
+        /// Returns a SolidColorBrush. The brush color is provided by
+        /// the TileColor property.
+        /// Use this if you want a fancy looking launcher button background
+        /// </summary>
         SolidColorBrush ColorBrush { get; }
+        /// <summary>
+        /// Ladability check
+        /// </summary>
         bool CanLoad { get; }
+        /// <summary>
+        /// Module category
+        /// </summary>
         string Category { get; }
+        /// <summary>
+        /// Dialog open parameters
+        /// </summary>
         OpenParameters OpenParameters { get; }
+        /// <summary>
+        /// Limit app to singe instance
+        /// </summary>
         bool IsSingleInstance { get; }
+        /// <summary>
+        /// List of supported extensions
+        /// </summary>
         IEnumerable<string> SupportedExtensions { get; }
+        /// <summary>
+        /// Callback, when App is attached.
+        /// Use this instead of ctor logic.
+        /// </summary>
         void AppAttached();
     }
 }
