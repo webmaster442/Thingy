@@ -13,6 +13,7 @@ namespace Thingy.Implementation
         IEnumerable<IModule> GetModulesForCategory(string category = null);
         IEnumerable<IModule> GetModulesByName(string searchname);
         IDictionary<string, int> CategoryModuleCount { get; }
-        IModule GetModuleForFile(string file);
+        //IModule GetModuleForFile(string file);
+        IList<IModule> GetModulesForFiles(IEnumerable<string> files);
     }
 }

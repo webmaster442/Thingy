@@ -138,23 +138,24 @@ namespace Thingy.Implementation
             return moduleToRun;
         }
 
-        public IModule GetModuleForFile(string file)
+        public IList<IModule> GetModulesForFiles(IEnumerable<string> files)
         {
-            var extension = System.IO.Path.GetExtension(file);
+            var extensions = from file in files
+                    select Path.GetExtension(file);
 
-            var moduleToRun = (from module in _modules
-                               where module.SupportedExtensions != null &&
-                               module.SupportedExtensions.Contains(extension)
-                               select module).FirstOrDefault();
+            var uniqueExtension = new HashSet<string>(extensions);
 
-            if (moduleToRun == null)
-            {
-                if (!string.IsNullOrEmpty(extension))
-                    _app.Log.Error("couldn't find module for extension: {0}", extension);
-                return null;
-            }
+            _app.Log.Info("Found {0} different extensions in {1} files", uniqueExtension.Count, files.Count());
 
-            return moduleToRun;
+            var moduleList = (from extension in uniqueExtension
+                     from module in _modules
+                     where module.SupportedExtensions != null &&
+                     module.SupportedExtensions.Contains(extension)
+                     select module).ToList();
+
+            _app.Log.Info("Found {0} modules for prodived {1} extensions", moduleList.Count, uniqueExtension.Count);
+
+            return moduleList;
         }
     }
 }

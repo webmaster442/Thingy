@@ -115,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\OpenSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\StartPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -157,6 +161,10 @@
     <Compile Include="Controls\MonitorSwitcher.xaml.cs">
       <DependentUpon>MonitorSwitcher.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\OpenSelector.xaml.cs">
+      <DependentUpon>OpenSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OpenSelectorItem.cs" />
     <Compile Include="Controls\StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>

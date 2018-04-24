@@ -65,7 +65,18 @@ namespace Thingy
             var loader = Resolve<IModuleLoader>();
             foreach (var file in files)
             {
-                var module = loader.GetModuleForFile(file);
+                IModule module = null;
+                var modules = loader.GetModulesForFiles(files);
+                if (modules == null || modules.Count == 0) continue;
+                else if (modules.Count == 1)
+                {
+                    module = modules[0];
+                }
+                else
+                {
+                    module = await SelectModule(modules);
+                }
+
                 if (module == null) continue;
 
                 if (module.IsSingleInstance)
@@ -90,6 +101,14 @@ namespace Thingy
                     Messager.SendMessage(id, new HandleFileMessage(AppConstants.ApplicationGuid, file));
                 }
             }
+        }
+
+        private async Task<IModule> SelectModule(IList<IModule> modules)
+        {
+            OpenSelector selector = new OpenSelector(this);
+            selector.InputModules = modules;
+            await ShowMessageBox(selector);
+            return selector.SelectedModule;
         }
 
         public Task HideMessageBox(CustomDialog messageBoxContent)
