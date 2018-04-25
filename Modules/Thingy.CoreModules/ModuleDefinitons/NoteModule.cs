@@ -1,4 +1,5 @@
 ﻿using AppLib.WPF;
+using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Thingy.API;
@@ -28,6 +29,21 @@ namespace Thingy.Modules
             var view = new CoreModules.Views.Notes.NoteEditor();
             view.DataContext = new CoreModules.ViewModels.Notes.NoteEditorViewModel(view, App, App.Resolve<IDataBase>());
             return view;
+        }
+
+        public override IEnumerable<string> SupportedExtensions
+        {
+            get
+            {
+                yield return ".txt";
+                yield return ".cpp";
+                yield return ".cs";
+                yield return ".c";
+                yield return ".h";
+                yield return ".md";
+                yield return ".html";
+                yield return ".js";
+            }
         }
     }
 }

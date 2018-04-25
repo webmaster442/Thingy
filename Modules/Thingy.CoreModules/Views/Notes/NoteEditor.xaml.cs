@@ -1,4 +1,5 @@
-﻿using ICSharpCode.AvalonEdit;
+﻿using AppLib.MVVM.MessageHandler;
+using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Folding;
 using ICSharpCode.AvalonEdit.Highlighting;
@@ -7,16 +8,17 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using Thingy.API.Messages;
 
 namespace Thingy.CoreModules.Views.Notes
 {
     /// <summary>
     /// Interaction logic for NoteEditor.xaml
     /// </summary>
-    public partial class NoteEditor : UserControl, INoteEditor
+    public partial class NoteEditor : UserControl, INoteEditor, IMessageClient<HandleFileMessage>
     {
-        FoldingManager foldingManager;
-        object foldingStrategy;
+        private FoldingManager foldingManager;
+        private object foldingStrategy;
 
         public string EditorText
         {
@@ -24,9 +26,15 @@ namespace Thingy.CoreModules.Views.Notes
             set { TextEditor.Text = value; }
         }
 
+        public Guid MessageReciverID
+        {
+            get { return Guid.Parse(Tag.ToString()); }
+        }
+
         public NoteEditor()
         {
             InitializeComponent();
+            Messager.Instance.SubScribe(this);
         }
 
         public void ClearText()
@@ -150,6 +158,11 @@ namespace Thingy.CoreModules.Views.Notes
         {
             IHighlighter highlighter = new DocumentHighlighter(TextEditor.Document, TextEditor.SyntaxHighlighting);
             return HtmlClipboard.CreateHtmlFragment(TextEditor.Document, highlighter, null, new HtmlOptions());
+        }
+
+        public void HandleMessage(HandleFileMessage message)
+        {
+            LoadFile(message.Files[0]);
         }
     }
 }

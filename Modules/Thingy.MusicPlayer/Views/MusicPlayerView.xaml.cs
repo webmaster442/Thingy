@@ -23,7 +23,7 @@ namespace Thingy.MusicPlayer.Views
 
         public Guid MessageReciverID
         {
-            get { return Guid.NewGuid(); }
+            get { return Guid.Parse(Tag.ToString()); }
         }
 
         public MusicPlayerView()
