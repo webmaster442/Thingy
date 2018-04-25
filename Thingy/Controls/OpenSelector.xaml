@@ -1,15 +1,14 @@
-﻿<mahdialogs:CustomDialog
+﻿<UserControl
     x:Class="Thingy.Controls.OpenSelector"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mahdialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="400"
     DataContext="{Binding RelativeSource={RelativeSource Self}}"
     mc:Ignorable="d">
-    <mahdialogs:CustomDialog.Resources>
+    <UserControl.Resources>
         <DataTemplate
             x:Key="OpenItem">
             <Grid>
@@ -28,46 +27,20 @@
                     Text="{Binding Text}" />
             </Grid>
         </DataTemplate>
-    </mahdialogs:CustomDialog.Resources>
-    <mahdialogs:CustomDialog.Title>Select module to open files</mahdialogs:CustomDialog.Title>
-    <mahdialogs:CustomDialog.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid
-                Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <TextBlock
-                    Grid.Row="0"
-                    Margin="5"
-                    Text="Multiple modules detected, that can handle the files. Select module to open files with that"
-                    TextWrapping="Wrap" />
-                <ListBox
-                    x:Name="ModuleList"
-                    Grid.Row="1"
-                    ItemTemplate="{StaticResource OpenItem}"
-                    ItemsSource="{Binding ItemsCollection}" />
-            </Grid>
-            <StackPanel
-                Grid.Row="1"
-                Height="85"
-                HorizontalAlignment="Right"
-                Orientation="Horizontal">
-                <Button
-                    x:Name="PART_NegativeButton"
-                    Height="35"
-                    MinWidth="80"
-                    Margin="5,0,0,0"
-                    Click="PART_NegativeButton_Click"
-                    Content="OK"
-                    Cursor="Arrow"
-                    Style="{DynamicResource AccentedDialogSquareButton}" />
-            </StackPanel>
-        </Grid>
-    </mahdialogs:CustomDialog.Content>
-</mahdialogs:CustomDialog>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            Margin="5"
+            Text="Multiple modules detected, that can handle the files. Select module to open files with that"
+            TextWrapping="Wrap" />
+        <ListBox
+            x:Name="ModuleList"
+            Grid.Row="1"
+            ItemTemplate="{StaticResource OpenItem}" />
+    </Grid>
+</UserControl>

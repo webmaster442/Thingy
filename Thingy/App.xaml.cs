@@ -63,43 +63,42 @@ namespace Thingy
         public async void HandleFiles(IList<string> files)
         {
             var loader = Resolve<IModuleLoader>();
-            foreach (var file in files)
+
+            IModule module = null;
+            var modules = loader.GetModulesForFiles(files);
+            if (modules == null || modules.Count == 0) return;
+
+            else if (modules.Count == 1)
             {
-                IModule module = null;
-                var modules = loader.GetModulesForFiles(files);
-                if (modules == null || modules.Count == 0) continue;
-                else if (modules.Count == 1)
-                {
-                    module = modules[0];
-                }
-                else
-                {
-                    module = await SelectModule(modules);
-                }
+                module = modules[0];
+            }
+            else
+            {
+                module = await SelectModule(modules);
+            }
 
-                if (module == null) continue;
+            if (module == null) return;
 
-                if (module.IsSingleInstance)
-                {
-                    int tabIndex = TabManager.GetTabIndexByTitle(module.ModuleName);
-                    if (tabIndex == -1)
-                    {
-                        var id = await TabManager.StartModule(module);
-                        await Task.Delay(25);
-                        Messager.SendMessage(id, new HandleFileMessage(AppConstants.ApplicationGuid, file));
-                    }
-                    else
-                    {
-                        TabManager.FocusTabByIndex(tabIndex);
-                        Messager.SendMessage(module.RunModule().GetType(), new HandleFileMessage(AppConstants.ApplicationGuid, file));
-                    }
-                }
-                else
+            if (module.IsSingleInstance)
+            {
+                int tabIndex = TabManager.GetTabIndexByTitle(module.ModuleName);
+                if (tabIndex == -1)
                 {
                     var id = await TabManager.StartModule(module);
                     await Task.Delay(25);
-                    Messager.SendMessage(id, new HandleFileMessage(AppConstants.ApplicationGuid, file));
+                    Messager.SendMessage(id, new HandleFileMessage(AppConstants.ApplicationGuid, files));
                 }
+                else
+                {
+                    TabManager.FocusTabByIndex(tabIndex);
+                    Messager.SendMessage(module.RunModule().GetType(), new HandleFileMessage(AppConstants.ApplicationGuid, files));
+                }
+            }
+            else
+            {
+                var id = await TabManager.StartModule(module);
+                await Task.Delay(25);
+                Messager.SendMessage(id, new HandleFileMessage(AppConstants.ApplicationGuid, files));
             }
         }
 
@@ -107,8 +106,9 @@ namespace Thingy
         {
             OpenSelector selector = new OpenSelector(this);
             selector.InputModules = modules;
-            await ShowMessageBox(selector);
-            return selector.SelectedModule;
+            if (await ShowDialog("Select module", selector, DialogButtons.OkCancel))
+                return selector.SelectedModule;
+            return null;
         }
 
         public Task HideMessageBox(CustomDialog messageBoxContent)

@@ -1,9 +1,9 @@
 ﻿using AppLib.Common.Extensions;
-using MahApps.Metro.Controls.Dialogs;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using Thingy.API;
 
 namespace Thingy.Controls
@@ -11,7 +11,7 @@ namespace Thingy.Controls
     /// <summary>
     /// Interaction logic for OpenSelector.xaml
     /// </summary>
-    public partial class OpenSelector : CustomDialog
+    public partial class OpenSelector : UserControl
     {
         private IApplication _app;
 
@@ -54,16 +54,13 @@ namespace Thingy.Controls
                         };
 
             ItemsCollection.UpdateWith(query);
+
+            ModuleList.ItemsSource = ItemsCollection;
         }
 
         public OpenSelector(IApplication app): this()
         {
             _app = app;
-        }
-
-        private async void PART_NegativeButton_Click(object sender, RoutedEventArgs e)
-        {
-            await _app.HideMessageBox(this);
         }
     }
 }
