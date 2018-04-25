@@ -12,6 +12,7 @@ using Thingy.API;
 using Thingy.API.Messages;
 using Thingy.Controls;
 using Thingy.Implementation;
+using System.Linq;
 
 namespace Thingy
 {
@@ -79,6 +80,8 @@ namespace Thingy
 
             if (module == null) return;
 
+            var msgcontent = SelectFilesSupportedByModule(files, module);
+
             if (module.IsSingleInstance)
             {
                 int tabIndex = TabManager.GetTabIndexByTitle(module.ModuleName);
@@ -86,20 +89,28 @@ namespace Thingy
                 {
                     var id = await TabManager.StartModule(module);
                     await Task.Delay(25);
-                    Messager.SendMessage(id, new HandleFileMessage(AppConstants.ApplicationGuid, files));
+                    Messager.SendMessage(id, new HandleFileMessage(AppConstants.ApplicationGuid, msgcontent));
                 }
                 else
                 {
                     TabManager.FocusTabByIndex(tabIndex);
-                    Messager.SendMessage(module.RunModule().GetType(), new HandleFileMessage(AppConstants.ApplicationGuid, files));
+                    Messager.SendMessage(module.RunModule().GetType(), new HandleFileMessage(AppConstants.ApplicationGuid, msgcontent));
                 }
             }
             else
             {
                 var id = await TabManager.StartModule(module);
                 await Task.Delay(25);
-                Messager.SendMessage(id, new HandleFileMessage(AppConstants.ApplicationGuid, files));
+                Messager.SendMessage(id, new HandleFileMessage(AppConstants.ApplicationGuid, msgcontent));
             }
+        }
+
+        private IEnumerable<string> SelectFilesSupportedByModule(IEnumerable<string> files, IModule filter)
+        {
+            return 
+                from file in files
+                where filter.SupportedExtensions.Contains(System.IO.Path.GetExtension(file))
+                select file;
         }
 
         private async Task<IModule> SelectModule(IList<IModule> modules)
