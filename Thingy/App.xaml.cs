@@ -238,6 +238,16 @@ namespace Thingy
             mainwindow.StatusFlyOut.IsOpen = true;
         }
 
+        public void ShowFlyoutLeft(UserControl control, string title, bool AutoClose = true, int AutoCloseTimeMs = 5000)
+        {
+            var mainwindow = (Current.MainWindow as MainWindow);
+            mainwindow.LeftFlyOut.Content = control;
+            mainwindow.LeftFlyOut.AutoCloseInterval = AutoCloseTimeMs;
+            mainwindow.LeftFlyOut.IsAutoCloseEnabled = AutoClose;
+            mainwindow.LeftFlyOut.Header = title;
+            mainwindow.LeftFlyOut.IsOpen = true;
+        }
+
         #endregion
 
         protected override void OnStartup(StartupEventArgs e)

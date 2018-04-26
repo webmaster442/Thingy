@@ -7,12 +7,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="100"
-    d:DesignWidth="300"
+    d:DesignWidth="800"
     mc:Ignorable="d">
     <StackPanel
         Orientation="Horizontal">
         <applib:ImageButton
-            Width="100"
+            Width="120"
             Click="ScreenClick"
             Content="1st Screen only"
             Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-monitor.png"

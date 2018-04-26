@@ -175,6 +175,12 @@
                 </StackPanel>
             </mah:Flyout>
             <mah:Flyout
+                x:Name="LeftFlyOut"
+                ClosingFinished="LeftFlyOut_ClosingFinished"
+                IsAutoCloseEnabled="True"
+                Position="Left"
+                Theme="Inverse" />
+            <mah:Flyout
                 x:Name="StatusFlyOut"
                 ClosingFinished="StatusFlyOut_ClosingFinished"
                 IsAutoCloseEnabled="True"

@@ -1,5 +1,4 @@
-﻿using AppLib.Common;
-using Dragablz;
+﻿using Dragablz;
 using MahApps.Metro.Controls;
 using System;
 using System.Linq;
@@ -7,11 +6,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Shell;
 using Thingy.API;
 using Thingy.API.Capabilities;
-using Thingy.Infrastructure;
 using Thingy.Properties;
 
 namespace Thingy
@@ -155,7 +152,7 @@ namespace Thingy
             TabControl.SelectedIndex = index;
         }
 
-        private void ModernWindow_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        private void ModernWindow_Loaded(object sender, RoutedEventArgs e)
         {
             TabablzControl.AddItemCommand.Execute(this, TabControl);
             FocusTabByIndex(0);
@@ -167,9 +164,23 @@ namespace Thingy
             Settings.Default.Save();
         }
 
-        private void StatusFlyOut_ClosingFinished(object sender, System.Windows.RoutedEventArgs e)
+        private void StatusFlyOut_ClosingFinished(object sender, RoutedEventArgs e)
         {
             _app.Log.Info("Closing Status flyout");
+            if (StatusFlyOut.Content != null)
+            {
+                if (StatusFlyOut.Content is IDisposable disposable)
+                {
+                    _app.Log.Info($"Dispodsing type: {StatusFlyOut.Content.GetType().FullName}");
+                    disposable.Dispose();
+                }
+                StatusFlyOut.Content = null;
+            }
+        }
+
+        private void LeftFlyOut_ClosingFinished(object sender, RoutedEventArgs e)
+        {
+            _app.Log.Info("Closing left flyout");
             if (StatusFlyOut.Content != null)
             {
                 if (StatusFlyOut.Content is IDisposable disposable)
@@ -187,7 +198,7 @@ namespace Thingy
             base.OnKeyDown(e);
         }
 
-        private void Window_Drop(object sender, System.Windows.DragEventArgs e)
+        private void Window_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {

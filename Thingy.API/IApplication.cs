@@ -115,9 +115,16 @@ namespace Thingy.API
         /// <param name="AutoCloseTimeMs">Auto close interval. Default = 5000</param>
         void ShowStatusBarMenu(UserControl control, string title, bool AutoClose = true, int AutoCloseTimeMs = 5000);
         /// <summary>
+        /// Show a user control as a flyout on the left
+        /// </summary>
+        /// <param name="control">Content</param>
+        /// <param name="title">Title</param>
+        /// <param name="AutoClose">Automaticaly close or not. Default = true</param>
+        /// <param name="AutoCloseTimeMs">Auto close interval. Default = 5000</param>
+        void ShowFlyoutLeft(UserControl control, string title, bool AutoClose = true, int AutoCloseTimeMs = 5000);
+        /// <summary>
         /// Get the Associated Application Dispatcher
         /// </summary>
         Dispatcher CurrentDispatcher { get; }
-
     }
  }
