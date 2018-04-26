@@ -76,6 +76,7 @@
     <Compile Include="Implementation\StoredFiles.cs" />
     <Compile Include="Implementation\ToDo.cs" />
     <Compile Include="Implementation\VirtualFolders.cs" />
+    <Compile Include="initialData\RadioStations.cs" />
     <Compile Include="Interfaces\IAlarms.cs" />
     <Compile Include="Interfaces\IFavoriteFolders.cs" />
     <Compile Include="Interfaces\IMediaLibary.cs" />
@@ -89,7 +90,6 @@
   <ItemGroup>
     <None Include="Database Diagram.cd" />
     <Compile Include="Entity\MediaLibary\Query.cs" />
-    <None Include="initialData\radioStations.csv" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

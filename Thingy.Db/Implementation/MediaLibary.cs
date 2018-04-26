@@ -46,6 +46,11 @@ namespace Thingy.Db.Implementation
             _radioStations.Insert(station);
         }
 
+        public void AddRadioStations(IEnumerable<RadioStation> stations)
+        {
+            _radioStations.InsertBulk(stations);
+        }
+
         public IEnumerable<RadioStation> GetRadioStations()
         {
             return _radioStations.FindAll();

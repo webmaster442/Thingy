@@ -13,6 +13,17 @@ namespace Thingy.Db.Entity.MediaLibary
         [BsonField]
         public string Url { get; set; }
 
+        public RadioStation()
+        {
+
+        }
+
+        public RadioStation(string name, string url)
+        {
+            Name = name;
+            Url = url;
+        }
+
         public override bool Equals(object obj)
         {
             return Equals(obj as RadioStation);

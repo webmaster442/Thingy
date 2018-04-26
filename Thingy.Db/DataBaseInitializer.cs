@@ -6,7 +6,7 @@ namespace Thingy.Db
     {
         internal static void Init(IDataBase dataBase)
         {
-
+            dataBase.MediaLibary.AddRadioStations(initialData.RadioStations.Collection);
         }
     }
 }
