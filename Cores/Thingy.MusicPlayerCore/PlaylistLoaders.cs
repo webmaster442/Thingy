@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -13,8 +14,15 @@ namespace Thingy.MusicPlayerCore
         {
             if (file.StartsWith("http://") || file.StartsWith("https://"))
             {
-                using (var client = new System.Net.WebClient())
+                using (var client = new WebClient())
                 {
+                    IWebProxy defaultProxy = WebRequest.DefaultWebProxy;
+                    if (defaultProxy != null)
+                    {
+                        defaultProxy.Credentials = CredentialCache.DefaultCredentials;
+                        client.Proxy = defaultProxy;
+                    }
+
                     var response = await client.DownloadStringTaskAsync(new Uri(file));
                     return new StringReader(response);
                 }

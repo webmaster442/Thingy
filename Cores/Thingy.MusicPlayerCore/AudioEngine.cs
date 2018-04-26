@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
@@ -313,6 +314,7 @@ namespace Thingy.MusicPlayerCore
                     r = ++_req;
                 }
                 var netFlags = BassFlags.StreamDownloadBlocks | sourceflags;
+                Bass.NetProxy = ""; //os default proxy
                 _decodeChannel = Bass.CreateStream(fileName, 0, netFlags, _streamDloadProc, new IntPtr(r));
                 lock (Lock)
                 {

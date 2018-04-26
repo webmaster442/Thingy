@@ -193,7 +193,16 @@ namespace Thingy.MusicPlayer.ViewModels
             bool result = await _app.ShowDialog("Add URL...", dialog, DialogButtons.OkCancel);
             if (result)
             {
-                List.Add(dialog.Url);
+                if (dialog.Url.EndsWith("m3u") || 
+                    dialog.Url.EndsWith("pls") || 
+                    dialog.Url.EndsWith("m3u8"))
+                {
+                    await DoOpenList(dialog.Url, true);
+                }
+                else
+                {
+                    List.Add(dialog.Url);
+                }
             }
         }
 
