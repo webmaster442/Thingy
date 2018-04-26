@@ -1,6 +1,6 @@
-﻿using AppLib.Common.PInvoke;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
+using Thingy.InternalCode;
 
 namespace Thingy.Controls
 {
@@ -16,32 +16,32 @@ namespace Thingy.Controls
 
         private void Lock_Click(object sender, RoutedEventArgs e)
         {
-            User32.LockWorkStation();
+            PowerManagement.Set(PowerAction.Lock);
         }
 
         private void Sleep_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.Application.SetSuspendState(System.Windows.Forms.PowerState.Suspend, true, true);
+            PowerManagement.Set(PowerAction.Sleep);
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
-            User32.ExitWindowsEx(ExitWindows.EWX_LOGOFF, ShutdownReason.FlagPlanned);
+            PowerManagement.Set(PowerAction.Logout);
         }
 
         private void Hybernate_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.Application.SetSuspendState(System.Windows.Forms.PowerState.Hibernate, true, true);
+            PowerManagement.Set(PowerAction.Hybernate);
         }
 
         private void Shutdown_Click(object sender, RoutedEventArgs e)
         {
-            User32.ExitWindowsEx(ExitWindows.EWX_POWEROFF, ShutdownReason.FlagPlanned);
+            PowerManagement.Set(PowerAction.Hybernate);
         }
 
         private void Restart_Click(object sender, RoutedEventArgs e)
         {
-            User32.ExitWindowsEx(ExitWindows.EWX_REBOOT, ShutdownReason.FlagPlanned);
+            PowerManagement.Set(PowerAction.Restart);
         }
     }
 }
