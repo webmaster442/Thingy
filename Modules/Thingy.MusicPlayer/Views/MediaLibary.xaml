@@ -66,9 +66,10 @@
                 Header="Create Query" />
 
             <MenuItem
+                x:Name="SendToPlayerMenuItem"
                 Command="{Binding SendToPlayerCommand}"
-                CommandParameter="{Binding ElementName=DataGrid, Path=SelectedItems}"
-                Header="Send Selection to Music Player" />
+                Header="Send Selection to Music Player">
+            </MenuItem>
         </Menu>
 
         <TreeView
@@ -119,6 +120,18 @@
             HorizontalAlignment="Stretch"
             Background="LightBlue"/>
 
+        <ListBox
+            x:Name="RadioList"
+            Grid.Row="1"
+            Grid.Column="2"
+            ItemsSource="{Binding RadioItems}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        
         <DataGrid
             x:Name="DataGrid"
             Grid.Row="1"

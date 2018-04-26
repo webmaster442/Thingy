@@ -36,6 +36,7 @@ namespace Thingy.MusicPlayer.ViewModels
         public DelegateCommand<IList> SendToPlayerCommand { get; }
 
         public ObservableCollection<Song> QueryResults { get; }
+        public ObservableCollection<RadioStation> RadioItems { get; }
 
 
         public MediaLibaryViewModel(IApplication app, IDataBase db)
@@ -45,6 +46,7 @@ namespace Thingy.MusicPlayer.ViewModels
             _extensions = new ExtensionProvider();
             Tree = new ObservableCollection<NavigationItem>();
             QueryResults = new ObservableCollection<Song>();
+            RadioItems = new ObservableCollection<RadioStation>();
             CreateQueryCommand = Command.ToCommand(CreateQuery);
             AddFilesCommand = Command.ToCommand(AddFiles);
             AddDirectoryCommand = Command.ToCommand(AddDirectory);
@@ -52,6 +54,12 @@ namespace Thingy.MusicPlayer.ViewModels
             DeleteQueryCommand = Command.ToCommand<string[]>(DeleteQuery);
             SendToPlayerCommand = Command.ToCommand<IList>(SendToPlayer, CanSendToPlayer);
             BuildTree();
+            LoadRadios();
+        }
+
+        private void LoadRadios()
+        {
+            RadioItems.UpdateWith(_db.MediaLibary.GetRadioStations());
         }
 
         private bool CanSendToPlayer(IList songs)
@@ -61,8 +69,16 @@ namespace Thingy.MusicPlayer.ViewModels
 
         private void SendToPlayer(IList songs)
         {
-            var files = songs.Cast<Song>().Select(s => s.Filename).ToList();
-            _app.HandleFiles(files);
+            if (songs[0] is Song)
+            {
+                var files = songs.Cast<Song>().Select(s => s.Filename).ToList();
+                _app.HandleFiles(files);
+            }
+            else
+            {
+                var files = songs.Cast<RadioStation>().Select(s => s.Url).ToList();
+                _app.HandleFiles(files);
+            }
         }
 
         private async void CreateQuery()
@@ -200,6 +216,11 @@ namespace Thingy.MusicPlayer.ViewModels
                 Name = "Queries",
                 Icon = BitmapHelper.FrozenBitmap(ResourceLocator.GetIcon(IconCategories.Small, "icons8-questionnaire-48.png")),
                 SubItems = new ObservableCollection<string>(_db.MediaLibary.GetQueryNames())
+            });
+            Tree.Add(new NavigationItem
+            {
+                Name = "Radio",
+                Icon = BitmapHelper.FrozenBitmap(ResourceLocator.GetIcon(IconCategories.Small, "icons8-radio-station-48.png"))
             });
         }
 
