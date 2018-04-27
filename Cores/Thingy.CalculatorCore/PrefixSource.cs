@@ -5,8 +5,6 @@ namespace Thingy.CalculatorCore
 {
     public static class PrefixSource
     {
-        public static IDictionary<string, double> PrefixTable { get; set; }
-
         static PrefixSource()
         {
             PrefixTable = new Dictionary<string, double>(20)
@@ -33,6 +31,8 @@ namespace Thingy.CalculatorCore
                 { "Y", 1E24 }
             };
         }
+
+        public static IDictionary<string, double> PrefixTable { get; set; }
 
         /// <summary>
         /// Divides a double value to the nearest corresponding prefix value

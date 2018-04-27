@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace Thingy.CalculatorCore.Constants
 {
-    public class ConstantDB: IConstantDB
+    public class ConstantDB : IConstantDB
     {
         private HashSet<Constant> _recent;
         private Dictionary<string, IEnumerable<Constant>> _db;

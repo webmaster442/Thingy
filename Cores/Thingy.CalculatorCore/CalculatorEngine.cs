@@ -1,35 +1,38 @@
 ﻿using AppLib.Common.IO;
 using AppLib.Maths;
+using AppLib.MVVM;
 using IronPython;
 using IronPython.Hosting;
 using Microsoft.Scripting;
 using Microsoft.Scripting.Hosting;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using AppLib.MVVM;
-using Thingy.CalculatorCore.Constants;
-using System.Text;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Thingy.CalculatorCore.Constants;
 using Thingy.CalculatorCore.FunctionCaching;
 
 namespace Thingy.CalculatorCore
 {
     public sealed class CalculatorEngine : BindableBase, ICalculatorEngine, IDisposable
     {
-        private ScriptEngine _engine;
-        private ScriptScope _scope;
-        private ZeroStream _history;
-        private EventRedirectedStreamWriter _output;
-        private Dictionary<string, FunctionInformation> _functioncache;
-        private Preprocessor _preprocessor;
-        private StringBuilder _linebuffer;
-
         private IConstantDB _db;
-        private bool _PreferPrefixes;
-        private bool _GroupByThousands;
-
+        private ScriptEngine _engine;
+        private Dictionary<string, FunctionInformation> _functioncache;
         private Type[] _functionTypes;
+        private bool _GroupByThousands;
+        private ZeroStream _history;
+        private StringBuilder _linebuffer;
+        private EventRedirectedStreamWriter _output;
+        private bool _PreferPrefixes;
+        private Preprocessor _preprocessor;
+        private ScriptScope _scope;
+
+        private void _output_StreamWasWritten(object sender, string e)
+        {
+            _linebuffer.Append(e);
+        }
 
         public CalculatorEngine()
         {
@@ -61,9 +64,10 @@ namespace Thingy.CalculatorCore
             FunctionCache.Fill(ref _functioncache, ref _scope, _functionTypes);
         }
 
-        private void _output_StreamWasWritten(object sender, string e)
+        public IConstantDB ConstantDB
         {
-            _linebuffer.Append(e);
+            get { return _db; }
+            private set { SetValue(ref _db, value); }
         }
 
         public IEnumerable<Tuple<string, string>> FunctionsNamesAndPrototypes
@@ -78,16 +82,16 @@ namespace Thingy.CalculatorCore
             }
         }
 
-        public bool PreferPrefixes
-        {
-            get { return _PreferPrefixes; }
-            set { SetValue(ref _PreferPrefixes, value); }
-        }
-
         public bool GroupByThousands
         {
             get { return _GroupByThousands; }
             set { SetValue(ref _GroupByThousands, value); }
+        }
+
+        public bool PreferPrefixes
+        {
+            get { return _PreferPrefixes; }
+            set { SetValue(ref _PreferPrefixes, value); }
         }
 
         public TrigonometryMode TrigonometryMode
@@ -98,12 +102,6 @@ namespace Thingy.CalculatorCore
                 Trigonometry.Mode = value;
                 OnPropertyChanged(() => TrigonometryMode);
             }
-        }
-
-        public IConstantDB ConstantDB
-        {
-            get { return _db; }
-            private set { SetValue(ref _db, value); }
         }
 
         public Task<CalculatorResult> Calculate(string commandLine)
@@ -139,6 +137,11 @@ namespace Thingy.CalculatorCore
             });
         }
 
+        public bool DeleteVariableByName(string name)
+        {
+            return _scope.RemoveVariable(name);
+        }
+
         public void Dispose()
         {
             if (_output != null)
@@ -171,11 +174,6 @@ namespace Thingy.CalculatorCore
                     yield return result;
                 }
             }
-        }
-
-        public bool DeleteVariableByName(string name)
-        {
-            return _scope.RemoveVariable(name);
         }
 
         public void SetVariable(string name, object value)

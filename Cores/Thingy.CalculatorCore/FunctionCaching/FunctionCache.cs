@@ -9,15 +9,6 @@ namespace Thingy.CalculatorCore.FunctionCaching
 {
     public static class FunctionCache
     {
-        public static void Fill(ref Dictionary<string, FunctionInformation> cache, ref ScriptScope scope, params Type[] types)
-        {
-            foreach (var type in types)
-            {
-                scope.SetVariable(type.Name, DynamicHelpers.GetPythonTypeFromType(type));
-                AddMethodsToFunctionCache(ref cache, type);
-            }
-        }
-
         private static void AddMethodsToFunctionCache(ref Dictionary<string, FunctionInformation> cache, Type type)
         {
             var methods = type.GetMethods(BindingFlags.Public | BindingFlags.Static);
@@ -55,6 +46,15 @@ namespace Thingy.CalculatorCore.FunctionCaching
             }
             value.Append(")");
             return value.ToString();
+        }
+
+        public static void Fill(ref Dictionary<string, FunctionInformation> cache, ref ScriptScope scope, params Type[] types)
+        {
+            foreach (var type in types)
+            {
+                scope.SetVariable(type.Name, DynamicHelpers.GetPythonTypeFromType(type));
+                AddMethodsToFunctionCache(ref cache, type);
+            }
         }
     }
 }

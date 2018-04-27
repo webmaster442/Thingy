@@ -12,8 +12,56 @@ namespace Thingy.CalculatorCore
     public static class NumberToText
     {
         private static readonly Dictionary<double, string> _numbers;
-        private static Dictionary<double, string> _scales;
         private static readonly StringBuilder _output;
+        private static Dictionary<double, string> _scales;
+
+        private static double Append(double num, double scale)
+        {
+            if (num > scale - 1)
+            {
+                var baseScale = ((long)(num / scale));
+                AppendLessThanOneThousand(baseScale);
+                _output.AppendFormat("{0} ", _scales[scale]);
+                num = num - (baseScale * scale);
+            }
+            return num;
+        }
+
+        private static void AppendFloatingPart(string number)
+        {
+            var parts = number.Split('.');
+            _output.Append(" point ");
+            foreach (var part in parts[1])
+            {
+                var key = Convert.ToDouble(new string(part, 1));
+                _output.AppendFormat("{0} ", _numbers[key]);
+            }
+        }
+
+        private static double AppendLessThanOneThousand(double num)
+        {
+            if (num > 99)
+            {
+                var hundreds = ((int)(num / 100));
+                _output.AppendFormat("{0} hundred ", _numbers[hundreds]);
+                num = num - (hundreds * 100);
+            }
+
+            if (num > 20)
+            {
+                var tens = ((int)(num / 10)) * 10;
+                _output.AppendFormat("{0} ", _numbers[tens]);
+                num = num - tens;
+            }
+
+            if (num > 0)
+            {
+                _output.AppendFormat("{0} ", _numbers[num]);
+                num = 0;
+            }
+
+            return num;
+        }
 
         static NumberToText()
         {
@@ -115,55 +163,6 @@ namespace Thingy.CalculatorCore
             catch (Exception)
             {
                 return "This number can't be converted to text";
-            }
-        }
-
-        private static double Append(double num, double scale)
-        {
-            if (num > scale - 1)
-            {
-                var baseScale = ((long)(num / scale));
-                AppendLessThanOneThousand(baseScale);
-                _output.AppendFormat("{0} ", _scales[scale]);
-                num = num - (baseScale * scale);
-            }
-            return num;
-        }
-
-        private static double AppendLessThanOneThousand(double num)
-        {
-
-            if (num > 99)
-            {
-                var hundreds = ((int)(num / 100));
-                _output.AppendFormat("{0} hundred ", _numbers[hundreds]);
-                num = num - (hundreds * 100);
-            }
-
-            if (num > 20)
-            {
-                var tens = ((int)(num / 10)) * 10;
-                _output.AppendFormat("{0} ", _numbers[tens]);
-                num = num - tens;
-            }
-
-            if (num > 0)
-            {
-                _output.AppendFormat("{0} ", _numbers[num]);
-                num = 0;
-            }
-
-            return num;
-        }
-
-        private static void AppendFloatingPart(string number)
-        {
-            var parts = number.Split('.');
-            _output.Append(" point ");
-            foreach (var part in parts[1])
-            {
-                var key = Convert.ToDouble(new string(part, 1));
-                _output.AppendFormat("{0} ", _numbers[key]);
             }
         }
     }

@@ -11,7 +11,8 @@ namespace Thingy.CalculatorCore.Constants
 
         public IEnumerable<Constant> Constants
         {
-            get {
+            get
+            {
                 yield return new Constant("Fine Structure Constant: alpha = e^2/4*Pi*e_0*h_bar*c_0 [1] (2007 CODATA)", "FineStructureConstant", 7.2973525376e-3);
                 yield return new Constant("Rydberg Constant: R_infty = alpha^2*m_e*c_0/2*h [m^-1] (2007 CODATA)", "RydbergConstant", 10973731.568528);
                 yield return new Constant("Bor Radius: a_0 = alpha/4*Pi*R_infty [m] (2007 CODATA)", "BohrRadius", 0.52917720859e-10);

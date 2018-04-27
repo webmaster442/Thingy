@@ -9,6 +9,48 @@ namespace Thingy.CalculatorCore
     {
         private static Dictionary<byte, char> Digits;
 
+        /// <summary>
+        /// Reverse a stringbuilder's content
+        /// </summary>
+        /// <param name="sb">StringBuilder to reverse</param>
+        /// <returns>Reversed stringBuilder</returns>
+        private static StringBuilder Reverse(StringBuilder sb)
+        {
+            var ret = new StringBuilder(sb.Length);
+            for (int i = sb.Length - 1; i >= 0; i--)
+            {
+                ret.Append(sb[i]);
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// Converts a number digit to a number
+        /// </summary>
+        /// <param name="value">number digit</param>
+        /// <returns>vallue associated to number digit</returns>
+        private static byte ToDigit(char value)
+        {
+            switch (value)
+            {
+                case '0':
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                    return Convert.ToByte(value - 48);
+
+                default:
+                    var q = from i in Digits where i.Value == value select i.Key;
+                    return q.First();
+            }
+        }
+
         static NumberSystemConversion()
         {
             Digits = new Dictionary<byte, char>
@@ -21,6 +63,59 @@ namespace Thingy.CalculatorCore
                 {30, 'U'}, {31, 'V'}, {32, 'W'}, {33, 'X'},
                 {34, 'Y'}, {35, 'Z'}
             };
+        }
+
+        /// <summary>
+        /// Convert a byte array to hexadecimal representation
+        /// </summary>
+        /// <param name="array">array to convert</param>
+        /// <returns>hexadecimal string</returns>
+        public static string ByteArrayToHex(byte[] array)
+        {
+            var ret = new StringBuilder();
+            foreach (var b in array)
+            {
+                string s = Convert.ToString(b, 16);
+                if (s.Length < 2) s = "0" + s;
+                ret.Append(s);
+            }
+            return ret.ToString();
+        }
+
+        public static string FormatBin(string input)
+        {
+            var buffer = new StringBuilder();
+            int counter = 0;
+            for (int i = input.Length - 1; i >= 0; i--)
+            {
+                if (counter == 4)
+                {
+                    buffer.Append(" ");
+                    counter = 0;
+                }
+                buffer.Append(input[i]);
+                counter++;
+            }
+            for (int i = 0; i < (4 - counter); i++) buffer.Append(" ");
+            return Reverse(buffer).ToString();
+        }
+
+        /// <summary>
+        /// Converts a number back from a system to decimal
+        /// </summary>
+        /// <param name="input">Input in system</param>
+        /// <param name="system">system</param>
+        /// <returns>value in decimal</returns>
+        public static long FromSystem(string input, int system)
+        {
+            int exponent = 0;
+            long value = 0;
+            for (int i = input.Length - 1; i >= 0; i--)
+            {
+                value += ToDigit(input[i]) * (long)Math.Pow(system, exponent);
+                exponent++;
+            }
+            return value;
         }
 
         /// <summary>
@@ -49,48 +144,6 @@ namespace Thingy.CalculatorCore
         }
 
         /// <summary>
-        /// Reverse a stringbuilder's content
-        /// </summary>
-        /// <param name="sb">StringBuilder to reverse</param>
-        /// <returns>Reversed stringBuilder</returns>
-        private static StringBuilder Reverse(StringBuilder sb)
-        {
-            var ret = new StringBuilder(sb.Length);
-            for (int i = sb.Length - 1; i >= 0; i--)
-            {
-                ret.Append(sb[i]);
-            }
-            return ret;
-        }
-
-
-        /// <summary>
-        /// Converts a number digit to a number
-        /// </summary>
-        /// <param name="value">number digit</param>
-        /// <returns>vallue associated to number digit</returns>
-        private static byte ToDigit(char value)
-        {
-            switch (value)
-            {
-                case '0':
-                case '1':
-                case '2':
-                case '3':
-                case '4':
-                case '5':
-                case '6':
-                case '7':
-                case '8':
-                case '9':
-                    return Convert.ToByte(value - 48);
-                default:
-                    var q = from i in Digits where i.Value == value select i.Key;
-                    return q.First();
-            }
-        }
-
-        /// <summary>
         /// Converts a number to a target number system
         /// </summary>
         /// <param name="number">number to convert</param>
@@ -110,60 +163,6 @@ namespace Thingy.CalculatorCore
                 number /= system;
             }
             return Reverse(output).ToString();
-        }
-
-        /// <summary>
-        /// Converts a number back from a system to decimal
-        /// </summary>
-        /// <param name="input">Input in system</param>
-        /// <param name="system">system</param>
-        /// <returns>value in decimal</returns>
-        public static long FromSystem(string input, int system)
-        {
-            int exponent = 0;
-            long value = 0;
-            for (int i = input.Length - 1; i >= 0; i--)
-            {
-                value += ToDigit(input[i]) * (long)Math.Pow(system, exponent);
-                exponent++;
-            }
-            return value;
-        }
-
-        /// <summary>
-        /// Convert a byte array to hexadecimal representation
-        /// </summary>
-        /// <param name="array">array to convert</param>
-        /// <returns>hexadecimal string</returns>
-        public static string ByteArrayToHex(byte[] array)
-        {
-            var ret = new StringBuilder();
-            foreach (var b in array)
-            {
-                string s = Convert.ToString(b, 16);
-                if (s.Length < 2) s = "0" + s;
-                ret.Append(s);
-            }
-            return ret.ToString();
-        }
-
-
-        public static string FormatBin(string input)
-        {
-            var buffer = new StringBuilder();
-            int counter = 0;
-            for (int i = input.Length - 1; i >= 0; i--)
-            {
-                if (counter == 4)
-                {
-                    buffer.Append(" ");
-                    counter = 0;
-                }
-                buffer.Append(input[i]);
-                counter++;
-            }
-            for (int i = 0; i < (4 - counter); i++) buffer.Append(" ");
-            return Reverse(buffer).ToString();
         }
     }
 }

@@ -10,10 +10,15 @@ namespace Thingy.CalculatorCore
 {
     public class Preprocessor
     {
+        private readonly IDictionary<string, FunctionInformation> _functionReplaceTable;
         private readonly string[] _operators;
         private readonly List<IProcessor> _processors;
         private readonly string _tokenizerregex;
-        private readonly IDictionary<string, FunctionInformation> _functionReplaceTable;
+
+        private string[] TokenizeInput(string input)
+        {
+            return Regex.Split(input, _tokenizerregex);
+        }
 
         public Preprocessor(IDictionary<string, FunctionInformation> functionReplcaceTable, IConstantDB constantDB)
         {
@@ -43,16 +48,11 @@ namespace Thingy.CalculatorCore
             _tokenizerregex = regex.ToString();
         }
 
-        private string[] TokenizeInput(string input)
-        {
-            return Regex.Split(input, _tokenizerregex);
-        }
-
         public string Process(string input)
         {
             var tokens = TokenizeInput(input);
 
-            for (int i=0; i<tokens.Length; i++)
+            for (int i = 0; i < tokens.Length; i++)
             {
                 if (_functionReplaceTable != null &&
                     _functionReplaceTable.Keys.Contains(tokens[i]))
@@ -83,6 +83,5 @@ namespace Thingy.CalculatorCore
 
             return string.Join(" ", tokens).Trim();
         }
-
     }
 }

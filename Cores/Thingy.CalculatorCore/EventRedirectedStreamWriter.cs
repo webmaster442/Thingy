@@ -5,12 +5,6 @@ namespace Thingy.CalculatorCore
 {
     public class EventRedirectedStreamWriter : StreamWriter
     {
-        public EventRedirectedStreamWriter(Stream stream) : base(stream)
-        {
-        }
-
-        public event EventHandler<string> StreamWasWritten;
-
         private void FireEvent(object parameter, bool appendline = false)
         {
             if (!appendline)
@@ -29,6 +23,12 @@ namespace Thingy.CalculatorCore
         {
             var str = string.Format(format, pars) + "\n";
             StreamWasWritten?.Invoke(this, str);
+        }
+
+        public event EventHandler<string> StreamWasWritten;
+
+        public EventRedirectedStreamWriter(Stream stream) : base(stream)
+        {
         }
 
         public override void Write(bool value)

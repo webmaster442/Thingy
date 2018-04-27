@@ -9,28 +9,34 @@ namespace Thingy.CalculatorCore
 {
     public static class StringFormatter
     {
-        public static string DisplayString(object o, bool preferPrefixes, bool groupByThousands, TrigonometryMode trigonometryMode)
+        private static string FormatComplex(Complex cplx, TrigonometryMode trigonometryMode)
         {
-            Type t = o.GetType();
-            switch (t.Name)
+            var sb = new StringBuilder();
+            sb.Append("R: ");
+            sb.Append(cplx.Real);
+            sb.Append(" i: ");
+            sb.Append(cplx.Imaginary);
+            sb.Append("\r\n φ: ");
+            switch (trigonometryMode)
             {
-                case "Double":
-                case "Single":
-                case "Int32":
-                case "Int16":
-                case "Byte":
-                case "SByte":
-                case "UInt32":
-                case "UInt64":
-                    return FormatDouble(Convert.ToDouble(o), preferPrefixes, groupByThousands);
-                case "Complex":
-                    return FormatComplex((Complex)o, trigonometryMode);
-                case "String":
-                    return (string)o;
-                default:
-                    if (o is IEnumerable) return FormatEnumerable(o, trigonometryMode);
-                    else return o.ToString();
+                case TrigonometryMode.DEG:
+                    sb.Append(Trigonometry.Rad2Deg(cplx.Phase));
+                    sb.Append(" °");
+                    break;
+
+                case TrigonometryMode.GRAD:
+                    sb.Append(Trigonometry.Rad2Grad(cplx.Phase));
+                    sb.Append(" grad");
+                    break;
+
+                case TrigonometryMode.RAD:
+                    sb.Append(cplx.Phase);
+                    sb.Append(" rad");
+                    break;
             }
+            sb.Append(" ABS: ");
+            sb.Append(cplx.Magnitude);
+            return sb.ToString();
         }
 
         private static string FormatDouble(double input, bool preferPrefixes, bool groupByThousands)
@@ -87,34 +93,6 @@ namespace Thingy.CalculatorCore
             else return input.ToString(CultureInfo.InvariantCulture);
         }
 
-        private static string FormatComplex(Complex cplx, TrigonometryMode trigonometryMode)
-        {
-            var sb = new StringBuilder();
-            sb.Append("R: ");
-            sb.Append(cplx.Real);
-            sb.Append(" i: ");
-            sb.Append(cplx.Imaginary);
-            sb.Append("\r\n φ: ");
-            switch (trigonometryMode)
-            {
-                case TrigonometryMode.DEG:
-                    sb.Append(Trigonometry.Rad2Deg(cplx.Phase));
-                    sb.Append(" °");
-                    break;
-                case TrigonometryMode.GRAD:
-                    sb.Append(Trigonometry.Rad2Grad(cplx.Phase));
-                    sb.Append(" grad");
-                    break;
-                case TrigonometryMode.RAD:
-                    sb.Append(cplx.Phase);
-                    sb.Append(" rad");
-                    break;
-            }
-            sb.Append(" ABS: ");
-            sb.Append(cplx.Magnitude);
-            return sb.ToString();
-        }
-
         private static string FormatEnumerable(object o, TrigonometryMode trigonometryMode)
         {
             var sb = new StringBuilder();
@@ -143,6 +121,33 @@ namespace Thingy.CalculatorCore
             }
 
             return sb.ToString();
+        }
+
+        public static string DisplayString(object o, bool preferPrefixes, bool groupByThousands, TrigonometryMode trigonometryMode)
+        {
+            Type t = o.GetType();
+            switch (t.Name)
+            {
+                case "Double":
+                case "Single":
+                case "Int32":
+                case "Int16":
+                case "Byte":
+                case "SByte":
+                case "UInt32":
+                case "UInt64":
+                    return FormatDouble(Convert.ToDouble(o), preferPrefixes, groupByThousands);
+
+                case "Complex":
+                    return FormatComplex((Complex)o, trigonometryMode);
+
+                case "String":
+                    return (string)o;
+
+                default:
+                    if (o is IEnumerable) return FormatEnumerable(o, trigonometryMode);
+                    else return o.ToString();
+            }
         }
     }
 }
