@@ -9,9 +9,9 @@ namespace Thingy.Controls
     /// </summary>
     public partial class WindowsPower : UserControl
     {
-        public WindowsPower()
+        private void Hybernate_Click(object sender, RoutedEventArgs e)
         {
-            InitializeComponent();
+            PowerManagement.Set(PowerAction.Hybernate);
         }
 
         private void Lock_Click(object sender, RoutedEventArgs e)
@@ -19,19 +19,14 @@ namespace Thingy.Controls
             PowerManagement.Set(PowerAction.Lock);
         }
 
-        private void Sleep_Click(object sender, RoutedEventArgs e)
-        {
-            PowerManagement.Set(PowerAction.Sleep);
-        }
-
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
             PowerManagement.Set(PowerAction.Logout);
         }
 
-        private void Hybernate_Click(object sender, RoutedEventArgs e)
+        private void Restart_Click(object sender, RoutedEventArgs e)
         {
-            PowerManagement.Set(PowerAction.Hybernate);
+            PowerManagement.Set(PowerAction.Restart);
         }
 
         private void Shutdown_Click(object sender, RoutedEventArgs e)
@@ -39,9 +34,14 @@ namespace Thingy.Controls
             PowerManagement.Set(PowerAction.Hybernate);
         }
 
-        private void Restart_Click(object sender, RoutedEventArgs e)
+        private void Sleep_Click(object sender, RoutedEventArgs e)
         {
-            PowerManagement.Set(PowerAction.Restart);
+            PowerManagement.Set(PowerAction.Sleep);
+        }
+
+        public WindowsPower()
+        {
+            InitializeComponent();
         }
     }
 }

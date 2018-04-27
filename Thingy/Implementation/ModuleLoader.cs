@@ -10,20 +10,9 @@ namespace Thingy.Implementation
 {
     internal class ModuleLoader: IModuleLoader
     {
+        private IApplication _app;
         private List<IModule> _modules;
         private Dictionary<string, int> _moudleCounter;
-        private IApplication _app;
-
-        public ModuleLoader(IApplication app)
-        {
-            _app = app ;
-            _modules = new List<IModule>();
-            _moudleCounter = new Dictionary<string, int>
-            {
-                { "All", 0 }
-            };
-            LoadModules();
-        }
 
         private void LoadModules()
         {
@@ -91,34 +80,19 @@ namespace Thingy.Implementation
             ++_moudleCounter["All"];
         }
 
+        public ModuleLoader(IApplication app)
+        {
+            _app = app ;
+            _modules = new List<IModule>();
+            _moudleCounter = new Dictionary<string, int>
+            {
+                { "All", 0 }
+            };
+            LoadModules();
+        }
         public IDictionary<string, int> CategoryModuleCount
         {
             get { return _moudleCounter; }
-        }
-
-        public IEnumerable<IModule> GetModulesForCategory(string category = null)
-        {
-            if (string.IsNullOrEmpty(category) || category == "All")
-            {
-                return _modules.OrderBy(module => module.ModuleName);
-            }
-            else
-            {
-                return _modules.Where(module => module.Category == category).OrderBy(module => module.ModuleName);
-            }
-
-        }
-
-        public IEnumerable<IModule> GetModulesByName(string searchname)
-        {
-            if (string.IsNullOrEmpty(searchname))
-            {
-                return _modules.OrderBy(module => module.ModuleName);
-            }
-            else
-            {
-                return _modules.Where(m => m.ModuleName.Contains(searchname, StringComparison.CurrentCultureIgnoreCase)).OrderBy(m => m.ModuleName);
-            }
         }
 
         public IModule GetModuleByName(string name)
@@ -138,6 +112,30 @@ namespace Thingy.Implementation
             return moduleToRun;
         }
 
+        public IEnumerable<IModule> GetModulesByName(string searchname)
+        {
+            if (string.IsNullOrEmpty(searchname))
+            {
+                return _modules.OrderBy(module => module.ModuleName);
+            }
+            else
+            {
+                return _modules.Where(m => m.ModuleName.Contains(searchname, StringComparison.CurrentCultureIgnoreCase)).OrderBy(m => m.ModuleName);
+            }
+        }
+
+        public IEnumerable<IModule> GetModulesForCategory(string category = null)
+        {
+            if (string.IsNullOrEmpty(category) || category == "All")
+            {
+                return _modules.OrderBy(module => module.ModuleName);
+            }
+            else
+            {
+                return _modules.Where(module => module.Category == category).OrderBy(module => module.ModuleName);
+            }
+
+        }
         public IList<IModule> GetModulesForFiles(IEnumerable<string> files)
         {
             var extensions = from file in files

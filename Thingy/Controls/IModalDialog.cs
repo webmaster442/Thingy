@@ -1,5 +1,4 @@
-﻿using System.Windows.Controls;
-using Thingy.API;
+﻿using Thingy.API;
 
 namespace Thingy.Controls
 {

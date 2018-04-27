@@ -10,8 +10,34 @@ namespace Thingy.Implementation
 {
     public sealed class Settings : ISettings
     {
-        private Dictionary<string, string> _config;
         private readonly ILog _log;
+        private Dictionary<string, string> _config;
+
+        private void FirePropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+        private void Load()
+        {
+            try
+            {
+                var name = Paths.Resolve(Paths.ConfigPath);
+                if (!File.Exists(name))
+                {
+                    _log.Warning("Config file doesn't exist: {0}", name);
+                    _config = new Dictionary<string, string>();
+                    return;
+                }
+                _config = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(name));
+
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex);
+                _config = new Dictionary<string, string>();
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -20,10 +46,10 @@ namespace Thingy.Implementation
             _log = log;
             Load();
         }
-
-        private void FirePropertyChanged(string name)
+        public object this[string key, object defaultValue]
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            get => Get(key, defaultValue);
+            set => Set(key, value);
         }
 
         public bool Exists(string key)
@@ -54,6 +80,18 @@ namespace Thingy.Implementation
             }
         }
 
+        public IEnumerator<KeyValuePair<string, string>> GetEnumerator()
+        {
+            _log.Info("Enumerating settings...");
+            return _config.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            _log.Info("Enumerating settings...");
+            return _config.GetEnumerator();
+        }
+
         public void Remove(string key)
         {
             if (_config.ContainsKey(key))
@@ -66,28 +104,6 @@ namespace Thingy.Implementation
                 _log.Warning("Tried to remove non exiting key: {0}", key);
             }
         }
-
-        private void Load()
-        {
-            try
-            {
-                var name = Paths.Resolve(Paths.ConfigPath);
-                if (!File.Exists(name))
-                {
-                    _log.Warning("Config file doesn't exist: {0}", name);
-                    _config = new Dictionary<string, string>();
-                    return;
-                }
-                _config = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(name));
-
-            }
-            catch (Exception ex)
-            {
-                _log.Error(ex);
-                _config = new Dictionary<string, string>();
-            }
-        }
-
         public void Save()
         {
             try
@@ -140,24 +156,6 @@ namespace Thingy.Implementation
                     _log.Error(ex);
                 }
             }
-        }
-
-        public IEnumerator<KeyValuePair<string, string>> GetEnumerator()
-        {
-            _log.Info("Enumerating settings...");
-            return _config.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            _log.Info("Enumerating settings...");
-            return _config.GetEnumerator();
-        }
-
-        public object this[string key, object defaultValue]
-        {
-            get => Get(key, defaultValue);
-            set => Set(key, value);
         }
     }
 }

@@ -10,13 +10,6 @@ namespace Thingy.Infrastructure
         private IApplication _app;
         private Dictionary<string, Action> _switchActions;
 
-        public CommandLineParser(IApplication app)
-        {
-            _app = app;
-            _switchActions = new Dictionary<string, Action>();
-            InitActions();
-        }
-
         private void InitActions()
         {
             _switchActions.Add("/exit", () =>
@@ -29,6 +22,12 @@ namespace Thingy.Infrastructure
             });
         }
 
+        public CommandLineParser(IApplication app)
+        {
+            _app = app;
+            _switchActions = new Dictionary<string, Action>();
+            InitActions();
+        }
         public void Parse(string args)
         {
             var parser = new ParameterParser(args, true, true);

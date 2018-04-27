@@ -87,7 +87,7 @@
                                         Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-downloading-updates-96.png" />
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <Separator/>
+                            <Separator />
                             <MenuItem
                                 Command="{Binding SettingCommand}"
                                 Header="Settings...">

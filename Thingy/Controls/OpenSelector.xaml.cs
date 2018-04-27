@@ -14,34 +14,7 @@ namespace Thingy.Controls
     {
         private IApplication _app;
 
-        public ObservableCollection<OpenSelectorItem> ItemsCollection { get; set; }
         private IList<IModule> _modules;
-
-        public OpenSelector()
-        {
-            InitializeComponent();
-            ItemsCollection = new ObservableCollection<OpenSelectorItem>();
-        }
-
-        public IList<IModule> InputModules
-        {
-            get { return _modules; }
-            set
-            {
-                _modules = value;
-                CreateButtonItems();
-            }
-        }
-
-        public IModule SelectedModule
-        {
-            get
-            {
-                var selected = ModuleList.SelectedIndex;
-                if (selected < 0) return null;
-                return _modules[selected];
-            }
-        }
 
         private void CreateButtonItems()
         {
@@ -57,9 +30,37 @@ namespace Thingy.Controls
             ModuleList.ItemsSource = ItemsCollection;
         }
 
-        public OpenSelector(IApplication app): this()
+        public OpenSelector()
+        {
+            InitializeComponent();
+            ItemsCollection = new ObservableCollection<OpenSelectorItem>();
+        }
+
+        public OpenSelector(IApplication app) : this()
         {
             _app = app;
+        }
+
+        public IList<IModule> InputModules
+        {
+            get { return _modules; }
+            set
+            {
+                _modules = value;
+                CreateButtonItems();
+            }
+        }
+
+        public ObservableCollection<OpenSelectorItem> ItemsCollection { get; set; }
+
+        public IModule SelectedModule
+        {
+            get
+            {
+                var selected = ModuleList.SelectedIndex;
+                if (selected < 0) return null;
+                return _modules[selected];
+            }
         }
     }
 }

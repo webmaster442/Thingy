@@ -8,7 +8,7 @@ using Thingy.Implementation;
 
 namespace Thingy
 {
-    public class MainWindowViewModel: ViewModel<IMainWindow>
+    public class MainWindowViewModel : ViewModel<IMainWindow>
     {
         public DelegateCommand SettingCommand { get; private set; }
         public DelegateCommand ExitCommand { get; private set; }
@@ -23,7 +23,7 @@ namespace Thingy
 
         private readonly IApplication _app;
 
-        public MainWindowViewModel(IMainWindow view, IApplication app): base(view)
+        public MainWindowViewModel(IMainWindow view, IApplication app) : base(view)
         {
             _app = app;
             ExitCommand = Command.ToCommand(Exit);

@@ -10,11 +10,66 @@ namespace Thingy.Controls
     /// </summary>
     public partial class ModalDialog : ChildWindow, IModalDialog
     {
-        public static readonly DependencyProperty DialogContentProperty =
-            DependencyProperty.Register("DailogContent", typeof(object), typeof(ModalDialog));
+        private DialogButtons _dialogbuttons;
 
         private INotifyDataErrorInfo ValidatableContent;
-        private DialogButtons _dialogbuttons;
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            Close(false);
+        }
+
+        private void ConfigureButtons()
+        {
+            switch (DialogButtons)
+            {
+                case DialogButtons.None:
+                    OkButton.Visibility = Visibility.Collapsed;
+                    CancelButton.Visibility = Visibility.Collapsed;
+                    break;
+                case DialogButtons.Ok:
+                    OkButton.Visibility = Visibility.Visible;
+                    CancelButton.Visibility = Visibility.Collapsed;
+                    break;
+                case DialogButtons.OkCancel:
+                    OkButton.Visibility = Visibility.Visible;
+                    CancelButton.Visibility = Visibility.Visible;
+                    break;
+                case DialogButtons.YesNo:
+                    OkButton.Content = "Yes";
+                    CancelButton.Content = "No";
+                    OkButton.Visibility = Visibility.Visible;
+                    CancelButton.Visibility = Visibility.Visible;
+                    break;
+            }
+        }
+
+        private void ErrorHandler(object sender, DataErrorsChangedEventArgs e)
+        {
+            OkButton.IsEnabled = !ValidatableContent.HasErrors;
+        }
+
+        private INotifyDataErrorInfo GetDialogContentModell(object content)
+        {
+            if (content is FrameworkElement element && element.DataContext != null)
+            {
+                if (element.DataContext is INotifyDataErrorInfo model)
+                    return model;
+            }
+            return null;
+        }
+
+        private void Ok_Click(object sender, RoutedEventArgs e)
+        {
+            Close(true);
+        }
+
+        public static readonly DependencyProperty DialogContentProperty =
+                                                                    DependencyProperty.Register("DailogContent", typeof(object), typeof(ModalDialog));
+        public ModalDialog()
+        {
+            InitializeComponent();
+        }
 
         public object DailogContent
         {
@@ -49,61 +104,6 @@ namespace Thingy.Controls
                 _dialogbuttons = value;
                 ConfigureButtons();
             }
-        }
-
-        private void ConfigureButtons()
-        {
-            switch (DialogButtons)
-            {
-                case DialogButtons.None:
-                    OkButton.Visibility = Visibility.Collapsed;
-                    CancelButton.Visibility = Visibility.Collapsed;
-                    break;
-                case DialogButtons.Ok:
-                    OkButton.Visibility = Visibility.Visible;
-                    CancelButton.Visibility = Visibility.Collapsed;
-                    break;
-                case DialogButtons.OkCancel:
-                    OkButton.Visibility = Visibility.Visible;
-                    CancelButton.Visibility = Visibility.Visible;
-                    break;
-                case DialogButtons.YesNo:
-                    OkButton.Content = "Yes";
-                    CancelButton.Content = "No";
-                    OkButton.Visibility = Visibility.Visible;
-                    CancelButton.Visibility = Visibility.Visible;
-                    break;
-            }
-        }
-
-        private INotifyDataErrorInfo GetDialogContentModell(object content)
-        {
-            if (content is FrameworkElement element && element.DataContext != null)
-            {
-                if (element.DataContext is INotifyDataErrorInfo model)
-                    return model;
-            }
-            return null;
-        }
-
-        private void ErrorHandler(object sender, DataErrorsChangedEventArgs e)
-        {
-            OkButton.IsEnabled = !ValidatableContent.HasErrors;
-        }
-
-        public ModalDialog()
-        {
-            InitializeComponent();
-        }
-
-        private void Ok_Click(object sender, RoutedEventArgs e)
-        {
-            Close(true);
-        }
-
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            Close(false);
         }
     }
 }

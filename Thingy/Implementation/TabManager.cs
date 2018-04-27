@@ -10,18 +10,13 @@ namespace Thingy.Implementation
 {
     internal class TabManager : ITabManager
     {
-        private Dictionary<Guid, IModule> _runningModules;
-        private IModuleLoader _moduleLoader;
         private IApplication _application;
+        private IModuleLoader _moduleLoader;
+        private Dictionary<Guid, IModule> _runningModules;
 
         private MainWindow MainWindow
         {
             get { return Application.Current.MainWindow as MainWindow; }
-        }
-
-        public int Count
-        {
-            get { return MainWindow.TabCount; }
         }
 
         public TabManager(IApplication application, IModuleLoader moduleLoader)
@@ -29,6 +24,16 @@ namespace Thingy.Implementation
             _application = application;
             _moduleLoader = moduleLoader;
             _runningModules = new Dictionary<Guid, IModule>();
+        }
+
+        public int Count
+        {
+            get { return MainWindow.TabCount; }
+        }
+
+        public void CloseCurrentTab()
+        {
+            MainWindow.CloseCurrentTab();
         }
 
         public void CreateNewTabContent(string Title, UserControl control)
@@ -46,14 +51,14 @@ namespace Thingy.Implementation
             return MainWindow.FindTabByTitle(Title);
         }
 
+        public void ModuleClosed(Guid ModuleId)
+        {
+            _runningModules.Remove(ModuleId);
+        }
+
         public void SetCurrentTabContent(string Title, UserControl control)
         {
             MainWindow.SetCurrentTabContent(Title, control, false);
-        }
-
-        public void CloseCurrentTab()
-        {
-            MainWindow.CloseCurrentTab();
         }
 
         public async Task<Guid> StartModule(IModule module)
@@ -110,11 +115,6 @@ namespace Thingy.Implementation
             {
                 return Guid.Empty;
             }
-        }
-
-        public void ModuleClosed(Guid ModuleId)
-        {
-            _runningModules.Remove(ModuleId);
         }
     }
 }

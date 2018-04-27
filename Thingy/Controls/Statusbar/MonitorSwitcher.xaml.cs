@@ -9,11 +9,6 @@ namespace Thingy.Controls
     /// </summary>
     internal partial class MonitorSwitcher : UserControl
     {
-        public MonitorSwitcher()
-        {
-            InitializeComponent();
-        }
-
         private void ScreenClick(object sender, System.Windows.RoutedEventArgs e)
         {
             if (sender is ImageButton caller)
@@ -23,6 +18,11 @@ namespace Thingy.Controls
                 p.StartInfo.Arguments = caller.Tag.ToString();
                 p.Start();
             }
+        }
+
+        public MonitorSwitcher()
+        {
+            InitializeComponent();
         }
     }
 }

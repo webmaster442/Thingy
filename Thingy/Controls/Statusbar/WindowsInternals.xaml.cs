@@ -10,11 +10,6 @@ namespace Thingy.Controls
     /// </summary>
     public partial class WindowsInternals : UserControl
     {
-        public WindowsInternals()
-        {
-            InitializeComponent();
-        }
-
         private void Run(string cmd, string arg = null)
         {
             try
@@ -48,6 +43,11 @@ namespace Thingy.Controls
                     }
                 }
             }
+        }
+
+        public WindowsInternals()
+        {
+            InitializeComponent();
         }
     }
 }

@@ -9,34 +9,6 @@ namespace Thingy.InternalCode
 {
     internal class BatteryInfo: Image
     {
-        public void UpdateBatteryInfo()
-        {
-            try
-            {
-                ManagementObjectSearcher searcher =
-                    new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_Battery");
-
-                StringBuilder tooltip = new StringBuilder();
-
-                foreach (ManagementObject queryObj in searcher.Get())
-                {
-                    tooltip.AppendLine("-----------------------------------");
-                    tooltip.AppendLine("Battery Info");
-                    tooltip.AppendLine("-----------------------------------");
-                    tooltip.AppendFormat("BatteryStatus: {0}\n", DecodeStatus(queryObj["BatteryStatus"]));
-                    tooltip.AppendFormat("Chemistry: {0}\n", DecodeChemistry(queryObj["Chemistry"]));
-                    tooltip.AppendFormat("EstimatedChargeRemaining: {0}\n", queryObj["EstimatedChargeRemaining"]);
-                    tooltip.AppendFormat("EstimatedRunTime: {0}\n", DecodeRuntime(queryObj["EstimatedRunTime"]));
-                    SetSource(queryObj["EstimatedChargeRemaining"], queryObj["BatteryStatus"]);
-                    ToolTip = CreateTooltip(tooltip, queryObj["EstimatedChargeRemaining"]);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
         private object CreateTooltip(StringBuilder tooltip, object v)
         {
             StackPanel sp = new StackPanel();
@@ -55,25 +27,27 @@ namespace Thingy.InternalCode
             return sp;
         }
 
-        private void SetSource(object remaining, object status)
+        private string DecodeChemistry(object chem)
         {
-            int charge = Convert.ToInt32(remaining);
-            int stat = Convert.ToInt32(status);
-
-            if (stat == 3)
+            int ch = Convert.ToInt32(chem);
+            switch (ch)
             {
-                Source = new BitmapImage(new Uri("pack://application:,,,/Thingy.Resources;component/Icons/icons8-charging-battery.png"));
-            }
-            else
-            {
-                if (charge >= 0 && charge <= 25)
-                    Source = new BitmapImage(new Uri("pack://application:,,,/Thingy.Resources;component/Icons/icons8-low-battery.png"));
-                else if (charge >= 26 && charge <= 50)
-                    Source = new BitmapImage(new Uri("pack://application:,,,/Thingy.Resources;component/Icons/icons8-battery-level.png"));
-                else if (charge >= 51 && charge <= 75)
-                    Source = new BitmapImage(new Uri("pack://application:,,,/Thingy.Resources;component/Icons/icons8-charged-battery.png"));
-                else if (charge >= 76 && charge <= 100)
-                    Source = new BitmapImage(new Uri("pack://application:,,,/Thingy.Resources;component/Icons/icons8-full-battery.png"));
+                case 1:
+                    return "Other";
+                case 3:
+                    return "Lead Acid";
+                case 4:
+                    return "Nickel Cadmium";
+                case 5:
+                    return "Nickel Metal Hydride";
+                case 6:
+                    return "Lithium-ion";
+                case 7:
+                    return "Zinc air";
+                case 8:
+                    return "Lithium Polymer";
+                default:
+                    return "Unknown";
             }
         }
 
@@ -116,27 +90,53 @@ namespace Thingy.InternalCode
             }
         }
 
-        private string DecodeChemistry(object chem)
+        private void SetSource(object remaining, object status)
         {
-            int ch = Convert.ToInt32(chem);
-            switch (ch)
+            int charge = Convert.ToInt32(remaining);
+            int stat = Convert.ToInt32(status);
+
+            if (stat == 3)
             {
-                case 1:
-                    return "Other";
-                case 3:
-                    return "Lead Acid";
-                case 4:
-                    return "Nickel Cadmium";
-                case 5:
-                    return "Nickel Metal Hydride";
-                case 6:
-                    return "Lithium-ion";
-                case 7:
-                    return "Zinc air";
-                case 8:
-                    return "Lithium Polymer";
-                default:
-                    return "Unknown";
+                Source = new BitmapImage(new Uri("pack://application:,,,/Thingy.Resources;component/Icons/icons8-charging-battery.png"));
+            }
+            else
+            {
+                if (charge >= 0 && charge <= 25)
+                    Source = new BitmapImage(new Uri("pack://application:,,,/Thingy.Resources;component/Icons/icons8-low-battery.png"));
+                else if (charge >= 26 && charge <= 50)
+                    Source = new BitmapImage(new Uri("pack://application:,,,/Thingy.Resources;component/Icons/icons8-battery-level.png"));
+                else if (charge >= 51 && charge <= 75)
+                    Source = new BitmapImage(new Uri("pack://application:,,,/Thingy.Resources;component/Icons/icons8-charged-battery.png"));
+                else if (charge >= 76 && charge <= 100)
+                    Source = new BitmapImage(new Uri("pack://application:,,,/Thingy.Resources;component/Icons/icons8-full-battery.png"));
+            }
+        }
+
+        public void UpdateBatteryInfo()
+        {
+            try
+            {
+                ManagementObjectSearcher searcher =
+                    new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_Battery");
+
+                StringBuilder tooltip = new StringBuilder();
+
+                foreach (ManagementObject queryObj in searcher.Get())
+                {
+                    tooltip.AppendLine("-----------------------------------");
+                    tooltip.AppendLine("Battery Info");
+                    tooltip.AppendLine("-----------------------------------");
+                    tooltip.AppendFormat("BatteryStatus: {0}\n", DecodeStatus(queryObj["BatteryStatus"]));
+                    tooltip.AppendFormat("Chemistry: {0}\n", DecodeChemistry(queryObj["Chemistry"]));
+                    tooltip.AppendFormat("EstimatedChargeRemaining: {0}\n", queryObj["EstimatedChargeRemaining"]);
+                    tooltip.AppendFormat("EstimatedRunTime: {0}\n", DecodeRuntime(queryObj["EstimatedRunTime"]));
+                    SetSource(queryObj["EstimatedChargeRemaining"], queryObj["BatteryStatus"]);
+                    ToolTip = CreateTooltip(tooltip, queryObj["EstimatedChargeRemaining"]);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

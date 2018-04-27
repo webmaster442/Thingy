@@ -4,6 +4,7 @@ namespace Thingy.InternalCode
 {
     internal class WinSparkle
     {
+#pragma warning disable IDE1006 // Naming Styles
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         public static extern bool SetDllDirectory(string lpPathName);
 
@@ -20,5 +21,6 @@ namespace Thingy.InternalCode
         public static extern void win_sparkle_set_registry_path(string path);
         [DllImport("WinSparkle.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void win_sparkle_check_update_with_ui();
+#pragma warning restore IDE1006 // Naming Styles
     }
 }

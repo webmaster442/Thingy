@@ -11,10 +11,10 @@ namespace Thingy.Implementation
         private StringBuilder _buffer;
         private string _logfile;
 
-        public Log(string filename)
+        private void CheckBufferClean()
         {
-            _buffer = new StringBuilder();
-            _logfile = filename;
+            if (_buffer.Length > 2048 * 3)
+                _buffer.Clear();
         }
 
         private void Write(string category, string msg, params object[] additional)
@@ -26,6 +26,25 @@ namespace Thingy.Implementation
             {
                 WriteToFile();
             }
+        }
+
+        public Log(string filename)
+        {
+            _buffer = new StringBuilder();
+            _logfile = filename;
+        }
+        public void BigDivider()
+        {
+            var line = "\r\n===================================================================================\r\n";
+            _buffer.AppendLine(line);
+            Debug.Write(line);
+        }
+
+        public void Divider()
+        {
+            var line = "--------------------------------------------------------------------------------------";
+            _buffer.AppendLine(line);
+            Debug.Write(line);
         }
 
         public void Error(Exception ex)
@@ -43,6 +62,11 @@ namespace Thingy.Implementation
         public void Info(string msg, params object[] additional)
         {
             Write("info", msg, additional);
+        }
+
+        public override string ToString()
+        {
+            return _buffer.ToString();
         }
 
         public void Warning(string msg, params object[] additional)
@@ -64,31 +88,6 @@ namespace Thingy.Implementation
             {
                 Error(ex);
             }
-        }
-
-        private void CheckBufferClean()
-        {
-            if (_buffer.Length > 2048 * 3)
-                _buffer.Clear();
-        }
-
-        public void Divider()
-        {
-            var line = "--------------------------------------------------------------------------------------";
-            _buffer.AppendLine(line);
-            Debug.Write(line);
-        }
-
-        public void BigDivider()
-        {
-            var line = "\r\n===================================================================================\r\n";
-            _buffer.AppendLine(line);
-            Debug.Write(line);
-        }
-
-        public override string ToString()
-        {
-            return _buffer.ToString();
         }
     }
 }
