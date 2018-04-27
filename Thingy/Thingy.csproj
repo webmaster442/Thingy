@@ -111,7 +111,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\MonitorSwitcher.xaml">
+    <Page Include="Controls\Statusbar\MonitorSwitcher.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -127,9 +127,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\WindowsPower.xaml">
+    <Page Include="Controls\Statusbar\WindowsPower.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Statusbar\WindowsInternals.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="InternalModules\About.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -158,7 +162,7 @@
     <Compile Include="Controls\ModalDialogReal.xaml.cs">
       <DependentUpon>ModalDialogReal.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MonitorSwitcher.xaml.cs">
+    <Compile Include="Controls\Statusbar\MonitorSwitcher.xaml.cs">
       <DependentUpon>MonitorSwitcher.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\OpenSelector.xaml.cs">
@@ -172,10 +176,13 @@
     <Compile Include="Controls\Statusbar.xaml.cs">
       <DependentUpon>Statusbar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\WindowsPower.xaml.cs">
+    <Compile Include="Controls\Statusbar\WindowsPower.xaml.cs">
       <DependentUpon>WindowsPower.xaml</DependentUpon>
     </Compile>
     <Compile Include="Constants\AppConstants.cs" />
+    <Compile Include="Controls\Statusbar\WindowsInternals.xaml.cs">
+      <DependentUpon>WindowsInternals.xaml</DependentUpon>
+    </Compile>
     <Compile Include="IMainWindow.cs" />
     <Compile Include="Implementation\CommandLineParser.cs" />
     <Compile Include="Implementation\IModuleLoader.cs" />

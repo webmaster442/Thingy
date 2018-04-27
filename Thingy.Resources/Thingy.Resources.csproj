@@ -311,5 +311,8 @@
     <Resource Include="Icons\icons8-youtube-96.png" />
     <Resource Include="Icons\mpv-logo-128.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-windows8-96.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

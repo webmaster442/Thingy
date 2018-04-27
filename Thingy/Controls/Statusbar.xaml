@@ -1,14 +1,14 @@
 ﻿<UserControl
     x:Class="Thingy.Controls.StatusbarView"
-    x:ClassModifier="internal"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:InternalCode="clr-namespace:Thingy.InternalCode"
     xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:InternalCode="clr-namespace:Thingy.InternalCode"
     Height="38"
-    d:DesignWidth="900"
+    d:DesignWidth="1024"
+    x:ClassModifier="internal"
     Background="White"
     mc:Ignorable="d">
     <Grid>
@@ -17,17 +17,22 @@
             <ColumnDefinition />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Horizontal">
-            <InternalCode:BatteryInfo x:Name="BatteryInfo" />
-            <Image Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-processor.png" />
-            <TextBlock Margin="5,0" Text="CPU: " />
+        <StackPanel
+            Orientation="Horizontal">
+            <InternalCode:BatteryInfo
+                x:Name="BatteryInfo" />
+            <Image
+                Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-processor.png" />
+            <TextBlock
+                Margin="5,0"
+                Text="CPU: " />
             <Grid>
                 <ProgressBar
                     x:Name="CPUProgress"
                     Width="150"
-                    VerticalAlignment="Center"
                     Height="22"
                     Margin="2"
+                    VerticalAlignment="Center"
                     Maximum="100"
                     Minimum="0" />
                 <TextBlock
@@ -37,7 +42,8 @@
                     VerticalAlignment="Center"
                     Text="100%" />
             </Grid>
-            <Image Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-memory-slot.png" />
+            <Image
+                Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-memory-slot.png" />
             <TextBlock
                 Grid.Column="2"
                 Margin="5,0"
@@ -47,9 +53,9 @@
                     x:Name="RAMProgress"
                     Grid.Column="3"
                     Width="150"
-                    VerticalAlignment="Center"
                     Height="22"
                     Margin="2"
+                    VerticalAlignment="Center"
                     Maximum="100"
                     Minimum="0" />
                 <TextBlock
@@ -65,15 +71,20 @@
                 Margin="2,0"
                 Text="14,2GB" />
         </StackPanel>
-        <StackPanel Grid.Column="2" Orientation="Horizontal">
-            <Image Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-audio.png" />
+        <StackPanel
+            Grid.Column="2"
+            Orientation="Horizontal">
+            <Image
+                Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-audio.png" />
             <ToggleButton
                 x:Name="BtnMute"
                 Margin="5,0"
                 Checked="BtnMute_Checked"
                 Unchecked="BtnMute_Checked">
                 <ToggleButton.Style>
-                    <Style BasedOn="{StaticResource Flat}" TargetType="{x:Type ToggleButton}">
+                    <Style
+                        BasedOn="{StaticResource Flat}"
+                        TargetType="{x:Type ToggleButton}">
                         <Setter Property="Content" Value="Mute" />
                         <Style.Triggers>
                             <Trigger Property="IsChecked" Value="True">
@@ -90,6 +101,15 @@
                 Maximum="100"
                 Minimum="0"
                 ValueChanged="Slider_ValueChanged" />
+            <applib:ImageButton
+                x:Name="Windows"
+                Margin="10,0,5,0"
+                Click="Windows_Click"
+                Content="Windows"
+                Image="pack://application:,,,/Thingy.Resources;component/Icons/icons8-windows8-96.png"
+                ImageHeight="28"
+                ImageWidth="28"
+                Style="{StaticResource Flat}" />
             <applib:ImageButton
                 x:Name="DisplaySwitch"
                 Margin="10,0,5,0"

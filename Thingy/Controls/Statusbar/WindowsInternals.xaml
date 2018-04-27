@@ -1,0 +1,79 @@
+﻿<UserControl
+    x:Class="Thingy.Controls.WindowsInternals"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style
+            x:Key="Link"
+            TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource Ubuntu}" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Margin" Value="10,4" />
+            <Setter Property="Foreground" Value="White" />
+            <EventSetter
+                Event="MouseLeftButtonDown"
+                Handler="TextBlock_MouseLeftButtonDown" />
+            <Setter Property="TextDecorations" Value="Underline" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="WhiteSmoke" />
+                    <Setter Property="TextDecorations" Value="None" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel>
+        <TextBlock
+            Style="{StaticResource Link}"
+            Tag="control.exe"
+            Text="Control panel" />
+        <TextBlock
+            Style="{StaticResource Link}"
+            Tag="taskmgr.exe"
+            Text="Task manager" />
+        <TextBlock
+            Style="{StaticResource Link}"
+            Tag="control.exe appwiz.cpl"
+            Text="Programs and Features" />
+        <TextBlock
+            Style="{StaticResource Link}"
+            Tag="regedit.exe"
+            Text="Registry Editor" />
+        <Separator />
+        <TextBlock
+            Style="{StaticResource Link}"
+            Tag="mmc.exe devmgmt.msc"
+            Text="Device Manager" />
+        <TextBlock
+            Style="{StaticResource Link}"
+            Tag="mmc.exe diskmgmt.msc"
+            Text="Disk Management" />
+        <TextBlock
+            Style="{StaticResource Link}"
+            Tag="mmc.exe eventvwr.msc"
+            Text="Event Log" />
+        <TextBlock
+            Style="{StaticResource Link}"
+            Tag="mmc.exe compmgmt.msc"
+            Text="Computer Management" />
+        <TextBlock
+            Style="{StaticResource Link}"
+            Tag="mmc.exe services.msc"
+            Text="Services" />
+        <Separator />
+        <TextBlock
+            Style="{StaticResource Link}"
+            Tag="ms-windows-store:"
+            Text="Windows store" />
+        <TextBlock
+            Style="{StaticResource Link}"
+            Tag="ms-settings:"
+            Text="PC Settings" />
+    </StackPanel>
+</UserControl>

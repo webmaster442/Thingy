@@ -112,5 +112,10 @@ namespace Thingy.Controls
         {
             Application.ShowStatusBarMenu(new WindowsPower(), "Power options");
         }
+
+        private void Windows_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Application.ShowFlyoutLeft(new WindowsInternals(), "Windows", true, 10000);
+        }
     }
 }
