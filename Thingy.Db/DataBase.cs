@@ -28,6 +28,8 @@ namespace Thingy.Db
 
         public IMediaLibary MediaLibary { get; private set; }
 
+        public IPodcasts Podcasts { get; private set; }
+
         public DataBase(string file)
         {
             bool needsInit = false;
@@ -57,6 +59,8 @@ namespace Thingy.Db
                                                          _db.GetCollection<RadioStation>(CollectionNames.Radios),
                                                          _db.GetCollection<SongQuery>(CollectionNames.Queries),
                                                          StoredFiles);
+
+            Podcasts = new Implementation.Podcasts(_db.GetCollection<PodcastUri>(CollectionNames.Podcasts));
 
             if (needsInit)
             {

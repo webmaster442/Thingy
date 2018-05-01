@@ -62,11 +62,13 @@
     <Compile Include="Entity\MediaLibary\IntQuery.cs" />
     <Compile Include="Entity\MediaLibary\StringQuery.cs" />
     <Compile Include="Entity\MediaLibary\Song.cs" />
+    <Compile Include="Entity\PodcastUri.cs" />
     <Compile Include="Factories\QueryFactory.cs" />
     <Compile Include="Implementation\Alarms.cs" />
     <Compile Include="Implementation\MediaLibary.cs" />
     <Compile Include="Implementation\MediaLibaryCache.cs" />
     <Compile Include="Implementation\Notes.cs" />
+    <Compile Include="Implementation\Podcasts.cs" />
     <Compile Include="Implementation\Programs.cs" />
     <Compile Include="Entity\ToDoItem.cs" />
     <Compile Include="Entity\VirtualFolder.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="Interfaces\IFavoriteFolders.cs" />
     <Compile Include="Interfaces\IMediaLibary.cs" />
     <Compile Include="Interfaces\INotes.cs" />
+    <Compile Include="Interfaces\IPodcasts.cs" />
     <Compile Include="Interfaces\IPrograms.cs" />
     <Compile Include="Interfaces\IStoredFiles.cs" />
     <Compile Include="Interfaces\ITodo.cs" />

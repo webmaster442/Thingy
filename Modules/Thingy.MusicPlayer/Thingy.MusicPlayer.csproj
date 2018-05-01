@@ -53,6 +53,7 @@
       <Link>Properties\CommonVersion.cs</Link>
     </Compile>
     <Compile Include="IMusicPlayer.cs" />
+    <Compile Include="Models\PodcastFeedItem.cs" />
     <Compile Include="ModuleDefinitions\MediaLibaryModule.cs" />
     <Compile Include="ModuleDefinitions\MusicPlayerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="ViewModels\MusicPlayerViewModel.cs" />
     <Compile Include="Models\NavigationItem.cs" />
     <Compile Include="ViewModels\PlayListViewModel.cs" />
+    <Compile Include="ViewModels\PodcastToolViewModel.cs" />
     <Compile Include="Views\AddURLDialog.xaml.cs">
       <DependentUpon>AddURLDialog.xaml</DependentUpon>
     </Compile>
@@ -71,6 +73,9 @@
     </Compile>
     <Compile Include="Views\MusicPlayerView.xaml.cs">
       <DependentUpon>MusicPlayerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Podcasttool.xaml.cs">
+      <DependentUpon>Podcasttool.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\QueryEditor.xaml.cs">
       <DependentUpon>QueryEditor.xaml</DependentUpon>
@@ -96,6 +101,10 @@
     <Page Include="Views\MusicPlayerView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Podcasttool.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\QueryEditor.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -2,8 +2,9 @@
 
 namespace Thingy.CoreModules.Models
 {
-    public class XKCDResponse
+    internal class XKCDResponse
     {
+#pragma warning disable IDE1006 // Naming Styles
         public int month { get; set; }
         public int num { get; set; }
         public string link { get; set; }
@@ -20,5 +21,6 @@ namespace Thingy.CoreModules.Models
         {
             get { return new DateTime(year, month, day).Date; }
         }
+#pragma warning restore IDE1006 // Naming Styles
     }
 }

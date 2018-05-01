@@ -11,6 +11,7 @@
         public const string Songs = "SongsCollection";
         public const string Radios = "RadiosCollection";
         public const string Queries = "QueryCollection";
+        public const string Podcasts = "PodcastCollection";
     }
 
     public enum Folders

@@ -63,6 +63,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.GitBash", "Modules\T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.Mpv", "Modules\Thingy.Mpv\Thingy.Mpv.csproj", "{D1B59ED4-418D-4698-B127-BC1BCEC2ACDC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.IOCore", "Cores\Thingy.IOCore\Thingy.IOCore.csproj", "{5A7E127E-70C0-4E8B-AC91-AA655B65B7FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +143,10 @@ Global
 		{D1B59ED4-418D-4698-B127-BC1BCEC2ACDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1B59ED4-418D-4698-B127-BC1BCEC2ACDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1B59ED4-418D-4698-B127-BC1BCEC2ACDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A7E127E-70C0-4E8B-AC91-AA655B65B7FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A7E127E-70C0-4E8B-AC91-AA655B65B7FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A7E127E-70C0-4E8B-AC91-AA655B65B7FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A7E127E-70C0-4E8B-AC91-AA655B65B7FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -160,6 +166,7 @@ Global
 		{253234E3-85E1-4479-813C-96360A670D86} = {0F95BE5A-A7C1-4CF6-8D09-8491163E7ED2}
 		{F2F28913-F5A7-47AC-A7EC-51248F3E5290} = {0F95BE5A-A7C1-4CF6-8D09-8491163E7ED2}
 		{D1B59ED4-418D-4698-B127-BC1BCEC2ACDC} = {0F95BE5A-A7C1-4CF6-8D09-8491163E7ED2}
+		{5A7E127E-70C0-4E8B-AC91-AA655B65B7FD} = {8DD48674-DAFC-4411-BC97-E0E0E6B34F53}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E3667F8E-DFD2-486A-AA38-7A1EFCC1CD63}
