@@ -63,7 +63,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.GitBash", "Modules\T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.Mpv", "Modules\Thingy.Mpv\Thingy.Mpv.csproj", "{D1B59ED4-418D-4698-B127-BC1BCEC2ACDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.IOCore", "Cores\Thingy.IOCore\Thingy.IOCore.csproj", "{5A7E127E-70C0-4E8B-AC91-AA655B65B7FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.JobCore", "Cores\Thingy.IOCore\Thingy.JobCore.csproj", "{5A7E127E-70C0-4E8B-AC91-AA655B65B7FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

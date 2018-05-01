@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Thingy.IOCore.Internals
+namespace Thingy.JobCore
 {
-    internal static class IOInternal
+    internal static class Internals
     {
         public const int BufferSize = 8192;
 
@@ -32,12 +32,17 @@ namespace Thingy.IOCore.Internals
             return string.Format("{0:0.###} {1}", value, unit);
         }
 
-        internal static string ProgressString(long totalsize, long copied, DateTime startTime)
+        internal static JobProgress ReportProgress(long totalsize, long copied, DateTime startTime)
         {
             var Diff = DateTime.Now - startTime;
             double progress = (double)copied / totalsize;
             double speed = copied / Diff.TotalSeconds;
-            return $"{progress:0.00}%\n{FileSize(speed)}/s";
+
+            return new JobProgress
+            {
+                Progress = progress,
+                StatusText = $"Average speed: {FileSize(speed)}/s"
+            };
         }
     }
 }

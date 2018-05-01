@@ -1,0 +1,51 @@
+﻿<mahdialogs:CustomDialog
+    x:Class="Thingy.JobCore.JobRunner"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mahdialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Loaded="CustomDialog_Loaded">
+    <mahdialogs:CustomDialog.Title>Processing... Please wait...</mahdialogs:CustomDialog.Title>
+    <mahdialogs:CustomDialog.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid
+                Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <ProgressBar
+                    x:Name="ProgressBar"
+                    Grid.Row="0"
+                    Height="20"
+                    Margin="15"
+                    Maximum="1"
+                    Minimum="0" />
+                <TextBlock
+                    x:Name="StatusText"
+                    Grid.Row="1"
+                    Margin="15" />
+            </Grid>
+            <StackPanel
+                Grid.Row="1"
+                Height="85"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal">
+                <Button
+                    x:Name="PART_NegativeButton"
+                    Height="35"
+                    MinWidth="80"
+                    Margin="5,0,0,0"
+                    Click="PART_NegativeButton_Click"
+                    Content="Cancel"
+                    Cursor="Arrow"
+                    Style="{DynamicResource AccentedDialogSquareButton}" />
+            </StackPanel>
+        </Grid>
+    </mahdialogs:CustomDialog.Content>
+</mahdialogs:CustomDialog>

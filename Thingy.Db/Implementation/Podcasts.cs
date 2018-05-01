@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Thingy.Db.Entity;
-using Thingy.Db.Interfaces;
 
 namespace Thingy.Db.Implementation
 {

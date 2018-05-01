@@ -3,16 +3,21 @@ using System.IO;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Thingy.IOCore.Internals;
 
-namespace Thingy.IOCore
+namespace Thingy.JobCore.Jobs
 {
-    public static partial class IO
+    public class DownloadFileJob : AsyncJob
     {
-        public static async Task DownloadFile(string sourceUri,
-                                              string destination,
-                                              IProgress<string> progress,
-                                              CancellationToken ct)
+        private readonly string _sourceuri;
+        private readonly string _targetfile;
+
+        public DownloadFileJob(string sourceUri, string targetFile)
+        {
+            _sourceuri = sourceUri;
+            _targetfile = targetFile;
+        }
+
+        public override async Task<bool> Run(CancellationToken token, IProgress<JobProgress> progress)
         {
             using (WebClient client = new WebClient())
             {
@@ -26,26 +31,28 @@ namespace Thingy.IOCore
                 var startTime = DateTime.Now;
                 long copied = 0;
                 long totalsize = 0;
-                using (var tartet = File.Create(destination))
+                using (var tartet = File.Create(_targetfile))
                 {
-                    ct.ThrowIfCancellationRequested();
-                    using (var source = await client.OpenReadTaskAsync(sourceUri))
+                    token.ThrowIfCancellationRequested();
+                    using (var source = await client.OpenReadTaskAsync(_sourceuri))
                     {
                         int read = 0;
                         totalsize = long.Parse(client.ResponseHeaders[HttpRequestHeader.ContentLength]);
-                        byte[] buffer = new byte[IOInternal.BufferSize];
+                        byte[] buffer = new byte[Internals.BufferSize];
                         do
                         {
-                            ct.ThrowIfCancellationRequested();
+                            token.ThrowIfCancellationRequested();
                             read = source.Read(buffer, 0, buffer.Length);
                             tartet.Write(buffer, 0, read);
                             copied += read;
-                            progress?.Report(IOInternal.ProgressString(totalsize, copied, startTime));
+                            progress.Report(Internals.ReportProgress(totalsize, copied, startTime));
                         }
                         while (read > 0);
                     }
                 }
             }
+
+            return true;
         }
     }
 }
