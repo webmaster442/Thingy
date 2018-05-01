@@ -1,7 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Thingy.API;
@@ -46,6 +45,7 @@ namespace Thingy.JobCore
 
         private async void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            TaskBar.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Normal;
             try
             {
                 _app.Log.Info("Starting job: {0}", _job.GetType().FullName);
@@ -53,7 +53,7 @@ namespace Thingy.JobCore
                 _app.Log.Info("Finished job: {0}", _job.GetType().FullName);
                 Close();
             }
-            catch (TaskCanceledException)
+            catch (OperationCanceledException)
             {
                 _app.Log.Info("{0} Job canceled by user", _job.GetType().FullName);
                 Close();
