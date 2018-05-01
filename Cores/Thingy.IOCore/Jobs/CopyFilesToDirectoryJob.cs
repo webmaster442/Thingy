@@ -33,6 +33,7 @@ namespace Thingy.JobCore.Jobs
                 destinations.Add(Path.Combine(_destination, fi.Name));
             }
 
+            progress.Report(Internals.ReportProgress(total, copied, startTime));
             for (int i = 0; i < _files.Count; i++)
             {
                 token.ThrowIfCancellationRequested();

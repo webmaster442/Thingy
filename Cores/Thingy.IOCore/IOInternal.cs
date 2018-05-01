@@ -41,7 +41,7 @@ namespace Thingy.JobCore
             return new JobProgress
             {
                 Progress = progress,
-                StatusText = $"Average speed: {FileSize(speed)}/s"
+                StatusText = $"{progress:P2}, Average speed: {FileSize(speed)}/s"
             };
         }
     }
