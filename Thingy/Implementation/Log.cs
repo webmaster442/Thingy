@@ -78,7 +78,7 @@ namespace Thingy.Implementation
         {
             try
             {
-                using (var file = File.CreateText(_logfile))
+                using (var file = File.AppendText(_logfile))
                 {
                     file.Write(_buffer.ToString());
                     CheckBufferClean();
