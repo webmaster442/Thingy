@@ -6,6 +6,6 @@ namespace Thingy.JobCore
 {
     public abstract class AsyncJob
     {
-        public abstract Task<bool> Run(CancellationToken token, IProgress<JobProgress> progress);
+        public abstract Task Run(CancellationToken token, IProgress<JobProgress> progress);
     }
 }

@@ -12,6 +12,7 @@ using Thingy.API;
 using Thingy.API.Capabilities;
 using Thingy.Db;
 using Thingy.Db.Entity;
+using Thingy.JobCore;
 
 namespace Thingy.CoreModules.ViewModels
 {
@@ -192,10 +193,9 @@ namespace Thingy.CoreModules.ViewModels
             };
             if (folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                var dialog = new CoreModules.Dialogs.CopyorZipDialog(_app);
+                var job = new JobCore.Jobs.CopyFilesToDirectoryJob(CurrentFolder, folderBrowserDialog.SelectedPath);
+                var dialog = new JobRunner(_app, job);
                 dialog.Show();
-                dialog.StartCopy(CurrentFolder, folderBrowserDialog.SelectedPath);
-
             }
         }
 
@@ -205,9 +205,9 @@ namespace Thingy.CoreModules.ViewModels
             saveFileDialog.Filter = "Zip files|*.zip";
             if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                var dialog = new CoreModules.Dialogs.CopyorZipDialog(_app);
+                var job = new JobCore.Jobs.CreateZipJob(CurrentFolder, saveFileDialog.FileName);
+                var dialog = new JobRunner(_app, job);
                 dialog.Show();
-                dialog.StartZip(CurrentFolder, saveFileDialog.FileName);
             }
         }
 

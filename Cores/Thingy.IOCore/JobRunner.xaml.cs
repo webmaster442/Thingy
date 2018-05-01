@@ -1,4 +1,4 @@
-﻿using MahApps.Metro.Controls.Dialogs;
+﻿using MahApps.Metro.Controls;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,7 +11,7 @@ namespace Thingy.JobCore
     /// <summary>
     /// Interaction logic for JobRunner.xaml
     /// </summary>
-    public partial class JobRunner : CustomDialog
+    public partial class JobRunner : MetroWindow
     {
         private readonly IApplication _app;
         private readonly AsyncJob _job;
@@ -29,37 +29,41 @@ namespace Thingy.JobCore
 
         private void ProgressChanged(JobProgress obj)
         {
-            Dispatcher.Invoke(() =>
-            {
-                ProgressBar.Value = obj.Progress;
-                StatusText.Text = obj.StatusText;
-            });
-        }
-
-        private async void CustomDialog_Loaded(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                _app.Log.Info("Starting job: {0}", _job.GetType().FullName);
-                bool result = await _job.Run(_tokenSource.Token, _reporter);
-                _app.Log.Info("Finished job: {0}", _job.GetType().FullName);
-                await _app.HideMessageBox(this);
-            }
-            catch (TaskCanceledException)
-            {
-                _app.Log.Info("{0} Job canceled by user", _job.GetType().FullName);
-                await _app.HideMessageBox(this);
-            }
-            catch (Exception ex)
-            {
-                _app.Log.Error("Exception in job: {0}", _job.GetType().FullName);
-                _app.Log.Error(ex);
-            }
+            TaskBar.ProgressValue = obj.Progress;
+            ProgressBar.Value = obj.Progress;
+            StatusText.Text = obj.StatusText;
         }
 
         private void PART_NegativeButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             _tokenSource.Cancel();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _tokenSource.Cancel();
+        }
+
+        private async void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _app.Log.Info("Starting job: {0}", _job.GetType().FullName);
+                await _job.Run(_tokenSource.Token, _reporter);
+                _app.Log.Info("Finished job: {0}", _job.GetType().FullName);
+                Close();
+            }
+            catch (TaskCanceledException)
+            {
+                _app.Log.Info("{0} Job canceled by user", _job.GetType().FullName);
+                Close();
+            }
+            catch (Exception ex)
+            {
+                _app.Log.Error("Exception in job: {0}", _job.GetType().FullName);
+                _app.Log.Error(ex);
+                Close();
+            }
         }
     }
 }

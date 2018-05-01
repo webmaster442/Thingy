@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Thingy.JobCore.Jobs
 {
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
     public class CopyFilesToDirectoryJob : AsyncJob
     {
         private readonly IList<string> _files;
@@ -18,7 +17,7 @@ namespace Thingy.JobCore.Jobs
             _destination = destination;
         }
 
-        public override async Task<bool> Run(CancellationToken token, IProgress<JobProgress> progress)
+        private void Job(CancellationToken token, IProgress<JobProgress> progress)
         {
             long total = 0;
             long copied = 0;
@@ -31,7 +30,7 @@ namespace Thingy.JobCore.Jobs
             {
                 FileInfo fi = new FileInfo(file);
                 total += fi.Length;
-                destinations.Add(fi.Name);
+                destinations.Add(Path.Combine(_destination, fi.Name));
             }
 
             for (int i = 0; i < _files.Count; i++)
@@ -55,8 +54,11 @@ namespace Thingy.JobCore.Jobs
                     }
                 }
             }
-            return true;
+        }
+
+        public override Task Run(CancellationToken token, IProgress<JobProgress> progress)
+        {
+            return Task.Run(() => Job(token, progress));
         }
     }
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 }

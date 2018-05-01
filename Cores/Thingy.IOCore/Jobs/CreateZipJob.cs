@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Thingy.JobCore.Jobs
 {
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
     public class CreateZipJob : AsyncJob
     {
         private readonly IList<string> _sourcefiles;
@@ -19,7 +18,7 @@ namespace Thingy.JobCore.Jobs
             _zipfile = zipfile;
         }
 
-        public override async Task<bool> Run(CancellationToken token, IProgress<JobProgress> progress)
+        private void Job(CancellationToken token, IProgress<JobProgress> progress)
         {
             var startTime = DateTime.Now;
             long copied = 0;
@@ -62,9 +61,11 @@ namespace Thingy.JobCore.Jobs
                     }
                 }
             }
+        }
 
-            return true;
+        public override Task Run(CancellationToken token, IProgress<JobProgress> progress)
+        {
+            return Task.Run(() => Job(token, progress));
         }
     }
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 }

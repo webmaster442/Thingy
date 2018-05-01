@@ -17,7 +17,7 @@ namespace Thingy.JobCore.Jobs
             _targetfile = targetFile;
         }
 
-        public override async Task<bool> Run(CancellationToken token, IProgress<JobProgress> progress)
+        public override async Task Run(CancellationToken token, IProgress<JobProgress> progress)
         {
             using (WebClient client = new WebClient())
             {
@@ -51,8 +51,6 @@ namespace Thingy.JobCore.Jobs
                     }
                 }
             }
-
-            return true;
         }
     }
 }
