@@ -22,9 +22,11 @@
         <Label
             Content="Feeds" />
         <ListBox
+            ItemTemplate="{StaticResource PodcastUri}"
             x:Name="FeedList"
             Grid.Row="1"
-            Grid.Column="0" />
+            Grid.Column="0"
+            ItemsSource="{Binding Podcasts}" />
 
         <StackPanel
             Grid.Row="0"
@@ -39,7 +41,8 @@
         <ListBox
             x:Name="ContentList"
             Grid.Row="1"
-            Grid.Column="2" />
+            Grid.Column="2"
+            ItemsSource="{Binding Feed}" />
 
         <GridSplitter
             Grid.Row="1"
@@ -54,7 +57,8 @@
             Grid.Column="0"
             Orientation="Horizontal">
             <Button
-                Content="Add feed" />
+                Command="{Binding AddFeedCommand}"
+                Content="Add feed..." />
             <Button
                 Content="Delete Selected" />
         </StackPanel>

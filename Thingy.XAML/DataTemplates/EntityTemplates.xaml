@@ -262,4 +262,20 @@
         </Grid>
     </DataTemplate>
 
+    <DataTemplate
+        x:Key="PodcastUri">
+        <StackPanel>
+            <TextBlock
+                FontFamily="{StaticResource Exo2}"
+                TextWrapping="Wrap"
+                FontSize="16"
+                Margin="3"
+                Text="{Binding Name}" />
+            <TextBlock
+                Text="{Binding Uri}"
+                TextWrapping="Wrap"
+                FontStyle="Italic"/>
+        </StackPanel>
+    </DataTemplate>
+
 </ResourceDictionary>

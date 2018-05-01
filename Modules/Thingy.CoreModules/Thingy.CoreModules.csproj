@@ -190,6 +190,10 @@
       <Project>{faf19388-a6c0-46f9-a588-a46db392ace4}</Project>
       <Name>AppLib.WPF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Cores\Thingy.JobCore\Thingy.JobCore.csproj">
+      <Project>{5a7e127e-70c0-4e8b-ac91-aa655b65b7fd}</Project>
+      <Name>Thingy.JobCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Thingy.API\Thingy.API.csproj">
       <Project>{bf3b99f7-722c-40c2-a0fe-7c3f8f1b6b01}</Project>
       <Name>Thingy.API</Name>
