@@ -59,7 +59,7 @@
       <Link>Properties\CommonVersion.cs</Link>
     </Compile>
     <Compile Include="AsyncJob.cs" />
-    <Compile Include="IOInternal.cs" />
+    <Compile Include="Internals.cs" />
     <Compile Include="JobProgress.cs" />
     <Compile Include="JobRunner.xaml.cs">
       <DependentUpon>JobRunner.xaml</DependentUpon>

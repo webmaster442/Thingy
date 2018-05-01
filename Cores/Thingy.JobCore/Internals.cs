@@ -4,7 +4,7 @@ namespace Thingy.JobCore
 {
     internal static class Internals
     {
-        public const int BufferSize = 8192;
+        internal const int BufferSize = 8192;
 
         internal static string FileSize(double value)
         {
@@ -29,7 +29,7 @@ namespace Thingy.JobCore
                 value /= 1024D;
                 unit = "kiB";
             }
-            return string.Format("{0:0.###} {1}", value, unit);
+            return string.Format("{0:0.##} {1}", value, unit);
         }
 
         internal static JobProgress ReportProgress(long totalsize, long copied, DateTime startTime)
