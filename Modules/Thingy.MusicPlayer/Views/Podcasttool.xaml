@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:interactivity="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -20,13 +21,9 @@
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
         <Label
-            Content="Feeds" />
-        <ListBox
-            ItemTemplate="{StaticResource PodcastUri}"
-            x:Name="FeedList"
-            Grid.Row="1"
+            Grid.Row="0"
             Grid.Column="0"
-            ItemsSource="{Binding Podcasts}" />
+            Content="Feeds" />
 
         <StackPanel
             Grid.Row="0"
@@ -35,14 +32,38 @@
             <Label
                 Content="Download location:" />
             <applib:FileSelector
-                Width="250" />
+                Width="250"
+                Filter="folder"
+                SelectedFile="{Binding DownloadDir, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
 
         <ListBox
-            x:Name="ContentList"
+            x:Name="FeedList"
             Grid.Row="1"
-            Grid.Column="2"
-            ItemsSource="{Binding Feed}" />
+            Grid.Column="0"
+            ItemTemplate="{StaticResource PodcastUri}"
+            ItemsSource="{Binding Podcasts}">
+            <interactivity:Interaction.Triggers>
+                <interactivity:EventTrigger EventName="MouseDoubleClick">
+                    <interactivity:InvokeCommandAction Command="{Binding DownloadAndParseFeedCommand}" CommandParameter="{Binding ElementName=FeedList, Path=SelectedIndex}" />
+                </interactivity:EventTrigger>
+            </interactivity:Interaction.Triggers>
+        </ListBox>
+
+        <StackPanel
+            Grid.Row="2"
+            Grid.Column="0"
+            Orientation="Horizontal">
+            <Button
+                Command="{Binding AddFeedCommand}"
+                Content="Add feed..."
+                Style="{StaticResource BigButton}" />
+            <Button
+                Command="{Binding RemoveFeedCommand}"
+                CommandParameter="{Binding ElementName=FeedList, Path=SelectedIndex}"
+                Content="Delete Selected"
+                Style="{StaticResource BigButton}" />
+        </StackPanel>
 
         <GridSplitter
             Grid.Row="1"
@@ -52,25 +73,27 @@
             VerticalAlignment="Stretch"
             Background="LightBlue" />
 
-        <StackPanel
-            Grid.Row="2"
-            Grid.Column="0"
-            Orientation="Horizontal">
-            <Button
-                Command="{Binding AddFeedCommand}"
-                Content="Add feed..." />
-            <Button
-                Content="Delete Selected" />
-        </StackPanel>
+        <ListBox
+            x:Name="ContentList"
+            Grid.Row="1"
+            Grid.Column="2"
+            ItemTemplate="{StaticResource PodcastItem}"
+            ItemsSource="{Binding Feed}" />
 
         <StackPanel
             Grid.Row="2"
             Grid.Column="2"
             Orientation="Horizontal">
             <Button
-                Content="Download" />
+                Command="{Binding DownloadPodcastCommand}"
+                CommandParameter="{Binding ElementName=ContentList, Path=SelectedIndex}"
+                Content="Download"
+                Style="{StaticResource BigButton}" />
             <Button
-                Content="Send to player" />
+                Command="{Binding SendToPlayerCommand}"
+                CommandParameter="{Binding ElementName=ContentList, Path=SelectedIndex}"
+                Content="Send to player"
+                Style="{StaticResource BigButton}" />
         </StackPanel>
     </Grid>
 </UserControl>

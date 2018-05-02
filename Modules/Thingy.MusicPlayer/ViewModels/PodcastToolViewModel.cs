@@ -14,30 +14,63 @@ using Thingy.Db;
 using Thingy.Db.Entity;
 using Thingy.MusicPlayer.Models;
 using AppLib.Common.Extensions;
+using Thingy.MusicPlayerCore.Formats;
+using Thingy.JobCore;
 
 namespace Thingy.MusicPlayer.ViewModels
 {
-    public class PodcastToolViewModel: ViewModel
+    public class PodcastToolViewModel : ViewModel
     {
         private readonly IApplication _app;
         private readonly IDataBase _db;
+        private IExtensionProvider _extensions;
+
+        private string _downloaddir;
+
+        public string DownloadDir
+        {
+            get { return _downloaddir; }
+            set
+            {
+                if (SetValue(ref _downloaddir, value))
+                {
+                    if (Feed != null && Feed.Count > 0)
+                    {
+                        foreach (var item in Feed)
+                        {
+                            item.LocalFile = GetLocalFile(item.Url, DownloadDir);
+                        }
+                    }
+                    _app.Settings.Set("PodcastDownloadDir", value);
+                }
+            }
+        }
 
         public ObservableCollection<PodcastUri> Podcasts { get; }
         public ObservableCollection<PodcastFeedItem> Feed { get; }
 
         public DelegateCommand AddFeedCommand { get; }
-        public DelegateCommand RemoveFeedCommand { get; }
+        public DelegateCommand<int> RemoveFeedCommand { get; }
+        public DelegateCommand<int> DownloadAndParseFeedCommand { get; }
+        public DelegateCommand<int> DownloadPodcastCommand { get; }
+        public DelegateCommand<int> SendToPlayerCommand { get; }
 
         public PodcastToolViewModel(IApplication app, IDataBase db)
         {
             _app = app;
             _db = db;
+            _extensions = new ExtensionProvider();
+            DownloadDir = _app.Settings.Get("PodcastDownloadDir", @"c:\podcasts");
             Podcasts = new ObservableCollection<PodcastUri>(_db.Podcasts.GetPodcasts());
             Feed = new ObservableCollection<PodcastFeedItem>();
+            DownloadAndParseFeedCommand = Command.ToCommand<int>(DownloadAndParseFeed);
             AddFeedCommand = Command.ToCommand(AddFeed);
+            RemoveFeedCommand = Command.ToCommand<int>(RemoveFeed, CanRemoveFeed);
+            DownloadPodcastCommand = Command.ToCommand<int>(DownloadPodcast, CanDownloadPodcast);
+            SendToPlayerCommand = Command.ToCommand<int>(SendToPlayer, CanSendToPlayer);
         }
 
-        private async Task<SyndicationFeed> DownloadAndParseFeed(string url)
+        private async Task<SyndicationFeed> DownloadFeed(string url)
         {
             using (WebClient client = new WebClient())
             {
@@ -52,18 +85,53 @@ namespace Thingy.MusicPlayer.ViewModels
             }
         }
 
-        private IEnumerable<PodcastFeedItem> DownloadAndParseFeed(SyndicationFeed feed)
+        private IEnumerable<PodcastFeedItem> ParseFeed(SyndicationFeed feed)
         {
             foreach (var item in feed.Items)
             {
+                var link = ExtractLink(item.Links);
+                var local = GetLocalFile(link, DownloadDir);
                 yield return new PodcastFeedItem
                 {
-                    Description = item.Content.ToString(),
-                    Url = item.BaseUri.ToString(),
+                    Description = item.Summary.Text,
+                    Url = link,
                     Title = item.Title.Text,
-                    LocalFile = "",
+                    LocalFile = local,
                     PublishDate = item.PublishDate.UtcDateTime
                 };
+            }
+        }
+
+        private string GetLocalFile(string link, string dir)
+        {
+            var file = Path.GetFileName(link);
+            return Path.Combine(dir, file);
+        }
+
+        private string ExtractLink(Collection<SyndicationLink> links)
+        {
+            foreach (var link in links)
+            {
+                var str = link.Uri.ToString();
+                if (_extensions.GetFormatKind(str) == FormatKind.Stream)
+                    return str;
+            }
+            return null;
+        }
+
+        private async void DownloadAndParseFeed(int index)
+        {
+            if (index < 0) return;
+            try
+            {
+                var item = Podcasts[index];
+                var feed = await DownloadFeed(item.Uri);
+                Feed.UpdateWith(ParseFeed(feed));
+            }
+            catch (Exception ex)
+            {
+                await _app.ShowMessageBox("Error", "Can't download or parse given url", DialogButtons.Ok);
+                _app.Log.Error(ex);
             }
         }
 
@@ -75,14 +143,14 @@ namespace Thingy.MusicPlayer.ViewModels
             {
                 try
                 {
-                    var feed = await DownloadAndParseFeed(dialog.Url);
+                    var feed = await DownloadFeed(dialog.Url);
                     _db.Podcasts.SavePodcast(new PodcastUri
                     {
                         Name = feed.Title.Text,
                         Uri = dialog.Url
                     });
                     Podcasts.UpdateWith(_db.Podcasts.GetPodcasts());
-                    Feed.UpdateWith(DownloadAndParseFeed(feed));
+                    Feed.UpdateWith(ParseFeed(feed));
                 }
                 catch (Exception ex)
                 {
@@ -90,6 +158,49 @@ namespace Thingy.MusicPlayer.ViewModels
                     _app.Log.Error(ex);
                 }
             }
+        }
+
+        private bool CanDownloadPodcast(int obj)
+        {
+            return obj > -1 && !File.Exists(Feed[obj].LocalFile);
+        }
+
+        private async void DownloadPodcast(int obj)
+        {
+            if (!Directory.Exists(DownloadDir))
+            {
+                await _app.ShowMessageBox("Download directory not found", "Download directory doesn't exit. Please set it", DialogButtons.Ok);
+                return;
+            }
+            else
+            {
+                var item = Feed[obj];
+                var job = new JobCore.Jobs.DownloadFileJob(item.Url, item.LocalFile);
+                JobRunner runner = new JobRunner(_app, job);
+                runner.Show();
+            }
+        }
+
+        private void SendToPlayer(int obj)
+        {
+            _app.HandleFiles(new List<string> { Feed[obj].LocalFile });
+        }
+
+        private bool CanSendToPlayer(int obj)
+        {
+            return obj > -1 && File.Exists(Feed[obj].LocalFile);
+        }
+
+        private void RemoveFeed(int obj)
+        {
+            var seledted = Podcasts[obj];
+            _db.Podcasts.DeletePodcast(seledted.Name);
+            Podcasts.UpdateWith(_db.Podcasts.GetPodcasts());
+        }
+
+        private bool CanRemoveFeed(int obj)
+        {
+            return obj > -1;
         }
     }
 }

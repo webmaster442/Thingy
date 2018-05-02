@@ -1,6 +1,7 @@
 ﻿using MahApps.Metro.Controls;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Thingy.API;
@@ -62,6 +63,8 @@ namespace Thingy.JobCore
             {
                 _app.Log.Error("Exception in job: {0}", _job.GetType().FullName);
                 _app.Log.Error(ex);
+                MessageBox.Show("Job terminated with an undhandled exception. See log for details");
+                await Task.Delay(100);
                 Close();
             }
         }

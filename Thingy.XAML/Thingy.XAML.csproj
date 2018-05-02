@@ -65,6 +65,7 @@
     <Compile Include="Converters\ExeIconExtractor.cs" />
     <Compile Include="Converters\FileToIconConverter.cs" />
     <Compile Include="Converters\FontFamilyConverter.cs" />
+    <Compile Include="Converters\PodcastStatusConverter.cs" />
     <Compile Include="Converters\UniformGridColunConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

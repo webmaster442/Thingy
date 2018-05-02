@@ -266,16 +266,48 @@
         x:Key="PodcastUri">
         <StackPanel>
             <TextBlock
-                FontFamily="{StaticResource Exo2}"
-                TextWrapping="Wrap"
-                FontSize="16"
                 Margin="3"
-                Text="{Binding Name}" />
+                FontFamily="{StaticResource Exo2}"
+                FontSize="16"
+                Text="{Binding Name}"
+                TextWrapping="Wrap" />
             <TextBlock
+                FontStyle="Italic"
                 Text="{Binding Uri}"
-                TextWrapping="Wrap"
-                FontStyle="Italic"/>
+                TextWrapping="Wrap" />
         </StackPanel>
     </DataTemplate>
 
+    <DataTemplate
+        x:Key="PodcastItem">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Image
+                Grid.Column="0"
+                Width="32"
+                Height="32"
+                Source="{Binding LocalFile, Converter={conv:PodcastStatusConverter}}" />
+            <StackPanel
+                Grid.Column="1">
+                <Label
+                    Content="{Binding Title}"
+                    Style="{StaticResource Title}" />
+                <TextBlock
+                    Margin="10,0"
+                    FontStyle="Italic"
+                    Text="{Binding PublishDate}" />
+                <TextBlock
+                    Margin="10,0"
+                    FontStyle="Italic"
+                    Text="{Binding Url}" />
+                <Separator />
+                <TextBlock
+                    Margin="10,0"
+                    Text="{Binding Description}" />
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
 </ResourceDictionary>

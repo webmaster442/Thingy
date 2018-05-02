@@ -38,6 +38,9 @@ namespace Thingy.JobCore
             double progress = (double)copied / totalsize;
             double speed = copied / Diff.TotalSeconds;
 
+            if (double.IsNaN(progress)) progress = 0;
+            if (double.IsNaN(speed)) speed = 0;
+
             return new JobProgress
             {
                 Progress = progress,

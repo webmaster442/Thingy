@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Thingy.JobCore.Jobs
 {
@@ -17,7 +18,12 @@ namespace Thingy.JobCore.Jobs
             _targetfile = targetFile;
         }
 
-        public override async Task Run(CancellationToken token, IProgress<JobProgress> progress)
+        public override Task Run(CancellationToken token, IProgress<JobProgress> progress)
+        {
+            return Task.Run(() => Job(progress, token));
+        }
+
+        private void Job(IProgress<JobProgress> progress, CancellationToken token)
         {
             using (WebClient client = new WebClient())
             {
@@ -34,10 +40,12 @@ namespace Thingy.JobCore.Jobs
                 using (var tartet = File.Create(_targetfile))
                 {
                     token.ThrowIfCancellationRequested();
-                    using (var source = await client.OpenReadTaskAsync(_sourceuri))
+                    progress.Report(Internals.ReportProgress(totalsize, copied, startTime));
+                    using (var source = client.OpenRead(_sourceuri))
                     {
                         int read = 0;
-                        totalsize = long.Parse(client.ResponseHeaders[HttpRequestHeader.ContentLength]);
+                        var size = client.ResponseHeaders.GetValues("Content-Length").FirstOrDefault();
+                        totalsize = long.Parse(size);
                         byte[] buffer = new byte[Internals.BufferSize];
                         do
                         {
