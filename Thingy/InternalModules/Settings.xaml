@@ -41,22 +41,40 @@
                         x:Name="Save"
                         Margin="5"
                         Click="Save_Click"
-                        Content="Save" />
+                        Content="Save"
+                        Width="100"
+                        IsEnabled="{Binding ElementName=ExpertMode, Path=IsChecked}" />
+                    <CheckBox
+                        x:Name="ExpertMode"
+                        FontWeight="Bold"
+                        Content="Enable Editing&#x0a;Warning! Not valid settings can lead to app crash. This is only for experts!"
+                        IsChecked="False" />
                 </StackPanel>
                 <DataGrid
                     x:Name="SettingsGrid"
                     Grid.Row="1"
-                    AutoGenerateColumns="False">
+                    AutoGenerateColumns="False"
+                    CanUserSortColumns="True"
+                    SelectionUnit="Cell"
+                    IsEnabled="{Binding ElementName=ExpertMode, Path=IsChecked}"
+                    IsReadOnly="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn
                             Width="*"
                             Binding="{Binding Key}"
                             Header="Setting name"
                             IsReadOnly="True" />
-                        <DataGridTextColumn
+                        <DataGridTemplateColumn
                             Width="*"
-                            Binding="{Binding Value}"
-                            Header="Value" />
+                            Header="Value">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox
+                                        BorderThickness="0"
+                                        Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

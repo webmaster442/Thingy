@@ -1,5 +1,7 @@
 ﻿using AppLib.Common.Extensions;
+using AppLib.MVVM;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -8,10 +10,22 @@ using Thingy.API;
 
 namespace Thingy.InternalModules
 {
-    public class SettingModell
+    public class SettingModell: BindableBase
     {
-        public string Key { get; set; }
-        public string Value { get; set; }
+        private string _key;
+        private string _value;
+
+        public string Key
+        {
+            get { return _key; }
+            set { SetValue(ref _key, value); }
+        }
+
+        public string Value
+        {
+            get { return _value; }
+            set { SetValue(ref _value, value); }
+        }
     }
 
     /// <summary>
@@ -24,6 +38,7 @@ namespace Thingy.InternalModules
         public Settings()
         {
             InitializeComponent();
+            StoredSettings = new ObservableCollection<SettingModell>();
         }
 
         public Settings(IApplication app): this()
@@ -31,18 +46,24 @@ namespace Thingy.InternalModules
             _app = app;
         }
 
-        public ObservableCollection<SettingModell> StoredSettings;
+        public ObservableCollection<SettingModell> StoredSettings { get; }
 
         private async void Save_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var diff = from vm in StoredSettings
-                           from setting in _app.Settings
-                           where
-                           vm.Key == setting.Key &&
-                           vm.Value != setting.Value
-                           select vm;
+                List<SettingModell> diff = new List<SettingModell>();
+                foreach (var setting in _app.Settings)
+                {
+                    var vm = (from i in StoredSettings
+                             where i.Key == setting.Key
+                             select i).FirstOrDefault();
+
+                    if (vm != null && vm.Value != setting.Value)
+                    {
+                        diff.Add(vm);
+                    }
+                }
 
                 foreach (var d in diff)
                 {
@@ -59,7 +80,6 @@ namespace Thingy.InternalModules
         {
             if (TabControl.SelectedIndex != 1) return;
 
-            StoredSettings = new ObservableCollection<SettingModell>();
             var query = from setting in _app.Settings
                         where !string.IsNullOrEmpty(setting.Key)
                         select new SettingModell
