@@ -33,23 +33,6 @@ namespace Thingy.InternalModules
 
         public ObservableCollection<SettingModell> StoredSettings;
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            StoredSettings = new ObservableCollection<SettingModell>();
-
-            var query = from setting in _app.Settings
-                        where !string.IsNullOrEmpty(setting.Key)
-                        select new SettingModell
-                        {
-                            Key = setting.Key,
-                            Value = setting.Value
-                        };
-
-            StoredSettings.UpdateWith(query);
-
-            SettingsGrid.ItemsSource = StoredSettings;
-        }
-
         private async void Save_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -70,6 +53,24 @@ namespace Thingy.InternalModules
             {
                 await _app.ShowMessageBox("Error", ex.Message, DialogButtons.Ok);
             }
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (TabControl.SelectedIndex != 1) return;
+
+            StoredSettings = new ObservableCollection<SettingModell>();
+            var query = from setting in _app.Settings
+                        where !string.IsNullOrEmpty(setting.Key)
+                        select new SettingModell
+                        {
+                            Key = setting.Key,
+                            Value = setting.Value
+                        };
+
+            StoredSettings.UpdateWith(query);
+
+            SettingsGrid.ItemsSource = StoredSettings;
         }
     }
 }

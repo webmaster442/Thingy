@@ -32,8 +32,18 @@ namespace Thingy.Mpv.ModuleDefinitions
         {
             get
             {
-                var youtubedl = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Apps\x64\youtube-dl.exe");
-                var canLoad = System.IO.File.Exists(youtubedl);
+                string youtubedl = null;
+                var setpath = App.Settings.Get("YoutubeDlPath", string.Empty);
+                if (string.IsNullOrEmpty(setpath))
+                {
+                    youtubedl = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Apps\x64\youtube-dl.exe");
+                }
+                else
+                {
+                    youtubedl = setpath;
+                }
+
+                bool canLoad = System.IO.File.Exists(youtubedl);
                 if (!canLoad)
                     App.Log.Warning("youtube-dl Module not shown, because file not exists: {0}", youtubedl);
                 return canLoad;

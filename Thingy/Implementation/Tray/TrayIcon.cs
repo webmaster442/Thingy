@@ -61,10 +61,10 @@ namespace Thingy.Implementation.Tray
             ModifierKeys @out = ModifierKeys.None;
             if (Enum.TryParse(_app.Settings.Get(SettingsKeys.ActivatorModifierKey1, "Alt"), out @out))
             {
-                if (!string.IsNullOrEmpty(_app.Settings.Get(SettingsKeys.ActivatorModifierKey2, "")))
+                if (!string.IsNullOrEmpty(_app.Settings.Get(SettingsKeys.ActivatorModifierKey2, "None")))
                 {
                     ModifierKeys out2 = ModifierKeys.None;
-                    if (Enum.TryParse(_app.Settings.Get(SettingsKeys.ActivatorModifierKey2, ""), out out2))
+                    if (Enum.TryParse(_app.Settings.Get(SettingsKeys.ActivatorModifierKey2, "None"), out out2))
                     {
                         modifier = @out | out2;
                         return true;
