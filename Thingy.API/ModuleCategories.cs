@@ -6,5 +6,6 @@
         public const string Calculators = "Calculators";
         public const string Utilities = "Utilities";
         public const string Science = "Science";
+        public const string Media = "Media";
     }
 }
