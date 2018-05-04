@@ -20,7 +20,7 @@ namespace Thingy.Mpv.ModuleDefinitions
 
         public override string Category
         {
-            get { return ModuleCategories.Utilities; }
+            get { return ModuleCategories.Media; }
         }
 
         public override UserControl RunModule()
