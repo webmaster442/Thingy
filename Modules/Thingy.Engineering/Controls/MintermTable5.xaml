@@ -1,0 +1,731 @@
+﻿<UserControl
+    x:Class="Thingy.Engineering.Controls.MintermTable5"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="600"
+    Height="340"
+    mc:Ignorable="d">
+    <Grid
+        x:Name="Minterm5x">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="30" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="10" />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <Rectangle
+            Grid.Row="6"
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            Width="5"
+            Fill="Black" />
+        <Rectangle
+            Grid.Row="5"
+            Grid.RowSpan="2"
+            Grid.Column="6"
+            Width="5"
+            Fill="Black" />
+        <Rectangle
+            Grid.Row="3"
+            Grid.Column="4"
+            Grid.ColumnSpan="2"
+            Height="5"
+            Fill="Black" />
+        <Rectangle
+            Grid.Row="8"
+            Grid.Column="3"
+            Grid.ColumnSpan="2"
+            Height="5"
+            Fill="Black" />
+        <Rectangle
+            Grid.Row="6"
+            Grid.RowSpan="2"
+            Grid.Column="9"
+            Width="5"
+            Fill="Black" />
+        <Rectangle
+            Grid.Row="5"
+            Grid.RowSpan="2"
+            Grid.Column="14"
+            Width="5"
+            Fill="Black" />
+        <Rectangle
+            Grid.Row="3"
+            Grid.Column="12"
+            Grid.ColumnSpan="2"
+            Height="5"
+            Fill="Black" />
+        <Rectangle
+            Grid.Row="8"
+            Grid.Column="11"
+            Grid.ColumnSpan="2"
+            Height="5"
+            Fill="Black" />
+        <Rectangle
+            Grid.Row="1"
+            Grid.Column="10"
+            Grid.ColumnSpan="4"
+            Height="5"
+            Fill="Black" />
+        <TextBlock
+            Grid.Row="6"
+            Grid.RowSpan="2"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="18"
+            FontWeight="Bold"
+            Text="B" />
+        <TextBlock
+            Grid.Row="5"
+            Grid.RowSpan="2"
+            Grid.Column="7"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="18"
+            FontWeight="Bold"
+            Text="C" />
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="4"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="18"
+            FontWeight="Bold"
+            Text="D" />
+        <TextBlock
+            Grid.Row="9"
+            Grid.Column="3"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="18"
+            FontWeight="Bold"
+            Text="E" />
+        <TextBlock
+            Grid.Row="6"
+            Grid.RowSpan="2"
+            Grid.Column="8"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="18"
+            FontWeight="Bold"
+            Text="B" />
+        <TextBlock
+            Grid.Row="5"
+            Grid.RowSpan="2"
+            Grid.Column="15"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="18"
+            FontWeight="Bold"
+            Text="C" />
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="12"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="18"
+            FontWeight="Bold"
+            Text="D" />
+        <TextBlock
+            Grid.Row="9"
+            Grid.Column="11"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="18"
+            FontWeight="Bold"
+            Text="E" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="11"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="18"
+            FontWeight="Bold"
+            Text="A" />
+
+        <Border
+            Grid.Row="4"
+            Grid.Column="2"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="0"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="4"
+            Grid.Column="3"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="1"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="4"
+            Grid.Column="4"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="3"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="4"
+            Grid.Column="5"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="2"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+
+        <Border
+            Grid.Row="5"
+            Grid.Column="2"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="4"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="5"
+            Grid.Column="3"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="5"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="5"
+            Grid.Column="4"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="7"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="5"
+            Grid.Column="5"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="6"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+
+        <Border
+            Grid.Row="6"
+            Grid.Column="2"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="12"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="6"
+            Grid.Column="3"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="13"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="6"
+            Grid.Column="4"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="15"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="6"
+            Grid.Column="5"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="14"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+
+        <Border
+            Grid.Row="7"
+            Grid.Column="2"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="8"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="7"
+            Grid.Column="3"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="9"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="7"
+            Grid.Column="4"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="11"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="7"
+            Grid.Column="5"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="10"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+
+        <Border
+            Grid.Row="4"
+            Grid.Column="10"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="16"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="4"
+            Grid.Column="11"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="17"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="4"
+            Grid.Column="12"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="19"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="4"
+            Grid.Column="13"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="18"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+
+        <Border
+            Grid.Row="5"
+            Grid.Column="10"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="20"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="5"
+            Grid.Column="11"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="21"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="5"
+            Grid.Column="12"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="23"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="5"
+            Grid.Column="13"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="22"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+
+        <Border
+            Grid.Row="6"
+            Grid.Column="10"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="28"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="6"
+            Grid.Column="11"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="29"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="6"
+            Grid.Column="12"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="31"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="6"
+            Grid.Column="13"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="30"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+
+        <Border
+            Grid.Row="7"
+            Grid.Column="10"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="24"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="7"
+            Grid.Column="11"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="25"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="7"
+            Grid.Column="12"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="27"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+        <Border
+            Grid.Row="7"
+            Grid.Column="13"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="26"
+                IsThreeState="True">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform
+                        ScaleX="1.2"
+                        ScaleY="1.2" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </Border>
+
+    </Grid>
+</UserControl>

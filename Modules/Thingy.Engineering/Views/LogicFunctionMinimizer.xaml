@@ -1,0 +1,175 @@
+﻿<UserControl
+    x:Class="Thingy.Engineering.Views.LogicFunctionMinimizer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:specialcontrols="clr-namespace:Thingy.Engineering.Controls"
+    d:DesignHeight="540"
+    d:DesignWidth="960"
+    Loaded="UserControl_Loaded"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style
+            BasedOn="{StaticResource {x:Type RadioButton}}"
+            TargetType="{x:Type RadioButton}">
+            <Setter Property="Margin" Value="2" />
+        </Style>
+        <Style
+            BasedOn="{StaticResource {x:Type TextBox}}"
+            TargetType="{x:Type TextBox}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style
+            BasedOn="{StaticResource {x:Type TextBlock}}"
+            TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="80" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TabControl
+            x:Name="TabInputMode"
+            Grid.Row="0"
+            Grid.ColumnSpan="5"
+            TabStripPlacement="Left">
+            <TabItem
+                Header="2 variables"
+                Style="{StaticResource CompactTabItem}">
+                <specialcontrols:MintermTable2
+                    x:Name="Minterm2x" />
+            </TabItem>
+            <TabItem
+                Header="3 variables"
+                Style="{StaticResource CompactTabItem}">
+                <specialcontrols:MintermTable3
+                    x:Name="Minterm3x" />
+            </TabItem>
+            <TabItem
+                Header="4 variables"
+                Style="{StaticResource CompactTabItem}">
+                <specialcontrols:MintermTable4
+                    x:Name="Minterm4x" />
+            </TabItem>
+            <TabItem
+                Header="5 variables"
+                Style="{StaticResource CompactTabItem}">
+                <specialcontrols:MintermTable5
+                    x:Name="Minterm5x" />
+            </TabItem>
+            <TabItem
+                Header="List of Minterms"
+                Style="{StaticResource CompactTabItem}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition />
+                        <RowDefinition Height="40" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Text="List of set minterms: (one per line):" />
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Text="List of don't care minterms: (one per line):" />
+                    <TextBox
+                        x:Name="TbListSet"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="5"
+                        VerticalAlignment="Stretch"
+                        mah:TextBoxHelper.Watermark="Like...&#x0a;1&#x0a;2&#x0a;3&#x0a;4"
+                        AcceptsReturn="True"
+                        FontSize="22" />
+                    <TextBox
+                        x:Name="TbListDontCare"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="5"
+                        VerticalAlignment="Stretch"
+                        mah:TextBoxHelper.Watermark="Like...&#x0a;5&#x0a;7"
+                        AcceptsReturn="True"
+                        FontSize="22" />
+                    <TextBlock
+                        Grid.Row="2"
+                        Text="Number of Variables:" />
+                    <applib:EditableSlider
+                        x:Name="EsListVarCount"
+                        Grid.Row="2"
+                        Grid.Column="2"
+                        Margin="3"
+                        DefaultValue="5"
+                        DisplayFormat="0"
+                        Maximum="16"
+                        Minimum="2"
+                        Value="5" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <GroupBox
+            Grid.Row="0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Header="Options">
+            <StackPanel>
+                <CheckBox
+                    x:Name="CbHazardFree"
+                    Margin="3"
+                    Content="Hazard Free" />
+                <RadioButton
+                    x:Name="RadioMSB"
+                    Margin="3"
+                    Checked="VarnameSet"
+                    Content="A is MSB"
+                    IsChecked="True"
+                    Unchecked="VarnameSet" />
+                <RadioButton
+                    x:Name="RadioLSB"
+                    Margin="3"
+                    Content="A is LSB" />
+            </StackPanel>
+        </GroupBox>
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Orientation="Horizontal">
+            <Button
+                x:Name="BtnSetAll"
+                Click="BtnSetAll_Click"
+                Content="Set All"
+                Style="{StaticResource BigButton}" />
+            <Button
+                x:Name="BtnUnsetAll"
+                Click="BtnUnsetAll_Click"
+                Content="Unset All"
+                Style="{StaticResource BigButton}" />
+            <Button
+                x:Name="BtnMinimize"
+                Click="BtnMinimize_Click"
+                Content="Minimize!"
+                Style="{StaticResource BigButton}" />
+        </StackPanel>
+        <TextBox
+            x:Name="TbResults"
+            Grid.Row="1"
+            Grid.Column="1"
+            FontSize="18"
+            IsReadOnly="True" />
+    </Grid>
+</UserControl>
+
