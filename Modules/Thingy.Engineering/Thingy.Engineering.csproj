@@ -58,6 +58,9 @@
       <Link>Properties\CommonVersion.cs</Link>
     </Compile>
     <Compile Include="Controls\IMintermTable.cs" />
+    <Compile Include="Controls\IpInput.xaml.cs">
+      <DependentUpon>IpInput.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MintermTable2.xaml.cs">
       <DependentUpon>MintermTable2.xaml</DependentUpon>
     </Compile>
@@ -71,6 +74,8 @@
       <DependentUpon>MintermTable5.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\MintermTableHelpers.cs" />
+    <Compile Include="IP\IpExtensions.cs" />
+    <Compile Include="IP\SubnetMask.cs" />
     <Compile Include="LogicMinimizer\LogicItem.cs" />
     <Compile Include="LogicMinimizer\Implicant.cs" />
     <Compile Include="LogicMinimizer\ImplicantRelationship.cs" />
@@ -78,8 +83,12 @@
     <Compile Include="LogicMinimizer\Utility.cs" />
     <Compile Include="ModuleDefinitions\LogicMinimizerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\SubnetCalculatorViewModel.cs" />
     <Compile Include="Views\LogicFunctionMinimizer.xaml.cs">
       <DependentUpon>LogicFunctionMinimizer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubnetCalculator.xaml.cs">
+      <DependentUpon>SubnetCalculator.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +114,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\IpInput.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\MintermTable2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -122,6 +135,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\LogicFunctionMinimizer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubnetCalculator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

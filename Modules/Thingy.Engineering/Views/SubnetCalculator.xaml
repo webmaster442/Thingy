@@ -1,0 +1,139 @@
+﻿<UserControl
+    x:Class="Thingy.Engineering.Views.SubnetCalculator"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:special="clr-namespace:Thingy.Engineering.Controls"
+    d:DesignHeight="540"
+    d:DesignWidth="970"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style
+            BasedOn="{StaticResource {x:Type TextBlock}}"
+            TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            Text="Network Address:" />
+        <special:IpInput
+            x:Name="Network"
+            Grid.Row="0"
+            Grid.Column="1"
+            Margin="2"
+            IpAddress="{Binding Ip}" />
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            Text="Network Mask:" />
+        <special:IpInput
+            x:Name="Mask"
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="2"
+            IpAddress="{Binding Mask}" />
+
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="2"
+            Margin="2"
+            Text="Required networks:" />
+
+        <applib:EditableSlider
+            x:Name="ReqNetworks"
+            Grid.Row="0"
+            Grid.Column="3"
+            Width="180"
+            Margin="2"
+            VerticalAlignment="Center"
+            DefaultValue="3"
+            Maximum="255"
+            Minimum="1"
+            Value="{Binding NetworkCount}" />
+
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="2"
+            Margin="2"
+            Text="Netmask Length" />
+
+        <applib:EditableSlider
+            Grid.Row="1"
+            Grid.Column="3"
+            Width="180"
+            Margin="2"
+            VerticalAlignment="Center"
+            DefaultValue="24"
+            Maximum="255"
+            Minimum="1"
+            Value="{Binding NetmaskLength}" />
+
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="4"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
+            <TextBlock
+                Margin="10,0"
+                Text="Template: " />
+            <Button
+                Width="22"
+                Command="{Binding TemplateCommand}"
+                CommandParameter="255.0.0.0"
+                Content="A" />
+            <Button
+                Width="22"
+                Margin="5,0"
+                Command="{Binding TemplateCommand}"
+                CommandParameter="255.255.0.0"
+                Content="B" />
+            <Button
+                Width="22"
+                Command="{Binding TemplateCommand}"
+                CommandParameter="255.255.255.0"
+                Content="C" />
+        </StackPanel>
+
+        <Button
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Grid.Column="5"
+            Width="100"
+            Margin="10"
+            HorizontalAlignment="Right"
+            Command="{Binding SplitSubnetsCommand}"
+            Content="Calculate" />
+
+        <TextBox
+            x:Name="Output"
+            Grid.Row="2"
+            Grid.ColumnSpan="6"
+            AcceptsReturn="True"
+            AcceptsTab="True"
+            FontFamily="{StaticResource UbuntuMono}"
+            FontSize="16"
+            IsReadOnly="True"
+            Style="{StaticResource BorderlessTextBox}"
+            Text="{Binding Output}"
+            VerticalScrollBarVisibility="Visible" />
+    </Grid>
+</UserControl>
