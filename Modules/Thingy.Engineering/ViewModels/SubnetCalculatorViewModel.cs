@@ -2,7 +2,7 @@
 using System;
 using System.Net;
 using System.Text;
-using Thingy.Engineering.IP;
+using Thingy.Engineering.Domain.IP;
 
 namespace Thingy.Engineering.ViewModels
 {
@@ -13,7 +13,7 @@ namespace Thingy.Engineering.ViewModels
         private int _networks;
         private int _netmasklen;
 
-        public IPAddress IP
+        public IPAddress Ip
         {
             get { return _ip; }
             set { SetValue(ref _ip, value); }
@@ -25,7 +25,10 @@ namespace Thingy.Engineering.ViewModels
             set
             {
                 SetValue(ref _mask, value);
-                _netmasklen = SubnetMask.GetBitLength(_mask);
+                if (value != null)
+                    _netmasklen = SubnetMask.GetBitLength(_mask);
+                else
+                    _netmasklen = 0;
                 OnPropertyChanged(() => NetmaskLength);
             }
         }
@@ -36,7 +39,8 @@ namespace Thingy.Engineering.ViewModels
             set
             {
                 SetValue(ref _netmasklen, value);
-                _mask = SubnetMask.CreateByNetBitLength(_netmasklen);
+                if (value >= 2)
+                    _mask = SubnetMask.CreateByNetBitLength(_netmasklen);
                 OnPropertyChanged(() => Mask);
             }
         }
@@ -52,7 +56,8 @@ namespace Thingy.Engineering.ViewModels
 
         public SubnetCalculatorViewModel()
         {
-            IP = IPAddress.Parse("192.168.0.1");
+            Ip = IPAddress.Parse("192.168.0.1");
+            Mask = IPAddress.Parse("255.255.255.0");
             SplitSubnetsCommand = Command.ToCommand(SplitSubnets);
             TemplateCommand = Command.ToCommand<string>(Template);
         }
@@ -90,7 +95,7 @@ namespace Thingy.Engineering.ViewModels
 
         private void SplitSubnets()
         {
-            if (Mask == null || IP == null) return;
+            if (Mask == null || Ip == null) return;
 
             var buffer = new StringBuilder();
             int requiredbits = GetBits(NetworkCount);
@@ -111,7 +116,7 @@ namespace Thingy.Engineering.ViewModels
             buffer.AppendLine("--------------------------------------------------------------------------------------");
             buffer.AppendLine();
 
-            uint tmp = IP.GetUint();
+            uint tmp = Ip.GetUint();
             int shift = 32 - outmaskbits;
             for (uint i = 0; i < NetworkCount; i++)
             {

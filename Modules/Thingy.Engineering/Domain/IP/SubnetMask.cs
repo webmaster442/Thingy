@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Net;
 
-namespace Thingy.Engineering.IP
+namespace Thingy.Engineering.Domain.IP
 {
     internal static class SubnetMask
     {

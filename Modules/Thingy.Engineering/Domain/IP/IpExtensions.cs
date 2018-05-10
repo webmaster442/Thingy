@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace Thingy.Engineering.IP
+namespace Thingy.Engineering.Domain.IP
 {
     internal static class IpExtensions
     {

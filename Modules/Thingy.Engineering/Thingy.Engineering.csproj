@@ -74,14 +74,15 @@
       <DependentUpon>MintermTable5.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\MintermTableHelpers.cs" />
-    <Compile Include="IP\IpExtensions.cs" />
-    <Compile Include="IP\SubnetMask.cs" />
-    <Compile Include="LogicMinimizer\LogicItem.cs" />
-    <Compile Include="LogicMinimizer\Implicant.cs" />
-    <Compile Include="LogicMinimizer\ImplicantRelationship.cs" />
-    <Compile Include="LogicMinimizer\QuineMcclusky.cs" />
-    <Compile Include="LogicMinimizer\Utility.cs" />
+    <Compile Include="Domain\IP\IpExtensions.cs" />
+    <Compile Include="Domain\IP\SubnetMask.cs" />
+    <Compile Include="Domain\LogicMinimizer\LogicItem.cs" />
+    <Compile Include="Domain\LogicMinimizer\Implicant.cs" />
+    <Compile Include="Domain\LogicMinimizer\ImplicantRelationship.cs" />
+    <Compile Include="Domain\LogicMinimizer\QuineMcclusky.cs" />
+    <Compile Include="Domain\LogicMinimizer\Utility.cs" />
     <Compile Include="ModuleDefinitions\LogicMinimizerModule.cs" />
+    <Compile Include="ModuleDefinitions\SubnetCalculatorModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\SubnetCalculatorViewModel.cs" />
     <Compile Include="Views\LogicFunctionMinimizer.xaml.cs">

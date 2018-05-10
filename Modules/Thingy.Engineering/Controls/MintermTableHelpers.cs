@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
-using Thingy.Engineering.LogicMinimizer;
+using Thingy.Engineering.Domain.LogicMinimizer;
 
 namespace Thingy.Engineering.Controls
 {

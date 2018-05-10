@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Controls;
 using AppLib.WPF.Extensions;
-using Thingy.Engineering.LogicMinimizer;
+using Thingy.Engineering.Domain.LogicMinimizer;
 
 namespace Thingy.Engineering.Controls
 {

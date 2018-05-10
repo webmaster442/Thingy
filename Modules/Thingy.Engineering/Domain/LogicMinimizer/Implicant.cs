@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Thingy.Engineering.LogicMinimizer
+namespace Thingy.Engineering.Domain.LogicMinimizer
 {
     internal class Implicant
     {

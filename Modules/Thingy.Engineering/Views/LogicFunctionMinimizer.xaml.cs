@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using Thingy.API;
-using Thingy.Engineering.LogicMinimizer;
+using Thingy.Engineering.Domain.LogicMinimizer;
 
 namespace Thingy.Engineering.Views
 {

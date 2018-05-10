@@ -1,4 +1,4 @@
-﻿namespace Thingy.Engineering.LogicMinimizer
+﻿namespace Thingy.Engineering.Domain.LogicMinimizer
 {
     internal class ImplicantRelationship
     {

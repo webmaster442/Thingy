@@ -1,10 +1,10 @@
-﻿using System;
-using System.ComponentModel;
+﻿using AppLib.MVVM;
+using System;
 using System.Text;
 
-namespace Thingy.Engineering.LogicMinimizer
+namespace Thingy.Engineering.Domain.LogicMinimizer
 {
-    public class LogicItem : INotifyPropertyChanged
+    public class LogicItem : BindableBase
     {
         private bool? _Checked;
         private int _Index;
@@ -13,38 +13,19 @@ namespace Thingy.Engineering.LogicMinimizer
         public bool? Checked
         {
             get { return _Checked; }
-            set 
-            {
-                _Checked = value;
-                FirePropertyChangedEvent("Checked");
-            }
+            set { SetValue(ref _Checked, value); }
         }
 
         public string BinaryValue
         {
             get { return _BinaryValue; }
-            set
-            {
-                _BinaryValue = value;
-                FirePropertyChangedEvent("BinaryValue");
-            }
+            set { SetValue(ref _BinaryValue, value); }
         }
 
         public int Index
         {
             get { return _Index; }
-            set
-            {
-                _Index = value;
-                FirePropertyChangedEvent("Index");
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void FirePropertyChangedEvent(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            set { SetValue(ref _Index, value); }
         }
 
         public static string GetBinaryValue(int number, int chars)

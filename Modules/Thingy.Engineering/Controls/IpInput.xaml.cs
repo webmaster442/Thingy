@@ -31,10 +31,8 @@ namespace Thingy.Engineering.Controls
         private static void AddressChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var ip = e.NewValue as IPAddress;
-            if (ip == null || ip.AddressFamily != AddressFamily.InterNetwork)
+            if (ip != null && ip.AddressFamily == AddressFamily.InterNetwork)
             {
-                ip = new IPAddress(0);
-
                 var sender = d as IpInput;
 
                 if (sender == null || sender._internaltrigger) return;
@@ -45,7 +43,6 @@ namespace Thingy.Engineering.Controls
                 sender.Octet2.Value = bytes[2];
                 sender.Octet3.Value = bytes[3];
             }
-
         }
 
         private void Octet_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)

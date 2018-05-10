@@ -1,4 +1,4 @@
-﻿using Thingy.Engineering.LogicMinimizer;
+﻿using Thingy.Engineering.Domain.LogicMinimizer;
 
 namespace Thingy.Engineering.Controls
 {
