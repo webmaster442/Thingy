@@ -4,10 +4,11 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
+using Thingy.API.Jobs;
 
 namespace Thingy.JobCore.Jobs
 {
-    public class DownloadFileJob : AsyncJob
+    public class DownloadFileJob : Job
     {
         private readonly string _sourceuri;
         private readonly string _targetfile;
@@ -18,7 +19,12 @@ namespace Thingy.JobCore.Jobs
             _targetfile = targetFile;
         }
 
-        public override Task Run(CancellationToken token, IProgress<JobProgress> progress)
+        public override string Title
+        {
+            get { return "Downloading File..."; }
+        }
+
+        public override Task RunJob(CancellationToken token, IProgress<JobProgress> progress)
         {
             return Task.Run(() => Job(progress, token));
         }
@@ -40,20 +46,20 @@ namespace Thingy.JobCore.Jobs
                 using (var tartet = File.Create(_targetfile))
                 {
                     token.ThrowIfCancellationRequested();
-                    progress.Report(Internals.ReportProgress(totalsize, copied, startTime));
+                    progress.Report(ReportProgress(totalsize, copied, startTime));
                     using (var source = client.OpenRead(_sourceuri))
                     {
                         int read = 0;
                         var size = client.ResponseHeaders.GetValues("Content-Length").FirstOrDefault();
                         totalsize = long.Parse(size);
-                        byte[] buffer = new byte[Internals.BufferSize];
+                        byte[] buffer = new byte[BufferSize];
                         do
                         {
                             token.ThrowIfCancellationRequested();
                             read = source.Read(buffer, 0, buffer.Length);
                             tartet.Write(buffer, 0, read);
                             copied += read;
-                            progress.Report(Internals.ReportProgress(totalsize, copied, startTime));
+                            progress.Report(ReportProgress(totalsize, copied, startTime));
                         }
                         while (read > 0);
                     }

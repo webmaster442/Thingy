@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using Thingy.API.Jobs;
 using Thingy.API.Messages;
 
 namespace Thingy.API
@@ -126,5 +127,9 @@ namespace Thingy.API
         /// Get the Associated Application Dispatcher
         /// </summary>
         Dispatcher CurrentDispatcher { get; }
+        /// <summary>
+        /// Job runner instance
+        /// </summary>
+        IJobRunner JobRunner { get; }
     }
  }

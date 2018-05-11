@@ -184,7 +184,7 @@ namespace Thingy.CoreModules.ViewModels
             return CurrentFolder.Count > 0;
         }
 
-        private void CopyContents()
+        private async void CopyContents()
         {
             var folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog
             {
@@ -194,20 +194,18 @@ namespace Thingy.CoreModules.ViewModels
             if (folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 var job = new JobCore.Jobs.CopyFilesToDirectoryJob(CurrentFolder, folderBrowserDialog.SelectedPath);
-                var dialog = new JobRunner(_app, job);
-                dialog.Show();
+                await _app.JobRunner.RunJob(job);
             }
         }
 
-        private void CreateZip()
+        private async void CreateZip()
         {
             var saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             saveFileDialog.Filter = "Zip files|*.zip";
             if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 var job = new JobCore.Jobs.CreateZipJob(CurrentFolder, saveFileDialog.FileName);
-                var dialog = new JobRunner(_app, job);
-                dialog.Show();
+                await _app.JobRunner.RunJob(job);
             }
         }
 

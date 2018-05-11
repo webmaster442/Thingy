@@ -4,15 +4,16 @@ using MahApps.Metro.SimpleChildWindow;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using Thingy.API;
+using Thingy.API.Jobs;
 using Thingy.API.Messages;
 using Thingy.Controls;
 using Thingy.Implementation;
-using System.Linq;
 
 namespace Thingy
 {
@@ -48,6 +49,12 @@ namespace Thingy
         public Dispatcher CurrentDispatcher
         {
             get { return Current.Dispatcher; }
+        }
+
+        public IJobRunner JobRunner
+        {
+            get;
+            private set;
         }
 
         public void Close()
@@ -258,6 +265,7 @@ namespace Thingy
 
             Messager = new Messager();
             TabManager = new TabManager(this, Resolve<IModuleLoader>());
+            JobRunner = new JobRunner(this);
 
             var trayIcon = new Implementation.Tray.TrayIcon(this);
 

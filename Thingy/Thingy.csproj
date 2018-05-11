@@ -138,6 +138,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="InternalModules\JobRunnerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="InternalModules\LogViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -193,6 +197,7 @@
     <Compile Include="IMainWindow.cs" />
     <Compile Include="Implementation\CommandLineParser.cs" />
     <Compile Include="Implementation\IModuleLoader.cs" />
+    <Compile Include="Implementation\JobRunner.cs" />
     <Compile Include="Implementation\JumpListFactory.cs" />
     <Compile Include="Implementation\Log.cs" />
     <Compile Include="Implementation\Messager.cs" />
@@ -206,6 +211,9 @@
     <Compile Include="InternalCode\WinSparkle.cs" />
     <Compile Include="InternalModules\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InternalModules\JobRunnerWindow.xaml.cs">
+      <DependentUpon>JobRunnerWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="InternalModules\LogViewer.xaml.cs">
       <DependentUpon>LogViewer.xaml</DependentUpon>

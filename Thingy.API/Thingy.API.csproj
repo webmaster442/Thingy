@@ -65,9 +65,12 @@
     <Compile Include="IApplication.cs" />
     <Compile Include="ILog.cs" />
     <Compile Include="IModule.cs" />
+    <Compile Include="Jobs\Job.cs" />
     <Compile Include="Internals\TileColorProvider.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="ITabManager.cs" />
+    <Compile Include="Jobs\IJobRunner.cs" />
+    <Compile Include="Jobs\JobProgress.cs" />
     <Compile Include="Messages\HandleFileMessage.cs" />
     <Compile Include="Messages\IMessager.cs" />
     <Compile Include="Messages\MessageBase.cs" />

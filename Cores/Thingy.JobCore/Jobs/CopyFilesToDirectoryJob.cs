@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Thingy.API.Jobs;
 
 namespace Thingy.JobCore.Jobs
 {
-    public class CopyFilesToDirectoryJob : AsyncJob
+    public class CopyFilesToDirectoryJob : Job
     {
         private readonly IList<string> _files;
         private readonly string _destination;
+
+        public override string Title
+        {
+            get { return "Coping files..."; }
+        }
 
         public CopyFilesToDirectoryJob(IList<string> files, string destination)
         {
@@ -22,7 +28,7 @@ namespace Thingy.JobCore.Jobs
             long total = 0;
             long copied = 0;
             DateTime startTime = DateTime.Now;
-            byte[] buffer = new byte[Internals.BufferSize];
+            byte[] buffer = new byte[BufferSize];
             int read;
             List<string> destinations = new List<string>(_files.Count);
 
@@ -33,7 +39,7 @@ namespace Thingy.JobCore.Jobs
                 destinations.Add(Path.Combine(_destination, fi.Name));
             }
 
-            progress.Report(Internals.ReportProgress(total, copied, startTime));
+            progress.Report(ReportProgress(total, copied, startTime));
             for (int i = 0; i < _files.Count; i++)
             {
                 token.ThrowIfCancellationRequested();
@@ -49,7 +55,7 @@ namespace Thingy.JobCore.Jobs
                             token.ThrowIfCancellationRequested();
                             copied += read;
                             target.Write(buffer, 0, read);
-                            progress.Report(Internals.ReportProgress(total, copied, startTime));
+                            progress.Report(ReportProgress(total, copied, startTime));
                         }
                         while (read > 0);
                     }
@@ -57,7 +63,7 @@ namespace Thingy.JobCore.Jobs
             }
         }
 
-        public override Task Run(CancellationToken token, IProgress<JobProgress> progress)
+        public override Task RunJob(CancellationToken token, IProgress<JobProgress> progress)
         {
             return Task.Run(() => Job(token, progress));
         }

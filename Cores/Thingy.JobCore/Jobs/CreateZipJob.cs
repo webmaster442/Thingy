@@ -4,13 +4,19 @@ using System.IO;
 using System.IO.Compression;
 using System.Threading;
 using System.Threading.Tasks;
+using Thingy.API.Jobs;
 
 namespace Thingy.JobCore.Jobs
 {
-    public class CreateZipJob : AsyncJob
+    public class CreateZipJob : Job
     {
         private readonly IList<string> _sourcefiles;
         private readonly string _zipfile;
+
+        public override string Title
+        {
+            get { return "Packing files..."; }
+        }
 
         public CreateZipJob(IList<string> sourcefiles, string zipfile)
         {
@@ -24,7 +30,7 @@ namespace Thingy.JobCore.Jobs
             long copied = 0;
             long total = 0;
             int read = 0;
-            byte[] buffer = new byte[Internals.BufferSize];
+            byte[] buffer = new byte[BufferSize];
 
             List<string> destinations = new List<string>(_sourcefiles.Count);
 
@@ -53,7 +59,7 @@ namespace Thingy.JobCore.Jobs
                                     read = source.Read(buffer, 0, buffer.Length);
                                     copied += read;
                                     packed.Write(buffer, 0, read);
-                                    progress.Report(Internals.ReportProgress(total, copied, startTime));
+                                    progress.Report(ReportProgress(total, copied, startTime));
                                 }
                                 while (read > 0);
                             }
@@ -63,7 +69,7 @@ namespace Thingy.JobCore.Jobs
             }
         }
 
-        public override Task Run(CancellationToken token, IProgress<JobProgress> progress)
+        public override Task RunJob(CancellationToken token, IProgress<JobProgress> progress)
         {
             return Task.Run(() => Job(token, progress));
         }

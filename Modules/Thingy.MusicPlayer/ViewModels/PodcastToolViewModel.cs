@@ -176,8 +176,7 @@ namespace Thingy.MusicPlayer.ViewModels
             {
                 var item = Feed[obj];
                 var job = new JobCore.Jobs.DownloadFileJob(item.Url, item.LocalFile);
-                JobRunner runner = new JobRunner(_app, job);
-                runner.Show();
+                await _app.JobRunner.RunJob(job);
             }
         }
 
