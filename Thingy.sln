@@ -68,6 +68,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.JobCore", "Cores\Thi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.Engineering", "Modules\Thingy.Engineering\Thingy.Engineering.csproj", "{EAE30B58-F3B0-483B-AC3E-49FA7067D2F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITunesLibraryParser", "iTunesLibraryParser\ITunesLibraryParser\ITunesLibraryParser.csproj", "{B251EEE4-5448-4F54-9755-86EB79DA9419}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -154,6 +156,10 @@ Global
 		{EAE30B58-F3B0-483B-AC3E-49FA7067D2F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAE30B58-F3B0-483B-AC3E-49FA7067D2F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAE30B58-F3B0-483B-AC3E-49FA7067D2F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B251EEE4-5448-4F54-9755-86EB79DA9419}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B251EEE4-5448-4F54-9755-86EB79DA9419}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B251EEE4-5448-4F54-9755-86EB79DA9419}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B251EEE4-5448-4F54-9755-86EB79DA9419}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -175,6 +181,7 @@ Global
 		{D1B59ED4-418D-4698-B127-BC1BCEC2ACDC} = {0F95BE5A-A7C1-4CF6-8D09-8491163E7ED2}
 		{5A7E127E-70C0-4E8B-AC91-AA655B65B7FD} = {8DD48674-DAFC-4411-BC97-E0E0E6B34F53}
 		{EAE30B58-F3B0-483B-AC3E-49FA7067D2F8} = {0F95BE5A-A7C1-4CF6-8D09-8491163E7ED2}
+		{B251EEE4-5448-4F54-9755-86EB79DA9419} = {8C1E4C07-0B06-4EFA-A24D-560619F3782A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E3667F8E-DFD2-486A-AA38-7A1EFCC1CD63}

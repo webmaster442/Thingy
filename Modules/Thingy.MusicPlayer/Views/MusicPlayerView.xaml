@@ -5,6 +5,7 @@
     xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:interactivity="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:Thingy.MusicPlayer.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:musicplayer="clr-namespace:Thingy.MusicPlayerCore.Controls;assembly=Thingy.MusicPlayerCore"
     xmlns:xaml="clr-namespace:Thingy.XAML.Converters;assembly=Thingy.XAML"
@@ -348,6 +349,8 @@
                                 </MenuItem.Icon>
                             </MenuItem>
                         </MenuItem>
+                        <local:ITunesMenu
+                            FilesProvidedEvent="ITunesMenu_FilesProvidedEvent" />
                     </Menu>
                     <ListBox
                         x:Name="PlaylistView"

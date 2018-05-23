@@ -320,5 +320,8 @@
   <ItemGroup>
     <Resource Include="Icons\icons8-wired-network-96.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-itunes-96.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

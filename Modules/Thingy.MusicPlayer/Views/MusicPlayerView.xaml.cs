@@ -1,11 +1,12 @@
-﻿using System.Windows;
+﻿using AppLib.MVVM.MessageHandler;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using AppLib.MVVM.MessageHandler;
-using AppLib.Common;
 using Thingy.API.Messages;
 using Thingy.MusicPlayer.ViewModels;
-using System;
 
 namespace Thingy.MusicPlayer.Views
 {
@@ -87,6 +88,11 @@ namespace Thingy.MusicPlayer.Views
         {
             var chapter = ChapterSwitcher.SelectedItem;
             ViewModel?.JumpToChapterCommand.Execute(chapter);
+        }
+
+        private void ITunesMenu_FilesProvidedEvent(object sender, IEnumerable<string> e)
+        {
+            ViewModel?.HandleFiles(e.ToArray());
         }
     }
 }

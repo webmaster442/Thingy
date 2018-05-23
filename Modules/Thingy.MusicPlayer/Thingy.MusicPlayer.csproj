@@ -53,6 +53,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Webmaster442.LibItunesXmlDb, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Webmaster442.LibItunesXmlDb.1.0.0\lib\net47\Webmaster442.LibItunesXmlDb.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +75,9 @@
     <Compile Include="ViewModels\PodcastToolViewModel.cs" />
     <Compile Include="Views\AddURLDialog.xaml.cs">
       <DependentUpon>AddURLDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ITunesMenu.xaml.cs">
+      <DependentUpon>ITunesMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoadCdDialog.xaml.cs">
       <DependentUpon>LoadCdDialog.xaml</DependentUpon>
@@ -97,6 +103,10 @@
     <Page Include="Views\AddURLDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ITunesMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LoadCdDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
