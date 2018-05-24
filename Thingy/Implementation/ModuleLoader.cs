@@ -8,18 +8,75 @@ using Thingy.API;
 
 namespace Thingy.Implementation
 {
-    internal class ModuleLoader: IModuleLoader
+    internal class ModuleLoader : IModuleLoader
     {
         private IApplication _app;
         private List<IModule> _modules;
+        private List<ICmdModule> _commandModules;
         private Dictionary<string, int> _moudleCounter;
 
-        private void LoadModules()
+        private string[] GetModuleFiles()
         {
-            _app.Log.Info("Searching for loadable modules...");
+            _app.Log.Info("Searching for loadable plugins...");
             var files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*.module.dll");
-            _app.Log.Info("Found {0} loadable modules", files.Length);
+            _app.Log.Info("Found {0} loadable plugins", files.Length);
+            return files;
+        }
+
+        private static IEnumerable<Type> FilterModules(Type imodule, Assembly assembly)
+        {
+            return from module in assembly.GetTypes()
+                   where imodule.IsAssignableFrom(module) &&
+                         module.IsInterface == false &&
+                         module.IsAbstract == false &&
+                         module.IsVisible == true
+                   select module;
+        }
+
+        private void LoadModule(Type module)
+        {
+            try
+            {
+                var instance = (IModule)Activator.CreateInstance(module);
+
+                instance.App = _app; //injection
+                instance.AppAttached();
+
+                if (instance.CanLoad)
+                {
+                    SetCount(instance.Category);
+                    _modules.Add(instance);
+                    _app.Log.Info($"Module load was succesfull: {module.Name}");
+                }
+                else
+                {
+                    _app.Log.Info($"Module load was succesfull, but it was not cached: {module.Name}");
+                }
+            }
+            catch (Exception ex)
+            {
+                _app.Log.Error(ex);
+            }
+        }
+
+        private void LoadCmdModule(Type module)
+        {
+            try
+            {
+                var instance = (ICmdModule)Activator.CreateInstance(module);
+                _commandModules.Add(instance);
+                _app.Log.Info($"Command module load was succesfull: {module.Name}");
+            }
+            catch (Exception ex)
+            {
+                _app.Log.Error(ex);
+            }
+        }
+
+        private void LoadModules(string[] files)
+        {
             var imodule = typeof(IModule);
+            var icmdmodule = typeof(ICmdModule);
             foreach (var file in files)
             {
                 try
@@ -27,37 +84,16 @@ namespace Thingy.Implementation
                     _app.Log.Info("Atempting to load: {0}", file);
                     var assembly = Assembly.LoadFile(file);
 
-                    var modules = from module in assembly.GetTypes()
-                                  where imodule.IsAssignableFrom(module) &&
-                                        module.IsInterface == false &&
-                                        module.IsAbstract == false &&
-                                        module.IsVisible == true
-                                  select module;
+                    IEnumerable<Type> modules = FilterModules(imodule, assembly);
+                    IEnumerable<Type> cmdModules = FilterModules(icmdmodule, assembly);
 
                     foreach (var module in modules)
                     {
-                        try
-                        {
-                            var instance = (IModule)Activator.CreateInstance(module);
-
-                            instance.App = _app; //injection
-                            instance.AppAttached();
-
-                            if (instance.CanLoad)
-                            {
-                                SetCount(instance.Category);
-                                _modules.Add(instance);
-                                _app.Log.Info($"Module load was succesfull: {module.Name}");
-                            }
-                            else
-                            {
-                                _app.Log.Info($"Module load was succesfull, but it was not cached: {module.Name}");
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            _app.Log.Error(ex);
-                        }
+                        LoadModule(module);
+                    }
+                    foreach (var cmdmodule in cmdModules)
+                    {
+                        LoadCmdModule(cmdmodule);
                     }
                 }
                 catch (Exception ex)
@@ -82,17 +118,23 @@ namespace Thingy.Implementation
 
         public ModuleLoader(IApplication app)
         {
-            _app = app ;
+            _app = app;
             _modules = new List<IModule>();
             _moudleCounter = new Dictionary<string, int>
             {
                 { "All", 0 }
             };
-            LoadModules();
+            var modules = GetModuleFiles();
+            LoadModules(modules);
         }
         public IDictionary<string, int> CategoryModuleCount
         {
             get { return _moudleCounter; }
+        }
+
+        public IEnumerable<ICmdModule> CommandLineModules
+        {
+            get { return _commandModules; }
         }
 
         public IModule GetModuleByName(string name)
@@ -108,6 +150,23 @@ namespace Thingy.Implementation
             }
 
             _app.Log.Info("Found Module: {0}", name);
+
+            return moduleToRun;
+        }
+
+        public ICmdModule GetCommandLineModuleByName(string name)
+        {
+            var moduleToRun = (from cmdmodule in _commandModules
+                               where cmdmodule.InvokeName == name
+                               select cmdmodule).FirstOrDefault();
+
+            if (moduleToRun == null)
+            {
+                _app.Log.Error("couldn't find command module: {0}", name);
+                return null;
+            }
+
+            _app.Log.Info("Found command Module: {0}", name);
 
             return moduleToRun;
         }
@@ -139,17 +198,17 @@ namespace Thingy.Implementation
         public IList<IModule> GetModulesForFiles(IEnumerable<string> files)
         {
             var extensions = from file in files
-                    select Path.GetExtension(file);
+                             select Path.GetExtension(file);
 
             var uniqueExtension = new HashSet<string>(extensions);
 
             _app.Log.Info("Found {0} different extensions in {1} files", uniqueExtension.Count, files.Count());
 
             var moduleList = (from extension in uniqueExtension
-                     from module in _modules
-                     where module.SupportedExtensions != null &&
-                     module.SupportedExtensions.Contains(extension)
-                     select module).ToList();
+                              from module in _modules
+                              where module.SupportedExtensions != null &&
+                              module.SupportedExtensions.Contains(extension)
+                              select module).ToList();
 
             _app.Log.Info("Found {0} modules for prodived {1} extensions", moduleList.Count, uniqueExtension.Count);
 
