@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Thingy.API;
 
 namespace Thingy.Implementation
 {
-    internal interface IModuleLoader
+    public interface IModuleLoader
     {
         IModule GetModuleByName(string name);
         IEnumerable<IModule> GetModulesForCategory(string category = null);
@@ -17,5 +13,6 @@ namespace Thingy.Implementation
         //---cmdline
         IEnumerable<ICmdModule> CommandLineModules { get; }
         ICmdModule GetCommandLineModuleByName(string name);
+        IEnumerable<string> CommandNames { get; }
     }
 }

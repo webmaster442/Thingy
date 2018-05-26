@@ -102,6 +102,10 @@
       <Link>Properties\CommonVersion.cs</Link>
     </Compile>
     <Compile Include="Constants\SettingsKeys.cs" />
+    <Page Include="Controls\CommandLine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ModalDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -138,10 +142,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="InternalModules\CommandLine.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="InternalModules\JobRunnerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -170,7 +170,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\CommandLine.xaml.cs">
+      <DependentUpon>CommandLine.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\IModalDialog.cs" />
+    <Compile Include="Controls\ITerminal.cs" />
     <Compile Include="Controls\ModalDialog.xaml.cs">
       <DependentUpon>ModalDialog.xaml</DependentUpon>
     </Compile>
@@ -198,7 +202,9 @@
     <Compile Include="Controls\Statusbar\WindowsInternals.xaml.cs">
       <DependentUpon>WindowsInternals.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Terminal.cs" />
     <Compile Include="IMainWindow.cs" />
+    <Compile Include="Implementation\CmdHost.cs" />
     <Compile Include="Implementation\CommandLineParser.cs" />
     <Compile Include="Implementation\IModuleLoader.cs" />
     <Compile Include="Implementation\JobRunner.cs" />
@@ -216,10 +222,6 @@
     <Compile Include="InternalModules\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
-    <Compile Include="InternalModules\CommandLine.xaml.cs">
-      <DependentUpon>CommandLine.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="InternalModules\CommandLineViewModel.cs" />
     <Compile Include="InternalModules\JobRunnerWindow.xaml.cs">
       <DependentUpon>JobRunnerWindow.xaml</DependentUpon>
     </Compile>

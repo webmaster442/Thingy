@@ -11,17 +11,17 @@ namespace Thingy.API
         /// <summary>
         /// Standalone switches passed
         /// </summary>
-        IList<string> StandaloneSwitches { get; }
+        public IList<string> StandaloneSwitches { get; }
 
         /// <summary>
         /// Files passed
         /// </summary>
-        IList<string> Files { get; }
+        public IList<string> Files { get; }
 
         /// <summary>
         /// Switches with values
         /// </summary>
-        IDictionary<string, string> SwitchesWithValue { get; }
+        public IDictionary<string, string> SwitchesWithValue { get; }
 
         public CmdArguments(IList<string> standalone, IList<string> files, IDictionary<string, string> swicthes)
         {

@@ -36,6 +36,7 @@ namespace Thingy
         private static App SetupApplication()
         {
             var application = new App();
+
             _moduleLoader = new ModuleLoader(application);
             Resolver.Register<IApplication>(() => application);
             Resolver.Register<IModuleLoader>(() => _moduleLoader);
@@ -43,7 +44,7 @@ namespace Thingy
             JumpListFactory.CreateJumplist();
             application.InitializeComponent();
             application.ShutdownMode = ShutdownMode.OnMainWindowClose;
-            application.MainWindow = new MainWindow(application);
+            application.MainWindow = new MainWindow(application, _moduleLoader);
             return application;
         }
 

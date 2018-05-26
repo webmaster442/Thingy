@@ -9,7 +9,7 @@ using System.Windows.Input;
 using System.Windows.Shell;
 using Thingy.API;
 using Thingy.API.Capabilities;
-using Thingy.Properties;
+using Thingy.Implementation;
 
 namespace Thingy
 {
@@ -19,6 +19,22 @@ namespace Thingy
     public partial class MainWindow : MetroWindow, IMainWindow
     {
         private IApplication _app;
+
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        public MainWindow(IApplication app, IModuleLoader loader) : this()
+        {
+            _app = app;
+            StatusBar.Application = _app;
+            Terminal.ModuleLoader = loader;
+            Terminal.App = _app;
+            DataContext = new MainWindowViewModel(this, app);
+            Title = $"{Title} - {GetAssemblyVersion()}";
+            TabControl.ClosingItemCallback = TabClosing;
+        }
 
         private string GetAssemblyVersion()
         {
@@ -38,11 +54,6 @@ namespace Thingy
                 }
                 StatusFlyOut.Content = null;
             }
-        }
-
-        private void ModernWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            Settings.Default.Save();
         }
 
         private void ModernWindow_Loaded(object sender, RoutedEventArgs e)
@@ -129,7 +140,7 @@ namespace Thingy
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            if (e.SystemKey == Key.LeftAlt) ShowHideMenu();
+            if (e.SystemKey == Key.LeftAlt) OpenOrHideFlyout(nameof(MenuFlyout));
             base.OnKeyDown(e);
         }
 
@@ -139,20 +150,6 @@ namespace Thingy
             var tabs = TabControl.GetOrderedHeaders().ToList();
             var curenttab = tabs[TabControl.SelectedIndex];
             TabablzControl.CloseItemCommand.Execute(curenttab, TabControl);
-        }
-
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
-
-        public MainWindow(IApplication app) : this()
-        {
-            _app = app;
-            StatusBar.Application = _app;
-            DataContext = new MainWindowViewModel(this, app);
-            Title = $"{Title} - {GetAssemblyVersion()}";
-            TabControl.ClosingItemCallback = TabClosing;
         }
 
         public UserControl CurrentTabContent
@@ -217,9 +214,17 @@ namespace Thingy
             }
         }
 
-        public void ShowHideMenu()
+        public void OpenOrHideFlyout(string flyoutName)
         {
-            MenuFlyout.IsOpen = !MenuFlyout.IsOpen;
+            switch (flyoutName)
+            {
+                case nameof(MenuFlyout):
+                    MenuFlyout.IsOpen = !MenuFlyout.IsOpen;
+                    break;
+                case nameof(TerminalFlyout):
+                    TerminalFlyout.IsOpen = !TerminalFlyout.IsOpen;
+                    break;
+            }
         }
     }
 }

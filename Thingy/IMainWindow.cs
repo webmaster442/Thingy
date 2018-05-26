@@ -5,7 +5,7 @@ namespace Thingy
 {
     public interface IMainWindow: IView
     {
-        void ShowHideMenu();
+        void OpenOrHideFlyout(string flyoutName);
         UserControl CurrentTabContent { get; }
         void SetBusyOverlayVisibility(bool isVisible);
     }

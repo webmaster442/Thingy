@@ -22,5 +22,9 @@ namespace Thingy.API
         /// Command name
         /// </summary>
         string InvokeName { get; }
+        /// <summary>
+        /// Command line host for API acces
+        /// </summary>
+        ICmdHost Host { get; set; }
     }
 }

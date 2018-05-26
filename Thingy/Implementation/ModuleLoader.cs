@@ -64,6 +64,7 @@ namespace Thingy.Implementation
             try
             {
                 var instance = (ICmdModule)Activator.CreateInstance(module);
+                instance.Host = _app.ConsoleHost;
                 _commandModules.Add(instance);
                 _app.Log.Info($"Command module load was succesfull: {module.Name}");
             }
@@ -120,6 +121,7 @@ namespace Thingy.Implementation
         {
             _app = app;
             _modules = new List<IModule>();
+            _commandModules = new List<ICmdModule>();
             _moudleCounter = new Dictionary<string, int>
             {
                 { "All", 0 }
@@ -135,6 +137,14 @@ namespace Thingy.Implementation
         public IEnumerable<ICmdModule> CommandLineModules
         {
             get { return _commandModules; }
+        }
+
+        public IEnumerable<string> CommandNames
+        {
+            get
+            {
+                return _commandModules.Select(module => module.InvokeName);
+            }
         }
 
         public IModule GetModuleByName(string name)

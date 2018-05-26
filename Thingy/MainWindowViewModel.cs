@@ -13,7 +13,7 @@ namespace Thingy
         public DelegateCommand SettingCommand { get; private set; }
         public DelegateCommand ExitCommand { get; private set; }
         public DelegateCommand LogCommand { get; private set; }
-        public DelegateCommand OpenMenuCommand { get; private set; }
+        public DelegateCommand<string> OpenFlyoutCommand { get; private set; }
         public DelegateCommand AboutCommand { get; private set; }
         public DelegateCommand UpdateCommand { get; private set; }
 
@@ -29,12 +29,20 @@ namespace Thingy
             ExitCommand = Command.ToCommand(Exit);
             AboutCommand = Command.ToCommand(OpenAbout);
             LogCommand = Command.ToCommand(OpenLog, CanOpenLog);
-            OpenMenuCommand = Command.ToCommand(OpenMenu);
+            OpenFlyoutCommand = Command.ToCommand<string>(OpenFlyout);
             SettingCommand = Command.ToCommand(OpenSetting, CanOpenSetting);
             UpdateCommand = Command.ToCommand(Update);
             ModuleImportCommand = Command.ToCommand(ModuleImport, CanImportExport);
             ModuleExportCommand = Command.ToCommand(ModuleExport, CanImportExport);
             ModuleAppendCommand = Command.ToCommand(ModuleAppend, CanImportExport);
+        }
+
+        private void OpenFlyout(string obj)
+        {
+            if (!string.IsNullOrEmpty(obj))
+            {
+                View.OpenOrHideFlyout(obj);
+            }
         }
 
         private void Update()
@@ -131,11 +139,6 @@ namespace Thingy
         private async void ModuleAppend()
         {
             await DoImport(true);
-        }
-
-        private void OpenMenu()
-        {
-            View.ShowHideMenu();
         }
 
         private void Exit()
