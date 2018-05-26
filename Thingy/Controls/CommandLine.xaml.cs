@@ -24,6 +24,8 @@ namespace Thingy.Controls
             InitializeComponent();
             AutoCompleteSource = new ObservableCollection<string>();
             Buffer = new ObservableCollection<string>();
+            TerminalControl.AutoCompletionsSource = AutoCompleteSource;
+            TerminalControl.ItemsSource = Buffer;
         }
 
         private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
@@ -60,7 +62,7 @@ namespace Thingy.Controls
 
         private void SetPrompt()
         {
-            TerminalControl.Prompt = $"{CurrentDirectory}\r\n$ ";
+            TerminalControl.Prompt = $"{CurrentDirectory} $ ";
         }
 
         private void UpdateAutoCompleteSource()

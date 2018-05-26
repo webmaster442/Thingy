@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    DataContext="{Binding RelativeSource={x:Static RelativeSource.Self}}"
+    x:Name="Ctrl"
     Loaded="UserControl_Loaded"
     mc:Ignorable="d">
     <UserControl.Resources>
@@ -18,9 +18,11 @@
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="Background" Value="#FF1E1E1E" />
             <Setter Property="Foreground" Value="WhiteSmoke" />
-            <Setter Property="FontFamily" Value="Lucida Console" />
+            <Setter Property="FontFamily" Value="{StaticResource UbuntuMono}" />
             <Setter Property="ItemsMargin" Value="5" />
-            <Setter Property="ItemHeight" Value="10" />
+            <Setter Property="ItemHeight" Value="14" />
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Visible"/>
         </Style>
     </UserControl.Resources>
     <TabControl>
@@ -28,11 +30,8 @@
             Header="Command Line"
             Style="{StaticResource CompactTabItem}">
             <local:Terminal
-                FontFamily="{StaticResource UbuntuMono}"
-                FontSize="12"
+                DataContext="{Binding ElementName=Ctrl}"
                 x:Name="TerminalControl"
-                AutoCompletionsSource="{Binding AutoCompleteSource}"
-                ItemsSource="{Binding Buffer}"
                 LineEntered="TerminalControl_LineEntered"
                 Style="{StaticResource TerminalStyle}" />
         </TabItem>
