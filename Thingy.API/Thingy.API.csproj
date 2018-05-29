@@ -64,8 +64,6 @@
     <Compile Include="CmdArguments.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="IApplication.cs" />
-    <Compile Include="CommandLine\ICmdHost.cs" />
-    <Compile Include="CommandLine\ICmdModule.cs" />
     <Compile Include="ILog.cs" />
     <Compile Include="IModule.cs" />
     <Compile Include="Jobs\Job.cs" />

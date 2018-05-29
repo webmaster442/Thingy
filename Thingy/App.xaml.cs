@@ -57,12 +57,6 @@ namespace Thingy
             private set;
         }
 
-        public ICmdHost ConsoleHost
-        {
-            get;
-            private set;
-        }
-
         public void Close()
         {
             Current.Shutdown();
@@ -265,7 +259,6 @@ namespace Thingy
 
         public App(): base()
         {
-            ConsoleHost = new CmdHostProxy(this);
         }
 
         protected override void OnStartup(StartupEventArgs e)

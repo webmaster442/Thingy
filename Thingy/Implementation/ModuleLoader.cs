@@ -12,7 +12,6 @@ namespace Thingy.Implementation
     {
         private IApplication _app;
         private List<IModule> _modules;
-        private List<ICmdModule> _commandModules;
         private Dictionary<string, int> _moudleCounter;
 
         private string[] GetModuleFiles()
@@ -59,25 +58,9 @@ namespace Thingy.Implementation
             }
         }
 
-        private void LoadCmdModule(Type module)
-        {
-            try
-            {
-                var instance = (ICmdModule)Activator.CreateInstance(module);
-                instance.Host = _app.ConsoleHost;
-                _commandModules.Add(instance);
-                _app.Log.Info($"Command module load was succesfull: {module.Name}");
-            }
-            catch (Exception ex)
-            {
-                _app.Log.Error(ex);
-            }
-        }
-
         private void LoadModules(string[] files)
         {
             var imodule = typeof(IModule);
-            var icmdmodule = typeof(ICmdModule);
             foreach (var file in files)
             {
                 try
@@ -86,15 +69,10 @@ namespace Thingy.Implementation
                     var assembly = Assembly.LoadFile(file);
 
                     IEnumerable<Type> modules = FilterModules(imodule, assembly);
-                    IEnumerable<Type> cmdModules = FilterModules(icmdmodule, assembly);
 
                     foreach (var module in modules)
                     {
                         LoadModule(module);
-                    }
-                    foreach (var cmdmodule in cmdModules)
-                    {
-                        LoadCmdModule(cmdmodule);
                     }
                 }
                 catch (Exception ex)
@@ -121,7 +99,6 @@ namespace Thingy.Implementation
         {
             _app = app;
             _modules = new List<IModule>();
-            _commandModules = new List<ICmdModule>();
             _moudleCounter = new Dictionary<string, int>
             {
                 { "All", 0 }
@@ -132,19 +109,6 @@ namespace Thingy.Implementation
         public IDictionary<string, int> CategoryModuleCount
         {
             get { return _moudleCounter; }
-        }
-
-        public IEnumerable<ICmdModule> CommandLineModules
-        {
-            get { return _commandModules; }
-        }
-
-        public IEnumerable<string> CommandNames
-        {
-            get
-            {
-                return _commandModules.Select(module => module.InvokeName);
-            }
         }
 
         public IModule GetModuleByName(string name)
@@ -160,23 +124,6 @@ namespace Thingy.Implementation
             }
 
             _app.Log.Info("Found Module: {0}", name);
-
-            return moduleToRun;
-        }
-
-        public ICmdModule GetCommandLineModuleByName(string name)
-        {
-            var moduleToRun = (from cmdmodule in _commandModules
-                               where cmdmodule.InvokeName == name
-                               select cmdmodule).FirstOrDefault();
-
-            if (moduleToRun == null)
-            {
-                _app.Log.Error("couldn't find command module: {0}", name);
-                return null;
-            }
-
-            _app.Log.Info("Found command Module: {0}", name);
 
             return moduleToRun;
         }

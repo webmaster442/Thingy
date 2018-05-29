@@ -29,8 +29,6 @@ namespace Thingy
         {
             _app = app;
             StatusBar.Application = _app;
-            Terminal.ModuleLoader = loader;
-            Terminal.App = _app;
             DataContext = new MainWindowViewModel(this, app);
             Title = $"{Title} - {GetAssemblyVersion()}";
             TabControl.ClosingItemCallback = TabClosing;

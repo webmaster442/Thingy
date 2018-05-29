@@ -131,9 +131,5 @@ namespace Thingy.API
         /// Job runner instance
         /// </summary>
         IJobRunner JobRunner { get; }
-        /// <summary>
-        /// Console Host
-        /// </summary>
-        ICmdHost ConsoleHost { get; }
     }
  }

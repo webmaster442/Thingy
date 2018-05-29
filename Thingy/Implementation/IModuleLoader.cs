@@ -10,9 +10,5 @@ namespace Thingy.Implementation
         IEnumerable<IModule> GetModulesByName(string searchname);
         IDictionary<string, int> CategoryModuleCount { get; }
         IList<IModule> GetModulesForFiles(IEnumerable<string> files);
-        //---cmdline
-        IEnumerable<ICmdModule> CommandLineModules { get; }
-        ICmdModule GetCommandLineModuleByName(string name);
-        IEnumerable<string> CommandNames { get; }
     }
 }

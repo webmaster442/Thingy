@@ -79,7 +79,7 @@
                 x:Name="TerminalFlyout"
                 Position="Top"
                 Theme="Inverse">
-                <controls:CommandLine
+                <StackPanel
                     x:Name="Terminal"
                     Height="{Binding ElementName=Window, Path=ActualHeight, Converter={applib:PercentOperationConverter}, ConverterParameter=50}"/>
             </mah:Flyout>
