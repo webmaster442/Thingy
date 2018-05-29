@@ -8,29 +8,29 @@ namespace Thingy.Cmd
 {
     internal class ModuleRunner
     {
-        private readonly List<IModule> _modules;
+        private readonly List<ICommandModule> _modules;
 
         public ModuleRunner()
         {
-            _modules = new List<IModule>();
+            _modules = new List<ICommandModule>();
             LoadModules();
         }
 
         private void LoadModules()
         {
-            Assembly current = Assembly.GetAssembly(typeof(IModule));
+            Assembly current = Assembly.GetAssembly(typeof(ICommandModule));
             var modules = from type in current.GetTypes()
                           where
-                          type.IsAssignableFrom(typeof(IModule)) &&
-                          !type.IsAbstract && 
-                          type.IsClass
+                          type.GetInterfaces().Contains(typeof(ICommandModule)) &&
+                          type.IsInterface == false &&
+                          type.IsAbstract == false
                           select type;
 
             foreach (var module in modules)
             {
                 try
                 {
-                    IModule loaded =  (IModule)Activator.CreateInstance(module);
+                    ICommandModule loaded =  (ICommandModule)Activator.CreateInstance(module);
                     _modules.Add(loaded);
                 }
                 catch (Exception ex)
@@ -43,7 +43,7 @@ namespace Thingy.Cmd
             }
         }
 
-        public IModule GetModule(string name)
+        public ICommandModule GetModule(string name)
         {
             return _modules.Where(m => m.InvokeName == name).FirstOrDefault();
         }

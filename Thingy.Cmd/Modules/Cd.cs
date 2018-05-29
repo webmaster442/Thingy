@@ -3,19 +3,13 @@ using System.IO;
 
 namespace Thingy.Cmd.Modules
 {
-    internal class Cd : IModule
+    public class Cd : ICommandModule
     {
-        public string HelpFile
-        {
-            get { return "cd.txt"; }
-        }
+        public string HelpFile => "cd.txt";
 
-        public string InvokeName
-        {
-            get { return "cd"; }
-        }
+        public string InvokeName => "cd";
 
-        public void Run(ICmdHost host, Parameters parameters)
+        public void Run(ICommandHost host, Parameters parameters)
         {
             if (parameters.Files.Count > 0)
             {

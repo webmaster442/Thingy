@@ -49,11 +49,13 @@
       <Link>Properties\CommonVersion.cs</Link>
     </Compile>
     <Compile Include="CommandHost.cs" />
-    <Compile Include="ICmdHost.cs" />
-    <Compile Include="IModule.cs" />
+    <Compile Include="ICommandHost.cs" />
+    <Compile Include="ICommandModule.cs" />
     <Compile Include="ModuleRunner.cs" />
     <Compile Include="Modules\BrainFuck.cs" />
     <Compile Include="Modules\Cd.cs" />
+    <Compile Include="Modules\Clear.cs" />
+    <Compile Include="Modules\Exit.cs" />
     <Compile Include="ParameterParser.cs" />
     <Compile Include="Parameters.cs" />
     <Compile Include="Program.cs" />

@@ -1,8 +1,9 @@
 ﻿namespace Thingy.Cmd
 {
-    internal interface ICmdHost
+    public interface ICommandHost
     {
         void Clear();
+        void Exit();
         string WorkingDirectory { get; set; }
         void WriteLine(string str);
         void WriteLine(string str, params object[] args);

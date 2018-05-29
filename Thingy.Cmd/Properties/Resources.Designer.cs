@@ -61,11 +61,29 @@ namespace Thingy.Cmd.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ERROR: The module has crashed while executing.
+        /// </summary>
+        internal static string MODULE_CRASH {
+            get {
+                return ResourceManager.GetString("MODULE_CRASH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ERROR: The specified path doesn&apos;t exist.
         /// </summary>
         internal static string PATH_NOTEXIST {
             get {
                 return ResourceManager.GetString("PATH_NOTEXIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ERROR: Unknown Command: {0}.
+        /// </summary>
+        internal static string UNKNOWN_MODULE {
+            get {
+                return ResourceManager.GetString("UNKNOWN_MODULE", resourceCulture);
             }
         }
     }

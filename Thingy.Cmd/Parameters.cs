@@ -2,11 +2,20 @@
 
 namespace Thingy.Cmd
 {
-    internal class Parameters
+    public class Parameters
     {
-        public List<string> Switches { get; set; }
-        public List<string> Files { get; set; }
-        public Dictionary<string, string> SwithesWithValue { get; set; }
+        public Parameters()
+        {
+            Switches = new List<string>();
+            Files = new List<string>();
+            SwithesWithValue = new Dictionary<string, string>();
+        }
+
+        public List<string> Switches { get; }
+
+        public List<string> Files { get; }
+
+        public Dictionary<string, string> SwithesWithValue { get; }
 
         public bool HasSwitch(string shortName, string LongName = null)
         {

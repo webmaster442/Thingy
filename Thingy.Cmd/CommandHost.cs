@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
+using Thingy.Cmd.Properties;
 
 namespace Thingy.Cmd
 {
-    internal class CommandHost: ICmdHost
+    internal class CommandHost: ICommandHost
     {
         private ModuleRunner _moduleRunner;
 
@@ -17,17 +18,23 @@ namespace Thingy.Cmd
         {
             string input;
             DoLogo();
-            do
+            while (true)
             {
                 WritePrompt();
                 input = Console.ReadLine().ToLower();
                 try
                 {
                     Parameters arguments = ParameterParser.Parse(input, out string command);
-                    IModule module = _moduleRunner.GetModule(command);
+                    ICommandModule module = _moduleRunner.GetModule(command);
                     if (module != null)
                     {
                         module.Run(this, arguments);
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine(Resources.UNKNOWN_MODULE, command);
+                        Console.WriteLine();
                     }
                 }
                 catch (Exception ex)
@@ -36,10 +43,10 @@ namespace Thingy.Cmd
                     Console.WriteLine(ex);
                     Debugger.Break();
 #endif
-                    Console.WriteLine("Error in module. Module execution terminated");
+                    Console.WriteLine(Resources.MODULE_CRASH);
+                    Console.WriteLine();
                 }
             }
-            while (input != "exit");
         }
 
         private void DoLogo()
@@ -87,6 +94,11 @@ namespace Thingy.Cmd
         public void WriteLine(string str, params object[] args)
         {
             Console.Write(str, args);
+        }
+
+        public void Exit()
+        {
+            Environment.Exit(0);
         }
         #endregion
     }
