@@ -71,6 +71,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorCore.Tests", "Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.Cmd", "Thingy.Cmd\Thingy.Cmd.csproj", "{740B535E-9799-4749-8A18-917DEBCEEAA4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.Cmd.Tests", "Thingy.Cmd.Tests\Thingy.Cmd.Tests.csproj", "{8B865BB0-D1E4-49E8-A458-14FC001CDA47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -161,6 +163,10 @@ Global
 		{740B535E-9799-4749-8A18-917DEBCEEAA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{740B535E-9799-4749-8A18-917DEBCEEAA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{740B535E-9799-4749-8A18-917DEBCEEAA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B865BB0-D1E4-49E8-A458-14FC001CDA47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B865BB0-D1E4-49E8-A458-14FC001CDA47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B865BB0-D1E4-49E8-A458-14FC001CDA47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B865BB0-D1E4-49E8-A458-14FC001CDA47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -183,6 +189,7 @@ Global
 		{5A7E127E-70C0-4E8B-AC91-AA655B65B7FD} = {8DD48674-DAFC-4411-BC97-E0E0E6B34F53}
 		{EAE30B58-F3B0-483B-AC3E-49FA7067D2F8} = {0F95BE5A-A7C1-4CF6-8D09-8491163E7ED2}
 		{7AE977DC-E1DF-42BF-BD75-23EC6ADE0198} = {E26407E7-5EAB-4737-B555-1CD5D99A80B9}
+		{8B865BB0-D1E4-49E8-A458-14FC001CDA47} = {E26407E7-5EAB-4737-B555-1CD5D99A80B9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E3667F8E-DFD2-486A-AA38-7A1EFCC1CD63}
