@@ -25,12 +25,9 @@ namespace Thingy.CoreModules.ModuleDefinitons
 
         public override UserControl RunModule()
         {
-            var cmd = new System.Diagnostics.Process();
-            cmd.StartInfo.WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            cmd.StartInfo.FileName = "cmd.exe";
-            cmd.StartInfo.Arguments = "/k init.cmd";
-            cmd.Start();
-            return null;
+            var view = new CoreModules.Views.CommandLine();
+            view.DataContext = new CoreModules.ViewModels.CommandLineViewModel(view, "Thingy.cmd.exe");
+            return view;
         }
     }
 }

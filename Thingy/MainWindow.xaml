@@ -40,22 +40,6 @@
                 Orientation="Horizontal">
                 <Button
                     Command="{Binding OpenFlyoutCommand}"
-                    CommandParameter="TerminalFlyout">
-                    <StackPanel
-                        Orientation="Horizontal">
-                        <applib:ImageAwesome
-                            Width="24"
-                            Height="24"
-                            Foreground="White"
-                            Icon="fa_terminal" />
-                        <TextBlock
-                            Margin="2,0"
-                            VerticalAlignment="Center"
-                            Text="Command line" />
-                    </StackPanel>
-                </Button>
-                <Button
-                    Command="{Binding OpenFlyoutCommand}"
                     CommandParameter="MenuFlyout">
                     <StackPanel
                         Orientation="Horizontal">
@@ -75,14 +59,6 @@
     </mah:MetroWindow.RightWindowCommands>
     <mah:MetroWindow.Flyouts>
         <mah:FlyoutsControl>
-            <mah:Flyout
-                x:Name="TerminalFlyout"
-                Position="Top"
-                Theme="Inverse">
-                <StackPanel
-                    x:Name="Terminal"
-                    Height="{Binding ElementName=Window, Path=ActualHeight, Converter={applib:PercentOperationConverter}, ConverterParameter=50}"/>
-            </mah:Flyout>
             <mah:Flyout
                 x:Name="MenuFlyout"
                 Position="Top"

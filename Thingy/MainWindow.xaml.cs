@@ -219,9 +219,6 @@ namespace Thingy
                 case nameof(MenuFlyout):
                     MenuFlyout.IsOpen = !MenuFlyout.IsOpen;
                     break;
-                case nameof(TerminalFlyout):
-                    TerminalFlyout.IsOpen = !TerminalFlyout.IsOpen;
-                    break;
             }
         }
     }
