@@ -69,8 +69,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E26407E7
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorCore.Tests", "Tests\CalculatorCore.Tests\CalculatorCore.Tests.csproj", "{7AE977DC-E1DF-42BF-BD75-23EC6ADE0198}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.Cmd", "Thingy.Cmd\Thingy.Cmd.csproj", "{740B535E-9799-4749-8A18-917DEBCEEAA4}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.Cmd.Tests", "Thingy.Cmd.Tests\Thingy.Cmd.Tests.csproj", "{8B865BB0-D1E4-49E8-A458-14FC001CDA47}"
 EndProject
 Global
@@ -159,10 +157,6 @@ Global
 		{7AE977DC-E1DF-42BF-BD75-23EC6ADE0198}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AE977DC-E1DF-42BF-BD75-23EC6ADE0198}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AE977DC-E1DF-42BF-BD75-23EC6ADE0198}.Release|Any CPU.Build.0 = Release|Any CPU
-		{740B535E-9799-4749-8A18-917DEBCEEAA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{740B535E-9799-4749-8A18-917DEBCEEAA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{740B535E-9799-4749-8A18-917DEBCEEAA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{740B535E-9799-4749-8A18-917DEBCEEAA4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8B865BB0-D1E4-49E8-A458-14FC001CDA47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8B865BB0-D1E4-49E8-A458-14FC001CDA47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B865BB0-D1E4-49E8-A458-14FC001CDA47}.Release|Any CPU.ActiveCfg = Release|Any CPU

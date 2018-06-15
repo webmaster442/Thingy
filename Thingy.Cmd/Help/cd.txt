@@ -1,9 +1,0 @@
-﻿----------------------------------------------------------------------------
-cd  
-----------------------------------------------------------------------------
-
-change working directory
-
-	changes the working directory to a directory specified.
-
-	Environment variables and relative paths are supported.
