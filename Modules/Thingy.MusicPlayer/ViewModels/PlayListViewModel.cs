@@ -243,25 +243,25 @@ namespace Thingy.MusicPlayer.ViewModels
 
         private void SortAscending()
         {
-            var q = from track in Copy(List)
+            var q = (from track in Copy(List)
                     orderby track ascending
-                    select track;
+                    select track).ToList(); ;
             List.UpdateWith(q);
         }
 
         private void SortDescending()
         {
-            var q = from track in Copy(List)
+            var q = (from track in Copy(List)
                     orderby track descending
-                    select track;
+                    select track).ToList();
             List.UpdateWith(q);
         }
 
         private void SortSuffle()
         {
-            var q = from track in Copy(List)
+            var q = (from track in Copy(List)
                     orderby Guid.NewGuid()
-                    select track;
+                    select track).ToList();
             List.UpdateWith(q);
         }
 

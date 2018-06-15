@@ -32,7 +32,12 @@ namespace Thingy.MusicPlayer.Views
             }
             try
             {
-                iTunes = new ITunesXmlDb(ITunesXmlDb.UserItunesDbPath, true);
+                ITunesXmlDbOptions options = new ITunesXmlDbOptions
+                {
+                    ExcludeNonExistingFiles = true,
+                    ParalelParsingEnabled = true
+                };
+                iTunes = new ITunesXmlDb(ITunesXmlDb.UserItunesDbPath, options);
                 CreateMenuItems(MenuAlbums, iTunes.Albums.Where(x => !string.IsNullOrEmpty(x)));
                 CreateMenuItems(MenuArtists, iTunes.Artists.Where(x => !string.IsNullOrEmpty(x)));
                 CreateMenuItems(MenuGenres, iTunes.Genres.Where(x => !string.IsNullOrEmpty(x)));
