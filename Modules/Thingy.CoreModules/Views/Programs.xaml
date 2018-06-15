@@ -48,17 +48,30 @@
         </TabItem>
         <TabItem
             Header="Start menu">
-            <ScrollViewer>
-                <ItemsControl
-                    ItemTemplate="{StaticResource SystemProgram}"
-                    ItemsSource="{Binding StartMenu}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-            </ScrollViewer>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBox
+                    Text="{Binding StartMenuFilter, UpdateSourceTrigger=PropertyChanged}"
+                    Grid.Row="0"
+                    mah:TextBoxHelper.AutoWatermark="False"
+                    mah:TextBoxHelper.ClearTextButton="True"
+                    mah:TextBoxHelper.Watermark="Type here to search" />
+                <ScrollViewer
+                    Grid.Row="1">
+                    <ItemsControl
+                        ItemTemplate="{StaticResource SystemProgram}"
+                        ItemsSource="{Binding StartMenu}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
         </TabItem>
     </TabControl>
 </UserControl>

@@ -19,6 +19,7 @@ namespace Thingy.CoreModules.ViewModels
         private IDataBase _db;
         private IApplication _application;
         private string _filter;
+        private string _startmenufilter;
 
         public DelegateCommand AddCommand { get; private set; }
         public DelegateCommand<string> EditCommand { get; private set; }
@@ -39,6 +40,31 @@ namespace Thingy.CoreModules.ViewModels
             }
         }
 
+        public string StartMenuFilter
+        {
+            get { return _startmenufilter; }
+            set
+            {
+                SetValue(ref _startmenufilter, value);
+                ApplyStartMenuFilter();
+            }
+        }
+
+        private void ApplyStartMenuFilter()
+        {
+            if (string.IsNullOrEmpty(_startmenufilter))
+                StartMenu.UpdateWith(ProgramProviders.GetStartMenu());
+            else
+            {
+                var match = from program in ProgramProviders.GetStartMenu()
+                            where
+                            program.Name.Contains(_startmenufilter, StringComparison.InvariantCultureIgnoreCase)
+                            select program;
+                StartMenu.UpdateWith(match);
+            }
+
+        }
+
         private void ApplyFiltering()
         {
             if (string.IsNullOrEmpty(_filter))
@@ -52,6 +78,8 @@ namespace Thingy.CoreModules.ViewModels
                 Programs.UpdateWith(match);
             }
         }
+
+
 
         public ProgramsViewModel(IApplication app, IDataBase db)
         {
