@@ -106,6 +106,7 @@
     <Compile Include="ModuleDefinitons\CurrencyConverterModule.cs" />
     <Compile Include="ModuleDefinitons\FontsModule.cs" />
     <Compile Include="ModuleDefinitons\GreekAlphabetModule.cs" />
+    <Compile Include="ModuleDefinitons\LinuxSubSystemModule.cs" />
     <Compile Include="ModuleDefinitons\NoteModule.cs" />
     <Compile Include="ModuleDefinitons\PlacesModule.cs" />
     <Compile Include="ModuleDefinitons\PowerShellModule.cs" />
