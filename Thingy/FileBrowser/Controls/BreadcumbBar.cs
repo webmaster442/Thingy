@@ -73,9 +73,9 @@ namespace Thingy.FileBrowser.Controls
         private object BuildPathString(string[] parts, int i)
         {
             StringBuilder sb = new StringBuilder();
-            for (int j=0; j<i; j++)
+            for (int j=0; j<=i; j++)
             {
-                sb.AppendFormat("{0}\\", parts[i]);
+                sb.AppendFormat("{0}\\", parts[j]);
             }
             return sb.ToString();
         }
