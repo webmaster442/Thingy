@@ -38,6 +38,7 @@ namespace Thingy
             var application = new App();
 
             _moduleLoader = new ModuleLoader(application);
+            _moduleLoader.Add(new FileBrowser.FileBrowserModule());
             Resolver.Register<IApplication>(() => application);
             Resolver.Register<IModuleLoader>(() => _moduleLoader);
             CommandLineParser = new CommandLineParser(application);

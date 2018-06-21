@@ -1,0 +1,47 @@
+﻿<UserControl
+    x:Class="Thingy.FileBrowser.FileBrowserView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:FileBrowserControls="clr-namespace:Thingy.FileBrowser.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style
+            TargetType="GridSplitter">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Width" Value="3"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <FileBrowserControls:DirectoryTree
+            Grid.Row="2"
+            Grid.Column="0"
+            SelectedPath="{Binding CurrentFolder}" />
+        <GridSplitter
+            Grid.Row="2"
+            Grid.Column="1" />
+        <FileBrowserControls:BreadcumbBar
+            Grid.Row="2"
+            Grid.Column="1"
+            SelectedPath="{Binding CurrentFolder}" />
+        <FileBrowserControls:FileListView
+            Grid.Row="2"
+            Grid.Column="2"
+            SelectedPath="{Binding CurrentFolder}"/>
+    </Grid>
+</UserControl>

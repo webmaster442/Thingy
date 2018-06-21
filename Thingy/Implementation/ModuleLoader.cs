@@ -171,5 +171,15 @@ namespace Thingy.Implementation
 
             return moduleList;
         }
+
+        public void Add(IModule module)
+        {
+            _modules.Add(module);
+        }
+
+        public void AddRange(IEnumerable<IModule> modules)
+        {
+            _modules.AddRange(modules);
+        }
     }
 }

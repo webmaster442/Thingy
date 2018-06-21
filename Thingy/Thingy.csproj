@@ -134,6 +134,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="FileBrowser\FileBrowserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="InternalModules\About.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -194,6 +198,15 @@
     <Compile Include="Controls\Statusbar\WindowsInternals.xaml.cs">
       <DependentUpon>WindowsInternals.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FileBrowser\Controls\BreadcumbBar.cs" />
+    <Compile Include="FileBrowser\Controls\DirectoryTree.cs" />
+    <Compile Include="FileBrowser\Controls\FileListView.cs" />
+    <Compile Include="FileBrowser\Controls\IFileSystemControl.cs" />
+    <Compile Include="FileBrowser\FileBrowserModule.cs" />
+    <Compile Include="FileBrowser\FileBrowserView.xaml.cs">
+      <DependentUpon>FileBrowserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FileBrowser\ViewModels\FileBrowserViewModel.cs" />
     <Compile Include="IMainWindow.cs" />
     <Compile Include="Implementation\CommandLineParser.cs" />
     <Compile Include="Implementation\IModuleLoader.cs" />
@@ -309,6 +322,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if "$(ConfigurationName)" EQU "Debug" goto exit
