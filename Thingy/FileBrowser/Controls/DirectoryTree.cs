@@ -11,6 +11,7 @@ namespace Thingy.FileBrowser.Controls
     {
         private object _dummyNode = null;
         private bool _lock;
+        private string _lastdriveLetter;
 
         static DirectoryTree()
         {
@@ -32,6 +33,7 @@ namespace Thingy.FileBrowser.Controls
         public DirectoryTree()
         {
             MouseDoubleClick += DirectoryTree_MouseDoubleClick;
+            _lastdriveLetter = null;
         }
 
         private void DirectoryTree_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -69,7 +71,12 @@ namespace Thingy.FileBrowser.Controls
 
             if (sender.SelectedPath != FileListView.HomePath)
             {
-                sender.RenderFolderView($"{parts[0]}\\");
+                var root = Directory.GetDirectoryRoot(sender.SelectedPath);
+                if (root != sender._lastdriveLetter)
+                {
+                    sender.RenderFolderView($"{parts[0]}\\");
+                    sender._lastdriveLetter = root;
+                }
                 sender.SelectNodePath(sender.SelectedPath);
             }
         }
@@ -153,11 +160,13 @@ namespace Thingy.FileBrowser.Controls
                 else
                 {
                     var q2 = from i in Items.OfType<TreeViewItem>()
-                             where i.IsExpanded == true
+                             where i.IsExpanded == true ||
+                             itemId.StartsWith(i.Tag.ToString())
                              select i;
 
                     foreach (var node in q2)
                     {
+                        node.IsExpanded = true;
                         var result = FromID(itemId, node);
                         if (result != null)
                         {
@@ -169,10 +178,15 @@ namespace Thingy.FileBrowser.Controls
             }
             else
             {
-                foreach (TreeViewItem node in rootNode.Items)
+                var relavantnodes = from TreeViewItem i in rootNode.Items
+                                    where itemId.StartsWith(i.Tag.ToString())
+                                    select i;
+
+                foreach (TreeViewItem node in relavantnodes)
                 {
                     if (node == null) continue;
                     if (node.Tag.Equals(itemId)) return node;
+                    node.IsExpanded = true;
                     var next = FromID(itemId, node);
                     if (next != null) return next;
                 }
@@ -183,7 +197,11 @@ namespace Thingy.FileBrowser.Controls
         private void SelectNodePath(string path)
         {
             var node = FromID(path, null);
-            if (node != null) node.IsExpanded = true;
+            if (node != null)
+            {
+                node.BringIntoView();
+                node.IsExpanded = true;
+            }
         }
 
         private void Folders_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
