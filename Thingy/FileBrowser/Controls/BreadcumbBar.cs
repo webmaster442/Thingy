@@ -51,6 +51,8 @@ namespace Thingy.FileBrowser.Controls
 
                 for (int i = 0; i < parts.Length; i++)
                 {
+                    if (string.IsNullOrEmpty(parts[i])) continue;
+
                     Button b = new Button();
                     b.ToolTip = BuildPathString(parts, i);
                     b.Content = parts[i];
@@ -81,7 +83,7 @@ namespace Thingy.FileBrowser.Controls
         private void B_Click(object sender, RoutedEventArgs e)
         {
             Button b = sender as Button;
-            var path = b.Tag?.ToString();
+            var path = b.ToolTip?.ToString();
             if (!string.IsNullOrEmpty(path))
             {
                 SelectedPath = path;

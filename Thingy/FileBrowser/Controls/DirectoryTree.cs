@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Thingy.FileBrowser.Controls
 {
@@ -26,6 +27,17 @@ namespace Thingy.FileBrowser.Controls
                                                                   new FrameworkPropertyMetadata(false,
                                                                   FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
                                                                   Render));
+        }
+
+        public DirectoryTree()
+        {
+            MouseDoubleClick += DirectoryTree_MouseDoubleClick;
+        }
+
+        private void DirectoryTree_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (!(SelectedItem is TreeViewItem item)) return;
+            SelectedPath = item.Tag.ToString();
         }
 
         public string SelectedPath
@@ -57,39 +69,50 @@ namespace Thingy.FileBrowser.Controls
 
             if (sender.SelectedPath != FileListView.HomePath)
             {
-                sender.RenderFolderView(parts[0]);
+                sender.RenderFolderView($"{parts[0]}\\");
                 sender.SelectNodePath(sender.SelectedPath);
             }
         }
 
         private void RenderFolderView(string driveLetter)
         {
+            if (string.IsNullOrEmpty(driveLetter)) return;
 
-            string[] directories = null;
+            try
+            {
+                string[] directories = null;
 
-            if (!IsHiddenVisible)
-            {
-                var dir = new DirectoryInfo(driveLetter);
-                var folders = from i in dir.GetDirectories()
-                              where !i.Attributes.HasFlag(FileAttributes.Hidden)
-                              select i.FullName;
-                directories = folders.ToArray();
-            }
-            else
-            {
-                directories = Directory.GetDirectories(driveLetter);
-            }
-            foreach (string s in directories)
-            {
-                var folder = new TreeViewItem
+                if (!IsHiddenVisible)
                 {
-                    Header = Path.GetFileName(s),
-                    Tag = s,
-                    FontWeight = FontWeights.Normal
-                };
-                folder.Items.Add(_dummyNode);
-                folder.Expanded += Folder_Expanded;
-                Items.Add(folder);
+                    var dir = new DirectoryInfo(Directory.GetDirectoryRoot(driveLetter));
+
+                    
+
+                    var folders = from i in dir.GetDirectories()
+                                  where !i.Attributes.HasFlag(FileAttributes.Hidden)
+                                  select i.FullName;
+                    directories = folders.ToArray();
+                }
+                else
+                {
+                    directories = Directory.GetDirectories(driveLetter);
+                }
+                foreach (string s in directories)
+                {
+                    var folder = new TreeViewItem
+                    {
+                        Header = Path.GetFileName(s),
+                        Tag = s,
+                        FontWeight = FontWeights.Normal
+                    };
+                    folder.Items.Add(_dummyNode);
+                    folder.Expanded += Folder_Expanded;
+                    Items.Add(folder);
+                }
+            }
+            catch (Exception ex)
+            {
+                OnNavigationException?.Invoke(this, ex.Message);
             }
         }
 

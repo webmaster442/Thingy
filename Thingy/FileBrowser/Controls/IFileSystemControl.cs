@@ -14,5 +14,6 @@ namespace Thingy.FileBrowser.Controls
     {
         IEnumerable<string> FilteredExtensions { get; set; }
         void GoHome();
+        event EventHandler<string> FileDoubleClick;
     }
 }

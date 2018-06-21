@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Thingy.FileBrowser.Controls
 {
@@ -26,6 +27,29 @@ namespace Thingy.FileBrowser.Controls
                                                                   new FrameworkPropertyMetadata(false,
                                                                   FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
                                                                   Render));
+        }
+
+        public FileListView()
+        {
+            MouseDoubleClick += FileListView_MouseDoubleClick;
+        }
+
+        public event EventHandler<string> FileDoubleClick;
+
+        private void FileListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (SelectedItem != null)
+            {
+                var item = SelectedItem as string;
+                if (Directory.Exists(item))
+                {
+                    SelectedPath = item;
+                }
+                else if (File.Exists(item))
+                {
+                    FileDoubleClick?.Invoke(this, item);
+                }
+            }
         }
 
         public string SelectedPath
