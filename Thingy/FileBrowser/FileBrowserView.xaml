@@ -14,7 +14,7 @@
             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" />
             <Setter Property="VerticalAlignment" Value="Stretch" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="Width" Value="3"/>
+            <Setter Property="Width" Value="3" />
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -24,27 +24,55 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="30" />
             <RowDefinition />
         </Grid.RowDefinitions>
+
+        <TabControl
+            Grid.Row="0"
+            Grid.ColumnSpan="3"
+            TabStripPlacement="Bottom">
+            <TabItem
+                Header="General"
+                Style="{StaticResource CompactTabItem}">
+                <StackPanel
+                    Orientation="Horizontal">
+                    <Button Content="Home"/>
+                    <CheckBox
+                        Content="Show&#x0a;Hidden&#x0a;Files" />
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+
         <FileBrowserControls:DirectoryTree
             x:Name="DirectoryTree"
             Grid.Row="2"
             Grid.Column="0"
             SelectedPath="{Binding CurrentFolder}" />
+
         <GridSplitter
             Grid.Row="2"
             Grid.Column="1" />
+
         <FileBrowserControls:BreadcumbBar
             x:Name="DirectoryBreadCumb"
             Grid.Row="1"
             Grid.ColumnSpan="3"
-            SelectedPath="{Binding CurrentFolder}" />
+            Margin="3,0"
+            SelectedPath="{Binding CurrentFolder}">
+            <FileBrowserControls:BreadcumbBar.Resources>
+                <Style
+                    TargetType="Button">
+                    <Setter Property="Margin" Value="3" />
+                </Style>
+            </FileBrowserControls:BreadcumbBar.Resources>
+        </FileBrowserControls:BreadcumbBar>
+
         <FileBrowserControls:FileListView
             x:Name="DirectoryList"
             Grid.Row="2"
             Grid.Column="2"
-            SelectedPath="{Binding CurrentFolder}"/>
+            SelectedPath="{Binding CurrentFolder}" />
     </Grid>
 </UserControl>
