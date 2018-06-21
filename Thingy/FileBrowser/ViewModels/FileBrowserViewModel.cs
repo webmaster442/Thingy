@@ -1,4 +1,5 @@
 ﻿using AppLib.MVVM;
+using Thingy.FileBrowser.Controls;
 
 namespace Thingy.FileBrowser.ViewModels
 {
@@ -10,6 +11,11 @@ namespace Thingy.FileBrowser.ViewModels
         {
             get { return _currentFolder; }
             set { SetValue(ref _currentFolder, value); }
+        }
+
+        public FileBrowserViewModel()
+        {
+            CurrentFolder = FileListView.HomePath;
         }
     }
 }

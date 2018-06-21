@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Thingy.FileBrowser.Controls
 {
@@ -6,10 +7,12 @@ namespace Thingy.FileBrowser.Controls
     {
         string SelectedPath { get; set; }
         bool IsHiddenVisible { get; set; }
+        event EventHandler<string> OnNavigationException;
     }
 
     interface IFileDisplayControl: IFileSystemControl
     {
         IEnumerable<string> FilteredExtensions { get; set; }
+        void GoHome();
     }
 }

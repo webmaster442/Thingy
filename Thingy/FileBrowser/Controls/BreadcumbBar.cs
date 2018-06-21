@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -16,6 +17,11 @@ namespace Thingy.FileBrowser.Controls
                                                                 SelectedPathChanged));
         }
 
+        public BreadcumbBar()
+        {
+            Orientation = Orientation.Horizontal;
+        }
+
         public string SelectedPath
         {
             get { return (string)GetValue(SelectedPathProperty); }
@@ -27,6 +33,8 @@ namespace Thingy.FileBrowser.Controls
         // Using a DependencyProperty as the backing store for SelectedPath.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedPathProperty;
 
+        public event EventHandler<string> OnNavigationException;
+
         private static void SelectedPathChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             BreadcumbBar sender = d as BreadcumbBar;
@@ -36,20 +44,27 @@ namespace Thingy.FileBrowser.Controls
 
         private void Render()
         {
-            string[] parts = SelectedPath?.Split('/', '\\');
-            if (parts == null || parts.Length < 0) return;
-
-            for (int i=0; i<parts.Length;i++)
+            try
             {
-                Button b = new Button();
-                b.ToolTip = BuildPathString(parts, i);
-                b.Content = parts[i];
-                b.Click += B_Click;
-                Children.Add(b);
+                string[] parts = SelectedPath?.Split('/', '\\');
+                if (parts == null || parts.Length < 0) return;
 
-                TextBlock div = new TextBlock();
-                div.Text = @"\";
-                Children.Add(div);
+                for (int i = 0; i < parts.Length; i++)
+                {
+                    Button b = new Button();
+                    b.ToolTip = BuildPathString(parts, i);
+                    b.Content = parts[i];
+                    b.Click += B_Click;
+                    Children.Add(b);
+
+                    TextBlock div = new TextBlock();
+                    div.Text = @"\";
+                    Children.Add(div);
+                }
+            }
+            catch (Exception ex)
+            {
+                OnNavigationException?.Invoke(this, ex.Message);
             }
         }
 

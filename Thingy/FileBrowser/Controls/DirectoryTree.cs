@@ -46,6 +46,8 @@ namespace Thingy.FileBrowser.Controls
         // Using a DependencyProperty as the backing store for IsHiddenVisible.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsHiddenVisibleProperty;
 
+        public event EventHandler<string> OnNavigationException;
+
         private static void Render(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             DirectoryTree sender = d as DirectoryTree;
@@ -53,12 +55,16 @@ namespace Thingy.FileBrowser.Controls
 
             var parts = sender.SelectedPath.Split('\\', '/');
 
-            sender.RenderFolderView(parts[0]);
-            sender.SelectNodePath(sender.SelectedPath);
+            if (sender.SelectedPath != FileListView.HomePath)
+            {
+                sender.RenderFolderView(parts[0]);
+                sender.SelectNodePath(sender.SelectedPath);
+            }
         }
 
         private void RenderFolderView(string driveLetter)
         {
+
             string[] directories = null;
 
             if (!IsHiddenVisible)
@@ -108,7 +114,10 @@ namespace Thingy.FileBrowser.Controls
                         item.Items.Add(subitem);
                     }
                 }
-                catch (Exception) { }
+                catch (Exception ex)
+                {
+                    OnNavigationException?.Invoke(this, ex.Message);
+                }
             }
         }
 

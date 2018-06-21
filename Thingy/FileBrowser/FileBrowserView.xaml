@@ -29,6 +29,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <FileBrowserControls:DirectoryTree
+            x:Name="DirectoryTree"
             Grid.Row="2"
             Grid.Column="0"
             SelectedPath="{Binding CurrentFolder}" />
@@ -36,10 +37,12 @@
             Grid.Row="2"
             Grid.Column="1" />
         <FileBrowserControls:BreadcumbBar
-            Grid.Row="2"
-            Grid.Column="1"
+            x:Name="DirectoryBreadCumb"
+            Grid.Row="1"
+            Grid.ColumnSpan="3"
             SelectedPath="{Binding CurrentFolder}" />
         <FileBrowserControls:FileListView
+            x:Name="DirectoryList"
             Grid.Row="2"
             Grid.Column="2"
             SelectedPath="{Binding CurrentFolder}"/>
