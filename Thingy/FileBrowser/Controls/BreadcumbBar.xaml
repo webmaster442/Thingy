@@ -9,36 +9,41 @@
     d:DesignHeight="30"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style
+            x:Key="Toggle"
+            BasedOn="{StaticResource {x:Type ToggleButton}}"
+            TargetType="ToggleButton">
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="False">
+                    <Setter Property="Content" Value="&#x3E;&#x3E;" />
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Content" Value="&#x3C;&#x3C;" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <ToggleButton
-            Margin="3"
-            x:Name="PathEditable">
-            <ToggleButton.Resources>
-                <Style
-                    BasedOn="{StaticResource {x:Type ToggleButton}}"
-                    TargetType="ToggleButton">
-                    <Style.Triggers>
-                        <Trigger Property="IsChecked" Value="False">
-                            <Setter Property="Content" Value="&#x3E;&#x3E;" />
-                        </Trigger>
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Content" Value="&#x3C;&#x3C;" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </ToggleButton.Resources>
-        </ToggleButton>
+            Style="{StaticResource Toggle}"
+            x:Name="PathEditable"
+            Margin="3" />
+
         <StackPanel
             x:Name="BreadCumbs"
             Grid.Column="1"
+            VerticalAlignment="Center"
+            Orientation="Horizontal"
             Visibility="{Binding ElementName=PathEditable, Path=IsChecked, Converter={applib:BoolToVisibilityConverter}, ConverterParameter=true}" />
         <TextBox
             x:Name="Path"
             Grid.Column="1"
+            VerticalAlignment="Center"
             Text="{Binding ElementName=ctrl, Path=SelectedPath, Mode=TwoWay}"
             Visibility="{Binding ElementName=PathEditable, Path=IsChecked, Converter={applib:BoolToVisibilityConverter}}" />
     </Grid>

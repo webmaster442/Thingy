@@ -25,7 +25,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="30" />
+            <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -66,7 +66,6 @@
             x:Name="DirectoryBreadCumb"
             Grid.Row="1"
             Grid.ColumnSpan="3"
-            Margin="3,0"
             SelectedPath="{Binding CurrentFolder}">
             <FileBrowserControls:BreadcumbBar.Resources>
                 <Style

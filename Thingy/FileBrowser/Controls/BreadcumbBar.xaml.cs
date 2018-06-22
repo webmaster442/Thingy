@@ -56,9 +56,11 @@ namespace Thingy.FileBrowser.Controls
                 {
                     if (string.IsNullOrEmpty(parts[i])) continue;
 
-                    Button b = new Button();
-                    b.ToolTip = BuildPathString(parts, i);
-                    b.Content = parts[i];
+                    Button b = new Button
+                    {
+                        ToolTip = BuildPathString(parts, i),
+                        Content = parts[i]
+                    };
                     b.Click += B_Click;
                     BreadCumbs.Children.Add(b);
 
