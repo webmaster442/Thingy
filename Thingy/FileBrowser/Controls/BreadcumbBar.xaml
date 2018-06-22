@@ -45,6 +45,7 @@
             Grid.Column="1"
             VerticalAlignment="Center"
             Text="{Binding ElementName=ctrl, Path=SelectedPath, Mode=TwoWay}"
+            KeyDown="Path_KeyDown"
             Visibility="{Binding ElementName=PathEditable, Path=IsChecked, Converter={applib:BoolToVisibilityConverter}}" />
     </Grid>
 </UserControl>

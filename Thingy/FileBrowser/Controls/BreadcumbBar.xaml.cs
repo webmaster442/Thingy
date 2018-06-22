@@ -2,6 +2,8 @@
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Input;
 
 namespace Thingy.FileBrowser.Controls
 {
@@ -93,6 +95,15 @@ namespace Thingy.FileBrowser.Controls
             if (!string.IsNullOrEmpty(path))
             {
                 SelectedPath = path;
+            }
+        }
+
+        private void Path_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                var binding = BindingOperations.GetBindingExpression(Path, TextBox.TextProperty);
+                binding?.UpdateSource();
             }
         }
     }
