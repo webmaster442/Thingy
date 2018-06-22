@@ -1,4 +1,5 @@
-﻿using AppLib.MVVM;
+﻿using System;
+using AppLib.MVVM;
 using Thingy.FileBrowser.Controls;
 
 namespace Thingy.FileBrowser.ViewModels
@@ -6,6 +7,15 @@ namespace Thingy.FileBrowser.ViewModels
     internal class FileBrowserViewModel: ViewModel
     {
         private string _currentFolder;
+        private bool _hiddenvisible;
+
+        public DelegateCommand<string> NavigateCommand { get; }
+
+        public FileBrowserViewModel()
+        {
+            NavigateCommand = Command.CreateCommand<string>(Navigate);
+            CurrentFolder = FileListView.HomePath;
+        }
 
         public string CurrentFolder
         {
@@ -13,9 +23,15 @@ namespace Thingy.FileBrowser.ViewModels
             set { SetValue(ref _currentFolder, value); }
         }
 
-        public FileBrowserViewModel()
+        public bool ShowHiddenFiles
         {
-            CurrentFolder = FileListView.HomePath;
+            get { return _hiddenvisible; }
+            set { SetValue(ref _hiddenvisible, value); }
+        }
+
+        private void Navigate(string obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }

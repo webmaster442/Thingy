@@ -24,14 +24,14 @@ namespace Thingy.CoreModules.ViewModels
             controller = new TerminalController(view);
             _initscript = basecommand;
             controller.SetShell(shell);
-            LoadedCommand = Command.ToCommand(Loaded);
-            ClosingCommand = Command.ToCommand(Closing);
-            SetFolderCommand = Command.ToCommand(SetFolder);
+            LoadedCommand = Command.CreateCommand(Loaded);
+            ClosingCommand = Command.CreateCommand(Closing);
+            SetFolderCommand = Command.CreateCommand(SetFolder);
 
-            ClearCommand = Command.ToCommand(Clear);
-            RestartCommand = Command.ToCommand(Restart);
-            CopyCommand = Command.ToCommand(Copy);
-            PasteCommand = Command.ToCommand(Paste);
+            ClearCommand = Command.CreateCommand(Clear);
+            RestartCommand = Command.CreateCommand(Restart);
+            CopyCommand = Command.CreateCommand(Copy);
+            PasteCommand = Command.CreateCommand(Paste);
         }
 
         private void SetFolder()

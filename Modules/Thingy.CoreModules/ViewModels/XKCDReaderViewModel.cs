@@ -87,12 +87,12 @@ namespace Thingy.CoreModules.ViewModels
         {
             _app = app;
             PreviousComics = new ObservableCollection<int>();
-            LoadLatestComicCommand = Command.ToCommand(LoadLatestComic);
-            NextComicCommand = Command.ToCommand(NextComic, CanDoNext);
-            PreviousComicCommand = Command.ToCommand(PreviousComic, CanDoPrevious);
-            LoadSpecificComicCommand = Command.ToCommand<int>(LoadSpecificComic);
-            FirstComicCommand = Command.ToCommand(FirstComic);
-            LastComicCommand = Command.ToCommand(LastComic);
+            LoadLatestComicCommand = Command.CreateCommand(LoadLatestComic);
+            NextComicCommand = Command.CreateCommand(NextComic, CanDoNext);
+            PreviousComicCommand = Command.CreateCommand(PreviousComic, CanDoPrevious);
+            LoadSpecificComicCommand = Command.CreateCommand<int>(LoadSpecificComic);
+            FirstComicCommand = Command.CreateCommand(FirstComic);
+            LastComicCommand = Command.CreateCommand(LastComic);
         }
 
         private async Task LoadDataFromJson(string path = "info.0.json")

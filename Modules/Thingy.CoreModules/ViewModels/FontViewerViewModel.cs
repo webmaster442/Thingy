@@ -26,10 +26,10 @@ namespace Thingy.CoreModules.ViewModels
             FontsToInstall = new ObservableCollection<string>();
             FontsToPreview = new ObservableCollection<string>();
 
-            AddFontsCommand = Command.ToCommand(AddFonts);
-            ClearListCommand = Command.ToCommand(ClearList);
-            InstallCommand = Command.ToCommand(Install);
-            OpenDirCommand = Command.ToCommand(OpenDir);
+            AddFontsCommand = Command.CreateCommand(AddFonts);
+            ClearListCommand = Command.CreateCommand(ClearList);
+            InstallCommand = Command.CreateCommand(Install);
+            OpenDirCommand = Command.CreateCommand(OpenDir);
         }
 
         private void OpenDir()

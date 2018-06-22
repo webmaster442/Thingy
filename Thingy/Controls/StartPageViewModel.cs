@@ -25,9 +25,9 @@ namespace Thingy.Controls
             _application = application;
             Modules = new ObservableCollection<IModule>();
             Modules.AddRange(_moduleLoader.GetModulesForCategory());
-            TileClickCommand = Command.ToCommand<string>(TileClick);
+            TileClickCommand = Command.CreateCommand<string>(TileClick);
             Categories = new Dictionary<string, int>(_moduleLoader.CategoryModuleCount);
-            FilterCategoryCommand = Command.ToCommand<KeyValuePair<string, int>>(FilterCategory);
+            FilterCategoryCommand = Command.CreateCommand<KeyValuePair<string, int>>(FilterCategory);
         }
 
         private void FilterCategory(KeyValuePair<string, int> obj)

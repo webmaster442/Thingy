@@ -21,13 +21,13 @@ namespace Thingy.Calculator.ViewModels
         public DisplayChangerViewModel(IApplication app)
         {
             _app = app;
-            ConvertFileSizeCommand = Command.ToCommand<object>(ConvertFileSize, CanExecute);
-            ConvertPercentageCommand = Command.ToCommand<object>(ConvertPercentage, CanExecute);
-            ConvertTextCommand = Command.ToCommand<object>(ConvertText, CanExecute);
-            ConvertFractionsCommand = Command.ToCommand<object>(ConvertFractions, CanExecute);
-            ConvertPrefixesCommand = Command.ToCommand<object>(ConvertPrefixes, CanExecute);
-            ConvertNumberSystemCommand = Command.ToCommand<object>(ConvertNumberSystem, CanExecute);
-            ConvertUnitCommand = Command.ToCommand<object>(ConvertUnit, CanExecute);
+            ConvertFileSizeCommand = Command.CreateCommand<object>(ConvertFileSize, CanExecute);
+            ConvertPercentageCommand = Command.CreateCommand<object>(ConvertPercentage, CanExecute);
+            ConvertTextCommand = Command.CreateCommand<object>(ConvertText, CanExecute);
+            ConvertFractionsCommand = Command.CreateCommand<object>(ConvertFractions, CanExecute);
+            ConvertPrefixesCommand = Command.CreateCommand<object>(ConvertPrefixes, CanExecute);
+            ConvertNumberSystemCommand = Command.CreateCommand<object>(ConvertNumberSystem, CanExecute);
+            ConvertUnitCommand = Command.CreateCommand<object>(ConvertUnit, CanExecute);
         }
 
         private bool CanExecute(object obj)

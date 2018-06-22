@@ -35,9 +35,9 @@ namespace Thingy.CoreModules.ViewModels
             Completed = new TrulyObservableCollection<ToDoItem>();
             Pending.AddRange(_db.Todo.GetUncompletedTasks());
             Completed.AddRange(_db.Todo.GetCompletededTasks());
-            AddNewItemCommand = Command.ToCommand(AddNewItem);
-            DeleteItemCommand = Command.ToCommand<int>(DeleteItem, CanDelete);
-            DeleteCompletedItemsCommand = Command.ToCommand(DeleteCompletedItems);
+            AddNewItemCommand = Command.CreateCommand(AddNewItem);
+            DeleteItemCommand = Command.CreateCommand<int>(DeleteItem, CanDelete);
+            DeleteCompletedItemsCommand = Command.CreateCommand(DeleteCompletedItems);
         }
 
         private void Pending_ItemChanged(object sender, ItemChangedEventArgs<ToDoItem> e)

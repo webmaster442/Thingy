@@ -39,9 +39,9 @@ namespace Thingy.CoreModules.ViewModels
             Drives = new ObservableCollection<Drive>(Providers.ProvideDriveData());
             EnvVars = new ObservableCollection<SystemFolderLink>(Providers.ProvideEnvironmentVariables());
             Folders = new ObservableCollection<FolderLink>();
-            NewFolderLinkCommand = Command.ToCommand(NewFolderLink);
-            OpenLocationCommand = Command.ToCommand<string>(OpenLocation);
-            DeleteSelectedLinkCommand = Command.ToCommand<string>(DeleteSelectedLink);
+            NewFolderLinkCommand = Command.CreateCommand(NewFolderLink);
+            OpenLocationCommand = Command.CreateCommand<string>(OpenLocation);
+            DeleteSelectedLinkCommand = Command.CreateCommand<string>(DeleteSelectedLink);
         }
 
         public string Filter

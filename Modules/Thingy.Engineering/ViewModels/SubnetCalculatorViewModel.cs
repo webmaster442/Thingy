@@ -58,8 +58,8 @@ namespace Thingy.Engineering.ViewModels
         {
             Ip = IPAddress.Parse("192.168.0.1");
             Mask = IPAddress.Parse("255.255.255.0");
-            SplitSubnetsCommand = Command.ToCommand(SplitSubnets);
-            TemplateCommand = Command.ToCommand<string>(Template);
+            SplitSubnetsCommand = Command.CreateCommand(SplitSubnets);
+            TemplateCommand = Command.CreateCommand<string>(Template);
         }
 
         private void Template(string obj)

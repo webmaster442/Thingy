@@ -86,11 +86,11 @@ namespace Thingy.CoreModules.ViewModels
             _db = db;
             _application = app;
             Programs = new ObservableCollection<LauncherProgram>();
-            AddCommand = Command.ToCommand(Add);
-            EditCommand = Command.ToCommand<string>(Edit);
-            DeleteCommand = Command.ToCommand<string>(Delete);
-            RunCommand = Command.ToCommand<string>(Run);
-            RunSystemCommand = Command.ToCommand<string>(RunSystem);
+            AddCommand = Command.CreateCommand(Add);
+            EditCommand = Command.CreateCommand<string>(Edit);
+            DeleteCommand = Command.CreateCommand<string>(Delete);
+            RunCommand = Command.CreateCommand<string>(Run);
+            RunSystemCommand = Command.CreateCommand<string>(RunSystem);
             Programs.AddRange(_db.Programs.GetPrograms());
             StartMenu = new ObservableCollection<SystemProgram>(ProgramProviders.GetStartMenu());
         }

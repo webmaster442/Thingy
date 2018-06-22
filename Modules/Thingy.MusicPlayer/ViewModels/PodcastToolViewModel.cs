@@ -63,11 +63,11 @@ namespace Thingy.MusicPlayer.ViewModels
             DownloadDir = _app.Settings.Get("PodcastDownloadDir", @"c:\podcasts");
             Podcasts = new ObservableCollection<PodcastUri>(_db.Podcasts.GetPodcasts());
             Feed = new ObservableCollection<PodcastFeedItem>();
-            DownloadAndParseFeedCommand = Command.ToCommand<int>(DownloadAndParseFeed);
-            AddFeedCommand = Command.ToCommand(AddFeed);
-            RemoveFeedCommand = Command.ToCommand<int>(RemoveFeed, CanRemoveFeed);
-            DownloadPodcastCommand = Command.ToCommand<int>(DownloadPodcast, CanDownloadPodcast);
-            SendToPlayerCommand = Command.ToCommand<int>(SendToPlayer, CanSendToPlayer);
+            DownloadAndParseFeedCommand = Command.CreateCommand<int>(DownloadAndParseFeed);
+            AddFeedCommand = Command.CreateCommand(AddFeed);
+            RemoveFeedCommand = Command.CreateCommand<int>(RemoveFeed, CanRemoveFeed);
+            DownloadPodcastCommand = Command.CreateCommand<int>(DownloadPodcast, CanDownloadPodcast);
+            SendToPlayerCommand = Command.CreateCommand<int>(SendToPlayer, CanSendToPlayer);
         }
 
         private async Task<SyndicationFeed> DownloadFeed(string url)

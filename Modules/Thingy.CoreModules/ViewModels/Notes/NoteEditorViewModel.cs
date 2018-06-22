@@ -36,16 +36,16 @@ namespace Thingy.CoreModules.ViewModels.Notes
         {
             _app = app;
             _db = db;
-            NewFileCommand = Command.ToCommand<bool>(NewFile);
-            OpenFileCommand = Command.ToCommand<bool>(OpenFile);
-            SaveFileCommand = Command.ToCommand(SaveFile);
-            SaveAsCommand = Command.ToCommand(SaveAs);
-            PrintCommand = Command.ToCommand(Print);
-            OpenNoteDBCommand = Command.ToCommand<bool>(OpenNoteDB);
-            SaveNoteDBCommand = Command.ToCommand(SaveNoteDB);
-            RenderCommand = Command.ToCommand<string>(Render);
-            FindCommand = Command.ToCommand<TextEditor>(Find);
-            ReplaceCommand = Command.ToCommand<TextEditor>(Replace);
+            NewFileCommand = Command.CreateCommand<bool>(NewFile);
+            OpenFileCommand = Command.CreateCommand<bool>(OpenFile);
+            SaveFileCommand = Command.CreateCommand(SaveFile);
+            SaveAsCommand = Command.CreateCommand(SaveAs);
+            PrintCommand = Command.CreateCommand(Print);
+            OpenNoteDBCommand = Command.CreateCommand<bool>(OpenNoteDB);
+            SaveNoteDBCommand = Command.CreateCommand(SaveNoteDB);
+            RenderCommand = Command.CreateCommand<string>(Render);
+            FindCommand = Command.CreateCommand<TextEditor>(Find);
+            ReplaceCommand = Command.CreateCommand<TextEditor>(Replace);
             
             _Template = Resources.ResourceLocator.GetResourceFile("html.MarkdownTemplate.html");
         }

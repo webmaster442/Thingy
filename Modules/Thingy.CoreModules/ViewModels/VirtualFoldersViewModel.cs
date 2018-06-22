@@ -47,16 +47,16 @@ namespace Thingy.CoreModules.ViewModels
             CurrentFolder.CollectionChanged += CurrentFolder_CollectionChanged;
             Folders.UpdateWith(_db.VirtualFolders.GetVirtualFolders());
 
-            NewFolderCommand = Command.ToCommand(NewFolder);
-            DeleteFolderCommand = Command.ToCommand<VirtualFolder>(DeleteFolder, CanDeleteFolder);
-            ClearFolderCommand = Command.ToCommand(ClearFolder, IsFolderOpened);
-            AddFilesCommand = Command.ToCommand(AddFiles, IsFolderOpened);
-            DeleteFilesCommand = Command.ToCommand<IList>(DeleteFiles, CanDeleteFiles);
-            CopyContentsCommand = Command.ToCommand(CopyContents, CanCopyOrZip);
-            CreateZipCommand = Command.ToCommand(CreateZip, CanCopyOrZip);
-            LoadFolderCommand = Command.ToCommand<VirtualFolder>(LoadFolder);
-            SaveFolderCommand = Command.ToCommand(SaveFolder, CanSaveFolder);
-            FilesDroppedCommand = Command.ToCommand<string[]>(FilesDropped);
+            NewFolderCommand = Command.CreateCommand(NewFolder);
+            DeleteFolderCommand = Command.CreateCommand<VirtualFolder>(DeleteFolder, CanDeleteFolder);
+            ClearFolderCommand = Command.CreateCommand(ClearFolder, IsFolderOpened);
+            AddFilesCommand = Command.CreateCommand(AddFiles, IsFolderOpened);
+            DeleteFilesCommand = Command.CreateCommand<IList>(DeleteFiles, CanDeleteFiles);
+            CopyContentsCommand = Command.CreateCommand(CopyContents, CanCopyOrZip);
+            CreateZipCommand = Command.CreateCommand(CreateZip, CanCopyOrZip);
+            LoadFolderCommand = Command.CreateCommand<VirtualFolder>(LoadFolder);
+            SaveFolderCommand = Command.CreateCommand(SaveFolder, CanSaveFolder);
+            FilesDroppedCommand = Command.CreateCommand<string[]>(FilesDropped);
         }
 
         private void FilesDropped(string[] obj)

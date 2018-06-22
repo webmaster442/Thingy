@@ -59,20 +59,20 @@ namespace Thingy.MusicPlayer.ViewModels
             _app = app;
             _extensions = new ExtensionProvider();
             List = new ObservableCollection<string>();
-            OpenListCommand = Command.ToCommand(OpenList);
-            ApendListCommand = Command.ToCommand(AppendList);
-            AddFilesCommand = Command.ToCommand(AddFiles);
-            AddFolderCommand = Command.ToCommand(AddFolder);
-            AddUrlCommand = Command.ToCommand(AddUrl);
-            SaveListCommand = Command.ToCommand(SaveList);
-            LoadCDCommand = Command.ToCommand(LoadCD);
+            OpenListCommand = Command.CreateCommand(OpenList);
+            ApendListCommand = Command.CreateCommand(AppendList);
+            AddFilesCommand = Command.CreateCommand(AddFiles);
+            AddFolderCommand = Command.CreateCommand(AddFolder);
+            AddUrlCommand = Command.CreateCommand(AddUrl);
+            SaveListCommand = Command.CreateCommand(SaveList);
+            LoadCDCommand = Command.CreateCommand(LoadCD);
 
-            ClearListCommand = Command.ToCommand(ClearList);
-            DeleteSelectedCommand = Command.ToCommand<string[]>(DeleteSelected);
+            ClearListCommand = Command.CreateCommand(ClearList);
+            DeleteSelectedCommand = Command.CreateCommand<string[]>(DeleteSelected);
 
-            SortAscendingCommand = Command.ToCommand(SortAscending);
-            SortDescendingCommand = Command.ToCommand(SortDescending);
-            SortSuffleCommand = Command.ToCommand(SortSuffle);
+            SortAscendingCommand = Command.CreateCommand(SortAscending);
+            SortDescendingCommand = Command.CreateCommand(SortDescending);
+            SortSuffleCommand = Command.CreateCommand(SortSuffle);
         }
 
         public async Task DoOpenList(string file, bool apend)

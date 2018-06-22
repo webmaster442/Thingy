@@ -32,7 +32,7 @@ namespace Thingy.CoreModules.ViewModels
             CurrencyTypes = new ObservableCollection<string>();
             CurrencyRates = new ObservableCollection<CurrencyRate>();
             UpdateVisibility = Visibility.Collapsed;
-            UpdateCommand = Command.ToCommand(Update);
+            UpdateCommand = Command.CreateCommand(Update);
         }
 
         private async void Update()

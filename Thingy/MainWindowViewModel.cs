@@ -26,15 +26,15 @@ namespace Thingy
         public MainWindowViewModel(IMainWindow view, IApplication app) : base(view)
         {
             _app = app;
-            ExitCommand = Command.ToCommand(Exit);
-            AboutCommand = Command.ToCommand(OpenAbout);
-            LogCommand = Command.ToCommand(OpenLog, CanOpenLog);
-            OpenFlyoutCommand = Command.ToCommand<string>(OpenFlyout);
-            SettingCommand = Command.ToCommand(OpenSetting, CanOpenSetting);
-            UpdateCommand = Command.ToCommand(Update);
-            ModuleImportCommand = Command.ToCommand(ModuleImport, CanImportExport);
-            ModuleExportCommand = Command.ToCommand(ModuleExport, CanImportExport);
-            ModuleAppendCommand = Command.ToCommand(ModuleAppend, CanImportExport);
+            ExitCommand = Command.CreateCommand(Exit);
+            AboutCommand = Command.CreateCommand(OpenAbout);
+            LogCommand = Command.CreateCommand(OpenLog, CanOpenLog);
+            OpenFlyoutCommand = Command.CreateCommand<string>(OpenFlyout);
+            SettingCommand = Command.CreateCommand(OpenSetting, CanOpenSetting);
+            UpdateCommand = Command.CreateCommand(Update);
+            ModuleImportCommand = Command.CreateCommand(ModuleImport, CanImportExport);
+            ModuleExportCommand = Command.CreateCommand(ModuleExport, CanImportExport);
+            ModuleAppendCommand = Command.CreateCommand(ModuleAppend, CanImportExport);
         }
 
         private void OpenFlyout(string obj)

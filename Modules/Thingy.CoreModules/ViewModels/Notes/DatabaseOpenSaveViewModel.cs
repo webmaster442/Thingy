@@ -28,10 +28,10 @@ namespace Thingy.CoreModules.ViewModels.Notes
             _app = app;
             _db = db;
             Notes = new ObservableCollection<Note>(_db.Notes.GetNotes());
-            NewNoteCommand = Command.ToCommand(NewNote);
-            DeleteCommand = Command.ToCommand<Note>(Delete, CanDeleteExport);
-            ExportCommand = Command.ToCommand<Note>(Export, CanDeleteExport);
-            ImportCommand = Command.ToCommand(Import);
+            NewNoteCommand = Command.CreateCommand(NewNote);
+            DeleteCommand = Command.CreateCommand<Note>(Delete, CanDeleteExport);
+            ExportCommand = Command.CreateCommand<Note>(Export, CanDeleteExport);
+            ImportCommand = Command.CreateCommand(Import);
         }
 
         private void Import()

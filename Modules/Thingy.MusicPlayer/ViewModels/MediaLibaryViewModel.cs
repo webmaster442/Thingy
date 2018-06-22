@@ -47,12 +47,12 @@ namespace Thingy.MusicPlayer.ViewModels
             Tree = new ObservableCollection<NavigationItem>();
             QueryResults = new ObservableCollection<Song>();
             RadioItems = new ObservableCollection<RadioStation>();
-            CreateQueryCommand = Command.ToCommand(CreateQuery);
-            AddFilesCommand = Command.ToCommand(AddFiles);
-            AddDirectoryCommand = Command.ToCommand(AddDirectory);
-            CategoryQueryCommand = Command.ToCommand<string[]>(CategoryQuery);
-            DeleteQueryCommand = Command.ToCommand<string[]>(DeleteQuery);
-            SendToPlayerCommand = Command.ToCommand<IList>(SendToPlayer, CanSendToPlayer);
+            CreateQueryCommand = Command.CreateCommand(CreateQuery);
+            AddFilesCommand = Command.CreateCommand(AddFiles);
+            AddDirectoryCommand = Command.CreateCommand(AddDirectory);
+            CategoryQueryCommand = Command.CreateCommand<string[]>(CategoryQuery);
+            DeleteQueryCommand = Command.CreateCommand<string[]>(DeleteQuery);
+            SendToPlayerCommand = Command.CreateCommand<IList>(SendToPlayer, CanSendToPlayer);
             BuildTree();
             LoadRadios();
         }

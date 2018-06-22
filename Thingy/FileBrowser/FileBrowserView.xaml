@@ -38,9 +38,13 @@
                 Style="{StaticResource CompactTabItem}">
                 <StackPanel
                     Orientation="Horizontal">
-                    <Button Content="Home"/>
+                    <Button
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="HOME:\"
+                        Content="Home" />
                     <CheckBox
-                        Content="Show&#x0a;Hidden&#x0a;Files" />
+                        Content="Show&#x0a;Hidden&#x0a;Files"
+                        IsChecked="{Binding ShowHiddenFiles, Mode=TwoWay}" />
                 </StackPanel>
             </TabItem>
         </TabControl>
@@ -49,6 +53,7 @@
             x:Name="DirectoryTree"
             Grid.Row="2"
             Grid.Column="0"
+            IsHiddenVisible="{Binding ShowHiddenFiles}"
             SelectedPath="{Binding CurrentFolder}" />
 
         <GridSplitter
@@ -73,6 +78,7 @@
             x:Name="DirectoryList"
             Grid.Row="2"
             Grid.Column="2"
+            IsHiddenVisible="{Binding ShowHiddenFiles}"
             SelectedPath="{Binding CurrentFolder}" />
     </Grid>
 </UserControl>

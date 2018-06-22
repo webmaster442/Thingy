@@ -77,18 +77,18 @@ namespace Thingy.MusicPlayer.ViewModels
         {
             AudioEngine = engine;
             Playlist = new PlayListViewModel(app);
-            OpenFileCommand = Command.ToCommand(OpenFile);
-            PlayCommand = Command.ToCommand(Play);
-            PauseCommand = Command.ToCommand(Pause);
-            SeekBackCommand = Command.ToCommand(SeekBack);
-            SeekFwdCommand = Command.ToCommand(SeekFwd);
-            DragStartedCommand = Command.ToCommand(DragStarted);
-            DragCompletedCommand = Command.ToCommand<double>(DragCompleted);
-            PrevousTrackCommand = Command.ToCommand(PrevousTrack);
-            NextTrackCommand = Command.ToCommand(NextTrack);
-            SelectedDeviceChangedCommand = Command.ToCommand<int>(SelectedDeviceChanged);
-            PlayListDoubleClickCommand = Command.ToCommand<int>(PlayListDoubleClick);
-            JumpToChapterCommand = Command.ToCommand<Chapter>(JumpToChapter);
+            OpenFileCommand = Command.CreateCommand(OpenFile);
+            PlayCommand = Command.CreateCommand(Play);
+            PauseCommand = Command.CreateCommand(Pause);
+            SeekBackCommand = Command.CreateCommand(SeekBack);
+            SeekFwdCommand = Command.CreateCommand(SeekFwd);
+            DragStartedCommand = Command.CreateCommand(DragStarted);
+            DragCompletedCommand = Command.CreateCommand<double>(DragCompleted);
+            PrevousTrackCommand = Command.CreateCommand(PrevousTrack);
+            NextTrackCommand = Command.CreateCommand(NextTrack);
+            SelectedDeviceChangedCommand = Command.CreateCommand<int>(SelectedDeviceChanged);
+            PlayListDoubleClickCommand = Command.CreateCommand<int>(PlayListDoubleClick);
+            JumpToChapterCommand = Command.CreateCommand<Chapter>(JumpToChapter);
         }
 
         private void PlayListDoubleClick(int index)

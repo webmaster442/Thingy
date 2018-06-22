@@ -19,8 +19,8 @@ namespace Thingy.GitBash.ViewModels
         public GitBashViewModel(IApplication app, IGitBashView view) : base(view)
         {
             _app = app;
-            ExecuteCommand = Command.ToCommand<string>(Execute);
-            ChangeFolderCommand = Command.ToCommand(ChangeFolder);
+            ExecuteCommand = Command.CreateCommand<string>(Execute);
+            ChangeFolderCommand = Command.CreateCommand(ChangeFolder);
             ComplexCommand = new ComplexCommand(_app, view);
             _aliveTimer = new DispatcherTimer();
             _aliveTimer.Interval = TimeSpan.FromMilliseconds(150);

@@ -58,7 +58,7 @@ namespace Thingy.Calculator.Dialogs
                                              'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'S', 'T', 'U', 'V',
                                              'W', 'X', 'Y','Z'};
             SelectedNumberSystem = 16;
-            InsertCommand = Command.ToCommand<char>(Insert);
+            InsertCommand = Command.CreateCommand<char>(Insert);
             FocusManager.SetFocusedElement(this, InputTextBox);
         }
 
