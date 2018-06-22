@@ -134,14 +134,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FileBrowser\Controls\BreadcumbBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="FileBrowser\FileBrowserView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="InternalModules\About.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -202,17 +194,6 @@
     <Compile Include="Controls\Statusbar\WindowsInternals.xaml.cs">
       <DependentUpon>WindowsInternals.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FileBrowser\Controls\BreadcumbBar.xaml.cs">
-      <DependentUpon>BreadcumbBar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="FileBrowser\Controls\DirectoryTree.cs" />
-    <Compile Include="FileBrowser\Controls\FileListView.cs" />
-    <Compile Include="FileBrowser\Controls\IFileSystemControl.cs" />
-    <Compile Include="FileBrowser\FileBrowserModule.cs" />
-    <Compile Include="FileBrowser\FileBrowserView.xaml.cs">
-      <DependentUpon>FileBrowserView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="FileBrowser\ViewModels\FileBrowserViewModel.cs" />
     <Compile Include="IMainWindow.cs" />
     <Compile Include="Implementation\CommandLineParser.cs" />
     <Compile Include="Implementation\IModuleLoader.cs" />
@@ -306,6 +287,10 @@
     <ProjectReference Include="..\Thingy.ExternalLibs\Thingy.ExternalLibs.csproj">
       <Project>{a65caeaf-839b-44e2-bea5-6555f965143a}</Project>
       <Name>Thingy.ExternalLibs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Thingy.FileBrowser\Thingy.FileBrowser.csproj">
+      <Project>{f74f7d50-530d-49a6-837a-66de74ac7dfe}</Project>
+      <Name>Thingy.FileBrowser</Name>
     </ProjectReference>
     <ProjectReference Include="..\Thingy.Resources\Thingy.Resources.csproj">
       <Project>{63a3ee73-078f-4dec-8578-5af6f158d383}</Project>

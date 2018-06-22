@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F74F7D50-530D-49A6-837A-66DE74AC7DFE}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <RootNamespace>Thingy.FileBrowser</RootNamespace>
+    <AssemblyName>Thingy.FileBrowser.module</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Build-tools\CommonVersion.cs">
+      <Link>Properties\CommonVersion.cs</Link>
+    </Compile>
+    <Compile Include="Controls\BreadcumbBar.xaml.cs">
+      <DependentUpon>BreadcumbBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DirectoryTree.cs" />
+    <Compile Include="Controls\FileListView.cs" />
+    <Compile Include="Controls\IFileSystemControl.cs" />
+    <Compile Include="FileBrowserModule.cs" />
+    <Compile Include="FileBrowserView.xaml.cs">
+      <DependentUpon>FileBrowserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\FileBrowserViewModel.cs" />
+    <Compile Include="ViewModels\ToolbarViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\BreadcumbBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FileBrowserView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\applib\AppLib.Common\AppLib.Common.csproj">
+      <Project>{516087B5-6AC5-44A5-8DF1-FE42D7A7A0E6}</Project>
+      <Name>AppLib.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\applib\AppLib.MVVM\AppLib.MVVM.csproj">
+      <Project>{848616a9-3d2f-42b1-b474-be506e8019e4}</Project>
+      <Name>AppLib.MVVM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\applib\AppLib.WPF\AppLib.WPF.csproj">
+      <Project>{faf19388-a6c0-46f9-a588-a46db392ace4}</Project>
+      <Name>AppLib.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Thingy.API\Thingy.API.csproj">
+      <Project>{BF3B99F7-722C-40C2-A0FE-7C3F8F1B6B01}</Project>
+      <Name>Thingy.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Thingy.Db\Thingy.Db.csproj">
+      <Project>{2d7e8d87-74ac-402a-8e11-bdacc7b3839b}</Project>
+      <Name>Thingy.Db</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Thingy.XAML\Thingy.XAML.csproj">
+      <Project>{a8fbd1d1-eb45-42d5-85b8-d07c2a992e69}</Project>
+      <Name>Thingy.XAML</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

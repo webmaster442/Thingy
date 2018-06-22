@@ -1,20 +1,24 @@
-﻿using System;
-using AppLib.MVVM;
+﻿using AppLib.MVVM;
+using Thingy.Db;
 using Thingy.FileBrowser.Controls;
 
 namespace Thingy.FileBrowser.ViewModels
 {
     internal class FileBrowserViewModel: ViewModel
     {
+
         private string _currentFolder;
         private bool _hiddenvisible;
 
         public DelegateCommand<string> NavigateCommand { get; }
 
-        public FileBrowserViewModel()
+        public ToolbarViewModel Toolbar { get; }
+
+        public FileBrowserViewModel(IDataBase db)
         {
             NavigateCommand = Command.CreateCommand<string>(Navigate);
             CurrentFolder = FileListView.HomePath;
+            Toolbar = new ToolbarViewModel(db);
         }
 
         public string CurrentFolder
