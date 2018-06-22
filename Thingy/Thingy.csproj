@@ -134,6 +134,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="FileBrowser\Controls\BreadcumbBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FileBrowser\FileBrowserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -198,7 +202,9 @@
     <Compile Include="Controls\Statusbar\WindowsInternals.xaml.cs">
       <DependentUpon>WindowsInternals.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FileBrowser\Controls\BreadcumbBar.cs" />
+    <Compile Include="FileBrowser\Controls\BreadcumbBar.xaml.cs">
+      <DependentUpon>BreadcumbBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FileBrowser\Controls\DirectoryTree.cs" />
     <Compile Include="FileBrowser\Controls\FileListView.cs" />
     <Compile Include="FileBrowser\Controls\IFileSystemControl.cs" />

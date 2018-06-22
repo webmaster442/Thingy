@@ -5,21 +5,24 @@ using System.Windows.Controls;
 
 namespace Thingy.FileBrowser.Controls
 {
-    internal class BreadcumbBar: StackPanel, IFileSystemControl
+    /// <summary>
+    /// Interaction logic for BreadcumbBar.xaml
+    /// </summary>
+    public partial class BreadcumbBar : UserControl, IFileSystemControl
     {
-        static BreadcumbBar()
-        {
-            SelectedPathProperty = DependencyProperty.Register("SelectedPath", 
-                                                                typeof(string), 
-                                                                typeof(BreadcumbBar), 
-                                                                new FrameworkPropertyMetadata("", 
-                                                                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, 
-                                                                SelectedPathChanged));
-        }
-
         public BreadcumbBar()
         {
-            Orientation = Orientation.Horizontal;
+            InitializeComponent();
+        }
+
+        static BreadcumbBar()
+        {
+            SelectedPathProperty = DependencyProperty.Register("SelectedPath",
+                                                                typeof(string),
+                                                                typeof(BreadcumbBar),
+                                                                new FrameworkPropertyMetadata("",
+                                                                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
+                                                                SelectedPathChanged));
         }
 
         public string SelectedPath
@@ -38,7 +41,7 @@ namespace Thingy.FileBrowser.Controls
         private static void SelectedPathChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             BreadcumbBar sender = d as BreadcumbBar;
-            sender.Children.Clear();
+            sender.BreadCumbs.Children.Clear();
             sender.Render();
         }
 
@@ -57,11 +60,11 @@ namespace Thingy.FileBrowser.Controls
                     b.ToolTip = BuildPathString(parts, i);
                     b.Content = parts[i];
                     b.Click += B_Click;
-                    Children.Add(b);
+                    BreadCumbs.Children.Add(b);
 
                     TextBlock div = new TextBlock();
                     div.Text = @"\";
-                    Children.Add(div);
+                    BreadCumbs.Children.Add(div);
                 }
             }
             catch (Exception ex)
@@ -73,7 +76,7 @@ namespace Thingy.FileBrowser.Controls
         private object BuildPathString(string[] parts, int i)
         {
             StringBuilder sb = new StringBuilder();
-            for (int j=0; j<=i; j++)
+            for (int j = 0; j <= i; j++)
             {
                 sb.AppendFormat("{0}\\", parts[j]);
             }

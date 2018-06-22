@@ -27,8 +27,10 @@ namespace Thingy.FileBrowser.Controls
                                                                   typeof(DirectoryTree),
                                                                   new FrameworkPropertyMetadata(false,
                                                                   FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
-                                                                  Render));
+                                                                  HiddenChanged));
         }
+
+
 
         public DirectoryTree()
         {
@@ -62,22 +64,38 @@ namespace Thingy.FileBrowser.Controls
 
         public event EventHandler<string> OnNavigationException;
 
+        private static void HiddenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            DirectoryTree sender = d as DirectoryTree;
+            if (sender._lock) return;
+            sender.Render(true);
+        }
+
         private static void Render(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             DirectoryTree sender = d as DirectoryTree;
             if (sender._lock) return;
+            sender.Render();
+        }
 
-            var parts = sender.SelectedPath.Split('\\', '/');
+        private void Render(bool HiddenHasChanged = false)
+        {
+            var parts = SelectedPath.Split('\\', '/');
 
-            if (sender.SelectedPath != FileListView.HomePath)
+            if (SelectedPath != FileListView.HomePath)
             {
-                var root = Directory.GetDirectoryRoot(sender.SelectedPath);
-                if (root != sender._lastdriveLetter)
+                var root = Directory.GetDirectoryRoot(SelectedPath);
+                if (root != _lastdriveLetter || HiddenHasChanged)
                 {
-                    sender.RenderFolderView($"{parts[0]}\\");
-                    sender._lastdriveLetter = root;
+                    Items.Clear();
+                    RenderFolderView($"{parts[0]}\\");
+                    _lastdriveLetter = root;
                 }
-                sender.SelectNodePath(sender.SelectedPath);
+                SelectNodePath(SelectedPath);
+            }
+            else
+            {
+                Items.Clear();
             }
         }
 

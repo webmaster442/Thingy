@@ -29,9 +29,9 @@ namespace Thingy.FileBrowser.ViewModels
             set { SetValue(ref _hiddenvisible, value); }
         }
 
-        private void Navigate(string obj)
+        private void Navigate(string location)
         {
-            throw new NotImplementedException();
+            CurrentFolder = location;
         }
     }
 }

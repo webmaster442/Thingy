@@ -39,10 +39,12 @@
                 <StackPanel
                     Orientation="Horizontal">
                     <Button
+                        Margin="3"
                         Command="{Binding NavigateCommand}"
                         CommandParameter="HOME:\"
                         Content="Home" />
                     <CheckBox
+                        Margin="3"
                         Content="Show&#x0a;Hidden&#x0a;Files"
                         IsChecked="{Binding ShowHiddenFiles, Mode=TwoWay}" />
                 </StackPanel>

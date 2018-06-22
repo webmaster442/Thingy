@@ -100,22 +100,29 @@ namespace Thingy.FileBrowser.Controls
                     return;
                 }
 
+                var dir = new DirectoryInfo(path);
+
                 if (IsHiddenVisible)
                 {
                     items.AddRange(Directory.GetDirectories(path));
                     if (FilteredExtensions != null && FilteredExtensions.Any())
-                        return;
-                    else
                     {
-                        var dir = new DirectoryInfo(path);
+
                         var files = from i in dir.GetFiles()
                                     where FilteredExtensions.Contains(i.Extension)
                                     select i.FullName;
+                        items.AddRange(files);
+                    }
+                    else
+                    {
+                        var files = from i in dir.GetFiles()
+                                    select i.FullName;
+                        items.AddRange(files);
                     }
                 }
                 else
                 {
-                    var dir = new DirectoryInfo(path);
+
                     var folders = from i in dir.GetDirectories()
                                   where !i.Attributes.HasFlag(FileAttributes.Hidden)
                                   select i.FullName;

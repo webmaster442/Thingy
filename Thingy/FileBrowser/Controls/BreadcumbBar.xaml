@@ -1,0 +1,45 @@
+﻿<UserControl
+    x:Class="Thingy.FileBrowser.Controls.BreadcumbBar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="ctrl"
+    d:DesignHeight="30"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <ToggleButton
+            Margin="3"
+            x:Name="PathEditable">
+            <ToggleButton.Resources>
+                <Style
+                    BasedOn="{StaticResource {x:Type ToggleButton}}"
+                    TargetType="ToggleButton">
+                    <Style.Triggers>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter Property="Content" Value="&#x3E;&#x3E;" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Content" Value="&#x3C;&#x3C;" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ToggleButton.Resources>
+        </ToggleButton>
+        <StackPanel
+            x:Name="BreadCumbs"
+            Grid.Column="1"
+            Visibility="{Binding ElementName=PathEditable, Path=IsChecked, Converter={applib:BoolToVisibilityConverter}, ConverterParameter=true}" />
+        <TextBox
+            x:Name="Path"
+            Grid.Column="1"
+            Text="{Binding ElementName=ctrl, Path=SelectedPath, Mode=TwoWay}"
+            Visibility="{Binding ElementName=PathEditable, Path=IsChecked, Converter={applib:BoolToVisibilityConverter}}" />
+    </Grid>
+</UserControl>
