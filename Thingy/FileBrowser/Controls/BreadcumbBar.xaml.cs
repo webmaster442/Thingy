@@ -58,6 +58,7 @@ namespace Thingy.FileBrowser.Controls
 
                     Button b = new Button
                     {
+                        Style = Application.Current.TryFindResource(typeof(Button)) as Style,
                         ToolTip = BuildPathString(parts, i),
                         Content = parts[i]
                     };
