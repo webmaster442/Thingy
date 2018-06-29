@@ -2,6 +2,7 @@
 using System.Windows.Media;
 using Thingy.API;
 using Thingy.Db;
+using Thingy.Implementation;
 
 namespace Thingy.FileBrowser
 {
@@ -26,7 +27,7 @@ namespace Thingy.FileBrowser
         {
             return new FileBrowserView
             {
-                DataContext = new ViewModels.FileBrowserViewModel(App.Resolve<IDataBase>())
+                DataContext = new ViewModels.FileBrowserViewModel(App, App.Resolve<IDataBase>(), App.Resolve<IModuleLoader>())
             };
         }
     }

@@ -68,6 +68,7 @@ namespace Thingy.MusicPlayerCore.Formats
 
         public bool IsNetworkStream(string file)
         {
+            if (string.IsNullOrEmpty(file)) return false;
             var lowercase = file.ToLower();
             return lowercase.StartsWith("http://") || lowercase.StartsWith("https://") || lowercase.StartsWith("ftp://");
         }

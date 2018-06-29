@@ -213,7 +213,7 @@
       <DependentUpon>FileBrowserView.xaml</DependentUpon>
     </Compile>
     <Compile Include="FileBrowser\ViewModels\FileBrowserViewModel.cs" />
-    <Compile Include="FileBrowser\ViewModels\ToolbarViewModel.cs" />
+    <Compile Include="FileBrowser\ViewModels\ProviderViewModel.cs" />
     <Compile Include="IMainWindow.cs" />
     <Compile Include="Implementation\CommandLineParser.cs" />
     <Compile Include="Implementation\IModuleLoader.cs" />

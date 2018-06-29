@@ -89,32 +89,23 @@ namespace Thingy
 
             var msgcontent = SelectFilesSupportedByModule(files, module);
 
-            if (module.IsSingleInstance)
+            int tabIndex = TabManager.GetTabIndexByTitle(module.ModuleName);
+            if (tabIndex == -1)
             {
-                int tabIndex = TabManager.GetTabIndexByTitle(module.ModuleName);
-                if (tabIndex == -1)
-                {
-                    var id = await TabManager.StartModule(module);
-                    await Task.Delay(25);
-                    Messager.SendMessage(id, new HandleFileMessage(AppConstants.ApplicationGuid, msgcontent));
-                }
-                else
-                {
-                    TabManager.FocusTabByIndex(tabIndex);
-                    Messager.SendMessage(module.RunModule().GetType(), new HandleFileMessage(AppConstants.ApplicationGuid, msgcontent));
-                }
+                var id = await TabManager.StartModule(module, true);
+                await Task.Delay(25);
+                Messager.SendMessage(id, new HandleFileMessage(AppConstants.ApplicationGuid, msgcontent));
             }
             else
             {
-                var id = await TabManager.StartModule(module);
-                await Task.Delay(25);
-                Messager.SendMessage(id, new HandleFileMessage(AppConstants.ApplicationGuid, msgcontent));
+                TabManager.FocusTabByIndex(tabIndex);
+                Messager.SendMessage(module.RunModule().GetType(), new HandleFileMessage(AppConstants.ApplicationGuid, msgcontent));
             }
         }
 
         private IEnumerable<string> SelectFilesSupportedByModule(IEnumerable<string> files, IModule filter)
         {
-            return 
+            return
                 from file in files
                 where filter.SupportedExtensions.Contains(System.IO.Path.GetExtension(file))
                 select file;
@@ -257,7 +248,7 @@ namespace Thingy
 
         #endregion
 
-        public App(): base()
+        public App() : base()
         {
         }
 

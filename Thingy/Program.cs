@@ -36,9 +36,7 @@ namespace Thingy
         private static App SetupApplication()
         {
             var application = new App();
-
             _moduleLoader = new ModuleLoader(application);
-            _moduleLoader.Add(new FileBrowser.FileBrowserModule());
             Resolver.Register<IApplication>(() => application);
             Resolver.Register<IModuleLoader>(() => _moduleLoader);
             CommandLineParser = new CommandLineParser(application);
@@ -87,6 +85,7 @@ namespace Thingy
             if (singleInstance.IsFirstInstance)
             {
                 App application = SetupApplication();
+                _moduleLoader.Add(new FileBrowser.FileBrowserModule());
                 application.Run(application.MainWindow);
                 AppShutDown(singleInstance);
             }

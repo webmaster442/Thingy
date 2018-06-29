@@ -174,12 +174,17 @@ namespace Thingy.Implementation
 
         public void Add(IModule module)
         {
+            module.App = _app;
+            module.AppAttached();
             _modules.Add(module);
         }
 
         public void AddRange(IEnumerable<IModule> modules)
         {
-            _modules.AddRange(modules);
+            foreach (var module in modules)
+            {
+                Add(module);
+            }
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using AppLib.MVVM;
+using Thingy.API;
 using Thingy.Db;
 using Thingy.FileBrowser.Controls;
+using Thingy.Implementation;
 
 namespace Thingy.FileBrowser.ViewModels
 {
@@ -11,14 +13,18 @@ namespace Thingy.FileBrowser.ViewModels
         private bool _hiddenvisible;
 
         public DelegateCommand<string> NavigateCommand { get; }
+        public DelegateCommand<string> RunModuleCommand { get; }
+        public DelegateCommand<string> RunProgramCommand { get; }
+        public ProviderViewModel ItemProvider { get; }
 
-        public ToolbarViewModel Toolbar { get; }
-
-        public FileBrowserViewModel(IDataBase db)
+        public FileBrowserViewModel(IApplication app, IDataBase db, IModuleLoader moduleLoader)
         {
             NavigateCommand = Command.CreateCommand<string>(Navigate);
+            RunModuleCommand = Command.CreateCommand<string>(RunModule);
+            RunProgramCommand = Command.CreateCommand<string>(RunProgram);
             CurrentFolder = FileListView.HomePath;
-            Toolbar = new ToolbarViewModel(db);
+            ItemProvider = new ProviderViewModel(app, db, moduleLoader);
+            CurrentFolder = @"HOME:\";
         }
 
         public string CurrentFolder
@@ -36,6 +42,16 @@ namespace Thingy.FileBrowser.ViewModels
         private void Navigate(string location)
         {
             CurrentFolder = location;
+        }
+
+        private void RunProgram(string obj)
+        {
+            ItemProvider.StartProgram(obj);
+        }
+
+        private void RunModule(string obj)
+        {
+            ItemProvider.StartModule(obj);
         }
     }
 }

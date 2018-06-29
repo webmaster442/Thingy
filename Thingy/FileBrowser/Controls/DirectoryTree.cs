@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -80,10 +81,11 @@ namespace Thingy.FileBrowser.Controls
 
         private void Render(bool HiddenHasChanged = false)
         {
-            var parts = SelectedPath.Split('\\', '/');
+            if (string.IsNullOrEmpty(SelectedPath)) return;
 
             if (SelectedPath != FileListView.HomePath)
             {
+                var parts = SelectedPath.Split('\\', '/');
                 var root = Directory.GetDirectoryRoot(SelectedPath);
                 if (root != _lastdriveLetter || HiddenHasChanged)
                 {

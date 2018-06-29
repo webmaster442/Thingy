@@ -61,7 +61,7 @@ namespace Thingy.Implementation
             MainWindow.SetCurrentTabContent(Title, control, false);
         }
 
-        public async Task<Guid> StartModule(IModule module)
+        public async Task<Guid> StartModule(IModule module, bool newTab = false)
         {
             if (module == null) return Guid.Empty;
             var control = module.RunModule();
@@ -97,7 +97,10 @@ namespace Thingy.Implementation
                             var mId = Guid.NewGuid();
                             _runningModules.Add(mId, module);
                             control.Tag = mId;
-                            SetCurrentTabContent(module.ModuleName, control);
+                            if (newTab)
+                                CreateNewTabContent(module.ModuleName, control);
+                            else
+                                SetCurrentTabContent(module.ModuleName, control);
                             return mId;
                         }
                     }
@@ -106,7 +109,10 @@ namespace Thingy.Implementation
                         var mId = Guid.NewGuid();
                         _runningModules.Add(mId, module);
                         control.Tag = mId;
-                        SetCurrentTabContent(module.ModuleName, control);
+                        if (newTab)
+                            CreateNewTabContent(module.ModuleName, control);
+                        else
+                            SetCurrentTabContent(module.ModuleName, control);
                         return mId;
                     }
                 }
