@@ -1,15 +1,16 @@
-﻿namespace Thingy.Db
+﻿using Thingy.Db.Entity;
+
+namespace Thingy.Db
 {
     public interface IDataBase
     {
         ITodo Todo { get; }
-        IFavoriteFolders FavoriteFolders { get; }
-        IVirtualFolders VirtualFolders { get; }
+        IEntityTable<string, FolderLink> FavoriteFolders { get; }
+        IEntityTable<string, VirtualFolder> VirtualFolders { get; }
         IPrograms Programs { get; }
-        INotes Notes { get; }
-        IAlarms Alarms { get; }
+        IEntityTable<string, Note> Notes { get; }
         IStoredFiles StoredFiles { get; }
         IMediaLibary MediaLibary { get; }
-        IPodcasts Podcasts { get; }
+        IEntityTable<string, PodcastUri> Podcasts { get; }
     }
 }

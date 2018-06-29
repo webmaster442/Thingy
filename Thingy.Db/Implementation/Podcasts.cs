@@ -1,32 +1,26 @@
 ﻿using LiteDB;
-using System.Collections.Generic;
 using System.Linq;
 using Thingy.Db.Entity;
 
 namespace Thingy.Db.Implementation
 {
-    internal class Podcasts: ImplementationBase<PodcastUri>, IPodcasts
+    internal class Podcasts: ImplementationBase<PodcastUri>, IEntityTable<string, PodcastUri>
     {
         public Podcasts(LiteCollection<PodcastUri> collection) : base(collection)
         {
         }
 
-        public void DeleteAll()
-        {
-            EntityCollection.Delete(x => x.Name != null);
-        }
-
-        public void DeletePodcast(string name)
+        public void Delete(string name)
         {
             EntityCollection.Delete(n => n.Name == name);
         }
 
-        public IEnumerable<PodcastUri> GetPodcasts()
+        public PodcastUri GetByKey(string key)
         {
-            return EntityCollection.FindAll();
+            return EntityCollection.Find(item => item.Name == key).FirstOrDefault();
         }
 
-        public void SavePodcast(PodcastUri uri)
+        public void Save(PodcastUri uri)
         {
             var existing = EntityCollection.Find(f => f.Name == uri.Name).FirstOrDefault();
             if (existing != null)
@@ -38,11 +32,6 @@ namespace Thingy.Db.Implementation
             {
                 EntityCollection.Insert(uri);
             }
-        }
-
-        public void SavePodcasts(IEnumerable<PodcastUri> uris)
-        {
-            EntityCollection.InsertBulk(uris);
         }
     }
 }

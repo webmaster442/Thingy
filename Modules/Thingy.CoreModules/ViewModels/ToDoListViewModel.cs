@@ -33,8 +33,8 @@ namespace Thingy.CoreModules.ViewModels
             Pending = new TrulyObservableCollection<ToDoItem>();
             Pending.ItemChanged += Pending_ItemChanged;
             Completed = new TrulyObservableCollection<ToDoItem>();
-            Pending.AddRange(_db.Todo.GetUncompletedTasks());
-            Completed.AddRange(_db.Todo.GetCompletededTasks());
+            Pending.AddRange(_db.Todo.GetUncompleted());
+            Completed.AddRange(_db.Todo.GetCompleteded());
             AddNewItemCommand = Command.CreateCommand(AddNewItem);
             DeleteItemCommand = Command.CreateCommand<int>(DeleteItem, CanDelete);
             DeleteCompletedItemsCommand = Command.CreateCommand(DeleteCompletedItems);
@@ -44,14 +44,14 @@ namespace Thingy.CoreModules.ViewModels
         {
             var item = e.ChangedItem;
             _db.Todo.UpdateToDoItem(item);
-            Pending.UpdateCollection(_db.Todo.GetUncompletedTasks());
-            Completed.UpdateCollection(_db.Todo.GetCompletededTasks());
+            Pending.UpdateCollection(_db.Todo.GetUncompleted());
+            Completed.UpdateCollection(_db.Todo.GetCompleteded());
         }
 
         private void DeleteItem(int obj)
         {
             var item = Pending[obj];
-            _db.Todo.DeleteToDoItem(item);
+            _db.Todo.Delete(item);
             Pending.RemoveAt(obj);
         }
 
@@ -68,7 +68,7 @@ namespace Thingy.CoreModules.ViewModels
             if (result)
             {
                 Pending.Add(item);
-                _db.Todo.SaveToDoItem(item);
+                _db.Todo.Save(item);
 
             }
         }
@@ -79,8 +79,8 @@ namespace Thingy.CoreModules.ViewModels
             if (result)
             {
                 _db.Todo.DeleteCompletedToDoItems();
-                Pending.UpdateCollection(_db.Todo.GetUncompletedTasks());
-                Completed.UpdateCollection(_db.Todo.GetCompletededTasks());
+                Pending.UpdateCollection(_db.Todo.GetUncompleted());
+                Completed.UpdateCollection(_db.Todo.GetCompleteded());
             }
         }
 
@@ -90,18 +90,18 @@ namespace Thingy.CoreModules.ViewModels
             {
                 var import = EntitySerializer.Deserialize<ToDoItem[]>(xmlData);
                 if (append)
-                    _db.Todo.SaveToDoItems(import);
+                    _db.Todo.Save(import);
                 else
                 {
                     _db.Todo.DeleteAll();
-                    _db.Todo.SaveToDoItems(import);
+                    _db.Todo.Save(import);
                 }
                 _application.CurrentDispatcher.Invoke(() =>
                 {
                     Pending.Clear();
-                    Pending.AddRange(_db.Todo.GetUncompletedTasks());
+                    Pending.AddRange(_db.Todo.GetUncompleted());
                     Completed.Clear();
-                    Completed.AddRange(_db.Todo.GetCompletededTasks());
+                    Completed.AddRange(_db.Todo.GetCompleteded());
                 });
             });
         }
@@ -110,7 +110,7 @@ namespace Thingy.CoreModules.ViewModels
         {
             return Task.Run(() =>
             {
-                EntitySerializer.Serialize(xmlData, _db.Todo.GetAllTasks().ToArray());
+                EntitySerializer.Serialize(xmlData, _db.Todo.GetAll().ToArray());
             });
         }
     }

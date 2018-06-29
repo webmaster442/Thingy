@@ -1,5 +1,4 @@
 ﻿using LiteDB;
-using System.Collections.Generic;
 using System.Linq;
 using Thingy.Db.Entity;
 
@@ -11,17 +10,12 @@ namespace Thingy.Db.Implementation
         {
         }
 
-        public IEnumerable<LauncherProgram> GetPrograms()
-        {
-            return EntityCollection.FindAll();
-        }
-
-        public void SaveLauncherProgram(LauncherProgram program)
+        public void Save(LauncherProgram program)
         {
             EntityCollection.Insert(program);
         }
 
-        public void DeleteLauncherProgram(string name)
+        public void Delete(string name)
         {
             EntityCollection.Delete(p => p.Name == name);
         }
@@ -36,14 +30,9 @@ namespace Thingy.Db.Implementation
             }
         }
 
-        public void SaveLauncherPrograms(IEnumerable<LauncherProgram> programs)
+        public LauncherProgram GetByKey(string key)
         {
-            EntityCollection.InsertBulk(programs);
-        }
-
-        public void DeleteAll()
-        {
-            EntityCollection.Delete(program => program.Name != null);
+            return EntityCollection.Find(item => item.Name == key).FirstOrDefault();
         }
     }
 }

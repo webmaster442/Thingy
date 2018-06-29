@@ -45,7 +45,7 @@ namespace Thingy.CoreModules.ViewModels
             Folders = new ObservableCollection<VirtualFolder>();
             CurrentFolder = new ObservableCollection<string>();
             CurrentFolder.CollectionChanged += CurrentFolder_CollectionChanged;
-            Folders.UpdateWith(_db.VirtualFolders.GetVirtualFolders());
+            Folders.UpdateWith(_db.VirtualFolders.GetAll());
 
             NewFolderCommand = Command.CreateCommand(NewFolder);
             DeleteFolderCommand = Command.CreateCommand<VirtualFolder>(DeleteFolder, CanDeleteFolder);
@@ -100,7 +100,7 @@ namespace Thingy.CoreModules.ViewModels
             {
                 loadedfolder.Files.Clear();
                 loadedfolder.Files.AddRange(CurrentFolder);
-                _db.VirtualFolders.SaveVirtualFolder(loadedfolder);
+                _db.VirtualFolders.Save(loadedfolder);
             }
         }
 
@@ -110,8 +110,8 @@ namespace Thingy.CoreModules.ViewModels
             var result = await _app.ShowDialog("New Virtual Folder", new CoreModules.Dialogs.NewVirtualFolder(), DialogButtons.OkCancel, true, modell);
             if (result)
             {
-                _db.VirtualFolders.SaveVirtualFolder(modell);
-                Folders.UpdateWith(_db.VirtualFolders.GetVirtualFolders());
+                _db.VirtualFolders.Save(modell);
+                Folders.UpdateWith(_db.VirtualFolders.GetAll());
             }
         }
 
@@ -146,7 +146,7 @@ namespace Thingy.CoreModules.ViewModels
             var q = MessageBox.Show("Delete virtual folder?", "Virtual Folder delete", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (q == MessageBoxResult.Yes)
             {
-                _db.VirtualFolders.DeleteVirtualFolder(obj.Name);
+                _db.VirtualFolders.Delete(obj.Name);
             }
         }
 
@@ -215,13 +215,13 @@ namespace Thingy.CoreModules.ViewModels
             {
                 var import = EntitySerializer.Deserialize<VirtualFolder[]>(xmlData);
                 if (append)
-                    _db.VirtualFolders.SaveVirtualFolders(import);
+                    _db.VirtualFolders.Save(import);
                 else
                 {
                     _db.VirtualFolders.DeleteAll();
-                    _db.VirtualFolders.SaveVirtualFolders(import);
+                    _db.VirtualFolders.Save(import);
                 }
-                _app.CurrentDispatcher.Invoke(() => Folders.UpdateWith(_db.VirtualFolders.GetVirtualFolders()));
+                _app.CurrentDispatcher.Invoke(() => Folders.UpdateWith(_db.VirtualFolders.GetAll()));
             });
         }
 

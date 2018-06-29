@@ -14,21 +14,19 @@ namespace Thingy.Db
 
         public ITodo Todo { get; private set; }
 
-        public IFavoriteFolders FavoriteFolders { get; private set; }
+        public IEntityTable<string, FolderLink> FavoriteFolders { get; private set; }
 
-        public IVirtualFolders VirtualFolders { get; private set; }
+        public IEntityTable<string, VirtualFolder> VirtualFolders { get; private set; }
 
         public IPrograms Programs { get; private set; }
 
-        public INotes Notes { get; private set; }
-
-        public IAlarms Alarms { get; private set; }
+        public IEntityTable<string, Note> Notes { get; private set; }
 
         public IStoredFiles StoredFiles { get; private set; }
 
         public IMediaLibary MediaLibary { get; private set; }
 
-        public IPodcasts Podcasts { get; private set; }
+        public IEntityTable<string, PodcastUri> Podcasts { get; private set; }
 
         public DataBase(string file)
         {
@@ -52,7 +50,6 @@ namespace Thingy.Db
 
             Notes = new Implementation.Notes(_db.GetCollection<Note>(CollectionNames.Notes));
 
-            Alarms = new Implementation.Alarms(_db.GetCollection<Alarm>(CollectionNames.Alarms));
             StoredFiles = new Implementation.StoredFiles(_db);
 
             MediaLibary = new Implementation.MediaLibary(_db.GetCollection<Song>(CollectionNames.Songs), 

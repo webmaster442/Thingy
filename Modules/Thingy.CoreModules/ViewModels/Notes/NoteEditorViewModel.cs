@@ -125,11 +125,11 @@ namespace Thingy.CoreModules.ViewModels.Notes
             {
                 var import = EntitySerializer.Deserialize<Note[]>(xmlData);
                 if (append)
-                    _db.Notes.SaveNotes(import);
+                    _db.Notes.Save(import);
                 else
                 {
                     _db.Notes.DeleteAll();
-                    _db.Notes.SaveNotes(import);
+                    _db.Notes.Save(import);
                 }
             });
         }
@@ -138,7 +138,7 @@ namespace Thingy.CoreModules.ViewModels.Notes
         {
             return Task.Run(() =>
             {
-                EntitySerializer.Serialize(xmlData, _db.Notes.GetNotes().ToArray());
+                EntitySerializer.Serialize(xmlData, _db.Notes.GetAll().ToArray());
             });
         }
 

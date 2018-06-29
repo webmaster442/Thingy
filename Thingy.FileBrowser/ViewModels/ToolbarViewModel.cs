@@ -10,7 +10,7 @@ namespace Thingy.FileBrowser.ViewModels
 
         public ToolbarViewModel(IDataBase db)
         {
-            var programs = db.Programs.GetPrograms().Select(p => p.Name);
+            var programs = db.Programs.GetAll().Select(p => p.Name);
             ProgramNames = new ObservableCollection<string>(programs);
         }
     }

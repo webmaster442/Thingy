@@ -5,18 +5,13 @@ using Thingy.Db.Entity;
 
 namespace Thingy.Db.Implementation
 {
-    internal class VirtualFolders : ImplementationBase<VirtualFolder>, IVirtualFolders
+    internal class VirtualFolders : ImplementationBase<VirtualFolder>, IEntityTable<string, VirtualFolder>
     {
         public VirtualFolders(LiteCollection<VirtualFolder> collection) : base(collection)
         {
         }
 
-        public IEnumerable<VirtualFolder> GetVirtualFolders()
-        {
-            return EntityCollection.FindAll();
-        }
-
-        public void SaveVirtualFolder(VirtualFolder folder)
+        public void Save(VirtualFolder folder)
         {
             var existing = EntityCollection.Find(f => f.Name == folder.Name).FirstOrDefault();
             if (existing != null)
@@ -31,19 +26,14 @@ namespace Thingy.Db.Implementation
             }
         }
 
-        public void DeleteVirtualFolder(string folderName)
+        public void Delete(string folderName)
         {
             EntityCollection.Delete(f => f.Name == folderName);
         }
 
-        public void SaveVirtualFolders(IEnumerable<VirtualFolder> folders)
+        public VirtualFolder GetByKey(string key)
         {
-            EntityCollection.InsertBulk(folders);
-        }
-
-        public void DeleteAll()
-        {
-            EntityCollection.Delete(item => true);
+            return EntityCollection.Find(item => item.Name == key).FirstOrDefault();
         }
     }
 }

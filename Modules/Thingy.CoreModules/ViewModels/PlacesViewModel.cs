@@ -57,10 +57,10 @@ namespace Thingy.CoreModules.ViewModels
         private void ApplyFiltering()
         {
             if (string.IsNullOrEmpty(_filter))
-                Folders.UpdateWith(_db.FavoriteFolders.GetFavoriteFolders());
+                Folders.UpdateWith(_db.FavoriteFolders.GetAll());
             else
             {
-                var match = from frolder in _db.FavoriteFolders.GetFavoriteFolders()
+                var match = from frolder in _db.FavoriteFolders.GetAll()
                             where 
                             frolder.Name.Contains(_filter, StringComparison.InvariantCultureIgnoreCase)
                             select frolder;
@@ -85,7 +85,7 @@ namespace Thingy.CoreModules.ViewModels
             var result = await _app.ShowDialog("New Folder Link", dialog, DialogButtons.OkCancel, true, item);
             if (result)
             {
-                _db.FavoriteFolders.SaveFavoriteFolder(item);
+                _db.FavoriteFolders.Save(item);
                 ApplyFiltering();
             }
         }
@@ -95,7 +95,7 @@ namespace Thingy.CoreModules.ViewModels
             var q = MessageBox.Show("Delete link?", "Link delete", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (q == MessageBoxResult.Yes)
             {
-                _db.FavoriteFolders.DeleteFavoriteFolder(obj);
+                _db.FavoriteFolders.Delete(obj);
                 ApplyFiltering();
             }
         }
@@ -106,13 +106,13 @@ namespace Thingy.CoreModules.ViewModels
             {
                 var import = EntitySerializer.Deserialize<FolderLink[]>(xmlData);
                 if (append)
-                    _db.FavoriteFolders.SaveFavoriteFolders(import);
+                    _db.FavoriteFolders.Save(import);
                 else
                 {
                     _db.FavoriteFolders.DeleteAll();
-                    _db.FavoriteFolders.SaveFavoriteFolders(import);
+                    _db.FavoriteFolders.Save(import);
                 }
-                _app.CurrentDispatcher.Invoke(() => Folders.UpdateWith(_db.FavoriteFolders.GetFavoriteFolders()));
+                _app.CurrentDispatcher.Invoke(() => Folders.UpdateWith(_db.FavoriteFolders.GetAll()));
             });
         }
 
