@@ -1,4 +1,6 @@
-﻿namespace Thingy.Db
+﻿using Thingy.Db.Entity;
+
+namespace Thingy.Db
 {
     public interface IDataBase
     {
@@ -6,7 +8,7 @@
         IFavoriteFolders FavoriteFolders { get; }
         IVirtualFolders VirtualFolders { get; }
         IPrograms Programs { get; }
-        INotes Notes { get; }
+        IEntityTable<string, Note> Notes { get; }
         IAlarms Alarms { get; }
         IStoredFiles StoredFiles { get; }
         IMediaLibary MediaLibary { get; }

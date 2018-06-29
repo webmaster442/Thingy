@@ -20,7 +20,7 @@ namespace Thingy.Db
 
         public IPrograms Programs { get; private set; }
 
-        public INotes Notes { get; private set; }
+        public IEntityTable<string, Note> Notes { get; private set; }
 
         public IAlarms Alarms { get; private set; }
 

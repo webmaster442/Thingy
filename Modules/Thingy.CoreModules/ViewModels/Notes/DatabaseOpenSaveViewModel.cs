@@ -27,7 +27,7 @@ namespace Thingy.CoreModules.ViewModels.Notes
         {
             _app = app;
             _db = db;
-            Notes = new ObservableCollection<Note>(_db.Notes.GetNotes());
+            Notes = new ObservableCollection<Note>(_db.Notes.GetAll());
             NewNoteCommand = Command.CreateCommand(NewNote);
             DeleteCommand = Command.CreateCommand<Note>(Delete, CanDeleteExport);
             ExportCommand = Command.CreateCommand<Note>(Export, CanDeleteExport);
@@ -47,8 +47,8 @@ namespace Thingy.CoreModules.ViewModels.Notes
                         Name = Path.GetFileNameWithoutExtension(ofd.FileName),
                         Content = file.ReadToEnd()
                     };
-                    _db.Notes.SaveNote(n);
-                    Notes.UpdateWith(_db.Notes.GetNotes());
+                    _db.Notes.Save(n);
+                    Notes.UpdateWith(_db.Notes.GetAll());
                 }
             }
         }
@@ -69,8 +69,8 @@ namespace Thingy.CoreModules.ViewModels.Notes
 
         private void Delete(Note obj)
         {
-            _db.Notes.DeleteNote(obj.Name);
-            Notes.UpdateWith(_db.Notes.GetNotes());
+            _db.Notes.Delete(obj.Name);
+            Notes.UpdateWith(_db.Notes.GetAll());
         }
 
         private bool CanDeleteExport(Note obj)
@@ -84,8 +84,8 @@ namespace Thingy.CoreModules.ViewModels.Notes
             var result = await _app.ShowDialog("New Note", new Views.Notes.NewNote(), DialogButtons.OkCancel, true, model);
             if (result)
             {
-                _db.Notes.SaveNote(model);
-                Notes.UpdateWith(_db.Notes.GetNotes());
+                _db.Notes.Save(model);
+                Notes.UpdateWith(_db.Notes.GetAll());
             }
         }
 
@@ -94,7 +94,7 @@ namespace Thingy.CoreModules.ViewModels.Notes
             if (SeletedNote != null)
             {
                 SeletedNote.Content = content;
-                _db.Notes.SaveNote(SeletedNote);
+                _db.Notes.Save(SeletedNote);
             }
         }
 

@@ -5,18 +5,13 @@ using Thingy.Db.Entity;
 
 namespace Thingy.Db.Implementation
 {
-    internal class Notes : ImplementationBase<Note>, INotes
+    internal class Notes : ImplementationBase<Note>, IEntityTable<string, Note>
     {
         public Notes(LiteCollection<Note> collection) : base(collection)
         {
         }
 
-        public IEnumerable<Note> GetNotes()
-        {
-            return EntityCollection.FindAll();
-        }
-
-        public void SaveNote(Note note)
+        public void Save(Note note)
         {
             var existing = EntityCollection.Find(f => f.Name == note.Name).FirstOrDefault();
             if (existing != null)
@@ -30,12 +25,12 @@ namespace Thingy.Db.Implementation
             }
         }
 
-        public void DeleteNote(string noteName)
+        public void Delete(string noteName)
         {
             EntityCollection.Delete(n => n.Name == noteName);
         }
 
-        public void SaveNotes(IEnumerable<Note> notes)
+        public void Save(IEnumerable<Note> notes)
         {
             EntityCollection.InsertBulk(notes);
         }
@@ -43,6 +38,16 @@ namespace Thingy.Db.Implementation
         public void DeleteAll()
         {
             EntityCollection.Delete(x => x.Name != null);
+        }
+
+        public IEnumerable<Note> GetAll()
+        {
+            return EntityCollection.FindAll();
+        }
+
+        public Note GetByKey(string key)
+        {
+            return EntityCollection.Find(n => n.Name == key).FirstOrDefault();
         }
     }
 }
