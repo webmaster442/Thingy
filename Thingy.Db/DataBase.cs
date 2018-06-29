@@ -16,7 +16,7 @@ namespace Thingy.Db
 
         public IFavoriteFolders FavoriteFolders { get; private set; }
 
-        public IVirtualFolders VirtualFolders { get; private set; }
+        public IEntityTable<string, VirtualFolder> VirtualFolders { get; private set; }
 
         public IPrograms Programs { get; private set; }
 

@@ -6,7 +6,7 @@ namespace Thingy.Db
     {
         ITodo Todo { get; }
         IFavoriteFolders FavoriteFolders { get; }
-        IVirtualFolders VirtualFolders { get; }
+        IEntityTable<string, VirtualFolder> VirtualFolders { get; }
         IPrograms Programs { get; }
         IEntityTable<string, Note> Notes { get; }
         IAlarms Alarms { get; }

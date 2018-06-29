@@ -87,7 +87,6 @@
     <Compile Include="Interfaces\IPrograms.cs" />
     <Compile Include="Interfaces\IStoredFiles.cs" />
     <Compile Include="Interfaces\ITodo.cs" />
-    <Compile Include="Interfaces\IVirtualFolders.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
