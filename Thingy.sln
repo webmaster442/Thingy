@@ -69,8 +69,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E26407E7
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorCore.Tests", "Tests\CalculatorCore.Tests\CalculatorCore.Tests.csproj", "{7AE977DC-E1DF-42BF-BD75-23EC6ADE0198}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thingy.FileBrowser", "Thingy.FileBrowser\Thingy.FileBrowser.csproj", "{F74F7D50-530D-49A6-837A-66DE74AC7DFE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -157,10 +155,6 @@ Global
 		{7AE977DC-E1DF-42BF-BD75-23EC6ADE0198}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AE977DC-E1DF-42BF-BD75-23EC6ADE0198}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AE977DC-E1DF-42BF-BD75-23EC6ADE0198}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F74F7D50-530D-49A6-837A-66DE74AC7DFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F74F7D50-530D-49A6-837A-66DE74AC7DFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F74F7D50-530D-49A6-837A-66DE74AC7DFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F74F7D50-530D-49A6-837A-66DE74AC7DFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
