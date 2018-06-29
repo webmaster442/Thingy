@@ -61,7 +61,7 @@ namespace Thingy.MusicPlayer.ViewModels
             _db = db;
             _extensions = new ExtensionProvider();
             DownloadDir = _app.Settings.Get("PodcastDownloadDir", @"c:\podcasts");
-            Podcasts = new ObservableCollection<PodcastUri>(_db.Podcasts.GetPodcasts());
+            Podcasts = new ObservableCollection<PodcastUri>(_db.Podcasts.GetAll());
             Feed = new ObservableCollection<PodcastFeedItem>();
             DownloadAndParseFeedCommand = Command.CreateCommand<int>(DownloadAndParseFeed);
             AddFeedCommand = Command.CreateCommand(AddFeed);
@@ -144,12 +144,12 @@ namespace Thingy.MusicPlayer.ViewModels
                 try
                 {
                     var feed = await DownloadFeed(dialog.Url);
-                    _db.Podcasts.SavePodcast(new PodcastUri
+                    _db.Podcasts.Save(new PodcastUri
                     {
                         Name = feed.Title.Text,
                         Uri = dialog.Url
                     });
-                    Podcasts.UpdateWith(_db.Podcasts.GetPodcasts());
+                    Podcasts.UpdateWith(_db.Podcasts.GetAll());
                     Feed.UpdateWith(ParseFeed(feed));
                 }
                 catch (Exception ex)
@@ -193,8 +193,8 @@ namespace Thingy.MusicPlayer.ViewModels
         private void RemoveFeed(int obj)
         {
             var seledted = Podcasts[obj];
-            _db.Podcasts.DeletePodcast(seledted.Name);
-            Podcasts.UpdateWith(_db.Podcasts.GetPodcasts());
+            _db.Podcasts.Delete(seledted.Name);
+            Podcasts.UpdateWith(_db.Podcasts.GetAll());
         }
 
         private bool CanRemoveFeed(int obj)

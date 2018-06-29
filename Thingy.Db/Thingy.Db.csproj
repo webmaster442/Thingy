@@ -83,7 +83,6 @@
     <Compile Include="Interfaces\IAlarms.cs" />
     <Compile Include="Interfaces\IFavoriteFolders.cs" />
     <Compile Include="Interfaces\IMediaLibary.cs" />
-    <Compile Include="Interfaces\IPodcasts.cs" />
     <Compile Include="Interfaces\IPrograms.cs" />
     <Compile Include="Interfaces\IStoredFiles.cs" />
     <Compile Include="Interfaces\ITodo.cs" />

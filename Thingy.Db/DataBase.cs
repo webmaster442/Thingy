@@ -28,7 +28,7 @@ namespace Thingy.Db
 
         public IMediaLibary MediaLibary { get; private set; }
 
-        public IPodcasts Podcasts { get; private set; }
+        public IEntityTable<string, PodcastUri> Podcasts { get; private set; }
 
         public DataBase(string file)
         {

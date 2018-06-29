@@ -12,6 +12,6 @@ namespace Thingy.Db
         IAlarms Alarms { get; }
         IStoredFiles StoredFiles { get; }
         IMediaLibary MediaLibary { get; }
-        IPodcasts Podcasts { get; }
+        IEntityTable<string, PodcastUri> Podcasts { get; }
     }
 }
