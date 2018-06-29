@@ -1,7 +1,6 @@
 ﻿using LiteDB;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 using Thingy.Db.Entity;
 
 namespace Thingy.Db.Implementation
@@ -12,35 +11,35 @@ namespace Thingy.Db.Implementation
         {
         }
 
-        public IEnumerable<ToDoItem> GetCompletededTasks()
+        public IEnumerable<ToDoItem> GetCompleteded()
         {
             return EntityCollection.Find(x => x.IsCompleted == true)
                 .OrderBy(x => x.DueDate);
 
         }
 
-        public IEnumerable<ToDoItem> GetUncompletedTasks()
+        public IEnumerable<ToDoItem> GetUncompleted()
         {
             return EntityCollection.Find(x => x.IsCompleted == false);
         }
 
-        public void SaveToDoItem(ToDoItem itemtoSave)
+        public void Save(ToDoItem itemtoSave)
         {
             EntityCollection.Insert(itemtoSave);
         }
 
-        public void DeleteToDoItem(ToDoItem toDelete)
+        public void Delete(ToDoItem toDelete)
         {
-            EntityCollection.Delete(item => item.Content == toDelete.Content);
+            EntityCollection.Delete(item => item.Name == toDelete.Name);
         }
 
         public void UpdateToDoItem(ToDoItem toUpdate)
         {
-            var u = (EntityCollection.Find(item => item.Content == toUpdate.Content)).FirstOrDefault();
+            var u = (EntityCollection.Find(item => item.Name == toUpdate.Name)).FirstOrDefault();
             if (u != null)
             {
                 u.CompletedDate = toUpdate.CompletedDate;
-                u.Content = toUpdate.Content;
+                u.Name = toUpdate.Name;
                 u.DueDate = toUpdate.DueDate;
                 u.IsCompleted = toUpdate.IsCompleted;
                 EntityCollection.Update(u);
@@ -52,19 +51,14 @@ namespace Thingy.Db.Implementation
             EntityCollection.Delete(item => item.IsCompleted == true);
         }
 
-        public IEnumerable<ToDoItem> GetAllTasks()
+        public ToDoItem GetByKey(string key)
         {
-            return EntityCollection.FindAll();
+            return EntityCollection.Find(item => item.Name == key).FirstOrDefault();
         }
 
-        public void SaveToDoItems(IEnumerable<ToDoItem> itemtoSave)
+        public void Delete(string key)
         {
-            EntityCollection.InsertBulk(itemtoSave);
-        }
-
-        public void DeleteAll()
-        {
-            EntityCollection.Delete(item => true);
+            EntityCollection.Delete(item => item.Name == key);
         }
     }
 }

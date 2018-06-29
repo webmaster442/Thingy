@@ -21,7 +21,7 @@ namespace Thingy.Db.Entity
 
         [BsonId]
         [Required]
-        public string Content
+        public string Name
         {
             get { return _content; }
             set { SetValue(ref _content, value); }
@@ -61,7 +61,7 @@ namespace Thingy.Db.Entity
         public bool Equals(ToDoItem other)
         {
             return other != null &&
-                   Content == other.Content &&
+                   Name == other.Name &&
                    IsCompleted == other.IsCompleted &&
                    EqualityComparer<DateTime?>.Default.Equals(CompletedDate, other.CompletedDate) &&
                    EqualityComparer<DateTime?>.Default.Equals(DueDate, other.DueDate);
@@ -70,7 +70,7 @@ namespace Thingy.Db.Entity
         public override int GetHashCode()
         {
             var hashCode = 1682209475;
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Content);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
             hashCode = hashCode * -1521134295 + IsCompleted.GetHashCode();
             hashCode = hashCode * -1521134295 + EqualityComparer<DateTime?>.Default.GetHashCode(CompletedDate);
             hashCode = hashCode * -1521134295 + EqualityComparer<DateTime?>.Default.GetHashCode(DueDate);
