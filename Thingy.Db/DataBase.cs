@@ -22,8 +22,6 @@ namespace Thingy.Db
 
         public IEntityTable<string, Note> Notes { get; private set; }
 
-        public IAlarms Alarms { get; private set; }
-
         public IStoredFiles StoredFiles { get; private set; }
 
         public IMediaLibary MediaLibary { get; private set; }
@@ -52,7 +50,6 @@ namespace Thingy.Db
 
             Notes = new Implementation.Notes(_db.GetCollection<Note>(CollectionNames.Notes));
 
-            Alarms = new Implementation.Alarms(_db.GetCollection<Alarm>(CollectionNames.Alarms));
             StoredFiles = new Implementation.StoredFiles(_db);
 
             MediaLibary = new Implementation.MediaLibary(_db.GetCollection<Song>(CollectionNames.Songs), 
