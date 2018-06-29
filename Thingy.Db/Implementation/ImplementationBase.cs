@@ -12,17 +12,17 @@ namespace Thingy.Db.Implementation
             EntityCollection = collection;
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public virtual IEnumerable<TEntity> GetAll()
         {
             return EntityCollection.FindAll();
         }
 
-        public void Save(IEnumerable<TEntity> entities)
+        public virtual void Save(IEnumerable<TEntity> entities)
         {
             EntityCollection.InsertBulk(entities);
         }
 
-        public void DeleteAll()
+        public virtual void DeleteAll()
         {
             EntityCollection.Delete(item => true);
         }

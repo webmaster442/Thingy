@@ -190,7 +190,7 @@ namespace Thingy.Db.Implementation
             _querydb.Insert(q);
         }
 
-        public void DeleteAll()
+        public override void DeleteAll()
         {
             _querydb.Delete(x => x.Name != null);
             EntityCollection.Delete(s => s.Filename != null);
