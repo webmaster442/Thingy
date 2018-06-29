@@ -68,10 +68,10 @@ namespace Thingy.CoreModules.ViewModels
         private void ApplyFiltering()
         {
             if (string.IsNullOrEmpty(_filter))
-                Programs.UpdateWith(_db.Programs.GetPrograms());
+                Programs.UpdateWith(_db.Programs.GetAll());
             else
             {
-                var match = from frolder in _db.Programs.GetPrograms()
+                var match = from frolder in _db.Programs.GetAll()
                             where
                             frolder.Name.Contains(_filter, StringComparison.InvariantCultureIgnoreCase)
                             select frolder;
@@ -91,7 +91,7 @@ namespace Thingy.CoreModules.ViewModels
             DeleteCommand = Command.CreateCommand<string>(Delete);
             RunCommand = Command.CreateCommand<string>(Run);
             RunSystemCommand = Command.CreateCommand<string>(RunSystem);
-            Programs.AddRange(_db.Programs.GetPrograms());
+            Programs.AddRange(_db.Programs.GetAll());
             StartMenu = new ObservableCollection<SystemProgram>(ProgramProviders.GetStartMenu());
         }
 
@@ -115,7 +115,7 @@ namespace Thingy.CoreModules.ViewModels
             var q = await _application.ShowMessageBox("Link delete", "Delete program?", DialogButtons.YesNo);
             if (q)
             {
-                _db.Programs.DeleteLauncherProgram(obj);
+                _db.Programs.Delete(obj);
                 ApplyFiltering();
             }
         }
@@ -123,7 +123,7 @@ namespace Thingy.CoreModules.ViewModels
         private async void Edit(string obj)
         {
             var dialog = new CoreModules.Dialogs.NewProgram();
-            var program = _db.Programs.GetPrograms().Where(p => p.Name == obj).FirstOrDefault();
+            var program = _db.Programs.GetAll().Where(p => p.Name == obj).FirstOrDefault();
             var oldname = string.Copy(program.Name);
             var result = await _application.ShowDialog("New Program", dialog, DialogButtons.OkCancel, true, program);
 
@@ -142,7 +142,7 @@ namespace Thingy.CoreModules.ViewModels
             var result = await _application.ShowDialog("New Program", dialog, DialogButtons.OkCancel, true, model);
             if (result)
             {
-                _db.Programs.SaveLauncherProgram(model);
+                _db.Programs.Save(model);
                 ApplyFiltering();
             }
         }
@@ -153,13 +153,13 @@ namespace Thingy.CoreModules.ViewModels
             {
                 var import = EntitySerializer.Deserialize<LauncherProgram[]>(xmlData);
                 if (append)
-                    _db.Programs.SaveLauncherPrograms(import);
+                    _db.Programs.Save(import);
                 else
                 {
                     _db.Programs.DeleteAll();
-                    _db.Programs.SaveLauncherPrograms(import);
+                    _db.Programs.Save(import);
                 }
-                _application.CurrentDispatcher.Invoke(() => Programs.UpdateWith(_db.Programs.GetPrograms()));
+                _application.CurrentDispatcher.Invoke(() => Programs.UpdateWith(_db.Programs.GetAll()));
             });
         }
 
