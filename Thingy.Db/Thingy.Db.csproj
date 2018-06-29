@@ -78,7 +78,6 @@
     <Compile Include="Implementation\ToDo.cs" />
     <Compile Include="Implementation\VirtualFolders.cs" />
     <Compile Include="initialData\RadioStations.cs" />
-    <Compile Include="Interfaces\IFavoriteFolders.cs" />
     <Compile Include="Interfaces\IMediaLibary.cs" />
     <Compile Include="Interfaces\IPrograms.cs" />
     <Compile Include="Interfaces\IStoredFiles.cs" />

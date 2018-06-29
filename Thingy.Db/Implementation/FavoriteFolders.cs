@@ -1,38 +1,28 @@
 ﻿using LiteDB;
-using System.Collections.Generic;
+using System.Linq;
 using Thingy.Db.Entity;
 
 namespace Thingy.Db.Implementation
 {
-    internal class FavoriteFolders : ImplementationBase<FolderLink>, IFavoriteFolders
+    internal class FavoriteFolders : ImplementationBase<FolderLink>, IEntityTable<string, FolderLink>
     {
         public FavoriteFolders(LiteCollection<FolderLink> collection) : base(collection)
         {
         }
 
-        public IEnumerable<FolderLink> GetFavoriteFolders()
-        {
-            return EntityCollection.FindAll();
-        }
-
-        public void SaveFavoriteFolder(FolderLink favorite)
+        public void Save(FolderLink favorite)
         {
             EntityCollection.Insert(favorite);
         }
 
-        public void DeleteFavoriteFolder(string foldername)
+        public void Delete(string foldername)
         {
             EntityCollection.Delete(folder => folder.Name == foldername);
         }
 
-        public void SaveFavoriteFolders(IEnumerable<FolderLink> favorites)
+        public FolderLink GetByKey(string key)
         {
-            EntityCollection.InsertBulk(favorites);
-        }
-
-        public void DeleteAll()
-        {
-            EntityCollection.Delete(folder => folder.Name != null);
+            return EntityCollection.Find(folder => folder.Name == key).FirstOrDefault();
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Thingy.Db
     public interface IDataBase
     {
         ITodo Todo { get; }
-        IFavoriteFolders FavoriteFolders { get; }
+        IEntityTable<string, FolderLink> FavoriteFolders { get; }
         IEntityTable<string, VirtualFolder> VirtualFolders { get; }
         IPrograms Programs { get; }
         IEntityTable<string, Note> Notes { get; }

@@ -14,7 +14,7 @@ namespace Thingy.Db
 
         public ITodo Todo { get; private set; }
 
-        public IFavoriteFolders FavoriteFolders { get; private set; }
+        public IEntityTable<string, FolderLink> FavoriteFolders { get; private set; }
 
         public IEntityTable<string, VirtualFolder> VirtualFolders { get; private set; }
 
