@@ -1,5 +1,6 @@
 ﻿using AppLib.WPF;
 using System;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Thingy.API;
@@ -26,6 +27,20 @@ namespace Thingy.Mpv.ModuleDefinitions
         public override UserControl RunModule()
         {
             return new Views.MpvView(App);
+        }
+
+        public override bool CanHadleFile(string pathOrExtension)
+        {
+            var extension = System.IO.Path.GetExtension(pathOrExtension);
+            if (MpvFormats.IsYoutubeUrl(pathOrExtension))
+            {
+                return true;
+            }
+            else if (MpvFormats.SupportedVideoFormats.Contains(extension))
+            {
+                return true;
+            }
+            return MpvFormats.SupportedAudioFormats.Contains(extension);
         }
 
         public override bool CanLoad
