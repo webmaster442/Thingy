@@ -60,5 +60,10 @@ namespace Thingy.Mpv.ModuleDefinitions
                 };
             }
         }
+
+        public override bool CanHadleFile(string pathOrExtension)
+        {
+            return MpvFormats.IsYoutubeUrl(pathOrExtension);
+        }
     }
 }
