@@ -103,11 +103,11 @@ namespace Thingy
             }
         }
 
-        private IEnumerable<string> SelectFilesSupportedByModule(IEnumerable<string> files, IModule filter)
+        private IEnumerable<string> SelectFilesSupportedByModule(IEnumerable<string> files, IModule module)
         {
             return
                 from file in files
-                where filter.SupportedExtensions.Contains(System.IO.Path.GetExtension(file))
+                where module.CanHadleFile(file)
                 select file;
         }
 

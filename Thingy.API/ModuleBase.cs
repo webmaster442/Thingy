@@ -43,16 +43,16 @@ namespace Thingy.API
             get { return false; }
         }
 
-        public virtual IEnumerable<string> SupportedExtensions
-        {
-            get { return null; }
-        }
-
         public IApplication App { get; set; }
 
         public virtual OpenParameters OpenParameters
         {
             get { return null; }
+        }
+
+        public virtual bool CanHadleFile(string pathOrExtension)
+        {
+            return false;
         }
     }
 }

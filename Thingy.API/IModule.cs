@@ -62,7 +62,7 @@ namespace Thingy.API
         /// <summary>
         /// List of supported extensions
         /// </summary>
-        IEnumerable<string> SupportedExtensions { get; }
+        bool CanHadleFile(string pathOrExtension);
         /// <summary>
         /// Callback, when App is attached.
         /// Use this instead of ctor logic.

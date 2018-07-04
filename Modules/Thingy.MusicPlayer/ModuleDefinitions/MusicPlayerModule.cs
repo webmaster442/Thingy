@@ -1,5 +1,6 @@
 ﻿using AppLib.WPF;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Thingy.API;
@@ -11,6 +12,7 @@ namespace Thingy.Modules
     public class MusicPlayerModule : ModuleBase
     {
         private static IAudioEngine _audioEngine;
+        private IExtensionProvider _provider;
 
         public override string ModuleName
         {
@@ -50,13 +52,17 @@ namespace Thingy.Modules
             }
         }
 
-        public override IEnumerable<string> SupportedExtensions
+        public override bool CanHadleFile(string pathOrExtension)
         {
-            get
-            {
-                IExtensionProvider provider = new ExtensionProvider();
-                return provider.AllSupportedFormats;
-            }
+            if (_provider == null)
+                _provider = new ExtensionProvider();
+
+            var extension = System.IO.Path.GetExtension(pathOrExtension);
+
+            if (pathOrExtension.StartsWith("http://") || pathOrExtension.StartsWith("https://"))
+                return true;
+
+            return _provider.AllSupportedFormats.Contains(extension);
         }
     }
 }

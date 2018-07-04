@@ -161,10 +161,9 @@ namespace Thingy.Implementation
 
             _app.Log.Info("Found {0} different extensions in {1} files", uniqueExtension.Count, files.Count());
 
-            var moduleList = (from extension in uniqueExtension
+            var moduleList = (from file in files
                               from module in _modules
-                              where module.SupportedExtensions != null &&
-                              module.SupportedExtensions.Contains(extension)
+                              where module.CanHadleFile(file)
                               select module).ToList();
 
             _app.Log.Info("Found {0} modules for prodived {1} extensions", moduleList.Count, uniqueExtension.Count);

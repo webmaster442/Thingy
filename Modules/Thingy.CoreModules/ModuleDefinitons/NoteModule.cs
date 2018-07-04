@@ -1,5 +1,6 @@
 ﻿using AppLib.WPF;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Thingy.API;
@@ -31,7 +32,7 @@ namespace Thingy.Modules
             return view;
         }
 
-        public override IEnumerable<string> SupportedExtensions
+        private IEnumerable<string> SupportedExtensions
         {
             get
             {
@@ -44,6 +45,12 @@ namespace Thingy.Modules
                 yield return ".html";
                 yield return ".js";
             }
+        }
+
+        public override bool CanHadleFile(string pathOrExtension)
+        {
+            var extension = System.IO.Path.GetExtension(pathOrExtension);
+            return SupportedExtensions.Contains(extension);
         }
     }
 }
