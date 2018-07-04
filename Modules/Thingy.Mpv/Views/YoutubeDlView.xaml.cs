@@ -1,24 +1,27 @@
-﻿using System;
+﻿using AppLib.MVVM.MessageHandler;
+using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Thingy.API;
 using Thingy.API.Capabilities;
+using Thingy.API.Messages;
 
 namespace Thingy.Mpv.Views
 {
     /// <summary>
     /// Interaction logic for YoutubeDlView.xaml
     /// </summary>
-    public partial class YoutubeDlView : UserControl, IHaveCloseTask
+    public partial class YoutubeDlView : UserControl, IHaveCloseTask, IMessageClient<HandleFileMessage>
     {
         private IApplication _app;
 
         public YoutubeDlView(IApplication app)
         {
-            _app = app;
             InitializeComponent();
+            Messager.Instance.SubScribe(this);
+            _app = app;
         }
 
         private void RunYoutubeDl(string dir, string args)
@@ -75,6 +78,15 @@ namespace Thingy.Mpv.Views
                 RunYoutubeDl(TbTargetFolder.Text, $"{TbArguments.Text} {TbUrl.Text}");
         }
 
+        public void HandleMessage(HandleFileMessage message)
+        {
+            if (message.Files.Count > 0)
+            {
+                var file = message.Files[0];
+                TbUrl.Text = file;
+            }
+        }
+
         public Action ClosingTask
         {
             get { return Download; }
@@ -83,6 +95,11 @@ namespace Thingy.Mpv.Views
         public bool CanExecuteAsync
         {
             get { return false; }
+        }
+
+        public Guid MessageReciverID
+        {
+            get { return Guid.Parse(Tag.ToString()); }
         }
     }
 }

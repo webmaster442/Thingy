@@ -1,23 +1,26 @@
-﻿using System;
+﻿using AppLib.MVVM.MessageHandler;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using Thingy.API;
 using Thingy.API.Capabilities;
+using Thingy.API.Messages;
 
 namespace Thingy.Mpv.Views
 {
     /// <summary>
     /// Interaction logic for MpvView.xaml
     /// </summary>
-    public partial class MpvView : UserControl, IHaveCloseTask
+    public partial class MpvView : UserControl, IHaveCloseTask, IMessageClient<HandleFileMessage>
     {
         private IApplication _app;
 
         public MpvView(IApplication app)
         {
             InitializeComponent();
+            Messager.Instance.SubScribe(this);
             _app = app;
         }
 
@@ -59,6 +62,15 @@ namespace Thingy.Mpv.Views
                 return $"{TbArguments} \"{TbFileName.Text}\"";
         }
 
+        public void HandleMessage(HandleFileMessage message)
+        {
+            if (message.Files.Count > 0)
+            {
+                var file = message.Files[0];
+                TbFileName.Text = file;
+            }
+        }
+
         public Action ClosingTask
         {
             get { return CloseJob; }
@@ -67,6 +79,11 @@ namespace Thingy.Mpv.Views
         public bool CanExecuteAsync
         {
             get { return false; }
+        }
+
+        public Guid MessageReciverID
+        {
+            get { return Guid.Parse(Tag.ToString()); }
         }
     }
 }

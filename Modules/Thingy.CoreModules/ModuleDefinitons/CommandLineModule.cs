@@ -29,5 +29,15 @@ namespace Thingy.Modules
             view.DataContext = new CoreModules.ViewModels.CommandLineViewModel(view);
             return view;
         }
+
+        public override bool CanHadleFile(string pathOrExtension)
+        {
+            return System.IO.Directory.Exists(pathOrExtension);
+        }
+
+        public override bool SupportsFolderAsArgument
+        {
+            get { return true; }
+        }
     }
 }

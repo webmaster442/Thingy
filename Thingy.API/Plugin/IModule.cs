@@ -60,9 +60,15 @@ namespace Thingy.API
         /// </summary>
         bool IsSingleInstance { get; }
         /// <summary>
-        /// List of supported extensions
+        /// Checks if module can handle file or extension provided
         /// </summary>
+        /// <param name="pathOrExtension">path to check</param>
+        /// <returns></returns>
         bool CanHadleFile(string pathOrExtension);
+        /// <summary>
+        /// Checks if moduel supports folder as argument
+        /// </summary>
+        bool SupportsFolderAsArgument { get; }
         /// <summary>
         /// Callback, when App is attached.
         /// Use this instead of ctor logic.

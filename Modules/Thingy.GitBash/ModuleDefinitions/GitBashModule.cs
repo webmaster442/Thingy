@@ -1,10 +1,6 @@
 ﻿using AppLib.WPF;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Thingy.API;
@@ -43,6 +39,16 @@ namespace Thingy.GitBash.ModuleDefinitions
                 var _gitPath = Path.Combine(pf, @"Git\git-bash.exe");
                 return File.Exists(_gitPath);
             }
+        }
+
+        public override bool CanHadleFile(string pathOrExtension)
+        {
+            return Directory.Exists(pathOrExtension);
+        }
+
+        public override bool SupportsFolderAsArgument
+        {
+            get { return true; }
         }
     }
 }

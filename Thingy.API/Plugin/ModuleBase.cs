@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Media;
 using Thingy.API.Internals;
 
@@ -48,6 +47,11 @@ namespace Thingy.API
         public virtual OpenParameters OpenParameters
         {
             get { return null; }
+        }
+
+        public virtual bool SupportsFolderAsArgument
+        {
+            get { return false; }
         }
 
         public virtual bool CanHadleFile(string pathOrExtension)
