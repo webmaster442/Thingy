@@ -326,5 +326,11 @@
   <ItemGroup>
     <Resource Include="Icons\icons8-linux-96.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SmallIcons\icons8-home-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SmallIcons\icons8-plugin-48.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

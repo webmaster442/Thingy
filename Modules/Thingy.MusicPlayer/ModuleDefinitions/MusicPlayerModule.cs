@@ -1,5 +1,4 @@
 ﻿using AppLib.WPF;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -54,6 +53,8 @@ namespace Thingy.Modules
 
         public override bool CanHadleFile(string pathOrExtension)
         {
+            if (string.IsNullOrEmpty(pathOrExtension)) return false;
+
             if (_provider == null)
                 _provider = new ExtensionProvider();
 

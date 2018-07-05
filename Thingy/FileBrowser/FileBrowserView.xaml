@@ -57,45 +57,116 @@
 
             <Menu>
                 <MenuItem
-                    Command="{Binding NavigateCommand}"
-                    CommandParameter="HOME:\"
-                    Header="Home" />
+                    Background="{StaticResource {x:Static SystemColors.ActiveCaptionBrushKey}}"
+                    Header="File explorer">
+                    <MenuItem
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="HOME:\"
+                        Header="Go Home">
+                        <MenuItem.Icon>
+                            <Image
+                                Width="24"
+                                Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-home-48.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                </MenuItem>
                 <MenuItem
                     Header="Navigate to..."
                     ItemsSource="{Binding ItemProvider.Places}">
+                    <MenuItem.ItemContainerStyle>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="Command" Value="{Binding Path=DataContext.NavigateCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+                            <Setter Property="CommandParameter" Value="{Binding}"/>
+                        </Style>
+                    </MenuItem.ItemContainerStyle>
                     <MenuItem.ItemTemplate>
                         <DataTemplate>
-                            <MenuItem
-                                Command="{Binding Path=DataContext.NavigateCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
-                                CommandParameter="{Binding}"
-                                Header="{Binding}" />
+                            <TextBlock Text="{Binding}"/>
                         </DataTemplate>
                     </MenuItem.ItemTemplate>
+                    <MenuItem.Icon>
+                        <Image
+                            Width="24"
+                            Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-folder-tree.png" />
+                    </MenuItem.Icon>
                 </MenuItem>
-                <Separator/>
+                <Separator />
                 <MenuItem
-                    Header="Open with module..."
-                    ItemsSource="{Binding ItemProvider.Modules}">
-                    <MenuItem.ItemTemplate>
-                        <DataTemplate>
-                            <MenuItem
-                                Command="{Binding Path=DataContext.RunModuleCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
-                                CommandParameter="{Binding Path=DataContext.ItemProvider.SelectedPath, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
-                                Header="{Binding}" />
-                        </DataTemplate>
-                    </MenuItem.ItemTemplate>
+                    Header="Open">
+                    <MenuItem.Icon>
+                        <Image
+                            Width="24"
+                            Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-linking-96.png" />
+                    </MenuItem.Icon>
+                    <MenuItem
+                        Header="Open with module..."
+                        ItemsSource="{Binding ItemProvider.Modules}">
+                        <MenuItem.ItemContainerStyle>
+                            <Style TargetType="MenuItem">
+                                <Setter Property="Command" Value="{Binding Path=DataContext.RunModuleCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+                                <Setter Property="CommandParameter" Value="{Binding Path=DataContext.ItemProvider.SelectedPath, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+                            </Style>
+                        </MenuItem.ItemContainerStyle>
+                        <MenuItem.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}"/>
+                            </DataTemplate>
+                        </MenuItem.ItemTemplate>
+                        <MenuItem.Icon>
+                            <Image
+                                Width="24"
+                                Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-plugin-48.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem
+                        Header="Open with program..."
+                        ItemsSource="{Binding ItemProvider.ExternalPrograms}">
+                        <MenuItem.ItemContainerStyle>
+                            <Style TargetType="MenuItem">
+                                <Setter Property="Command" Value="{Binding Path=DataContext.RunProgramCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+                                <Setter Property="CommandParameter" Value="{Binding Path=DataContext.ItemProvider.SelectedPath, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+                            </Style>
+                        </MenuItem.ItemContainerStyle>
+                        <MenuItem.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}"/>
+                            </DataTemplate>
+                        </MenuItem.ItemTemplate>
+                        <MenuItem.Icon>
+                            <Image
+                                Width="24"
+                                Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-linking-96.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
                 <MenuItem
-                    Header="Open with program..."
-                    ItemsSource="{Binding ItemProvider.ExternalPrograms}">
-                    <MenuItem.ItemTemplate>
-                        <DataTemplate>
-                            <MenuItem
-                                Command="{Binding Path=DataContext.RunProgramCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
-                                CommandParameter="{Binding Path=DataContext.ItemProvider.SelectedPath, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
-                                Header="{Binding}" />
-                        </DataTemplate>
-                    </MenuItem.ItemTemplate>
+                    Header="Folder">
+                    <MenuItem.Icon>
+                        <Image
+                            Width="24"
+                            Source="pack://application:,,,/Thingy.Resources;component/Icons/icons8-folder.png" />
+                    </MenuItem.Icon>
+                    <MenuItem
+                        Header="Start module..."
+                        ItemsSource="{Binding ItemProvider.FolderModules}">
+                        <MenuItem.ItemContainerStyle>
+                            <Style TargetType="MenuItem">
+                                <Setter Property="Command" Value="{Binding Path=DataContext.RunModuleCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+                                <Setter Property="CommandParameter" Value="{Binding Path=DataContext.ItemProvider.CurrentFolder, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+                            </Style>
+                        </MenuItem.ItemContainerStyle>
+                        <MenuItem.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}"/>
+                            </DataTemplate>
+                        </MenuItem.ItemTemplate>
+                        <MenuItem.Icon>
+                            <Image
+                                Width="24"
+                                Source="pack://application:,,,/Thingy.Resources;component/SmallIcons/icons8-plugin-48.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
             </Menu>
             <CheckBox

@@ -18,10 +18,12 @@ namespace Thingy.FileBrowser.ViewModels
         private readonly IModuleLoader _moduleLoader;
 
         private string _selected;
+        private string _currentfolder;
 
         public ObservableCollection<string> ExternalPrograms { get; }
         public ObservableCollection<string> Places { get; }
         public ObservableCollection<string> Modules { get; }
+        public ObservableCollection<string> FolderModules { get; }
 
         public ProviderViewModel(IApplication app, IDataBase db, IModuleLoader moduleLoader)
         {
@@ -31,6 +33,7 @@ namespace Thingy.FileBrowser.ViewModels
             ExternalPrograms = new ObservableCollection<string>();
             Places = new ObservableCollection<string>();
             Modules = new ObservableCollection<string>();
+            FolderModules = new ObservableCollection<string>();
             InitDbParts();
         }
 
@@ -41,6 +44,16 @@ namespace Thingy.FileBrowser.ViewModels
             {
                 SetValue(ref _selected, value);
                 GetModules(value);
+            }
+        }
+
+        public string CurrentFolder
+        {
+            get { return _currentfolder; }
+            set
+            {
+                SetValue(ref _currentfolder, value);
+                GetFolderModules(value);
             }
         }
 
@@ -57,6 +70,12 @@ namespace Thingy.FileBrowser.ViewModels
             var modules = _moduleLoader.GetModulesForFiles(new string[] { selectedPath });
             var items = modules.Select(m => m.ModuleName);
             Modules.UpdateWith(items);
+        }
+
+        private void GetFolderModules(string value)
+        {
+            var modules = _moduleLoader.GetModulesWithDirectorySupport().Select(m => m.ModuleName);
+            FolderModules.UpdateWith(modules);
         }
 
         internal void StartModule(string obj)

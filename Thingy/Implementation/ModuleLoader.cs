@@ -171,6 +171,13 @@ namespace Thingy.Implementation
             return moduleList;
         }
 
+        public IList<IModule> GetModulesWithDirectorySupport()
+        {
+            var modules = _modules.Where(m => m.SupportsFolderAsArgument == true).ToList();
+            _app.Log.Info("Found {0} modules with folder support", modules.Count);
+            return modules;
+        }
+
         public void Add(IModule module)
         {
             module.App = _app;

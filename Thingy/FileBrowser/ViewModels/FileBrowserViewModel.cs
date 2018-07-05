@@ -30,7 +30,14 @@ namespace Thingy.FileBrowser.ViewModels
         public string CurrentFolder
         {
             get { return _currentFolder; }
-            set { SetValue(ref _currentFolder, value); }
+            set
+            {
+                SetValue(ref _currentFolder, value);
+                if (ItemProvider != null)
+                {
+                    ItemProvider.CurrentFolder = value;
+                }
+            }
         }
 
         public bool ShowHiddenFiles

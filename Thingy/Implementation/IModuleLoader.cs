@@ -10,6 +10,7 @@ namespace Thingy.Implementation
         IEnumerable<IModule> GetModulesByName(string searchname);
         IDictionary<string, int> CategoryModuleCount { get; }
         IList<IModule> GetModulesForFiles(IEnumerable<string> files);
+        IList<IModule> GetModulesWithDirectorySupport();
         void Add(IModule module);
         void AddRange(IEnumerable<IModule> modules);
     }
