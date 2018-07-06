@@ -1,4 +1,5 @@
-﻿using AppLib.MVVM;
+﻿using System;
+using AppLib.MVVM;
 using Thingy.API;
 using Thingy.Db;
 using Thingy.FileBrowser.Controls;
@@ -15,12 +16,14 @@ namespace Thingy.FileBrowser.ViewModels
         public DelegateCommand<string> NavigateCommand { get; }
         public DelegateCommand<string> RunModuleCommand { get; }
         public DelegateCommand<string> RunProgramCommand { get; }
+        public DelegateCommand<string> RunModuleDirectoryCommand { get; }
         public ProviderViewModel ItemProvider { get; }
 
         public FileBrowserViewModel(IApplication app, IDataBase db, IModuleLoader moduleLoader)
         {
             NavigateCommand = Command.CreateCommand<string>(Navigate);
             RunModuleCommand = Command.CreateCommand<string>(RunModule);
+            RunModuleDirectoryCommand = Command.CreateCommand<string>(RunModuleDirectory);
             RunProgramCommand = Command.CreateCommand<string>(RunProgram);
             CurrentFolder = FileListView.HomePath;
             ItemProvider = new ProviderViewModel(app, db, moduleLoader);
@@ -58,7 +61,12 @@ namespace Thingy.FileBrowser.ViewModels
 
         private void RunModule(string obj)
         {
-            ItemProvider.StartModule(obj);
+            ItemProvider.StartModule(obj, ItemProvider.SelectedPath);
+        }
+
+        private void RunModuleDirectory(string obj)
+        {
+            ItemProvider.StartModule(obj, ItemProvider.CurrentFolder);
         }
     }
 }

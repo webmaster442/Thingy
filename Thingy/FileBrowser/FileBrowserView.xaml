@@ -105,7 +105,7 @@
                         <MenuItem.ItemContainerStyle>
                             <Style TargetType="MenuItem">
                                 <Setter Property="Command" Value="{Binding Path=DataContext.RunModuleCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
-                                <Setter Property="CommandParameter" Value="{Binding Path=DataContext.ItemProvider.SelectedPath, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+                                <Setter Property="CommandParameter" Value="{Binding}"/>
                             </Style>
                         </MenuItem.ItemContainerStyle>
                         <MenuItem.ItemTemplate>
@@ -152,8 +152,8 @@
                         ItemsSource="{Binding ItemProvider.FolderModules}">
                         <MenuItem.ItemContainerStyle>
                             <Style TargetType="MenuItem">
-                                <Setter Property="Command" Value="{Binding Path=DataContext.RunModuleCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
-                                <Setter Property="CommandParameter" Value="{Binding Path=DataContext.ItemProvider.CurrentFolder, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+                                <Setter Property="Command" Value="{Binding Path=DataContext.RunModuleDirectoryCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+                                <Setter Property="CommandParameter" Value="{Binding}"/>
                             </Style>
                         </MenuItem.ItemContainerStyle>
                         <MenuItem.ItemTemplate>

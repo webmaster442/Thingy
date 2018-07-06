@@ -68,6 +68,13 @@ namespace Thingy
             return mainwindow.ShowMetroDialogAsync(messageBoxContent);
         }
 
+        public async void HandleFiles(string preferedModuleName, IList<string> files)
+        {
+            var loader = Resolve<IModuleLoader>();
+            var module = loader.GetModuleByName(preferedModuleName);
+            await SendFilesToModule(files, module);
+        }
+
         public async void HandleFiles(IList<string> files)
         {
             var loader = Resolve<IModuleLoader>();
@@ -85,6 +92,11 @@ namespace Thingy
                 module = await SelectModule(modules);
             }
 
+            await SendFilesToModule(files, module);
+        }
+
+        private async Task SendFilesToModule(IList<string> files, IModule module)
+        {
             if (module == null) return;
 
             var msgcontent = SelectFilesSupportedByModule(files, module);

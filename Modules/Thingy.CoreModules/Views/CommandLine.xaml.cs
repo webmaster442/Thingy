@@ -40,7 +40,8 @@ namespace Thingy.CoreModules.Views
 
         public void HandleMessage(HandleFileMessage message)
         {
-            ViewModel?.SetFolderCommand?.Execute(message.Files.FirstOrDefault());
+
+            ViewModel?.SetShellFolder(message.Files.FirstOrDefault());
         }
     }
 }

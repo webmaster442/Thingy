@@ -11,7 +11,7 @@ using Thingy.Implementation;
 
 namespace Thingy.FileBrowser.ViewModels
 {
-    public class ProviderViewModel: ViewModel
+    internal class ProviderViewModel: ViewModel
     {
         private readonly IApplication _app;
         private readonly IDataBase _db;
@@ -78,9 +78,9 @@ namespace Thingy.FileBrowser.ViewModels
             FolderModules.UpdateWith(modules);
         }
 
-        internal void StartModule(string obj)
+        public void StartModule(string moduleName, string parameters)
         {
-            _app.HandleFiles(new List<string> { obj });
+            _app.HandleFiles(moduleName, new List<string> { parameters });
         }
 
         public void StartProgram(string programName)

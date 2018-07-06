@@ -34,6 +34,11 @@ namespace Thingy.CoreModules.ViewModels
             PasteCommand = Command.CreateCommand(Paste);
         }
 
+        public void SetShellFolder(string path)
+        {
+            controller.InvokeCmd("Setting path...", $"pushd \"{path}\"");
+        }
+
         private void SetFolder()
         {
             if (View != null)
@@ -41,8 +46,7 @@ namespace Thingy.CoreModules.ViewModels
                 var fb = new System.Windows.Forms.FolderBrowserDialog();
                 if (fb.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    Clipboard.SetText($"pushd \"{fb.SelectedPath}\"");
-                    View?.GetTextBox()?.Paste();
+                    SetShellFolder(fb.SelectedPath);
                 }
             }
         }

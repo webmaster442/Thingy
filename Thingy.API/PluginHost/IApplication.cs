@@ -90,6 +90,12 @@ namespace Thingy.API
         /// <param name="files">files</param>
         void HandleFiles(IList<string> files);
         /// <summary>
+        /// Handle files with prefered module
+        /// </summary>
+        /// <param name="preferedModuleName">Prefered module. If module does not exist, then handling will not succed</param>
+        /// <param name="files">files</param>
+        void HandleFiles(string preferedModuleName, IList<string> files);
+        /// <summary>
         /// Resolve a type from the IoC container
         /// </summary>
         /// <typeparam name="T">Type to resolve</typeparam>
