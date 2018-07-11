@@ -1,5 +1,6 @@
 ﻿using AppLib.MVVM.MessageHandler;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using Thingy.API.Messages;
 
@@ -13,6 +14,7 @@ namespace Thingy.GitBash.Views
         public GitBashView()
         {
             InitializeComponent();
+            Messager.Instance.SubScribe(this);
         }
 
         public bool IsAlive
@@ -31,10 +33,15 @@ namespace Thingy.GitBash.Views
             GitControl = null;
         }
 
-        public void HandleMessage(HandleFileMessage message)
+        public async void HandleMessage(HandleFileMessage message)
         {
-            var path = message.Files[0].Replace(@":", "").Replace(@"\", "/");
-            SendText($"cd /{path}");
+            if (message?.Files != null)
+            {
+                await Task.Delay(100); //wait for process to start
+                var path = message.Files[0].Replace(@":", "").Replace(@"\", "/");
+                SendText($"cd /{path}");
+                SendText($"clear");
+            }
         }
 
         public void SendText(string text)

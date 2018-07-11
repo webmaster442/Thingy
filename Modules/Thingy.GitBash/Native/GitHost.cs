@@ -58,6 +58,7 @@ namespace Thingy.GitBash.Native
             Win32.SetParent(childHwnd, parentHwnd);
             base.InvalidateVisual();
             Win32.SetFocus(childHwnd);
+            System.Windows.Application.Current.MainWindow.Activate();
         }
 
         public GitHost(string path) : base()
