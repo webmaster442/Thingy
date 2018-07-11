@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -69,8 +70,24 @@
     <Compile Include="Models\Presets\H264VideoNvidia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\CommonVersion.cs" />
+    <Compile Include="ViewModels\FFMpegGuiViewModel.cs" />
+    <Compile Include="Views\FFMpegGui.xaml.cs">
+      <DependentUpon>FFMpegGui.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\applib\AppLib.Common\AppLib.Common.csproj">
+      <Project>{516087b5-6ac5-44a5-8df1-fe42d7a7a0e6}</Project>
+      <Name>AppLib.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\applib\AppLib.MVVM\AppLib.MVVM.csproj">
+      <Project>{848616a9-3d2f-42b1-b474-be506e8019e4}</Project>
+      <Name>AppLib.MVVM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\applib\AppLib.WPF\AppLib.WPF.csproj">
+      <Project>{faf19388-a6c0-46f9-a588-a46db392ace4}</Project>
+      <Name>AppLib.WPF</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Thingy.API\Thingy.API.csproj">
       <Project>{bf3b99f7-722c-40c2-a0fe-7c3f8f1b6b01}</Project>
       <Name>Thingy.API</Name>
@@ -78,8 +95,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ModuleDefinitions\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\FileRenamer.xaml">
@@ -87,6 +102,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\PresetRenderer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\FFMpegGui.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

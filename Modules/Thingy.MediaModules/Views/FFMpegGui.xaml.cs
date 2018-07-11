@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Thingy.Views
+namespace Thingy.MediaModules.Views
 {
     /// <summary>
     /// Interaction logic for FFMpegGui.xaml

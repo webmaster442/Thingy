@@ -3,9 +3,11 @@ using AppLib.MVVM;
 using System;
 using System.Collections.ObjectModel;
 using System.Text;
-using Thingy.FFMpegGui;
+using Thingy.API;
+using Thingy.MediaModules.Controls;
+using Thingy.MediaModules.Models;
 
-namespace Thingy.ViewModels
+namespace Thingy.MediaModules.ViewModels
 {
     public class FFMpegGuiViewModel : ViewModel
     {
@@ -50,7 +52,7 @@ namespace Thingy.ViewModels
             set
             {
                 _ffmpegPath = value;
-                Properties.Settings.Default.FFMpegPath = value;
+                _app.Settings.Set("FFMpegPath", value);
             }
         }
 
@@ -66,14 +68,14 @@ namespace Thingy.ViewModels
             Presets = new PresetList();
             _app = app;
             Files = new ObservableCollection<string>();
-            FFMPegFolder = Properties.Settings.Default.FFMpegPath;
+            FFMPegFolder = _app.Settings.Get("FFMpegPath", "");
             FileTable = new ObservableCollection<Tuple<string, string>>();
-            AddFilesCommand = Command.ToCommand(AddFiles);
-            RemoveSelectedCommand = Command.ToCommand<string>(RemoveSelected, CanRemove);
-            ClearListCommand = Command.ToCommand(ClearList);
-            GenerateBachCommand = Command.ToCommand(GenerateBach);
-            SaveBachCommand = Command.ToCommand(SaveBach);
-            ExecuteBachCommand = Command.ToCommand(ExecuteBach);
+            AddFilesCommand = Command.CreateCommand(AddFiles);
+            RemoveSelectedCommand = Command.CreateCommand<string>(RemoveSelected, CanRemove);
+            ClearListCommand = Command.CreateCommand(ClearList);
+            GenerateBachCommand = Command.CreateCommand(GenerateBach);
+            SaveBachCommand = Command.CreateCommand(SaveBach);
+            ExecuteBachCommand = Command.CreateCommand(ExecuteBach);
         }
 
         private void AddFiles()
@@ -142,7 +144,7 @@ namespace Thingy.ViewModels
             }
             catch (Exception ex)
             {
-                await _app.ShowMessageBox("Error", ex.Message, MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
+                await _app.ShowMessageBox("Error", ex.Message, DialogButtons.Ok);
             }
         }
 
@@ -158,7 +160,7 @@ namespace Thingy.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    await _app.ShowMessageBox("Error", ex.Message, MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative);
+                    await _app.ShowMessageBox("Error", ex.Message, DialogButtons.Ok);
                 }
             }
         }
