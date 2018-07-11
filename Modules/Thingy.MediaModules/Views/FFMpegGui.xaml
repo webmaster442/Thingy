@@ -36,16 +36,7 @@
                             x:Name="FolderSelector"
                             Width="290"
                             Filter="folder" />
-
-                        <TextBlock
-                            Margin="5,0"
-                            Text="FFMpeg folder:" />
-
-                        <applib:FileSelector
-                            x:Name="FFMpegSelector"
-                            Width="290"
-                            Filter="folder"
-                            SelectedFile="{Binding FFMPegFolder, Mode=TwoWay}"/>
+                        
                     </StackPanel>
                     <StackPanel
                         Grid.Row="1"

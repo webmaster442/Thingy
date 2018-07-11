@@ -46,16 +46,6 @@ namespace Thingy.MediaModules.ViewModels
             set { SetValue(ref _generated, value); }
         }
 
-        public string FFMPegFolder
-        {
-            get { return _ffmpegPath; }
-            set
-            {
-                _ffmpegPath = value;
-                _app.Settings.Set("FFMpegPath", value);
-            }
-        }
-
         public DelegateCommand AddFilesCommand { get; private set; }
         public DelegateCommand<string> RemoveSelectedCommand { get; private set; }
         public DelegateCommand ClearListCommand { get; private set; }
@@ -68,7 +58,6 @@ namespace Thingy.MediaModules.ViewModels
             Presets = new PresetList();
             _app = app;
             Files = new ObservableCollection<string>();
-            FFMPegFolder = _app.Settings.Get("FFMpegPath", "");
             FileTable = new ObservableCollection<Tuple<string, string>>();
             AddFilesCommand = Command.CreateCommand(AddFiles);
             RemoveSelectedCommand = Command.CreateCommand<string>(RemoveSelected, CanRemove);
@@ -106,10 +95,18 @@ namespace Thingy.MediaModules.ViewModels
 
         private void GenerateBach()
         {
+            string ffmpeg = _app.Settings.Get("FFMpegPath", string.Empty);
+
+            if (string.IsNullOrEmpty(ffmpeg))
+            {
+                GeneratedBach = "FFMpeg not found. Job can't be created.";
+                return;
+            }
+
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("@echo off");
             sb.AppendLine("title FFMpeg job");
-            sb.AppendFormat("pushd \"{0}\"\r\n", FFMPegFolder);
+            sb.AppendFormat("pushd \"{0}\"\r\n", ffmpeg);
             if (SelectedPreset != null)
             {
                 foreach (var entry in FileTable)

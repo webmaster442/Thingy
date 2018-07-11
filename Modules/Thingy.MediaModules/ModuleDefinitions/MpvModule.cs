@@ -7,16 +7,26 @@ using Thingy.API;
 
 namespace Thingy.MediaModules.ModuleDefinitions
 {
-    public class FFMpegGuiModule : ModuleBase
+    public class MpvModule : ModuleBase
     {
         public override string ModuleName
         {
-            get { return "FFMpegGui"; }
+            get { return "MVP Player"; }
         }
 
         public override ImageSource Icon
         {
-            get { return BitmapHelper.FrozenBitmap("pack://application:,,,/Thingy.Resources;component/Icons/icons8-ffmpeg-96.png"); }
+            get { return BitmapHelper.FrozenBitmap("pack://application:,,,/Thingy.Resources;component/Icons/mpv-logo-128.png"); }
+        }
+
+        public override string Category
+        {
+            get { return ModuleCategories.Media; }
+        }
+
+        public override UserControl RunModule()
+        {
+            return new Views.MpvView(App);
         }
 
         public override bool CanHadleFile(string pathOrExtension)
@@ -37,35 +47,33 @@ namespace Thingy.MediaModules.ModuleDefinitions
         {
             get
             {
-                string ffmpeg = null;
-                var setpath = App.Settings.Get("FFMpegPath", string.Empty);
+                string mpv = null;
+                var setpath = App.Settings.Get("MPVPath", string.Empty);
                 if (string.IsNullOrEmpty(setpath))
                 {
-                    ffmpeg = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Apps\x64\ffmpeg.exe");
+                    mpv = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Apps\x64\mpv.exe");
                 }
                 else
                 {
-                    ffmpeg = setpath;
+                    mpv = setpath;
                 }
-                bool canLoad = System.IO.File.Exists(ffmpeg);
+                bool canLoad = System.IO.File.Exists(mpv);
                 if (!canLoad)
-                    App.Log.Warning("ffmpeg Module not shown, because file not exists: {0}", ffmpeg);
+                    App.Log.Warning("Mpv Module not shown, because file not exists: {0}", mpv);
 
                 return canLoad;
             }
         }
 
-        public override string Category
+        public override OpenParameters OpenParameters
         {
-            get { return ModuleCategories.Utilities; }
-        }
-
-        public override UserControl RunModule()
-        {
-            return new Views.FFMpegGui
+            get
             {
-                DataContext = new ViewModels.FFMpegGuiViewModel(App)
-            };
+                return new OpenParameters
+                {
+                    DialogButtons = DialogButtons.OkCancel
+                };
+            }
         }
     }
 }
