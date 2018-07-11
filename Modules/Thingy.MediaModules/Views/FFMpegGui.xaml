@@ -36,7 +36,7 @@
                             x:Name="FolderSelector"
                             Width="290"
                             Filter="folder" />
-                        
+
                     </StackPanel>
                     <StackPanel
                         Grid.Row="1"

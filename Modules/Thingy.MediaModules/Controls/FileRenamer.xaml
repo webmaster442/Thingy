@@ -5,9 +5,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Thingy.MediaModules.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="Control"
     d:DesignHeight="300"
     d:DesignWidth="900"
-    x:Name="Control"
     mc:Ignorable="d">
     <UserControl.Resources>
         <Style
@@ -26,7 +26,7 @@
         <Style
             x:Key="PatternSelector"
             TargetType="ComboBox">
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate>
@@ -81,9 +81,9 @@
                     SelectedIndex="0" />
                 <Button
                     x:Name="InsertFilenamePattern"
-                    Click="InsertFilenamePattern_Click"
                     Grid.Row="1"
                     Grid.Column="1"
+                    Click="InsertFilenamePattern_Click"
                     Content="Insert" />
             </Grid>
         </GroupBox>
@@ -112,9 +112,9 @@
                     SelectedIndex="0" />
                 <Button
                     x:Name="InsertExtensionPattern"
-                    Click="InsertExtensionPattern_Click"
                     Grid.Row="1"
                     Grid.Column="1"
+                    Click="InsertExtensionPattern_Click"
                     Content="Insert" />
             </Grid>
         </GroupBox>
@@ -153,10 +153,10 @@
                     Grid.ColumnSpan="2"
                     Orientation="Horizontal">
                     <CheckBox
-                        IsChecked="{Binding ElementName=Control, Path=IsRegex}"
-                        Content="RegExp"
+                        Margin="5,0"
                         VerticalAlignment="Center"
-                        Margin="5,0"/>
+                        Content="RegExp"
+                        IsChecked="{Binding ElementName=Control, Path=IsRegex}" />
                 </StackPanel>
             </Grid>
         </GroupBox>
@@ -213,23 +213,23 @@
         <DataGrid
             x:Name="FileList"
             Grid.Row="3"
+            Grid.ColumnSpan="4"
             AutoGenerateColumns="False"
             CanUserAddRows="False"
             CanUserDeleteRows="False"
             CanUserReorderColumns="True"
-            CanUserSortColumns="True"
             CanUserResizeColumns="true"
-            ItemsSource="{Binding ElementName=Control, Path=RenameTable}"
-            Grid.ColumnSpan="4">
+            CanUserSortColumns="True"
+            ItemsSource="{Binding ElementName=Control, Path=RenameTable}">
             <DataGrid.Columns>
                 <DataGridTextColumn
                     Width="*"
-                    Header="Input File"
-                    Binding="{Binding Item1}"/>
+                    Binding="{Binding Item1}"
+                    Header="Input File" />
                 <DataGridTextColumn
                     Width="*"
-                    Header="Output file"
-                    Binding="{Binding Item2}"/>
+                    Binding="{Binding Item2}"
+                    Header="Output file" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -16,27 +16,34 @@
         </Style>
     </UserControl.Resources>
     <ScrollViewer>
-        <StackPanel HorizontalAlignment="Left">
-        <GroupBox
-            Header="Applications">
-            <StackPanel>
-                <TextBlock
-                    FontWeight="Bold"
-                    Text="If not set, then the default search dir is App directory\Apps\x64\" />
-                <TextBlock
-                    Text="MPV Path:" />
-                <applib:FileSelector
-                    Margin="18,0"
-                    Filter="mpv.exe"
-                    SelectedFile="{api:SettingsBinding [MPVPath\, null]}" />
-                <TextBlock
-                    Text="Youtube-dl Path:" />
-                <applib:FileSelector
-                    Margin="18,0"
-                    Filter="youtube-dl.exe"
-                    SelectedFile="{api:SettingsBinding [YoutubeDlPath\, null]}" />
-            </StackPanel>
-        </GroupBox>
+        <StackPanel
+            HorizontalAlignment="Left">
+            <GroupBox
+                Header="Applications">
+                <StackPanel>
+                    <TextBlock
+                        FontWeight="Bold"
+                        Text="If not set, then the default search dir is App directory\Apps\x64\" />
+                    <TextBlock
+                        Text="MPV Path:" />
+                    <applib:FileSelector
+                        Margin="18,0"
+                        Filter="mpv.exe"
+                        SelectedFile="{api:SettingsBinding [MPVPath\, null]}" />
+                    <TextBlock
+                        Text="Youtube-dl Path:" />
+                    <applib:FileSelector
+                        Margin="18,0"
+                        Filter="youtube-dl.exe"
+                        SelectedFile="{api:SettingsBinding [YoutubeDlPath\, null]}" />
+                    <TextBlock
+                        Text="ffmpeg Path:" />
+                    <applib:FileSelector
+                        Margin="18,0"
+                        Filter="ffmpeg.exe"
+                        SelectedFile="{api:SettingsBinding [FFMpegPath\, null]}" />
+                </StackPanel>
+            </GroupBox>
         </StackPanel>
     </ScrollViewer>
 </UserControl>
