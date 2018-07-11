@@ -52,6 +52,7 @@ namespace Thingy.MediaModules.ModuleDefinitions
                 if (string.IsNullOrEmpty(setpath))
                 {
                     mpv = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Apps\x64\mpv.exe");
+                    App.Settings.Set("MPVPath", mpv);
                 }
                 else
                 {

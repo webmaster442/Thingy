@@ -42,6 +42,7 @@ namespace Thingy.MediaModules.ModuleDefinitions
                 if (string.IsNullOrEmpty(setpath))
                 {
                     ffmpeg = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Apps\x64\ffmpeg.exe");
+                    App.Settings.Set("FFMpegPath", ffmpeg);
                 }
                 else
                 {

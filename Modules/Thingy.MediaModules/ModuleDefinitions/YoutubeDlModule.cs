@@ -37,6 +37,7 @@ namespace Thingy.MediaModules.ModuleDefinitions
                 if (string.IsNullOrEmpty(setpath))
                 {
                     youtubedl = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Apps\x64\youtube-dl.exe");
+                    App.Settings.Set("YoutubeDlPath", youtubedl);
                 }
                 else
                 {
