@@ -1,6 +1,6 @@
-﻿using Thingy.FFMpegGui.Controls;
+﻿using Thingy.MediaModules.Controls.PresetControls;
 
-namespace Thingy.FFMpegGui
+namespace Thingy.MediaModules.Models
 {
     public abstract class BaseVideoPreset : BasePreset
     {

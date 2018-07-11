@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
-namespace Thingy.FFMpegGui.Controls
+namespace Thingy.MediaModules.Controls.PresetControls
 {
     public class SliderControl : BaseControl
     {

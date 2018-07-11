@@ -1,6 +1,7 @@
-﻿using Thingy.FFMpegGui.Controls;
+﻿
+using Thingy.MediaModules.Controls.PresetControls;
 
-namespace Thingy.FFMpegGui.Presets
+namespace Thingy.MediaModules.Models.Presets
 {
     public class AudioToMp3 : BaseAudioPreset
     {

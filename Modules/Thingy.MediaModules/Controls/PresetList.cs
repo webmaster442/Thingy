@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Thingy.MediaModules.Models;
 
-namespace Thingy.FFMpegGui
+namespace Thingy.MediaModules.Controls
 {
     public class PresetList : List<BasePreset>
     {

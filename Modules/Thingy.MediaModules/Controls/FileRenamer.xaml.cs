@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Thingy.FFMpegGui
+namespace Thingy.MediaModules.Controls
 {
     /// <summary>
     /// Interaction logic for FileRenamer.xaml

@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Thingy.FFMpegGui.Controls
+namespace Thingy.MediaModules.Controls.PresetControls
 {
     public class OptionList : BaseControl
     {

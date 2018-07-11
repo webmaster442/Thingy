@@ -1,4 +1,4 @@
-﻿namespace Thingy.FFMpegGui.Presets
+﻿namespace Thingy.MediaModules.Models.Presets
 {
     public class AudioToALAC : BaseAudioPreset
     {

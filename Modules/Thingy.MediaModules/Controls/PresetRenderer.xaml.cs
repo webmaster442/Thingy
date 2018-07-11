@@ -1,7 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using Thingy.MediaModules.Models;
 
-namespace Thingy.FFMpegGui
+namespace Thingy.MediaModules.Controls
 {
     /// <summary>
     /// Interaction logic for PresetRenderer.xaml

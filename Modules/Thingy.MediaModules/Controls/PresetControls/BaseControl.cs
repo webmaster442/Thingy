@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Thingy.FFMpegGui.Controls
+namespace Thingy.MediaModules.Controls.PresetControls
 {
     public abstract class BaseControl
     {
