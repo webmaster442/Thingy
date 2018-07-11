@@ -15,5 +15,17 @@
                  length="7348224"
                  type="application/octet-stream" />
     </item>
+    <item>
+      <title>Version 2018.7.11.1916</title>
+      <sparkle:releaseNotesLink>
+        https://raw.githubusercontent.com/webmaster442/Thingy/master/Build-tools/release_notes.html
+      </sparkle:releaseNotesLink>
+      <pubDate>Wed, 11 Jul 2018 20:19:00 +0100</pubDate>
+      <enclosure url="https://github.com/webmaster442/Thingy/releases/download/2018-07-11/thingy-installer.exe.exe"
+                 sparkle:installerArguments="/passive"
+                 sparkle:version="2018.7.11.1916"
+                 length="43797675"
+                 type="application/octet-stream" />
+    </item>
   </channel>
 </rss>
