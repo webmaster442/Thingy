@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using AppLib.WPF;
+using System.Windows.Controls;
 using System.Windows.Media;
 using Thingy.API;
 using Thingy.Db;
@@ -15,7 +16,7 @@ namespace Thingy.FileBrowser
 
         public override ImageSource Icon
         {
-            get { return null; }
+            get { return BitmapHelper.FrozenBitmap("pack://application:,,,/Thingy.Resources;component/Icons/icons8-folder-tree.png"); }
         }
 
         public override string Category
