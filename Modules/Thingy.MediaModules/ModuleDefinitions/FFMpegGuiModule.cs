@@ -1,9 +1,9 @@
 ﻿using AppLib.WPF;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Thingy.Infrastructure;
+using Thingy.API;
 
-namespace Thingy.Modules
+namespace Thingy.MediaModules.ModuleDefinitions
 {
     public class FFMpegGuiModule : ModuleBase
     {
@@ -26,7 +26,7 @@ namespace Thingy.Modules
         {
             return new Views.FFMpegGui
             {
-                DataContext = new ViewModels.FFMpegGuiViewModel(App.Instance)
+                DataContext = new ViewModels.FFMpegGuiViewModel(App)
             };
         }
     }
