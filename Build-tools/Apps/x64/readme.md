@@ -5,3 +5,4 @@ Extract files here.
 Files needed:
 mpv: https://mpv.srsfckn.biz/
 youtube-dl: https://rg3.github.io/youtube-dl/
+ffmpeg: https://ffmpeg.zeranoe.com/builds/
