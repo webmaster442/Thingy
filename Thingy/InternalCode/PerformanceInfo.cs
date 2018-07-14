@@ -9,7 +9,7 @@ namespace Thingy.InternalCode
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool GetPerformanceInfo([Out] out PerformanceInformation PerformanceInformation, [In] int Size);
 
-        public static Int64 GetPhysicalAvailableMemoryInMiB()
+        public static long GetPhysicalAvailableMemoryInMiB()
         {
             PerformanceInformation pi = new PerformanceInformation();
             if (GetPerformanceInfo(out pi, Marshal.SizeOf(pi)))
@@ -23,7 +23,7 @@ namespace Thingy.InternalCode
 
         }
 
-        public static Int64 GetTotalMemoryInMiB()
+        public static long GetTotalMemoryInMiB()
         {
             PerformanceInformation pi = new PerformanceInformation();
             if (GetPerformanceInfo(out pi, Marshal.SizeOf(pi)))

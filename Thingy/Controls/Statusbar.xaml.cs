@@ -14,6 +14,8 @@ namespace Thingy.Controls
     internal partial class StatusbarView : UserControl
     {
         private static long _availableMemory;
+        private static long _free;
+        private static long _used;
         private static PerformanceCounter _cpuCounter;
         private DispatcherTimer _timer;
         private MMDevice defaultDevice;
@@ -28,9 +30,17 @@ namespace Thingy.Controls
 
             RAMProgress.Value = ram;
             RAMText.Text = string.Format("{0:0.00}%", ram);
-            RAMAmount.Text = string.Format("{0} MB", PerformanceInfo.GetPhysicalAvailableMemoryInMiB());
+            _free = PerformanceInfo.GetPhysicalAvailableMemoryInMiB();
+            _used = _availableMemory - _free;
+            RAMAmount.Text = string.Format("{0} MB", _free);
+            RAMAmount.ToolTip = CreateTooltip();
 
             BatteryInfo.UpdateBatteryInfo();
+        }
+
+        private object CreateTooltip()
+        {
+            return $"Available: {_availableMemory} MB\nUsed: {_used} MB\nFree: {_free} MB";
         }
 
         private void AudioEndpointVolume_OnVolumeNotification(AudioVolumeNotificationData data)
