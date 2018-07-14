@@ -84,12 +84,6 @@ namespace Thingy.MusicPlayer.Views
             ViewModel?.HandleFiles(message.Files.ToArray());
         }
 
-        private void ChapterSwitcher_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var chapter = ChapterSwitcher.SelectedItem;
-            ViewModel?.JumpToChapterCommand.Execute(chapter);
-        }
-
         private void ITunesMenu_FilesProvidedEvent(object sender, IEnumerable<string> e)
         {
             ViewModel?.HandleFiles(e.ToArray());

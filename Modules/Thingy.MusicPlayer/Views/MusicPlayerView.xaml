@@ -158,21 +158,26 @@
                                     ContentStringFormat="Volume: {0:P1}" />
                             </Slider.ToolTip>
                         </Slider>
-                        <ComboBox
-                            x:Name="ChapterSwitcher"
-                            MaxWidth="150"
+                        <Menu
                             Margin="10,0"
-                            VerticalAlignment="Center"
-                            ItemsSource="{Binding AudioEngine.Chapters}"
-                            SelectionChanged="ChapterSwitcher_SelectionChanged"
-                            Text="Chapters...">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock
-                                        Text="{Binding Title}" />
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
+                            VerticalAlignment="Center">
+                            <MenuItem
+                                Header="Chapters..."
+                                ItemsSource="{Binding AudioEngine.Chapters}">
+                                <MenuItem.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Text="{Binding Title}" />
+                                    </DataTemplate>
+                                </MenuItem.ItemTemplate>
+                                <MenuItem.ItemContainerStyle>
+                                    <Style TargetType="MenuItem">
+                                        <Setter Property="Command" Value="{Binding Path=DataContext.JumpToChapterCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+                                        <Setter Property="CommandParameter" Value="{Binding}"/>
+                                    </Style>
+                                </MenuItem.ItemContainerStyle>
+                            </MenuItem>
+                        </Menu>
                     </StackPanel>
                     <Slider
                         x:Name="SeekBar"
