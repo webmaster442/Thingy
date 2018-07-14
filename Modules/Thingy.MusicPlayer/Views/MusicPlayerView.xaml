@@ -350,6 +350,7 @@
                             </MenuItem>
                         </MenuItem>
                         <local:ITunesMenu
+                            x:Name="iTunesMenu"
                             FilesProvidedEvent="ITunesMenu_FilesProvidedEvent" />
                     </Menu>
                     <ListBox

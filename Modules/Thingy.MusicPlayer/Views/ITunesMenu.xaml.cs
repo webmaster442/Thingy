@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Webmaster442.LibItunesXmlDb;
 using System.Linq;
+using Thingy.API;
 
 namespace Thingy.MusicPlayer.Views
 {
@@ -19,6 +20,12 @@ namespace Thingy.MusicPlayer.Views
         {
             InitializeComponent();
             MenuItunes_Loaded();
+        }
+
+        public IApplication App
+        {
+            get;
+            set;
         }
 
         public event EventHandler<IEnumerable<string>> FilesProvidedEvent;
@@ -67,7 +74,7 @@ namespace Thingy.MusicPlayer.Views
             }
         }
 
-        private void Subitem_Click(object sender, RoutedEventArgs e)
+        private async void Subitem_Click(object sender, RoutedEventArgs e)
         {
             if (FilesProvidedEvent != null)
             {
@@ -76,25 +83,33 @@ namespace Thingy.MusicPlayer.Views
                     IEnumerable<string> files = null;
                     string tag = s.Tag.ToString();
                     string content = s.Header.ToString();
-                    switch (tag)
+                    try
                     {
-                        case "Albums":
-                            files = iTunes.Filter(FilterKind.Album, content).Select(t => t.FilePath);
-                            break;
-                        case "Artists":
-                            files = iTunes.Filter(FilterKind.Artist, content).Select(t => t.FilePath);
-                            break;
-                        case "Years":
-                            files = iTunes.Filter(FilterKind.Year, content).Select(t => t.FilePath);
-                            break;
-                        case "Genres":
-                            files = iTunes.Filter(FilterKind.Genre, content).Select(t => t.FilePath);
-                            break;
-                        case "Playlists":
-                            files = iTunes.ReadPlaylist(content).Select(t => t.FilePath);
-                            break;
+                        switch (tag)
+                        {
+                            case "Albums":
+                                files = iTunes.Filter(FilterKind.Album, content).Select(t => t.FilePath);
+                                break;
+                            case "Artists":
+                                files = iTunes.Filter(FilterKind.Artist, content).Select(t => t.FilePath);
+                                break;
+                            case "Years":
+                                files = iTunes.Filter(FilterKind.Year, content).Select(t => t.FilePath);
+                                break;
+                            case "Genres":
+                                files = iTunes.Filter(FilterKind.Genre, content).Select(t => t.FilePath);
+                                break;
+                            case "Playlists":
+                                files = iTunes.ReadPlaylist(content).Select(t => t.FilePath);
+                                break;
+                        }
+                        FilesProvidedEvent.Invoke(this, files);
                     }
-                    FilesProvidedEvent.Invoke(this, files);
+                    catch (Exception ex)
+                    {
+                        await App?.ShowMessageBox("Error", "Selection can't be loaded", DialogButtons.Ok);
+                        App?.Log?.Error(ex);
+                    }
                 }
             }
         }

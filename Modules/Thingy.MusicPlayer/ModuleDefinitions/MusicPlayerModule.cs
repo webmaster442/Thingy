@@ -31,6 +31,7 @@ namespace Thingy.Modules
         public override UserControl RunModule()
         {
             var view = new MusicPlayer.Views.MusicPlayerView();
+            view.iTunesMenu.App = App;
             view.DataContext = new MusicPlayer.ViewModels.MusicPlayerViewModel(view, App, _audioEngine);
             return view;
         }
