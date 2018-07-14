@@ -53,7 +53,7 @@ namespace Thingy.CoreModules.ViewModels
             var q = await _app.ShowMessageBox("Question", "Install Fonts?", DialogButtons.YesNo);
             if (q)
             {
-                await FontInstaller.InstallFontsTask(FontsToInstall);
+                FontInstaller.InstallFonts(_app, FontsToInstall);
             }
         }
 

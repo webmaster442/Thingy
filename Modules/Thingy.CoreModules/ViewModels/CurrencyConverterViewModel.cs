@@ -6,11 +6,10 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Linq;
+using Thingy.API;
 using Thingy.CoreModules.MnbServiceReference;
 using Thingy.CoreModules.Models;
 
@@ -24,11 +23,13 @@ namespace Thingy.CoreModules.ViewModels
         private Visibility _UpdateVisibility;
         private int _selectedInputIndex;
         private int _selectedOutputIndex;
+        private IApplication _app;
 
         public DelegateCommand UpdateCommand { get; private set; }
 
-        public CurrencyConverterViewModel()
+        public CurrencyConverterViewModel(IApplication app)
         {
+            _app = app;
             CurrencyTypes = new ObservableCollection<string>();
             CurrencyRates = new ObservableCollection<CurrencyRate>();
             UpdateVisibility = Visibility.Collapsed;
@@ -70,7 +71,8 @@ namespace Thingy.CoreModules.ViewModels
                 LastUpdate = DateTime.Now;
                 CurrencyRates.Clear();
                 CurrencyTypes.Clear();
-                MessageBox.Show("Error calling webservice:\r\n" + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                _app.Log.Error(ex);
+                await _app.ShowMessageBox("Error", "Error calling webservice", DialogButtons.Ok);
                 UpdateVisibility = Visibility.Collapsed;
             }
         }
@@ -97,7 +99,7 @@ namespace Thingy.CoreModules.ViewModels
             }
         }
 
-        private void ConvertRate(decimal value)
+        private async void ConvertRate(decimal value)
         {
             try
             {
@@ -119,7 +121,8 @@ namespace Thingy.CoreModules.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error on conversion:\r\n" + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                _app.Log.Error(ex);
+                await _app.ShowMessageBox("Error", "Error on conversion.", DialogButtons.Ok);
                 Output = 0;
             }
         }

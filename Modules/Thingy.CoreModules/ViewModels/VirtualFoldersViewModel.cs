@@ -141,10 +141,10 @@ namespace Thingy.CoreModules.ViewModels
             return obj != null;
         }
 
-        private void DeleteFolder(VirtualFolder obj)
+        private async void DeleteFolder(VirtualFolder obj)
         {
-            var q = MessageBox.Show("Delete virtual folder?", "Virtual Folder delete", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (q == MessageBoxResult.Yes)
+            var q = await _app.ShowMessageBox("Virtual Folder delete", "Delete virtual folder?", DialogButtons.YesNo);
+            if (q == true)
             {
                 _db.VirtualFolders.Delete(obj.Name);
             }

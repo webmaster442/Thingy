@@ -21,7 +21,7 @@ namespace Thingy.Modules
         {
             return new CoreModules.Views.CurrencyConverter
             {
-                DataContext = new CoreModules.ViewModels.CurrencyConverterViewModel()
+                DataContext = new CoreModules.ViewModels.CurrencyConverterViewModel(App)
             };
         }
 

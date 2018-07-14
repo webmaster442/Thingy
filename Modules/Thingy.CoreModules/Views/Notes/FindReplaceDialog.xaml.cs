@@ -4,6 +4,7 @@ using System.Media;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using Thingy.API;
 
 namespace Thingy.CoreModules.Views.Notes
 {

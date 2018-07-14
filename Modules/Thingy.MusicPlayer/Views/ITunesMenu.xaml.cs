@@ -30,7 +30,7 @@ namespace Thingy.MusicPlayer.Views
 
         public event EventHandler<IEnumerable<string>> FilesProvidedEvent;
 
-        private void MenuItunes_Loaded()
+        private async void MenuItunes_Loaded()
         {
             if (!ITunesXmlDb.UserHasItunesDb || DesignerProperties.GetIsInDesignMode(this))
             {
@@ -53,7 +53,8 @@ namespace Thingy.MusicPlayer.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                App?.Log.Error(ex);
+                await App?.ShowMessageBox("Error", "Error Accessing iTunes", DialogButtons.Ok);
                 IsEnabled = false;
                 return;
             }

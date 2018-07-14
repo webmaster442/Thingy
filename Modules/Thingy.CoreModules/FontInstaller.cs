@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
+using Thingy.API;
 
 namespace Thingy.CoreModules
 {
     public static class FontInstaller
     {
-        public static void InstallFonts(IEnumerable<string> fontfiles)
+        public static async void InstallFonts(IApplication app, IEnumerable<string> fontfiles)
         {
             try
             {
@@ -48,17 +47,13 @@ namespace Thingy.CoreModules
 
                 Directory.Delete(targetdir, true);
 
-                MessageBox.Show("Fonts Installed succesfully", "Font Installer", MessageBoxButton.OK, MessageBoxImage.Information);
+                await app.ShowMessageBox("Font Installer", "Fonts Installed succesfully", DialogButtons.Ok);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                app.Log.Error(ex);
+                await app.ShowMessageBox("Error", "Error installing fonts", DialogButtons.Ok);
             }
-        }
-
-        public static Task InstallFontsTask(IEnumerable<string> fontfiles)
-        {
-            return Task.Run(() => InstallFonts(fontfiles));
         }
     }
 }

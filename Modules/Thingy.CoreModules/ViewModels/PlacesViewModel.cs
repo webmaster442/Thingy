@@ -90,10 +90,11 @@ namespace Thingy.CoreModules.ViewModels
             }
         }
 
-        private void DeleteSelectedLink(string obj)
+        private async void DeleteSelectedLink(string obj)
         {
-            var q = MessageBox.Show("Delete link?", "Link delete", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (q == MessageBoxResult.Yes)
+            
+            var q = await _app.ShowMessageBox("Link delete", "Delete link?", DialogButtons.YesNo);
+            if (q == true)
             {
                 _db.FavoriteFolders.Delete(obj);
                 ApplyFiltering();
