@@ -25,7 +25,7 @@ namespace Thingy
             InitializeComponent();
         }
 
-        public MainWindow(IApplication app, IModuleLoader loader) : this()
+        public MainWindow(IApplication app): this()
         {
             _app = app;
             StatusBar.Application = _app;
@@ -56,9 +56,29 @@ namespace Thingy
 
         private void ModernWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            TabablzControl.AddItemCommand.Execute(this, TabControl);
-            FocusTabByIndex(0);
-            Program.CommandLineParser.Parse(Environment.CommandLine);
+            try
+            {
+                if (DataContext == null)
+                {
+                    //tab tear fix: Default parameterless ctor is invoked
+                    _app = Application.Current as IApplication;
+                    StatusBar.Application = _app;
+                    DataContext = new MainWindowViewModel(this, _app);
+                    Title = $"{Title} - {GetAssemblyVersion()}";
+                    TabControl.ClosingItemCallback = TabClosing;
+                    TabControl.NewItemFactory = (DataContext as MainWindowViewModel)?.ItemFactory;
+                }
+                else
+                {
+                    TabablzControl.AddItemCommand.Execute(this, TabControl);
+                    FocusTabByIndex(0);
+                    Program.CommandLineParser.Parse(Environment.CommandLine);
+                }
+            }
+            catch (Exception ex)
+            {
+                _app.Log.Error(ex);
+            }
         }
 
         private void StatusFlyOut_ClosingFinished(object sender, RoutedEventArgs e)
