@@ -10,6 +10,8 @@ namespace Thingy
 {
     public class MainWindowViewModel : ViewModel<IMainWindow>
     {
+        private bool _topmost;
+
         public DelegateCommand SettingCommand { get; private set; }
         public DelegateCommand ExitCommand { get; private set; }
         public DelegateCommand LogCommand { get; private set; }
@@ -35,6 +37,20 @@ namespace Thingy
             ModuleImportCommand = Command.CreateCommand(ModuleImport, CanImportExport);
             ModuleExportCommand = Command.CreateCommand(ModuleExport, CanImportExport);
             ModuleAppendCommand = Command.CreateCommand(ModuleAppend, CanImportExport);
+            TopMostToogle = app.Settings.Get("Topmost", false);
+        }
+
+        public bool TopMostToogle
+        {
+            get { return _topmost; }
+            set
+            {
+                if (SetValue(ref _topmost, value))
+                {
+                    _app.Settings.Set("Topmost", value);
+                    View.SetTopMost(value);
+                }
+            }
         }
 
         private void OpenFlyout(string obj)

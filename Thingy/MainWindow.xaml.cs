@@ -241,5 +241,10 @@ namespace Thingy
                     break;
             }
         }
+
+        public void SetTopMost(bool value)
+        {
+            this.Topmost = value;
+        }
     }
 }

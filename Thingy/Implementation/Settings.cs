@@ -134,7 +134,7 @@ namespace Thingy.Implementation
             {
                 try
                 {
-                    _log.Info("Modifiying existing {0} key value from {1} to {1}", key, _config[key], value);
+                    _log.Info("Modifiying existing {0} key value from {1} to {2}", key, _config[key], value);
                     _config[key] = JsonConvert.SerializeObject(value);
                     FirePropertyChanged(key);
                 }

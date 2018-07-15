@@ -8,5 +8,6 @@ namespace Thingy
         void OpenOrHideFlyout(string flyoutName);
         UserControl CurrentTabContent { get; }
         void SetBusyOverlayVisibility(bool isVisible);
+        void SetTopMost(bool value);
     }
 }

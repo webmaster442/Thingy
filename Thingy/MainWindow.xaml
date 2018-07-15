@@ -2,6 +2,7 @@
     x:Class="Thingy.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:api="clr-namespace:Thingy.API;assembly=Thingy.API"
     xmlns:applib="http://github.com/webmaster442/AppLib/WPF/Controls"
     xmlns:controls="clr-namespace:Thingy.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -44,8 +45,9 @@
                     <StackPanel
                         Orientation="Horizontal">
                         <applib:ImageAwesome
-                            Width="24"
-                            Height="24"
+                            Width="22"
+                            Height="22"
+                            Margin="2"
                             Foreground="White"
                             Icon="fa_bars" />
                         <TextBlock
@@ -54,6 +56,33 @@
                             Text="Menu" />
                     </StackPanel>
                 </Button>
+                <TextBlock
+                    Foreground="White"
+                    Text="|" />
+                <ToggleButton
+                    IsChecked="{Binding TopMostToogle}">
+                    <ToggleButton.Content>
+                        <TextBlock>
+                            <TextBlock.Style>
+                                <Style
+                                    TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding TopMostToogle}"
+                                            Value="true">
+                                            <Setter Property="Text" Value="Topmost: on" />
+                                        </DataTrigger>
+                                        <DataTrigger
+                                            Binding="{Binding TopMostToogle}"
+                                            Value="false">
+                                            <Setter Property="Text" Value="Topmost: off" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </ToggleButton.Content>
+                </ToggleButton>
             </StackPanel>
         </mah:WindowCommands>
     </mah:MetroWindow.RightWindowCommands>
