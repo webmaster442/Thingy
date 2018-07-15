@@ -206,6 +206,7 @@
             IsHiddenVisible="{Binding ShowHiddenFiles}"
             SelectedItem="{Binding ItemProvider.SelectedPath}"
             SelectedPath="{Binding CurrentFolder}"
+            FileDoubleClick="DirectoryList_FileDoubleClick"
             SelectionMode="Single">
             <ListView.View>
                 <GridView>

@@ -1,5 +1,5 @@
-﻿using System.Diagnostics;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
+using Thingy.FileBrowser.ViewModels;
 
 namespace Thingy.FileBrowser
 {
@@ -16,9 +16,19 @@ namespace Thingy.FileBrowser
             DirectoryTree.OnNavigationException += NavigationException;
         }
 
+        private FileBrowserViewModel ViewModel
+        {
+            get { return DataContext as FileBrowserViewModel;  }
+        }
+
         private void NavigationException(object sender, string e)
         {
-            Debug.WriteLine(e);
+            ViewModel?.LogNavigationException(e);
+        }
+
+        private void DirectoryList_FileDoubleClick(object sender, string e)
+        {
+            ViewModel?.FileDoubleClickedCommand.Execute(e);
         }
     }
 }

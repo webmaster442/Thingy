@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using Thingy.API;
 using Thingy.Db;
+using Thingy.FileBrowser.Controls;
 using Thingy.Implementation;
 
 namespace Thingy.FileBrowser.ViewModels
@@ -81,6 +82,20 @@ namespace Thingy.FileBrowser.ViewModels
         public void StartModule(string moduleName, string parameters)
         {
             _app.HandleFiles(moduleName, new List<string> { parameters });
+        }
+
+        internal string GetPath(string location)
+        {
+            if (System.IO.Directory.Exists(location) ||
+                FileListView.HomePath == location)
+            {
+                return location;
+            }
+            else
+            {
+                var folder = _db.FavoriteFolders.GetByKey(location);
+                return folder?.Path;
+            }
         }
 
         public void StartProgram(string programName)
