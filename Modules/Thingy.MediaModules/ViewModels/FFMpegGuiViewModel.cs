@@ -12,7 +12,6 @@ namespace Thingy.MediaModules.ViewModels
     public class FFMpegGuiViewModel : ViewModel
     {
         private string _generated;
-        private string _ffmpegPath;
         private BasePreset _preset;
         private IApplication _app;
 

@@ -62,6 +62,7 @@
     <Compile Include="Models\BaseAudioPreset.cs" />
     <Compile Include="Models\BasePreset.cs" />
     <Compile Include="Models\BaseVideoPreset.cs" />
+    <Compile Include="Models\Presets\AudioToAC3.cs" />
     <Compile Include="Models\Presets\AudioToALAC.cs" />
     <Compile Include="Models\Presets\AudioToFLAC.cs" />
     <Compile Include="Models\Presets\AudioToMp3.cs" />
