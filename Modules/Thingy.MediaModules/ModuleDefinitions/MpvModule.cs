@@ -26,7 +26,10 @@ namespace Thingy.MediaModules.ModuleDefinitions
 
         public override UserControl RunModule()
         {
-            return new Views.MpvView(App);
+            return new Views.MpvPlayerView
+            {
+                DataContext = new ViewModels.MpvPlayerViewModel(App)
+            };
         }
 
         public override bool CanHadleFile(string pathOrExtension)

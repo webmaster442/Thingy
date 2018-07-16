@@ -71,15 +71,16 @@
     <Compile Include="ModuleDefinitions\FFMpegGuiModule.cs" />
     <Compile Include="ModuleDefinitions\MpvModule.cs" />
     <Compile Include="ModuleDefinitions\YoutubeDlModule.cs" />
-    <Compile Include="MpvFormats.cs" />
+    <Compile Include="Formats.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\CommonVersion.cs" />
     <Compile Include="ViewModels\FFMpegGuiViewModel.cs" />
+    <Compile Include="ViewModels\MpvPlayerViewModel.cs" />
     <Compile Include="Views\FFMpegGui.xaml.cs">
       <DependentUpon>FFMpegGui.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MpvView.xaml.cs">
-      <DependentUpon>MpvView.xaml</DependentUpon>
+    <Compile Include="Views\MpvPlayerView.xaml.cs">
+      <DependentUpon>MpvPlayerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\YoutubeDlView.xaml.cs">
       <DependentUpon>YoutubeDlView.xaml</DependentUpon>
@@ -117,9 +118,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\MpvView.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Views\MpvPlayerView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\YoutubeDlView.xaml">
       <Generator>MSBuild:Compile</Generator>

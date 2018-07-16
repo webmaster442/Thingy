@@ -64,7 +64,15 @@ namespace Thingy.MediaModules
                 "http://youtu.be/",
             };
 
-            return YoutubePrefixes.Contains(pathOrExtension);
+            foreach (var prefix in YoutubePrefixes)
+            {
+                if (pathOrExtension.StartsWith(prefix))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
