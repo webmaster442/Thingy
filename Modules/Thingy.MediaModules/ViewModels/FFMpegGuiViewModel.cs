@@ -106,7 +106,7 @@ namespace Thingy.MediaModules.ViewModels
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("@echo off");
             sb.AppendLine("title FFMpeg job");
-            sb.AppendFormat("pushd \"{0}\"\r\n", ffmpeg);
+            sb.AppendFormat("pushd \"{0}\"\r\n", System.IO.Path.GetDirectoryName(ffmpeg));
             if (SelectedPreset != null)
             {
                 foreach (var entry in FileTable)
@@ -130,13 +130,13 @@ namespace Thingy.MediaModules.ViewModels
 
         private async void ExecuteBach()
         {
-            var name = System.IO.Path.GetTempFileName();
+            var name = $"{System.IO.Path.GetTempFileName()}.bat";
             try
             {
                 WriteToFile(name);
                 System.Diagnostics.Process p = new System.Diagnostics.Process();
                 p.StartInfo.FileName = "cmd.exe";
-                p.StartInfo.Arguments = $"/k {name} {name}";
+                p.StartInfo.Arguments = $"/k \"{name}\"";
                 p.Start();
             }
             catch (Exception ex)

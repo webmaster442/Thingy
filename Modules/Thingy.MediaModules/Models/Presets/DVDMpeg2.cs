@@ -62,7 +62,7 @@ namespace Thingy.MediaModules.Models.Presets
                 var vb = this["videobitrate.Value"];
                 var ab = this["audiobitrate.Value"];
 
-                return $"ffmpeg.exe -i \"{InputFile}\" {standard} -aspect {this["aspect.Value"]} -b:v {vb}k -c:a ac3 -b:a {ab} -ar 48000 \"{OutputFile}\"";
+                return $"ffmpeg.exe -i \"{InputFile}\" {standard} -aspect {this["aspect.Value"]} -b:v {vb}k -c:a ac3 -b:a {ab}k -ar 48000 \"{OutputFile}\"";
             }
         }
 
