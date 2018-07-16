@@ -66,6 +66,7 @@
     <Compile Include="Models\Presets\AudioToFLAC.cs" />
     <Compile Include="Models\Presets\AudioToMp3.cs" />
     <Compile Include="Models\Presets\AudioToWavPack.cs" />
+    <Compile Include="Models\Presets\DVDMpeg2.cs" />
     <Compile Include="Models\Presets\ExtractAudio.cs" />
     <Compile Include="Models\Presets\H264VideoNvidia.cs" />
     <Compile Include="ModuleDefinitions\FFMpegGuiModule.cs" />
