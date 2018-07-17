@@ -4,7 +4,7 @@
   <Minor>$MONTH$</Minor>
   <Revision>$DAY$</Revision>
   <Build>$BUILD$</Build>
-  <BuildCounter>2012</BuildCounter>
+  <BuildCounter>2017</BuildCounter>
 </VersionIncrement>
 <!--
 Possible tags:

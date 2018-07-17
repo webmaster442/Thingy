@@ -14,6 +14,7 @@ namespace Thingy.MediaModules.ViewModels
         private string _generated;
         private BasePreset _preset;
         private IApplication _app;
+        private bool _OutputOk;
 
         public PresetList Presets
         {
@@ -43,6 +44,12 @@ namespace Thingy.MediaModules.ViewModels
         {
             get { return _generated; }
             set { SetValue(ref _generated, value); }
+        }
+
+        public bool OutputOk
+        {
+            get { return _OutputOk; }
+            set { SetValue(ref _OutputOk, value); }
         }
 
         public DelegateCommand AddFilesCommand { get; private set; }
@@ -132,11 +139,19 @@ namespace Thingy.MediaModules.ViewModels
             var name = $"{System.IO.Path.GetTempFileName()}.bat";
             try
             {
-                WriteToFile(name);
-                System.Diagnostics.Process p = new System.Diagnostics.Process();
-                p.StartInfo.FileName = "cmd.exe";
-                p.StartInfo.Arguments = $"/k \"{name}\"";
-                p.Start();
+                bool @continue = true;
+                if (!OutputOk)
+                {
+                    @continue = await _app.ShowMessageBox("Warning", "Output folder not set. Continue?", DialogButtons.YesNo);
+                }
+                if (@continue)
+                {
+                    WriteToFile(name);
+                    System.Diagnostics.Process p = new System.Diagnostics.Process();
+                    p.StartInfo.FileName = "cmd.exe";
+                    p.StartInfo.Arguments = $"/k \"{name}\"";
+                    p.Start();
+                }
             }
             catch (Exception ex)
             {
@@ -146,6 +161,12 @@ namespace Thingy.MediaModules.ViewModels
 
         private async void SaveBach()
         {
+            bool @continue = true;
+            if (!OutputOk)
+            {
+                @continue = await _app.ShowMessageBox("Warning", "Output folder not set. Continue?", DialogButtons.YesNo);
+            }
+            if (!@continue) return;
             var sfd = new System.Windows.Forms.SaveFileDialog();
             sfd.Filter = "CMD file|*.cmd";
             if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)

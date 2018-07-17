@@ -35,7 +35,7 @@
                         <applib:FileSelector
                             x:Name="FolderSelector"
                             Width="290"
-                            Filter="folder" />
+                            Filter="folder"/>
 
                     </StackPanel>
                     <StackPanel
@@ -105,7 +105,8 @@
                 x:Name="Renamer"
                 InputFiles="{Binding Files, Mode=OneWay}"
                 OutputFolder="{Binding ElementName=FolderSelector, Path=SelectedFile}"
-                RenameTable="{Binding FileTable}" />
+                RenameTable="{Binding FileTable}"
+                IsOutputFolderExists="{Binding OutputOk}"/>
         </TabItem>
         <TabItem
             Header="Generated Bach">
