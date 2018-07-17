@@ -11,7 +11,7 @@ namespace Thingy.MediaModules.ModuleDefinitions
     {
         public override string ModuleName
         {
-            get { return "FFMpegGui"; }
+            get { return "FFMpeg GUI"; }
         }
 
         public override ImageSource Icon

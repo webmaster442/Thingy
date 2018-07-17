@@ -144,9 +144,30 @@ namespace Thingy.MediaModules.Controls
         public static readonly DependencyProperty CounterDigitsProperty =
             DependencyProperty.Register("CounterDigits", typeof(int), typeof(FileRenamer), new PropertyMetadata(1, DPChanged));
 
+
+
+        public bool IsOutputFolderExists
+        {
+            get { return (bool)GetValue(IsOutputFolderExistsProperty); }
+            set { SetValue(IsOutputFolderExistsProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsOutputFolderExistsProperty =
+            DependencyProperty.Register("IsOutputFolderExists", typeof(bool), typeof(FileRenamer), new PropertyMetadata(false));
+
         private static void DPChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             FileRenamer fr = d as FileRenamer;
+
+            if (string.IsNullOrEmpty(fr.OutputFolder) ||
+                !System.IO.Directory.Exists(fr.OutputFolder))
+            {
+                fr.IsOutputFolderExists = false;
+            }
+            else
+            {
+                fr.IsOutputFolderExists = true;
+            }
             fr.ProcessTags();
         }
 

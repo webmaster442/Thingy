@@ -1,15 +1,29 @@
-﻿using System.Windows.Controls;
+﻿using AppLib.Common.Extensions;
+using AppLib.MVVM.MessageHandler;
+using System;
+using System.Windows.Controls;
+using Thingy.API.Messages;
 
 namespace Thingy.MediaModules.Views
 {
     /// <summary>
     /// Interaction logic for FFMpegGui.xaml
     /// </summary>
-    public partial class FFMpegGui : UserControl
+    public partial class FFMpegGui : UserControl, IMessageClient<HandleFileMessage>
     {
         public FFMpegGui()
         {
             InitializeComponent();
+        }
+
+        public Guid MessageReciverID
+        {
+            get { return Guid.Parse(Tag.ToString()); }
+        }
+
+        public void HandleMessage(HandleFileMessage message)
+        {
+            (DataContext as ViewModels.FFMpegGuiViewModel)?.Files?.AddRange(message.Files);
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
