@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace Thingy.Implementation.BangProvider
+namespace Thingy.Implementation.Bang
 {
     internal class BangProvider
     {
