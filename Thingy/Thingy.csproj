@@ -215,6 +215,7 @@
     <Compile Include="FileBrowser\ViewModels\FileBrowserViewModel.cs" />
     <Compile Include="FileBrowser\ViewModels\ProviderViewModel.cs" />
     <Compile Include="IMainWindow.cs" />
+    <Compile Include="Implementation\BangProvider\BangProvider.cs" />
     <Compile Include="Implementation\CommandLineParser.cs" />
     <Compile Include="Implementation\IModuleLoader.cs" />
     <Compile Include="Implementation\JobRunner.cs" />
@@ -325,6 +326,7 @@
     <Resource Include="Implementation\Tray\icons8-exit-sign.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Implementation\BangProvider\Bangs.txt" />
     <Content Include="Native\x64\WinSparkle.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
