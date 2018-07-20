@@ -52,6 +52,7 @@
     <Compile Include="..\..\Build-tools\CommonVersion.cs">
       <Link>Properties\CommonVersion.cs</Link>
     </Compile>
+    <Compile Include="Jobs\HashJob.cs" />
     <Compile Include="Jobs\CopyFilesToDirectoryJob.cs" />
     <Compile Include="Jobs\CreateZipJob.cs" />
     <Compile Include="Jobs\DownloadFileJob.cs" />

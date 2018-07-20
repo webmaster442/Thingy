@@ -55,8 +55,8 @@ namespace Thingy.API.Jobs
         public abstract Task RunJob(CancellationToken token, IProgress<JobProgress> progress);
     }
 
-    public abstract class Job<T> : Job where T : class, new()
+    public abstract class Job<T> : Job
     {
-        public abstract T Result { get; set; }
+        public T Result { get; protected set; }
     }
 }

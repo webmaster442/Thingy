@@ -44,6 +44,12 @@ namespace Thingy.API
         /// <returns>Awaitable module GUID</returns>
         Task<Guid> StartModule(IModule module, bool newTab = false);
         /// <summary>
+        /// Start a module
+        /// </summary>
+        /// <param name="moduleName">Name of Module to start</param>
+        /// <returns>Awaitable module GUID</returns>
+        Task<Guid> StartModule(string moduleName, bool newTab = false);
+        /// <summary>
         /// Module closed callback
         /// </summary>
         /// <param name="ModuleId">Module id</param>

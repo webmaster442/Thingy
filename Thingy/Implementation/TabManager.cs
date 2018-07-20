@@ -122,5 +122,21 @@ namespace Thingy.Implementation
                 return Guid.Empty;
             }
         }
+
+        public Task<Guid> StartModule(string moduleName, bool newTab = false)
+        {
+            var module = _moduleLoader.GetModuleByName(moduleName);
+            if (module != null)
+            {
+                return StartModule(module, newTab);
+            }
+            else
+            {
+                return Task.Run(() =>
+                {
+                    return Guid.Empty;
+                });
+            }
+        }
     }
 }

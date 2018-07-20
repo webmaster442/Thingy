@@ -9,6 +9,7 @@ namespace Thingy.Infrastructure
     {
         private IApplication _app;
         private Dictionary<string, Action> _switchActions;
+        private Dictionary<string, Action<string>> _argumentedSwitches;
 
         private void InitActions()
         {
@@ -20,12 +21,20 @@ namespace Thingy.Infrastructure
             {
                 _app.Restart();
             });
+            _argumentedSwitches.Add("/module", async (name) =>
+            {
+                if (!string.IsNullOrEmpty(name))
+                {
+                    await _app.TabManager.StartModule(name, true);
+                }
+            });
         }
 
         public CommandLineParser(IApplication app)
         {
             _app = app;
             _switchActions = new Dictionary<string, Action>();
+            _argumentedSwitches = new Dictionary<string, Action<string>>();
             InitActions();
         }
         public void Parse(string args)
@@ -37,6 +46,13 @@ namespace Thingy.Infrastructure
                 if (parser.StandaloneSwitches.Contains(action.Key))
                 {
                     action.Value.Invoke();
+                }
+            }
+            foreach (var action in _argumentedSwitches)
+            {
+                if (parser.SwitchesWithValue.ContainsKey(action.Key))
+                {
+                    action.Value.Invoke(parser.SwitchesWithValue[action.Key]);
                 }
             }
 
