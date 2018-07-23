@@ -1,0 +1,55 @@
+﻿<mahdialogs:CustomDialog
+    x:Class="Thingy.InternalModules.Bang"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:controls="clr-namespace:Thingy.Controls"
+    xmlns:mahdialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+    d:DesignHeight="180"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <mahdialogs:CustomDialog.Title>Bang!</mahdialogs:CustomDialog.Title>
+    <mahdialogs:CustomDialog.Content>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel
+            Grid.Row="0">
+            <TextBox
+                Margin="15,0"
+                Text="{Binding BangSearchText}"
+                controls:AutoCompleteBehavior.AutoCompleteItemsSource="{Binding BangProvider.Bangs}" 
+                mah:TextBoxHelper.Watermark="Type here to bang search"
+                mah:TextBoxHelper.ClearTextButton="True"/>
+        </StackPanel>
+        <StackPanel
+            Grid.Row="1"
+            Height="85"
+            HorizontalAlignment="Right"
+            Orientation="Horizontal">
+            <Button
+                x:Name="PART_NegativeButton"
+                Height="35"
+                MinWidth="80"
+                Margin="5,0,0,0"
+                Content="OK"
+                Cursor="Arrow"
+                Command="{Binding OkCommand}"
+                Style="{DynamicResource AccentedDialogSquareButton}" />
+            <Button
+                x:Name="PART_NegativeButton2"
+                Height="35"
+                MinWidth="80"
+                Margin="5,0,0,0"
+                Content="Cancel"
+                Cursor="Arrow"
+                Command="{Binding CancelCommand}"
+                Style="{DynamicResource AccentedDialogSquareButton}" />
+        </StackPanel>
+    </Grid>
+    </mahdialogs:CustomDialog.Content>
+</mahdialogs:CustomDialog>

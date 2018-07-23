@@ -147,6 +147,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="InternalModules\Bang.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="InternalModules\JobRunnerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -175,6 +179,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\Autocomplete.cs" />
     <Compile Include="Controls\IModalDialog.cs" />
     <Compile Include="Controls\ModalDialog.xaml.cs">
       <DependentUpon>ModalDialog.xaml</DependentUpon>
@@ -236,6 +241,9 @@
     <Compile Include="InternalModules\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InternalModules\Bang.xaml.cs">
+      <DependentUpon>Bang.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InternalModules\JobRunnerWindow.xaml.cs">
       <DependentUpon>JobRunnerWindow.xaml</DependentUpon>
     </Compile>
@@ -251,6 +259,7 @@
     <Compile Include="InternalModules\SettingsPages\Paths.xaml.cs">
       <DependentUpon>Paths.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InternalViewModels\BangViewModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
