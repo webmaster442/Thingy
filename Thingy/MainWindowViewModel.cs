@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Thingy.API;
 using Thingy.API.Capabilities;
 using Thingy.Implementation;
+using Thingy.InternalModules;
 
 namespace Thingy
 {
@@ -18,26 +19,35 @@ namespace Thingy
         public DelegateCommand<string> OpenFlyoutCommand { get; private set; }
         public DelegateCommand AboutCommand { get; private set; }
         public DelegateCommand UpdateCommand { get; private set; }
+        public DelegateCommand OpenBangCommand { get; private set; }
 
         public DelegateCommand ModuleImportCommand { get; private set; }
         public DelegateCommand ModuleAppendCommand { get; private set; }
         public DelegateCommand ModuleExportCommand { get; private set; }
 
         private readonly IApplication _app;
+        private readonly Bang _bang;
 
         public MainWindowViewModel(IMainWindow view, IApplication app) : base(view)
         {
             _app = app;
+            _bang = new Bang(_app);
             ExitCommand = Command.CreateCommand(Exit);
             AboutCommand = Command.CreateCommand(OpenAbout);
             LogCommand = Command.CreateCommand(OpenLog, CanOpenLog);
             OpenFlyoutCommand = Command.CreateCommand<string>(OpenFlyout);
             SettingCommand = Command.CreateCommand(OpenSetting, CanOpenSetting);
             UpdateCommand = Command.CreateCommand(Update);
+            OpenBangCommand = Command.CreateCommand(OpenBang);
             ModuleImportCommand = Command.CreateCommand(ModuleImport, CanImportExport);
             ModuleExportCommand = Command.CreateCommand(ModuleExport, CanImportExport);
             ModuleAppendCommand = Command.CreateCommand(ModuleAppend, CanImportExport);
             TopMostToogle = app.Settings.Get("Topmost", false);
+        }
+
+        private async void OpenBang()
+        {
+            await _app.ShowMessageBox(_bang);
         }
 
         public bool TopMostToogle

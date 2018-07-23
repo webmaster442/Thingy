@@ -15,7 +15,7 @@ namespace Thingy.Implementation.Bang
             Descriptions = new List<string>(11414);
 
             var asm = Assembly.GetAssembly(typeof(BangProvider));
-            using (Stream stream = asm.GetManifestResourceStream("Thingy.Implementation.BangProvider.Bangs.txt"))
+            using (Stream stream = asm.GetManifestResourceStream("Thingy.Implementation.Bang.Bangs.txt"))
             {
                 using (StreamReader reader = new StreamReader(stream))
                 {
