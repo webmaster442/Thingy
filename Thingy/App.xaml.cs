@@ -65,7 +65,7 @@ namespace Thingy
         public Task CloseMessageBox(CustomDialog messageBoxContent)
         {
             var mainwindow = (Current.MainWindow as MainWindow);
-            return mainwindow.ShowMetroDialogAsync(messageBoxContent);
+            return mainwindow.HideMetroDialogAsync(messageBoxContent);
         }
 
         public async void HandleFiles(string preferedModuleName, IList<string> files)
