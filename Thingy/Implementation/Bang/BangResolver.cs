@@ -5,9 +5,9 @@ using System.Web;
 
 namespace Thingy.Implementation.Bang
 {
-    internal class BangResolver
+    internal static class BangResolver
     {
-        public async Task<string> Resolve(string bangQuery)
+        public static async Task<string> Resolve(string bangQuery)
         {
             if (!bangQuery.StartsWith("!")) return null;
             var encoded = HttpUtility.UrlEncode(bangQuery);

@@ -38,8 +38,9 @@
                     controls:AutoCompleteBehavior.AutoCompleteItemsSource="{Binding BangProvider.Bangs}"
                     mah:TextBoxHelper.ClearTextButton="True"
                     mah:TextBoxHelper.Watermark="Type here to bang search"
+                    KeyDown="TextBox_KeyDown"
                     FontSize="22"
-                    Text="{Binding BangSearchText}" />
+                    Text="{Binding BangSearchText, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
             <StackPanel
                 Grid.Row="1"

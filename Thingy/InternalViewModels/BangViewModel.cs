@@ -2,6 +2,9 @@
 using Thingy.API;
 using Thingy.Implementation.Bang;
 using Thingy.InternalModules;
+using System.Diagnostics;
+using System;
+using System.Threading.Tasks;
 
 namespace Thingy.InternalViewModels
 {
@@ -34,13 +37,31 @@ namespace Thingy.InternalViewModels
             get;
         }
 
-        private void Search()
+        private async Task SearchTask()
         {
-
+            try
+            {
+                var resultUrl = await BangResolver.Resolve(BangSearchText);
+                Process p = new Process();
+                p.StartInfo.FileName = resultUrl;
+                p.StartInfo.UseShellExecute = true;
+                p.Start();
+            }
+            catch (Exception ex)
+            {
+                await _app.ShowMessageBox("Error", "Error while searching", DialogButtons.Ok);
+                _app.Log.Error(ex);
+            }
         }
 
-        private void Ok()
+        private async void Search()
         {
+            await SearchTask();
+        }
+
+        private async void Ok()
+        {
+            await SearchTask();
             View.Close();
         }
 

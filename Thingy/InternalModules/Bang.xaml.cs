@@ -1,5 +1,6 @@
 ﻿using AppLib.MVVM;
 using MahApps.Metro.Controls.Dialogs;
+using System.Windows.Input;
 using Thingy.API;
 using Thingy.InternalViewModels;
 
@@ -31,6 +32,14 @@ namespace Thingy.InternalModules
         public async void Close()
         {
             await _app.CloseMessageBox(this);
+        }
+
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                (DataContext as BangViewModel).SearchCommand.Execute(null);
+            }
         }
     }
 }
