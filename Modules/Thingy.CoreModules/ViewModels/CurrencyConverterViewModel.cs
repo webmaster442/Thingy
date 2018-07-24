@@ -71,7 +71,7 @@ namespace Thingy.CoreModules.ViewModels
                 LastUpdate = DateTime.Now;
                 CurrencyRates.Clear();
                 CurrencyTypes.Clear();
-                _app.Log.Error(ex);
+                _app.Log.Exception(ex);
                 await _app.ShowMessageBox("Error", "Error calling webservice", DialogButtons.Ok);
                 UpdateVisibility = Visibility.Collapsed;
             }
@@ -121,7 +121,7 @@ namespace Thingy.CoreModules.ViewModels
             }
             catch (Exception ex)
             {
-                _app.Log.Error(ex);
+                _app.Log.Exception(ex);
                 await _app.ShowMessageBox("Error", "Error on conversion.", DialogButtons.Ok);
                 Output = 0;
             }

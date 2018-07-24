@@ -131,7 +131,7 @@ namespace Thingy.MusicPlayer.ViewModels
             catch (Exception ex)
             {
                 await _app.ShowMessageBox("Error", "Can't download or parse given url", DialogButtons.Ok);
-                _app.Log.Error(ex);
+                _app.Log.Exception(ex);
             }
         }
 
@@ -155,7 +155,7 @@ namespace Thingy.MusicPlayer.ViewModels
                 catch (Exception ex)
                 {
                     await _app.ShowMessageBox("Error", "Can't download or parse given url", DialogButtons.Ok);
-                    _app.Log.Error(ex);
+                    _app.Log.Exception(ex);
                 }
             }
         }

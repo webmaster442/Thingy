@@ -54,7 +54,7 @@ namespace Thingy.Implementation
             }
             catch (Exception ex)
             {
-                _app.Log.Error(ex);
+                _app.Log.Exception(ex);
             }
         }
 
@@ -77,7 +77,7 @@ namespace Thingy.Implementation
                 }
                 catch (Exception ex)
                 {
-                    _app.Log.Error(ex);
+                    _app.Log.Exception(ex);
                 }
             }
         }

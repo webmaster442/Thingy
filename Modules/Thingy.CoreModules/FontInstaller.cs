@@ -51,7 +51,7 @@ namespace Thingy.CoreModules
             }
             catch (Exception ex)
             {
-                app.Log.Error(ex);
+                app.Log.Exception(ex);
                 await app.ShowMessageBox("Error", "Error installing fonts", DialogButtons.Ok);
             }
         }

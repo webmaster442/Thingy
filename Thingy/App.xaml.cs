@@ -286,7 +286,7 @@ namespace Thingy
         {
             Log.Divider();
             Log.Error("Fatal unhandled exception");
-            Log.Error(e.Exception);
+            Log.Exception(e.Exception);
             Log.WriteToFile();
             AppLib.WPF.Dialogs.Dialogs.ShowErrorDialog(e.Exception);
         }

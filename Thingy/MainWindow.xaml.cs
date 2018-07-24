@@ -77,7 +77,7 @@ namespace Thingy
             }
             catch (Exception ex)
             {
-                _app.Log.Error(ex);
+                _app.Log.Exception(ex);
             }
         }
 

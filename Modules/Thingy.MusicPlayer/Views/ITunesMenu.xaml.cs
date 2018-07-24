@@ -53,7 +53,7 @@ namespace Thingy.MusicPlayer.Views
             }
             catch (Exception ex)
             {
-                App?.Log.Error(ex);
+                App?.Log.Exception(ex);
                 await App?.ShowMessageBox("Error", "Error Accessing iTunes", DialogButtons.Ok);
                 IsEnabled = false;
                 return;
@@ -109,7 +109,7 @@ namespace Thingy.MusicPlayer.Views
                     catch (Exception ex)
                     {
                         await App?.ShowMessageBox("Error", "Selection can't be loaded", DialogButtons.Ok);
-                        App?.Log?.Error(ex);
+                        App?.Log?.Exception(ex);
                     }
                 }
             }

@@ -34,7 +34,7 @@ namespace Thingy.Implementation
             }
             catch (Exception ex)
             {
-                _log.Error(ex);
+                _log.Exception(ex);
                 _config = new Dictionary<string, string>();
             }
         }
@@ -68,7 +68,7 @@ namespace Thingy.Implementation
                 }
                 catch (Exception ex)
                 {
-                    _log.Error(ex);
+                    _log.Exception(ex);
                     return defaultValue;
                 }
             }
@@ -124,7 +124,7 @@ namespace Thingy.Implementation
             }
             catch (Exception ex)
             {
-                _log.Error(ex);
+                _log.Exception(ex);
             }
         }
 
@@ -140,7 +140,7 @@ namespace Thingy.Implementation
                 }
                 catch (Exception ex)
                 {
-                    _log.Error(ex);
+                    _log.Exception(ex);
                 }
             }
             else
@@ -153,7 +153,7 @@ namespace Thingy.Implementation
                 }
                 catch (Exception ex)
                 {
-                    _log.Error(ex);
+                    _log.Exception(ex);
                 }
             }
         }

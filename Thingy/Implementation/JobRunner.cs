@@ -20,7 +20,7 @@ namespace Thingy.Implementation
         private async Task ExceptionHandler(Type job, JobRunnerWindow win, Exception ex)
         {
             _app.Log.Error("Exception in job: {0}", job.FullName);
-            _app.Log.Error(ex);
+            _app.Log.Exception(ex);
             MessageBox.Show("Job terminated with an undhandled exception. See log for details");
             await Task.Delay(100);
             win.Close();

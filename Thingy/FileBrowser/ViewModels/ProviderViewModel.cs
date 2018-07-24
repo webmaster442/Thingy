@@ -117,7 +117,7 @@ namespace Thingy.FileBrowser.ViewModels
             catch (Exception ex)
             {
                 _app.Log.Error("Error starting program: {0}", programName);
-                _app.Log.Error(ex);
+                _app.Log.Exception(ex);
             }
         }
     }

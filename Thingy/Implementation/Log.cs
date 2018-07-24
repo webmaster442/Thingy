@@ -6,14 +6,21 @@ using Thingy.API;
 
 namespace Thingy.Implementation
 {
+    internal enum LogLevel
+    {
+        Debug,
+        Release
+    }
+
     internal class Log: ILog
     {
         private StringBuilder _buffer;
         private string _logfile;
+        private LogLevel _loglevel;
 
         private void CheckBufferClean()
         {
-            if (_buffer.Length > 2048 * 3)
+            if (_buffer.Length > 4096)
                 _buffer.Clear();
         }
 
@@ -32,7 +39,14 @@ namespace Thingy.Implementation
         {
             _buffer = new StringBuilder();
             _logfile = filename;
+#if DEBUG
+            _loglevel = LogLevel.Debug;
+#endif
+#if RELEASE
+            _loglevel = LogLevel.Release;
+#endif
         }
+
         public void BigDivider()
         {
             var line = "\r\n===================================================================================\r\n";
@@ -47,7 +61,7 @@ namespace Thingy.Implementation
             Debug.Write(line);
         }
 
-        public void Error(Exception ex)
+        public void Exception(Exception ex)
         {
             Divider();
             Write("exception", "\r\nmessage: {0}\r\nsource: {1}\r\nstacktrace: {2}", ex.Message, ex.Source, ex.StackTrace);
@@ -61,6 +75,7 @@ namespace Thingy.Implementation
 
         public void Info(string msg, params object[] additional)
         {
+            if (_loglevel == LogLevel.Release) return;
             Write("info", msg, additional);
         }
 
@@ -86,7 +101,7 @@ namespace Thingy.Implementation
             }
             catch (Exception ex)
             {
-                Error(ex);
+                Exception(ex);
             }
         }
     }

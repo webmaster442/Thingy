@@ -83,7 +83,7 @@ namespace Thingy.Controls
             }
             catch (Exception e)
             {
-                Application.Log.Error(e);
+                Application.Log.Exception(e);
                 VolumeSlider.IsEnabled = false;
                 BtnMute.IsEnabled = false;
             }

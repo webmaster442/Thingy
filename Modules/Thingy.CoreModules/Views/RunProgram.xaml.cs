@@ -62,7 +62,7 @@ namespace Thingy.CoreModules.Views
             }
             catch (Win32Exception ex)
             {
-                _app.Log.Error(ex);
+                _app.Log.Exception(ex);
             }
         }
     }

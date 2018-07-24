@@ -11,7 +11,7 @@ namespace Thingy.API
         /// Log an exception
         /// </summary>
         /// <param name="ex">Exception to log</param>
-        void Error(Exception ex);
+        void Exception(Exception ex);
         /// <summary>
         /// Log an error
         /// </summary>

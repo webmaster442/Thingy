@@ -50,7 +50,7 @@ namespace Thingy.InternalViewModels
             catch (Exception ex)
             {
                 await _app.ShowMessageBox("Error", "Error while searching", DialogButtons.Ok);
-                _app.Log.Error(ex);
+                _app.Log.Exception(ex);
             }
         }
 

@@ -47,7 +47,7 @@ namespace Thingy.FileBrowser.ViewModels
             catch (Exception ex)
             {
                 await _app.ShowMessageBox("Error", "File can't be started", DialogButtons.Ok);
-                _app.Log.Error(ex);
+                _app.Log.Exception(ex);
             }
         }
 
