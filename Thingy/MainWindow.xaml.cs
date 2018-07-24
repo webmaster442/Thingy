@@ -255,5 +255,16 @@ namespace Thingy
         {
             this.Topmost = value;
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+#if RELEASE
+            Visibility = Visibility.Collapsed;
+            e.Cancel = true;
+#endif
+#if DEBUG
+            e.Cancel = false;
+#endif
+        }
     }
 }

@@ -112,6 +112,7 @@ namespace Thingy.Implementation.Tray
 
         private void OpenProgramHandler(object sender, EventArgs e)
         {
+            App.Current.MainWindow.Visibility = System.Windows.Visibility.Visible;
             App.Current.MainWindow.Show();
             App.Current.MainWindow.WindowState = System.Windows.WindowState.Normal;
             App.Current.MainWindow.Activate();
