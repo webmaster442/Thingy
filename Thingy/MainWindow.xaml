@@ -52,7 +52,7 @@
                         <TextBlock
                             Margin="2,0"
                             VerticalAlignment="Center"
-                            Text="Bang!" />
+                            Text="Bang! (F2)" />
                     </StackPanel>
                 </Button>
                 <TextBlock
@@ -72,7 +72,7 @@
                         <TextBlock
                             Margin="2,0"
                             VerticalAlignment="Center"
-                            Text="Menu" />
+                            Text="Menu (Alt)" />
                     </StackPanel>
                 </Button>
                 <TextBlock

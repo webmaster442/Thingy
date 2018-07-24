@@ -158,7 +158,16 @@ namespace Thingy
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            if (e.SystemKey == Key.LeftAlt) OpenOrHideFlyout(nameof(MenuFlyout));
+            if (e.SystemKey == Key.LeftAlt ||
+                e.SystemKey == Key.RightAlt)
+            {
+                OpenOrHideFlyout(nameof(MenuFlyout));
+            }
+            else if (e.Key == Key.F2)
+            {
+                (DataContext as MainWindowViewModel)?.OpenBangCommand?.Execute(null);
+            }
+
             base.OnKeyDown(e);
         }
 

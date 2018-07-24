@@ -234,8 +234,16 @@ namespace Thingy
 
         public Task ShowMessageBox(CustomDialog messageBoxContent)
         {
-            var mainwindow = (Current.MainWindow as MainWindow);
-            return mainwindow.ShowMetroDialogAsync(messageBoxContent);
+            try
+            {
+                var mainwindow = (Current.MainWindow as MainWindow);
+                return mainwindow.ShowMetroDialogAsync(messageBoxContent);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Log.Exception(ex);
+                return Task.CompletedTask;
+            }
         }
 
         public void ShowStatusBarMenu(UserControl control, string title, bool AutoClose = true, int AutoCloseTimeMs = 5000)
