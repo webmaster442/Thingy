@@ -20,11 +20,13 @@ namespace Thingy.InternalViewModels
             CancelCommand = Command.CreateCommand(Cancel);
             OkCommand = Command.CreateCommand(Ok);
             SearchCommand = Command.CreateCommand(Search);
+            OpenHelpCommand = Command.CreateCommand(OpenHelp);
         }
 
         public DelegateCommand CancelCommand { get; }
         public DelegateCommand OkCommand { get; }
         public DelegateCommand SearchCommand { get; }
+        public DelegateCommand OpenHelpCommand { get; }
 
         public string BangSearchText
         {
@@ -42,16 +44,21 @@ namespace Thingy.InternalViewModels
             try
             {
                 var resultUrl = await BangResolver.Resolve(BangSearchText);
-                Process p = new Process();
-                p.StartInfo.FileName = resultUrl;
-                p.StartInfo.UseShellExecute = true;
-                p.Start();
+                RunWebBrowser(resultUrl);
             }
             catch (Exception ex)
             {
                 await _app.ShowMessageBox("Error", "Error while searching", DialogButtons.Ok);
                 _app.Log.Exception(ex);
             }
+        }
+
+        private void RunWebBrowser(string url)
+        {
+            Process p = new Process();
+            p.StartInfo.FileName = url;
+            p.StartInfo.UseShellExecute = true;
+            p.Start();
         }
 
         private async void Search()
@@ -68,6 +75,11 @@ namespace Thingy.InternalViewModels
         private void Cancel()
         {
             View.Close();
+        }
+
+        private void OpenHelp()
+        {
+            RunWebBrowser("https://duckduckgo.com/bang_lite.html");
         }
     }
 }

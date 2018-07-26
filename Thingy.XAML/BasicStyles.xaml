@@ -30,6 +30,32 @@
     </Style>
 
     <Style
+        x:Key="LinkButton"
+        TargetType="Button">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="Blue" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate
+                    TargetType="Button">
+                    <TextBlock
+                        Background="{TemplateBinding Background}"
+                        Text="{TemplateBinding Content}"
+                        TextDecorations="Underline" />
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Foreground" Value="Red" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style
         TargetType="TextBlock">
         <Setter Property="Margin" Value="1" />
         <Setter Property="VerticalAlignment" Value="Center" />
