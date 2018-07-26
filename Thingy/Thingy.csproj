@@ -237,6 +237,8 @@
     <Compile Include="InternalCode\BatteryInfo.cs" />
     <Compile Include="InternalCode\PerformanceInfo.cs" />
     <Compile Include="InternalCode\PowerManagement.cs" />
+    <Compile Include="InternalCode\WebBroswserLocator.cs" />
+    <Compile Include="InternalCode\WebBrowser.cs" />
     <Compile Include="InternalCode\WinSparkle.cs" />
     <Compile Include="InternalModules\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
