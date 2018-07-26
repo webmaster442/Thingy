@@ -44,7 +44,15 @@
                     <TextBlock
                         Background="{TemplateBinding Background}"
                         Text="{TemplateBinding Content}"
-                        TextDecorations="Underline" />
+                        TextDecorations="Underline">
+                        <TextBlock.InputBindings>
+                            <MouseBinding
+                                Command="{TemplateBinding Command}"
+                                CommandParameter="{TemplateBinding CommandParameter}"
+                                CommandTarget="{TemplateBinding CommandTarget}"
+                                MouseAction="LeftClick" />
+                        </TextBlock.InputBindings>
+                    </TextBlock>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Foreground" Value="Red" />

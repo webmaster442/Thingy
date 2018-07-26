@@ -8,10 +8,9 @@ namespace Thingy.InternalCode
 {
     internal static class WebBroswserLocator
     {
-        private static IList<WebBrowser> GetBrowsers()
+        public static IEnumerable<WebBrowser> GetBrowsers()
         {
             var browserKeys = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Clients\StartMenuInternet");
-            var ret = new List<WebBrowser>();
 
             if (browserKeys == null)
             {
@@ -36,17 +35,20 @@ namespace Thingy.InternalCode
 
                 RegistryKey browserIconPath = browserKey.OpenSubKey(@"DefaultIcon");
                 var icon = browserIconPath.GetValue(null).ToString().StripQuotes();
+                if (!string.IsNullOrEmpty(icon) && icon.Contains(","))
+                {
+                    var parts = icon.Split(',');
+                    icon = parts[0];
+                }
 
-                ret.Add(new WebBrowser(name, path, version, icon));
+                yield return new WebBrowser(name, path, version, icon);
             }
 
             WebBrowser edgeBrowser = GetEdgeVersion();
             if (edgeBrowser != null)
             {
-                ret.Add(edgeBrowser);
+                yield return edgeBrowser;
             }
-
-            return ret;
         }
 
         private const string registryEdge = @"SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\SystemAppData\Microsoft.MicrosoftEdge_8wekyb3d8bbwe\Schemas";

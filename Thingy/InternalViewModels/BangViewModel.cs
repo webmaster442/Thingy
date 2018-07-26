@@ -1,10 +1,12 @@
 ﻿using AppLib.MVVM;
+using System;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using Thingy.API;
 using Thingy.Implementation.Bang;
+using Thingy.InternalCode;
 using Thingy.InternalModules;
-using System.Diagnostics;
-using System;
-using System.Threading.Tasks;
 
 namespace Thingy.InternalViewModels
 {
@@ -20,13 +22,14 @@ namespace Thingy.InternalViewModels
             CancelCommand = Command.CreateCommand(Cancel);
             OkCommand = Command.CreateCommand(Ok);
             SearchCommand = Command.CreateCommand(Search);
-            OpenHelpCommand = Command.CreateCommand(OpenHelp);
+            OpenBangHelpCommand = Command.CreateCommand(OpenHelp);
+            Browsers = new ObservableCollection<WebBrowser>(WebBroswserLocator.GetBrowsers());
         }
 
         public DelegateCommand CancelCommand { get; }
         public DelegateCommand OkCommand { get; }
         public DelegateCommand SearchCommand { get; }
-        public DelegateCommand OpenHelpCommand { get; }
+        public DelegateCommand OpenBangHelpCommand { get; }
 
         public string BangSearchText
         {
@@ -35,6 +38,11 @@ namespace Thingy.InternalViewModels
         }
 
         public BangProvider BangProvider
+        {
+            get;
+        }
+
+        public ObservableCollection<WebBrowser> Browsers
         {
             get;
         }
