@@ -72,6 +72,7 @@ namespace Thingy.InternalViewModels
         private async void Search()
         {
             await SearchTask();
+            View.Close();
         }
 
         private async void Ok()

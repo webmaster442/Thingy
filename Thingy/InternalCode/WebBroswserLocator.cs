@@ -62,7 +62,10 @@ namespace Thingy.InternalCode
                 Match result = Regex.Match(version, "(((([0-9.])\\d)+){1})");
                 if (result.Success)
                 {
-                    return new WebBrowser("Edge", "start microsoft-edge:", result.Value, null);
+                    var iconpath = Environment.ExpandEnvironmentVariables(@"%windir%\SystemApps\Microsoft.MicrosoftEdge_8wekyb3d8bbwe\MicrosoftEdge.exe");
+
+                    return
+                        new WebBrowser("Edge", "start microsoft-edge:", result.Value, iconpath);
                 }
             }
             return null;
