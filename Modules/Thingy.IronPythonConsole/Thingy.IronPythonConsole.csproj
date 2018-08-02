@@ -60,6 +60,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -80,6 +81,21 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PythonConsole\CommandLineHistory.cs" />
+    <Compile Include="PythonConsole\PythonCompletionData.cs" />
+    <Compile Include="PythonConsole\PythonConfig.cs" />
+    <Compile Include="PythonConsole\PythonConsole.cs" />
+    <Compile Include="PythonConsole\PythonConsoleCompletionDataProvider.cs" />
+    <Compile Include="PythonConsole\PythonConsoleCompletionWindow.cs" />
+    <Compile Include="PythonConsole\PythonConsoleControl.xaml.cs">
+      <DependentUpon>PythonConsoleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PythonConsole\PythonConsoleHighlightingColorizer.cs" />
+    <Compile Include="PythonConsole\PythonConsoleHost.cs" />
+    <Compile Include="PythonConsole\PythonConsolePad.cs" />
+    <Compile Include="PythonConsole\PythonEditingCommandHandler.cs" />
+    <Compile Include="PythonConsole\PythonOutputStream.cs" />
+    <Compile Include="PythonConsole\PythonTextEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\applib\AppLib.WPF\AppLib.WPF.csproj">
@@ -93,6 +109,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="PythonConsole\Resources\Python.xshd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="PythonConsole\PythonConsoleControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
