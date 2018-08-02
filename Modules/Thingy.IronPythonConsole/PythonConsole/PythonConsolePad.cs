@@ -1,48 +1,43 @@
 ﻿// Copyright (c) 2010 Joe Moorhouse
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using ICSharpCode.AvalonEdit;
 using System.Windows.Media;
 
 namespace PythonConsoleControl
-{   
-    public class PythonConsolePad 
+{
+    public class PythonConsolePad
     {
-        PythonTextEditor pythonTextEditor;
-        TextEditor textEditor;
-        PythonConsoleHost host;
+        private PythonConsoleHost _host;
+        private PythonTextEditor _pythonTextEditor;
+        private TextEditor _textEditor;
 
         public PythonConsolePad()
         {
-            textEditor = new TextEditor();
-            pythonTextEditor = new PythonTextEditor(textEditor);
-            host = new PythonConsoleHost(pythonTextEditor);
-            host.Run();
-            textEditor.FontFamily = new FontFamily("Consolas");
-            textEditor.FontSize = 12;
-        }
-
-        public TextEditor Control
-        {
-            get { return textEditor; }
-        }
-
-        public PythonConsoleHost Host
-        {
-            get { return host; }
+            _textEditor = new TextEditor();
+            _pythonTextEditor = new PythonTextEditor(_textEditor);
+            _host = new PythonConsoleHost(_pythonTextEditor);
+            _host.Run();
+            _textEditor.FontFamily = new FontFamily("Consolas");
+            _textEditor.FontSize = 12;
         }
 
         public PythonConsole Console
         {
-            get { return host.Console; }
+            get { return _host.Console; }
         }
 
+        public TextEditor Control
+        {
+            get { return _textEditor; }
+        }
+
+        public PythonConsoleHost Host
+        {
+            get { return _host; }
+        }
         public void Dispose()
         {
-            host.Dispose();
+            _host.Dispose();
         }
     }
 }

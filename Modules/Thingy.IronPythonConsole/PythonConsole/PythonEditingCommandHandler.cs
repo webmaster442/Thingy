@@ -16,16 +16,11 @@ namespace PythonConsoleControl
     /// <summary>
     /// Commands that only involve the text editor are outsourced to here.
     /// </summary>
-    class PythonEditingCommandHandler
+    internal partial class PythonEditingCommandHandler
     {
-        PythonTextEditor textEditor;
-        TextArea textArea;
-        
-        public PythonEditingCommandHandler(PythonTextEditor textEditor)
-        {
-            this.textEditor = textEditor;
-            this.textArea = textEditor.textArea;
-        }
+        private const string LineSelectedType = "MSDEVLineSelect";
+        private TextArea _textArea;
+        private PythonTextEditor _textEditor;
 
         internal static void CanCutOrCopy(object target, CanExecuteRoutedEventArgs args)
         {
@@ -38,46 +33,13 @@ namespace PythonConsoleControl
             }
         }
 
-        internal static TextArea GetTextArea(object target)
+        internal static void CanDelete(object target, CanExecuteRoutedEventArgs args)
         {
-            return target as TextArea;
-        }
-
-        internal static void OnCopy(object target, ExecutedRoutedEventArgs args)
-        {
+            // HasSomethingSelected for delete command
             TextArea textArea = GetTextArea(target);
             if (textArea != null && textArea.Document != null)
             {
-                if (textArea.Selection.IsEmpty && textArea.Options.CutCopyWholeLine)
-                {
-                    DocumentLine currentLine = textArea.Document.GetLineByNumber(textArea.Caret.Line);
-                    CopyWholeLine(textArea, currentLine);
-                }
-                else
-                {
-                    CopySelectedText(textArea);
-                }
-                args.Handled = true;
-            }
-        }
-
-        internal static void OnCut(object target, ExecutedRoutedEventArgs args)
-        {
-            TextArea textArea = GetTextArea(target);
-            if (textArea != null && textArea.Document != null)
-            {
-                if (textArea.Selection.IsEmpty && textArea.Options.CutCopyWholeLine)
-                {
-                    DocumentLine currentLine = textArea.Document.GetLineByNumber(textArea.Caret.Line);
-                    CopyWholeLine(textArea, currentLine);
-                    textArea.Document.Remove(currentLine.Offset, currentLine.TotalLength);
-                }
-                else
-                {
-                    CopySelectedText(textArea);
-                    textArea.Selection.ReplaceSelectionWithText(string.Empty);
-                }
-                textArea.Caret.BringCaretToView();
+                args.CanExecute = !textArea.Selection.IsEmpty;
                 args.Handled = true;
             }
         }
@@ -132,6 +94,50 @@ namespace PythonConsoleControl
             //textArea.OnTextCopied(new TextEventArgs(text));
         }
 
+        internal static TextArea GetTextArea(object target)
+        {
+            return target as TextArea;
+        }
+
+        internal static void OnCopy(object target, ExecutedRoutedEventArgs args)
+        {
+            TextArea textArea = GetTextArea(target);
+            if (textArea != null && textArea.Document != null)
+            {
+                if (textArea.Selection.IsEmpty && textArea.Options.CutCopyWholeLine)
+                {
+                    DocumentLine currentLine = textArea.Document.GetLineByNumber(textArea.Caret.Line);
+                    CopyWholeLine(textArea, currentLine);
+                }
+                else
+                {
+                    CopySelectedText(textArea);
+                }
+                args.Handled = true;
+            }
+        }
+
+        internal static void OnCut(object target, ExecutedRoutedEventArgs args)
+        {
+            TextArea textArea = GetTextArea(target);
+            if (textArea != null && textArea.Document != null)
+            {
+                if (textArea.Selection.IsEmpty && textArea.Options.CutCopyWholeLine)
+                {
+                    DocumentLine currentLine = textArea.Document.GetLineByNumber(textArea.Caret.Line);
+                    CopyWholeLine(textArea, currentLine);
+                    textArea.Document.Remove(currentLine.Offset, currentLine.TotalLength);
+                }
+                else
+                {
+                    CopySelectedText(textArea);
+                    textArea.Selection.ReplaceSelectionWithText(string.Empty);
+                }
+                textArea.Caret.BringCaretToView();
+                args.Handled = true;
+            }
+        }
+
         internal static ExecutedRoutedEventHandler OnDelete(RoutedUICommand selectingCommand)
         {
             return (target, args) =>
@@ -152,9 +158,9 @@ namespace PythonConsoleControl
                             bool hasSomethingDeletable = false;
                             foreach (ISegment s in textArea.Selection.Segments)
                             {
-                                method = textAreaType.GetMethod("GetDeletableSegments", BindingFlags.Instance | BindingFlags.NonPublic); 
+                                method = textAreaType.GetMethod("GetDeletableSegments", BindingFlags.Instance | BindingFlags.NonPublic);
                                 //textArea.GetDeletableSegments(s).Length > 0)
-                                if ((int)method.Invoke(textArea, new Object[]{s}) > 0) 
+                                if ((int)method.Invoke(textArea, new Object[] { s }) > 0)
                                 {
                                     hasSomethingDeletable = true;
                                     break;
@@ -169,7 +175,7 @@ namespace PythonConsoleControl
                             }
                         }
                         method = textAreaType.GetMethod("RemoveSelectedText", BindingFlags.Instance | BindingFlags.NonPublic);
-                        method.Invoke(textArea, new Object[]{});
+                        method.Invoke(textArea, new Object[] { });
                         //textArea.RemoveSelectedText();
                     }
                     textArea.Caret.BringCaretToView();
@@ -178,42 +184,10 @@ namespace PythonConsoleControl
             };
         }
 
-        internal static void CanDelete(object target, CanExecuteRoutedEventArgs args)
+        public PythonEditingCommandHandler(PythonTextEditor textEditor)
         {
-            // HasSomethingSelected for delete command
-            TextArea textArea = GetTextArea(target);
-            if (textArea != null && textArea.Document != null)
-            {
-                args.CanExecute = !textArea.Selection.IsEmpty;
-                args.Handled = true;
-            }
-        }
-
-        const string LineSelectedType = "MSDEVLineSelect";  // This is the type VS 2003 and 2005 use for flagging a whole line copy
-
-        struct VerySimpleSegment : ISegment
-	    {
-		    public readonly int Offset, Length;
-		
-		    int ISegment.Offset {
-			    get { return Offset; }
-		    }
-		
-		    int ISegment.Length {
-			    get { return Length; }
-		    }
-		
-		    public int EndOffset {
-			    get {
-				    return Offset + Length;
-			    }
-		    }
-
-            public VerySimpleSegment(int offset, int length)
-		    {
-			    this.Offset = offset;
-			    this.Length = length;
-		    }
+            _textEditor = textEditor;
+            _textArea = textEditor.TextArea;
         }
     }
 }

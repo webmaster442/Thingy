@@ -96,6 +96,7 @@
     <Compile Include="PythonConsole\PythonEditingCommandHandler.cs" />
     <Compile Include="PythonConsole\PythonOutputStream.cs" />
     <Compile Include="PythonConsole\PythonTextEditor.cs" />
+    <Compile Include="PythonConsole\VerySimpleSegment.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\applib\AppLib.WPF\AppLib.WPF.csproj">

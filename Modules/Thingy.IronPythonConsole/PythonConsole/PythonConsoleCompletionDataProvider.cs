@@ -16,90 +16,16 @@ namespace PythonConsoleControl
     /// <summary>
     /// Provides code completion for the Python Console window.
     /// </summary>
-    public class PythonConsoleCompletionDataProvider 
+    public class PythonConsoleCompletionDataProvider
     {
-        CommandLine commandLine;
-        internal volatile bool AutocompletionInProgress = false;
+        private CommandLine _commandLine;
+        private bool _excludeCallables;
 
-        bool excludeCallables;
-        public bool ExcludeCallables { get { return excludeCallables; } set { excludeCallables = value; } }
-
-        public PythonConsoleCompletionDataProvider(CommandLine commandLine)//IMemberProvider memberProvider)
+        private string GetName(string text)
         {
-            this.commandLine = commandLine;
-        }
-
-        /// <summary>
-        /// Generates completion data for the specified text. The text should be everything before
-        /// the dot character that triggered the completion. The text can contain the command line prompt
-        /// '>>>' as this will be ignored.
-        /// </summary>
-        public ICompletionData[] GenerateCompletionData(string line)
-        {         
-            List<PythonCompletionData> items = new List<PythonCompletionData>(); //DefaultCompletionData
-
-            string name = GetName(line);
-            // A very simple test of callables!
-            if (excludeCallables && name.Contains(')')) return null;
-
-            if (!String.IsNullOrEmpty(name))
-            {
-                System.IO.Stream stream = commandLine.ScriptScope.Engine.Runtime.IO.OutputStream;
-                try
-                {
-                    AutocompletionInProgress = true;
-                    // Another possibility:
-                    //commandLine.ScriptScope.Engine.Runtime.IO.SetOutput(new System.IO.MemoryStream(), Encoding.UTF8);
-                    //object value = commandLine.ScriptScope.Engine.CreateScriptSourceFromString(name, SourceCodeKind.Expression).Execute(commandLine.ScriptScope);
-                    //IList<string> members = commandLine.ScriptScope.Engine.Operations.GetMemberNames(value);
-                    Type type = TryGetType(name);
-                    // Use Reflection for everything except in-built Python types and COM pbjects. 
-                    if (type != null && type.Namespace != "IronPython.Runtime" && (type.Name != "__ComObject"))
-                    {
-                        PopulateFromCLRType(items, type, name);
-                    }
-                    else
-                    {
-                        string dirCommand = "dir(" + name + ")";
-                        object value = commandLine.ScriptScope.Engine.CreateScriptSourceFromString(dirCommand, SourceCodeKind.Expression).Execute(commandLine.ScriptScope);
-                        AutocompletionInProgress = false;
-                        foreach (object member in (value as IronPython.Runtime.List))
-                        {
-                            items.Add(new PythonCompletionData((string)member, name, commandLine, false));
-                        }
-                    }
-                }
-                catch (ThreadAbortException tae)
-                {
-                    if (tae.ExceptionState is Microsoft.Scripting.KeyboardInterruptException) Thread.ResetAbort();
-                }
-                catch
-                {
-                    // Do nothing.
-                }
-                commandLine.ScriptScope.Engine.Runtime.IO.SetOutput(stream, Encoding.UTF8);
-                AutocompletionInProgress = false;
-            }
-            return items.ToArray();
-        }
-
-        protected Type TryGetType(string name)
-        {
-            string tryGetType = name + ".GetType()";
-            object type = null;
-            try
-            {
-                type = commandLine.ScriptScope.Engine.CreateScriptSourceFromString(tryGetType, SourceCodeKind.Expression).Execute(commandLine.ScriptScope);
-            }
-            catch (ThreadAbortException tae)
-            {
-                if (tae.ExceptionState is Microsoft.Scripting.KeyboardInterruptException) Thread.ResetAbort();
-            }
-            catch
-            {
-                // Do nothing.
-            }
-            return type as Type;
+            text = text.Replace("\t", "   ");
+            int startIndex = text.LastIndexOf(' ');
+            return text.Substring(startIndex + 1).Trim('.');
         }
 
         protected void PopulateFromCLRType(List<PythonCompletionData> items, Type type, string name)
@@ -133,8 +59,89 @@ namespace PythonConsoleControl
             }
             foreach (string completion in completionsList)
             {
-                items.Add(new PythonCompletionData(completion, name, commandLine, true));
+                items.Add(new PythonCompletionData(completion, name, _commandLine, true));
             }
+        }
+
+        protected Type TryGetType(string name)
+        {
+            string tryGetType = name + ".GetType()";
+            object type = null;
+            try
+            {
+                type = _commandLine.ScriptScope.Engine.CreateScriptSourceFromString(tryGetType, SourceCodeKind.Expression).Execute(_commandLine.ScriptScope);
+            }
+            catch (ThreadAbortException tae)
+            {
+                if (tae.ExceptionState is Microsoft.Scripting.KeyboardInterruptException) Thread.ResetAbort();
+            }
+            catch
+            {
+                // Do nothing.
+            }
+            return type as Type;
+        }
+
+        internal volatile bool AutocompletionInProgress = false;
+
+        public PythonConsoleCompletionDataProvider(CommandLine commandLine)//IMemberProvider memberProvider)
+        {
+            this._commandLine = commandLine;
+        }
+
+        public bool ExcludeCallables { get { return _excludeCallables; } set { _excludeCallables = value; } }
+        /// <summary>
+        /// Generates completion data for the specified text. The text should be everything before
+        /// the dot character that triggered the completion. The text can contain the command line prompt
+        /// '>>>' as this will be ignored.
+        /// </summary>
+        public ICompletionData[] GenerateCompletionData(string line)
+        {
+            List<PythonCompletionData> items = new List<PythonCompletionData>(); //DefaultCompletionData
+
+            string name = GetName(line);
+            // A very simple test of callables!
+            if (_excludeCallables && name.Contains(')')) return null;
+
+            if (!String.IsNullOrEmpty(name))
+            {
+                System.IO.Stream stream = _commandLine.ScriptScope.Engine.Runtime.IO.OutputStream;
+                try
+                {
+                    AutocompletionInProgress = true;
+                    // Another possibility:
+                    //commandLine.ScriptScope.Engine.Runtime.IO.SetOutput(new System.IO.MemoryStream(), Encoding.UTF8);
+                    //object value = commandLine.ScriptScope.Engine.CreateScriptSourceFromString(name, SourceCodeKind.Expression).Execute(commandLine.ScriptScope);
+                    //IList<string> members = commandLine.ScriptScope.Engine.Operations.GetMemberNames(value);
+                    Type type = TryGetType(name);
+                    // Use Reflection for everything except in-built Python types and COM pbjects.
+                    if (type != null && type.Namespace != "IronPython.Runtime" && (type.Name != "__ComObject"))
+                    {
+                        PopulateFromCLRType(items, type, name);
+                    }
+                    else
+                    {
+                        string dirCommand = "dir(" + name + ")";
+                        object value = _commandLine.ScriptScope.Engine.CreateScriptSourceFromString(dirCommand, SourceCodeKind.Expression).Execute(_commandLine.ScriptScope);
+                        AutocompletionInProgress = false;
+                        foreach (object member in (value as IronPython.Runtime.List))
+                        {
+                            items.Add(new PythonCompletionData((string)member, name, _commandLine, false));
+                        }
+                    }
+                }
+                catch (ThreadAbortException tae)
+                {
+                    if (tae.ExceptionState is Microsoft.Scripting.KeyboardInterruptException) Thread.ResetAbort();
+                }
+                catch
+                {
+                    // Do nothing.
+                }
+                _commandLine.ScriptScope.Engine.Runtime.IO.SetOutput(stream, Encoding.UTF8);
+                AutocompletionInProgress = false;
+            }
+            return items.ToArray();
         }
 
         /// <summary>
@@ -144,7 +151,7 @@ namespace PythonConsoleControl
         /// </summary>
         public void GenerateDescription(string stub, string item, DescriptionUpdateDelegate updateDescription, bool isInstance)
         {
-            System.IO.Stream stream = commandLine.ScriptScope.Engine.Runtime.IO.OutputStream;
+            System.IO.Stream stream = _commandLine.ScriptScope.Engine.Runtime.IO.OutputStream;
             string description = "";
             if (!String.IsNullOrEmpty(item))
             {
@@ -158,7 +165,7 @@ namespace PythonConsoleControl
                     string docCommand = "";
                     if (isInstance) docCommand = "type(" + stub + ")" + "." + item + ".__doc__";
                     else docCommand = stub + "." + item + ".__doc__";
-                    object value = commandLine.ScriptScope.Engine.CreateScriptSourceFromString(docCommand, SourceCodeKind.Expression).Execute(commandLine.ScriptScope);
+                    object value = _commandLine.ScriptScope.Engine.CreateScriptSourceFromString(docCommand, SourceCodeKind.Expression).Execute(_commandLine.ScriptScope);
                     description = (string)value;
                     AutocompletionInProgress = false;
                 }
@@ -172,18 +179,9 @@ namespace PythonConsoleControl
                     AutocompletionInProgress = false;
                     // Do nothing.
                 }
-                commandLine.ScriptScope.Engine.Runtime.IO.SetOutput(stream, Encoding.UTF8);
+                _commandLine.ScriptScope.Engine.Runtime.IO.SetOutput(stream, Encoding.UTF8);
                 updateDescription(description);
             }
         }
-
-
-        string GetName(string text)
-        {
-            text = text.Replace("\t", "   ");
-            int startIndex = text.LastIndexOf(' ');
-            return text.Substring(startIndex + 1).Trim('.');
-        }
-
     }
 }

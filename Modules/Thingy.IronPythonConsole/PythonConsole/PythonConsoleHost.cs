@@ -17,22 +17,18 @@ namespace PythonConsoleControl
     /// <summary>
     /// Hosts the python console.
     /// </summary>
-    public class PythonConsoleHost : ConsoleHost, IDisposable
+    public sealed class PythonConsoleHost : ConsoleHost, IDisposable
     {
-        Thread thread;
-        PythonTextEditor textEditor;
-        PythonConsole pythonConsole;
+        private PythonConsole _pythonConsole;
+        private PythonTextEditor _textEditor;
+        private Thread _thread;
 
-        public event ConsoleCreatedEventHandler ConsoleCreated;
-
-        public PythonConsoleHost(PythonTextEditor textEditor)
+        /// <summary>
+        /// Runs the console.
+        /// </summary>
+        private void RunConsole()
         {
-            this.textEditor = textEditor;
-        }
-
-        public PythonConsole Console
-        {
-            get { return pythonConsole; }
+            Run(new string[] { "-X:FullFrames" });
         }
 
         protected override Type Provider
@@ -40,37 +36,9 @@ namespace PythonConsoleControl
             get { return typeof(PythonContext); }
         }
 
-        /// <summary>
-        /// Runs the console host in its own thread.
-        /// </summary>
-        public void Run()
-        {
-            thread = new Thread(RunConsole);
-            thread.IsBackground = true;
-            thread.Start();
-        }
-
-        public void Dispose()
-        {
-            if (pythonConsole != null)
-            {
-                pythonConsole.Dispose();
-            }
-
-            if (thread != null)
-            {
-                thread.Join();
-            }
-        }
-
         protected override CommandLine CreateCommandLine()
         {
             return new PythonCommandLine();
-        }
-
-        protected override OptionsParser CreateOptionsParser()
-        {
-            return new PythonOptionsParser();
         }
 
         /// <remarks>
@@ -81,23 +49,15 @@ namespace PythonConsoleControl
         /// </remarks>
         protected override IConsole CreateConsole(ScriptEngine engine, CommandLine commandLine, ConsoleOptions options)
         {
-            SetOutput(new PythonOutputStream(textEditor));
-            pythonConsole = new PythonConsole(textEditor, commandLine);
-            if (ConsoleCreated != null) ConsoleCreated(this, EventArgs.Empty);
-            return pythonConsole;
+            SetOutput(new PythonOutputStream(_textEditor));
+            _pythonConsole = new PythonConsole(_textEditor, commandLine);
+            ConsoleCreated?.Invoke(this, EventArgs.Empty);
+            return _pythonConsole;
         }
 
-        protected virtual void SetOutput(PythonOutputStream stream)
+        protected override OptionsParser CreateOptionsParser()
         {
-            Runtime.IO.SetOutput(stream, Encoding.UTF8);
-        }
-
-        /// <summary>
-        /// Runs the console.
-        /// </summary>
-        void RunConsole()
-        {
-            this.Run(new string[] { "-X:FullFrames" });
+            return new PythonOptionsParser();
         }
 
         protected override ScriptRuntimeSetup CreateRuntimeSetup()
@@ -113,15 +73,6 @@ namespace PythonConsoleControl
             return srs;
         }
 
-        protected override void ParseHostOptions(string[] args)
-        {
-            // Python doesn't want any of the DLR base options.
-            foreach (string s in args)
-            {
-                Options.IgnoredArgs.Add(s);
-            }
-        }
-
         protected override void ExecuteInternal()
         {
             if (PythonConfig.SearchPaths?.Any() ?? false)
@@ -134,6 +85,59 @@ namespace PythonConsoleControl
             var pc = HostingHelpers.GetLanguageContext(Engine) as PythonContext;
             pc.SetModuleState(typeof(ScriptEngine), Engine);
             base.ExecuteInternal();
+        }
+
+        protected override void ParseHostOptions(string[] args)
+        {
+            // Python doesn't want any of the DLR base options.
+            foreach (string s in args)
+            {
+                Options.IgnoredArgs.Add(s);
+            }
+        }
+
+        private void SetOutput(PythonOutputStream stream)
+        {
+            Runtime.IO.SetOutput(stream, Encoding.UTF8);
+        }
+
+        public event ConsoleCreatedEventHandler ConsoleCreated;
+
+        public PythonConsoleHost(PythonTextEditor textEditor)
+        {
+            this._textEditor = textEditor;
+        }
+
+        public PythonConsole Console
+        {
+            get { return _pythonConsole; }
+        }
+
+        public void Dispose()
+        {
+            if (_pythonConsole != null)
+            {
+                _pythonConsole.Dispose();
+                _pythonConsole = null;
+            }
+
+            if (_thread != null)
+            {
+                _thread.Join();
+                _thread = null;
+            }
+        }
+
+        /// <summary>
+        /// Runs the console host in its own thread.
+        /// </summary>
+        public void Run()
+        {
+            _thread = new Thread(RunConsole)
+            {
+                IsBackground = true
+            };
+            _thread.Start();
         }
     }
 }

@@ -11,28 +11,16 @@ namespace PythonConsoleControl
     /// </summary>
     public class PythonConsoleHighlightingColorizer : HighlightingColorizer
     {
-        TextDocument document;
-
-        /// <summary>
-        /// Creates a new HighlightingColorizer instance.
-        /// </summary>
-        /// <param name="ruleSet">The root highlighting rule set.</param>
-        public PythonConsoleHighlightingColorizer(IHighlightingDefinition highlightingDefinition, TextDocument document)
-            : base(new DocumentHighlighter(document, highlightingDefinition  ))
-        {
-            if (document == null)
-                throw new ArgumentNullException("document");
-            this.document = document;
-        }
+        private TextDocument _document;
 
         /// <inheritdoc/>
         protected override void ColorizeLine(DocumentLine line)
         {
-            IHighlighter highlighter = CurrentContext.TextView.Services.GetService(typeof(IHighlighter)) as IHighlighter;
-            string lineString = document.GetText(line);
-            if (highlighter != null)
+            string lineString = _document.GetText(line);
+            if (CurrentContext.TextView.Services.GetService(typeof(IHighlighter)) is IHighlighter highlighter)
             {
-                if (lineString.Length < 3 || lineString.Substring(0, 3) == ">>>" || lineString.Substring(0, 3) == "...") {
+                if (lineString.Length < 3 || lineString.Substring(0, 3) == ">>>" || lineString.Substring(0, 3) == "...")
+                {
                     HighlightedLine hl = highlighter.HighlightLine(line.LineNumber);
                     foreach (HighlightedSection section in hl.Sections)
                     {
@@ -40,9 +28,20 @@ namespace PythonConsoleControl
                                        visualLineElement => ApplyColorToElement(visualLineElement, section.Color));
                     }
                 }
-                else { // Could add foreground colour functionality here.
+                else
+                { // Could add foreground colour functionality here.
                 }
             }
+        }
+
+        /// <summary>
+        /// Creates a new HighlightingColorizer instance.
+        /// </summary>
+        /// <param name="ruleSet">The root highlighting rule set.</param>
+        public PythonConsoleHighlightingColorizer(IHighlightingDefinition highlightingDefinition, TextDocument document)
+            : base(new DocumentHighlighter(document, highlightingDefinition))
+        {
+            _document = document ?? throw new ArgumentNullException("document");
         }
     }
 }

@@ -7,7 +7,7 @@ namespace PythonConsoleControl
 {
     public class PythonOutputStream : Stream
     {
-        PythonTextEditor textEditor;
+        private PythonTextEditor textEditor;
 
         public PythonOutputStream(PythonTextEditor textEditor)
         {
@@ -44,6 +44,11 @@ namespace PythonConsoleControl
         {
         }
 
+        public override int Read(byte[] buffer, int offset, int count)
+        {
+            return 0;
+        }
+
         public override long Seek(long offset, SeekOrigin origin)
         {
             return 0;
@@ -52,12 +57,6 @@ namespace PythonConsoleControl
         public override void SetLength(long value)
         {
         }
-
-        public override int Read(byte[] buffer, int offset, int count)
-        {
-            return 0;
-        }
-
         /// <summary>
         /// Assumes the bytes are UTF8 and writes them to the text editor.
         /// </summary>

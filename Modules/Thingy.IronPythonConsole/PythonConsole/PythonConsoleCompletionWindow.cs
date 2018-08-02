@@ -15,163 +15,100 @@ using System.Windows.Threading;
 namespace PythonConsoleControl
 {
     public delegate void DescriptionUpdateDelegate(string description);
-    
+
     /// <summary>
     /// The code completion window.
     /// </summary>
     public class PythonConsoleCompletionWindow : CompletionWindowBase
     {
-        readonly CompletionList completionList = new CompletionList();
-        ToolTip toolTip = new ToolTip();
-        DispatcherTimer updateDescription;
-        TimeSpan updateDescriptionInterval;
-        PythonTextEditor textEditor;
-        PythonConsoleCompletionDataProvider completionDataProvider;
+        private readonly CompletionList _completionList;
+        private PythonTextEditor _textEditor;
+        private ToolTip _toolTip = new ToolTip();
+        private PythonConsoleCompletionDataProvider _completionDataProvider;
+        private DispatcherTimer _updateDescription;
+        private TimeSpan _updateDescriptionInterval;
 
-        /// <summary>
-        /// Gets the completion list used in this completion window.
-        /// </summary>
-        public CompletionList CompletionList
+        private void AttachEvents()
         {
-            get { return completionList; }
+            TextArea.Caret.PositionChanged += CaretPositionChanged;
+            TextArea.MouseWheel += TextArea_MouseWheel;
+            TextArea.PreviewTextInput += TextArea_PreviewTextInput;
         }
 
-        /// <summary>
-        /// Creates a new code completion window.
-        /// </summary>
-        public PythonConsoleCompletionWindow(TextArea textArea, PythonTextEditor textEditor)
-            : base(textArea)
+        private void CaretPositionChanged(object sender, EventArgs e)
         {
-            // keep height automatic
-            this.completionDataProvider = textEditor.CompletionProvider;
-            this.textEditor = textEditor;
-            this.CloseAutomatically = true;
-            this.SizeToContent = SizeToContent.Height;
-            this.MaxHeight = 300;
-            this.Width = 250;
-            this.Content = completionList;
-            // prevent user from resizing window to 0x0
-            this.MinHeight = 15;
-            this.MinWidth = 30;
-
-            toolTip.PlacementTarget = this;
-            toolTip.Placement = PlacementMode.Right;
-            toolTip.Closed += toolTip_Closed;
-
-            completionList.InsertionRequested += completionList_InsertionRequested;
-            completionList.SelectionChanged += completionList_SelectionChanged;
-            AttachEvents();
-
-            updateDescription = new DispatcherTimer();
-            updateDescription.Tick += new EventHandler(completionList_UpdateDescription);
-            updateDescriptionInterval = TimeSpan.FromSeconds(0.3);
-
-            EventInfo eventInfo = typeof(TextView).GetEvent("ScrollOffsetChanged");
-            Delegate methodDelegate = Delegate.CreateDelegate(eventInfo.EventHandlerType, (this as CompletionWindowBase), "TextViewScrollOffsetChanged");
-            eventInfo.RemoveEventHandler(this.TextArea.TextView, methodDelegate);
-        }
-
-        #region ToolTip handling
-        void toolTip_Closed(object sender, RoutedEventArgs e)
-        {
-            // Clear content after tooltip is closed.
-            // We cannot clear is immediately when setting IsOpen=false
-            // because the tooltip uses an animation for closing.
-            if (toolTip != null)
-                toolTip.Content = null;
-        }
-
-        void completionList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var item = completionList.SelectedItem;
-            if (item == null)
+            int offset = TextArea.Caret.Offset;
+            if (offset == StartOffset)
             {
-                updateDescription.Stop();
+                if (CloseAutomatically && CloseWhenCaretAtBeginning)
+                {
+                    Close();
+                }
+                else
+                {
+                    _completionList.SelectItem(string.Empty);
+                }
                 return;
+            }
+            if (offset < StartOffset || offset > EndOffset)
+            {
+                if (CloseAutomatically)
+                {
+                    Close();
+                }
             }
             else
             {
-                updateDescription.Interval = updateDescriptionInterval;
-                updateDescription.Start();
-            }
-        }
-
-        void completionList_UpdateDescription(Object sender, EventArgs e)
-        {
-            updateDescription.Stop();
-            textEditor.UpdateCompletionDescription();
-        }
-
-        /// <summary>
-        /// Update the description of the current item. This is typically called from a separate thread from the main UI thread.
-        /// </summary>
-        internal void UpdateCurrentItemDescription()
-        {
-            if (textEditor.StopCompletion())
-            {
-                updateDescription.Interval = updateDescriptionInterval;
-                updateDescription.Start();
-                return;
-            }
-            string stub = "";
-            string item = "";
-            bool isInstance = false;
-            textEditor.textEditor.Dispatcher.Invoke(new Action(delegate()
-            {
-                PythonCompletionData data = (completionList.SelectedItem as PythonCompletionData);
-                if (data == null || toolTip == null)
-                    return;
-                stub = data.Stub;
-                item = data.Text;
-                isInstance = data.IsInstance;
-            }));
-            // Send to the completion thread to generate the description, providing callback.
-            completionDataProvider.GenerateDescription(stub, item, completionList_WriteDescription, isInstance);
-        }
-
-        void completionList_WriteDescription(string description)
-        {
-            textEditor.textEditor.Dispatcher.Invoke(new Action(delegate() {
-                if (toolTip != null)
+                TextDocument document = TextArea.Document;
+                if (document != null)
                 {
-                    if (description != null)
-                    {
-                        toolTip.Content = description;
-                        toolTip.IsOpen = true;
-                    }
-                    else
-                    {
-                        toolTip.IsOpen = false;
-                    }
+                    _completionList.SelectItem(document.GetText(StartOffset, offset - StartOffset));
                 }
-            }));
+            }
         }
 
-        #endregion
-
-        void completionList_InsertionRequested(object sender, EventArgs e)
+        private void CompletionList_InsertionRequested(object sender, EventArgs e)
         {
             Close();
             // The window must close before Complete() is called.
             // If the Complete callback pushes stacked input handlers, we don't want to pop those when the CC window closes.
-            var item = completionList.SelectedItem;
+            var item = _completionList.SelectedItem;
             if (item != null)
-                item.Complete(this.TextArea, new AnchorSegment(this.TextArea.Document, this.StartOffset, this.EndOffset - this.StartOffset), e);
+                item.Complete(TextArea, new AnchorSegment(TextArea.Document, StartOffset, EndOffset - StartOffset), e);
         }
 
-        void AttachEvents()
+        private UIElement GetScrollEventTarget()
         {
-            this.TextArea.Caret.PositionChanged += CaretPositionChanged;
-            this.TextArea.MouseWheel += textArea_MouseWheel;
-            this.TextArea.PreviewTextInput += textArea_PreviewTextInput;
+            if (_completionList == null)
+                return this;
+            return _completionList.ScrollViewer ?? _completionList.ListBox ?? (UIElement)_completionList;
+        }
+
+        private void TextArea_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            e.Handled = RaiseEventPair(GetScrollEventTarget(),
+                                       PreviewMouseWheelEvent, MouseWheelEvent,
+                                       new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta));
+        }
+
+        private void TextArea_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = RaiseEventPair(this, PreviewTextInputEvent, TextInputEvent,
+                                       new TextCompositionEventArgs(e.Device, e.TextComposition));
+        }
+
+        /// <inheritdoc/>
+        protected override bool CloseOnFocusLost
+        {
+            get { return CloseAutomatically; }
         }
 
         /// <inheritdoc/>
         protected override void DetachEvents()
         {
-            this.TextArea.Caret.PositionChanged -= CaretPositionChanged;
-            this.TextArea.MouseWheel -= textArea_MouseWheel;
-            this.TextArea.PreviewTextInput -= textArea_PreviewTextInput;
+            TextArea.Caret.PositionChanged -= CaretPositionChanged;
+            TextArea.MouseWheel -= TextArea_MouseWheel;
+            TextArea.PreviewTextInput -= TextArea_PreviewTextInput;
             base.DetachEvents();
         }
 
@@ -179,10 +116,10 @@ namespace PythonConsoleControl
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-            if (toolTip != null)
+            if (_toolTip != null)
             {
-                toolTip.IsOpen = false;
-                toolTip = null;
+                _toolTip.IsOpen = false;
+                _toolTip = null;
             }
         }
 
@@ -192,80 +129,145 @@ namespace PythonConsoleControl
             base.OnKeyDown(e);
             if (!e.Handled)
             {
-                completionList.HandleKey(e);
+                _completionList.HandleKey(e);
             }
         }
 
-        void textArea_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        /// <summary>
+        /// Creates a new code completion window.
+        /// </summary>
+        public PythonConsoleCompletionWindow(TextArea textArea, PythonTextEditor textEditor)
+            : base(textArea)
         {
-            e.Handled = RaiseEventPair(this, PreviewTextInputEvent, TextInputEvent,
-                                       new TextCompositionEventArgs(e.Device, e.TextComposition));
-        }
+            _completionList = new CompletionList();
 
-        void textArea_MouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            e.Handled = RaiseEventPair(GetScrollEventTarget(),
-                                       PreviewMouseWheelEvent, MouseWheelEvent,
-                                       new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta));
-        }
+            // keep height automatic
+            _completionDataProvider = textEditor.CompletionProvider;
+            _textEditor = textEditor;
+            CloseAutomatically = true;
+            SizeToContent = SizeToContent.Height;
+            MaxHeight = 300;
+            Width = 250;
+            Content = _completionList;
+            // prevent user from resizing window to 0x0
+            MinHeight = 15;
+            MinWidth = 30;
 
-        UIElement GetScrollEventTarget()
-        {
-            if (completionList == null)
-                return this;
-            return completionList.ScrollViewer ?? completionList.ListBox ?? (UIElement)completionList;
+            _toolTip.PlacementTarget = this;
+            _toolTip.Placement = PlacementMode.Right;
+            _toolTip.Closed += ToolTip_Closed;
+
+            _completionList.InsertionRequested += CompletionList_InsertionRequested;
+            _completionList.SelectionChanged += CompletionList_SelectionChanged;
+            AttachEvents();
+
+            _updateDescription = new DispatcherTimer();
+            _updateDescription.Tick += new EventHandler(CompletionListUpdateDescription);
+            _updateDescriptionInterval = TimeSpan.FromSeconds(0.3);
+
+            EventInfo eventInfo = typeof(TextView).GetEvent("ScrollOffsetChanged");
+            Delegate methodDelegate = Delegate.CreateDelegate(eventInfo.EventHandlerType, (this as CompletionWindowBase), "TextViewScrollOffsetChanged");
+            eventInfo.RemoveEventHandler(TextArea.TextView, methodDelegate);
         }
 
         /// <summary>
         /// Gets/Sets whether the completion window should close automatically.
         /// The default value is true.
         /// </summary>
-        public bool CloseAutomatically { get; set; }
-
-        /// <inheritdoc/>
-        protected override bool CloseOnFocusLost
+        public bool CloseAutomatically
         {
-            get { return this.CloseAutomatically; }
+            get;
+            set;
         }
 
         /// <summary>
-        /// When this flag is set, code completion closes if the caret moves to the
+        /// When flag is set, code completion closes if the caret moves to the
         /// beginning of the allowed range. This is useful in Ctrl+Space and "complete when typing",
         /// but not in dot-completion.
         /// Has no effect if CloseAutomatically is false.
         /// </summary>
         public bool CloseWhenCaretAtBeginning { get; set; }
 
-        void CaretPositionChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Gets the completion list used in completion window.
+        /// </summary>
+        public CompletionList CompletionList
         {
-            int offset = this.TextArea.Caret.Offset;
-            if (offset == this.StartOffset)
+            get { return _completionList; }
+        }
+        #region ToolTip handling
+
+        private void CompletionList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var item = _completionList.SelectedItem;
+            if (item == null)
             {
-                if (CloseAutomatically && CloseWhenCaretAtBeginning)
-                {
-                    Close();
-                }
-                else
-                {
-                    completionList.SelectItem(string.Empty);
-                }
+                _updateDescription.Stop();
                 return;
             }
-            if (offset < this.StartOffset || offset > this.EndOffset)
-            {
-                if (CloseAutomatically)
-                {
-                    Close();
-                }
-            }
-            else
-            {
-                TextDocument document = this.TextArea.Document;
-                if (document != null)
-                {
-                    completionList.SelectItem(document.GetText(this.StartOffset, offset - this.StartOffset));
-                }
-            }
+            _updateDescription.Interval = _updateDescriptionInterval;
+            _updateDescription.Start();
         }
+
+        private void CompletionList_WriteDescription(string description)
+        {
+            _textEditor.TextEditor.Dispatcher.Invoke(new Action(delegate ()
+            {
+                if (_toolTip != null)
+                {
+                    if (description != null)
+                    {
+                        _toolTip.Content = description;
+                        _toolTip.IsOpen = true;
+                    }
+                    else
+                    {
+                        _toolTip.IsOpen = false;
+                    }
+                }
+            }));
+        }
+
+        private void CompletionListUpdateDescription(Object sender, EventArgs e)
+        {
+            _updateDescription.Stop();
+            _textEditor.UpdateCompletionDescription();
+        }
+
+        private void ToolTip_Closed(object sender, RoutedEventArgs e)
+        {
+            // Clear content after tooltip is closed.
+            // We cannot clear is immediately when setting IsOpen=false
+            // because the tooltip uses an animation for closing.
+            if (_toolTip != null)
+                _toolTip.Content = null;
+        }
+        /// <summary>
+        /// Update the description of the current item. This is typically called from a separate thread from the main UI thread.
+        /// </summary>
+        internal void UpdateCurrentItemDescription()
+        {
+            if (_textEditor.StopCompletion())
+            {
+                _updateDescription.Interval = _updateDescriptionInterval;
+                _updateDescription.Start();
+                return;
+            }
+            string stub = "";
+            string item = "";
+            bool isInstance = false;
+            _textEditor.TextEditor.Dispatcher.Invoke(new Action(delegate ()
+            {
+                PythonCompletionData data = (_completionList.SelectedItem as PythonCompletionData);
+                if (data == null || _toolTip == null)
+                    return;
+                stub = data.Stub;
+                item = data.Text;
+                isInstance = data.IsInstance;
+            }));
+            // Send to the completion thread to generate the description, providing callback.
+            _completionDataProvider.GenerateDescription(stub, item, CompletionList_WriteDescription, isInstance);
+        }
+        #endregion ToolTip handling
     }
 }

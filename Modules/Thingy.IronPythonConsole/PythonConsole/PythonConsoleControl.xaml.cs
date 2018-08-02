@@ -6,7 +6,6 @@ using System.IO;
 using System.Windows.Controls;
 using System.Xml;
 
-
 namespace PythonConsoleControl
 {
     /// <summary>
@@ -14,13 +13,24 @@ namespace PythonConsoleControl
     /// </summary>
     public partial class IronPythonConsoleControl : UserControl
     {
-        PythonConsolePad pad;
-        
+        private Action<PythonConsoleHost> _hostAction;
+        private PythonConsolePad _pad;
+
+        private void Console_ConsoleInitialized(object sender, EventArgs e)
+        {
+            _hostAction.Invoke(Host);
+        }
+
+        private void Host_ConsoleCreated(object sender, EventArgs e)
+        {
+            Console.ConsoleInitialized += new ConsoleInitializedEventHandler(Console_ConsoleInitialized);
+        }
+
         public IronPythonConsoleControl()
         {
             InitializeComponent();
-            pad = new PythonConsolePad();
-            grid.Children.Add(pad.Control);
+            _pad = new PythonConsolePad();
+            grid.Children.Add(_pad.Control);
             // Load our custom highlighting definition
             IHighlightingDefinition pythonHighlighting;
             using (Stream s = typeof(IronPythonConsoleControl).Assembly.GetManifestResourceStream("PythonConsoleControl.Resources.Python.xshd"))
@@ -35,15 +45,29 @@ namespace PythonConsoleControl
             }
             // and register it in the HighlightingManager
             HighlightingManager.Instance.RegisterHighlighting("Python Highlighting", new string[] { ".cool" }, pythonHighlighting);
-            pad.Control.SyntaxHighlighting = pythonHighlighting;
-            IList<IVisualLineTransformer> transformers = pad.Control.TextArea.TextView.LineTransformers;
+            _pad.Control.SyntaxHighlighting = pythonHighlighting;
+            IList<IVisualLineTransformer> transformers = _pad.Control.TextArea.TextView.LineTransformers;
             for (int i = 0; i < transformers.Count; ++i)
             {
-                if (transformers[i] is HighlightingColorizer) transformers[i] = new PythonConsoleHighlightingColorizer(pythonHighlighting, pad.Control.Document);
+                if (transformers[i] is HighlightingColorizer) transformers[i] = new PythonConsoleHighlightingColorizer(pythonHighlighting, _pad.Control.Document);
             }
 
-            pad.Control.Loaded += (sender, args) => pad.Control.Focus();
+            _pad.Control.Loaded += (sender, args) => _pad.Control.Focus();
+        }
 
+        public PythonConsole Console
+        {
+            get { return _pad.Console; }
+        }
+
+        public PythonConsoleHost Host
+        {
+            get { return _pad.Host; }
+        }
+
+        public PythonConsolePad Pad
+        {
+            get { return _pad; }
         }
 
         /// <summary>
@@ -52,35 +76,8 @@ namespace PythonConsoleControl
         /// </summary>
         public void WithHost(Action<PythonConsoleHost> hostAction)
         {
-            this.hostAction = hostAction;
+            _hostAction = hostAction;
             Host.ConsoleCreated += new ConsoleCreatedEventHandler(Host_ConsoleCreated);
-        }
-
-        Action<PythonConsoleHost> hostAction;
-
-        void Host_ConsoleCreated(object sender, EventArgs e)
-        {
-            Console.ConsoleInitialized += new ConsoleInitializedEventHandler(Console_ConsoleInitialized);
-        }
-
-        void Console_ConsoleInitialized(object sender, EventArgs e)
-        {
-            hostAction.Invoke(Host);
-        }
-
-        public PythonConsole Console
-        {
-            get { return pad.Console; }
-        }
-
-        public PythonConsoleHost Host
-        {
-            get { return pad.Host; }
-        }
-
-        public PythonConsolePad Pad
-        {
-            get { return pad; }
         }
     }
 }
