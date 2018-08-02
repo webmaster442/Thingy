@@ -1,18 +1,15 @@
 ﻿// Copyright (c) 2010 Joe Moorhouse
 
+using ICSharpCode.AvalonEdit.CodeCompletion;
+using ICSharpCode.AvalonEdit.Document;
+using Microsoft.Scripting;
+using Microsoft.Scripting.Hosting.Shell;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using ICSharpCode.AvalonEdit.CodeCompletion;
-using ICSharpCode.AvalonEdit;
-using ICSharpCode.AvalonEdit.Editing;
-using ICSharpCode.AvalonEdit.Document;
-using Microsoft.Scripting.Hosting.Shell;
-using Microsoft.Scripting.Hosting;
-using Microsoft.Scripting;
-using System.Threading;
 using System.Reflection;
+using System.Text;
+using System.Threading;
 
 namespace PythonConsoleControl
 {
