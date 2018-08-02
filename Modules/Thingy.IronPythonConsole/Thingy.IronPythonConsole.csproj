@@ -78,6 +78,7 @@
     <Compile Include="..\..\Build-tools\CommonVersion.cs">
       <Link>Properties\CommonVersion.cs</Link>
     </Compile>
+    <Compile Include="ModuleDefinitions\IronPythonConsoleModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -97,6 +98,9 @@
     <Compile Include="PythonConsole\PythonOutputStream.cs" />
     <Compile Include="PythonConsole\PythonTextEditor.cs" />
     <Compile Include="PythonConsole\VerySimpleSegment.cs" />
+    <Compile Include="Views\IronPythonConsole.xaml.cs">
+      <DependentUpon>IronPythonConsole.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\applib\AppLib.WPF\AppLib.WPF.csproj">
@@ -117,6 +121,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\IronPythonConsole.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
