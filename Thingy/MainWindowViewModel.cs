@@ -195,7 +195,7 @@ namespace Thingy
 
         private void OpenAbout()
         {
-            _app.TabManager.CreateNewTabContent("About", new InternalModules.About());
+            //_app.TabManager.CreateNewTabContent("About", new InternalModules.About());
         }
     }
 }

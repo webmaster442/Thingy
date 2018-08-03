@@ -167,9 +167,6 @@
     <Resource Include="Icons\icons8-about-96.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="html\MarkdownTemplate.html" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Icons\icons8-ascending-sorting-96.png" />
     <Resource Include="Icons\icons8-descending-sorting-96.png" />
   </ItemGroup>

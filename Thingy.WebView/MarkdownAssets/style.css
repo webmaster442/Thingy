@@ -1,0 +1,43 @@
+#navigation {
+    background: #d8d8d8;
+    border: dashed 1px black;
+    width: 10%;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    display: inline-block;
+}
+
+#content {
+    float: left;
+}
+
+body
+{
+    margin: 1% auto;
+    background: #f2f2f2;
+    color: #444444;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    text-shadow: 0 1px 0 #ffffff;
+    max-width: 73%;
+}
+
+li {
+    margin: 0px;
+}
+
+code {
+    background: white;
+}
+
+a {
+    border-bottom: 1px solid #444444;
+    color: #444444;
+    text-decoration: underline;
+}
+
+    a:hover {
+        border-bottom: 0;
+    }

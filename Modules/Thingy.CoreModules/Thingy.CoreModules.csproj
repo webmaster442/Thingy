@@ -30,14 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonMark, Version=0.1.0.0, Culture=neutral, PublicKeyToken=001ef8810438905d, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CommonMark.NET.0.15.1\lib\net45\CommonMark.dll</HintPath>
-    </Reference>
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\ControlzEx.dll</HintPath>
-    </Reference>
-    <Reference Include="HtmlRenderer.WPF, Version=1.5.0.6, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\HtmlRenderer.WPF.1.5.0.6\lib\net45\HtmlRenderer.WPF.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
       <HintPath>..\..\packages\AvalonEdit.5.0.4\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
@@ -155,9 +149,6 @@
     <Compile Include="Views\Notes\NoteEditor.xaml.cs">
       <DependentUpon>NoteEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Notes\Preivew.xaml.cs">
-      <DependentUpon>Preivew.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Places.xaml.cs">
       <DependentUpon>Places.xaml</DependentUpon>
     </Compile>
@@ -209,6 +200,10 @@
     <ProjectReference Include="..\..\Thingy.Resources\Thingy.Resources.csproj">
       <Project>{63a3ee73-078f-4dec-8578-5af6f158d383}</Project>
       <Name>Thingy.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Thingy.WebView\Thingy.WebView.csproj">
+      <Project>{191135b2-c6b8-4030-be04-7eac2f4a7b23}</Project>
+      <Name>Thingy.WebView</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Thingy.XAML\Thingy.XAML.csproj">
       <Project>{a8fbd1d1-eb45-42d5-85b8-d07c2a992e69}</Project>
@@ -269,10 +264,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Notes\NoteEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Notes\Preivew.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -347,7 +338,9 @@
     <None Include="Connected Services\MnbServiceReference\Thingy.CoreModules.MnbServiceReference.GetInfoResponseBody.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\MnbServiceReference\arfolyamok.disco" />

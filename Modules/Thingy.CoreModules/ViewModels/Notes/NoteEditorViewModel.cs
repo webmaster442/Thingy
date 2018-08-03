@@ -1,5 +1,4 @@
 ﻿using AppLib.MVVM;
-using CommonMark;
 using ICSharpCode.AvalonEdit;
 using MahApps.Metro.Controls.Dialogs;
 using System.IO;
@@ -11,6 +10,7 @@ using Thingy.API.Capabilities;
 using Thingy.CoreModules.Views.Notes;
 using Thingy.Db;
 using Thingy.Db.Entity;
+using Thingy.WebView;
 
 namespace Thingy.CoreModules.ViewModels.Notes
 {
@@ -170,35 +170,25 @@ namespace Thingy.CoreModules.ViewModels.Notes
             return output.ToString();
         }
 
-        private string RenderMD(string s)
-        {
-            try
-            {
-                return Combine(CommonMarkConverter.Convert(s));
-            }
-            catch (CommonMarkException ex)
-            {
-                return Combine($"<pre>Render error:\r\n{ex.Message}</pre>");
-            }
-        }
-
         private async void Render(string obj)
         {
+            WebViewControl control = new WebViewControl();
+
             string content = "";
             switch (obj.ToLower())
             {
                 case "html":
                     content = View.GetHTMLString();
+                    control.LoadHtmlText(content);
                     break;
                 case "md":
-                    content = RenderMD(View.EditorText);
+                    control.LoadMarkdown(View.EditorText);
                     break;
                 default:
                     return;
             }
 
-            var control = new Views.Notes.Preivew();
-            control.SetContent(content);
+
             await _app.ShowDialog("Preview", control, DialogButtons.Ok, false);
         }
     }
