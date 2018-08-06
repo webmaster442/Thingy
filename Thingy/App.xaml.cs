@@ -1,6 +1,8 @@
 ﻿using MahApps.Metro;
 using MahApps.Metro.Controls.Dialogs;
 using MahApps.Metro.SimpleChildWindow;
+using SharpRaven;
+using SharpRaven.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -272,8 +274,11 @@ namespace Thingy
         {
         }
 
+        private RavenClient _raven;
+
         protected override void OnStartup(StartupEventArgs e)
         {
+            _raven = new RavenClient("https://51754e7cd3d74a1eb75066efeeec7972@sentry.io/1257005");
             Dispatcher.UnhandledException += Dispatcher_UnhandledException;
 
             var accent = Settings.Get(SettingsKeys.ProgramAccent, "Orange");
@@ -292,6 +297,7 @@ namespace Thingy
 
         private void Dispatcher_UnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
+            _raven.Capture(new SentryEvent(e.Exception));
             Log.Divider();
             Log.Error("Fatal unhandled exception");
             Log.Exception(e.Exception);

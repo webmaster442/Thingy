@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 
 namespace Thingy.Resources
@@ -23,6 +25,12 @@ namespace Thingy.Resources
                     return reader.ReadToEnd();
                 }
             }
+        }
+
+        public static IEnumerable<string> GetHelpContent()
+        {
+            var executing = Assembly.GetAssembly(typeof(ResourceLocator));
+            return executing.GetManifestResourceNames().Where(n => n.Contains("Documentation"));
         }
 
         public static Uri GetIcon(IconCategories category, string name)

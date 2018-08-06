@@ -161,9 +161,6 @@
     <Resource Include="Icons\icons8-git.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="html\AboutPage.html" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Icons\icons8-about-96.png" />
   </ItemGroup>
   <ItemGroup>
@@ -329,5 +326,12 @@
   <ItemGroup>
     <Resource Include="SmallIcons\icons8-plugin-48.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Documentation\about.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Documentation\calculator-functions.md" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
