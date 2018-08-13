@@ -107,8 +107,6 @@
     <Compile Include="Mp4Chapters\MoovInfo.cs" />
     <Compile Include="Mp4Chapters\StreamWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimpleWPFTerminal\ITerminal.cs" />
-    <Compile Include="SimpleWPFTerminal\Terminal.cs" />
     <Compile Include="TagLib\Aac\AudioHeader.cs" />
     <Compile Include="TagLib\Aac\BitStream.cs" />
     <Compile Include="TagLib\Aac\File.cs" />
