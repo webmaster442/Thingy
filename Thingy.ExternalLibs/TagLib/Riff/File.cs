@@ -237,18 +237,21 @@ namespace TagLib.Riff
 		/// </summary>
 		public override void Save ()
 		{
+			// Boilerplate
+			PreSave();
+
 			Mode = AccessMode.Write;
 			try {
 				ByteVector data = new ByteVector ();
 				
-				// Enclose the Id3v2 tag in an "ID32" item and
+				// Enclose the Id3v2 tag in an "id3 " item and
 				// embed it as the first tag.
 				if (id32_tag != null) {
 					ByteVector tag_data = id32_tag.Render ();
 					if (tag_data.Count > 10) {
 						if (tag_data.Count % 2 == 1)
 							tag_data.Add (0);
-						data.Add ("ID32");
+						data.Add("id3 ");
 						data.Add (ByteVector.FromUInt (
 							(uint) tag_data.Count,
 							false));
@@ -475,11 +478,16 @@ namespace TagLib.Riff
 			// Read until there are less than 8 bytes to read.
 			do {
 				bool tag_found = false;
-				
+
+				// Check if the current position is an odd number and increment it so it is even
+				// This is done when the previous chunk size was an odd number.
+				// If this is not done, the chunk being read after the odd chunk will not be read.
+				if (position > 12 && (position & 1) != 0) { position++; }
+
 				Seek (position);
 				string fourcc = ReadBlock (4).ToString (StringType.UTF8);
 				size = ReadBlock (4).ToUInt (false);
-				
+
 				switch (fourcc)
 				{
 				
@@ -580,13 +588,16 @@ namespace TagLib.Riff
 					}
 					break;
 				}
-				
+
 				// "ID32" is a custom box for this format that
 				// contains an ID3v2 tag.
+				// "ID3 " and "id3 " have become standard (de facto)
+				case "id3 ":
+				case "ID3 ":
 				case "ID32":
 					if (read_tags && id32_tag == null)
 						id32_tag = new Id3v2.Tag (this,
-							position + 8);
+							position + 8, style);
 					
 					tag_found = true;
 					break;
