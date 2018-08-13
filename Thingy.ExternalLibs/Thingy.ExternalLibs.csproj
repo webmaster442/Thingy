@@ -160,9 +160,8 @@
     <Compile Include="TagLib\Id3v2\Frame.cs" />
     <Compile Include="TagLib\Id3v2\FrameFactory.cs" />
     <Compile Include="TagLib\Id3v2\FrameHeader.cs" />
-    <Compile Include="TagLib\Id3v2\Frames\AttachedPictureFrame.cs" />
+    <Compile Include="TagLib\Id3v2\Frames\AttachmentFrame.cs" />
     <Compile Include="TagLib\Id3v2\Frames\CommentsFrame.cs" />
-    <Compile Include="TagLib\Id3v2\Frames\GeneralEncapsulatedObjectFrame.cs" />
     <Compile Include="TagLib\Id3v2\Frames\MusicCdIdentifierFrame.cs" />
     <Compile Include="TagLib\Id3v2\Frames\PlayCountFrame.cs" />
     <Compile Include="TagLib\Id3v2\Frames\PopularimeterFrame.cs" />
@@ -233,6 +232,7 @@
     <Compile Include="TagLib\IFD\Tags\SonyMakerNoteEntryTag.cs" />
     <Compile Include="TagLib\IIM\IIMReader.cs" />
     <Compile Include="TagLib\IIM\IIMTag.cs" />
+    <Compile Include="TagLib\ILazy.cs" />
     <Compile Include="TagLib\Image\Codec.cs" />
     <Compile Include="TagLib\Image\CombinedImageTag.cs" />
     <Compile Include="TagLib\Image\File.cs" />
@@ -313,6 +313,7 @@
     <Compile Include="TagLib\Ogg\Paginator.cs" />
     <Compile Include="TagLib\Ogg\XiphComment.cs" />
     <Compile Include="TagLib\Picture.cs" />
+    <Compile Include="TagLib\PictureLazy.cs" />
     <Compile Include="TagLib\Png\Codec.cs" />
     <Compile Include="TagLib\Png\File.cs" />
     <Compile Include="TagLib\Png\PngTag.cs" />
